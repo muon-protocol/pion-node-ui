@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.page {
+  @apply px-36 py-20;
+}
+
 .btn {
   // size properties
   @apply px-6 py-4 font-medium;
+
   &--small {
     @apply px-5 py-2 text-sm;
+  }
+
+  &--large {
+    @apply px-20 py-6 text-2xl font-medium;
   }
 
   // color properties
@@ -22,4 +31,9 @@
   &--small {
     @apply rounded-lg;
   }
+
+  &--large {
+    @apply rounded-xl;
+  }
+
 }
