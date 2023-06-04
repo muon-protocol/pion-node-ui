@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.app {
+  @apply min-h-screen;
+  background-image: url('./assets/images/app-background.svg');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .page {
   @apply px-36 py-20;
 }
@@ -35,5 +43,4 @@
   &--large {
     @apply rounded-xl;
   }
-
 }

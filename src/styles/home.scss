@@ -1,0 +1,13 @@
+.plan-card {
+  &__content {
+    &__item {
+      &__title {
+        @apply text-soft-sky mb-1.5 text-lg;
+      }
+
+      &__value {
+        @apply text-white text-lg font-bold;
+      }
+    }
+  }
+}
