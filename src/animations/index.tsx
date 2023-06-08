@@ -56,3 +56,30 @@ export const MoveRightIn: FC<{
     </motion.div>
   );
 };
+
+export const FadeIn: FC<{
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}> = ({ delay, children, className }) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    window.addEventListener('load', () => {
+      controls.start({
+        opacity: 1,
+        transition: { duration: 0.5, delay: delay || 0 },
+      });
+    });
+  }, [controls, delay]);
+
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0 }}
+      animate={controls}
+    >
+      {children}
+    </motion.div>
+  );
+};

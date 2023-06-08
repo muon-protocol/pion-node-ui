@@ -1,6 +1,6 @@
 import { plans } from '../../data/constants';
 import PlanCard from './PlanCard.tsx';
-import { MoveRightIn } from './animations.tsx';
+import { MoveRightIn } from '../../animations';
 
 const Home = () => {
   return (

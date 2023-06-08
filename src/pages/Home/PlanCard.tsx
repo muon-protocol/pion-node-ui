@@ -1,5 +1,5 @@
 import { Plan } from '../../types';
-import { MoveUpIn } from './animations.tsx';
+import { MoveUpIn } from '../../animations';
 
 const PlanCard = ({
   plan,
