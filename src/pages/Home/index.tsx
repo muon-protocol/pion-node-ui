@@ -4,7 +4,7 @@ import PlanCard from './PlanCard.tsx';
 const Home = () => {
   return (
     <div className="page">
-      <p className="moto text-white md:w-2/5 text-5xl font-light leading-[58px] mb-4">
+      <p className="moto text-white md:w-1/2 text-5xl font-light leading-[58px] mb-4">
         Pion Network: Be a Pioneer, Bridge the Blockchain Islands
       </p>
       <p className="description text-white font-light text-[28px] mb-11">
