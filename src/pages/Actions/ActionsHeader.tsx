@@ -8,8 +8,8 @@ const ActionsHeader = () => {
 
   return (
     <div className="actions-header flex gap-10 w-full">
-      <div className="w-[92px]">{renderActionImageAndName(selectedAction)}</div>
-      <div className="w-[536px]">
+      <div className="w-[90px]">{renderActionImageAndName(selectedAction)}</div>
+      <div className="w-full">
         <p className="text-lg font-light text-white">
           {renderActionDescription(selectedAction)}
         </p>
@@ -20,8 +20,8 @@ const ActionsHeader = () => {
 
 const renderActionImageAndName = (action: ActionType) => {
   return (
-    <div className="flex flex-col justify-center items-center gap-2">
-      <div className="action-image">{renderActionImage(action)}</div>
+    <div className="w-[90px] flex flex-col justify-center items-center gap-2">
+      <div className="action-image ">{renderActionImage(action)}</div>
       <div className="action-name text-primary-10-solid text-2xl font-medium text-center">
         <p>{action}</p>
       </div>
