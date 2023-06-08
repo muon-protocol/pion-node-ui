@@ -5,14 +5,16 @@ export default {
     extend: {
       colors: {
         primary: '#5158F6',
+        gray10: '#E9EFF6',
+        'primary-dark': '#918EF5',
         'dark-soft-primary': '#5158F640',
         'xyz-75': '#E9EFF6BF',
         'soft-sky': '#BCC8DE',
         'primary-10-solid': '#ECEDFF',
         'card-bg-70-purple': '#6C677BB3',
+        'card-bg-dark': '#F6F3FF99',
         'titan-white': '#ECEDFF',
         'catskill-white': '#E9EFF666',
-        gray10: '#E9EFF6',
         'plan-1': '#F58E8E80',
         'plan-2': '#F3C95D80',
         'plan-3': '#918EF580',
