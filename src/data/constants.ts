@@ -1,4 +1,4 @@
-import { Plan, SidebarItem } from '../types';
+import { ActionType, Plan, SidebarItem } from '../types';
 
 export const plans: Plan[] = [
   {
@@ -39,34 +39,34 @@ export const sidebarItems: SidebarItem[] = [
     title: 'Create',
     icon: '/assets/images/actions/create-icon.svg',
     hoverIcon: '/assets/images/actions/create-hover-icon.svg',
-    link: '/create',
+    link: ActionType.CREATE,
   },
   {
     id: 2,
     title: 'Upgrade',
     icon: '/assets/images/actions/upgrade-icon.svg',
     hoverIcon: '/assets/images/actions/upgrade-hover-icon.svg',
-    link: '/upgrade',
+    link: ActionType.UPGRADE,
   },
   {
     id: 3,
     title: 'Merge',
     icon: '/assets/images/actions/merge-icon.svg',
     hoverIcon: '/assets/images/actions/merge-hover-icon.svg',
-    link: '/merge',
+    link: ActionType.MERGE,
   },
   {
     id: 4,
     title: 'Split',
     icon: '/assets/images/actions/split-icon.svg',
     hoverIcon: '/assets/images/actions/split-hover-icon.svg',
-    link: '/split',
+    link: ActionType.SPLIT,
   },
   {
     id: 5,
     title: 'Transfer',
     icon: '/assets/images/actions/transfer-icon.svg',
     hoverIcon: '/assets/images/actions/transfer-hover-icon.svg',
-    link: '/transfer',
+    link: ActionType.TRANSFER,
   },
 ];

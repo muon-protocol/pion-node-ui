@@ -22,5 +22,5 @@ export type SidebarItem = {
   title: string;
   icon: string;
   hoverIcon: string;
-  link: string;
+  link: ActionType;
 };
