@@ -1,4 +1,4 @@
-import { plans } from '../../utils/constants';
+import { plans } from '../../data/constants';
 import PlanCard from './PlanCard.tsx';
 
 const Home = () => {
