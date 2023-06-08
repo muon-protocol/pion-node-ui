@@ -16,3 +16,11 @@ export enum ActionType {
   SPLIT = 'Split',
   TRANSFER = 'Transfer',
 }
+
+export type SidebarItem = {
+  id: number;
+  title: string;
+  icon: string;
+  hoverIcon: string;
+  link: string;
+};

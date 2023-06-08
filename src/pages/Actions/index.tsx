@@ -6,10 +6,8 @@ const Actions = () => {
   return (
     <div className="page page--centered">
       <div className="flex flex-col w-[664px]">
-        <div>
-          <ActionsHeader />
-        </div>
-        <div className="flex">
+        <ActionsHeader />
+        <div className="flex w-full gap-10">
           <ActionsSidebar />
           <ActionsContent />
         </div>
