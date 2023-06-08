@@ -1,17 +1,23 @@
-import AmountInput from '../../components/Common/AmountInput.tsx';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { ActionType } from '../../types';
+
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
+import AddressInput from '../../components/Common/AddressInput.tsx';
+import AmountInput from '../../components/Common/AmountInput.tsx';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
   return (
     <div className="actions-content w-full bg-card-bg-70-purple px-11 py-10 rounded-2xl flex flex-col">
-      {selectedAction === ActionType.CREATE
-        ? renderCreateBody()
-        : selectedAction === ActionType.UPGRADE
-        ? renderUpgradeBody()
-        : ''}
+      {selectedAction === ActionType.CREATE ? (
+        renderCreateBody()
+      ) : selectedAction === ActionType.UPGRADE ? (
+        renderUpgradeBody()
+      ) : selectedAction === ActionType.TRANSFER ? (
+        renderTransferBody()
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
@@ -63,4 +69,14 @@ const renderUpgradeBody = () => {
   );
 };
 
+const renderTransferBody = () => {
+  return (
+    <>
+      <SelectButtonWithModal />
+      <AddressInput />
+
+      <button className="btn btn--secondary mt-auto mx-auto">Transfer</button>
+    </>
+  );
+};
 export default ActionsContent;
