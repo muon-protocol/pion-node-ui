@@ -1,7 +1,7 @@
 import useActions from '../../contexts/Actions/useActions.ts';
 import { ActionType } from '../../types';
 
-import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
+import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
@@ -16,6 +16,8 @@ const ActionsContent = () => {
         renderCreateBody()
       ) : selectedAction === ActionType.UPGRADE ? (
         renderUpgradeBody()
+      ) : selectedAction === ActionType.MERGE ? (
+        <MergeBody />
       ) : selectedAction === ActionType.SPLIT ? (
         <SplitBody />
       ) : selectedAction === ActionType.TRANSFER ? (
@@ -52,7 +54,7 @@ const renderCreateBody = () => {
 const renderUpgradeBody = () => {
   return (
     <>
-      <SelectButtonWithModal />
+      <SelectButtonWithModal title="Select BonPion" />
       <AmountInput />
       <p className="font-light text-gray10 underline mb-10 cursor-pointer">
         I Want to Boost Bonded PION Power with LP Tokens
@@ -74,12 +76,38 @@ const renderUpgradeBody = () => {
   );
 };
 
+const MergeBody = () => {
+  return (
+    <>
+      <SelectButtonWithModal title="Select bonPIONs to Merge" multiple />
+      <img
+        src="/assets/images/actions/merge-content-icon.svg"
+        alt=""
+        className="mx-auto mb-6 select-none"
+      />
+      <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex flex-col bg-primary-dark">
+        <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
+        <span className="text-sm text-gray10 flex mb-2 justify-between">
+          <p className="font-light">Node Power</p>
+          <p className="font-medium">5030</p>
+        </span>
+        <span className="text-sm text-gray10 flex justify-between">
+          <p className="font-light">Tier</p>
+          <p className="font-medium">Pion Enhancer (Tier 2)</p>
+        </span>
+      </div>
+
+      <button className="btn btn--secondary mt-auto mx-auto">Merge</button>
+    </>
+  );
+};
+
 const SplitBody = () => {
   const [splitValue, setSplitValue] = useState(50);
 
   return (
     <>
-      <SelectButtonWithModal />
+      <SelectButtonWithModal title="Select BonPion" />
       <img
         src="/assets/images/actions/split-content-icon.svg"
         alt=""
@@ -123,7 +151,7 @@ const SplitBody = () => {
 const renderTransferBody = () => {
   return (
     <>
-      <SelectButtonWithModal />
+      <SelectButtonWithModal title="Select BonPion" />
       <AddressInput />
 
       <button className="btn btn--secondary mt-auto mx-auto">Transfer</button>
