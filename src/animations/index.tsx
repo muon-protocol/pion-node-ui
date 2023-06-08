@@ -5,7 +5,8 @@ export const MoveUpIn: FC<{
   children: ReactNode;
   className?: string;
   delay?: number;
-}> = ({ delay, children, className }) => {
+  duration?: number;
+}> = ({ delay, duration, children, className }) => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -13,10 +14,10 @@ export const MoveUpIn: FC<{
       controls.start({
         opacity: 1,
         y: 0,
-        transition: { duration: 0.5, delay: delay || 0 },
+        transition: { duration: duration || 0.5, delay: delay || 0 },
       });
     });
-  }, [controls, delay]);
+  }, [controls, delay, duration]);
 
   return (
     <motion.div
@@ -33,7 +34,8 @@ export const MoveRightIn: FC<{
   children: ReactNode;
   className?: string;
   delay?: number;
-}> = ({ delay, children, className }) => {
+  duration?: number;
+}> = ({ delay, duration, children, className }) => {
   const controls = useAnimation();
 
   useEffect(() => {
@@ -41,10 +43,10 @@ export const MoveRightIn: FC<{
       controls.start({
         opacity: 1,
         x: 0,
-        transition: { duration: 0.5, delay: delay || 0 },
+        transition: { duration: duration || 0.5, delay: delay || 0 },
       });
     });
-  }, [controls, delay]);
+  }, [controls, delay, duration]);
 
   return (
     <motion.div
@@ -61,17 +63,18 @@ export const FadeIn: FC<{
   children: ReactNode;
   className?: string;
   delay?: number;
-}> = ({ delay, children, className }) => {
+  duration?: number;
+}> = ({ delay, duration, children, className }) => {
   const controls = useAnimation();
 
   useEffect(() => {
     window.addEventListener('load', () => {
       controls.start({
         opacity: 1,
-        transition: { duration: 0.5, delay: delay || 0 },
+        transition: { duration: duration || 0.5, delay: delay || 0 },
       });
     });
-  }, [controls, delay]);
+  }, [controls, delay, duration]);
 
   return (
     <motion.div
