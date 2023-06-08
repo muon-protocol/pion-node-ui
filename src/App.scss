@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .app {
   @apply min-h-screen;
   background-image: url('./assets/images/app-background.svg');
@@ -30,6 +40,10 @@
     @apply px-20 py-6 text-2xl font-medium;
   }
 
+  &--secondary-tag {
+    @apply px-2 py-0 text-xs font-light min-w-[40px];
+  }
+
   // color properties
   @apply bg-primary text-white w-fit;
 
@@ -41,6 +55,10 @@
     @apply bg-titan-white text-primary;
   }
 
+  &--secondary-tag {
+    @apply bg-primary-10-solid text-black;
+  }
+
   // border properties
   @apply rounded-xl;
 
@@ -50,5 +68,9 @@
 
   &--large {
     @apply rounded-xl;
+  }
+
+  &--secondary-tag {
+    @apply rounded;
   }
 }
