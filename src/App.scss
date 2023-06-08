@@ -20,7 +20,7 @@
 
 .btn {
   // size properties
-  @apply px-6 py-4 font-medium;
+  @apply px-16 py-4 font-medium;
 
   &--small {
     @apply px-5 py-2 text-sm;
@@ -31,14 +31,18 @@
   }
 
   // color properties
-  @apply bg-primary text-white;
+  @apply bg-primary text-white w-fit;
 
   &--dark-primary {
     @apply bg-dark-soft-primary text-white;
   }
 
+  &--secondary {
+    @apply bg-titan-white text-primary;
+  }
+
   // border properties
-  @apply rounded-md;
+  @apply rounded-xl;
 
   &--small {
     @apply rounded-lg;
