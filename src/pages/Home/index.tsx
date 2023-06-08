@@ -13,9 +13,21 @@ const Home = () => {
       <button className="btn btn--large mb-32">Start Your Node</button>
 
       <div className="plans flex gap-16 justify-between">
-        <PlanCard plan={plans[0]} className="w-1/3 bg-plan-1" />
-        <PlanCard plan={plans[1]} className="w-1/3 bg-plan-2" />
-        <PlanCard plan={plans[2]} className="w-1/3 bg-plan-3" />
+        <PlanCard
+          plan={plans[0]}
+          className="w-1/3 bg-plan-1"
+          animationDelay={0.7}
+        />
+        <PlanCard
+          plan={plans[1]}
+          className="w-1/3 bg-plan-2"
+          animationDelay={0.9}
+        />
+        <PlanCard
+          plan={plans[2]}
+          className="w-1/3 bg-plan-3"
+          animationDelay={1.1}
+        />
       </div>
     </div>
   );
