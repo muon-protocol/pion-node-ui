@@ -14,7 +14,7 @@ input[type=number] {
 
 .app {
   @apply min-h-screen;
-  background-image: url('./assets/images/app-background.svg');
+  background-image: url('../public/assets/images/app-background.svg');
   background-position: 0 0;
   background-repeat: no-repeat;
   background-size: cover;

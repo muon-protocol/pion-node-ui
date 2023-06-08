@@ -1,4 +1,3 @@
-import logo from '../../assets/images/navbar/logo.svg';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
@@ -6,7 +5,11 @@ const Navbar = () => {
     <div className="navbar flex justify-between items-center py-9 pl-14 pr-12">
       <div className="navbar__left">
         <Link to={'/'}>
-          <img src={logo} alt={''} className="w-[120px] h-auto" />
+          <img
+            src="/assets/images/navbar/logo.svg"
+            alt={''}
+            className="w-[120px] h-auto"
+          />
         </Link>
       </div>
       <div className="navbar__right flex justify-end items-center gap-4">
