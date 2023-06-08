@@ -1,5 +1,5 @@
 import { Plan } from '../../types';
-import { PlanAnimation } from './animations.tsx';
+import { MoveUpIn } from './animations.tsx';
 
 const PlanCard = ({
   plan,
@@ -11,8 +11,8 @@ const PlanCard = ({
   animationDelay: number;
 }) => {
   return (
-    <PlanAnimation
-      className={className + ' rounded-3xl'}
+    <MoveUpIn
+      className={(className || '') + ' rounded-3xl'}
       delay={animationDelay}
     >
       <div className={`plan-card p-9 pt-[130px] relative max-w-[430px]`}>
@@ -53,7 +53,7 @@ const PlanCard = ({
           </div>
         </div>
       </div>
-    </PlanAnimation>
+    </MoveUpIn>
   );
 };
 
