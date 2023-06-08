@@ -8,3 +8,11 @@ export type Plan = {
   backgroundColor: string;
   shadowColor: string;
 };
+
+export enum ActionType {
+  CREATE = 'Create',
+  UPGRADE = 'Upgrade',
+  MERGE = 'Merge',
+  SPLIT = 'Split',
+  TRANSFER = 'Transfer',
+}

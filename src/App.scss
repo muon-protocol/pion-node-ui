@@ -12,6 +12,10 @@
 
 .page {
   @apply px-36 py-20;
+
+  &--centered {
+    @apply flex items-center justify-center;
+  }
 }
 
 .btn {

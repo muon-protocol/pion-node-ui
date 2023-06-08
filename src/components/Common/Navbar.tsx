@@ -1,13 +1,18 @@
 import logo from '../../assets/images/navbar/logo.svg';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
     <div className="navbar flex justify-between items-center py-9 pl-14 pr-12">
       <div className="navbar__left">
-        <img src={logo} alt={''} className="w-[120px] h-auto" />
+        <Link to={'/'}>
+          <img src={logo} alt={''} className="w-[120px] h-auto" />
+        </Link>
       </div>
       <div className="navbar__right flex justify-end items-center gap-4">
-        <button className="btn btn--small">Create BonPION</button>
+        <Link className={'flex--1'} to={'/create'}>
+          <button className="btn btn--small">Create BonPION</button>
+        </Link>
         <button className="btn btn--small">Buy PION</button>
         <button className="btn btn--small btn--dark-primary">
           Balance: <strong className="ml-2 mr-1">2310.013</strong>
