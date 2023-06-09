@@ -10,12 +10,10 @@ export const MoveUpIn: FC<{
   const controls = useAnimation();
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      controls.start({
-        opacity: 1,
-        y: 0,
-        transition: { duration: duration || 0.5, delay: delay || 0 },
-      });
+    controls.start({
+      opacity: 1,
+      y: 0,
+      transition: { duration: duration || 0.5, delay: delay || 0 },
     });
   }, [controls, delay, duration]);
 
@@ -39,12 +37,10 @@ export const MoveRightIn: FC<{
   const controls = useAnimation();
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      controls.start({
-        opacity: 1,
-        x: 0,
-        transition: { duration: duration || 0.5, delay: delay || 0 },
-      });
+    controls.start({
+      opacity: 1,
+      x: 0,
+      transition: { duration: duration || 0.5, delay: delay || 0 },
     });
   }, [controls, delay, duration]);
 
@@ -68,11 +64,9 @@ export const FadeIn: FC<{
   const controls = useAnimation();
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      controls.start({
-        opacity: 1,
-        transition: { duration: duration || 0.5, delay: delay || 0 },
-      });
+    controls.start({
+      opacity: 1,
+      transition: { duration: duration || 0.5, delay: delay || 0 },
     });
   }, [controls, delay, duration]);
 

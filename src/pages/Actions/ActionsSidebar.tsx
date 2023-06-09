@@ -18,14 +18,12 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('load', () => {
-      document
-        .getElementById('sidebar-item-' + item.id)
-        ?.addEventListener('mouseenter', () => setIsHovered(true));
-      document
-        .getElementById('sidebar-item-' + item.id)
-        ?.addEventListener('mouseleave', () => setIsHovered(false));
-    });
+    document
+      .getElementById('sidebar-item-' + item.id)
+      ?.addEventListener('mouseenter', () => setIsHovered(true));
+    document
+      .getElementById('sidebar-item-' + item.id)
+      ?.addEventListener('mouseleave', () => setIsHovered(false));
   }, [isHovered, item.id]);
 
   return (
