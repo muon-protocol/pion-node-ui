@@ -52,7 +52,13 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
           isHovered ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      <div className="text-white text-sm font-semibold">{item.title}</div>
+      <div
+        className={`text-sm font-semibold transition-all ${
+          isHovered ? 'text-white' : 'text-gray-300'
+        }`}
+      >
+        {item.title}
+      </div>
     </div>
   );
 };
