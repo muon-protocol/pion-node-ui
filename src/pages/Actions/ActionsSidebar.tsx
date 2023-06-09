@@ -7,7 +7,7 @@ const ActionsSidebar = () => {
   return (
     <div className="action-sidebar bg-card-bg-70-purple px-4 py-14 rounded-2xl flex flex-col gap-10">
       {sidebarItems.map((item) => (
-        <SidebarItem item={item} />
+        <SidebarItem item={item} key={item.id} />
       ))}
     </div>
   );

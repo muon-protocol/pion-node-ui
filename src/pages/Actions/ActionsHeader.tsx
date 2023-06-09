@@ -1,6 +1,6 @@
 import useActions from '../../contexts/Actions/useActions.ts';
-
 import { ActionType } from '../../types';
+import { BottomToTop } from '../../animations';
 
 const ActionsHeader = () => {
   const { selectedAction } = useActions();
@@ -20,7 +20,9 @@ const ActionsHeader = () => {
 const renderActionImageAndName = (action: ActionType) => {
   return (
     <div className="w-[90px] flex flex-col justify-center items-center gap-2">
-      <div className="action-image ">{renderActionImage(action)}</div>
+      <BottomToTop>
+        <div className="action-image ">{renderActionImage(action)}</div>
+      </BottomToTop>
       <div className="action-name text-primary-10-solid text-2xl font-medium text-center">
         <p>{action}</p>
       </div>
