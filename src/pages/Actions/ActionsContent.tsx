@@ -33,27 +33,27 @@ const ActionsContent = () => {
 const RenderCreateBody = () => {
   return (
     <>
-      <MoveUpIn y={10} duration={0.2} delay={0.1}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <AmountInput />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.2}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <p className="font-light text-gray10 underline mb-10 cursor-pointer">
           I Want to Boost Bonded PION Power with LP Tokens
         </p>
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.3}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <span className="flex justify-between text-gray10 mb-2">
           <p className="font-light">Your bonPION power will be</p>
           <p className="font-medium">5030 bonPION</p>
         </span>
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.4}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <span className="flex justify-between text-gray10">
           <p className="font-light">Your tier will be</p>
           <p className="font-medium">Pion Supreme (Tier 3)</p>
         </span>
       </MoveUpIn>
-      <FadeIn delay={0.2} className="btn btn--secondary mt-auto mx-auto">
+      <FadeIn delay={0.1} className="btn btn--secondary mt-auto mx-auto">
         <button>Create Bounded PION</button>
       </FadeIn>
     </>
@@ -63,18 +63,18 @@ const RenderCreateBody = () => {
 const RenderUpgradeBody = () => {
   return (
     <>
-      <MoveUpIn y={10} duration={0.2} delay={0.1}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <SelectButtonWithModal title="Select BonPion" />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.2}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <AmountInput />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.3}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <p className="font-light text-gray10 underline mb-10 cursor-pointer">
           I Want to Boost Bonded PION Power with LP Tokens
         </p>
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.4}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <span className="flex justify-between text-gray10 mb-2">
           <p className="font-light">Your current bonPION power</p>
           <p className="font-medium">2000</p>
@@ -88,7 +88,7 @@ const RenderUpgradeBody = () => {
           <p className="font-medium">Pion Supreme (Tier 3)</p>
         </span>
       </MoveUpIn>
-      <FadeIn delay={0.2} className="btn btn--secondary mt-auto mx-auto">
+      <FadeIn delay={0.1} className="btn btn--secondary mt-auto mx-auto">
         <button>Upgrade</button>
       </FadeIn>
     </>
@@ -98,17 +98,17 @@ const RenderUpgradeBody = () => {
 const MergeBody = () => {
   return (
     <>
-      <MoveUpIn y={10} duration={0.2} delay={0.1}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <SelectButtonWithModal title="Select bonPIONs to Merge" multiple />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.2}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <img
           src="/assets/images/actions/merge-content-icon.svg"
           alt=""
           className="mx-auto mb-6 select-none"
         />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.3}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex flex-col bg-primary-dark">
           <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
           <span className="text-sm text-gray10 flex mb-2 justify-between">
@@ -121,7 +121,7 @@ const MergeBody = () => {
           </span>
         </div>
       </MoveUpIn>
-      <FadeIn delay={0.2} className="btn btn--secondary mt-auto mx-auto">
+      <FadeIn delay={0.1} className="btn btn--secondary mt-auto mx-auto">
         <button>Merge</button>
       </FadeIn>
     </>
@@ -133,17 +133,17 @@ const SplitBody = () => {
 
   return (
     <>
-      <MoveUpIn y={10} duration={0.2} delay={0.1}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <SelectButtonWithModal title="Select BonPion" />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.2}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <img
           src="/assets/images/actions/split-content-icon.svg"
           alt=""
           className="mx-auto mb-2 select-none"
         />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.3}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <Seekbar
           min={0}
           max={100}
@@ -151,7 +151,7 @@ const SplitBody = () => {
           onValueChange={setSplitValue}
         />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.4}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <div className="new-bounded-pions flex gap-3 w-full select-none">
           <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex-1 flex flex-col bg-primary-dark">
             <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
@@ -177,7 +177,7 @@ const SplitBody = () => {
           </div>
         </div>
       </MoveUpIn>
-      <FadeIn delay={0.2} className="btn btn--secondary mt-auto mx-auto">
+      <FadeIn delay={0.1} className="btn btn--secondary mt-auto mx-auto">
         <button>Split</button>
       </FadeIn>
     </>
@@ -187,14 +187,14 @@ const SplitBody = () => {
 const RenderTransferBody = () => {
   return (
     <>
-      <MoveUpIn y={10} duration={0.2} delay={0.1}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <SelectButtonWithModal title="Select BonPion" />
       </MoveUpIn>
-      <MoveUpIn y={10} duration={0.2} delay={0.2}>
+      <MoveUpIn y={5} duration={0.1} delay={0.1}>
         <AddressInput />
       </MoveUpIn>
 
-      <FadeIn delay={0.2} className="btn btn--secondary mt-auto mx-auto">
+      <FadeIn delay={0.1} className="btn btn--secondary mt-auto mx-auto">
         <button>Transfer</button>
       </FadeIn>
     </>
