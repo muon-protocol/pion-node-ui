@@ -1,13 +1,16 @@
 import ActionsSidebar from './ActionsSidebar.tsx';
 import ActionsHeader from './ActionsHeader.tsx';
 import ActionsContent from './ActionsContent.tsx';
+import { FadeIn } from '../../animations';
 
 const Actions = () => {
   return (
     <div className="page page--centered">
       <div className="flex flex-col w-[664px] gap-6">
-        <ActionsHeader />
-        <ActionsBody />
+        <FadeIn>
+          <ActionsHeader />
+          <ActionsBody />
+        </FadeIn>
       </div>
     </div>
   );
