@@ -15,6 +15,7 @@ export default {
         'card-bg-70-purple': '#6C677BB3',
         'card-bg-dark': '#F6F3FF99',
         'titan-white': '#ECEDFF',
+        'modal-backdrop': '#00000066',
         'catskill-white': '#E9EFF666',
         'plan-1': '#F58E8E80',
         'plan-2': '#F3C95D80',
