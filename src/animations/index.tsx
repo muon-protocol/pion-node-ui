@@ -1,5 +1,5 @@
 import { FC, ReactNode, useEffect } from 'react';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 export const MoveUpIn: FC<{
   children: ReactNode;
@@ -86,32 +86,33 @@ export const FadeIn: FC<{
   );
 };
 
-export const BottomToTop: FC<{
+export const Scale: FC<{
   children: ReactNode;
   className?: string;
   delay?: number;
   duration?: number;
-}> = ({ delay, duration, children, className }) => {
+  key?: string;
+}> = ({ delay, duration, children, className, key = '1' }) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    controls.start({
-      opacity: 1,
-      y: 0,
-      transition: { duration: duration || 0.3, delay: delay || 0 },
-    });
-  }, [controls, delay, duration]);
+    if (key) {
+      controls.start({
+        opacity: 1,
+        scale: 1,
+        transition: { duration: duration || 0.3, delay: delay || 0 },
+      });
+    }
+  }, [controls, delay, duration, key]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        className={className}
-        initial={{ opacity: 0, y: 20 }}
-        exit={{ opacity: 1, y: 0 }}
-        animate={controls}
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, scale: 0.5 }}
+      exit={{ opacity: 0, scale: 0.5 }}
+      animate={controls}
+    >
+      {children}
+    </motion.div>
   );
 };
