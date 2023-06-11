@@ -8,6 +8,7 @@ import Seekbar from '../../components/Common/Seekbar.tsx';
 import { useState } from 'react';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
+import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -129,17 +130,13 @@ const MergeBody = () => {
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex flex-col bg-primary-dark">
-          <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
-          <span className="text-sm text-gray10 flex mb-2 justify-between">
-            <p className="font-light">Node Power</p>
-            <p className="font-medium">5030</p>
-          </span>
-          <span className="text-sm text-gray10 flex justify-between">
-            <p className="font-light">Tier</p>
-            <p className="font-medium">Pion Enhancer (Tier 2)</p>
-          </span>
-        </div>
+        <BonPIONCard
+          title="New Bonded PION"
+          subTitle1="Node Power"
+          subValue1="530"
+          subTitle2="Tier"
+          subValue2="Pion Supreme (Tier 3)"
+        />
       </FadeIn>
       <FadeIn
         duration={0.1}
@@ -177,28 +174,20 @@ const SplitBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <div className="new-bounded-pions flex gap-3 w-full select-none">
-          <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex-1 flex flex-col bg-primary-dark">
-            <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
-            <span className="text-sm text-gray10 flex mb-2 justify-between">
-              <p className="font-light">Node Power</p>
-              <p className="font-medium">5030</p>
-            </span>
-            <span className="text-sm text-gray10 flex justify-between">
-              <p className="font-light">Tier</p>
-              <p className="font-medium">Pion Enhancer (Tier 2)</p>
-            </span>
-          </div>
-          <div className="new-bounded-pion-card rounded-2xl p-[18px] bg-primary-card flex-1 flex flex-col bg-primary-dark">
-            <p className="text-gray10 font-semibold mb-6">New Bounded PION</p>
-            <span className="text-sm text-gray10 flex mb-2 justify-between">
-              <p className="font-light">Node Power</p>
-              <p className="font-medium">5030</p>
-            </span>
-            <span className="text-sm text-gray10 flex justify-between">
-              <p className="font-light">Tier</p>
-              <p className="font-medium">Pion Enhancer (Tier 2)</p>
-            </span>
-          </div>
+          <BonPIONCard
+            title="New Bonded PION"
+            subTitle1="Node Power"
+            subValue1="530"
+            subTitle2="Tier"
+            subValue2="Pion Supreme (Tier 3)"
+          />
+          <BonPIONCard
+            title="New Bonded PION"
+            subTitle1="Node Power"
+            subValue1="530"
+            subTitle2="Tier"
+            subValue2="Pion Supreme (Tier 3)"
+          />
         </div>
       </FadeIn>
       <FadeIn
