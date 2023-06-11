@@ -80,7 +80,29 @@ const RenderUpgradeBody = () => {
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle="Select BonPION"
         >
-          <div className="flex flex-col gap-4"></div>
+          <div className="flex flex-col gap-4">
+            <BonPIONCard
+              title="New Bonded PION"
+              subTitle1="Node Power"
+              subValue1="530"
+              subTitle2="Tier"
+              subValue2="Pion Supreme (Tier 3)"
+            />
+            <BonPIONCard
+              title="New Bonded PION"
+              subTitle1="Node Power"
+              subValue1="530"
+              subTitle2="Tier"
+              subValue2="Pion Supreme (Tier 3)"
+            />
+            <BonPIONCard
+              title="New Bonded PION"
+              subTitle1="Node Power"
+              subValue1="530"
+              subTitle2="Tier"
+              subValue2="Pion Supreme (Tier 3)"
+            />
+          </div>
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
