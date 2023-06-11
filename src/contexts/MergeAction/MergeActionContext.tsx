@@ -5,13 +5,13 @@ const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
   openMergeModal: () => void;
   closeMergeModal: () => void;
-  isInMergeSelectedBonPIONs: (bonPION: BonPION) => boolean;
+  isInSelectedMergeBonPIONs: (bonPION: BonPION) => boolean;
   handleMergeModalItemClicked: (bonPION: BonPION) => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
   closeMergeModal: () => {},
-  isInMergeSelectedBonPIONs: () => false,
+  isInSelectedMergeBonPIONs: () => false,
   handleMergeModalItemClicked: () => {},
 });
 
@@ -47,7 +47,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
-  const isInMergeSelectedBonPIONs = (bonPION: BonPION) => {
+  const isInSelectedMergeBonPIONs = (bonPION: BonPION) => {
     return !!mergeModalSelectedBonPIONs.find((b) => b.id === bonPION.id);
   };
 
@@ -60,7 +60,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isMergeModalOpen,
         openMergeModal,
         closeMergeModal,
-        isInMergeSelectedBonPIONs,
+        isInSelectedMergeBonPIONs,
         handleMergeModalItemClicked,
       }}
     >

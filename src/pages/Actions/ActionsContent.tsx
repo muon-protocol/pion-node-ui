@@ -5,12 +5,12 @@ import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
-import { useState } from 'react';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
 import { mergeModalItems, upgradeModalItems } from '../../data';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
+import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -74,7 +74,7 @@ const RenderUpgradeBody = () => {
     openUpgradeModal,
     closeUpgradeModal,
     handleUpgradeModalItemClicked,
-    isSelectedBonPION,
+    isSelectedUpgradeBonPION,
   } = useUpgradeAction();
 
   return (
@@ -99,7 +99,7 @@ const RenderUpgradeBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleUpgradeModalItemClicked(item)}
                   compact
-                  selected={isSelectedBonPION(item)}
+                  selected={isSelectedUpgradeBonPION(item)}
                 />
               );
             })}
@@ -145,7 +145,7 @@ const MergeBody = () => {
     openMergeModal,
     closeMergeModal,
     handleMergeModalItemClicked,
-    isInMergeSelectedBonPIONs,
+    isInSelectedMergeBonPIONs,
   } = useMergeAction();
 
   return (
@@ -171,7 +171,7 @@ const MergeBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleMergeModalItemClicked(item)}
                   compact
-                  selected={isInMergeSelectedBonPIONs(item)}
+                  selected={isInSelectedMergeBonPIONs(item)}
                 />
               );
             })}
@@ -207,12 +207,44 @@ const MergeBody = () => {
 };
 
 const SplitBody = () => {
-  const [splitValue, setSplitValue] = useState(50);
+  const {
+    splitValue,
+    setSplitValue,
+    isSplitModalOpen,
+    openSplitModal,
+    closeSplitModal,
+    handleSplitModalItemClicked,
+    isSelectedSplitBonPION,
+  } = useSplitAction();
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        {/*<SelectButtonWithModal title="Select BonPion" />*/}
+        <SelectButtonWithModal
+          title="Select BonPion"
+          onClick={() => openSplitModal()}
+          isModalOpen={isSplitModalOpen}
+          closeModalHandler={() => closeSplitModal()}
+          modalTitle="Select BonPION"
+        >
+          <div className="flex flex-col gap-3">
+            {upgradeModalItems.map((item) => {
+              return (
+                <BonPIONCard
+                  className="cursor-pointer"
+                  title={item.title}
+                  subTitle1="Node Power"
+                  subValue1={item.nodePower}
+                  subTitle2="Tier"
+                  subValue2={item.tier}
+                  onClick={() => handleSplitModalItemClicked(item)}
+                  compact
+                  selected={isSelectedSplitBonPION(item)}
+                />
+              );
+            })}
+          </div>
+        </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <img

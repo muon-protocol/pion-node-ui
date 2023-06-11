@@ -5,13 +5,13 @@ const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
   openUpgradeModal: () => void;
   closeUpgradeModal: () => void;
-  isSelectedBonPION: (bonPION: BonPION) => boolean;
+  isSelectedUpgradeBonPION: (bonPION: BonPION) => boolean;
   handleUpgradeModalItemClicked: (bonPION: BonPION) => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
   closeUpgradeModal: () => {},
-  isSelectedBonPION: () => false,
+  isSelectedUpgradeBonPION: () => false,
   handleUpgradeModalItemClicked: () => {},
 });
 
@@ -41,7 +41,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     setUpgradeModalSelectedBonPION(null);
   };
 
-  const isSelectedBonPION = (bonPION: BonPION) => {
+  const isSelectedUpgradeBonPION = (bonPION: BonPION) => {
     return (
       !!upgradeModalSelectedBonPION &&
       upgradeModalSelectedBonPION.id === bonPION.id
@@ -57,7 +57,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         isUpgradeModalOpen,
         openUpgradeModal,
         closeUpgradeModal,
-        isSelectedBonPION,
+        isSelectedUpgradeBonPION,
         handleUpgradeModalItemClicked,
       }}
     >
