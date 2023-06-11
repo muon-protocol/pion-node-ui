@@ -293,10 +293,42 @@ const SplitBody = () => {
 };
 
 const RenderTransferBody = () => {
+  const {
+    isSplitModalOpen,
+    openSplitModal,
+    closeSplitModal,
+    handleSplitModalItemClicked,
+    isSelectedSplitBonPION,
+  } = useSplitAction();
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        {/*<SelectButtonWithModal title="Select BonPion" />*/}
+        <SelectButtonWithModal
+          title="Select BonPion"
+          onClick={() => openSplitModal()}
+          isModalOpen={isSplitModalOpen}
+          closeModalHandler={() => closeSplitModal()}
+          modalTitle="Select BonPION"
+        >
+          <div className="flex flex-col gap-3">
+            {upgradeModalItems.map((item) => {
+              return (
+                <BonPIONCard
+                  className="cursor-pointer"
+                  title={item.title}
+                  subTitle1="Node Power"
+                  subValue1={item.nodePower}
+                  subTitle2="Tier"
+                  subValue2={item.tier}
+                  onClick={() => handleSplitModalItemClicked(item)}
+                  compact
+                  selected={isSelectedSplitBonPION(item)}
+                />
+              );
+            })}
+          </div>
+        </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AddressInput />

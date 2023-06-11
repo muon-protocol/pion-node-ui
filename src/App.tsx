@@ -9,6 +9,7 @@ import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { UpgradeActionProvider } from './contexts/UpgradeAction/UpgradeActionContext.tsx';
 import { MergeActionProvider } from './contexts/MergeAction/MergeActionContext.tsx';
 import { SplitActionProvider } from './contexts/SplitAction/SplitActionContext.tsx';
+import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
 
 function App() {
   return (
@@ -17,13 +18,15 @@ function App() {
         <UpgradeActionProvider>
           <MergeActionProvider>
             <SplitActionProvider>
-              <BrowserRouter>
-                <Navbar />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/create" element={<Actions />} />
-                </Routes>
-              </BrowserRouter>
+              <TransferActionProvider>
+                <BrowserRouter>
+                  <Navbar />
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/create" element={<Actions />} />
+                  </Routes>
+                </BrowserRouter>
+              </TransferActionProvider>
             </SplitActionProvider>
           </MergeActionProvider>
         </UpgradeActionProvider>
