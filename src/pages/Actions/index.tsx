@@ -6,12 +6,10 @@ import { FadeIn } from '../../animations';
 const Actions = () => {
   return (
     <div className="page page--centered">
-      <div className="flex flex-col w-[664px] gap-6">
-        <FadeIn>
-          <ActionsHeader />
-          <ActionsBody />
-        </FadeIn>
-      </div>
+      <FadeIn className="flex flex-col w-[664px] gap-6">
+        <ActionsHeader />
+        <ActionsBody />
+      </FadeIn>
     </div>
   );
 };
