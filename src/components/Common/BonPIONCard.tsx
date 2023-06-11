@@ -2,24 +2,29 @@ import { FC } from 'react';
 
 const BonPIONCard: FC<{
   title: string;
+  className?: string;
   subTitle1: string;
   subValue1: string;
   subTitle2: string;
   subValue2: string;
+  onClick?: () => void;
   compact?: boolean;
   selected?: boolean;
 }> = ({
   title,
+  className,
   subTitle1,
   subValue1,
   subTitle2,
   subValue2,
+  onClick,
   compact,
   selected,
 }) => {
   return (
     <div
-      className={`new-bounded-pion-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col ${
+      onClick={() => onClick && onClick()}
+      className={`new-bounded-pion-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col ${className} ${
         selected
           ? 'bg-primary-dark text-gray10'
           : 'bg-primary-10-solid text-black'

@@ -9,6 +9,7 @@ import { useState } from 'react';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
+import { upgradeModalItems } from '../../data';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -67,8 +68,13 @@ const RenderCreateBody = () => {
 };
 
 const RenderUpgradeBody = () => {
-  const { isUpgradeModalOpen, openUpgradeModal, closeUpgradeModal } =
-    useUpgradeAction();
+  const {
+    isUpgradeModalOpen,
+    openUpgradeModal,
+    closeUpgradeModal,
+    handleUpgradeModalItemClicked,
+    isInSelectedBonPIONs,
+  } = useUpgradeAction();
 
   return (
     <>
@@ -81,33 +87,21 @@ const RenderUpgradeBody = () => {
           modalTitle="Select BonPION"
         >
           <div className="flex flex-col gap-4">
-            <BonPIONCard
-              title="New Bonded PION"
-              subTitle1="Node Power"
-              subValue1="530"
-              subTitle2="Tier"
-              subValue2="Pion Supreme (Tier 3)"
-              compact
-              selected={true}
-            />
-            <BonPIONCard
-              title="New Bonded PION"
-              subTitle1="Node Power"
-              subValue1="530"
-              subTitle2="Tier"
-              subValue2="Pion Supreme (Tier 3)"
-              compact
-              selected={false}
-            />
-            <BonPIONCard
-              title="New Bonded PION"
-              subTitle1="Node Power"
-              subValue1="530"
-              subTitle2="Tier"
-              subValue2="Pion Supreme (Tier 3)"
-              compact
-              selected={false}
-            />
+            {upgradeModalItems.map((item) => {
+              return (
+                <BonPIONCard
+                  className="cursor-pointer"
+                  title={item.title}
+                  subTitle1="Node Power"
+                  subValue1={item.nodePower}
+                  subTitle2="Tier"
+                  subValue2={item.tier}
+                  onClick={() => handleUpgradeModalItemClicked(item)}
+                  compact
+                  selected={isInSelectedBonPIONs(item)}
+                />
+              );
+            })}
           </div>
         </SelectButtonWithModal>
       </FadeIn>

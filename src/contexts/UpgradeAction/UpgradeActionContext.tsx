@@ -1,15 +1,17 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonPION } from '../../types';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
   openUpgradeModal: () => void;
   closeUpgradeModal: () => void;
+  isInSelectedBonPIONs: (bonPION: BonPION) => boolean;
   handleUpgradeModalItemClicked: (bonPION: BonPION) => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
   closeUpgradeModal: () => {},
+  isInSelectedBonPIONs: () => false,
   handleUpgradeModalItemClicked: () => {},
 });
 
@@ -22,9 +24,18 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     if (upgradeModalSelectedBonPIONs.find((b) => b.id === bonPION.id)) {
       removeUpgradeModalSelectedBonPION(bonPION);
     } else {
-      addUpgradeModalSelectedBonPION(bonPION);
+      if (upgradeModalSelectedBonPIONs.length < 2) {
+        addUpgradeModalSelectedBonPION(bonPION);
+      }
     }
   };
+
+  useEffect(() => {
+    if (upgradeModalSelectedBonPIONs.length === 2) {
+      closeUpgradeModal();
+    }
+  }, [upgradeModalSelectedBonPIONs]);
+
   const addUpgradeModalSelectedBonPION = (bonPION: BonPION) => {
     setUpgradeModalSelectedBonPIONs([...upgradeModalSelectedBonPIONs, bonPION]);
   };
@@ -33,6 +44,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     setUpgradeModalSelectedBonPIONs(
       upgradeModalSelectedBonPIONs.filter((b) => b.id !== bonPION.id),
     );
+  };
+
+  const isInSelectedBonPIONs = (bonPION: BonPION) => {
+    return !!upgradeModalSelectedBonPIONs.find((b) => b.id === bonPION.id);
   };
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
@@ -44,6 +59,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         isUpgradeModalOpen,
         openUpgradeModal,
         closeUpgradeModal,
+        isInSelectedBonPIONs,
         handleUpgradeModalItemClicked,
       }}
     >
