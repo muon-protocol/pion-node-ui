@@ -7,6 +7,7 @@ import AmountInput from '../../components/Common/AmountInput.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
 import { useState } from 'react';
 import { FadeIn } from '../../animations';
+import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -65,10 +66,21 @@ const RenderCreateBody = () => {
 };
 
 const RenderUpgradeBody = () => {
+  const { isUpgradeModalOpen, openUpgradeModal, closeUpgradeModal } =
+    useUpgradeAction();
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        <SelectButtonWithModal title="Select BonPion" />
+        <SelectButtonWithModal
+          title="Select BonPion"
+          onClick={() => openUpgradeModal()}
+          isModalOpen={isUpgradeModalOpen}
+          closeModalHandler={() => closeUpgradeModal()}
+          modalTitle="Select BonPION"
+        >
+          <div className="flex flex-col gap-4"></div>
+        </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput />
@@ -107,7 +119,7 @@ const MergeBody = () => {
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        <SelectButtonWithModal title="Select bonPIONs to Merge" multiple />
+        {/*<SelectButtonWithModal title="Select bonPIONs to Merge" multiple />*/}
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <img
@@ -146,7 +158,7 @@ const SplitBody = () => {
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        <SelectButtonWithModal title="Select BonPion" />
+        {/*<SelectButtonWithModal title="Select BonPion" />*/}
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <img
@@ -204,7 +216,7 @@ const RenderTransferBody = () => {
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        <SelectButtonWithModal title="Select BonPion" />
+        {/*<SelectButtonWithModal title="Select BonPion" />*/}
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AddressInput />

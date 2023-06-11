@@ -6,18 +6,21 @@ import Actions from './pages/Actions';
 import Navbar from './components/Common/Navbar.tsx';
 
 import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
+import { UpgradeActionProvider } from './contexts/UpgradeAction/UpgradeActionContext.tsx';
 
 function App() {
   return (
     <div className="app">
       <ActionsProvider>
-        <BrowserRouter>
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Actions />} />
-          </Routes>
-        </BrowserRouter>
+        <UpgradeActionProvider>
+          <BrowserRouter>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/create" element={<Actions />} />
+            </Routes>
+          </BrowserRouter>
+        </UpgradeActionProvider>
       </ActionsProvider>
     </div>
   );

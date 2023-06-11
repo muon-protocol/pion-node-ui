@@ -13,7 +13,12 @@ const ActionsProvider = ({ children }: { children: ReactNode }) => {
   const [selectedAction, setSelectedAction] = useState(ActionType.CREATE);
 
   return (
-    <ActionsContext.Provider value={{ selectedAction, setSelectedAction }}>
+    <ActionsContext.Provider
+      value={{
+        selectedAction,
+        setSelectedAction,
+      }}
+    >
       {children}
     </ActionsContext.Provider>
   );

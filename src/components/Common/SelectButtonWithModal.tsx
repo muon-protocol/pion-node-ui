@@ -1,13 +1,26 @@
+import Modal from './Modal.tsx';
+import { ReactNode } from 'react';
+
 const SelectButtonWithModal = ({
   title,
   multiple,
+  children,
+  isModalOpen,
+  closeModalHandler,
+  modalTitle,
+  onClick,
 }: {
   title: string;
   multiple?: boolean;
+  children: ReactNode;
+  isModalOpen: boolean;
+  closeModalHandler: () => void;
+  modalTitle: string;
+  onClick: () => void;
 }) => {
   return (
     <div className="select-button-with-modal mb-6">
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex flex-col w-full gap-2" onClick={onClick}>
         <div className="text-xyz-75 text-sm">{title}</div>
         <div className="select-button-with-modal__button flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14 cursor-pointer">
           <span className="flex gap-2.5 items-center">
@@ -51,7 +64,14 @@ const SelectButtonWithModal = ({
         </div>
       </div>
 
-      {false && <div className="select-button-with-modal__modal"></div>}
+      <Modal
+        title={modalTitle}
+        isOpen={isModalOpen}
+        closeModalHandler={closeModalHandler}
+        className="select-button-with-modal__modal"
+      >
+        {children}
+      </Modal>
     </div>
   );
 };

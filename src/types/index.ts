@@ -24,3 +24,10 @@ export type SidebarItem = {
   hoverIcon: string;
   link: ActionType;
 };
+
+export type BonPION = {
+  id: number;
+  title: string;
+  nodePower: string;
+  tier: string;
+};
