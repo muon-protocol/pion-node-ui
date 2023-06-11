@@ -87,6 +87,8 @@ const RenderUpgradeBody = () => {
               subValue1="530"
               subTitle2="Tier"
               subValue2="Pion Supreme (Tier 3)"
+              compact
+              selected={true}
             />
             <BonPIONCard
               title="New Bonded PION"
@@ -94,6 +96,8 @@ const RenderUpgradeBody = () => {
               subValue1="530"
               subTitle2="Tier"
               subValue2="Pion Supreme (Tier 3)"
+              compact
+              selected={false}
             />
             <BonPIONCard
               title="New Bonded PION"
@@ -101,6 +105,8 @@ const RenderUpgradeBody = () => {
               subValue1="530"
               subTitle2="Tier"
               subValue2="Pion Supreme (Tier 3)"
+              compact
+              selected={false}
             />
           </div>
         </SelectButtonWithModal>

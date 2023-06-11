@@ -17,7 +17,7 @@ const Modal: FC<{
           data-testid="modal-wrapper"
         >
           <div
-            className={`modal-content max-w-[420px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 bg-card-bg-70-purple rounded-3xl`}
+            className={`modal-content max-w-[400px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 bg-card-bg-70-purple rounded-3xl`}
             onClick={(e) => e.stopPropagation()}
             data-testid="modal-content"
           >
