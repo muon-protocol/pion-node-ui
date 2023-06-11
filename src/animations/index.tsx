@@ -108,8 +108,8 @@ export const Scale: FC<{
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, scale: 0.5 }}
-      exit={{ opacity: 0, scale: 0.5 }}
+      initial={{ opacity: 0, scale: 0 }}
+      exit={{ opacity: 0, scale: 0, transition: { duration: 0.1 } }}
       animate={controls}
     >
       {children}
