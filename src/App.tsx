@@ -7,19 +7,22 @@ import Navbar from './components/Common/Navbar.tsx';
 
 import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { UpgradeActionProvider } from './contexts/UpgradeAction/UpgradeActionContext.tsx';
+import { MergeActionProvider } from './contexts/MergeAction/MergeActionContext.tsx';
 
 function App() {
   return (
     <div className="app">
       <ActionsProvider>
         <UpgradeActionProvider>
-          <BrowserRouter>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/create" element={<Actions />} />
-            </Routes>
-          </BrowserRouter>
+          <MergeActionProvider>
+            <BrowserRouter>
+              <Navbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/create" element={<Actions />} />
+              </Routes>
+            </BrowserRouter>
+          </MergeActionProvider>
         </UpgradeActionProvider>
       </ActionsProvider>
     </div>

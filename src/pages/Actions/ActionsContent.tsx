@@ -9,7 +9,8 @@ import { useState } from 'react';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
-import { upgradeModalItems } from '../../data';
+import { mergeModalItems, upgradeModalItems } from '../../data';
+import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -73,7 +74,7 @@ const RenderUpgradeBody = () => {
     openUpgradeModal,
     closeUpgradeModal,
     handleUpgradeModalItemClicked,
-    isInSelectedBonPIONs,
+    isSelectedBonPION,
   } = useUpgradeAction();
 
   return (
@@ -98,7 +99,7 @@ const RenderUpgradeBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleUpgradeModalItemClicked(item)}
                   compact
-                  selected={isInSelectedBonPIONs(item)}
+                  selected={isSelectedBonPION(item)}
                 />
               );
             })}
@@ -139,10 +140,43 @@ const RenderUpgradeBody = () => {
 };
 
 const MergeBody = () => {
+  const {
+    isMergeModalOpen,
+    openMergeModal,
+    closeMergeModal,
+    handleMergeModalItemClicked,
+    isInMergeSelectedBonPIONs,
+  } = useMergeAction();
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        {/*<SelectButtonWithModal title="Select bonPIONs to Merge" multiple />*/}
+        <SelectButtonWithModal
+          title="Select BonPIONs"
+          onClick={() => openMergeModal()}
+          isModalOpen={isMergeModalOpen}
+          closeModalHandler={() => closeMergeModal()}
+          modalTitle="Select BonPIONs to Merge"
+          multiple
+        >
+          <div className="flex flex-col gap-4">
+            {mergeModalItems.map((item) => {
+              return (
+                <BonPIONCard
+                  className="cursor-pointer"
+                  title={item.title}
+                  subTitle1="Node Power"
+                  subValue1={item.nodePower}
+                  subTitle2="Tier"
+                  subValue2={item.tier}
+                  onClick={() => handleMergeModalItemClicked(item)}
+                  compact
+                  selected={isInMergeSelectedBonPIONs(item)}
+                />
+              );
+            })}
+          </div>
+        </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <img

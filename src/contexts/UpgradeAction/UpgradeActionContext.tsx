@@ -1,53 +1,51 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { BonPION } from '../../types';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
   openUpgradeModal: () => void;
   closeUpgradeModal: () => void;
-  isInSelectedBonPIONs: (bonPION: BonPION) => boolean;
+  isSelectedBonPION: (bonPION: BonPION) => boolean;
   handleUpgradeModalItemClicked: (bonPION: BonPION) => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
   closeUpgradeModal: () => {},
-  isInSelectedBonPIONs: () => false,
+  isSelectedBonPION: () => false,
   handleUpgradeModalItemClicked: () => {},
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
-  const [upgradeModalSelectedBonPIONs, setUpgradeModalSelectedBonPIONs] =
-    useState<BonPION[]>([]);
+  const [upgradeModalSelectedBonPION, setUpgradeModalSelectedBonPION] =
+    useState<BonPION | null>(null);
 
   const handleUpgradeModalItemClicked = (bonPION: BonPION) => {
-    if (upgradeModalSelectedBonPIONs.find((b) => b.id === bonPION.id)) {
-      removeUpgradeModalSelectedBonPION(bonPION);
+    if (!upgradeModalSelectedBonPION) {
+      changeUpgradeModalSelectedBonPION(bonPION);
+      return;
+    }
+    if (upgradeModalSelectedBonPION.id === bonPION.id) {
+      unselectUpgradeModalSelectedBonPION();
     } else {
-      if (upgradeModalSelectedBonPIONs.length < 2) {
-        addUpgradeModalSelectedBonPION(bonPION);
-      }
+      changeUpgradeModalSelectedBonPION(bonPION);
     }
   };
 
-  useEffect(() => {
-    if (upgradeModalSelectedBonPIONs.length === 2) {
-      closeUpgradeModal();
-    }
-  }, [upgradeModalSelectedBonPIONs]);
-
-  const addUpgradeModalSelectedBonPION = (bonPION: BonPION) => {
-    setUpgradeModalSelectedBonPIONs([...upgradeModalSelectedBonPIONs, bonPION]);
+  const changeUpgradeModalSelectedBonPION = (bonPION: BonPION) => {
+    setUpgradeModalSelectedBonPION(bonPION);
+    closeUpgradeModal();
   };
 
-  const removeUpgradeModalSelectedBonPION = (bonPION: BonPION) => {
-    setUpgradeModalSelectedBonPIONs(
-      upgradeModalSelectedBonPIONs.filter((b) => b.id !== bonPION.id),
+  const unselectUpgradeModalSelectedBonPION = () => {
+    setUpgradeModalSelectedBonPION(null);
+  };
+
+  const isSelectedBonPION = (bonPION: BonPION) => {
+    return (
+      !!upgradeModalSelectedBonPION &&
+      upgradeModalSelectedBonPION.id === bonPION.id
     );
-  };
-
-  const isInSelectedBonPIONs = (bonPION: BonPION) => {
-    return !!upgradeModalSelectedBonPIONs.find((b) => b.id === bonPION.id);
   };
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
@@ -59,7 +57,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         isUpgradeModalOpen,
         openUpgradeModal,
         closeUpgradeModal,
-        isInSelectedBonPIONs,
+        isSelectedBonPION,
         handleUpgradeModalItemClicked,
       }}
     >
