@@ -28,6 +28,8 @@ const Modal: FC<{
                 className="cursor-pointer"
                 onClick={closeModalHandler}
                 src="/assets/images/modal/exit.svg"
+                width="18px"
+                height="18px"
                 alt={'X'}
               />
             </div>

@@ -87,7 +87,7 @@ const RenderUpgradeBody = () => {
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle="Select BonPION"
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
               return (
                 <BonPIONCard
@@ -159,7 +159,7 @@ const MergeBody = () => {
           modalTitle="Select BonPIONs to Merge"
           multiple
         >
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {mergeModalItems.map((item) => {
               return (
                 <BonPIONCard
@@ -192,6 +192,7 @@ const MergeBody = () => {
           subValue1="530"
           subTitle2="Tier"
           subValue2="Pion Supreme (Tier 3)"
+          selected
         />
       </FadeIn>
       <FadeIn
@@ -236,6 +237,7 @@ const SplitBody = () => {
             subValue1="530"
             subTitle2="Tier"
             subValue2="Pion Supreme (Tier 3)"
+            selected
           />
           <BonPIONCard
             title="New Bonded PION"
@@ -243,6 +245,7 @@ const SplitBody = () => {
             subValue1="530"
             subTitle2="Tier"
             subValue2="Pion Supreme (Tier 3)"
+            selected
           />
         </div>
       </FadeIn>
