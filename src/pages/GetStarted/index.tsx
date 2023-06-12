@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 const GetStarted = () => {
   return (
     <div className="page page--get-started">
@@ -21,42 +23,86 @@ const GetStarted = () => {
         </span>
       </span>
       <span className="get-started__actions">
-        <span className="get-started__actions__action-container relative">
-          <img
-            className="get-started__actions__action__floating-object h-[186px] w-auto absolute -left-4 -bottom-9"
-            src="/assets/images/get-started/new-bon-pion-floating-icon.svg"
-            alt=""
-          />
-          <div className="get-started__actions__action">
-            <img
-              className="mb-12 h-16 w-auto"
-              src="/assets/images/get-started/new-bon-pion-icon.svg"
-              alt=""
-            />
-            <div className="text-2xl font-light text-white text-center">
-              Get Started with a New bonPION
-            </div>
-          </div>
-        </span>
-        <span className="get-started__actions__action-container relative">
-          <img
-            className="get-started__actions__action__floating-object h-[203px] w-auto absolute -top-7 -right-20"
-            src="/assets/images/get-started/muan-pioneer-floating-icon.svg"
-            alt=""
-          />
-          <div className="get-started__actions__action">
-            <img
-              className="mb-12 h-16 w-auto"
-              src="/assets/images/get-started/muan-pioneer.svg"
-              alt=""
-            />
-            <div className="text-2xl font-light text-white text-center">
-              Claim as a Muon Pioneer
-            </div>
-          </div>
-        </span>
+        <NewBonPionAction />
+        <MuanPioneerAction />
       </span>
     </div>
+  );
+};
+
+const NewBonPionAction = () => {
+  const newBonPionFloatingIconVariants = {
+    initial: {
+      left: -4 * 4,
+      bottom: -9 * 4,
+      transform: 'rotate(0deg)',
+    },
+    animate: {
+      left: -10 * 4,
+      bottom: 13 * 4,
+      transform: 'rotate(30deg)',
+    },
+  };
+  return (
+    <motion.span
+      whileHover="animate"
+      className="get-started__actions__action-container relative"
+    >
+      <motion.img
+        variants={newBonPionFloatingIconVariants}
+        className="get-started__actions__action__floating-object h-[186px] w-auto absolute -left-4 -bottom-9"
+        src="/assets/images/get-started/new-bon-pion-floating-icon.svg"
+        alt=""
+      />
+      <div className="get-started__actions__action">
+        <img
+          className="mb-12 h-16 w-auto"
+          src="/assets/images/get-started/new-bon-pion-icon.svg"
+          alt=""
+        />
+        <div className="text-2xl font-light text-white text-center">
+          Get Started with a New bonPION
+        </div>
+      </div>
+    </motion.span>
+  );
+};
+
+const MuanPioneerAction = () => {
+  const muanFloatingIconVariants = {
+    initial: {
+      top: -7 * 4,
+      right: -20 * 4,
+      transform: 'rotate(0deg)',
+    },
+    animate: {
+      top: 22 * 4,
+      right: -10 * 4,
+      transform: 'rotate(45deg)',
+    },
+  };
+  return (
+    <motion.span
+      whileHover="animate"
+      className="get-started__actions__action-container relative"
+    >
+      <motion.img
+        variants={muanFloatingIconVariants}
+        className="get-started__actions__action__floating-object h-[203px] w-auto absolute -top-7 -right-20"
+        src="/assets/images/get-started/muan-pioneer-floating-icon.svg"
+        alt=""
+      />
+      <div className="get-started__actions__action">
+        <img
+          className="mb-12 h-16 w-auto"
+          src="/assets/images/get-started/muan-pioneer.svg"
+          alt=""
+        />
+        <div className="text-2xl font-light text-white text-center">
+          Claim as a Muon Pioneer
+        </div>
+      </div>
+    </motion.span>
   );
 };
 
