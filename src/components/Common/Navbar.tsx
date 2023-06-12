@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Navbar = () => {
   return (
@@ -32,9 +33,10 @@ const DesktopNavbar = () => {
             Balance: <strong className="ml-2 mr-1">2310.013</strong>
             <strong className="text-xyz-75">PION</strong>
           </button>
-          <button className="btn btn--small btn--dark-primary">
-            0x5a03…c7ef
-          </button>
+          <ConnectButton />
+          {/*<ConnectButton className="btn btn--small btn--dark-primary">*/}
+          {/*  0x5a03…c7ef*/}
+          {/*</ConnectButton>*/}
         </div>
       </div>
     </FadeIn>
