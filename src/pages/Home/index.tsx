@@ -1,6 +1,7 @@
 import { plans } from '../../data/constants';
 import PlanCard from './PlanCard.tsx';
 import { MoveRightIn } from '../../animations';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -19,7 +20,9 @@ const Home = () => {
         </p>
       </MoveRightIn>
       <MoveRightIn delay={0.6}>
-        <button className="btn btn--large mb-32">Start Your Node</button>
+        <Link to="/get-started">
+          <button className="btn btn--large mb-32">Start Your Node</button>
+        </Link>
       </MoveRightIn>
       <div className="plans flex gap-16 justify-between">
         <PlanCard

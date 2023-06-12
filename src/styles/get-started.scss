@@ -1,0 +1,18 @@
+
+.get-started {
+  &__pioneer-option {
+    @apply bg-primary-dark text-white rounded-xl flex-1 py-5 px-2 text-center;
+  }
+
+  &__actions {
+    @apply flex gap-6 w-full;
+
+    &__action-container {
+      @apply flex-1;
+    }
+
+    &__action {
+      @apply cursor-pointer flex flex-col py-[60px] px-8 bg-glass backdrop-blur-[10px] rounded-2xl;
+    }
+  }
+}

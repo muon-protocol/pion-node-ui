@@ -10,6 +10,7 @@ import { UpgradeActionProvider } from './contexts/UpgradeAction/UpgradeActionCon
 import { MergeActionProvider } from './contexts/MergeAction/MergeActionContext.tsx';
 import { SplitActionProvider } from './contexts/SplitAction/SplitActionContext.tsx';
 import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
+import GetStarted from './pages/GetStarted';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
                   <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/create" element={<Actions />} />
+                    <Route path="/get-started" element={<GetStarted />} />
                   </Routes>
                 </BrowserRouter>
               </TransferActionProvider>

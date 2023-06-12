@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  @apply box-border outline-none focus:outline-none select-none p-0 m-0;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -25,6 +29,10 @@ input[type=number] {
 
   &--centered {
     @apply flex items-center justify-center;
+  }
+
+  &--get-started {
+    @apply flex flex-col items-center justify-center max-w-[688px] mx-auto;
   }
 }
 
