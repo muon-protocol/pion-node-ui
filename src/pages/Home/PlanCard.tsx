@@ -15,7 +15,7 @@ const PlanCard = ({
       className={(className || '') + ' rounded-3xl'}
       delay={animationDelay}
     >
-      <div className={`plan-card p-9 pt-[130px] relative max-w-[430px]`}>
+      <div className={`plan-card p-9 pb-10 pt-[130px] relative max-w-[430px]`}>
         <div
           className={`plan-card__title-shadow absolute left-9 top-9 ${plan.shadowColor} text-[40px] font-bold`}
         >
@@ -24,7 +24,7 @@ const PlanCard = ({
         <div className="plan-card__title absolute left-9 top-9 -ml-1 text-white text-[32px] font-bold">
           {plan.title}
         </div>
-        <div className="plan-card__content mb-1 flex flex-col gap-7">
+        <div className="plan-card__content mb-1 flex flex-col gap-6">
           <div className="plan-card__content__item flex flex-col">
             <div className="plan-card__content__item__title">
               Required Node Power

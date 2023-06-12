@@ -21,7 +21,7 @@ input[type=number] {
 }
 
 .page {
-  @apply px-36 py-20;
+  @apply max-w-[1232px] py-20 mx-auto;
 
   &--centered {
     @apply flex items-center justify-center;

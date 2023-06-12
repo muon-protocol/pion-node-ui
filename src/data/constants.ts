@@ -13,7 +13,7 @@ export const plans: Plan[] = [
   },
   {
     id: 2,
-    title: 'Pion Pro',
+    title: 'Pion Enhancer',
     requiredNodePower: '1000 - 5000',
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
@@ -23,7 +23,7 @@ export const plans: Plan[] = [
   },
   {
     id: 3,
-    title: 'Pion Master',
+    title: 'Pion Supreme',
     requiredNodePower: '+5000',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',

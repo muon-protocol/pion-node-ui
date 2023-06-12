@@ -2,11 +2,11 @@
   &__content {
     &__item {
       &__title {
-        @apply text-soft-sky mb-1.5 text-lg;
+        @apply text-soft-sky mb-0 text-[20px];
       }
 
       &__value {
-        @apply text-white text-lg font-bold;
+        @apply text-white text-[20px] font-bold;
       }
     }
   }

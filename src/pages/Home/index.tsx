@@ -6,13 +6,16 @@ const Home = () => {
   return (
     <div className="page">
       <MoveRightIn delay={0.3}>
-        <p className="moto text-white md:w-1/2 text-5xl font-light leading-[58px] mb-4">
+        <p className="moto text-white md:w-3/5 text-5xl font-light leading-[58px] mb-4">
           Pion Network: Be a Pioneer, Bridge the Blockchain Islands
         </p>
       </MoveRightIn>
       <MoveRightIn delay={0.4}>
-        <p className="description text-white font-light text-[28px] mb-11">
-          [ Description about the NFT, tiers and verification ]
+        <p className="description text-white font-light text-[28px] mb-11 md:w-4/6">
+          Empower Your Node with a Bonded PION NFT! <br />
+          Secure your spot in one of our three distinguished tiers by locking
+          PION tokens in your bonPION. The more tokens you lock, the higher the
+          tier and rewards.
         </p>
       </MoveRightIn>
       <MoveRightIn delay={0.6}>
