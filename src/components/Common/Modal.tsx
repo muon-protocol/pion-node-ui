@@ -6,10 +6,11 @@ import { AnimatePresence } from 'framer-motion';
 const Modal: FC<{
   title: string;
   className?: string;
+  size?: 'sm' | 'md' | 'lg';
   isOpen: boolean;
   children: React.ReactNode;
   closeModalHandler: () => void;
-}> = ({ title, children, isOpen, closeModalHandler, className }) => {
+}> = ({ title, children, size, isOpen, closeModalHandler, className }) => {
   return (
     <>
       <AnimatePresence>
@@ -20,7 +21,9 @@ const Modal: FC<{
             data-testid="modal-wrapper"
           >
             <Scale
-              className={`modal-content max-w-[400px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 bg-card-bg-70-purple rounded-3xl`}
+              className={`modal-content max-w-[400px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 ${
+                size === 'sm' ? 'bg-modal-small' : 'bg-card-bg-70-purple'
+              } rounded-3xl`}
             >
               <div
                 onClick={(e) => e.stopPropagation()}
@@ -32,7 +35,11 @@ const Modal: FC<{
                   <img
                     className="cursor-pointer"
                     onClick={closeModalHandler}
-                    src="/assets/images/modal/exit.svg"
+                    src={
+                      size === 'sm'
+                        ? '/assets/images/modal/exit-dark-icon.svg'
+                        : '/assets/images/modal/exit-white-icon.svg'
+                    }
                     width="18px"
                     height="18px"
                     alt={'X'}

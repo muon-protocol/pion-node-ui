@@ -97,7 +97,7 @@ const MuanPioneerAction = () => {
         <div className="get-started__actions__action">
           <img
             className="mb-12 h-16 w-auto"
-            src="/assets/images/get-started/muan-pioneer.svg"
+            src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
           <div className="text-2xl font-light text-white text-center">

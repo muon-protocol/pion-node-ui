@@ -12,6 +12,7 @@ import { SplitActionProvider } from './contexts/SplitAction/SplitActionContext.t
 import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
 import GetStarted from './pages/GetStarted';
 import ClaimPrize from './pages/ClaimPrize';
+import { ClaimPrizeProvider } from './contexts/ClaimPrize/ClaimPrizeContext.tsx';
 
 function App() {
   return (
@@ -21,15 +22,17 @@ function App() {
           <MergeActionProvider>
             <SplitActionProvider>
               <TransferActionProvider>
-                <BrowserRouter>
-                  <Navbar />
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/create" element={<Actions />} />
-                    <Route path="/get-started" element={<GetStarted />} />
-                    <Route path="/claim" element={<ClaimPrize />} />
-                  </Routes>
-                </BrowserRouter>
+                <ClaimPrizeProvider>
+                  <BrowserRouter>
+                    <Navbar />
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/create" element={<Actions />} />
+                      <Route path="/get-started" element={<GetStarted />} />
+                      <Route path="/claim" element={<ClaimPrize />} />
+                    </Routes>
+                  </BrowserRouter>
+                </ClaimPrizeProvider>
               </TransferActionProvider>
             </SplitActionProvider>
           </MergeActionProvider>

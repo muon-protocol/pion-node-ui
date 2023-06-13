@@ -1,7 +1,12 @@
 import { userWallets } from '../../data/constants.ts';
 import { UserWallet } from '../../types';
+import Modal from '../../components/Common/Modal.tsx';
+import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 
 const ClaimPrize = () => {
+  const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
+    useClaimPrize();
+
   return (
     <div className="page page--claim-prize">
       <p className="text-2xl font-light text-white mb-9">
@@ -19,6 +24,25 @@ const ClaimPrize = () => {
         )}
       </div>
       <ClaimCard />
+      <Modal
+        title=""
+        size="sm"
+        isOpen={isSwitchBackToWalletModalOpen}
+        closeModalHandler={closeSwitchBackToWalletModal}
+      >
+        <div className="pb-4 px-3 flex flex-col justify-center items-center">
+          <img
+            className="w-[108px] mb-10"
+            src="/assets/images/claim/switch-wallet-modal-icon.svg"
+            alt=""
+          />
+          <p className="text-center">
+            To claim your bonPION, please switch back to your Staking Address
+            <br />
+            <strong>(0x5a03…c7ef)</strong>
+          </p>
+        </div>
+      </Modal>
     </div>
   );
 };
@@ -45,6 +69,8 @@ const VerifyWalletCard = ({ wallet }: { wallet: UserWallet }) => {
 };
 
 const ClaimCard = () => {
+  const { openSwitchBackToWalletModal } = useClaimPrize();
+
   return (
     <div className="w-full bg-primary-dark pl-11 pr-9 py-8 rounded-2xl flex text-white">
       <div className="claim-card__left flex-1">
@@ -52,7 +78,10 @@ const ClaimCard = () => {
         <span className="flex justify-between font-light mb-3">
           <span className="flex gap-1">
             <span className="font-semibold">1200</span>PION
-            <img src="/assets/images/claim/claim-card-right-arrow.svg" alt="" />
+            <img
+              src="/assets/images/claim/claim-card-right-arrow-icon.svg"
+              alt=""
+            />
           </span>
           <span>
             <span className="font-semibold mr-1">0</span>Node Power
@@ -69,8 +98,9 @@ const ClaimCard = () => {
       </div>
       <div className="claim-card__right flex items-end justify-end flex-1">
         <button
+          onClick={openSwitchBackToWalletModal}
           className="btn btn--secondary text-xl font-medium"
-          disabled={1 === 1}
+          disabled={1 !== 1}
         >
           Claim
         </button>
