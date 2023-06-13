@@ -10,6 +10,8 @@ export default {
         black: '#323245',
         glass: '#00000059',
         green: '#8EF5AB',
+        disabled: '#C0C0C0',
+        gray3: '#939393',
         'primary-dark': '#918EF5',
         'dark-soft-primary': '#5158F640',
         'xyz-75': '#E9EFF6BF',

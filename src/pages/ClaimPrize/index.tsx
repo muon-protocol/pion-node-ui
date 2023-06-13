@@ -9,10 +9,14 @@ const ClaimPrize = () => {
         activities. Repeat this step for each address associated with pioneer
         activities
       </p>
-      <div className="w-full bg-card-bg-70-purple p-6 rounded-2xl flex gap-4 mb-6">
-        {userWallets.map((wallet) => (
-          <VerifyWalletCard wallet={wallet} />
-        ))}
+      <div className="w-full bg-card-bg-70-purple p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+        {1 === 1 ? (
+          <p className="text-2xl text-white font-light text-center w-full my-auto">
+            No Eligible address detected
+          </p>
+        ) : (
+          userWallets.map((wallet) => <VerifyWalletCard wallet={wallet} />)
+        )}
       </div>
       <ClaimCard />
     </div>
@@ -64,7 +68,12 @@ const ClaimCard = () => {
         </span>
       </div>
       <div className="claim-card__right flex items-end justify-end flex-1">
-        <button className="btn btn--secondary">Claim</button>
+        <button
+          className="btn btn--secondary text-xl font-medium"
+          disabled={1 === 1}
+        >
+          Claim
+        </button>
       </div>
     </div>
   );

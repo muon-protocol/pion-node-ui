@@ -46,6 +46,10 @@ input[type=number] {
   // size properties
   @apply px-16 py-4 font-medium;
 
+  &:disabled {
+    @apply bg-disabled text-gray3 cursor-not-allowed;
+  }
+
   &--small {
     @apply px-5 py-2 text-sm;
   }
