@@ -11,6 +11,7 @@ import { MergeActionProvider } from './contexts/MergeAction/MergeActionContext.t
 import { SplitActionProvider } from './contexts/SplitAction/SplitActionContext.tsx';
 import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
 import GetStarted from './pages/GetStarted';
+import ClaimPrize from './pages/ClaimPrize';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/create" element={<Actions />} />
                     <Route path="/get-started" element={<GetStarted />} />
+                    <Route path="/claim" element={<ClaimPrize />} />
                   </Routes>
                 </BrowserRouter>
               </TransferActionProvider>

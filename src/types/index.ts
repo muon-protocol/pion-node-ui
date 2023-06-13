@@ -31,3 +31,11 @@ export type BonPION = {
   nodePower: string;
   tier: string;
 };
+
+export type UserWallet = {
+  id: number;
+  title: string;
+  address: string;
+  balance: string;
+  verified: boolean;
+};

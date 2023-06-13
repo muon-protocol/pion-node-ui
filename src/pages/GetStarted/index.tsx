@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const GetStarted = () => {
   return (
@@ -82,27 +83,29 @@ const MuanPioneerAction = () => {
     },
   };
   return (
-    <motion.span
-      whileHover="animate"
+    <Link
       className="get-started__actions__action-container relative"
+      to="/claim"
     >
-      <motion.img
-        variants={muanFloatingIconVariants}
-        className="get-started__actions__action__floating-object h-[203px] w-auto absolute -top-7 -right-20"
-        src="/assets/images/get-started/muan-pioneer-floating-icon.svg"
-        alt=""
-      />
-      <div className="get-started__actions__action">
-        <img
-          className="mb-12 h-16 w-auto"
-          src="/assets/images/get-started/muan-pioneer.svg"
+      <motion.span whileHover="animate">
+        <motion.img
+          variants={muanFloatingIconVariants}
+          className="get-started__actions__action__floating-object h-[203px] w-auto absolute -top-7 -right-20"
+          src="/assets/images/get-started/muan-pioneer-floating-icon.svg"
           alt=""
         />
-        <div className="text-2xl font-light text-white text-center">
-          Claim as a Muon Pioneer
+        <div className="get-started__actions__action">
+          <img
+            className="mb-12 h-16 w-auto"
+            src="/assets/images/get-started/muan-pioneer.svg"
+            alt=""
+          />
+          <div className="text-2xl font-light text-white text-center">
+            Claim as a Muon Pioneer
+          </div>
         </div>
-      </div>
-    </motion.span>
+      </motion.span>
+    </Link>
   );
 };
 

@@ -25,6 +25,7 @@ input[type=number] {
 }
 
 .page {
+  // Todo: Refactor this and use tailwind spacing classes
   @apply max-w-[1232px] py-20 mx-auto;
 
   &--centered {
@@ -33,6 +34,10 @@ input[type=number] {
 
   &--get-started {
     @apply flex flex-col items-center justify-center max-w-[688px] mx-auto;
+  }
+
+  &--claim-prize {
+    @apply flex flex-col items-center justify-center max-w-[674px] mx-auto;
   }
 }
 

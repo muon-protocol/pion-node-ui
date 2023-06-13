@@ -1,4 +1,4 @@
-import { ActionType, Plan, SidebarItem } from '../types';
+import { ActionType, Plan, SidebarItem, UserWallet } from '../types';
 
 export const plans: Plan[] = [
   {
@@ -68,5 +68,29 @@ export const sidebarItems: SidebarItem[] = [
     icon: '/assets/images/actions/transfer-icon.svg',
     hoverIcon: '/assets/images/actions/transfer-colored-icon.svg',
     link: ActionType.TRANSFER,
+  },
+];
+
+export const userWallets: UserWallet[] = [
+  {
+    id: 1,
+    title: 'Deus Presale',
+    address: '0x1234567890123456789012345678901234567890',
+    balance: '+600 PION',
+    verified: true,
+  },
+  {
+    id: 2,
+    title: 'Muon Presale',
+    address: '0x1234567890123456789012345678901234567890',
+    balance: '+400 PION',
+    verified: false,
+  },
+  {
+    id: 3,
+    title: 'Alice Operator',
+    address: '0x1234567890123456789012345678901234567890',
+    balance: '+200 PION',
+    verified: false,
   },
 ];
