@@ -3,22 +3,15 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
-import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { mainnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+
 const Web3Context = createContext({});
 
 const Web3Provider = ({ children }: { children: ReactNode }) => {
   const { chains, publicClient } = configureChains(
-    [mainnet, polygon, optimism, arbitrum],
-    [
-      alchemyProvider({
-        apiKey: process.env.REACT_APP_ALCHEMY_ID
-          ? process.env.REACT_APP_ALCHEMY_ID
-          : '',
-      }),
-      publicProvider(),
-    ],
+    [mainnet],
+    [publicProvider()],
   );
 
   const { connectors } = getDefaultWallets({
