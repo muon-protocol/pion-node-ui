@@ -13,6 +13,7 @@ import { TransferActionProvider } from './contexts/TransferAction/TransferAction
 import GetStarted from './pages/GetStarted';
 import ClaimPrize from './pages/ClaimPrize';
 import { ClaimPrizeProvider } from './contexts/ClaimPrize/ClaimPrizeContext.tsx';
+import ReviewDetail from './pages/ReviewDetail';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
                       <Route path="/create" element={<Actions />} />
                       <Route path="/get-started" element={<GetStarted />} />
                       <Route path="/claim" element={<ClaimPrize />} />
+                      <Route path="/review" element={<ReviewDetail />} />
                     </Routes>
                   </BrowserRouter>
                 </ClaimPrizeProvider>

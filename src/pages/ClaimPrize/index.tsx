@@ -2,6 +2,7 @@ import { userWallets } from '../../data/constants.ts';
 import { UserWallet } from '../../types';
 import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import { Link } from 'react-router-dom';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -30,18 +31,20 @@ const ClaimPrize = () => {
         isOpen={isSwitchBackToWalletModalOpen}
         closeModalHandler={closeSwitchBackToWalletModal}
       >
-        <div className="pb-4 px-3 flex flex-col justify-center items-center">
-          <img
-            className="w-[108px] mb-10"
-            src="/assets/images/claim/switch-wallet-modal-icon.svg"
-            alt=""
-          />
-          <p className="text-center">
-            To claim your bonPION, please switch back to your Staking Address
-            <br />
-            <strong>(0x5a03…c7ef)</strong>
-          </p>
-        </div>
+        <Link to="/review">
+          <div className="pb-4 px-3 flex flex-col justify-center items-center">
+            <img
+              className="w-[108px] mb-10"
+              src="/assets/images/claim/switch-wallet-modal-icon.svg"
+              alt=""
+            />
+            <p className="text-center">
+              To claim your bonPION, please switch back to your Staking Address
+              <br />
+              <strong>(0x5a03…c7ef)</strong>
+            </p>
+          </div>
+        </Link>
       </Modal>
     </div>
   );
