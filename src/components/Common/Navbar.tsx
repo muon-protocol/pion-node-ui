@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const Navbar = () => {
+  const { isConnected } = useUserProfile();
+
   return (
     <>
       <DesktopNavbar />
@@ -29,10 +32,12 @@ const DesktopNavbar = () => {
             <button className="btn btn--small">Create BonPION</button>
           </Link>
           <button className="btn btn--small">Buy PION</button>
-          <button className="btn btn--small btn--dark-primary">
-            Balance: <strong className="ml-2 mr-1">2310.013</strong>
-            <strong className="text-xyz-75">PION</strong>
-          </button>
+          {isConnected && (
+            <button className="btn btn--small btn--dark-primary">
+              Balance: <strong className="ml-2 mr-1">2310.013</strong>
+              <strong className="text-xyz-75">PION</strong>
+            </button>
+          )}
           <ConnectWalletButton />
         </div>
       </div>
