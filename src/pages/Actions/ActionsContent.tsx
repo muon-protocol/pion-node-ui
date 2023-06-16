@@ -16,7 +16,7 @@ const ActionsContent = () => {
   const { selectedAction } = useActions();
 
   return (
-    <div className="actions-content w-full bg-card-bg-70-purple px-11 py-10 rounded-2xl flex flex-col">
+    <div className="actions-content w-full md:bg-card-bg-70-purple md:px-11 py-10 rounded-2xl flex flex-col">
       {selectedAction === ActionType.CREATE ? (
         <RenderCreateBody />
       ) : selectedAction === ActionType.UPGRADE ? (

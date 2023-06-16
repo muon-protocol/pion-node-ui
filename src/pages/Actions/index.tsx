@@ -16,7 +16,7 @@ const Actions = () => {
 
 const ActionsBody = () => {
   return (
-    <div className="actions-body flex w-full gap-10">
+    <div className="actions-body flex flex-col-reverse md:flex-row w-full gap-10">
       <ActionsSidebar />
       <ActionsContent />
     </div>

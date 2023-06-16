@@ -19,6 +19,7 @@ export default {
         'soft-sky': '#BCC8DE',
         'primary-10-solid': '#ECEDFF',
         'card-bg-70-purple': '#6C677BB3',
+        'card-bg': '#6C677B',
         'card-bg-dark': '#F6F3FF99',
         'titan-white': '#ECEDFF',
         'modal-backdrop': '#00000066',
