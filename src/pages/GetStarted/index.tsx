@@ -9,7 +9,7 @@ const GetStarted = () => {
         independently or claim it as a reward if you're part of the Muon
         pioneers
       </p>
-      <p className="text-white text-xl font-light mb-4 mr-auto">
+      <p className="text-white text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
         You're a pioneer if you:
       </p>
       <span className="flex w-full gap-3 justify-stretch mb-12">
@@ -61,7 +61,7 @@ const NewBonPionAction = () => {
           src="/assets/images/get-started/new-bon-pion-icon.svg"
           alt=""
         />
-        <div className="md:text-2xl md:font-light text-white md:text-center">
+        <div className="font-semibold md:text-2xl md:font-light text-white md:text-center mx-auto">
           Get Started with a New bonPION
         </div>
       </div>
@@ -100,7 +100,7 @@ const MuanPioneerAction = () => {
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="md:text-2xl md:font-light text-white md:text-center">
+          <div className="font-semibold md:text-2xl md:font-light text-white md:text-center mx-auto">
             Claim as a Muon Pioneer
           </div>
         </div>

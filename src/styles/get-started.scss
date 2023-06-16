@@ -1,7 +1,7 @@
 
 .get-started {
   &__pioneer-option {
-    @apply bg-primary-dark text-white rounded-xl flex-1 py-5 px-2 text-center;
+    @apply font-semibold md:font-medium bg-primary-dark text-white rounded-xl flex-1 py-5 px-2 text-center;
   }
 
   &__actions {
@@ -12,7 +12,7 @@
     }
 
     &__action {
-      @apply cursor-pointer flex items-center md:flex-col py-8 px-4 md:px-8 md:py-[60px] bg-glass backdrop-blur-[10px] rounded-2xl;
+      @apply cursor-pointer flex items-center md:flex-col py-6 px-4 md:px-8 md:py-[60px] bg-primary md:bg-glass md:backdrop-blur-[10px] rounded-2xl;
     }
   }
 }
