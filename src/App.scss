@@ -26,7 +26,7 @@ input[type=number] {
 
 .page {
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[1232px] py-20 mx-auto;
+  @apply max-w-[90vw] py-12 md:max-w-[1232px] md:py-20 mx-auto;
 
   &--centered {
     @apply flex items-center justify-center;

@@ -3,8 +3,17 @@ import { FadeIn } from '../../animations';
 
 const Navbar = () => {
   return (
+    <>
+      <DesktopNavbar />
+      <MobileNavbar />
+    </>
+  );
+};
+
+const DesktopNavbar = () => {
+  return (
     <FadeIn delay={0.3}>
-      <div className="navbar flex justify-between items-center py-9 pl-14 pr-12">
+      <div className="hidden md:flex navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
           <Link to={'/'}>
             <img
@@ -32,4 +41,7 @@ const Navbar = () => {
   );
 };
 
+const MobileNavbar = () => {
+  return <div className="visible md:hidden"></div>;
+};
 export default Navbar;
