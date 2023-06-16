@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const GetStarted = () => {
   return (
     <div className="page page--get-started">
-      <p className="text-white text-2xl font-light mb-6">
+      <p className="text-white text-[19px] md:text-2xl font-light mb-6">
         You can obtain bonPION in two ways: either create a new one
         independently or claim it as a reward if you're part of the Muon
         pioneers
@@ -51,17 +51,17 @@ const NewBonPionAction = () => {
     >
       <motion.img
         variants={newBonPionFloatingIconVariants}
-        className="get-started__actions__action__floating-object h-[186px] w-auto absolute -left-4 -bottom-9"
+        className="get-started__actions__action__floating-object hidden h-[186px] w-auto md:absolute -left-4 -bottom-9"
         src="/assets/images/get-started/new-bon-pion-floating-icon.svg"
         alt=""
       />
       <div className="get-started__actions__action">
         <img
-          className="mb-12 h-16 w-auto"
+          className="h-8 mr-3 md:mr-0 md:mb-12 md:h-16 w-auto"
           src="/assets/images/get-started/new-bon-pion-icon.svg"
           alt=""
         />
-        <div className="text-2xl font-light text-white text-center">
+        <div className="md:text-2xl md:font-light text-white md:text-center">
           Get Started with a New bonPION
         </div>
       </div>
@@ -90,17 +90,17 @@ const MuanPioneerAction = () => {
       <motion.span whileHover="animate">
         <motion.img
           variants={muanFloatingIconVariants}
-          className="get-started__actions__action__floating-object h-[203px] w-auto absolute -top-7 -right-20"
+          className="hidden md:absolut get-started__actions__action__floating-object h-[203px] w-auto -top-7 -right-20"
           src="/assets/images/get-started/muan-pioneer-floating-icon.svg"
           alt=""
         />
         <div className="get-started__actions__action">
           <img
-            className="mb-12 h-16 w-auto"
+            className="h-8 mr-3 md:mr-0 md:mb-12 md:h-16 w-auto"
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="text-2xl font-light text-white text-center">
+          <div className="md:text-2xl md:font-light text-white md:text-center">
             Claim as a Muon Pioneer
           </div>
         </div>

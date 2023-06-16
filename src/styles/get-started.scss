@@ -5,14 +5,14 @@
   }
 
   &__actions {
-    @apply flex gap-6 w-full;
+    @apply flex flex-col md:flex-row gap-3 md:gap-6 w-full;
 
     &__action-container {
       @apply flex-1;
     }
 
     &__action {
-      @apply cursor-pointer flex flex-col py-[60px] px-8 bg-glass backdrop-blur-[10px] rounded-2xl;
+      @apply cursor-pointer flex items-center md:flex-col py-8 px-4 md:px-8 md:py-[60px] bg-glass backdrop-blur-[10px] rounded-2xl;
     }
   }
 }
