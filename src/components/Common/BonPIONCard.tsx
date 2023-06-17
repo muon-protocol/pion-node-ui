@@ -30,8 +30,10 @@ const BonPIONCard: FC<{
           : 'bg-primary-10-solid text-black'
       }`}
     >
-      <p className={`font-semibold ${compact ? 'mb-3' : 'mb-6'}`}>{title}</p>
-      <span className="text-sm flex mb-2 justify-between">
+      <p className={`font-semibold ${compact ? 'md:mb-3' : 'mb-4 md:mb-6'}`}>
+        {title}
+      </p>
+      <span className="text-sm flex mb-0.5 md:mb-2 justify-between">
         <p className="font-light">{subTitle1}</p>
         <p className="font-medium">{subValue1}</p>
       </span>

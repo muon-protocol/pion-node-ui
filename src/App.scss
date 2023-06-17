@@ -45,7 +45,7 @@ input[type=number] {
 .btn {
   @apply cursor-pointer;
   // size properties
-  @apply px-16 py-4 font-medium;
+  @apply px-16 py-4 font-medium text-center;
 
   &:disabled {
     @apply bg-disabled text-gray3 cursor-not-allowed;

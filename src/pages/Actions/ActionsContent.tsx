@@ -22,9 +22,9 @@ const ActionsContent = () => {
       ) : selectedAction === ActionType.UPGRADE ? (
         <RenderUpgradeBody />
       ) : selectedAction === ActionType.MERGE ? (
-        <MergeBody />
+        <RenderMergeBody />
       ) : selectedAction === ActionType.SPLIT ? (
-        <SplitBody />
+        <RenderSplitBody />
       ) : selectedAction === ActionType.TRANSFER ? (
         <RenderTransferBody />
       ) : (
@@ -41,18 +41,18 @@ const RenderCreateBody = () => {
         <AmountInput />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <p className="font-light text-gray10 underline mb-10 cursor-pointer">
+        <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
           I Want to Boost Bonded PION Power with LP Tokens
         </p>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <span className="flex justify-between text-gray10 mb-2">
+        <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your bonPION power will be</p>
           <p className="font-medium">5030 bonPION</p>
         </span>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <span className="flex justify-between text-gray10">
+        <span className="flex justify-between text-gray10 max-md:text-sm">
           <p className="font-light">Your tier will be</p>
           <p className="font-medium">Pion Supreme (Tier 3)</p>
         </span>
@@ -60,7 +60,7 @@ const RenderCreateBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto mx-auto"
+        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button>Create Bounded PION</button>
       </FadeIn>
@@ -110,20 +110,20 @@ const RenderUpgradeBody = () => {
         <AmountInput />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <p className="font-light text-gray10 underline mb-10 cursor-pointer">
+        <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
           I Want to Boost Bonded PION Power with LP Tokens
         </p>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <span className="flex justify-between text-gray10 mb-2">
+        <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your current bonPION power</p>
           <p className="font-medium">2000</p>
         </span>
-        <span className="flex justify-between text-gray10 mb-2">
+        <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your bonPION power will be</p>
           <p className="font-medium">5030 bonPION</p>
         </span>
-        <span className="flex justify-between text-gray10">
+        <span className="flex justify-between text-gray10 max-md:text-sm">
           <p className="font-light">Your tier will be</p>
           <p className="font-medium">Pion Supreme (Tier 3)</p>
         </span>
@@ -131,7 +131,7 @@ const RenderUpgradeBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto mx-auto"
+        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button>Upgrade</button>
       </FadeIn>
@@ -139,7 +139,7 @@ const RenderUpgradeBody = () => {
   );
 };
 
-const MergeBody = () => {
+const RenderMergeBody = () => {
   const {
     isMergeModalOpen,
     openMergeModal,
@@ -182,7 +182,7 @@ const MergeBody = () => {
         <img
           src="/assets/images/actions/merge-content-icon.svg"
           alt=""
-          className="mx-auto mb-6 select-none"
+          className="mx-auto mb-6 max-md:w-10"
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
@@ -198,7 +198,7 @@ const MergeBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto mx-auto"
+        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button>Merge</button>
       </FadeIn>
@@ -206,7 +206,7 @@ const MergeBody = () => {
   );
 };
 
-const SplitBody = () => {
+const RenderSplitBody = () => {
   const {
     splitValue,
     setSplitValue,
@@ -250,7 +250,7 @@ const SplitBody = () => {
         <img
           src="/assets/images/actions/split-content-icon.svg"
           alt=""
-          className="mx-auto mb-2 select-none"
+          className="mx-auto mb-2 max-md:w-10"
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
@@ -262,7 +262,7 @@ const SplitBody = () => {
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <div className="new-bounded-pions flex gap-3 w-full select-none">
+        <div className="new-bounded-pions flex flex-col md:flex-row gap-3 w-full select-none">
           <BonPIONCard
             title="New Bonded PION"
             subTitle1="Node Power"
@@ -284,7 +284,7 @@ const SplitBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto mx-auto"
+        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button>Split</button>
       </FadeIn>
@@ -337,7 +337,7 @@ const RenderTransferBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto mx-auto"
+        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button>Transfer</button>
       </FadeIn>

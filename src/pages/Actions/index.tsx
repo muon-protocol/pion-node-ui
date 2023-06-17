@@ -6,7 +6,7 @@ import { FadeIn } from '../../animations';
 const Actions = () => {
   return (
     <div className="page page--centered">
-      <FadeIn className="flex flex-col w-[664px] gap-6">
+      <FadeIn className="flex flex-col w-[664px] gap-2 md:gap-6">
         <ActionsHeader />
         <ActionsBody />
       </FadeIn>

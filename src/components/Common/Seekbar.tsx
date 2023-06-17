@@ -36,7 +36,7 @@ const Seekbar = ({ min, max, value, onValueChange }: SeekbarProps) => {
       </div>
       <div
         ref={barRef}
-        className="relative bg-card-bg-dark w-full h-2 cursor-pointer rounded-lg mb-2.5"
+        className="relative bg-card-bg-dark w-full h-2 cursor-pointer rounded-lg mb-6 md:mb-2.5"
         onMouseDown={(e) => {
           setMouseDown(true);
           updateValue(e.clientX);

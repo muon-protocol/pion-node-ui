@@ -7,10 +7,10 @@ const ActionsHeader = () => {
   const { selectedAction } = useActions();
 
   return (
-    <div className="actions-header flex gap-10 w-full">
+    <div className="actions-header flex flex-col items-center md:items-start md:flex-row gap-10 w-full">
       <div className="w-[90px]">{renderActionImageAndName(selectedAction)}</div>
       <div className="w-full">
-        <p className="text-lg font-light text-white min-h-[112px]">
+        <p className="text-center md:text-left md:text-lg font-light text-white md:min-h-[112px]">
           {renderActionDescription(selectedAction)}
         </p>
       </div>
@@ -21,10 +21,10 @@ const ActionsHeader = () => {
 const renderActionImageAndName = (action: ActionType) => {
   return (
     <div className="w-[90px] flex flex-col justify-center items-center gap-2">
-      <div className="action-image relative min-h-[54px] flex justify-center w-full">
+      <div className="action-image relative min-h-[32px] md:min-h-[54px] flex justify-center w-full">
         {renderActionImage(action)}
       </div>
-      <div className="action-name text-primary-10-solid text-2xl font-medium flex justify-center w-full text-center">
+      <div className="action-name text-primary-10-solid text-xl font-medium flex justify-center w-full text-center">
         {renderActionName(action)}
       </div>
     </div>
@@ -38,46 +38,41 @@ const renderActionImage = (action: ActionType) => {
         {action === ActionType.CREATE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
+              className="w-8 h-8 md:w-[52px] md:h-[52px]"
               src="/assets/images/actions/create-colored-icon.svg"
               alt="create"
-              width="52"
-              height="52"
             />
           </Scale>
         ) : action === ActionType.UPGRADE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
+              className="w-8 h-8 md:w-[52px] md:h-[52px]"
               src="/assets/images/actions/upgrade-colored-icon.svg"
               alt="upgrade"
-              width="52"
-              height="52"
             />
           </Scale>
         ) : action === ActionType.MERGE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
+              className="w-8 h-8 md:w-[52px] md:h-[52px]"
               src="/assets/images/actions/merge-colored-icon.svg"
               alt="merge"
-              width="52"
-              height="52"
             />
           </Scale>
         ) : action === ActionType.SPLIT ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
+              className="w-8 h-8 md:w-[52px] md:h-[52px]"
               src="/assets/images/actions/split-colored-icon.svg"
               alt="split"
-              width="52"
-              height="52"
             />
           </Scale>
         ) : action === ActionType.TRANSFER ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
+              className="w-8 h-8 md:w-[52px] md:h-[52px]"
               src="/assets/images/actions/transfer-colored-icon.svg"
               alt="transfer"
-              width="52"
-              height="52"
             />
           </Scale>
         ) : (
