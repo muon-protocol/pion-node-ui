@@ -16,34 +16,40 @@ import { ClaimPrizeProvider } from './contexts/ClaimPrize/ClaimPrizeContext.tsx'
 import ReviewDetail from './pages/ReviewDetail';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
 import { UserProfileProvider } from './contexts/UserProfile/UserProfileContext.tsx';
+import { PIONProvider } from './contexts/PION/PIONContext.tsx';
 
 function App() {
   return (
     <div className="app">
       <Web3Provider>
         <UserProfileProvider>
-          <ActionsProvider>
-            <UpgradeActionProvider>
-              <MergeActionProvider>
-                <SplitActionProvider>
-                  <TransferActionProvider>
-                    <ClaimPrizeProvider>
-                      <BrowserRouter>
-                        <Navbar />
-                        <Routes>
-                          <Route path="/" element={<Home />} />
-                          <Route path="/create" element={<Actions />} />
-                          <Route path="/get-started" element={<GetStarted />} />
-                          <Route path="/claim" element={<ClaimPrize />} />
-                          <Route path="/review" element={<ReviewDetail />} />
-                        </Routes>
-                      </BrowserRouter>
-                    </ClaimPrizeProvider>
-                  </TransferActionProvider>
-                </SplitActionProvider>
-              </MergeActionProvider>
-            </UpgradeActionProvider>
-          </ActionsProvider>
+          <PIONProvider>
+            <ActionsProvider>
+              <UpgradeActionProvider>
+                <MergeActionProvider>
+                  <SplitActionProvider>
+                    <TransferActionProvider>
+                      <ClaimPrizeProvider>
+                        <BrowserRouter>
+                          <Navbar />
+                          <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/create" element={<Actions />} />
+                            <Route
+                              path="/get-started"
+                              element={<GetStarted />}
+                            />
+                            <Route path="/claim" element={<ClaimPrize />} />
+                            <Route path="/review" element={<ReviewDetail />} />
+                          </Routes>
+                        </BrowserRouter>
+                      </ClaimPrizeProvider>
+                    </TransferActionProvider>
+                  </SplitActionProvider>
+                </MergeActionProvider>
+              </UpgradeActionProvider>
+            </ActionsProvider>
+          </PIONProvider>
         </UserProfileProvider>
       </Web3Provider>
     </div>
