@@ -286,9 +286,13 @@ const RenderSplitBody = () => {
     isSelectedSplitBonPION,
   } = useSplitAction();
 
+  const isSplitBonPIONsButtonDisabled = useMemo(() => {
+    return !selectedSplitBonPION;
+  }, [selectedSplitBonPION]);
+
   return (
     <>
-      <FadeIn duration={0.1} delay={0.1}>
+      <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
           title="Select BonPion"
           onClick={() => openSplitModal()}
@@ -317,47 +321,50 @@ const RenderSplitBody = () => {
           </div>
         </SelectButtonWithModal>
       </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <img
-          src="/assets/images/actions/split-content-icon.svg"
-          alt=""
-          className="mx-auto mb-2 max-md:w-10"
-        />
-      </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <Seekbar
-          min={0}
-          max={100}
-          value={splitValue}
-          onValueChange={setSplitValue}
-        />
-      </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <div className="new-bounded-pions flex flex-col md:flex-row gap-3 w-full select-none">
-          <BonPIONCard
-            title="New Bonded PION"
-            subTitle1="Node Power"
-            subValue1="530"
-            subTitle2="Tier"
-            subValue2="Pion Supreme (Tier 3)"
-            selected
+      {selectedSplitBonPION && (
+        <FadeIn duration={0.1} delay={0.1}>
+          <img
+            src="/assets/images/actions/split-content-icon.svg"
+            alt=""
+            className="mx-auto mb-2 max-md:w-10"
           />
-          <BonPIONCard
-            title="New Bonded PION"
-            subTitle1="Node Power"
-            subValue1="530"
-            subTitle2="Tier"
-            subValue2="Pion Supreme (Tier 3)"
-            selected
+          <Seekbar
+            min={0}
+            max={100}
+            value={splitValue}
+            onValueChange={setSplitValue}
           />
-        </div>
-      </FadeIn>
+          <div className="new-bounded-pions flex flex-col md:flex-row gap-3 w-full select-none">
+            <BonPIONCard
+              title="New Bonded PION"
+              subTitle1="Node Power"
+              subValue1="530"
+              subTitle2="Tier"
+              subValue2="Pion Supreme (Tier 3)"
+              selected
+            />
+            <BonPIONCard
+              title="New Bonded PION"
+              subTitle1="Node Power"
+              subValue1="530"
+              subTitle2="Tier"
+              subValue2="Pion Supreme (Tier 3)"
+              selected
+            />
+          </div>
+        </FadeIn>
+      )}
       <FadeIn
         duration={0.1}
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button className="btn btn--secondary !w-full">Split</button>
+        <button
+          disabled={isSplitBonPIONsButtonDisabled}
+          className="btn btn--secondary !w-full"
+        >
+          Split
+        </button>
       </FadeIn>
     </>
   );
