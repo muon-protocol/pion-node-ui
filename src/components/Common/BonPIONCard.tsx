@@ -24,10 +24,11 @@ const BonPIONCard: FC<{
   return (
     <div
       onClick={() => onClick && onClick()}
-      className={`new-bounded-pion-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col ${className} ${
+      className={`new-bounded-pion-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col 
+        ${className} ${
         selected
           ? 'bg-primary-dark text-gray10'
-          : 'bg-primary-10-solid text-black'
+          : 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
       }`}
     >
       <p className={`font-semibold ${compact ? 'md:mb-3' : 'mb-4 md:mb-6'}`}>

@@ -12,6 +12,7 @@ export default {
         green: '#8EF5AB',
         disabled: '#C0C0C0',
         gray3: '#939393',
+        'primary-dark-500': '#C2C1F4',
         'modal-small': '#ECEDFFCC',
         'primary-dark': '#918EF5',
         'dark-soft-primary': '#5158F640',
