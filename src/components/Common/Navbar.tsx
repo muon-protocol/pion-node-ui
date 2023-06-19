@@ -3,6 +3,7 @@ import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import usePION from '../../contexts/PION/usePION.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
+import { weiToEther } from '../../utils/web3.ts';
 
 const Navbar = () => {
   return (
@@ -38,7 +39,9 @@ const DesktopNavbar = () => {
           {isConnected && balance !== undefined && balance !== null && (
             <button className="btn btn--small btn--dark-primary">
               Balance:{' '}
-              <strong className="ml-2 mr-1">{balance.toString()}</strong>
+              <strong className="ml-2 mr-1">
+                {weiToEther(balance.toString())}
+              </strong>
               <strong className="text-xyz-75">PION</strong>
             </button>
           )}
