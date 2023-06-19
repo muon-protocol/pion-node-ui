@@ -19,7 +19,7 @@ const SelectButtonWithModal = ({
   onClick: () => void;
 }) => {
   return (
-    <div className="select-button-with-modal mb-6">
+    <div className="select-button-with-modal mb-2">
       <div className="flex flex-col w-full gap-2" onClick={onClick}>
         <div className="text-xyz-75 text-sm max-md:text-sm max-md:font-semibold">
           {title}

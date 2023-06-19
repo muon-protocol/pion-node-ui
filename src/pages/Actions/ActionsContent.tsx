@@ -40,15 +40,21 @@ const ActionsContent = () => {
 
 const RenderCreateBody = () => {
   const { balance } = usePION();
-  const { claimAmount, handleClaimAmountChange } = useClaimAction();
+  const {
+    claimAmount,
+    handleClaimAmountChange,
+    handleCreateBonPIONClicked,
+    createActionLoading,
+  } = useClaimAction();
 
   const isCreateBondedPIONDisable = useMemo(() => {
     return (
       !claimAmount ||
       !balance ||
-      Number(weiToEther(balance.toString())) < Number(claimAmount)
+      Number(weiToEther(balance.toString())) < Number(claimAmount) ||
+      createActionLoading
     );
-  }, [balance, claimAmount]);
+  }, [balance, claimAmount, createActionLoading]);
 
   return (
     <>
@@ -82,6 +88,7 @@ const RenderCreateBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
+          onClick={() => handleCreateBonPIONClicked()}
           className="btn btn--secondary !w-full"
           disabled={isCreateBondedPIONDisable}
         >
