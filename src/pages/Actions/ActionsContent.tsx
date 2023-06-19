@@ -47,7 +47,7 @@ const RenderCreateBody = () => {
     createActionLoading,
   } = useCreateAction();
 
-  const isCreateBondedPIONDisable = useMemo(() => {
+  const isCreateBondedPIONButtonDisabled = useMemo(() => {
     return (
       !createAmount ||
       !balance ||
@@ -90,7 +90,7 @@ const RenderCreateBody = () => {
         <button
           onClick={() => handleCreateBonPIONClicked()}
           className="btn btn--secondary !w-full"
-          disabled={isCreateBondedPIONDisable}
+          disabled={isCreateBondedPIONButtonDisabled}
         >
           Create Bonded PION
         </button>
@@ -113,7 +113,7 @@ const RenderUpgradeBody = () => {
 
   const { balance } = usePION();
 
-  const isUpgradeBonPIONDisabled = useMemo(() => {
+  const isUpgradeBonPIONButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonPION ||
       !upgradeAmount ||
@@ -185,7 +185,7 @@ const RenderUpgradeBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          disabled={isUpgradeBonPIONDisabled}
+          disabled={isUpgradeBonPIONButtonDisabled}
           className="btn btn--secondary !w-full"
         >
           Upgrade
@@ -205,9 +205,13 @@ const RenderMergeBody = () => {
     isInSelectedMergeBonPIONs,
   } = useMergeAction();
 
+  const isMergeBonPIONsButtonDisabled = useMemo(() => {
+    return selectedMergeBonPIONs.length < 2;
+  }, [selectedMergeBonPIONs]);
+
   return (
     <>
-      <FadeIn duration={0.1} delay={0.1}>
+      <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
           title="Select BonPIONs"
           onClick={() => openMergeModal()}
@@ -259,7 +263,12 @@ const RenderMergeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button className="btn btn--secondary !w-full">Merge</button>
+        <button
+          disabled={isMergeBonPIONsButtonDisabled}
+          className="btn btn--secondary !w-full"
+        >
+          Merge
+        </button>
       </FadeIn>
     </>
   );
