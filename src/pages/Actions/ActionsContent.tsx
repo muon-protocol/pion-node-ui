@@ -11,6 +11,10 @@ import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
 import { mergeModalItems, upgradeModalItems } from '../../data';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
+import usePION from '../../contexts/PION/usePION.ts';
+import useClaimAction from '../../contexts/ClaimAction/useClaimAction.ts';
+import { weiToEther } from '../../utils/web3.ts';
+import { useMemo } from 'react';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -35,10 +39,25 @@ const ActionsContent = () => {
 };
 
 const RenderCreateBody = () => {
+  const { balance } = usePION();
+  const { claimAmount, handleClaimAmountChange } = useClaimAction();
+
+  const isCreateBondedPIONDisable = useMemo(() => {
+    return (
+      !claimAmount ||
+      !balance ||
+      Number(weiToEther(balance.toString())) < Number(claimAmount)
+    );
+  }, [balance, claimAmount]);
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
-        <AmountInput />
+        <AmountInput
+          balance={balance ? weiToEther(balance.toString()) : '...'}
+          value={claimAmount}
+          onValueChanged={handleClaimAmountChange}
+        />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
@@ -60,9 +79,14 @@ const RenderCreateBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button>Create Bounded PION</button>
+        <button
+          className="btn btn--secondary !w-full"
+          disabled={isCreateBondedPIONDisable}
+        >
+          Create Bonded PION
+        </button>
       </FadeIn>
     </>
   );
@@ -76,6 +100,8 @@ const RenderUpgradeBody = () => {
     handleUpgradeModalItemClicked,
     isSelectedUpgradeBonPION,
   } = useUpgradeAction();
+
+  // const { balance } = usePION();
 
   return (
     <>
@@ -107,7 +133,7 @@ const RenderUpgradeBody = () => {
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <AmountInput />
+        {/*<AmountInput balance={balance ? weiToEther(balance.toString()): '...'} value={} onValueChanged={}  />*/}
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
@@ -131,9 +157,9 @@ const RenderUpgradeBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button>Upgrade</button>
+        <button className="btn btn--secondary !w-full">Upgrade</button>
       </FadeIn>
     </>
   );
@@ -198,9 +224,9 @@ const RenderMergeBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button>Merge</button>
+        <button className="btn btn--secondary !w-full">Merge</button>
       </FadeIn>
     </>
   );
@@ -284,9 +310,9 @@ const RenderSplitBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button>Split</button>
+        <button className="btn btn--secondary !w-full">Split</button>
       </FadeIn>
     </>
   );
@@ -337,9 +363,9 @@ const RenderTransferBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="btn btn--secondary mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button>Transfer</button>
+        <button className="btn btn--secondary !w-full">Transfer</button>
       </FadeIn>
     </>
   );
