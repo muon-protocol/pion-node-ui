@@ -6,7 +6,7 @@ const useTransferAction = () => {
 
   if (!context) {
     throw new Error(
-      'useUpgradeActions must be used within a UpgradeActionProvider',
+      'useTransferActions must be used within a TransferActionProvider',
     );
   }
 

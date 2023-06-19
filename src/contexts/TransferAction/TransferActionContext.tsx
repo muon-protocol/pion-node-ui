@@ -7,18 +7,28 @@ const TransferActionContext = createContext<{
   closeTransferModal: () => void;
   isSelectedTransferBonPION: (bonPION: BonPION) => boolean;
   handleTransferModalItemClicked: (bonPION: BonPION) => void;
+  selectedTransferBonPION: BonPION | null;
+  handleTransferAddressChange: (address: string) => void;
+  transferAddress: string;
 }>({
   isTransferModalOpen: false,
   openTransferModal: () => {},
   closeTransferModal: () => {},
   isSelectedTransferBonPION: () => false,
   handleTransferModalItemClicked: () => {},
+  selectedTransferBonPION: null,
+  handleTransferAddressChange: () => {},
+  transferAddress: '',
 });
 
 const TransferActionProvider = ({ children }: { children: ReactNode }) => {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
   const [transferModalSelectedBonPION, setTransferModalSelectedBonPION] =
     useState<BonPION | null>(null);
+  const [transferAddress, setTransferAddress] = useState('');
+  const handleTransferAddressChange = (address: string) => {
+    setTransferAddress(address);
+  };
 
   const handleTransferModalItemClicked = (bonPION: BonPION) => {
     if (!transferModalSelectedBonPION) {
@@ -55,6 +65,9 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
     <TransferActionContext.Provider
       value={{
         isTransferModalOpen,
+        transferAddress,
+        handleTransferAddressChange,
+        selectedTransferBonPION: transferModalSelectedBonPION,
         openTransferModal,
         closeTransferModal,
         isSelectedTransferBonPION,

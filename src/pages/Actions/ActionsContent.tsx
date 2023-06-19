@@ -15,6 +15,7 @@ import usePION from '../../contexts/PION/usePION.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { weiToEther } from '../../utils/web3.ts';
 import { useMemo } from 'react';
+import useTransferAction from '../../contexts/TransferAction/useTransferAction.ts';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -372,25 +373,33 @@ const RenderSplitBody = () => {
 
 const RenderTransferBody = () => {
   const {
-    isSplitModalOpen,
-    openSplitModal,
-    closeSplitModal,
-    handleSplitModalItemClicked,
-    selectedSplitBonPION,
-    isSelectedSplitBonPION,
-  } = useSplitAction();
+    isTransferModalOpen,
+    openTransferModal,
+    closeTransferModal,
+    handleTransferModalItemClicked,
+    selectedTransferBonPION,
+    handleTransferAddressChange,
+    transferAddress,
+    isSelectedTransferBonPION,
+  } = useTransferAction();
+
+  const isTransferBonPIONButtonDisabled = useMemo(() => {
+    return !selectedTransferBonPION || !transferAddress;
+  }, [transferAddress, selectedTransferBonPION]);
 
   return (
     <>
-      <FadeIn duration={0.1} delay={0.1}>
+      <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
           title="Select BonPion"
-          onClick={() => openSplitModal()}
-          isModalOpen={isSplitModalOpen}
-          closeModalHandler={() => closeSplitModal()}
+          onClick={() => openTransferModal()}
+          isModalOpen={isTransferModalOpen}
+          closeModalHandler={() => closeTransferModal()}
           modalTitle="Select BonPION"
           removeItem={() => {}}
-          selectedItems={selectedSplitBonPION ? [selectedSplitBonPION] : []}
+          selectedItems={
+            selectedTransferBonPION ? [selectedTransferBonPION] : []
+          }
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
@@ -402,9 +411,9 @@ const RenderTransferBody = () => {
                   subValue1={item.nodePower}
                   subTitle2="Tier"
                   subValue2={item.tier}
-                  onClick={() => handleSplitModalItemClicked(item)}
+                  onClick={() => handleTransferModalItemClicked(item)}
                   compact
-                  selected={isSelectedSplitBonPION(item)}
+                  selected={isSelectedTransferBonPION(item)}
                 />
               );
             })}
@@ -412,7 +421,10 @@ const RenderTransferBody = () => {
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <AddressInput />
+        <AddressInput
+          value={transferAddress}
+          onValueChanged={handleTransferAddressChange}
+        />
       </FadeIn>
 
       <FadeIn
@@ -420,7 +432,12 @@ const RenderTransferBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button className="btn btn--secondary !w-full">Transfer</button>
+        <button
+          disabled={isTransferBonPIONButtonDisabled}
+          className="btn btn--secondary !w-full"
+        >
+          Transfer
+        </button>
       </FadeIn>
     </>
   );

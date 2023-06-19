@@ -1,4 +1,10 @@
-const AddressInput = () => {
+const AddressInput = ({
+  value,
+  onValueChanged,
+}: {
+  value: string;
+  onValueChanged: (value: string) => void;
+}) => {
   return (
     <div className="address-input flex flex-col w-full gap-2 mb-2">
       <div className="address-input__top text-sm flex justify-between">
@@ -11,8 +17,8 @@ const AddressInput = () => {
           className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
           placeholder="Enter Address"
           type="text"
-          value={''}
-          onChange={() => {}}
+          value={value}
+          onChange={(e) => onValueChanged(e.target.value)}
         />
       </div>
     </div>
