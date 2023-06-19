@@ -5,12 +5,14 @@ const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
   openMergeModal: () => void;
   closeMergeModal: () => void;
+  selectedMergeBonPIONs: BonPION[];
   isInSelectedMergeBonPIONs: (bonPION: BonPION) => boolean;
   handleMergeModalItemClicked: (bonPION: BonPION) => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
   closeMergeModal: () => {},
+  selectedMergeBonPIONs: [],
   isInSelectedMergeBonPIONs: () => false,
   handleMergeModalItemClicked: () => {},
 });
@@ -60,6 +62,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isMergeModalOpen,
         openMergeModal,
         closeMergeModal,
+        selectedMergeBonPIONs: mergeModalSelectedBonPIONs,
         isInSelectedMergeBonPIONs,
         handleMergeModalItemClicked,
       }}

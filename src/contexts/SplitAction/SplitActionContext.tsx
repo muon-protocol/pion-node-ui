@@ -7,6 +7,7 @@ const SplitActionContext = createContext<{
   isSplitModalOpen: boolean;
   openSplitModal: () => void;
   closeSplitModal: () => void;
+  selectedSplitBonPION: BonPION | null;
   isSelectedSplitBonPION: (bonPION: BonPION) => boolean;
   handleSplitModalItemClicked: (bonPION: BonPION) => void;
 }>({
@@ -15,6 +16,7 @@ const SplitActionContext = createContext<{
   isSplitModalOpen: false,
   openSplitModal: () => {},
   closeSplitModal: () => {},
+  selectedSplitBonPION: null,
   isSelectedSplitBonPION: () => false,
   handleSplitModalItemClicked: () => {},
 });
@@ -63,6 +65,7 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         isSplitModalOpen,
         openSplitModal,
         closeSplitModal,
+        selectedSplitBonPION: splitModalSelectedBonPION,
         isSelectedSplitBonPION,
         handleSplitModalItemClicked,
       }}

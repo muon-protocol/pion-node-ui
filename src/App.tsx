@@ -17,7 +17,7 @@ import ReviewDetail from './pages/ReviewDetail';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
 import { UserProfileProvider } from './contexts/UserProfile/UserProfileContext.tsx';
 import { PIONProvider } from './contexts/PION/PIONContext.tsx';
-import { ClaimActionProvider } from './contexts/ClaimAction/ClaimActionContext.tsx';
+import { CreateActionProvider } from './contexts/CreateAction/CreateActionContext.tsx';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
         <UserProfileProvider>
           <PIONProvider>
             <ActionsProvider>
-              <ClaimActionProvider>
+              <CreateActionProvider>
                 <UpgradeActionProvider>
                   <MergeActionProvider>
                     <SplitActionProvider>
@@ -53,7 +53,7 @@ function App() {
                     </SplitActionProvider>
                   </MergeActionProvider>
                 </UpgradeActionProvider>
-              </ClaimActionProvider>
+              </CreateActionProvider>
             </ActionsProvider>
           </PIONProvider>
         </UserProfileProvider>

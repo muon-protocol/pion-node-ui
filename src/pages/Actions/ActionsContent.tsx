@@ -12,7 +12,7 @@ import { mergeModalItems, upgradeModalItems } from '../../data';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
 import usePION from '../../contexts/PION/usePION.ts';
-import useClaimAction from '../../contexts/ClaimAction/useClaimAction.ts';
+import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { weiToEther } from '../../utils/web3.ts';
 import { useMemo } from 'react';
 
@@ -41,28 +41,28 @@ const ActionsContent = () => {
 const RenderCreateBody = () => {
   const { balance } = usePION();
   const {
-    claimAmount,
-    handleClaimAmountChange,
+    createAmount,
+    handleCreateAmountChange,
     handleCreateBonPIONClicked,
     createActionLoading,
-  } = useClaimAction();
+  } = useCreateAction();
 
   const isCreateBondedPIONDisable = useMemo(() => {
     return (
-      !claimAmount ||
+      !createAmount ||
       !balance ||
-      Number(weiToEther(balance.toString())) < Number(claimAmount) ||
+      Number(weiToEther(balance.toString())) < Number(createAmount) ||
       createActionLoading
     );
-  }, [balance, claimAmount, createActionLoading]);
+  }, [balance, createAmount, createActionLoading]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
           balance={balance ? weiToEther(balance.toString()) : '...'}
-          value={claimAmount}
-          onValueChanged={handleClaimAmountChange}
+          value={createAmount}
+          onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
@@ -106,19 +106,33 @@ const RenderUpgradeBody = () => {
     closeUpgradeModal,
     handleUpgradeModalItemClicked,
     isSelectedUpgradeBonPION,
+    selectedUpgradeBonPION,
+    upgradeAmount,
+    handleUpgradeAmountChange,
   } = useUpgradeAction();
 
-  // const { balance } = usePION();
+  const { balance } = usePION();
+
+  const isUpgradeBonPIONDisabled = useMemo(() => {
+    return (
+      !selectedUpgradeBonPION ||
+      !upgradeAmount ||
+      !balance ||
+      Number(upgradeAmount) > Number(weiToEther(balance.toString()))
+    );
+  }, [selectedUpgradeBonPION, upgradeAmount, balance]);
 
   return (
     <>
-      <FadeIn duration={0.1} delay={0.1}>
+      <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
           title="Select BonPion"
           onClick={() => openUpgradeModal()}
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle="Select BonPION"
+          selectedItems={selectedUpgradeBonPION ? [selectedUpgradeBonPION] : []}
+          removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
@@ -140,7 +154,11 @@ const RenderUpgradeBody = () => {
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        {/*<AmountInput balance={balance ? weiToEther(balance.toString()): '...'} value={} onValueChanged={}  />*/}
+        <AmountInput
+          balance={balance ? weiToEther(balance.toString()) : '...'}
+          value={upgradeAmount}
+          onValueChanged={handleUpgradeAmountChange}
+        />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
@@ -166,7 +184,12 @@ const RenderUpgradeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button className="btn btn--secondary !w-full">Upgrade</button>
+        <button
+          disabled={isUpgradeBonPIONDisabled}
+          className="btn btn--secondary !w-full"
+        >
+          Upgrade
+        </button>
       </FadeIn>
     </>
   );
@@ -178,6 +201,7 @@ const RenderMergeBody = () => {
     openMergeModal,
     closeMergeModal,
     handleMergeModalItemClicked,
+    selectedMergeBonPIONs,
     isInSelectedMergeBonPIONs,
   } = useMergeAction();
 
@@ -191,6 +215,8 @@ const RenderMergeBody = () => {
           closeModalHandler={() => closeMergeModal()}
           modalTitle="Select BonPIONs to Merge"
           multiple
+          selectedItems={selectedMergeBonPIONs}
+          removeItem={(item) => handleMergeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
             {mergeModalItems.map((item) => {
@@ -247,6 +273,7 @@ const RenderSplitBody = () => {
     openSplitModal,
     closeSplitModal,
     handleSplitModalItemClicked,
+    selectedSplitBonPION,
     isSelectedSplitBonPION,
   } = useSplitAction();
 
@@ -259,6 +286,8 @@ const RenderSplitBody = () => {
           isModalOpen={isSplitModalOpen}
           closeModalHandler={() => closeSplitModal()}
           modalTitle="Select BonPION"
+          selectedItems={selectedSplitBonPION ? [selectedSplitBonPION] : []}
+          removeItem={() => {}}
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
@@ -331,6 +360,7 @@ const RenderTransferBody = () => {
     openSplitModal,
     closeSplitModal,
     handleSplitModalItemClicked,
+    selectedSplitBonPION,
     isSelectedSplitBonPION,
   } = useSplitAction();
 
@@ -343,6 +373,8 @@ const RenderTransferBody = () => {
           isModalOpen={isSplitModalOpen}
           closeModalHandler={() => closeSplitModal()}
           modalTitle="Select BonPION"
+          removeItem={() => {}}
+          selectedItems={selectedSplitBonPION ? [selectedSplitBonPION] : []}
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {

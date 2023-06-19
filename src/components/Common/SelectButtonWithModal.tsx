@@ -1,5 +1,6 @@
 import Modal from './Modal.tsx';
 import { ReactNode } from 'react';
+import { BonPION } from '../../types';
 
 const SelectButtonWithModal = ({
   title,
@@ -9,6 +10,8 @@ const SelectButtonWithModal = ({
   closeModalHandler,
   modalTitle,
   onClick,
+  selectedItems,
+  removeItem,
 }: {
   title: string;
   multiple?: boolean;
@@ -17,6 +20,8 @@ const SelectButtonWithModal = ({
   closeModalHandler: () => void;
   modalTitle: string;
   onClick: () => void;
+  selectedItems: BonPION[];
+  removeItem: (item: BonPION) => void;
 }) => {
   return (
     <div className="select-button-with-modal mb-2">
@@ -33,26 +38,27 @@ const SelectButtonWithModal = ({
             />
             {multiple ? (
               <>
-                <span className="rounded-lg bg-algo px-2 md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
-                  <p className="text-xs md:text-sm">bonPION #12151</p>
-                  <img
-                    className="w-2 h-2 md:w-[14px] md:h-[14px]"
-                    src="/assets/images/actions/x.svg"
-                    alt=""
-                  />
-                </span>
-                <span className="rounded-lg bg-algo px-2 md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
-                  <p className="text-xs md:text-sm">bonPION #12151</p>
-                  <img
-                    className="w-2 h-2 md:w-[14px] md:h-[14px]"
-                    src="/assets/images/actions/x.svg"
-                    alt=""
-                  />
-                </span>
+                {selectedItems.length > 0 ? (
+                  selectedItems.map((selectedItem) => (
+                    <span className="rounded-lg bg-algo px-2 md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
+                      <p className="text-xs md:text-sm">{selectedItem.title}</p>
+                      <img
+                        onClick={() => removeItem(selectedItem)}
+                        className="w-2 h-2 md:w-[14px] md:h-[14px]"
+                        src="/assets/images/actions/x.svg"
+                        alt=""
+                      />
+                    </span>
+                  ))
+                ) : (
+                  <p className="text-white font-medium max-md:text-sm">
+                    Select
+                  </p>
+                )}
               </>
             ) : (
               <p className="text-white font-medium max-md:text-sm">
-                bonPION #12151
+                {selectedItems.length > 0 ? selectedItems[0].title : 'Select'}
               </p>
             )}
           </span>
