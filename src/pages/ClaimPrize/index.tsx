@@ -3,6 +3,7 @@ import { UserWallet } from '../../types';
 import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { Link } from 'react-router-dom';
+import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -10,6 +11,7 @@ const ClaimPrize = () => {
 
   return (
     <div className="page page--claim-prize">
+      <ConnectWalletModal redirectRoute="/get-started" />
       <p className="text-2xl font-light text-white mb-9">
         Go to your wallet and choose the address linked to your pioneer
         activities. Repeat this step for each address associated with pioneer

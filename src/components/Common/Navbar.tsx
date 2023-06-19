@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import usePION from '../../contexts/PION/usePION.ts';
+import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 
 const Navbar = () => {
   return (
@@ -52,69 +52,4 @@ const DesktopNavbar = () => {
 const MobileNavbar = () => {
   return <div className="visible md:hidden"></div>;
 };
-
-const ConnectWalletButton = () => {
-  return (
-    <ConnectButton.Custom>
-      {({
-        account,
-        chain,
-        openAccountModal,
-        openChainModal,
-        openConnectModal,
-        mounted,
-      }) => {
-        const ready = mounted;
-        const connected = ready && account && chain;
-
-        return (
-          <div
-            {...(!ready && {
-              'aria-hidden': true,
-              style: {
-                opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
-              },
-            })}
-          >
-            {(() => {
-              if (!connected) {
-                return (
-                  <button
-                    onClick={openConnectModal}
-                    className="btn btn--small btn--dark-primary"
-                  >
-                    Connect Wallet
-                  </button>
-                );
-              }
-
-              if (chain.unsupported) {
-                return (
-                  <button
-                    onClick={openChainModal}
-                    className="btn btn--small btn--secondary"
-                  >
-                    Wrong network
-                  </button>
-                );
-              }
-
-              return (
-                <button
-                  onClick={openAccountModal}
-                  className="btn btn--small btn--dark-primary"
-                >
-                  {account.displayName}
-                </button>
-              );
-            })()}
-          </div>
-        );
-      }}
-    </ConnectButton.Custom>
-  );
-};
-
 export default Navbar;
