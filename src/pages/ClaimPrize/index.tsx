@@ -9,6 +9,8 @@ const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
     useClaimPrize();
 
+  // const { openSwitchBackToWalletModal } = useClaimPrize();
+
   return (
     <div className="page page--claim-prize">
       <ConnectWalletModal redirectRoute="/get-started" />

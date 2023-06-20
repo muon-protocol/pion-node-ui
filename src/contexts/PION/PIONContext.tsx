@@ -3,9 +3,9 @@ import { useContractRead } from 'wagmi';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import PION_ABI from '../../abis/PION.json';
 const PIONContext = createContext<{
-  balance: string | unknown;
+  balance: string | unknown | null;
 }>({
-  balance: '0',
+  balance: null,
 });
 
 const PIONProvider = ({ children }: { children: ReactNode }) => {

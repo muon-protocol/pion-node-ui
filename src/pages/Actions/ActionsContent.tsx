@@ -61,7 +61,9 @@ const RenderCreateBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          balance={balance ? weiToEther(balance.toString()) : '...'}
+          balance={
+            typeof balance === 'bigint' ? weiToEther(balance.toString()) : '...'
+          }
           value={createAmount}
           onValueChanged={handleCreateAmountChange}
         />
@@ -156,7 +158,9 @@ const RenderUpgradeBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          balance={balance ? weiToEther(balance.toString()) : '...'}
+          balance={
+            typeof balance === 'bigint' ? weiToEther(balance.toString()) : '...'
+          }
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
         />

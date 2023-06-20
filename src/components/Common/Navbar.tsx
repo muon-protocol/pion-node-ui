@@ -17,7 +17,6 @@ const Navbar = () => {
 const DesktopNavbar = () => {
   const { isConnected } = useUserProfile();
   const { balance } = usePION();
-  console.log('PIONBalance', balance);
 
   return (
     <FadeIn delay={0.3}>

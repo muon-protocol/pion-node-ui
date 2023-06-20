@@ -19,7 +19,6 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const [createActionLoading, setCreateActionLoading] = useState(false);
   const [createAmount, setCreateAmount] = useState('');
   const handleCreateAmountChange = (amount: string) => {
-    if (typeof balance !== 'bigint') return;
     setCreateAmount(amount.toString());
   };
 
