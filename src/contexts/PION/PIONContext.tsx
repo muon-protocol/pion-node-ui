@@ -1,7 +1,9 @@
 import { createContext, ReactNode } from 'react';
-import { useContractRead } from 'wagmi';
+import { useBalance, useContractRead } from 'wagmi';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import PION_ABI from '../../abis/PION.json';
+import { PION_ADDRESS } from '../../constants/addresses.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
 const PIONContext = createContext<{
   balance: string | unknown | null;
 }>({
@@ -11,9 +13,16 @@ const PIONContext = createContext<{
 const PIONProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
 
+  const balance = useBalance({
+    address: walletAddress,
+    token: PION_ADDRESS[getCurrentChainId()],
+  });
+
+  console.log('balance', balance);
+
   const { data } = useContractRead({
     abi: PION_ABI,
-    address: '0x0807653124F773dF22C5365ce86e2c7CE12B8e85',
+    address: PION_ADDRESS[getCurrentChainId()],
     functionName: 'balanceOf',
     args: [walletAddress ? walletAddress : '0x0'],
   });

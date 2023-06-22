@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { PIONContext } from './PIONContext.tsx';
+import { BonPIONContext } from './BonPIONContext.tsx';
 
-const usePION = () => {
-  const context = useContext(PIONContext);
+const useBonPION = () => {
+  const context = useContext(BonPIONContext);
 
   if (!context) {
     throw new Error('useBonPION must be used within a PIONContextProvider');
@@ -11,4 +11,4 @@ const usePION = () => {
   return context;
 };
 
-export default usePION;
+export default useBonPION;

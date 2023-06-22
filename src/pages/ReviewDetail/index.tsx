@@ -1,8 +1,6 @@
 import { upgradeModalItems } from '../../data';
 import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
-import AddressInput from '../../components/Common/AddressInput.tsx';
-
 const ReviewDetail = () => {
   return (
     <div className="page page--review-details">
@@ -87,7 +85,7 @@ const TransferCard = ({ className = '' }: { className: string }) => {
           })}
         </div>
       </SelectButtonWithModal>
-      <AddressInput />
+      {/*<AddressInput value={} onValueChanged={} />*/}
       <button className="btn btn--secondary mt-5 mx-auto">Transfer</button>
     </div>
   );
