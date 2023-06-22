@@ -66,6 +66,8 @@ const TransferCard = ({ className = '' }: { className: string }) => {
         isModalOpen={false}
         closeModalHandler={() => {}}
         modalTitle="Select BonPION"
+        removeItem={() => {}}
+        selectedItems={[]}
       >
         <div className="flex flex-col gap-3">
           {upgradeModalItems.map((item) => {
