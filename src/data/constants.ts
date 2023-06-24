@@ -9,7 +9,7 @@ export const plans: Plan[] = [
     APR: '10% - 15%',
     profitability: '200 - 250 days',
     backgroundColor: '#F58E8E80',
-    shadowColor: 'text-[#F58E8E59]',
+    shadowColor: 'text-[#ed8080]',
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const plans: Plan[] = [
     APR: '20% - 30%',
     profitability: '100 - 180 days',
     backgroundColor: '#F3C95D80',
-    shadowColor: 'text-[#F3C95D59]',
+    shadowColor: 'text-[#e6bf5a]',
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const plans: Plan[] = [
     APR: '35% - 50%',
     profitability: '50 - 80 days',
     backgroundColor: '#918EF580',
-    shadowColor: 'text-[#918EF559]',
+    shadowColor: 'text-[#8c8aed]',
   },
 ];
 

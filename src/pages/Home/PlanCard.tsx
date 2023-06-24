@@ -21,7 +21,7 @@ const PlanCard = ({
         >
           {plan.title}
         </div>
-        <div className="plan-card__title absolute left-9 top-9 -ml-1 text-white text-[32px] font-bold">
+        <div className="plan-card__title absolute left-9 top-9 -ml-1 text-black text-[32px] font-bold">
           {plan.title}
         </div>
         <div className="plan-card__content mb-1 flex flex-col gap-6">

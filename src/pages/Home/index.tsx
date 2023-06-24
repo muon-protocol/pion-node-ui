@@ -35,7 +35,7 @@ const Home = () => {
           </button>
         </Link>
       </MoveRightIn>
-      <div className="plans flex flex-col gap-8 md:flex-row md:gap-16 justify-between">
+      <div className="plans flex flex-col gap-8 md:flex-row md:gap-10 justify-between">
         <PlanCard
           plan={plans[0]}
           className="w-full md:w-1/3 bg-plan-1"
