@@ -78,13 +78,13 @@ const AmountInput = ({
           onChange={(e) => onValueChanged(e.target.value)}
         />
         <div className="amount-input__token-name text-gray10 font-semibold max-md:text-sm">
-          {'PION'}
+          {'ALICE'}
         </div>
       </div>
       {balance && Number(balance) < Number(value) && (
         <FadeIn duration={0.3}>
           <p className="text-red-400 font-bold text-xs">
-            You don't have sufficient amounts of PION.{' '}
+            You don't have sufficient amounts of ALICE.{' '}
             <span className="underline cursor-pointer">BUY HERE</span>
           </p>
         </FadeIn>

@@ -7,11 +7,11 @@ import AmountInput from '../../components/Common/AmountInput.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
-import BonPIONCard from '../../components/Common/BonPIONCard.tsx';
+import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import { mergeModalItems, upgradeModalItems } from '../../data';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
-import usePION from '../../contexts/PION/usePION.ts';
+import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { weiToEther } from '../../utils/web3.ts';
 import { useMemo } from 'react';
 import useTransferAction from '../../contexts/TransferAction/useTransferAction.ts';
@@ -45,39 +45,39 @@ const RenderUpgradeBody = () => {
     openUpgradeModal,
     closeUpgradeModal,
     handleUpgradeModalItemClicked,
-    isSelectedUpgradeBonPION,
-    selectedUpgradeBonPION,
+    isSelectedUpgradeBonALICE,
+    selectedUpgradeBonALICE,
     upgradeAmount,
     handleUpgradeAmountChange,
   } = useUpgradeAction();
 
-  const { balance } = usePION();
+  const { balance } = useALICE();
 
-  const isUpgradeBonPIONButtonDisabled = useMemo(() => {
+  const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
-      !selectedUpgradeBonPION ||
+      !selectedUpgradeBonALICE ||
       !upgradeAmount ||
       !balance ||
       Number(upgradeAmount) > Number(weiToEther(balance.toString()))
     );
-  }, [selectedUpgradeBonPION, upgradeAmount, balance]);
+  }, [selectedUpgradeBonALICE, upgradeAmount, balance]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPion"
+          title="Select BonALICE"
           onClick={() => openUpgradeModal()}
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
-          modalTitle="Select BonPION"
-          selectedItems={selectedUpgradeBonPION ? [selectedUpgradeBonPION] : []}
+          modalTitle="Select BonALICE"
+          selectedItems={selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []}
           removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
               return (
-                <BonPIONCard
+                <BonALICECard
                   className="cursor-pointer"
                   title={item.title}
                   subTitle1="Node Power"
@@ -86,7 +86,7 @@ const RenderUpgradeBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleUpgradeModalItemClicked(item)}
                   compact
-                  selected={isSelectedUpgradeBonPION(item)}
+                  selected={isSelectedUpgradeBonALICE(item)}
                 />
               );
             })}
@@ -104,21 +104,21 @@ const RenderUpgradeBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
-          I Want to Boost Bonded PION Power with LP Tokens
+          I Want to Boost Bonded ALICE Power with LP Tokens
         </p>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-          <p className="font-light">Your current bonPION power</p>
+          <p className="font-light">Your current bonALICE power</p>
           <p className="font-medium">2000</p>
         </span>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-          <p className="font-light">Your bonPION power will be</p>
-          <p className="font-medium">5030 bonPION</p>
+          <p className="font-light">Your bonALICE power will be</p>
+          <p className="font-medium">5030 bonALICE</p>
         </span>
         <span className="flex justify-between text-gray10 max-md:text-sm">
           <p className="font-light">Your tier will be</p>
-          <p className="font-medium">Pion Supreme (Tier 3)</p>
+          <p className="font-medium">ALICE Supreme (Tier 3)</p>
         </span>
       </FadeIn>
       <FadeIn
@@ -127,7 +127,7 @@ const RenderUpgradeBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          disabled={isUpgradeBonPIONButtonDisabled}
+          disabled={isUpgradeBonALICEButtonDisabled}
           className="btn btn--secondary !w-full"
         >
           Upgrade
@@ -143,31 +143,31 @@ const RenderMergeBody = () => {
     openMergeModal,
     closeMergeModal,
     handleMergeModalItemClicked,
-    selectedMergeBonPIONs,
-    isInSelectedMergeBonPIONs,
+    selectedMergeBonALICEs,
+    isInSelectedMergeBonALICEs,
   } = useMergeAction();
 
-  const isMergeBonPIONsButtonDisabled = useMemo(() => {
-    return selectedMergeBonPIONs.length < 2;
-  }, [selectedMergeBonPIONs]);
+  const isMergeBonALICEsButtonDisabled = useMemo(() => {
+    return selectedMergeBonALICEs.length < 2;
+  }, [selectedMergeBonALICEs]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPIONs"
+          title="Select BonALICEs"
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
-          modalTitle="Select BonPIONs to Merge"
+          modalTitle="Select BonALICEs to Merge"
           multiple
-          selectedItems={selectedMergeBonPIONs}
+          selectedItems={selectedMergeBonALICEs}
           removeItem={(item) => handleMergeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
             {mergeModalItems.map((item) => {
               return (
-                <BonPIONCard
+                <BonALICECard
                   className="cursor-pointer"
                   title={item.title}
                   subTitle1="Node Power"
@@ -176,7 +176,7 @@ const RenderMergeBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleMergeModalItemClicked(item)}
                   compact
-                  selected={isInSelectedMergeBonPIONs(item)}
+                  selected={isInSelectedMergeBonALICEs(item)}
                 />
               );
             })}
@@ -191,12 +191,12 @@ const RenderMergeBody = () => {
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <BonPIONCard
-          title="New Bonded PION"
+        <BonALICECard
+          title="New Bonded ALICE"
           subTitle1="Node Power"
           subValue1="530"
           subTitle2="Tier"
-          subValue2="Pion Supreme (Tier 3)"
+          subValue2="ALICE Supreme (Tier 3)"
           selected
         />
       </FadeIn>
@@ -206,7 +206,7 @@ const RenderMergeBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          disabled={isMergeBonPIONsButtonDisabled}
+          disabled={isMergeBonALICEsButtonDisabled}
           className="btn btn--secondary !w-full"
         >
           Merge
@@ -224,30 +224,30 @@ const RenderSplitBody = () => {
     openSplitModal,
     closeSplitModal,
     handleSplitModalItemClicked,
-    selectedSplitBonPION,
-    isSelectedSplitBonPION,
+    selectedSplitBonALICE,
+    isSelectedSplitBonALICE,
   } = useSplitAction();
 
-  const isSplitBonPIONsButtonDisabled = useMemo(() => {
-    return !selectedSplitBonPION;
-  }, [selectedSplitBonPION]);
+  const isSplitBonALICEsButtonDisabled = useMemo(() => {
+    return !selectedSplitBonALICE;
+  }, [selectedSplitBonALICE]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPion"
+          title="Select BonALICE"
           onClick={() => openSplitModal()}
           isModalOpen={isSplitModalOpen}
           closeModalHandler={() => closeSplitModal()}
-          modalTitle="Select BonPION"
-          selectedItems={selectedSplitBonPION ? [selectedSplitBonPION] : []}
+          modalTitle="Select BonALICE"
+          selectedItems={selectedSplitBonALICE ? [selectedSplitBonALICE] : []}
           removeItem={() => {}}
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
               return (
-                <BonPIONCard
+                <BonALICECard
                   className="cursor-pointer"
                   title={item.title}
                   subTitle1="Node Power"
@@ -256,14 +256,14 @@ const RenderSplitBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleSplitModalItemClicked(item)}
                   compact
-                  selected={isSelectedSplitBonPION(item)}
+                  selected={isSelectedSplitBonALICE(item)}
                 />
               );
             })}
           </div>
         </SelectButtonWithModal>
       </FadeIn>
-      {selectedSplitBonPION && (
+      {selectedSplitBonALICE && (
         <FadeIn duration={0.1} delay={0.1}>
           <img
             src="/assets/images/actions/split-content-icon.svg"
@@ -276,21 +276,21 @@ const RenderSplitBody = () => {
             value={splitValue}
             onValueChange={setSplitValue}
           />
-          <div className="new-bounded-pions flex flex-col md:flex-row gap-3 w-full select-none">
-            <BonPIONCard
-              title="New Bonded PION"
+          <div className="new-bounded-ALICEs flex flex-col md:flex-row gap-3 w-full select-none">
+            <BonALICECard
+              title="New Bonded ALICE"
               subTitle1="Node Power"
               subValue1="530"
               subTitle2="Tier"
-              subValue2="Pion Supreme (Tier 3)"
+              subValue2="ALICE Supreme (Tier 3)"
               selected
             />
-            <BonPIONCard
-              title="New Bonded PION"
+            <BonALICECard
+              title="New Bonded ALICE"
               subTitle1="Node Power"
               subValue1="530"
               subTitle2="Tier"
-              subValue2="Pion Supreme (Tier 3)"
+              subValue2="ALICE Supreme (Tier 3)"
               selected
             />
           </div>
@@ -302,7 +302,7 @@ const RenderSplitBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          disabled={isSplitBonPIONsButtonDisabled}
+          disabled={isSplitBonALICEsButtonDisabled}
           className="btn btn--secondary !w-full"
         >
           Split
@@ -318,34 +318,34 @@ const RenderTransferBody = () => {
     openTransferModal,
     closeTransferModal,
     handleTransferModalItemClicked,
-    selectedTransferBonPION,
+    selectedTransferBonALICE,
     handleTransferAddressChange,
     transferAddress,
-    isSelectedTransferBonPION,
+    isSelectedTransferBonALICE,
   } = useTransferAction();
 
-  const isTransferBonPIONButtonDisabled = useMemo(() => {
-    return !selectedTransferBonPION || !transferAddress;
-  }, [transferAddress, selectedTransferBonPION]);
+  const isTransferBonALICEButtonDisabled = useMemo(() => {
+    return !selectedTransferBonALICE || !transferAddress;
+  }, [transferAddress, selectedTransferBonALICE]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPion"
+          title="Select BonALICE"
           onClick={() => openTransferModal()}
           isModalOpen={isTransferModalOpen}
           closeModalHandler={() => closeTransferModal()}
-          modalTitle="Select BonPION"
+          modalTitle="Select BonALICE"
           removeItem={() => {}}
           selectedItems={
-            selectedTransferBonPION ? [selectedTransferBonPION] : []
+            selectedTransferBonALICE ? [selectedTransferBonALICE] : []
           }
         >
           <div className="flex flex-col gap-3">
             {upgradeModalItems.map((item) => {
               return (
-                <BonPIONCard
+                <BonALICECard
                   className="cursor-pointer"
                   title={item.title}
                   subTitle1="Node Power"
@@ -354,7 +354,7 @@ const RenderTransferBody = () => {
                   subValue2={item.tier}
                   onClick={() => handleTransferModalItemClicked(item)}
                   compact
-                  selected={isSelectedTransferBonPION(item)}
+                  selected={isSelectedTransferBonALICE(item)}
                 />
               );
             })}
@@ -374,7 +374,7 @@ const RenderTransferBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          disabled={isTransferBonPIONButtonDisabled}
+          disabled={isTransferBonALICEButtonDisabled}
           className="btn btn--secondary !w-full"
         >
           Transfer

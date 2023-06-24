@@ -15,7 +15,7 @@ const Web3Provider = ({ children }: { children: ReactNode }) => {
   );
 
   const { connectors } = getDefaultWallets({
-    appName: 'PION',
+    appName: 'ALICE',
     chains,
   });
 

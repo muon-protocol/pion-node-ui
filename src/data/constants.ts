@@ -3,7 +3,7 @@ import { ActionType, Plan, SidebarItem, UserWallet } from '../types';
 export const plans: Plan[] = [
   {
     id: 1,
-    title: 'Pion Starter',
+    title: 'ALICE Starter',
     requiredNodePower: '500 - 1000',
     verificationMethods: '6 methods',
     APR: '10% - 15%',
@@ -13,7 +13,7 @@ export const plans: Plan[] = [
   },
   {
     id: 2,
-    title: 'Pion Enhancer',
+    title: 'ALICE Enhancer',
     requiredNodePower: '1000 - 5000',
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
@@ -23,7 +23,7 @@ export const plans: Plan[] = [
   },
   {
     id: 3,
-    title: 'Pion Supreme',
+    title: 'ALICE Supreme',
     requiredNodePower: '+5000',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
@@ -76,21 +76,21 @@ export const userWallets: UserWallet[] = [
     id: 1,
     title: 'Deus Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+600 PION',
+    balance: '+600 ALICE',
     verified: true,
   },
   {
     id: 2,
     title: 'Muon Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+400 PION',
+    balance: '+400 ALICE',
     verified: false,
   },
   {
     id: 3,
     title: 'Alice Operator',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+200 PION',
+    balance: '+200 ALICE',
     verified: false,
   },
 ];

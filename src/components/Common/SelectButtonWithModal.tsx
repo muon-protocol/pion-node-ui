@@ -1,6 +1,6 @@
 import Modal from './Modal.tsx';
 import { ReactNode } from 'react';
-import { BonPION } from '../../types';
+import { BonALICE } from '../../types';
 
 const SelectButtonWithModal = ({
   title,
@@ -20,8 +20,8 @@ const SelectButtonWithModal = ({
   closeModalHandler: () => void;
   modalTitle: string;
   onClick: () => void;
-  selectedItems: BonPION[];
-  removeItem: (item: BonPION) => void;
+  selectedItems: BonALICE[];
+  removeItem: (item: BonALICE) => void;
 }) => {
   return (
     <div className="select-button-with-modal mb-2">

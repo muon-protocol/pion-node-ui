@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react';
-import { BonPION } from '../../types';
+import { BonALICE } from '../../types';
 
 const SplitActionContext = createContext<{
   splitValue: number;
@@ -7,50 +7,50 @@ const SplitActionContext = createContext<{
   isSplitModalOpen: boolean;
   openSplitModal: () => void;
   closeSplitModal: () => void;
-  selectedSplitBonPION: BonPION | null;
-  isSelectedSplitBonPION: (bonPION: BonPION) => boolean;
-  handleSplitModalItemClicked: (bonPION: BonPION) => void;
+  selectedSplitBonALICE: BonALICE | null;
+  isSelectedSplitBonALICE: (bonALICE: BonALICE) => boolean;
+  handleSplitModalItemClicked: (bonALICE: BonALICE) => void;
 }>({
   splitValue: 50,
   setSplitValue: () => {},
   isSplitModalOpen: false,
   openSplitModal: () => {},
   closeSplitModal: () => {},
-  selectedSplitBonPION: null,
-  isSelectedSplitBonPION: () => false,
+  selectedSplitBonALICE: null,
+  isSelectedSplitBonALICE: () => false,
   handleSplitModalItemClicked: () => {},
 });
 
 const SplitActionProvider = ({ children }: { children: ReactNode }) => {
   const [splitValue, setSplitValue] = useState(50);
   const [isSplitModalOpen, setIsSplitModalOpen] = useState(false);
-  const [splitModalSelectedBonPION, setSplitModalSelectedBonPION] =
-    useState<BonPION | null>(null);
+  const [splitModalSelectedBonALICE, setSplitModalSelectedBonALICE] =
+    useState<BonALICE | null>(null);
 
-  const handleSplitModalItemClicked = (bonPION: BonPION) => {
-    if (!splitModalSelectedBonPION) {
-      changeSplitModalSelectedBonPION(bonPION);
+  const handleSplitModalItemClicked = (bonALICE: BonALICE) => {
+    if (!splitModalSelectedBonALICE) {
+      changeSplitModalSelectedBonALICE(bonALICE);
       return;
     }
-    if (splitModalSelectedBonPION.id === bonPION.id) {
-      unselectSplitModalSelectedBonPION();
+    if (splitModalSelectedBonALICE.id === bonALICE.id) {
+      unselectSplitModalSelectedBonALICE();
     } else {
-      changeSplitModalSelectedBonPION(bonPION);
+      changeSplitModalSelectedBonALICE(bonALICE);
     }
   };
 
-  const changeSplitModalSelectedBonPION = (bonPION: BonPION) => {
-    setSplitModalSelectedBonPION(bonPION);
+  const changeSplitModalSelectedBonALICE = (bonALICE: BonALICE) => {
+    setSplitModalSelectedBonALICE(bonALICE);
     closeSplitModal();
   };
 
-  const unselectSplitModalSelectedBonPION = () => {
-    setSplitModalSelectedBonPION(null);
+  const unselectSplitModalSelectedBonALICE = () => {
+    setSplitModalSelectedBonALICE(null);
   };
 
-  const isSelectedSplitBonPION = (bonPION: BonPION) => {
+  const isSelectedSplitBonALICE = (bonALICE: BonALICE) => {
     return (
-      !!splitModalSelectedBonPION && splitModalSelectedBonPION.id === bonPION.id
+      !!splitModalSelectedBonALICE && splitModalSelectedBonALICE.id === bonALICE.id
     );
   };
 
@@ -65,8 +65,8 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         isSplitModalOpen,
         openSplitModal,
         closeSplitModal,
-        selectedSplitBonPION: splitModalSelectedBonPION,
-        isSelectedSplitBonPION,
+        selectedSplitBonALICE: splitModalSelectedBonALICE,
+        isSelectedSplitBonALICE,
         handleSplitModalItemClicked,
       }}
     >

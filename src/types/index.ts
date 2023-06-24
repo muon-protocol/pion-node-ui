@@ -25,7 +25,7 @@ export type SidebarItem = {
   link: ActionType;
 };
 
-export type BonPION = {
+export type BonALICE = {
   id: number;
   title: string;
   nodePower: string;

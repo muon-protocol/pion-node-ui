@@ -43,7 +43,7 @@ const ClaimPrize = () => {
               alt=""
             />
             <p className="text-center">
-              To claim your bonPION, please switch back to your Staking Address
+              To claim your bonALICE, please switch back to your Staking Address
               <br />
               <strong>(0x5a03…c7ef)</strong>
             </p>
@@ -81,10 +81,10 @@ const ClaimCard = () => {
   return (
     <div className="w-full bg-primary-dark pl-11 pr-9 py-8 rounded-2xl flex text-white">
       <div className="claim-card__left flex-1">
-        <p className="mb-9 font-semibold text-[20px]">Your Bonded PION</p>
+        <p className="mb-9 font-semibold text-[20px]">Your Bonded ALICE</p>
         <span className="flex justify-between font-light mb-3">
           <span className="flex gap-1">
-            <span className="font-semibold">1200</span>PION
+            <span className="font-semibold">1200</span>ALICE
             <img
               src="/assets/images/claim/claim-card-right-arrow-icon.svg"
               alt=""
@@ -95,8 +95,8 @@ const ClaimCard = () => {
           </span>
         </span>
         <span className="flex justify-between font-light mb-3">
-          <span>bonPION Tier:</span>
-          <span className="font-semibold">Pion Enhancer</span>
+          <span>bonALICE Tier:</span>
+          <span className="font-semibold">ALICE Enhancer</span>
         </span>
         <span className="flex justify-between font-light mb-3">
           <span>Potential APR:</span>

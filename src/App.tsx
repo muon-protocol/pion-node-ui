@@ -15,18 +15,18 @@ import { MergeActionProvider } from './contexts/MergeAction/MergeActionContext.t
 import { SplitActionProvider } from './contexts/SplitAction/SplitActionContext.tsx';
 import { UserProfileProvider } from './contexts/UserProfile/UserProfileContext.tsx';
 import { ClaimPrizeProvider } from './contexts/ClaimPrize/ClaimPrizeContext.tsx';
-import { BonPIONProvider } from './contexts/BonPION/BonPIONContext.tsx';
+import { BonALICEProvider } from './contexts/BonALICE/BonALICEContext.tsx';
 import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
-import { PIONProvider } from './contexts/PION/PIONContext.tsx';
+import { ALICEProvider } from './contexts/ALICE/ALICEContext.tsx';
 
 function App() {
   return (
     <div className="app">
       <Web3Provider>
         <UserProfileProvider>
-          <PIONProvider>
-            <BonPIONProvider>
+          <ALICEProvider>
+            <BonALICEProvider>
               <ActionsProvider>
                 <CreateActionProvider>
                   <UpgradeActionProvider>
@@ -57,8 +57,8 @@ function App() {
                   </UpgradeActionProvider>
                 </CreateActionProvider>
               </ActionsProvider>
-            </BonPIONProvider>
-          </PIONProvider>
+            </BonALICEProvider>
+          </ALICEProvider>
         </UserProfileProvider>
       </Web3Provider>
     </div>

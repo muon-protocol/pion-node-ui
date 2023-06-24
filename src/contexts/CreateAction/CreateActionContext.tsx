@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
-import usePION from '../PION/usePION.ts';
+import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import BONPION_API from '../../abis/BonPION.json';
-import { BONPION_ADDRESS, PION_ADDRESS } from '../../constants/addresses.ts';
+import BONALICE_API from '../../abis/BonALICE.json';
+import { BONALICE_ADDRESS, ALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 
@@ -10,16 +10,16 @@ const CreateActionContext = createContext<{
   createAmount: string;
   createActionLoading: boolean;
   handleCreateAmountChange: (amount: string) => void;
-  handleCreateBonPIONClicked: () => void;
+  handleCreateBonALICEClicked: () => void;
 }>({
   createAmount: '',
   createActionLoading: false,
   handleCreateAmountChange: () => {},
-  handleCreateBonPIONClicked: () => {},
+  handleCreateBonALICEClicked: () => {},
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
-  const { balance } = usePION();
+  const { balance } = useALICE();
   const { walletAddress } = useUserProfile();
 
   const [createActionLoading, setCreateActionLoading] = useState(false);
@@ -29,12 +29,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const mintAndLockArgs = useMemo(() => {
-    return [[PION_ADDRESS[getCurrentChainId()]], [createAmount], walletAddress];
+    return [[ALICE_ADDRESS[getCurrentChainId()]], [createAmount], walletAddress];
   }, [walletAddress, createAmount]);
 
   const { config } = usePrepareContractWrite({
-    abi: BONPION_API,
-    address: BONPION_ADDRESS[getCurrentChainId()],
+    abi: BONALICE_API,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
     args: mintAndLockArgs,
     chainId: getCurrentChainId(),
@@ -43,7 +43,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   console.log('config', config);
   const { write } = useContractWrite(config);
 
-  const handleCreateBonPIONClicked = () => {
+  const handleCreateBonALICEClicked = () => {
     if (!balance || !createAmount || Number(createAmount) > Number(balance))
       return;
     setCreateActionLoading(true);
@@ -58,7 +58,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         createAmount,
         createActionLoading,
         handleCreateAmountChange,
-        handleCreateBonPIONClicked,
+        handleCreateBonALICEClicked,
       }}
     >
       {children}

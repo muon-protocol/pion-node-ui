@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-const BonPIONCard: FC<{
+const BonALICECard: FC<{
   title: string;
   className?: string;
   subTitle1: string;
@@ -24,7 +24,7 @@ const BonPIONCard: FC<{
   return (
     <div
       onClick={() => onClick && onClick()}
-      className={`new-bounded-pion-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col 
+      className={`new-bounded-ALICE-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col 
         ${className} ${
         selected
           ? 'bg-primary-dark text-gray10'
@@ -46,4 +46,4 @@ const BonPIONCard: FC<{
   );
 };
 
-export default BonPIONCard;
+export default BonALICECard;

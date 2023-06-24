@@ -1,60 +1,60 @@
 import { createContext, ReactNode, useState } from 'react';
-import { BonPION } from '../../types';
+import { BonALICE } from '../../types';
 
 const TransferActionContext = createContext<{
   isTransferModalOpen: boolean;
   openTransferModal: () => void;
   closeTransferModal: () => void;
-  isSelectedTransferBonPION: (bonPION: BonPION) => boolean;
-  handleTransferModalItemClicked: (bonPION: BonPION) => void;
-  selectedTransferBonPION: BonPION | null;
+  isSelectedTransferBonALICE: (bonALICE: BonALICE) => boolean;
+  handleTransferModalItemClicked: (bonALICE: BonALICE) => void;
+  selectedTransferBonALICE: BonALICE | null;
   handleTransferAddressChange: (address: string) => void;
   transferAddress: string;
 }>({
   isTransferModalOpen: false,
   openTransferModal: () => {},
   closeTransferModal: () => {},
-  isSelectedTransferBonPION: () => false,
+  isSelectedTransferBonALICE: () => false,
   handleTransferModalItemClicked: () => {},
-  selectedTransferBonPION: null,
+  selectedTransferBonALICE: null,
   handleTransferAddressChange: () => {},
   transferAddress: '',
 });
 
 const TransferActionProvider = ({ children }: { children: ReactNode }) => {
   const [isTransferModalOpen, setIsTransferModalOpen] = useState(false);
-  const [transferModalSelectedBonPION, setTransferModalSelectedBonPION] =
-    useState<BonPION | null>(null);
+  const [transferModalSelectedBonALICE, setTransferModalSelectedBonALICE] =
+    useState<BonALICE | null>(null);
   const [transferAddress, setTransferAddress] = useState('');
   const handleTransferAddressChange = (address: string) => {
     setTransferAddress(address);
   };
 
-  const handleTransferModalItemClicked = (bonPION: BonPION) => {
-    if (!transferModalSelectedBonPION) {
-      changeTransferModalSelectedBonPION(bonPION);
+  const handleTransferModalItemClicked = (bonALICE: BonALICE) => {
+    if (!transferModalSelectedBonALICE) {
+      changeTransferModalSelectedBonALICE(bonALICE);
       return;
     }
-    if (transferModalSelectedBonPION.id === bonPION.id) {
-      unselectTransferModalSelectedBonPION();
+    if (transferModalSelectedBonALICE.id === bonALICE.id) {
+      unselectTransferModalSelectedBonALICE();
     } else {
-      changeTransferModalSelectedBonPION(bonPION);
+      changeTransferModalSelectedBonALICE(bonALICE);
     }
   };
 
-  const changeTransferModalSelectedBonPION = (bonPION: BonPION) => {
-    setTransferModalSelectedBonPION(bonPION);
+  const changeTransferModalSelectedBonALICE = (bonALICE: BonALICE) => {
+    setTransferModalSelectedBonALICE(bonALICE);
     closeTransferModal();
   };
 
-  const unselectTransferModalSelectedBonPION = () => {
-    setTransferModalSelectedBonPION(null);
+  const unselectTransferModalSelectedBonALICE = () => {
+    setTransferModalSelectedBonALICE(null);
   };
 
-  const isSelectedTransferBonPION = (bonPION: BonPION) => {
+  const isSelectedTransferBonALICE = (bonALICE: BonALICE) => {
     return (
-      !!transferModalSelectedBonPION &&
-      transferModalSelectedBonPION.id === bonPION.id
+      !!transferModalSelectedBonALICE &&
+      transferModalSelectedBonALICE.id === bonALICE.id
     );
   };
 
@@ -67,10 +67,10 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
         isTransferModalOpen,
         transferAddress,
         handleTransferAddressChange,
-        selectedTransferBonPION: transferModalSelectedBonPION,
+        selectedTransferBonALICE: transferModalSelectedBonALICE,
         openTransferModal,
         closeTransferModal,
-        isSelectedTransferBonPION,
+        isSelectedTransferBonALICE,
         handleTransferModalItemClicked,
       }}
     >

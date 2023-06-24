@@ -1,41 +1,41 @@
 import { createContext, ReactNode } from 'react';
 import { useBalance, useContractRead } from 'wagmi';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import PION_ABI from '../../abis/PION.json';
-import { PION_ADDRESS } from '../../constants/addresses.ts';
+import ALICE_ABI from '../../abis/ALICE.json';
+import { ALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-const PIONContext = createContext<{
+const ALICEContext = createContext<{
   balance: string | unknown | null;
 }>({
   balance: null,
 });
 
-const PIONProvider = ({ children }: { children: ReactNode }) => {
+const ALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
 
   const balance = useBalance({
     address: walletAddress,
-    token: PION_ADDRESS[getCurrentChainId()],
+    token: ALICE_ADDRESS[getCurrentChainId()],
   });
 
   console.log('balance', balance);
 
   const { data } = useContractRead({
-    abi: PION_ABI,
-    address: PION_ADDRESS[getCurrentChainId()],
+    abi: ALICE_ABI,
+    address: ALICE_ADDRESS[getCurrentChainId()],
     functionName: 'balanceOf',
     args: [walletAddress ? walletAddress : '0x0'],
   });
 
   return (
-    <PIONContext.Provider
+    <ALICEContext.Provider
       value={{
         balance: data,
       }}
     >
       {children}
-    </PIONContext.Provider>
+    </ALICEContext.Provider>
   );
 };
 
-export { PIONProvider, PIONContext };
+export { ALICEProvider, ALICEContext };

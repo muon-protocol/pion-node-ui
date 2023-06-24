@@ -1,56 +1,56 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { BonPION } from '../../types';
+import { BonALICE } from '../../types';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
   openMergeModal: () => void;
   closeMergeModal: () => void;
-  selectedMergeBonPIONs: BonPION[];
-  isInSelectedMergeBonPIONs: (bonPION: BonPION) => boolean;
-  handleMergeModalItemClicked: (bonPION: BonPION) => void;
+  selectedMergeBonALICEs: BonALICE[];
+  isInSelectedMergeBonALICEs: (bonALICE: BonALICE) => boolean;
+  handleMergeModalItemClicked: (bonALICE: BonALICE) => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
   closeMergeModal: () => {},
-  selectedMergeBonPIONs: [],
-  isInSelectedMergeBonPIONs: () => false,
+  selectedMergeBonALICEs: [],
+  isInSelectedMergeBonALICEs: () => false,
   handleMergeModalItemClicked: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   const [isMergeModalOpen, setIsMergeModalOpen] = useState(false);
-  const [mergeModalSelectedBonPIONs, setMergeModalSelectedBonPIONs] = useState<
-    BonPION[]
+  const [mergeModalSelectedBonALICEs, setMergeModalSelectedBonALICEs] = useState<
+    BonALICE[]
   >([]);
 
-  const handleMergeModalItemClicked = (bonPION: BonPION) => {
-    if (mergeModalSelectedBonPIONs.find((b) => b.id === bonPION.id)) {
-      removeMergeModalSelectedBonPION(bonPION);
+  const handleMergeModalItemClicked = (bonALICE: BonALICE) => {
+    if (mergeModalSelectedBonALICEs.find((b) => b.id === bonALICE.id)) {
+      removeMergeModalSelectedBonALICE(bonALICE);
     } else {
-      if (mergeModalSelectedBonPIONs.length < 2) {
-        addMergeModalSelectedBonPION(bonPION);
+      if (mergeModalSelectedBonALICEs.length < 2) {
+        addMergeModalSelectedBonALICE(bonALICE);
       }
     }
   };
 
   useEffect(() => {
-    if (mergeModalSelectedBonPIONs.length === 2) {
+    if (mergeModalSelectedBonALICEs.length === 2) {
       closeMergeModal();
     }
-  }, [mergeModalSelectedBonPIONs]);
+  }, [mergeModalSelectedBonALICEs]);
 
-  const addMergeModalSelectedBonPION = (bonPION: BonPION) => {
-    setMergeModalSelectedBonPIONs([...mergeModalSelectedBonPIONs, bonPION]);
+  const addMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
+    setMergeModalSelectedBonALICEs([...mergeModalSelectedBonALICEs, bonALICE]);
   };
 
-  const removeMergeModalSelectedBonPION = (bonPION: BonPION) => {
-    setMergeModalSelectedBonPIONs(
-      mergeModalSelectedBonPIONs.filter((b) => b.id !== bonPION.id),
+  const removeMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
+    setMergeModalSelectedBonALICEs(
+      mergeModalSelectedBonALICEs.filter((b) => b.id !== bonALICE.id),
     );
   };
 
-  const isInSelectedMergeBonPIONs = (bonPION: BonPION) => {
-    return !!mergeModalSelectedBonPIONs.find((b) => b.id === bonPION.id);
+  const isInSelectedMergeBonALICEs = (bonALICE: BonALICE) => {
+    return !!mergeModalSelectedBonALICEs.find((b) => b.id === bonALICE.id);
   };
 
   const openMergeModal = () => setIsMergeModalOpen(true);
@@ -62,8 +62,8 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isMergeModalOpen,
         openMergeModal,
         closeMergeModal,
-        selectedMergeBonPIONs: mergeModalSelectedBonPIONs,
-        isInSelectedMergeBonPIONs,
+        selectedMergeBonALICEs: mergeModalSelectedBonALICEs,
+        isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
       }}
     >

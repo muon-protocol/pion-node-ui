@@ -89,37 +89,37 @@ const renderActionDescription = (action: ActionType) => {
       {action === ActionType.CREATE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Begin your journey by crafting your Bonded PION NFT This requires
-            locking PION and PION LP tokens. Remember, the amount of tokens you
+            Begin your journey by crafting your Bonded ALICE NFT This requires
+            locking ALICE and ALICE LP tokens. Remember, the amount of tokens you
             lock will directly influence your NFT Power, tier, and rewards.
           </p>
         </FadeIn>
       ) : action === ActionType.UPGRADE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Boost your Node Power by adding more PION and PION LP tokens to your
-            Bonded PION NFT. This upgrade could change your tier and enhance
+            Boost your Node Power by adding more ALICE and ALICE LP tokens to your
+            Bonded ALICE NFT. This upgrade could change your tier and enhance
             your APR.
           </p>
         </FadeIn>
       ) : action === ActionType.MERGE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Choose two bonPIONs from your collection to merge into a single,
+            Choose two bonALICEs from your collection to merge into a single,
             more powerful NFT for increased earnings.
           </p>
         </FadeIn>
       ) : action === ActionType.SPLIT ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Choose a bonPION to split and adjust the slider to distribute the
+            Choose a bonALICE to split and adjust the slider to distribute the
             power as desired.
           </p>
         </FadeIn>
       ) : action === ActionType.TRANSFER ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Choose a bonPION from your collection, then enter the destination
+            Choose a bonALICE from your collection, then enter the destination
             address where you want to send it.
           </p>
         </FadeIn>

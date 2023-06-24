@@ -1,5 +1,5 @@
 /**
- * List of all the networks supported by the PION Interface
+ * List of all the networks supported by the ALICE Interface
  */
 export enum SupportedChainId {
   BSCTESTNET = 97,

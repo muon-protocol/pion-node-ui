@@ -5,7 +5,7 @@ const GetStarted = () => {
   return (
     <div className="page page--get-started">
       <p className="text-white text-[19px] md:text-2xl font-light mb-6">
-        You can obtain bonPION in two ways: either create a new one
+        You can obtain bonALICE in two ways: either create a new one
         independently or claim it as a reward if you're part of the Muon
         pioneers
       </p>
@@ -24,15 +24,15 @@ const GetStarted = () => {
         </span>
       </span>
       <span className="get-started__actions">
-        <NewBonPionAction />
+        <NewBonALICEAction />
         <MuanPioneerAction />
       </span>
     </div>
   );
 };
 
-const NewBonPionAction = () => {
-  const newBonPionFloatingIconVariants = {
+const NewBonALICEAction = () => {
+  const newBonALICEFloatingIconVariants = {
     initial: {
       left: -4 * 4,
       bottom: -9 * 4,
@@ -50,19 +50,19 @@ const NewBonPionAction = () => {
       className="get-started__actions__action-container relative"
     >
       <motion.img
-        variants={newBonPionFloatingIconVariants}
+        variants={newBonALICEFloatingIconVariants}
         className="get-started__actions__action__floating-object hidden h-[186px] w-auto md:absolute -left-4 -bottom-9"
-        src="/assets/images/get-started/new-bon-pion-floating-icon.svg"
+        src="/assets/images/get-started/new-bon-alice-floating-icon.svg"
         alt=""
       />
       <div className="get-started__actions__action">
         <img
           className="h-8 mr-3 md:mr-0 md:mb-12 md:h-16 w-auto"
-          src="/assets/images/get-started/new-bon-pion-icon.svg"
+          src="/assets/images/get-started/new-bon-alice-icon.svg"
           alt=""
         />
         <div className="font-semibold md:text-2xl md:font-light text-white md:text-center mx-auto">
-          Get Started with a New bonPION
+          Get Started with a New bonALICE
         </div>
       </div>
     </motion.span>
