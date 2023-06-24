@@ -19,6 +19,7 @@ import { BonALICEProvider } from './contexts/BonALICE/BonALICEContext.tsx';
 import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
 import { ALICEProvider } from './contexts/ALICE/ALICEContext.tsx';
+import {Footer} from "./components/Common/Footer.tsx";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
                                   element={<ReviewDetail />}
                                 />
                               </Routes>
+                              <Footer />
                             </BrowserRouter>
                           </ClaimPrizeProvider>
                         </TransferActionProvider>

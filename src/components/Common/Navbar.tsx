@@ -36,12 +36,13 @@ const DesktopNavbar = () => {
           </Link>
           <button className="btn btn--small">Buy ALICE</button>
           {isConnected && balance !== undefined && balance !== null && (
-            <button className="btn btn--small btn--dark-primary">
-              Balance:{' '}
+            <button className="btn btn--small btn--secondary flex">
+              <img src='/assets/images/navbar/muon-icon.svg' alt='' className='mr-3 h-[18px]'/>
+              <span className='text-black'>Balance: </span>
               <strong className="ml-2 mr-1">
                 {weiToEther(balance.toString())}
               </strong>
-              <strong className="text-xyz-75">ALICE</strong>
+              <strong className="text-black font-semibold">ALICE</strong>
             </button>
           )}
           <ConnectWalletButton />

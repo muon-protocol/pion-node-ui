@@ -51,7 +51,7 @@ export const ConnectWalletButton = () => {
               return (
                 <button
                   onClick={openAccountModal}
-                  className="btn btn--small btn--dark-primary"
+                  className="btn btn--secondary btn--small btn--dark-primary"
                 >
                   {account.displayName}
                 </button>
