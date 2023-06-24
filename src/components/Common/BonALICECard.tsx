@@ -31,16 +31,16 @@ const BonALICECard: FC<{
           : 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
       }`}
     >
-      <p className={`text-white font-semibold ${compact ? 'md:mb-3' : 'mb-4 md:mb-6'}`}>
+      <p className={`text-inherit font-semibold ${compact ? 'md:mb-3' : 'mb-4 md:mb-6'}`}>
         {title}
       </p>
       <span className="text-sm flex mb-0.5 md:mb-2 justify-between">
-        <p className="text-white font-light">{subTitle1}</p>
-        <p className="text-white font-medium">{subValue1}</p>
+        <p className="text-inherit font-light">{subTitle1}</p>
+        <p className="text-inherit font-medium">{subValue1}</p>
       </span>
       <span className="text-sm flex justify-between">
-        <p className="text-white font-light">{subTitle2}</p>
-        <p className="text-white font-medium">{subValue2}</p>
+        <p className="text-inherit font-light">{subTitle2}</p>
+        <p className="text-inherit font-medium">{subValue2}</p>
       </span>
     </div>
   );

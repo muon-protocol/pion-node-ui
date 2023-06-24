@@ -38,7 +38,7 @@ const Modal: FC<{
                     src={
                       size === 'sm'
                         ? '/assets/images/modal/exit-dark-icon.svg'
-                        : '/assets/images/modal/exit-white-icon.svg'
+                        : '/assets/images/modal/exit-dark-icon.svg'
                     }
                     width="18px"
                     height="18px"
