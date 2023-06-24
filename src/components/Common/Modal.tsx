@@ -22,7 +22,7 @@ const Modal: FC<{
           >
             <Scale
               className={`modal-content max-w-[400px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 ${
-                size === 'sm' ? 'bg-modal-small' : 'bg-card-bg-70-purple'
+                size === 'sm' ? 'bg-modal-small' : 'bg-white'
               } rounded-3xl`}
             >
               <div
@@ -30,7 +30,7 @@ const Modal: FC<{
                 data-testid="modal-content"
               >
                 <div className="modal-header flex justify-between items-center mb-6">
-                  <p className="text-white font-medium text-sm"> {title} </p>
+                  <p className="font-medium text-sm"> {title} </p>
 
                   <img
                     className="cursor-pointer"

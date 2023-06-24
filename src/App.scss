@@ -12,6 +12,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+p {
+  @apply text-black;
+}
+
 input[type=number] {
   -moz-appearance: textfield;
 }
@@ -75,7 +79,7 @@ input[type=number] {
   }
 
   &--secondary-tag {
-    @apply bg-primary-10-solid text-black;
+    @apply bg-primary-10-solid text-primary;
   }
 
   // border properties

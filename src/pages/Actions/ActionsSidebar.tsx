@@ -5,7 +5,7 @@ import { ActionType, SidebarItem } from '../../types';
 
 const ActionsSidebar = () => {
   return (
-    <div className="action-sidebar bg-card-bg rounded-2xl w-auto fixed bottom-2 left-2 right-2 flex justify-evenly px-2 pb-1.5 pt-3 md:left-0 md:right-0 md:bottom-0 md:relative md:w-auto md:rounded-2xl md:flex-col md:gap-10 md:bg-card-bg-70-purple md:px-4 md:py-14">
+    <div className="action-sidebar bg-primary-13 rounded-2xl w-auto fixed bottom-2 left-2 right-2 flex justify-evenly px-2 pb-1.5 pt-3 md:left-0 md:right-0 md:bottom-0 md:relative md:w-auto md:rounded-2xl md:flex-col md:gap-10 md:bg-primary-13 md:px-4 md:py-14">
       {sidebarItems.map((item) => (
         <SidebarItem item={item} key={item.id} />
       ))}
@@ -33,33 +33,19 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
 
   return (
     <div
-      className="sidebar-item relative flex-1 flex flex-col gap-1.5 md:gap-2 items-center justify-center cursor-pointer"
+      className="sidebar-item flex-1 flex flex-col gap-1.5 md:gap-2 items-center justify-center cursor-pointer"
       key={item.id}
       id={'sidebar-item-' + item.id}
       onClick={() => handleSidebarItemClick(item.link)}
     >
       <img
-        src={isHovered ? item.hoverIcon : item.icon}
-        alt={item.title}
-        className="opacity-0 top-0 w-auto h-[22px] md:h-6"
-      />
-      <img
         src={item.icon}
         alt={item.title}
-        className={`absolute transition-opacity top-0 w-6 h-[22px] md:h-6 z-10 ${
-          isHovered ? 'md:opacity-0' : 'md:opacity-100'
-        }`}
-      />
-      <img
-        src={item.hoverIcon}
-        alt={item.title}
-        className={`absolute transition-opacity top-0 w-6 h-[22px] md:h-6 z-10 ${
-          isHovered ? 'md:opacity-100' : 'md:opacity-0'
-        }`}
+        className={`transition-opacity top-0 w-6 h-[22px] md:h-6 z-10`}
       />
       <div
-        className={`text-xs md:text-sm font-semibold transition-all text-white ${
-          isHovered ? 'md:text-white' : 'md:text-gray-300'
+        className={`text-xs md:text-sm font-semibold transition-all text-primary ${
+          isHovered ? 'md:text-primary' : 'md:text-primary'
         }`}
       >
         {item.title}

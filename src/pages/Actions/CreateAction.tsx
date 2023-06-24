@@ -35,7 +35,7 @@ export const RenderCreateBody = () => {
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
+        <p className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer">
           I Want to Boost Bonded ALICE Power with LP Tokens
         </p>
       </FadeIn>
@@ -58,7 +58,7 @@ export const RenderCreateBody = () => {
       >
         <button
           onClick={() => handleCreateBonALICEClicked()}
-          className="btn btn--secondary !w-full"
+          className="btn !w-full"
           disabled={isCreateBondedALICEButtonDisabled}
         >
           Create Bonded ALICE

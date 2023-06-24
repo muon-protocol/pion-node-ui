@@ -39,7 +39,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-[52px] md:h-[52px]"
-              src="/assets/images/actions/create-colored-icon.svg"
+              src="/assets/images/actions/create-icon.svg"
               alt="create"
             />
           </Scale>
@@ -47,7 +47,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-[52px] md:h-[52px]"
-              src="/assets/images/actions/upgrade-colored-icon.svg"
+              src="/assets/images/actions/upgrade-icon.svg"
               alt="upgrade"
             />
           </Scale>
@@ -55,7 +55,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-[52px] md:h-[52px]"
-              src="/assets/images/actions/merge-colored-icon.svg"
+              src="/assets/images/actions/merge-icon.svg"
               alt="merge"
             />
           </Scale>
@@ -63,7 +63,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-[52px] md:h-[52px]"
-              src="/assets/images/actions/split-colored-icon.svg"
+              src="/assets/images/actions/split-icon.svg"
               alt="split"
             />
           </Scale>
@@ -71,7 +71,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-[52px] md:h-[52px]"
-              src="/assets/images/actions/transfer-colored-icon.svg"
+              src="/assets/images/actions/transfer-icon.svg"
               alt="transfer"
             />
           </Scale>

@@ -21,7 +21,7 @@ const ActionsContent = () => {
   const { selectedAction } = useActions();
 
   return (
-    <div className="actions-content w-full md:bg-card-bg-70-purple md:px-11 py-10 rounded-2xl flex flex-col">
+    <div className="actions-content w-full md:bg-white md:px-11 py-10 rounded-2xl flex flex-col">
       {selectedAction === ActionType.CREATE ? (
         <RenderCreateBody />
       ) : selectedAction === ActionType.UPGRADE ? (
@@ -103,7 +103,7 @@ const RenderUpgradeBody = () => {
         />
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
-        <p className="max-md:text-sm font-light text-gray10 underline mb-8 md:mb-10 cursor-pointer">
+        <p className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer">
           I Want to Boost Bonded ALICE Power with LP Tokens
         </p>
       </FadeIn>
@@ -128,7 +128,7 @@ const RenderUpgradeBody = () => {
       >
         <button
           disabled={isUpgradeBonALICEButtonDisabled}
-          className="btn btn--secondary !w-full"
+          className="btn !w-full"
         >
           Upgrade
         </button>
@@ -207,7 +207,7 @@ const RenderMergeBody = () => {
       >
         <button
           disabled={isMergeBonALICEsButtonDisabled}
-          className="btn btn--secondary !w-full"
+          className="btn !w-full"
         >
           Merge
         </button>
@@ -303,7 +303,7 @@ const RenderSplitBody = () => {
       >
         <button
           disabled={isSplitBonALICEsButtonDisabled}
-          className="btn btn--secondary !w-full"
+          className="btn !w-full"
         >
           Split
         </button>
@@ -375,7 +375,7 @@ const RenderTransferBody = () => {
       >
         <button
           disabled={isTransferBonALICEButtonDisabled}
-          className="btn btn--secondary !w-full"
+          className="btn !w-full"
         >
           Transfer
         </button>
