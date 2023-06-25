@@ -1,7 +1,8 @@
-import { createContext, ReactNode, useMemo, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import BONALICE_API from '../../abis/BonALICE.json';
+import ALICE_API from '../../abis/ALICE.json';
 import { BONALICE_ADDRESS, ALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
@@ -13,6 +14,7 @@ const CreateActionContext = createContext<{
   createActionLoading: boolean;
   handleCreateAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
+  handleApproveALICEClicked: () => void;
 }>({
   createAmount: {
     dsp: 0,
@@ -22,6 +24,7 @@ const CreateActionContext = createContext<{
   createActionLoading: false,
   handleCreateAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
+  handleApproveALICEClicked: () => {},
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
@@ -34,27 +37,24 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     big: BigInt(0),
     hStr: '',
   });
+
   const handleCreateAmountChange = (amount: string) => {
     setCreateAmount(w3bNumberFromString(amount));
   };
 
-  const mintAndLockArgs = useMemo(() => {
-    return [
-      [ALICE_ADDRESS[getCurrentChainId()]],
-      [createAmount.big],
-      walletAddress,
-    ];
-  }, [walletAddress, createAmount]);
-
-  const { config } = usePrepareContractWrite({
+  const { config: mintAndLockConfig } = usePrepareContractWrite({
     abi: BONALICE_API,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
-    args: mintAndLockArgs,
+    args: [
+      [ALICE_ADDRESS[getCurrentChainId()]],
+      [createAmount.big],
+      walletAddress,
+    ],
     chainId: getCurrentChainId(),
   });
 
-  const { write } = useContractWrite(config);
+  const { write: mintAndLockWrite } = useContractWrite(mintAndLockConfig);
 
   const handleCreateBonALICEClicked = () => {
     if (
@@ -64,7 +64,29 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     )
       return;
     setCreateActionLoading(true);
-    write?.();
+    mintAndLockWrite?.();
+    setCreateActionLoading(false);
+  };
+
+  const { config: approveConfig } = usePrepareContractWrite({
+    abi: ALICE_API,
+    address: ALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'approve',
+    args: [BONALICE_ADDRESS[getCurrentChainId()], createAmount.big],
+    chainId: getCurrentChainId(),
+  });
+
+  const { write: approveWrite } = useContractWrite(approveConfig);
+
+  const handleApproveALICEClicked = () => {
+    if (
+      !ALICEBalance ||
+      !createAmount ||
+      Number(createAmount) > Number(ALICEBalance.big)
+    )
+      return;
+    setCreateActionLoading(true);
+    approveWrite?.();
     setCreateActionLoading(false);
   };
 
@@ -75,6 +97,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         createActionLoading,
         handleCreateAmountChange,
         handleCreateBonALICEClicked,
+        handleApproveALICEClicked,
       }}
     >
       {children}

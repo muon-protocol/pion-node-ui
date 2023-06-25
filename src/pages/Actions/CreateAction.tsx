@@ -5,18 +5,22 @@ import { FadeIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 
 export const RenderCreateBody = () => {
-  const { ALICEBalance } = useALICE();
+  const { ALICEBalance, allowance } = useALICE();
   const {
     createAmount,
     handleCreateAmountChange,
     handleCreateBonALICEClicked,
     createActionLoading,
+    handleApproveALICEClicked,
   } = useCreateAction();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
+      !allowance ||
       !createAmount ||
+      createAmount.big === BigInt(0) ||
       !ALICEBalance ||
+      ALICEBalance.big === BigInt(0) ||
       ALICEBalance.dsp < createAmount.dsp ||
       createActionLoading
     );
@@ -53,13 +57,23 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button
-          onClick={() => handleCreateBonALICEClicked()}
-          className="btn !w-full"
-          disabled={isCreateBondedALICEButtonDisabled}
-        >
-          Create Bonded ALICE
-        </button>
+        {allowance && allowance.big < createAmount.big ? (
+          <button
+            onClick={() => handleApproveALICEClicked()}
+            className="btn !w-full"
+            disabled={isCreateBondedALICEButtonDisabled}
+          >
+            Approve {createAmount.hStr} ALICE
+          </button>
+        ) : (
+          <button
+            onClick={() => handleCreateBonALICEClicked()}
+            className="btn !w-full"
+            disabled={isCreateBondedALICEButtonDisabled}
+          >
+            Create Bonded ALICE
+          </button>
+        )}
       </FadeIn>
     </>
   );
