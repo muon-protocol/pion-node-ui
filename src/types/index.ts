@@ -60,3 +60,13 @@ export type RewardWallet = {
   wasAliceOperator: boolean;
   hasBeenProcessed: boolean;
 };
+
+export enum TransactionSources {
+  ALLOWANCE = 'allowance',
+}
+
+export type Transaction = {
+  id: number;
+  source: TransactionSources;
+  hash: string;
+};

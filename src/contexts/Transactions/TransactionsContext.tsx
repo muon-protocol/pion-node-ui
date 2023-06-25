@@ -2,22 +2,22 @@ import { createContext, ReactNode, useState } from 'react';
 import { Transaction } from '../../types';
 
 const TransactionsContext = createContext<{
-  addTransactions: (transaction: Transaction) => void;
+  addTransaction: (transaction: Transaction) => void;
 }>({
-  addTransactions: () => {},
+  addTransaction: () => {},
 });
 
 const TransactionsProvider = ({ children }: { children: ReactNode }) => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  const addTransactions = (transaction: Transaction) => {
+  const addTransaction = (transaction: Transaction) => {
     setTransactions([...transactions, transaction]);
   };
 
   return (
     <TransactionsContext.Provider
       value={{
-        addTransactions,
+        addTransaction,
       }}
     >
       {children}
