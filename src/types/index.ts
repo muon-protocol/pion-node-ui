@@ -68,5 +68,5 @@ export enum TransactionSources {
 export type Transaction = {
   id: number;
   source: TransactionSources;
-  hash: string;
+  hash: `0x${string}`;
 };

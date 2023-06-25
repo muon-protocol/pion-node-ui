@@ -1,5 +1,7 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode } from 'react';
 import { Transaction } from '../../types';
+import toast from 'react-hot-toast';
+import { waitForTransaction } from '@wagmi/core';
 
 const TransactionsContext = createContext<{
   addTransaction: (transaction: Transaction) => void;
@@ -8,10 +10,16 @@ const TransactionsContext = createContext<{
 });
 
 const TransactionsProvider = ({ children }: { children: ReactNode }) => {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const addTransaction = async (transaction: Transaction) => {
+    const data = waitForTransaction({
+      hash: transaction.hash,
+    });
 
-  const addTransaction = (transaction: Transaction) => {
-    setTransactions([...transactions, transaction]);
+    await toast.promise(data, {
+      loading: 'Waiting for transaction to be mined',
+      success: 'Transaction mined!',
+      error: 'Transaction failed',
+    });
   };
 
   return (

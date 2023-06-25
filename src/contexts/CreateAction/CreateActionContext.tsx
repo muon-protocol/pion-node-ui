@@ -96,6 +96,11 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (approveSuccess) closeAllowanceModal();
+    console.log('----------', {
+      id: Math.random(),
+      hash: approveData?.hash,
+      source: TransactionSources.ALLOWANCE,
+    });
     if (approveData)
       addTransaction({
         id: Math.random(),

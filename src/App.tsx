@@ -19,49 +19,57 @@ import { BonALICEProvider } from './contexts/BonALICE/BonALICEContext.tsx';
 import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
 import { ALICEProvider } from './contexts/ALICE/ALICEContext.tsx';
-import {Footer} from "./components/Common/Footer.tsx";
+import { Footer } from './components/Common/Footer.tsx';
+import { TransactionsProvider } from './contexts/Transactions/TransactionsContext.tsx';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div className="app">
       <Web3Provider>
-        <UserProfileProvider>
-          <ALICEProvider>
-            <BonALICEProvider>
-              <ActionsProvider>
-                <CreateActionProvider>
-                  <UpgradeActionProvider>
-                    <MergeActionProvider>
-                      <SplitActionProvider>
-                        <TransferActionProvider>
-                          <ClaimPrizeProvider>
-                            <BrowserRouter>
-                              <Navbar />
-                              <Routes>
-                                <Route path="/" element={<Home />} />
-                                <Route path="/create" element={<Actions />} />
-                                <Route
-                                  path="/get-started"
-                                  element={<GetStarted />}
-                                />
-                                <Route path="/claim" element={<ClaimPrize />} />
-                                <Route
-                                  path="/review"
-                                  element={<ReviewDetail />}
-                                />
-                              </Routes>
-                              <Footer />
-                            </BrowserRouter>
-                          </ClaimPrizeProvider>
-                        </TransferActionProvider>
-                      </SplitActionProvider>
-                    </MergeActionProvider>
-                  </UpgradeActionProvider>
-                </CreateActionProvider>
-              </ActionsProvider>
-            </BonALICEProvider>
-          </ALICEProvider>
-        </UserProfileProvider>
+        <TransactionsProvider>
+          <UserProfileProvider>
+            <ALICEProvider>
+              <BonALICEProvider>
+                <ActionsProvider>
+                  <CreateActionProvider>
+                    <UpgradeActionProvider>
+                      <MergeActionProvider>
+                        <SplitActionProvider>
+                          <TransferActionProvider>
+                            <ClaimPrizeProvider>
+                              <BrowserRouter>
+                                <Navbar />
+                                <Routes>
+                                  <Route path="/" element={<Home />} />
+                                  <Route path="/create" element={<Actions />} />
+                                  <Route
+                                    path="/get-started"
+                                    element={<GetStarted />}
+                                  />
+                                  <Route
+                                    path="/claim"
+                                    element={<ClaimPrize />}
+                                  />
+                                  <Route
+                                    path="/review"
+                                    element={<ReviewDetail />}
+                                  />
+                                </Routes>
+                                <Toaster position="bottom-right" />
+                                <Footer />
+                              </BrowserRouter>
+                            </ClaimPrizeProvider>
+                          </TransferActionProvider>
+                        </SplitActionProvider>
+                      </MergeActionProvider>
+                    </UpgradeActionProvider>
+                  </CreateActionProvider>
+                </ActionsProvider>
+              </BonALICEProvider>
+            </ALICEProvider>
+          </UserProfileProvider>
+        </TransactionsProvider>
       </Web3Provider>
     </div>
   );
