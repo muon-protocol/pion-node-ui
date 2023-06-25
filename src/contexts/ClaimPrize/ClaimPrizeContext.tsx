@@ -1,48 +1,63 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { getRewardsAPI } from '../../apis';
+import { RawRewards, RewardWallet } from '../../types';
+import { useRewardWallets } from '../../hooks/useRewardWallets.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
   openSwitchBackToWalletModal: () => void;
   closeSwitchBackToWalletModal: () => void;
-  rewards: any | null;
+  rewardWallets: RewardWallet[];
+  totalRewards: number;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
   closeSwitchBackToWalletModal: () => {},
-  rewards: null,
+  rewardWallets: [],
+  totalRewards: 0,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [isSwitchBackToWalletModalOpen, setIsSwitchBackToWalletModalOpen] =
     useState(false);
+  const [rawRewards, setRawRewards] = useState<RawRewards | null>(null);
+  const [totalRewards, setTotalRewards] = useState<number>(0);
 
   const { walletAddress, isConnected } = useUserProfile();
-
-  const [wallets, setWallets] = useState<string[]>([]);
-  const [rewards, setRewards] = useState(null);
-
-  useEffect(() => {
-    if (!walletAddress || !isConnected) return;
-    if (wallets.includes(walletAddress)) return;
-    setWallets([...wallets, walletAddress]);
-  }, [isConnected, walletAddress, wallets]);
+  const { rewardWallets, updateRewardWallet } = useRewardWallets();
 
   useEffect(() => {
     if (!walletAddress || !isConnected) return;
 
     async function getRewards() {
       try {
-        const response = await getRewardsAPI(wallets);
-        setRewards(response);
+        const walletsString: string[] = [];
+        rewardWallets.map((wallet) => {
+          walletsString.push(wallet.walletAddress);
+        });
+        const response = await getRewardsAPI(walletsString);
+        if (response.success) setRawRewards(response.result);
       } catch (error) {
         console.log(error);
       }
     }
 
     getRewards();
-  }, [wallets, walletAddress, isConnected]);
+  }, [rewardWallets, walletAddress, isConnected]);
+
+  useEffect(() => {
+    if (rawRewards) {
+      setTotalRewards(
+        rawRewards.alice_operator.reward +
+          rawRewards.deus_presale.reward +
+          rawRewards.early_alice_operator.reward +
+          rawRewards.muon_presale.reward,
+      );
+
+      updateRewardWallet(rawRewards);
+    }
+  }, [rawRewards, updateRewardWallet]);
 
   const openSwitchBackToWalletModal = () =>
     setIsSwitchBackToWalletModalOpen(true);
@@ -55,7 +70,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         isSwitchBackToWalletModalOpen,
         openSwitchBackToWalletModal,
         closeSwitchBackToWalletModal,
-        rewards,
+        rewardWallets,
+        totalRewards,
       }}
     >
       {children}

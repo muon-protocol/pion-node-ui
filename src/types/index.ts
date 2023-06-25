@@ -39,3 +39,24 @@ export type UserWallet = {
   balance: string;
   verified: boolean;
 };
+
+export type RawRewards = {
+  alice_operator: RawRewardSection;
+  deus_presale: RawRewardSection;
+  early_alice_operator: RawRewardSection;
+  muon_presale: RawRewardSection;
+};
+
+type RawRewardSection = {
+  contributors: string[];
+  reward: number;
+};
+
+export type RewardWallet = {
+  walletAddress: string;
+  signature: string | null;
+  wasInMuonPresale: boolean;
+  wasInDeusPresale: boolean;
+  wasAliceOperator: boolean;
+  hasBeenProcessed: boolean;
+};

@@ -4,12 +4,26 @@ import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { Link } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
+import { useMemo } from 'react';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
     useClaimPrize();
 
   // const { openSwitchBackToWalletModal } = useClaimPrize();
+
+  const { rewardWallets } = useClaimPrize();
+
+  const eligibleAddresses = useMemo(() => {
+    return rewardWallets.filter(
+      (wallet) =>
+        wallet.hasBeenProcessed &&
+        (wallet.wasInMuonPresale ||
+          wallet.wasInDeusPresale ||
+          wallet.wasAliceOperator ||
+          wallet.wasInMuonPresale),
+    );
+  }, [rewardWallets]);
 
   return (
     <div className="page page--claim-prize">
@@ -20,11 +34,7 @@ const ClaimPrize = () => {
         activities
       </p>
       <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
-        {0 === 1 ? (
-          <p className="text-2xl text-white font-light text-center w-full my-auto">
-            No Eligible address detected
-          </p>
-        ) : (
+        {eligibleAddresses.length > 0 ? (
           <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
             {userWallets.map((wallet) => (
               <VerifyWalletCard
@@ -33,6 +43,10 @@ const ClaimPrize = () => {
               />
             ))}
           </span>
+        ) : (
+          <p className="text-2xl font-light text-center w-full my-auto">
+            No Eligible address detected
+          </p>
         )}
       </div>
       <ClaimCard />
