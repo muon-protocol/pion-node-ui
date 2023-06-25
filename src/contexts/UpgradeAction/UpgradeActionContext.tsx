@@ -28,9 +28,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     useState<BonALICE | null>(null);
   const [upgradeAmount, setUpgradeAmount] = useState('');
 
-  const { balance } = useALICE();
+  const { ALICEBalance } = useALICE();
   const handleUpgradeAmountChange = (amount: string) => {
-    if (typeof balance !== 'bigint') return;
+    if (!ALICEBalance?.dsp) return;
     setUpgradeAmount(amount.toString());
   };
 

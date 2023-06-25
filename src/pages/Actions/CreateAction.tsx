@@ -24,7 +24,7 @@ export const RenderCreateBody = () => {
       ALICEBalance.dsp < createAmount.dsp ||
       createActionLoading
     );
-  }, [ALICEBalance, createAmount, createActionLoading]);
+  }, [ALICEBalance, createAmount, createActionLoading, allowance]);
 
   return (
     <>

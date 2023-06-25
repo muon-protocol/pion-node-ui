@@ -51,16 +51,16 @@ const RenderUpgradeBody = () => {
     handleUpgradeAmountChange,
   } = useUpgradeAction();
 
-  const { balance } = useALICE();
+  const { ALICEBalance } = useALICE();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
       !upgradeAmount ||
-      !balance ||
-      Number(upgradeAmount) > Number(weiToEther(balance.toString()))
+      !ALICEBalance?.hStr ||
+      Number(upgradeAmount) > Number(weiToEther(ALICEBalance.dsp.toString()))
     );
-  }, [selectedUpgradeBonALICE, upgradeAmount, balance]);
+  }, [selectedUpgradeBonALICE, upgradeAmount, ALICEBalance]);
 
   return (
     <>
@@ -71,7 +71,9 @@ const RenderUpgradeBody = () => {
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle="Select BonALICE"
-          selectedItems={selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []}
+          selectedItems={
+            selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []
+          }
           removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
@@ -95,9 +97,7 @@ const RenderUpgradeBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          balance={
-            typeof balance === 'bigint' ? weiToEther(balance.toString()) : '...'
-          }
+          balance={ALICEBalance ? ALICEBalance.dsp : '...'}
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
         />
