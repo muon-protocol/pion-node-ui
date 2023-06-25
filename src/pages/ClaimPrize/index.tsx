@@ -14,7 +14,7 @@ const ClaimPrize = () => {
   return (
     <div className="page page--claim-prize">
       <ConnectWalletModal redirectRoute="/get-started" />
-      <p className="text-2xl font-light text-white mb-9">
+      <p className="text-2xl font-light mb-9">
         Go to your wallet and choose the address linked to your pioneer
         activities. Repeat this step for each address associated with pioneer
         activities
@@ -81,7 +81,9 @@ const ClaimCard = () => {
   return (
     <div className="w-full bg-primary-dark pl-11 pr-9 py-8 rounded-2xl flex text-white">
       <div className="claim-card__left flex-1">
-        <p className="mb-9 font-semibold text-[20px]">Your Bonded ALICE</p>
+        <p className="mb-9 font-semibold text-[20px] text-white">
+          Your Bonded ALICE
+        </p>
         <span className="flex justify-between font-light mb-3">
           <span className="flex gap-1">
             <span className="font-semibold">1200</span>ALICE
@@ -106,7 +108,7 @@ const ClaimCard = () => {
       <div className="claim-card__right flex items-end justify-end flex-1">
         <button
           onClick={openSwitchBackToWalletModal}
-          className="btn btn--secondary text-xl font-medium"
+          className="btn text-xl font-medium"
           disabled={1 !== 1}
         >
           Claim

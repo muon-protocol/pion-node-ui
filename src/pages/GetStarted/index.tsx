@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 const GetStarted = () => {
   return (
     <div className="page page--get-started">
-      <p className="text-white text-[19px] md:text-2xl font-light mb-6">
+      <p className="text-[19px] md:text-2xl font-light mb-6">
         You can obtain bonALICE in two ways: either create a new one
         independently or claim it as a reward if you're part of the Muon
         pioneers
       </p>
-      <p className="text-white text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
+      <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
         You're a pioneer if you:
       </p>
       <span className="flex w-full gap-3 justify-stretch mb-12">
