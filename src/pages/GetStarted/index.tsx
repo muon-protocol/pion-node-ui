@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { FadeIn } from '../../animations';
 
 const GetStarted = () => {
   return (
-    <div className="page page--get-started">
+    <FadeIn duration={0.3} className="page page--get-started">
       <p className="text-[19px] md:text-2xl font-light mb-6">
         You can obtain bonALICE in two ways: either create a new one
         independently or claim it as a reward if you're part of the Muon
@@ -27,7 +28,7 @@ const GetStarted = () => {
         <NewBonALICEAction />
         <MuanPioneerAction />
       </span>
-    </div>
+    </FadeIn>
   );
 };
 

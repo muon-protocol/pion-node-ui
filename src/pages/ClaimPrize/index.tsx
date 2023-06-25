@@ -5,6 +5,7 @@ import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { Link } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import { useMemo } from 'react';
+import { FadeIn } from '../../animations';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -26,7 +27,7 @@ const ClaimPrize = () => {
   }, [rewardWallets]);
 
   return (
-    <div className="page page--claim-prize">
+    <FadeIn duration={0.3} className="page page--claim-prize">
       <ConnectWalletModal redirectRoute="/get-started" />
       <p className="text-2xl font-light mb-9">
         Go to your wallet and choose the address linked to your pioneer
@@ -71,7 +72,7 @@ const ClaimPrize = () => {
           </div>
         </Link>
       </Modal>
-    </div>
+    </FadeIn>
   );
 };
 
