@@ -6,7 +6,7 @@ const AmountInput = ({
   value,
   onValueChanged,
 }: {
-  balance?: string;
+  balance?: string | number;
   value: string;
   onValueChanged: (value: string) => void;
 }) => {

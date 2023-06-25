@@ -1,12 +1,11 @@
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useMemo } from 'react';
-import { weiToEther } from '../../utils/web3.ts';
 import { FadeIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 
 export const RenderCreateBody = () => {
-  const { balance } = useALICE();
+  const { ALICEBalance } = useALICE();
   const {
     createAmount,
     handleCreateAmountChange,
@@ -17,20 +16,18 @@ export const RenderCreateBody = () => {
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
       !createAmount ||
-      !balance ||
-      Number(weiToEther(balance.toString())) < Number(createAmount) ||
+      !ALICEBalance ||
+      ALICEBalance.dsp < createAmount.dsp ||
       createActionLoading
     );
-  }, [balance, createAmount, createActionLoading]);
+  }, [ALICEBalance, createAmount, createActionLoading]);
 
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          balance={
-            typeof balance === 'bigint' ? weiToEther(balance.toString()) : '...'
-          }
-          value={createAmount}
+          balance={ALICEBalance ? ALICEBalance.dsp : '...'}
+          value={createAmount.hStr}
           onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
@@ -42,7 +39,7 @@ export const RenderCreateBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your bonALICE power will be</p>
-          <p className="font-medium">{createAmount ? createAmount : 0}</p>
+          <p className="font-medium">{createAmount.dsp}</p>
         </span>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>

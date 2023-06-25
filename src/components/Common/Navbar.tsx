@@ -3,7 +3,6 @@ import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
-import { weiToEther } from '../../utils/web3.ts';
 
 const Navbar = () => {
   return (
@@ -16,7 +15,7 @@ const Navbar = () => {
 
 const DesktopNavbar = () => {
   const { isConnected } = useUserProfile();
-  const { balance } = useALICE();
+  const { ALICEBalance } = useALICE();
 
   return (
     <FadeIn delay={0.3}>
@@ -35,13 +34,15 @@ const DesktopNavbar = () => {
             <button className="btn btn--small">Create BonALICE</button>
           </Link>
           <button className="btn btn--small">Buy ALICE</button>
-          {isConnected && balance !== undefined && balance !== null && (
+          {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
-              <img src='/assets/images/navbar/muon-icon.svg' alt='' className='mr-3 h-[18px]'/>
-              <span className='text-black'>Balance: </span>
-              <strong className="ml-2 mr-1">
-                {weiToEther(balance.toString())}
-              </strong>
+              <img
+                src="/assets/images/navbar/muon-icon.svg"
+                alt=""
+                className="mr-3 h-[18px]"
+              />
+              <span className="text-black">Balance: </span>
+              <strong className="ml-2 mr-1">{ALICEBalance.dsp}</strong>
               <strong className="text-black font-semibold">ALICE</strong>
             </button>
           )}

@@ -5,31 +5,45 @@ import BONALICE_API from '../../abis/BonALICE.json';
 import { BONALICE_ADDRESS, ALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
+import { w3bNumberFromString } from '../../utils/web3.ts';
 
 const CreateActionContext = createContext<{
-  createAmount: string;
+  createAmount: W3bNumber;
   createActionLoading: boolean;
   handleCreateAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
 }>({
-  createAmount: '',
+  createAmount: {
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  },
   createActionLoading: false,
   handleCreateAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
-  const { balance } = useALICE();
+  const { ALICEBalance } = useALICE();
   const { walletAddress } = useUserProfile();
 
   const [createActionLoading, setCreateActionLoading] = useState(false);
-  const [createAmount, setCreateAmount] = useState('');
+  const [createAmount, setCreateAmount] = useState<W3bNumber>({
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  });
   const handleCreateAmountChange = (amount: string) => {
-    setCreateAmount(amount.toString());
+    setCreateAmount(w3bNumberFromString(amount));
   };
 
   const mintAndLockArgs = useMemo(() => {
-    return [[ALICE_ADDRESS[getCurrentChainId()]], [createAmount], walletAddress];
+    return [
+      [ALICE_ADDRESS[getCurrentChainId()]],
+      [createAmount.big],
+      walletAddress,
+    ];
   }, [walletAddress, createAmount]);
 
   const { config } = usePrepareContractWrite({
@@ -40,14 +54,16 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  console.log('config', config);
   const { write } = useContractWrite(config);
 
   const handleCreateBonALICEClicked = () => {
-    if (!balance || !createAmount || Number(createAmount) > Number(balance))
+    if (
+      !ALICEBalance ||
+      !createAmount ||
+      Number(createAmount) > Number(ALICEBalance.big)
+    )
       return;
     setCreateActionLoading(true);
-    console.log('write', write);
     write?.();
     setCreateActionLoading(false);
   };

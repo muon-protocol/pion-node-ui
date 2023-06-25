@@ -1,36 +1,48 @@
-import { createContext, ReactNode } from 'react';
-import { useBalance, useContractRead } from 'wagmi';
+import { createContext, ReactNode, useEffect, useState } from 'react';
+import { useBalance } from 'wagmi';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import ALICE_ABI from '../../abis/ALICE.json';
 import { ALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
+import { w3bNumberFromBigint } from '../../utils/web3.ts';
+
 const ALICEContext = createContext<{
-  balance: string | unknown | null;
+  ALICEBalanceIsFetched: boolean;
+  ALICEBalanceIsLoading: boolean;
+  ALICEBalance: W3bNumber | null;
 }>({
-  balance: null,
+  ALICEBalanceIsFetched: false,
+  ALICEBalanceIsLoading: false,
+  ALICEBalance: null,
 });
 
 const ALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
+  const [ALICEBalance, setALICEBalance] = useState<W3bNumber | null>(null);
 
-  const balance = useBalance({
+  const {
+    data,
+    isFetched: ALICEBalanceIsFetched,
+    isLoading: ALICEBalanceIsLoading,
+  } = useBalance({
     address: walletAddress,
     token: ALICE_ADDRESS[getCurrentChainId()],
+    chainId: getCurrentChainId(),
+    watch: true,
   });
 
-  console.log('balance', balance);
-
-  const { data } = useContractRead({
-    abi: ALICE_ABI,
-    address: ALICE_ADDRESS[getCurrentChainId()],
-    functionName: 'balanceOf',
-    args: [walletAddress ? walletAddress : '0x0'],
-  });
+  useEffect(() => {
+    if (ALICEBalanceIsFetched && data && data?.value) {
+      setALICEBalance(w3bNumberFromBigint(data.value));
+    }
+  }, [ALICEBalanceIsFetched, data]);
 
   return (
     <ALICEContext.Provider
       value={{
-        balance: data,
+        ALICEBalanceIsFetched,
+        ALICEBalanceIsLoading,
+        ALICEBalance,
       }}
     >
       {children}
