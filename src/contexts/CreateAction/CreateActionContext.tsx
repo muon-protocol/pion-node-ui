@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import BONALICE_API from '../../abis/BonALICE.json';
@@ -8,6 +8,8 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
+import { TransactionSources } from '../../types';
+import useTransactions from '../Transactions/useTransactions.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -15,6 +17,9 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
   handleApproveALICEClicked: () => void;
+  isAllowanceModalOpen: boolean;
+  closeAllowanceModal: () => void;
+  approveLoading: boolean;
 }>({
   createAmount: {
     dsp: 0,
@@ -25,11 +30,15 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
   handleApproveALICEClicked: () => {},
+  isAllowanceModalOpen: false,
+  closeAllowanceModal: () => {},
+  approveLoading: false,
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
-  const { ALICEBalance } = useALICE();
+  const { ALICEBalance, allowance } = useALICE();
   const { walletAddress } = useUserProfile();
+  const { addTransaction } = useTransactions();
 
   const [createActionLoading, setCreateActionLoading] = useState(false);
   const [createAmount, setCreateAmount] = useState<W3bNumber>({
@@ -37,6 +46,8 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     big: BigInt(0),
     hStr: '',
   });
+
+  const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
   const handleCreateAmountChange = (amount: string) => {
     setCreateAmount(w3bNumberFromString(amount));
@@ -76,7 +87,22 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const { write: approveWrite } = useContractWrite(approveConfig);
+  const {
+    write: approveWrite,
+    isLoading: approveLoading,
+    data: approveData,
+    isSuccess: approveSuccess,
+  } = useContractWrite(approveConfig);
+
+  useEffect(() => {
+    if (approveSuccess) closeAllowanceModal();
+    if (approveData)
+      addTransaction({
+        id: Math.random(),
+        hash: approveData.hash,
+        source: TransactionSources.ALLOWANCE,
+      });
+  }, [approveData, approveSuccess, addTransaction]);
 
   const handleApproveALICEClicked = () => {
     if (
@@ -85,10 +111,23 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       Number(createAmount) > Number(ALICEBalance.big)
     )
       return;
-    setCreateActionLoading(true);
+    openAllowanceModal();
     approveWrite?.();
-    setCreateActionLoading(false);
   };
+
+  useEffect(() => {
+    console.log('allowance', allowance);
+    console.log('createAmount', createAmount);
+    if (
+      allowance &&
+      createAmount &&
+      Number(createAmount.big) <= Number(allowance.big)
+    )
+      closeAllowanceModal();
+  }, [allowance, createAmount]);
+
+  const openAllowanceModal = () => setIsAllowanceModalOpen(true);
+  const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
 
   return (
     <CreateActionContext.Provider
@@ -98,6 +137,9 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         handleCreateAmountChange,
         handleCreateBonALICEClicked,
         handleApproveALICEClicked,
+        isAllowanceModalOpen,
+        closeAllowanceModal,
+        approveLoading,
       }}
     >
       {children}

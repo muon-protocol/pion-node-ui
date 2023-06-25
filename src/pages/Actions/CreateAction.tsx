@@ -3,6 +3,7 @@ import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useMemo } from 'react';
 import { FadeIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
+import Modal from '../../components/Common/Modal.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance, allowance } = useALICE();
@@ -12,6 +13,9 @@ export const RenderCreateBody = () => {
     handleCreateBonALICEClicked,
     createActionLoading,
     handleApproveALICEClicked,
+    isAllowanceModalOpen,
+    closeAllowanceModal,
+    approveLoading,
   } = useCreateAction();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
@@ -75,6 +79,31 @@ export const RenderCreateBody = () => {
           </button>
         )}
       </FadeIn>
+      <Modal
+        title=""
+        size="sm"
+        isOpen={isAllowanceModalOpen}
+        closeModalHandler={closeAllowanceModal}
+      >
+        <div className="flex flex-col justify-center items-center">
+          <img
+            className="w-[108px] mb-10"
+            src="/assets/images/claim/switch-wallet-modal-icon.svg"
+            alt=""
+          />
+          <p className="text-center mb-6">
+            You need to approve the ALICE token to be spent by the BonALICE.
+            Enter at least the amount you want to create and click Next then
+            Approve button on metamask.
+          </p>
+          <button
+            className="btn btn--dark-primary"
+            onClick={() => !approveLoading && handleApproveALICEClicked()}
+          >
+            {approveLoading ? 'Waiting for Metamask...' : 'Approve'}
+          </button>
+        </div>
+      </Modal>
     </>
   );
 };
