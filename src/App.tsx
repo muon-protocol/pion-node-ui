@@ -20,14 +20,14 @@ import { ActionsProvider } from './contexts/Actions/ActionsContext.tsx';
 import { Web3Provider } from './contexts/Web3/Web3Context.tsx';
 import { ALICEProvider } from './contexts/ALICE/ALICEContext.tsx';
 import { Footer } from './components/Common/Footer.tsx';
-import { TransactionsProvider } from './contexts/Transactions/TransactionsContext.tsx';
+import { NotificationsProvider } from './contexts/Notifications/NotificationsContext.tsx';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div className="app">
       <Web3Provider>
-        <TransactionsProvider>
+        <NotificationsProvider>
           <UserProfileProvider>
             <ALICEProvider>
               <BonALICEProvider>
@@ -69,7 +69,7 @@ function App() {
               </BonALICEProvider>
             </ALICEProvider>
           </UserProfileProvider>
-        </TransactionsProvider>
+        </NotificationsProvider>
       </Web3Provider>
     </div>
   );

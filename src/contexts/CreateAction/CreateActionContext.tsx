@@ -3,13 +3,17 @@ import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import BONALICE_API from '../../abis/BonALICE.json';
 import ALICE_API from '../../abis/ALICE.json';
-import { BONALICE_ADDRESS, ALICE_ADDRESS } from '../../constants/addresses.ts';
+import { ALICE_ADDRESS, BONALICE_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
-import { TransactionSources } from '../../types';
-import useTransactions from '../Transactions/useTransactions.ts';
+import {
+  NotificationSources,
+  NotificationStatuses,
+  NotificationType,
+} from '../../types';
+import useNotifications from '../Notifications/useNotifications.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -38,7 +42,8 @@ const CreateActionContext = createContext<{
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { ALICEBalance, allowance } = useALICE();
   const { walletAddress } = useUserProfile();
-  const { addTransaction } = useTransactions();
+  const { addNotification, removeNotification } = useNotifications();
+  const [notifId, setNotifId] = useState<string | null>(null);
 
   const [createActionLoading, setCreateActionLoading] = useState(false);
   const [createAmount, setCreateAmount] = useState<W3bNumber>({
@@ -95,19 +100,41 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   } = useContractWrite(approveConfig);
 
   useEffect(() => {
+    if (approveLoading) {
+      if (!notifId) {
+        const id = Math.random().toString();
+        addNotification({
+          id: id,
+          hash: null,
+          source: NotificationSources.ALLOWANCE,
+          message: 'Waiting for confirmation',
+          status: NotificationStatuses.PENDING,
+          type: NotificationType.PENDING,
+        });
+        setNotifId(id);
+      }
+    } else {
+      console.log('remove', notifId);
+      if (notifId) {
+        console.log('remove2', notifId);
+        removeNotification(notifId);
+        setNotifId(null);
+      }
+    }
+  }, [approveLoading, notifId, removeNotification]);
+
+  useEffect(() => {
     if (approveSuccess) closeAllowanceModal();
-    console.log('----------', {
-      id: Math.random(),
-      hash: approveData?.hash,
-      source: TransactionSources.ALLOWANCE,
-    });
     if (approveData)
-      addTransaction({
-        id: Math.random(),
+      addNotification({
+        id: '',
         hash: approveData.hash,
-        source: TransactionSources.ALLOWANCE,
+        source: NotificationSources.ALLOWANCE,
+        message: 'Waiting for confirmation',
+        status: NotificationStatuses.PENDING,
+        type: NotificationType.PROMISE,
       });
-  }, [approveData, approveSuccess, addTransaction]);
+  }, [approveData, approveSuccess, addNotification]);
 
   const handleApproveALICEClicked = () => {
     if (
@@ -121,8 +148,6 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    console.log('allowance', allowance);
-    console.log('createAmount', createAmount);
     if (
       allowance &&
       createAmount &&

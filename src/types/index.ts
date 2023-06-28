@@ -61,12 +61,26 @@ export type RewardWallet = {
   hasBeenProcessed: boolean;
 };
 
-export enum TransactionSources {
+export enum NotificationSources {
   ALLOWANCE = 'allowance',
 }
 
-export type Transaction = {
-  id: number;
-  source: TransactionSources;
-  hash: `0x${string}`;
+export type Notification = {
+  id: string;
+  source: NotificationSources;
+  hash: `0x${string}` | null;
+  type: NotificationType;
+  status: NotificationStatuses;
+  message: string;
 };
+
+export enum NotificationStatuses {
+  SUCCESS = 'success',
+  PENDING = 'pending',
+  FAILED = 'failed',
+}
+export enum NotificationType {
+  PROMISE = 'promise',
+  PENDING = 'pending',
+  TIMEOUT = 'timeout',
+}
