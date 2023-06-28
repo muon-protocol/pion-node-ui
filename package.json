@@ -10,9 +10,11 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "graphql-codegen"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.14",
     "@rainbow-me/rainbowkit": "^1.0.1",
     "@typechain/ethers-v5": "^11.0.0",
     "@types/react-router-dom": "^5.3.3",
@@ -20,6 +22,7 @@
     "@uniswap/v3-periphery": "^1.4.1",
     "axios": "^1.4.0",
     "framer-motion": "^10.12.16",
+    "graphql-tag": "^2.12.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
@@ -29,6 +32,8 @@
     "wagmi": "^1.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^4.0.1",
+    "@graphql-codegen/client-preset": "^4.0.0",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
@@ -38,6 +43,7 @@
     "eslint": "^8.38.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "graphql": "^16.6.0",
     "node-sass": "^9.0.0",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
