@@ -89,15 +89,19 @@ export const RenderCreateBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your bonALICE power will be</p>
-          <p className="font-medium">{createAmount.dsp}</p>
+          <p className="font-medium">
+            {createAmount.dsp + createBoostAmount.dsp * 2}
+          </p>
         </span>
       </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <span className="flex justify-between text-gray10 max-md:text-sm">
-          <p className="font-light">Your tier will be</p>
-          <p className="font-medium">ALICE Supreme (Tier 3)</p>
-        </span>
-      </FadeIn>
+      {createAmount.dsp > 0 && (
+        <MoveUpIn y={-10} duration={0.1} delay={0.1}>
+          <span className="flex justify-between text-gray10 max-md:text-sm">
+            <p className="font-light">Your tier will be</p>
+            <p className="font-medium">ALICE Starter (Tier 1)</p>
+          </span>
+        </MoveUpIn>
+      )}
       <FadeIn
         duration={0.1}
         delay={0.1}
