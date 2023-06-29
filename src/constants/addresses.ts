@@ -13,3 +13,7 @@ export const ALICE_ADDRESS: AddressMap = {
 export const BONALICE_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x834b6cE191BaB7F724983357eCD98EC1929A441a',
 };
+
+export const LP_TOKEN_ADDRESS: AddressMap = {
+  [SupportedChainId.BSCTESTNET]: '0x998977f47C5eb2e8bC696815718B91140E307fC9',
+};

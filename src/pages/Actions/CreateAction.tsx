@@ -5,9 +5,11 @@ import { FadeIn, MoveUpIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
 import { AnimatePresence } from 'framer-motion';
+import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance, allowance } = useALICE();
+  const { LPTokenBalance } = useLPToken();
   const {
     createAmount,
     createBoostAmount,
@@ -50,10 +52,10 @@ export const RenderCreateBody = () => {
           <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
             <AmountInput
               rightText={'LP ALICE'}
-              balance={null}
+              balance={LPTokenBalance ? LPTokenBalance.dsp : '...'}
               withIcon
               iconClicked={() => {
-                handleCreateBoostAmountChange('0');
+                handleCreateBoostAmountChange('');
                 setIsBoostSectionOpen(false);
               }}
               value={createBoostAmount.hStr}

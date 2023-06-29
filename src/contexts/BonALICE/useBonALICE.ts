@@ -5,7 +5,7 @@ const useBonALICE = () => {
   const context = useContext(BonALICEContext);
 
   if (!context) {
-    throw new Error('useBonALICE must be used within a ALICEContextProvider');
+    throw new Error('useLPToken must be used within a ALICEContextProvider');
   }
 
   return context;

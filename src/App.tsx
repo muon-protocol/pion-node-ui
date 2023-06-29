@@ -25,6 +25,7 @@ import { Toaster } from 'react-hot-toast';
 import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
+import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
 
 function App() {
   return (
@@ -36,44 +37,46 @@ function App() {
               <UserProfileProvider>
                 <ALICEProvider>
                   <BonALICEProvider>
-                    <ActionsProvider>
-                      <CreateActionProvider>
-                        <UpgradeActionProvider>
-                          <MergeActionProvider>
-                            <SplitActionProvider>
-                              <TransferActionProvider>
-                                <ClaimPrizeProvider>
-                                  <BrowserRouter>
-                                    <Navbar />
-                                    <Routes>
-                                      <Route path="/" element={<Home />} />
-                                      <Route
-                                        path="/create"
-                                        element={<Actions />}
-                                      />
-                                      <Route
-                                        path="/get-started"
-                                        element={<GetStarted />}
-                                      />
-                                      <Route
-                                        path="/claim"
-                                        element={<ClaimPrize />}
-                                      />
-                                      <Route
-                                        path="/review"
-                                        element={<ReviewDetail />}
-                                      />
-                                    </Routes>
-                                    <Toaster position="bottom-right" />
-                                    <Footer />
-                                  </BrowserRouter>
-                                </ClaimPrizeProvider>
-                              </TransferActionProvider>
-                            </SplitActionProvider>
-                          </MergeActionProvider>
-                        </UpgradeActionProvider>
-                      </CreateActionProvider>
-                    </ActionsProvider>
+                    <LPTokenProvider>
+                      <ActionsProvider>
+                        <CreateActionProvider>
+                          <UpgradeActionProvider>
+                            <MergeActionProvider>
+                              <SplitActionProvider>
+                                <TransferActionProvider>
+                                  <ClaimPrizeProvider>
+                                    <BrowserRouter>
+                                      <Navbar />
+                                      <Routes>
+                                        <Route path="/" element={<Home />} />
+                                        <Route
+                                          path="/create"
+                                          element={<Actions />}
+                                        />
+                                        <Route
+                                          path="/get-started"
+                                          element={<GetStarted />}
+                                        />
+                                        <Route
+                                          path="/claim"
+                                          element={<ClaimPrize />}
+                                        />
+                                        <Route
+                                          path="/review"
+                                          element={<ReviewDetail />}
+                                        />
+                                      </Routes>
+                                      <Toaster position="bottom-right" />
+                                      <Footer />
+                                    </BrowserRouter>
+                                  </ClaimPrizeProvider>
+                                </TransferActionProvider>
+                              </SplitActionProvider>
+                            </MergeActionProvider>
+                          </UpgradeActionProvider>
+                        </CreateActionProvider>
+                      </ActionsProvider>
+                    </LPTokenProvider>
                   </BonALICEProvider>
                 </ALICEProvider>
               </UserProfileProvider>
