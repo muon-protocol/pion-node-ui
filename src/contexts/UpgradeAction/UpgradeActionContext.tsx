@@ -39,7 +39,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       changeUpgradeModalSelectedBonALICE(bonALICE);
       return;
     }
-    if (upgradeModalSelectedBonALICE.id === bonALICE.id) {
+    if (upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
       unselectUpgradeModalSelectedBonALICE();
     } else {
       changeUpgradeModalSelectedBonALICE(bonALICE);
@@ -58,7 +58,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const isSelectedUpgradeBonALICE = (bonALICE: BonALICE) => {
     return (
       !!upgradeModalSelectedBonALICE &&
-      upgradeModalSelectedBonALICE.id === bonALICE.id
+      upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId
     );
   };
 

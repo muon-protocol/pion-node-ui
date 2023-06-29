@@ -1,6 +1,6 @@
-import { upgradeModalItems } from '../../data';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 const ReviewDetail = () => {
   return (
     <div className="page page--review-details">
@@ -56,6 +56,7 @@ const ReviewDetailCard = ({ className = '' }: { className: string }) => {
 };
 
 const TransferCard = ({ className = '' }: { className: string }) => {
+  const { bonALICEs } = useBonALICE();
   return (
     <div
       className={`w-full bg-card-bg-70-purple px-11 py-10 rounded-2xl flex flex-col ${className}`}
@@ -70,15 +71,15 @@ const TransferCard = ({ className = '' }: { className: string }) => {
         selectedItems={[]}
       >
         <div className="flex flex-col gap-3">
-          {upgradeModalItems.map((item) => {
+          {bonALICEs.map((item) => {
             return (
               <BonALICECard
                 className="cursor-pointer"
-                title={item.title}
+                title={'BonALICE #' + item.tokenId}
                 subTitle1="Node Power"
-                subValue1={item.nodePower}
+                subValue1={'1200'}
                 subTitle2="Tier"
-                subValue2={item.tier}
+                subValue2={'ALICE Starter (Tier 1)'}
                 onClick={() => {}}
                 compact
                 selected={true}

@@ -35,7 +35,7 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
       changeTransferModalSelectedBonALICE(bonALICE);
       return;
     }
-    if (transferModalSelectedBonALICE.id === bonALICE.id) {
+    if (transferModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
       unselectTransferModalSelectedBonALICE();
     } else {
       changeTransferModalSelectedBonALICE(bonALICE);
@@ -54,7 +54,7 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
   const isSelectedTransferBonALICE = (bonALICE: BonALICE) => {
     return (
       !!transferModalSelectedBonALICE &&
-      transferModalSelectedBonALICE.id === bonALICE.id
+      transferModalSelectedBonALICE.tokenId === bonALICE.tokenId
     );
   };
 

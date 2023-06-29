@@ -32,7 +32,7 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
       changeSplitModalSelectedBonALICE(bonALICE);
       return;
     }
-    if (splitModalSelectedBonALICE.id === bonALICE.id) {
+    if (splitModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
       unselectSplitModalSelectedBonALICE();
     } else {
       changeSplitModalSelectedBonALICE(bonALICE);
@@ -50,7 +50,8 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
 
   const isSelectedSplitBonALICE = (bonALICE: BonALICE) => {
     return (
-      !!splitModalSelectedBonALICE && splitModalSelectedBonALICE.id === bonALICE.id
+      !!splitModalSelectedBonALICE &&
+      splitModalSelectedBonALICE.tokenId === bonALICE.tokenId
     );
   };
 

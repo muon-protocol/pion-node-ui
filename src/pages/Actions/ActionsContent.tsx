@@ -8,7 +8,6 @@ import Seekbar from '../../components/Common/Seekbar.tsx';
 import { FadeIn } from '../../animations';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
-import { mergeModalItems, upgradeModalItems } from '../../data';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
@@ -16,6 +15,7 @@ import { weiToEther } from '../../utils/web3.ts';
 import { useMemo } from 'react';
 import useTransferAction from '../../contexts/TransferAction/useTransferAction.ts';
 import { RenderCreateBody } from './CreateAction.tsx';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -52,6 +52,7 @@ const RenderUpgradeBody = () => {
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
+  const { bonALICEs } = useBonALICE();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -77,7 +78,7 @@ const RenderUpgradeBody = () => {
           removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
-            {upgradeModalItems.map((item) => {
+            {bonALICEs.map((item) => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
@@ -85,7 +86,7 @@ const RenderUpgradeBody = () => {
                   subTitle1="Node Power"
                   subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={'Tier 1 ()'}
+                  subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleUpgradeModalItemClicked(item)}
                   compact
                   selected={isSelectedUpgradeBonALICE(item)}
@@ -147,6 +148,7 @@ const RenderMergeBody = () => {
     selectedMergeBonALICEs,
     isInSelectedMergeBonALICEs,
   } = useMergeAction();
+  const { bonALICEs } = useBonALICE();
 
   const isMergeBonALICEsButtonDisabled = useMemo(() => {
     return selectedMergeBonALICEs.length < 2;
@@ -166,7 +168,7 @@ const RenderMergeBody = () => {
           removeItem={(item) => handleMergeModalItemClicked(item)}
         >
           <div className="flex flex-col gap-3">
-            {mergeModalItems.map((item) => {
+            {bonALICEs.map((item) => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
@@ -174,7 +176,7 @@ const RenderMergeBody = () => {
                   subTitle1="Node Power"
                   subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={'Tier 1 ()'}
+                  subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleMergeModalItemClicked(item)}
                   compact
                   selected={isInSelectedMergeBonALICEs(item)}
@@ -228,6 +230,7 @@ const RenderSplitBody = () => {
     selectedSplitBonALICE,
     isSelectedSplitBonALICE,
   } = useSplitAction();
+  const { bonALICEs } = useBonALICE();
 
   const isSplitBonALICEsButtonDisabled = useMemo(() => {
     return !selectedSplitBonALICE;
@@ -246,7 +249,7 @@ const RenderSplitBody = () => {
           removeItem={() => {}}
         >
           <div className="flex flex-col gap-3">
-            {upgradeModalItems.map((item) => {
+            {bonALICEs.map((item) => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
@@ -254,7 +257,7 @@ const RenderSplitBody = () => {
                   subTitle1="Node Power"
                   subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={'Tier 1 ()'}
+                  subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleSplitModalItemClicked(item)}
                   compact
                   selected={isSelectedSplitBonALICE(item)}
@@ -324,6 +327,7 @@ const RenderTransferBody = () => {
     transferAddress,
     isSelectedTransferBonALICE,
   } = useTransferAction();
+  const { bonALICEs } = useBonALICE();
 
   const isTransferBonALICEButtonDisabled = useMemo(() => {
     return !selectedTransferBonALICE || !transferAddress;
@@ -344,7 +348,7 @@ const RenderTransferBody = () => {
           }
         >
           <div className="flex flex-col gap-3">
-            {upgradeModalItems.map((item) => {
+            {bonALICEs.map((item) => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
@@ -352,7 +356,7 @@ const RenderTransferBody = () => {
                   subTitle1="Node Power"
                   subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={'Tier 1 ()'}
+                  subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleTransferModalItemClicked(item)}
                   compact
                   selected={isSelectedTransferBonALICE(item)}

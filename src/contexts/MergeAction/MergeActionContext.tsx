@@ -19,12 +19,13 @@ const MergeActionContext = createContext<{
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   const [isMergeModalOpen, setIsMergeModalOpen] = useState(false);
-  const [mergeModalSelectedBonALICEs, setMergeModalSelectedBonALICEs] = useState<
-    BonALICE[]
-  >([]);
+  const [mergeModalSelectedBonALICEs, setMergeModalSelectedBonALICEs] =
+    useState<BonALICE[]>([]);
 
   const handleMergeModalItemClicked = (bonALICE: BonALICE) => {
-    if (mergeModalSelectedBonALICEs.find((b) => b.id === bonALICE.id)) {
+    if (
+      mergeModalSelectedBonALICEs.find((b) => b.tokenId === bonALICE.tokenId)
+    ) {
       removeMergeModalSelectedBonALICE(bonALICE);
     } else {
       if (mergeModalSelectedBonALICEs.length < 2) {
@@ -45,12 +46,14 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const removeMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
     setMergeModalSelectedBonALICEs(
-      mergeModalSelectedBonALICEs.filter((b) => b.id !== bonALICE.id),
+      mergeModalSelectedBonALICEs.filter((b) => b.tokenId !== bonALICE.tokenId),
     );
   };
 
   const isInSelectedMergeBonALICEs = (bonALICE: BonALICE) => {
-    return !!mergeModalSelectedBonALICEs.find((b) => b.id === bonALICE.id);
+    return !!mergeModalSelectedBonALICEs.find(
+      (b) => b.tokenId === bonALICE.tokenId,
+    );
   };
 
   const openMergeModal = () => setIsMergeModalOpen(true);
