@@ -8,6 +8,7 @@ import { BalanceData } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
 import { BonALICE } from '../../types';
+import useRefresh from '../Refresh/useRefresh.ts';
 
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
@@ -28,6 +29,7 @@ const BonALICEContext = createContext<{
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
   const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
+  const { fastRefresh } = useRefresh();
 
   const {
     data: balance,
@@ -53,19 +55,17 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
     write?.();
   };
 
-  const {
-    data: BonALICEData,
-    error: BonALICEError,
-    loading: BonALICELoading,
-  } = useQuery(USER_BON_ALICES, {
+  const { refetch: BonALICERefetch } = useQuery(USER_BON_ALICES, {
     variables: { account: walletAddress },
   });
 
   useEffect(() => {
-    if (BonALICEData && !BonALICELoading && !BonALICEError) {
-      setBonALICEs(BonALICEData.accountTokenIds);
+    if (fastRefresh && walletAddress) {
+      BonALICERefetch({ account: walletAddress }).then(({ data }) => {
+        setBonALICEs(data.accountTokenIds);
+      });
     }
-  }, [BonALICEData, BonALICELoading, BonALICEError]);
+  }, [fastRefresh, BonALICERefetch, walletAddress]);
 
   return (
     <BonALICEContext.Provider

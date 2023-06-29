@@ -24,58 +24,61 @@ import { NotificationsProvider } from './contexts/Notifications/NotificationsCon
 import { Toaster } from 'react-hot-toast';
 import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
+import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 
 function App() {
   return (
     <div className="app">
       <Web3Provider>
         <ApolloProvider client={aliceClient}>
-          <NotificationsProvider>
-            <UserProfileProvider>
-              <ALICEProvider>
-                <BonALICEProvider>
-                  <ActionsProvider>
-                    <CreateActionProvider>
-                      <UpgradeActionProvider>
-                        <MergeActionProvider>
-                          <SplitActionProvider>
-                            <TransferActionProvider>
-                              <ClaimPrizeProvider>
-                                <BrowserRouter>
-                                  <Navbar />
-                                  <Routes>
-                                    <Route path="/" element={<Home />} />
-                                    <Route
-                                      path="/create"
-                                      element={<Actions />}
-                                    />
-                                    <Route
-                                      path="/get-started"
-                                      element={<GetStarted />}
-                                    />
-                                    <Route
-                                      path="/claim"
-                                      element={<ClaimPrize />}
-                                    />
-                                    <Route
-                                      path="/review"
-                                      element={<ReviewDetail />}
-                                    />
-                                  </Routes>
-                                  <Toaster position="bottom-right" />
-                                  <Footer />
-                                </BrowserRouter>
-                              </ClaimPrizeProvider>
-                            </TransferActionProvider>
-                          </SplitActionProvider>
-                        </MergeActionProvider>
-                      </UpgradeActionProvider>
-                    </CreateActionProvider>
-                  </ActionsProvider>
-                </BonALICEProvider>
-              </ALICEProvider>
-            </UserProfileProvider>
-          </NotificationsProvider>
+          <RefreshProvider>
+            <NotificationsProvider>
+              <UserProfileProvider>
+                <ALICEProvider>
+                  <BonALICEProvider>
+                    <ActionsProvider>
+                      <CreateActionProvider>
+                        <UpgradeActionProvider>
+                          <MergeActionProvider>
+                            <SplitActionProvider>
+                              <TransferActionProvider>
+                                <ClaimPrizeProvider>
+                                  <BrowserRouter>
+                                    <Navbar />
+                                    <Routes>
+                                      <Route path="/" element={<Home />} />
+                                      <Route
+                                        path="/create"
+                                        element={<Actions />}
+                                      />
+                                      <Route
+                                        path="/get-started"
+                                        element={<GetStarted />}
+                                      />
+                                      <Route
+                                        path="/claim"
+                                        element={<ClaimPrize />}
+                                      />
+                                      <Route
+                                        path="/review"
+                                        element={<ReviewDetail />}
+                                      />
+                                    </Routes>
+                                    <Toaster position="bottom-right" />
+                                    <Footer />
+                                  </BrowserRouter>
+                                </ClaimPrizeProvider>
+                              </TransferActionProvider>
+                            </SplitActionProvider>
+                          </MergeActionProvider>
+                        </UpgradeActionProvider>
+                      </CreateActionProvider>
+                    </ActionsProvider>
+                  </BonALICEProvider>
+                </ALICEProvider>
+              </UserProfileProvider>
+            </NotificationsProvider>
+          </RefreshProvider>
         </ApolloProvider>
       </Web3Provider>
     </div>
