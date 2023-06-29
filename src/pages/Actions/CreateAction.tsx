@@ -11,6 +11,7 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
   const { allowance: bonALICEAllowance } = useBonALICE();
+  const { allowance: LPTokenAllowance } = useLPToken();
   const { LPTokenBalance } = useLPToken();
   const {
     createAmount,
@@ -19,10 +20,12 @@ export const RenderCreateBody = () => {
     handleCreateBoostAmountChange,
     handleCreateBonALICEClicked,
     createActionLoading,
-    handleApproveALICEClicked,
+    handleApproveBonALICEClicked,
+    handleApproveLPTokenClicked,
     isAllowanceModalOpen,
     closeAllowanceModal,
-    approveLoading,
+    approveBonALICELoading,
+    approveLPTokenLoading,
   } = useCreateAction();
 
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
@@ -30,6 +33,7 @@ export const RenderCreateBody = () => {
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
       !bonALICEAllowance ||
+      (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
       !createAmount ||
       createAmount.big === BigInt(0) ||
       !ALICEBalance ||
@@ -37,7 +41,14 @@ export const RenderCreateBody = () => {
       ALICEBalance.dsp < createAmount.dsp ||
       createActionLoading
     );
-  }, [ALICEBalance, createAmount, createActionLoading, bonALICEAllowance]);
+  }, [
+    ALICEBalance,
+    createAmount,
+    createActionLoading,
+    bonALICEAllowance,
+    LPTokenAllowance,
+    createBoostAmount,
+  ]);
 
   return (
     <>
@@ -94,11 +105,19 @@ export const RenderCreateBody = () => {
       >
         {bonALICEAllowance && bonALICEAllowance.big < createAmount.big ? (
           <button
-            onClick={() => handleApproveALICEClicked()}
+            onClick={() => handleApproveBonALICEClicked()}
             className="btn !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve {createAmount.hStr} ALICE
+          </button>
+        ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
+          <button
+            onClick={() => handleApproveLPTokenClicked()}
+            className="btn !w-full"
+            disabled={isCreateBondedALICEButtonDisabled}
+          >
+            Approve {createBoostAmount.hStr} LP Token
           </button>
         ) : (
           <button
@@ -123,16 +142,32 @@ export const RenderCreateBody = () => {
             alt=""
           />
           <p className="text-center mb-6">
-            You need to approve the ALICE token to be spent by the BonALICE.
-            Enter at least the amount you want to create and click Next then
+            You need to approve the ALICE token to be spent by the{' '}
+            {bonALICEAllowance && bonALICEAllowance?.big < createAmount?.big
+              ? 'BonALICE Contract'
+              : 'LP Token Contract'}
+            . Enter at least the amount you want to create and click Next then
             Approve button on metamask.
           </p>
-          <button
-            className="btn btn--dark-primary"
-            onClick={() => !approveLoading && handleApproveALICEClicked()}
-          >
-            {approveLoading ? 'Waiting for Metamask...' : 'Approve'}
-          </button>
+          {bonALICEAllowance && bonALICEAllowance?.big < createAmount?.big ? (
+            <button
+              className="btn btn--dark-primary"
+              onClick={() =>
+                !approveBonALICELoading && handleApproveBonALICEClicked()
+              }
+            >
+              {approveBonALICELoading ? 'Waiting for Metamask...' : 'Approve'}
+            </button>
+          ) : (
+            <button
+              className="btn btn--dark-primary"
+              onClick={() =>
+                !approveLPTokenLoading && handleApproveLPTokenClicked()
+              }
+            >
+              {approveLPTokenLoading ? 'Waiting for Metamask...' : 'Approve'}
+            </button>
+          )}
         </div>
       </Modal>
     </>

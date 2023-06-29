@@ -19,6 +19,7 @@ import {
 } from '../../types';
 import useNotifications from '../Notifications/useNotifications.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
+import useLPToken from '../LPToken/useLPToken.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -27,10 +28,12 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: (amount: string) => void;
   handleCreateBoostAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
-  handleApproveALICEClicked: () => void;
+  handleApproveBonALICEClicked: () => void;
+  handleApproveLPTokenClicked: () => void;
   isAllowanceModalOpen: boolean;
   closeAllowanceModal: () => void;
-  approveLoading: boolean;
+  approveBonALICELoading: boolean;
+  approveLPTokenLoading: boolean;
 }>({
   createAmount: {
     dsp: 0,
@@ -46,14 +49,17 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: () => {},
   handleCreateBoostAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
-  handleApproveALICEClicked: () => {},
+  handleApproveBonALICEClicked: () => {},
+  handleApproveLPTokenClicked: () => {},
   isAllowanceModalOpen: false,
   closeAllowanceModal: () => {},
-  approveLoading: false,
+  approveBonALICELoading: false,
+  approveLPTokenLoading: false,
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { ALICEBalance } = useALICE();
+  const { LPTokenBalance } = useLPToken();
   const { allowance: bonALICEAllowance } = useBonALICE();
   const { walletAddress } = useUserProfile();
   const { addNotification, removeNotification } = useNotifications();
@@ -120,14 +126,29 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const {
-    write: approveWrite,
-    isLoading: approveLoading,
-    data: approveData,
-    isSuccess: approveSuccess,
+    write: approveBonALICEWrite,
+    isLoading: approveBonALICELoading,
+    data: approveBonALICEData,
+    isSuccess: approveBonALICESuccess,
   } = useContractWrite(approveConfig);
 
+  const { config: approveLPTokenConfig } = usePrepareContractWrite({
+    abi: ALICE_API,
+    address: ALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'approve',
+    args: [LP_TOKEN_ADDRESS[getCurrentChainId()], createBoostAmount.big],
+    chainId: getCurrentChainId(),
+  });
+
+  const {
+    write: approveLPTokenWrite,
+    isLoading: approveLPTokenLoading,
+    data: approveLPTokenData,
+    isSuccess: approveLPTokenSuccess,
+  } = useContractWrite(approveLPTokenConfig);
+
   useEffect(() => {
-    if (approveLoading) {
+    if (approveBonALICELoading) {
       if (!notifId) {
         const id = Math.random().toString();
         addNotification({
@@ -146,22 +167,35 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setNotifId(null);
       }
     }
-  }, [approveLoading, notifId, removeNotification, addNotification]);
+  }, [approveBonALICELoading, notifId, removeNotification, addNotification]);
 
   useEffect(() => {
-    if (approveSuccess) closeAllowanceModal();
-    if (approveData)
+    if (approveBonALICESuccess) closeAllowanceModal();
+    if (approveBonALICEData)
       addNotification({
         id: '',
-        hash: approveData.hash,
+        hash: approveBonALICEData.hash,
         source: NotificationSources.ALLOWANCE,
         message: 'Waiting for confirmation',
         status: NotificationStatuses.PENDING,
         type: NotificationType.PROMISE,
       });
-  }, [approveData, approveSuccess, addNotification]);
+  }, [approveBonALICEData, approveBonALICESuccess, addNotification]);
 
-  const handleApproveALICEClicked = () => {
+  useEffect(() => {
+    if (approveLPTokenSuccess) closeAllowanceModal();
+    if (approveLPTokenData)
+      addNotification({
+        id: '',
+        hash: approveLPTokenData.hash,
+        source: NotificationSources.ALLOWANCE,
+        message: 'Waiting for confirmation',
+        status: NotificationStatuses.PENDING,
+        type: NotificationType.PROMISE,
+      });
+  }, [approveLPTokenData, approveLPTokenSuccess, addNotification]);
+
+  const handleApproveBonALICEClicked = () => {
     if (
       !ALICEBalance ||
       !createAmount ||
@@ -169,7 +203,18 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     )
       return;
     openAllowanceModal();
-    approveWrite?.();
+    approveBonALICEWrite?.();
+  };
+
+  const handleApproveLPTokenClicked = () => {
+    if (
+      !LPTokenBalance ||
+      !createBoostAmount ||
+      Number(createBoostAmount) > Number(LPTokenBalance.big)
+    )
+      return;
+    openAllowanceModal();
+    approveLPTokenWrite?.();
   };
 
   useEffect(() => {
@@ -193,10 +238,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         handleCreateAmountChange,
         handleCreateBoostAmountChange,
         handleCreateBonALICEClicked,
-        handleApproveALICEClicked,
+        handleApproveBonALICEClicked,
+        handleApproveLPTokenClicked,
         isAllowanceModalOpen,
         closeAllowanceModal,
-        approveLoading,
+        approveBonALICELoading,
+        approveLPTokenLoading,
       }}
     >
       {children}
