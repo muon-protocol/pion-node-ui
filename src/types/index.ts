@@ -25,13 +25,6 @@ export type SidebarItem = {
   link: ActionType;
 };
 
-export type BonALICE = {
-  id: number;
-  title: string;
-  nodePower: string;
-  tier: string;
-};
-
 export type UserWallet = {
   id: number;
   title: string;
@@ -79,8 +72,16 @@ export enum NotificationStatuses {
   PENDING = 'pending',
   FAILED = 'failed',
 }
+
 export enum NotificationType {
   PROMISE = 'promise',
   PENDING = 'pending',
   TIMEOUT = 'timeout',
 }
+
+export type BonALICE = {
+  __typename?: 'AccountTokenId';
+  account: any;
+  latestTimestamp: any;
+  tokenId: any;
+};

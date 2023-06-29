@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { useBalance, useContractWrite, usePrepareContractWrite } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import BONALICE_API from '../../abis/BonALICE.json';
@@ -7,22 +7,27 @@ import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { BalanceData } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
+import { BonALICE } from '../../types';
+
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
   balance: undefined | BalanceData;
   isFetched: boolean;
   isError: boolean;
   isLoading: boolean;
+  bonALICEs: BonALICE[];
 }>({
   handleCreateBonALICEClicked: () => {},
   balance: undefined,
   isFetched: false,
   isError: false,
   isLoading: false,
+  bonALICEs: [],
 });
 
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
+  const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
 
   const {
     data: balance,
@@ -48,17 +53,24 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
     write?.();
   };
 
-  const userBonALICES = useQuery(USER_BON_ALICES, {
-    variables: { address: walletAddress },
+  const {
+    data: BonALICEData,
+    error: BonALICEError,
+    loading: BonALICELoading,
+  } = useQuery(USER_BON_ALICES, {
+    variables: { account: walletAddress },
   });
 
   useEffect(() => {
-    console.log('userBonALICES', userBonALICES);
-  }, [userBonALICES]);
+    if (BonALICEData && !BonALICELoading && !BonALICEError) {
+      setBonALICEs(BonALICEData.accountTokenIds);
+    }
+  }, [BonALICEData, BonALICELoading, BonALICEError]);
 
   return (
     <BonALICEContext.Provider
       value={{
+        bonALICEs,
         handleCreateBonALICEClicked,
         balance,
         isError,
