@@ -34,6 +34,10 @@ const CreateActionContext = createContext<{
   closeAllowanceModal: () => void;
   approveBonALICELoading: boolean;
   approveLPTokenLoading: boolean;
+  mintAndLockIsLoading: boolean;
+  mintAndLockWithBoostIsLoading: boolean;
+  writeMintAndLockIsLoading: boolean;
+  writeMintAndLockWithBoostIsLoading: boolean;
 }>({
   createAmount: {
     dsp: 0,
@@ -55,6 +59,10 @@ const CreateActionContext = createContext<{
   closeAllowanceModal: () => {},
   approveBonALICELoading: false,
   approveLPTokenLoading: false,
+  mintAndLockIsLoading: false,
+  mintAndLockWithBoostIsLoading: false,
+  writeMintAndLockIsLoading: false,
+  writeMintAndLockWithBoostIsLoading: false,
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
@@ -88,7 +96,10 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     setCreateBoostAmount(w3bNumberFromString(amount));
   };
 
-  const { config: mintAndLockConfig } = usePrepareContractWrite({
+  const {
+    config: mintAndLockConfigWithBoost,
+    isLoading: mintAndLockWithBoostIsLoading,
+  } = usePrepareContractWrite({
     abi: BONALICE_API,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
@@ -103,7 +114,42 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const { write: mintAndLockWrite } = useContractWrite(mintAndLockConfig);
+  const { config: mintAndLockConfig, isLoading: mintAndLockIsLoading } =
+    usePrepareContractWrite({
+      abi: BONALICE_API,
+      address: BONALICE_ADDRESS[getCurrentChainId()],
+      functionName: 'mintAndLock',
+      args: [
+        [ALICE_ADDRESS[getCurrentChainId()]],
+        [createAmount.big],
+        walletAddress,
+      ],
+      chainId: getCurrentChainId(),
+    });
+
+  const {
+    write: mintAndLockWrite,
+    data: mintAndLockData,
+    isLoading: writeMintAndLockIsLoading,
+  } = useContractWrite(mintAndLockConfig);
+  const {
+    write: mintAndLockWriteWithBoost,
+    data: mintAndLockWithBoostData,
+    isLoading: writeMintAndLockWithBoostIsLoading,
+  } = useContractWrite(mintAndLockConfigWithBoost);
+
+  useEffect(() => {
+    if (mintAndLockData || mintAndLockWithBoostData) {
+      addNotification({
+        id: '',
+        hash: mintAndLockData?.hash || mintAndLockWithBoostData?.hash || null,
+        source: NotificationSources.MINT_AND_LOCK,
+        message: 'Waiting for confirmation',
+        status: NotificationStatuses.PENDING,
+        type: NotificationType.PROMISE,
+      });
+    }
+  }, [addNotification, mintAndLockData, mintAndLockWithBoostData]);
 
   const handleCreateBonALICEClicked = () => {
     if (
@@ -113,7 +159,11 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     )
       return;
     setCreateActionLoading(true);
-    mintAndLockWrite?.();
+    if (createBoostAmount.big > BigInt(0)) {
+      mintAndLockWriteWithBoost?.();
+    } else {
+      mintAndLockWrite?.();
+    }
     setCreateActionLoading(false);
   };
 
@@ -148,7 +198,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   } = useContractWrite(approveLPTokenConfig);
 
   useEffect(() => {
-    if (approveBonALICELoading) {
+    if (approveBonALICELoading || approveLPTokenLoading) {
       if (!notifId) {
         const id = Math.random().toString();
         addNotification({
@@ -167,7 +217,15 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setNotifId(null);
       }
     }
-  }, [approveBonALICELoading, notifId, removeNotification, addNotification]);
+  }, [
+    approveBonALICELoading,
+    notifId,
+    removeNotification,
+    addNotification,
+    approveLPTokenLoading,
+    mintAndLockIsLoading,
+    mintAndLockWithBoostIsLoading,
+  ]);
 
   useEffect(() => {
     if (approveBonALICESuccess) closeAllowanceModal();
@@ -244,6 +302,10 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         closeAllowanceModal,
         approveBonALICELoading,
         approveLPTokenLoading,
+        mintAndLockIsLoading,
+        mintAndLockWithBoostIsLoading,
+        writeMintAndLockIsLoading,
+        writeMintAndLockWithBoostIsLoading,
       }}
     >
       {children}

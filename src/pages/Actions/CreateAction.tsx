@@ -11,8 +11,7 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
   const { allowance: bonALICEAllowance } = useBonALICE();
-  const { allowance: LPTokenAllowance } = useLPToken();
-  const { LPTokenBalance } = useLPToken();
+  const { allowance: LPTokenAllowance, LPTokenBalance } = useLPToken();
   const {
     createAmount,
     createBoostAmount,
@@ -26,6 +25,8 @@ export const RenderCreateBody = () => {
     closeAllowanceModal,
     approveBonALICELoading,
     approveLPTokenLoading,
+    writeMintAndLockIsLoading,
+    writeMintAndLockWithBoostIsLoading,
   } = useCreateAction();
 
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
@@ -107,7 +108,11 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {bonALICEAllowance && bonALICEAllowance.big < createAmount.big ? (
+        {writeMintAndLockIsLoading || writeMintAndLockWithBoostIsLoading ? (
+          <button className="btn !w-full" disabled>
+            Creating...
+          </button>
+        ) : bonALICEAllowance && bonALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveBonALICEClicked()}
             className="btn !w-full"

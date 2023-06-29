@@ -50,7 +50,6 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
       LPTokenBalanceData &&
       LPTokenBalanceData?.value
     ) {
-      console.log(LPTokenBalanceData);
       setLPTokenBalance(w3bNumberFromBigint(LPTokenBalanceData.value));
     }
   }, [LPTokenBalanceIsFetched, LPTokenBalanceData]);

@@ -56,6 +56,7 @@ export type RewardWallet = {
 
 export enum NotificationSources {
   ALLOWANCE = 'allowance',
+  MINT_AND_LOCK = 'mint_and_lock',
 }
 
 export type Notification = {
