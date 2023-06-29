@@ -96,7 +96,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (allowanceIsFetched && allowanceData) {
+    if (allowanceIsFetched && allowanceData !== undefined) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setAllowance(w3bNumberFromBigint(allowanceData));

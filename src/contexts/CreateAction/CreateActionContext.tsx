@@ -117,7 +117,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     setCreateActionLoading(false);
   };
 
-  const { config: approveConfig } = usePrepareContractWrite({
+  const { config: approveBonAliceConfig } = usePrepareContractWrite({
     abi: ALICE_API,
     address: ALICE_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
@@ -130,13 +130,13 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     isLoading: approveBonALICELoading,
     data: approveBonALICEData,
     isSuccess: approveBonALICESuccess,
-  } = useContractWrite(approveConfig);
+  } = useContractWrite(approveBonAliceConfig);
 
   const { config: approveLPTokenConfig } = usePrepareContractWrite({
     abi: ALICE_API,
-    address: ALICE_ADDRESS[getCurrentChainId()],
+    address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
-    args: [LP_TOKEN_ADDRESS[getCurrentChainId()], createBoostAmount.big],
+    args: [BONALICE_ADDRESS[getCurrentChainId()], createBoostAmount.big],
     chainId: getCurrentChainId(),
   });
 

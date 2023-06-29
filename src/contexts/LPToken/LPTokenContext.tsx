@@ -1,7 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { useBalance, useContractRead } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import { ALICE_ADDRESS, LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
+import {
+  BONALICE_ADDRESS,
+  LP_TOKEN_ADDRESS,
+} from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
@@ -47,6 +50,7 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
       LPTokenBalanceData &&
       LPTokenBalanceData?.value
     ) {
+      console.log(LPTokenBalanceData);
       setLPTokenBalance(w3bNumberFromBigint(LPTokenBalanceData.value));
     }
   }, [LPTokenBalanceIsFetched, LPTokenBalanceData]);
@@ -57,15 +61,15 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
     isLoading: allowanceIsLoading,
   } = useContractRead({
     abi: ALICE_ABI,
-    address: ALICE_ADDRESS[getCurrentChainId()],
+    address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'allowance',
-    args: [walletAddress, LP_TOKEN_ADDRESS[getCurrentChainId()]],
+    args: [walletAddress, BONALICE_ADDRESS[getCurrentChainId()]],
     chainId: getCurrentChainId(),
     watch: true,
   });
 
   useEffect(() => {
-    if (allowanceIsFetched && allowanceData) {
+    if (allowanceIsFetched && allowanceData !== undefined) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setAllowance(w3bNumberFromBigint(allowanceData));
