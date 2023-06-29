@@ -6,9 +6,11 @@ import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
 import { AnimatePresence } from 'framer-motion';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 export const RenderCreateBody = () => {
-  const { ALICEBalance, allowance } = useALICE();
+  const { ALICEBalance } = useALICE();
+  const { allowance: bonALICEAllowance } = useBonALICE();
   const { LPTokenBalance } = useLPToken();
   const {
     createAmount,
@@ -27,7 +29,7 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
-      !allowance ||
+      !bonALICEAllowance ||
       !createAmount ||
       createAmount.big === BigInt(0) ||
       !ALICEBalance ||
@@ -35,7 +37,7 @@ export const RenderCreateBody = () => {
       ALICEBalance.dsp < createAmount.dsp ||
       createActionLoading
     );
-  }, [ALICEBalance, createAmount, createActionLoading, allowance]);
+  }, [ALICEBalance, createAmount, createActionLoading, bonALICEAllowance]);
 
   return (
     <>
@@ -90,7 +92,7 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {allowance && allowance.big < createAmount.big ? (
+        {bonALICEAllowance && bonALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"

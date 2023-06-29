@@ -3,7 +3,11 @@ import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
 import BONALICE_API from '../../abis/BonALICE.json';
 import ALICE_API from '../../abis/ALICE.json';
-import { ALICE_ADDRESS, BONALICE_ADDRESS } from '../../constants/addresses.ts';
+import {
+  ALICE_ADDRESS,
+  BONALICE_ADDRESS,
+  LP_TOKEN_ADDRESS,
+} from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
@@ -14,6 +18,7 @@ import {
   NotificationType,
 } from '../../types';
 import useNotifications from '../Notifications/useNotifications.ts';
+import useBonALICE from '../BonALICE/useBonALICE.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -48,7 +53,8 @@ const CreateActionContext = createContext<{
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
-  const { ALICEBalance, allowance } = useALICE();
+  const { ALICEBalance } = useALICE();
+  const { allowance: bonALICEAllowance } = useBonALICE();
   const { walletAddress } = useUserProfile();
   const { addNotification, removeNotification } = useNotifications();
   const [notifId, setNotifId] = useState<string | null>(null);
@@ -83,7 +89,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     args: [
       [
         ALICE_ADDRESS[getCurrentChainId()],
-        BONALICE_ADDRESS[getCurrentChainId()],
+        LP_TOKEN_ADDRESS[getCurrentChainId()],
       ],
       [createAmount.big, createBoostAmount.big],
       walletAddress,
@@ -135,14 +141,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setNotifId(id);
       }
     } else {
-      console.log('remove', notifId);
       if (notifId) {
-        console.log('remove2', notifId);
         removeNotification(notifId);
         setNotifId(null);
       }
     }
-  }, [approveLoading, notifId, removeNotification]);
+  }, [approveLoading, notifId, removeNotification, addNotification]);
 
   useEffect(() => {
     if (approveSuccess) closeAllowanceModal();
@@ -170,12 +174,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (
-      allowance &&
+      bonALICEAllowance &&
       createAmount &&
-      Number(createAmount.big) <= Number(allowance.big)
+      Number(createAmount.big) <= Number(bonALICEAllowance.big)
     )
       closeAllowanceModal();
-  }, [allowance, createAmount]);
+  }, [bonALICEAllowance, createAmount]);
 
   const openAllowanceModal = () => setIsAllowanceModalOpen(true);
   const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
