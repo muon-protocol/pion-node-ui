@@ -5,26 +5,38 @@ const AmountInput = ({
   balance,
   value,
   onValueChanged,
+  withIcon,
+  iconClicked,
+  rightText,
 }: {
-  balance?: string | number;
+  balance?: string | number | null;
   value: string;
   onValueChanged: (value: string) => void;
+  withIcon?: boolean;
+  iconClicked?: () => void;
+  rightText?: string;
 }) => {
   return (
-    <div className="amount-input flex flex-col w-full gap-2 mb-2">
-      <div className="amount-input__top text-sm flex justify-between">
+    <div
+      className={`amount-input flex flex-col w-full gap-2 mb-2 ${
+        withIcon ? 'mt-1.5' : ''
+      }`}
+    >
+      <div className="amount-input__top relative text-sm flex justify-between">
+        {withIcon && (
+          <img
+            onClick={iconClicked}
+            className="absolute -top-2.5 right-1/2 cursor-pointer"
+            src="/assets/images/actions/plus-icon.svg"
+            alt=""
+          />
+        )}
         <span className="flex flex-col">
-          <div className="amount-input__title max-md:text-sm text-gray max-md:font-semibold max-md:mb-1">
-            {'Token Amount'}
-          </div>
-          <p className="balance flex text-xs md:hidden text-gray">
+          <p className="balance flex text-gray">
             Balance: <span className="value ml-1 text-black">{balance}</span>
           </p>
         </span>
         <div className="amount-input__balance-and-actions flex items-center gap">
-          <p className="balance mr-0.5 md:mr-1.5 hidden md:flex text-gray">
-            Balance: <span className="value ml-1 text-black">{balance}</span>
-          </p>
           <div className="flex gap-1.5 max-md:items-end h-full">
             <button
               onClick={() =>
@@ -77,8 +89,8 @@ const AmountInput = ({
           value={value}
           onChange={(e) => onValueChanged(e.target.value)}
         />
-        <div className="amount-input__token-name font-semibold max-md:text-sm">
-          {'ALICE'}
+        <div className="amount-input__token-name font-semibold max-md:text-sm min-w-fit">
+          {rightText}
         </div>
       </div>
       {balance && Number(balance) < Number(value) && (

@@ -1,15 +1,18 @@
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
-import { useMemo } from 'react';
-import { FadeIn } from '../../animations';
+import { useMemo, useState } from 'react';
+import { FadeIn, MoveUpIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
+import { AnimatePresence } from 'framer-motion';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance, allowance } = useALICE();
   const {
     createAmount,
+    createBoostAmount,
     handleCreateAmountChange,
+    handleCreateBoostAmountChange,
     handleCreateBonALICEClicked,
     createActionLoading,
     handleApproveALICEClicked,
@@ -17,6 +20,8 @@ export const RenderCreateBody = () => {
     closeAllowanceModal,
     approveLoading,
   } = useCreateAction();
+
+  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
@@ -34,16 +39,38 @@ export const RenderCreateBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
+          rightText={'ALICE'}
           balance={ALICEBalance ? ALICEBalance.dsp : '...'}
           value={createAmount.hStr}
           onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <p className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer">
-          I Want to Boost Bonded ALICE Power with LP Tokens
-        </p>
-      </FadeIn>
+      <AnimatePresence>
+        {isBoostSectionOpen ? (
+          <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
+            <AmountInput
+              rightText={'LP ALICE'}
+              balance={null}
+              withIcon
+              iconClicked={() => {
+                handleCreateBoostAmountChange('0');
+                setIsBoostSectionOpen(false);
+              }}
+              value={createBoostAmount.hStr}
+              onValueChanged={handleCreateBoostAmountChange}
+            />
+          </MoveUpIn>
+        ) : (
+          <FadeIn duration={0.1} delay={0.1}>
+            <p
+              onClick={() => setIsBoostSectionOpen(true)}
+              className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer"
+            >
+              I Want to Boost Bonded ALICE Power with LP Tokens
+            </p>
+          </FadeIn>
+        )}
+      </AnimatePresence>
       <FadeIn duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your bonALICE power will be</p>

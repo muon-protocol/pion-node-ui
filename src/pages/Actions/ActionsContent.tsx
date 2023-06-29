@@ -81,11 +81,11 @@ const RenderUpgradeBody = () => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
-                  title={item.title}
+                  title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={item.nodePower}
+                  subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={item.tier}
+                  subValue2={'Tier 1 ()'}
                   onClick={() => handleUpgradeModalItemClicked(item)}
                   compact
                   selected={isSelectedUpgradeBonALICE(item)}
@@ -97,6 +97,7 @@ const RenderUpgradeBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
+          rightText={'ALICE'}
           balance={ALICEBalance ? ALICEBalance.dsp : '...'}
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
@@ -169,11 +170,11 @@ const RenderMergeBody = () => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
-                  title={item.title}
+                  title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={item.nodePower}
+                  subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={item.tier}
+                  subValue2={'Tier 1 ()'}
                   onClick={() => handleMergeModalItemClicked(item)}
                   compact
                   selected={isInSelectedMergeBonALICEs(item)}
@@ -249,11 +250,11 @@ const RenderSplitBody = () => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
-                  title={item.title}
+                  title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={item.nodePower}
+                  subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={item.tier}
+                  subValue2={'Tier 1 ()'}
                   onClick={() => handleSplitModalItemClicked(item)}
                   compact
                   selected={isSelectedSplitBonALICE(item)}
@@ -347,11 +348,11 @@ const RenderTransferBody = () => {
               return (
                 <BonALICECard
                   className="cursor-pointer"
-                  title={item.title}
+                  title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={item.nodePower}
+                  subValue1={'500'}
                   subTitle2="Tier"
-                  subValue2={item.tier}
+                  subValue2={'Tier 1 ()'}
                   onClick={() => handleTransferModalItemClicked(item)}
                   compact
                   selected={isSelectedTransferBonALICE(item)}

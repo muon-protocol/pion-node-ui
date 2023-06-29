@@ -17,8 +17,10 @@ import useNotifications from '../Notifications/useNotifications.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
+  createBoostAmount: W3bNumber;
   createActionLoading: boolean;
   handleCreateAmountChange: (amount: string) => void;
+  handleCreateBoostAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
   handleApproveALICEClicked: () => void;
   isAllowanceModalOpen: boolean;
@@ -30,8 +32,14 @@ const CreateActionContext = createContext<{
     big: BigInt(0),
     hStr: '',
   },
+  createBoostAmount: {
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  },
   createActionLoading: false,
   handleCreateAmountChange: () => {},
+  handleCreateBoostAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
   handleApproveALICEClicked: () => {},
   isAllowanceModalOpen: false,
@@ -52,10 +60,20 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     hStr: '',
   });
 
+  const [createBoostAmount, setCreateBoostAmount] = useState<W3bNumber>({
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  });
+
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
   const handleCreateAmountChange = (amount: string) => {
     setCreateAmount(w3bNumberFromString(amount));
+  };
+
+  const handleCreateBoostAmountChange = (amount: string) => {
+    setCreateBoostAmount(w3bNumberFromString(amount));
   };
 
   const { config: mintAndLockConfig } = usePrepareContractWrite({
@@ -63,8 +81,11 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
     args: [
-      [ALICE_ADDRESS[getCurrentChainId()]],
-      [createAmount.big],
+      [
+        ALICE_ADDRESS[getCurrentChainId()],
+        BONALICE_ADDRESS[getCurrentChainId()],
+      ],
+      [createAmount.big, createBoostAmount.big],
       walletAddress,
     ],
     chainId: getCurrentChainId(),
@@ -163,8 +184,10 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     <CreateActionContext.Provider
       value={{
         createAmount,
+        createBoostAmount,
         createActionLoading,
         handleCreateAmountChange,
+        handleCreateBoostAmountChange,
         handleCreateBonALICEClicked,
         handleApproveALICEClicked,
         isAllowanceModalOpen,
