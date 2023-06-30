@@ -45,7 +45,7 @@ const Modal: FC<{
                     alt={'X'}
                   />
                 </div>
-                <div className="z-10 bg-gray20 max-h-[70vh] styled-scroll">
+                <div className="styled-scroll overflow-y-auto z-10 bg-gray20 max-h-[50vh]">
                   {children}
                 </div>
               </div>
