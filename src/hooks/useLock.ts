@@ -1,7 +1,11 @@
 import { useCallback, useMemo } from 'react';
 import { writeContract } from '@wagmi/core';
 import BONALICE_API from '../abis/BonALICE.json';
-import { ALICE_ADDRESS, BONALICE_ADDRESS } from '../constants/addresses.ts';
+import {
+  ALICE_ADDRESS,
+  BONALICE_ADDRESS,
+  LP_TOKEN_ADDRESS,
+} from '../constants/addresses.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import { W3bNumber } from '../types/wagmi.ts';
 
@@ -17,7 +21,7 @@ const useLock = (
     const amounts = [ALICEAmount.big];
 
     if (LPTokenAmount.dsp > 0) {
-      tokens.push(BONALICE_ADDRESS[getCurrentChainId()]);
+      tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
       amounts.push(LPTokenAmount.big);
     }
 
