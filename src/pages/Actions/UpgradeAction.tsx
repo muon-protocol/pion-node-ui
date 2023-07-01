@@ -113,7 +113,7 @@ export const RenderUpgradeBody = () => {
           </p>
         </FadeIn>
       )}
-      <FadeIn duration={0.1} delay={0.1}>
+      <FadeIn className="mb-6" duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your current bonALICE power</p>
           <p className="font-medium">2000</p>
