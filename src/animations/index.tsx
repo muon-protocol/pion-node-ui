@@ -89,6 +89,33 @@ export const FadeIn: FC<{
   );
 };
 
+export const SwingIn: FC<{
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  duration?: number;
+}> = ({ delay, duration, children, className }) => {
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({
+      scaleX: [1, -1, 1],
+      transition: { duration: duration || 0.5, delay: delay || 0 },
+    });
+  }, [controls, delay, duration]);
+
+  return (
+    <motion.div
+      className={className}
+      initial={{ scaleX: 1 }}
+      exit={{ scaleX: 0, transition: { duration: 0.3 } }}
+      animate={controls}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
 export const Scale: FC<{
   children: ReactNode;
   className?: string;

@@ -6,13 +6,13 @@ import AddressInput from '../../components/Common/AddressInput.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
 import { FadeIn } from '../../animations';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
-import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
 import { useMemo } from 'react';
 import useTransferAction from '../../contexts/TransferAction/useTransferAction.ts';
 import { RenderCreateBody } from './CreateAction.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { RenderUpgradeBody } from './UpgradeAction.tsx';
+import RenderMergeBody from './MergeAction.tsx';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
@@ -33,86 +33,6 @@ const ActionsContent = () => {
         <></>
       )}
     </div>
-  );
-};
-
-const RenderMergeBody = () => {
-  const {
-    isMergeModalOpen,
-    openMergeModal,
-    closeMergeModal,
-    handleMergeModalItemClicked,
-    selectedMergeBonALICEs,
-    isInSelectedMergeBonALICEs,
-  } = useMergeAction();
-  const { bonALICEs } = useBonALICE();
-
-  const isMergeBonALICEsButtonDisabled = useMemo(() => {
-    return selectedMergeBonALICEs.length < 2;
-  }, [selectedMergeBonALICEs]);
-
-  return (
-    <>
-      <FadeIn duration={0.1} delay={0.1} className="mb-4">
-        <SelectButtonWithModal
-          title="Select BonALICEs"
-          onClick={() => openMergeModal()}
-          isModalOpen={isMergeModalOpen}
-          closeModalHandler={() => closeMergeModal()}
-          modalTitle="Select BonALICEs to Merge"
-          multiple
-          selectedItems={selectedMergeBonALICEs}
-          removeItem={(item) => handleMergeModalItemClicked(item)}
-        >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.map((item) => {
-              return (
-                <BonALICECard
-                  className="cursor-pointer"
-                  title={'BonALICE #' + item.tokenId}
-                  subTitle1="Node Power"
-                  subValue1={50}
-                  subTitle2="Tier"
-                  subValue2={'ALICE Starter (Tier 1)'}
-                  onClick={() => handleMergeModalItemClicked(item)}
-                  compact
-                  selected={isInSelectedMergeBonALICEs(item)}
-                />
-              );
-            })}
-          </div>
-        </SelectButtonWithModal>
-      </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <img
-          src="/assets/images/actions/merge-content-icon.svg"
-          alt=""
-          className="mx-auto mb-6 max-md:w-10"
-        />
-      </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <BonALICECard
-          title="New Bonded ALICE"
-          subTitle1="Node Power"
-          subValue1={30}
-          subTitle2="Tier"
-          subValue2="ALICE Supreme (Tier 3)"
-          selected
-        />
-      </FadeIn>
-      <FadeIn
-        duration={0.1}
-        delay={0.1}
-        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
-      >
-        <button
-          disabled={isMergeBonALICEsButtonDisabled}
-          className="btn !w-full"
-        >
-          Merge
-        </button>
-      </FadeIn>
-    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
+import useMerge from '../../hooks/useMerge.ts';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
@@ -8,6 +9,7 @@ const MergeActionContext = createContext<{
   selectedMergeBonALICEs: BonALICE[];
   isInSelectedMergeBonALICEs: (bonALICE: BonALICE) => boolean;
   handleMergeModalItemClicked: (bonALICE: BonALICE) => void;
+  merge: () => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -15,6 +17,7 @@ const MergeActionContext = createContext<{
   selectedMergeBonALICEs: [],
   isInSelectedMergeBonALICEs: () => false,
   handleMergeModalItemClicked: () => {},
+  merge: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -33,6 +36,11 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   };
+
+  const { merge } = useMerge(
+    mergeModalSelectedBonALICEs[0]?.tokenId,
+    mergeModalSelectedBonALICEs[1]?.tokenId,
+  );
 
   useEffect(() => {
     if (mergeModalSelectedBonALICEs.length === 2) {
@@ -68,6 +76,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         selectedMergeBonALICEs: mergeModalSelectedBonALICEs,
         isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
+        merge,
       }}
     >
       {children}
