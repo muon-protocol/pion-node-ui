@@ -16,7 +16,7 @@ import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { BalanceData, W3bNumber } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
-import { BonALICE, BonALICEWithLockedOf } from '../../types';
+import { BonALICE, RawBonALICE } from '../../types';
 import useRefresh from '../Refresh/useRefresh.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
 import useAllowance from '../../hooks/useAllowance.ts';
@@ -27,7 +27,7 @@ const BonALICEContext = createContext<{
   isFetched: boolean;
   isError: boolean;
   isLoading: boolean;
-  bonALICEs: BonALICEWithLockedOf[];
+  bonALICEs: BonALICE[];
   ALICEAllowance: W3bNumber | null;
   LPTokenAllowance: W3bNumber | null;
 }>({
@@ -43,7 +43,7 @@ const BonALICEContext = createContext<{
 
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
-  const [bonALICEs, setBonALICEs] = useState<BonALICEWithLockedOf[]>([]);
+  const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
 
   const { allowance: ALICEAllowance } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
@@ -85,8 +85,8 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (fastRefresh && walletAddress) {
       BonALICERefetch({ account: walletAddress }).then(({ data }) => {
-        const rawBonALICEs: BonALICE[] = data.accountTokenIds ?? [];
-        const contracts = rawBonALICEs.map((bonALICE: BonALICE) => ({
+        const rawBonALICEs: RawBonALICE[] = data.accountTokenIds ?? [];
+        const contracts = rawBonALICEs.map((bonALICE: RawBonALICE) => ({
           abi: BONALICE_API,
           address: BONALICE_ADDRESS[getCurrentChainId()],
           functionName: 'getLockedOf',
@@ -102,7 +102,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         readContracts({ contracts: contracts }).then((getLockedOfData) => {
-          const bonALICEs: BonALICEWithLockedOf[] = [];
+          const bonALICEs: BonALICE[] = [];
           getLockedOfData.map((lockedOf: any, index: number) => {
             bonALICEs.push({
               ...rawBonALICEs[index],

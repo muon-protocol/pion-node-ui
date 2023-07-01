@@ -113,20 +113,34 @@ export const RenderUpgradeBody = () => {
           </p>
         </FadeIn>
       )}
-      <FadeIn className="mb-6" duration={0.1} delay={0.1}>
-        <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-          <p className="font-light">Your current bonALICE power</p>
-          <p className="font-medium">2000</p>
-        </span>
-        <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-          <p className="font-light">Your bonALICE power will be</p>
-          <p className="font-medium">5030 bonALICE</p>
-        </span>
-        <span className="flex justify-between text-gray10 max-md:text-sm">
-          <p className="font-light">Your tier will be</p>
-          <p className="font-medium">ALICE Supreme (Tier 3)</p>
-        </span>
-      </FadeIn>
+      {selectedUpgradeBonALICE && (
+        <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
+          <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
+            <p className="font-light">Your current bonALICE power</p>
+            <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
+          </span>
+          {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) && (
+            <>
+              <MoveUpIn y={-10} duration={0.1}>
+                <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
+                  <p className="font-light">Your bonALICE power will be</p>
+                  <p className="font-medium">
+                    {selectedUpgradeBonALICE.nodePower +
+                      upgradeAmount.dsp +
+                      2 * upgradeBoostAmount.dsp}
+                  </p>
+                </span>
+              </MoveUpIn>
+              <MoveUpIn y={-10} duration={0.2}>
+                <span className="flex justify-between text-gray10 max-md:text-sm">
+                  <p className="font-light">Your tier will be</p>
+                  <p className="font-medium">ALICE Starter (Tier 1)</p>
+                </span>
+              </MoveUpIn>
+            </>
+          )}
+        </MoveUpIn>
+      )}
       <FadeIn
         duration={0.1}
         delay={0.1}

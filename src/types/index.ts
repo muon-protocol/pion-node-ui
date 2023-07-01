@@ -82,14 +82,14 @@ export enum NotificationType {
   TIMEOUT = 'timeout',
 }
 
-export type BonALICE = {
+export type RawBonALICE = {
   __typename?: 'AccountTokenId';
   account: any;
   latestTimestamp: any;
   tokenId: any;
 };
 
-export type BonALICEWithLockedOf = {
+export type BonALICE = {
   __typename?: 'AccountTokenId';
   account: any;
   latestTimestamp: any;
