@@ -3,6 +3,9 @@ import { BonALICE } from '../../types';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
 import useLock from '../../hooks/useLock.ts';
+import useApprove from '../../hooks/useApprove.ts';
+import { ALICE_ADDRESS, LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -16,6 +19,8 @@ const UpgradeActionContext = createContext<{
   handleUpgradeBoostAmountChange: (amount: string) => void;
   handleUpgradeAmountChange: (amount: string) => void;
   handleUpgradeBonALICEClicked: () => void;
+  ALICEApprove: () => void;
+  LPTokenApprove: () => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
@@ -36,6 +41,8 @@ const UpgradeActionContext = createContext<{
   handleUpgradeBoostAmountChange: () => {},
   handleUpgradeAmountChange: () => {},
   handleUpgradeBonALICEClicked: () => {},
+  ALICEApprove: () => {},
+  LPTokenApprove: () => {},
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -59,6 +66,16 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     upgradeModalSelectedBonALICE?.tokenId,
     upgradeAmount,
     upgradeBoostAmount,
+  );
+
+  const { approve: ALICEApprove } = useApprove(
+    ALICE_ADDRESS[getCurrentChainId()],
+    upgradeAmount,
+  );
+
+  const { approve: LPTokenApprove } = useApprove(
+    LP_TOKEN_ADDRESS[getCurrentChainId()],
+    upgradeAmount,
   );
 
   const handleUpgradeBonALICEClicked = async () => {
@@ -122,6 +139,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeAmountChange,
         handleUpgradeBoostAmountChange,
         handleUpgradeBonALICEClicked,
+        ALICEApprove,
+        LPTokenApprove,
       }}
     >
       {children}

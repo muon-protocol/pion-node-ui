@@ -22,6 +22,8 @@ export const RenderUpgradeBody = () => {
     handleUpgradeBoostAmountChange,
     upgradeBoostAmount,
     handleUpgradeBonALICEClicked,
+    LPTokenApprove,
+    ALICEApprove,
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
@@ -31,6 +33,7 @@ export const RenderUpgradeBody = () => {
     return (
       !selectedUpgradeBonALICE ||
       !upgradeAmount ||
+      !upgradeAmount.dsp ||
       !ALICEBalance?.hStr ||
       Number(upgradeAmount) > Number(weiToEther(ALICEBalance.dsp.toString()))
     );
@@ -39,6 +42,7 @@ export const RenderUpgradeBody = () => {
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
 
   const { LPTokenBalance } = useLPToken();
+  const { ALICEAllowance, LPTokenAllowance } = useBonALICE();
 
   return (
     <>
@@ -146,13 +150,36 @@ export const RenderUpgradeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button
-          onClick={() => handleUpgradeBonALICEClicked()}
-          disabled={isUpgradeBonALICEButtonDisabled}
-          className="btn !w-full"
-        >
-          Upgrade
-        </button>
+        {1 !== 1 ? (
+          <button className="btn !w-full" disabled>
+            Upgrading...
+          </button>
+        ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
+          <button
+            onClick={() => ALICEApprove()}
+            className="btn !w-full"
+            disabled={isUpgradeBonALICEButtonDisabled}
+          >
+            Approve {upgradeAmount.hStr} ALICE
+          </button>
+        ) : LPTokenAllowance &&
+          LPTokenAllowance.big < upgradeBoostAmount.big ? (
+          <button
+            onClick={() => LPTokenApprove()}
+            className="btn !w-full"
+            disabled={isUpgradeBonALICEButtonDisabled}
+          >
+            Approve {upgradeBoostAmount.hStr} LP Token
+          </button>
+        ) : (
+          <button
+            onClick={() => handleUpgradeBonALICEClicked()}
+            disabled={isUpgradeBonALICEButtonDisabled}
+            className="btn !w-full"
+          >
+            Upgrade
+          </button>
+        )}
       </FadeIn>
     </>
   );
