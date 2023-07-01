@@ -2,6 +2,7 @@ import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
+import useLock from '../../hooks/useLock.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -14,6 +15,7 @@ const UpgradeActionContext = createContext<{
   upgradeBoostAmount: W3bNumber;
   handleUpgradeBoostAmountChange: (amount: string) => void;
   handleUpgradeAmountChange: (amount: string) => void;
+  handleUpgradeBonALICEClicked: () => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
@@ -33,6 +35,7 @@ const UpgradeActionContext = createContext<{
   },
   handleUpgradeBoostAmountChange: () => {},
   handleUpgradeAmountChange: () => {},
+  handleUpgradeBonALICEClicked: () => {},
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +54,20 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     big: BigInt(0),
     hStr: '',
   });
+
+  const { lock } = useLock(
+    upgradeModalSelectedBonALICE?.tokenId,
+    upgradeAmount,
+    upgradeBoostAmount,
+  );
+
+  const handleUpgradeBonALICEClicked = async () => {
+    if (!upgradeModalSelectedBonALICE || !upgradeAmount.dsp) {
+      return;
+    }
+    const result = await lock();
+    console.log(result);
+  };
 
   const handleUpgradeBoostAmountChange = (amount: string) => {
     setUpgradeBoostAmount(w3bNumberFromString(amount));
@@ -104,6 +121,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         upgradeBoostAmount,
         handleUpgradeAmountChange,
         handleUpgradeBoostAmountChange,
+        handleUpgradeBonALICEClicked,
       }}
     >
       {children}

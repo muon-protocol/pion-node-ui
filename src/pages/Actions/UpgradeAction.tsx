@@ -21,6 +21,7 @@ export const RenderUpgradeBody = () => {
     handleUpgradeAmountChange,
     handleUpgradeBoostAmountChange,
     upgradeBoostAmount,
+    handleUpgradeBonALICEClicked,
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
@@ -132,6 +133,7 @@ export const RenderUpgradeBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
+          onClick={() => handleUpgradeBonALICEClicked()}
           disabled={isUpgradeBonALICEButtonDisabled}
           className="btn !w-full"
         >
