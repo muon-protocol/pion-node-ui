@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import {
+  readContracts,
   useBalance,
   useContractRead,
   useContractWrite,
@@ -7,12 +8,16 @@ import {
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import BONALICE_API from '../../abis/BonALICE.json';
-import { ALICE_ADDRESS, BONALICE_ADDRESS } from '../../constants/addresses.ts';
+import {
+  ALICE_ADDRESS,
+  BONALICE_ADDRESS,
+  LP_TOKEN_ADDRESS,
+} from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { BalanceData, W3bNumber } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
-import { BonALICE } from '../../types';
+import { BonALICE, BonALICEWithLockedOf } from '../../types';
 import useRefresh from '../Refresh/useRefresh.ts';
 import ALICE_ABI from '../../abis/ALICE.json';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
@@ -23,7 +28,7 @@ const BonALICEContext = createContext<{
   isFetched: boolean;
   isError: boolean;
   isLoading: boolean;
-  bonALICEs: BonALICE[];
+  bonALICEs: BonALICEWithLockedOf[];
   allowanceIsFetched: boolean;
   allowanceIsLoading: boolean;
   allowance: W3bNumber | null;
@@ -41,7 +46,7 @@ const BonALICEContext = createContext<{
 
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
-  const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
+  const [bonALICEs, setBonALICEs] = useState<BonALICEWithLockedOf[]>([]);
   const [allowance, setAllowance] = useState<W3bNumber | null>(null);
 
   const { fastRefresh } = useRefresh();
@@ -77,7 +82,36 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (fastRefresh && walletAddress) {
       BonALICERefetch({ account: walletAddress }).then(({ data }) => {
-        setBonALICEs(data.accountTokenIds);
+        const rawBonALICEs: BonALICE[] = data.accountTokenIds ?? [];
+        const contracts = rawBonALICEs.map((bonALICE: BonALICE) => ({
+          abi: BONALICE_API,
+          address: BONALICE_ADDRESS[getCurrentChainId()],
+          functionName: 'getLockedOf',
+          args: [
+            bonALICE.tokenId,
+            [
+              ALICE_ADDRESS[getCurrentChainId()],
+              LP_TOKEN_ADDRESS[getCurrentChainId()],
+            ],
+          ],
+        }));
+
+        readContracts({ contracts: contracts }).then((getLockedOfData) => {
+          const bonALICEs: BonALICEWithLockedOf[] = [];
+          console.log('getLockedOfData', getLockedOfData);
+          getLockedOfData.map((lockedOf: any, index: number) => {
+            bonALICEs.push({
+              ...rawBonALICEs[index],
+              ALICELockAmount: w3bNumberFromBigint(lockedOf.result[0]),
+              LPTokenLockAmount: w3bNumberFromBigint(lockedOf.result[1]),
+              nodePower:
+                w3bNumberFromBigint(lockedOf.result[0]).dsp +
+                w3bNumberFromBigint(lockedOf.result[1]).dsp * 2,
+            });
+          });
+          console.log('bonALICEs', bonALICEs);
+          setBonALICEs(bonALICEs);
+        });
       });
     }
   }, [fastRefresh, BonALICERefetch, walletAddress]);

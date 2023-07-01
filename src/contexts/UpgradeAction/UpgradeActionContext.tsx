@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
-import useALICE from '../ALICE/useALICE.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
+import { w3bNumberFromString } from '../../utils/web3.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -9,7 +10,9 @@ const UpgradeActionContext = createContext<{
   selectedUpgradeBonALICE: BonALICE | null;
   isSelectedUpgradeBonALICE: (bonALICE: BonALICE) => boolean;
   handleUpgradeModalItemClicked: (bonALICE: BonALICE) => void;
-  upgradeAmount: string;
+  upgradeAmount: W3bNumber;
+  upgradeBoostAmount: W3bNumber;
+  handleUpgradeBoostAmountChange: (amount: string) => void;
   handleUpgradeAmountChange: (amount: string) => void;
 }>({
   isUpgradeModalOpen: false,
@@ -18,7 +21,17 @@ const UpgradeActionContext = createContext<{
   selectedUpgradeBonALICE: null,
   isSelectedUpgradeBonALICE: () => false,
   handleUpgradeModalItemClicked: () => {},
-  upgradeAmount: '',
+  upgradeAmount: {
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  },
+  upgradeBoostAmount: {
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  },
+  handleUpgradeBoostAmountChange: () => {},
   handleUpgradeAmountChange: () => {},
 });
 
@@ -26,12 +39,25 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
   const [upgradeModalSelectedBonALICE, setUpgradeModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
-  const [upgradeAmount, setUpgradeAmount] = useState('');
 
-  const { ALICEBalance } = useALICE();
+  const [upgradeAmount, setUpgradeAmount] = useState<W3bNumber>({
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  });
+
+  const [upgradeBoostAmount, setUpgradeBoostAmount] = useState<W3bNumber>({
+    dsp: 0,
+    big: BigInt(0),
+    hStr: '',
+  });
+
+  const handleUpgradeBoostAmountChange = (amount: string) => {
+    setUpgradeBoostAmount(w3bNumberFromString(amount));
+  };
+
   const handleUpgradeAmountChange = (amount: string) => {
-    if (!ALICEBalance?.dsp) return;
-    setUpgradeAmount(amount.toString());
+    setUpgradeAmount(w3bNumberFromString(amount));
   };
 
   const handleUpgradeModalItemClicked = (bonALICE: BonALICE) => {
@@ -75,7 +101,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         isSelectedUpgradeBonALICE,
         handleUpgradeModalItemClicked,
         upgradeAmount,
+        upgradeBoostAmount,
         handleUpgradeAmountChange,
+        handleUpgradeBoostAmountChange,
       }}
     >
       {children}

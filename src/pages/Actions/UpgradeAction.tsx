@@ -1,12 +1,13 @@
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { weiToEther } from '../../utils/web3.ts';
-import { FadeIn } from '../../animations';
+import { FadeIn, MoveUpIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
+import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -18,6 +19,8 @@ export const RenderUpgradeBody = () => {
     selectedUpgradeBonALICE,
     upgradeAmount,
     handleUpgradeAmountChange,
+    handleUpgradeBoostAmountChange,
+    upgradeBoostAmount,
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
@@ -31,6 +34,10 @@ export const RenderUpgradeBody = () => {
       Number(upgradeAmount) > Number(weiToEther(ALICEBalance.dsp.toString()))
     );
   }, [selectedUpgradeBonALICE, upgradeAmount, ALICEBalance]);
+
+  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
+
+  const { LPTokenBalance } = useLPToken();
 
   return (
     <>
@@ -56,7 +63,7 @@ export const RenderUpgradeBody = () => {
                     className="cursor-pointer"
                     title={'BonALICE #' + item.tokenId}
                     subTitle1="Node Power"
-                    subValue1={'500'}
+                    subValue1={item.nodePower}
                     subTitle2="Tier"
                     subValue2={'ALICE Starter (Tier 1)'}
                     onClick={() => handleUpgradeModalItemClicked(item)}
@@ -77,15 +84,34 @@ export const RenderUpgradeBody = () => {
         <AmountInput
           rightText={'ALICE'}
           balance={ALICEBalance ? ALICEBalance.dsp : '...'}
-          value={upgradeAmount}
+          value={upgradeAmount.hStr}
           onValueChanged={handleUpgradeAmountChange}
         />
       </FadeIn>
-      <FadeIn duration={0.1} delay={0.1}>
-        <p className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer">
-          I Want to Boost Bonded ALICE Power with LP Tokens
-        </p>
-      </FadeIn>
+      {isBoostSectionOpen ? (
+        <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
+          <AmountInput
+            rightText={'LP ALICE'}
+            balance={LPTokenBalance ? LPTokenBalance.dsp : '...'}
+            withIcon
+            iconClicked={() => {
+              handleUpgradeBoostAmountChange('');
+              setIsBoostSectionOpen(false);
+            }}
+            value={upgradeBoostAmount.hStr}
+            onValueChanged={handleUpgradeBoostAmountChange}
+          />
+        </MoveUpIn>
+      ) : (
+        <FadeIn duration={0.1} delay={0.1}>
+          <p
+            onClick={() => setIsBoostSectionOpen(true)}
+            className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer"
+          >
+            I Want to Boost Bonded ALICE Power with LP Tokens
+          </p>
+        </FadeIn>
+      )}
       <FadeIn duration={0.1} delay={0.1}>
         <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
           <p className="font-light">Your current bonALICE power</p>

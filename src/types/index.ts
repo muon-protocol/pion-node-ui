@@ -1,3 +1,5 @@
+import { W3bNumber } from './wagmi.ts';
+
 export type Plan = {
   id: number;
   title: string;
@@ -85,4 +87,14 @@ export type BonALICE = {
   account: any;
   latestTimestamp: any;
   tokenId: any;
+};
+
+export type BonALICEWithLockedOf = {
+  __typename?: 'AccountTokenId';
+  account: any;
+  latestTimestamp: any;
+  tokenId: any;
+  ALICELockAmount: W3bNumber;
+  LPTokenLockAmount: W3bNumber;
+  nodePower: number;
 };

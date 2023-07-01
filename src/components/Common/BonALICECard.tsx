@@ -4,7 +4,7 @@ const BonALICECard: FC<{
   title: string;
   className?: string;
   subTitle1: string;
-  subValue1: string;
+  subValue1: number;
   subTitle2: string;
   subValue2: string;
   onClick?: () => void;
@@ -31,7 +31,11 @@ const BonALICECard: FC<{
           : 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
       }`}
     >
-      <p className={`text-inherit font-semibold ${compact ? 'md:mb-3' : 'mb-4 md:mb-6'}`}>
+      <p
+        className={`text-inherit font-semibold ${
+          compact ? 'md:mb-3' : 'mb-4 md:mb-6'
+        }`}
+      >
         {title}
       </p>
       <span className="text-sm flex mb-0.5 md:mb-2 justify-between">

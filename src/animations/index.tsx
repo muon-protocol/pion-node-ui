@@ -26,6 +26,7 @@ export const MoveUpIn: FC<{
     <motion.div
       className={className}
       initial={{ opacity: 0, y: y || 100 }}
+      exit={{ opacity: 0, y: y || 100, transition: { duration: 0.1 } }}
       animate={controls}
     >
       {children}
@@ -53,6 +54,7 @@ export const MoveRightIn: FC<{
     <motion.div
       className={className}
       initial={{ opacity: 0, x: -50 }}
+      exit={{ opacity: 0, x: -50, transition: { duration: 0.1 } }}
       animate={controls}
     >
       {children}
@@ -79,6 +81,7 @@ export const FadeIn: FC<{
     <motion.div
       className={className}
       initial={{ opacity: 0 }}
+      exit={{ opacity: 0, transition: { duration: 0.1 } }}
       animate={controls}
     >
       {children}
