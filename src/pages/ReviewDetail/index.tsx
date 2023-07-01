@@ -77,7 +77,7 @@ const TransferCard = ({ className = '' }: { className: string }) => {
                 className="cursor-pointer"
                 title={'BonALICE #' + item.tokenId}
                 subTitle1="Node Power"
-                subValue1={'1200'}
+                subValue1={1200}
                 subTitle2="Tier"
                 subValue2={'ALICE Starter (Tier 1)'}
                 onClick={() => {}}

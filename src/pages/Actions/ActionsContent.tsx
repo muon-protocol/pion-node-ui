@@ -71,7 +71,7 @@ const RenderMergeBody = () => {
                   className="cursor-pointer"
                   title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={'500'}
+                  subValue1={50}
                   subTitle2="Tier"
                   subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleMergeModalItemClicked(item)}
@@ -94,7 +94,7 @@ const RenderMergeBody = () => {
         <BonALICECard
           title="New Bonded ALICE"
           subTitle1="Node Power"
-          subValue1="530"
+          subValue1={30}
           subTitle2="Tier"
           subValue2="ALICE Supreme (Tier 3)"
           selected
@@ -152,7 +152,7 @@ const RenderSplitBody = () => {
                   className="cursor-pointer"
                   title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={'500'}
+                  subValue1={50}
                   subTitle2="Tier"
                   subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleSplitModalItemClicked(item)}
@@ -181,7 +181,7 @@ const RenderSplitBody = () => {
             <BonALICECard
               title="New Bonded ALICE"
               subTitle1="Node Power"
-              subValue1="530"
+              subValue1={30}
               subTitle2="Tier"
               subValue2="ALICE Supreme (Tier 3)"
               selected
@@ -189,7 +189,7 @@ const RenderSplitBody = () => {
             <BonALICECard
               title="New Bonded ALICE"
               subTitle1="Node Power"
-              subValue1="530"
+              subValue1={30}
               subTitle2="Tier"
               subValue2="ALICE Supreme (Tier 3)"
               selected
@@ -251,7 +251,7 @@ const RenderTransferBody = () => {
                   className="cursor-pointer"
                   title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={'500'}
+                  subValue1={50}
                   subTitle2="Tier"
                   subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleTransferModalItemClicked(item)}

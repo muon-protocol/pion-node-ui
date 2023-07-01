@@ -68,7 +68,7 @@ const CreateActionContext = createContext<{
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance } = useLPToken();
-  const { allowance: bonALICEAllowance } = useBonALICE();
+  const { ALICEAllowance } = useBonALICE();
   const { walletAddress } = useUserProfile();
   const { addNotification, removeNotification } = useNotifications();
   const [notifId, setNotifId] = useState<string | null>(null);
@@ -277,12 +277,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (
-      bonALICEAllowance &&
+      ALICEAllowance &&
       createAmount &&
-      Number(createAmount.big) <= Number(bonALICEAllowance.big)
+      Number(createAmount.big) <= Number(ALICEAllowance.big)
     )
       closeAllowanceModal();
-  }, [bonALICEAllowance, createAmount]);
+  }, [ALICEAllowance, createAmount]);
 
   const openAllowanceModal = () => setIsAllowanceModalOpen(true);
   const closeAllowanceModal = () => setIsAllowanceModalOpen(false);

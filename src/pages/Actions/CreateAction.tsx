@@ -10,8 +10,8 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
-  const { allowance: bonALICEAllowance } = useBonALICE();
-  const { allowance: LPTokenAllowance, LPTokenBalance } = useLPToken();
+  const { ALICEAllowance, LPTokenAllowance } = useBonALICE();
+  const { LPTokenBalance } = useLPToken();
   const {
     createAmount,
     createBoostAmount,
@@ -33,7 +33,7 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
-      !bonALICEAllowance ||
+      !ALICEAllowance ||
       (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
       !createAmount ||
       createAmount.big === BigInt(0) ||
@@ -46,7 +46,7 @@ export const RenderCreateBody = () => {
     ALICEBalance,
     createAmount,
     createActionLoading,
-    bonALICEAllowance,
+    ALICEAllowance,
     LPTokenAllowance,
     createBoostAmount,
   ]);
@@ -114,7 +114,7 @@ export const RenderCreateBody = () => {
           <button className="btn !w-full" disabled>
             Creating...
           </button>
-        ) : bonALICEAllowance && bonALICEAllowance.big < createAmount.big ? (
+        ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveBonALICEClicked()}
             className="btn !w-full"
@@ -154,13 +154,13 @@ export const RenderCreateBody = () => {
           />
           <p className="text-center mb-6">
             You need to approve the ALICE token to be spent by the{' '}
-            {bonALICEAllowance && bonALICEAllowance?.big < createAmount?.big
+            {ALICEAllowance && ALICEAllowance?.big < createAmount?.big
               ? 'BonALICE Contract'
               : 'LP Token Contract'}
             . Enter at least the amount you want to create and click Next then
             Approve button on metamask.
           </p>
-          {bonALICEAllowance && bonALICEAllowance?.big < createAmount?.big ? (
+          {ALICEAllowance && ALICEAllowance?.big < createAmount?.big ? (
             <button
               className="btn btn--dark-primary"
               onClick={() =>
