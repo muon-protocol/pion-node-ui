@@ -78,7 +78,7 @@ input[type=number] {
 }
 
 .btn {
-  @apply cursor-pointer;
+  @apply cursor-pointer flex items-center justify-center;
   // size properties
   @apply px-16 py-3.5 font-medium text-center;
 
@@ -88,7 +88,12 @@ input[type=number] {
 
   &--small {
     @apply px-5 py-2 text-sm;
+
+    &--with-icon {
+      @apply px-4 py-1.5 text-sm;
+    }
   }
+
 
   &--large {
     @apply px-20 py-6 text-2xl font-medium;
@@ -118,6 +123,10 @@ input[type=number] {
 
   &--small {
     @apply rounded-lg;
+
+    &--with-icon {
+      @apply rounded-lg;
+    }
   }
 
   &--large {

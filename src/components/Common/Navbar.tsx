@@ -3,6 +3,7 @@ import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 const Navbar = () => {
   return (
@@ -16,6 +17,7 @@ const Navbar = () => {
 const DesktopNavbar = () => {
   const { isConnected } = useUserProfile();
   const { ALICEBalance } = useALICE();
+  const { bonALICEs } = useBonALICE();
 
   return (
     <FadeIn delay={0.3}>
@@ -30,9 +32,22 @@ const DesktopNavbar = () => {
           </Link>
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
-          <Link className={'flex--1'} to={'/create'}>
-            <button className="btn btn--small">Create BonALICE</button>
-          </Link>
+          {bonALICEs.length == 0 ? (
+            <Link to={'/create'}>
+              <button className="btn btn--small">Create BonALICE</button>
+            </Link>
+          ) : (
+            <Link to={'/review'}>
+              <button className="btn btn--small--with-icon">
+                <img
+                  className="mr-2.5"
+                  src="/assets/images/alice-icon.svg"
+                  alt=""
+                />
+                Manage bonALICE
+              </button>
+            </Link>
+          )}
           <button className="btn btn--small">Buy ALICE</button>
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
