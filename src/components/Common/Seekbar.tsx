@@ -24,6 +24,8 @@ const Seekbar = ({ min, max, value, onValueChange }: SeekbarProps) => {
       let newValue =
         ((clientX - rect.left) / (rect.right - rect.left)) * (max - min) + min;
       newValue = Math.round(Math.min(Math.max(newValue, min), max));
+      if (newValue === 0) newValue = 1;
+      if (newValue === 100) newValue = 99;
       onValueChange(newValue);
     }
   };
@@ -31,8 +33,8 @@ const Seekbar = ({ min, max, value, onValueChange }: SeekbarProps) => {
   return (
     <>
       <div className="seekbar__values flex justify-between w-full mb-2 select-none">
-        <p className="font-semibold text-white">{value}%</p>
-        <p className="font-semibold text-white">{max - value}%</p>
+        <p className="font-semibold">{value}%</p>
+        <p className="font-semibold">{max - value}%</p>
       </div>
       <div
         ref={barRef}

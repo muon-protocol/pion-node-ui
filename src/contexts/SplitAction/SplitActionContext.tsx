@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
+import useSplit from '../../hooks/useSplit.ts';
 
 const SplitActionContext = createContext<{
   splitValue: number;
@@ -10,6 +11,7 @@ const SplitActionContext = createContext<{
   selectedSplitBonALICE: BonALICE | null;
   isSelectedSplitBonALICE: (bonALICE: BonALICE) => boolean;
   handleSplitModalItemClicked: (bonALICE: BonALICE) => void;
+  split: () => void;
 }>({
   splitValue: 50,
   setSplitValue: () => {},
@@ -19,6 +21,7 @@ const SplitActionContext = createContext<{
   selectedSplitBonALICE: null,
   isSelectedSplitBonALICE: () => false,
   handleSplitModalItemClicked: () => {},
+  split: () => {},
 });
 
 const SplitActionProvider = ({ children }: { children: ReactNode }) => {
@@ -26,6 +29,7 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
   const [isSplitModalOpen, setIsSplitModalOpen] = useState(false);
   const [splitModalSelectedBonALICE, setSplitModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
+  const { split } = useSplit(splitModalSelectedBonALICE, splitValue);
 
   const handleSplitModalItemClicked = (bonALICE: BonALICE) => {
     if (!splitModalSelectedBonALICE) {
@@ -69,6 +73,7 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         selectedSplitBonALICE: splitModalSelectedBonALICE,
         isSelectedSplitBonALICE,
         handleSplitModalItemClicked,
+        split,
       }}
     >
       {children}

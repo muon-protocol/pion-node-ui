@@ -16,6 +16,7 @@ const RenderSplitBody = () => {
     handleSplitModalItemClicked,
     selectedSplitBonALICE,
     isSelectedSplitBonALICE,
+    split,
   } = useSplitAction();
   const { bonALICEs } = useBonALICE();
 
@@ -42,7 +43,7 @@ const RenderSplitBody = () => {
                   className="cursor-pointer"
                   title={'BonALICE #' + item.tokenId}
                   subTitle1="Node Power"
-                  subValue1={50}
+                  subValue1={item.nodePower}
                   subTitle2="Tier"
                   subValue2={'ALICE Starter (Tier 1)'}
                   onClick={() => handleSplitModalItemClicked(item)}
@@ -77,7 +78,9 @@ const RenderSplitBody = () => {
                 <BonALICECard
                   title="New Bonded ALICE"
                   subTitle1="Node Power"
-                  subValue1={30}
+                  subValue1={Math.round(
+                    selectedSplitBonALICE.nodePower * (splitValue / 100),
+                  )}
                   subTitle2="Tier"
                   subValue2="ALICE Starter"
                   selected
@@ -85,7 +88,9 @@ const RenderSplitBody = () => {
                 <BonALICECard
                   title="New Bonded ALICE"
                   subTitle1="Node Power"
-                  subValue1={30}
+                  subValue1={Math.round(
+                    selectedSplitBonALICE.nodePower * (1 - splitValue / 100),
+                  )}
                   subTitle2="Tier"
                   subValue2="ALICE Starter"
                   selected
@@ -101,6 +106,9 @@ const RenderSplitBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
+          onClick={() => {
+            !isSplitBonALICEsButtonDisabled && split();
+          }}
           disabled={isSplitBonALICEsButtonDisabled}
           className="btn !w-full"
         >

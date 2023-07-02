@@ -27,3 +27,16 @@ export function w3bNumberFromString(amount: string): W3bNumber {
     big: inputAsBigInt,
   };
 }
+
+export function w3bNumberFromNumber(amount: number): W3bNumber {
+  const inputAsWei = ethers.utils.parseUnits(amount.toString(), 18);
+  const inputAsBigInt = BigInt(inputAsWei.toString());
+  const inputAsString = amount.toString();
+  const inputAsNumber = parseFloat(parseFloat(amount.toString()).toFixed(2));
+
+  return {
+    dsp: inputAsNumber,
+    hStr: inputAsString,
+    big: inputAsBigInt,
+  };
+}
