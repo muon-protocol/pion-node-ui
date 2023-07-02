@@ -5,10 +5,139 @@ import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
+import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const ReviewDetail = () => {
   const windowHight = window.innerHeight;
   const bodyHeight = windowHight - 108 - 70;
+
+  const { walletAddress } = useUserProfile();
+  const { bonALICEs } = useBonALICE();
+  const {
+    setNodeIP,
+    isSelectNodeBonALICEModalOpen,
+    nodeBonALICE,
+    setIsSelectNodeBonALICEModalOpen,
+    setNodeBonALICE,
+    handleAddNodeClicked,
+    nodeIP,
+  } = useNodeBonALICE();
+
+  const reviewDetailCard = () => {
+    return (
+      <div className="bg-white px-10 py-9 rounded-2xl w-full">
+        <div className="flex w-full gap-3 mb-7">
+          <SelectButtonWithModal
+            title=""
+            onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
+            isModalOpen={isSelectNodeBonALICEModalOpen}
+            closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
+            modalTitle="Select BonALICE"
+            removeItem={() => setNodeBonALICE(null)}
+            selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
+          >
+            <div className="flex flex-col gap-3">
+              {bonALICEs.map((item) => {
+                return (
+                  <BonALICECard
+                    className="cursor-pointer"
+                    title={'BonALICE #' + item.tokenId}
+                    subTitle1="Node Power"
+                    subValue1={item.nodePower}
+                    subTitle2="Tier"
+                    subValue2={'ALICE Starter (Tier 1)'}
+                    onClick={() => {
+                      setNodeBonALICE(item);
+                      setIsSelectNodeBonALICEModalOpen(false);
+                    }}
+                    compact
+                    selected={item.tokenId === nodeBonALICE?.tokenId}
+                  />
+                );
+              })}
+            </div>
+          </SelectButtonWithModal>
+          <Link to="/create">
+            <button className="btn btn--secondary btn--icon-btn !h-14 !w-14">
+              <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
+            </button>
+          </Link>
+        </div>
+        <div className="flex flex-col gap-3">
+          <span className="flex w-full justify-between leading-5 font-light">
+            <span className="min-w-[170px]">Staking Address:</span>
+            <span className="font-semibold ">
+              {walletAddress?.slice(0, 6) +
+                '...' +
+                walletAddress?.slice(-5, -1)}
+            </span>
+          </span>
+          <span className="flex w-full justify-between leading-5 font-light">
+            <span className="flex gap-1 min-w-[170px]">Node Power: </span>
+            {nodeBonALICE ? (
+              <span>
+                <span className="mr-1 font-semibold">
+                  {nodeBonALICE.nodePower}
+                </span>
+                (
+                <span className="font-medium">
+                  {nodeBonALICE.ALICELockAmount.dsp}
+                </span>{' '}
+                ALICE +
+                <span className="font-medium">
+                  {' '}
+                  {nodeBonALICE.LPTokenLockAmount.dsp}
+                </span>{' '}
+                LP)
+              </span>
+            ) : (
+              <span className="font-semibold">0</span>
+            )}
+          </span>
+          <span className="flex w-full justify-between leading-5 font-light">
+            <span className="min-w-[170px]">Tier:</span>
+            <span className="font-semibold ">
+              {nodeBonALICE ? 'ALICE Starter (Tier 1)' : 'Select BonALICE'}
+            </span>
+          </span>
+          <span className="flex w-full justify-between leading-5 font-light">
+            <span className="min-w-[170px]">Verification Required:</span>
+
+            {nodeBonALICE ? (
+              <span className="font-semibold underline  cursor-pointer">
+                6 methods
+              </span>
+            ) : (
+              <span className="font-semibold">Select BonALICE</span>
+            )}
+          </span>
+        </div>
+      </div>
+    );
+  };
+
+  const transferCard = () => {
+    return (
+      <div
+        className={`bg-white px-6 py-9 rounded-2xl flex flex-col !w-[365px] !min-w-[365px]`}
+      >
+        <AddressInput
+          title="Node IP"
+          placeholder="Enter Node IP"
+          value={nodeIP}
+          onValueChanged={(value) => setNodeIP(value)}
+        />
+        <button
+          className="btn btn--secondary mt-auto mx-auto"
+          onClick={() => handleAddNodeClicked()}
+          disabled={!nodeIP || !nodeBonALICE}
+        >
+          Add Node
+        </button>
+      </div>
+    );
+  };
 
   return (
     <div
@@ -27,78 +156,11 @@ const ReviewDetail = () => {
             <NotificationCard className="!w-[365px] !min-w-[365px]" />
           </div>
           <div className="review-details--bottom flex gap-9 w-full">
-            <ReviewDetailCard className="" />
-            <TransferCard className="!w-[365px] !min-w-[365px]" />
+            {reviewDetailCard()}
+            {transferCard()}
           </div>
         </div>
       </FadeIn>
-    </div>
-  );
-};
-
-const ReviewDetailCard = ({ className = '' }: { className: string }) => {
-  const { bonALICEs } = useBonALICE();
-
-  return (
-    <div className={`bg-white px-10 py-9 rounded-2xl w-full ${className}`}>
-      <div className="flex w-full gap-3 mb-7">
-        <SelectButtonWithModal
-          title=""
-          onClick={() => {}}
-          isModalOpen={false}
-          closeModalHandler={() => {}}
-          modalTitle="Select BonALICE"
-          removeItem={() => {}}
-          selectedItems={[]}
-        >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.map((item) => {
-              return (
-                <BonALICECard
-                  className="cursor-pointer"
-                  title={'BonALICE #' + item.tokenId}
-                  subTitle1="Node Power"
-                  subValue1={1200}
-                  subTitle2="Tier"
-                  subValue2={'ALICE Starter (Tier 1)'}
-                  onClick={() => {}}
-                  compact
-                  selected={true}
-                />
-              );
-            })}
-          </div>
-        </SelectButtonWithModal>
-        <Link to="/create">
-          <button className="btn btn--secondary btn--icon-btn !h-14 !w-14">
-            <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
-          </button>
-        </Link>
-      </div>
-      <div className="flex flex-col gap-3">
-        <span className="flex w-full justify-between leading-5 font-light">
-          <span className="min-w-[170px]">Staking Address:</span>
-          <span className="font-semibold ">0x5a03...C7ef</span>
-        </span>
-        <span className="flex w-full justify-between leading-5 font-light">
-          <span className="flex gap-1 min-w-[170px]">Node Power: </span>
-          <span>
-            <span className="mr-1 font-semibold">1200</span>(
-            <span className="font-medium">500</span> ALICE +
-            <span className="font-medium"> 0</span> LP)
-          </span>
-        </span>
-        <span className="flex w-full justify-between leading-5 font-light">
-          <span className="min-w-[170px]">Tier:</span>
-          <span className="font-semibold ">ALICE Starter</span>
-        </span>
-        <span className="flex w-full justify-between leading-5 font-light">
-          <span className="min-w-[170px]">Verification Required:</span>
-          <span className="font-semibold underline  cursor-pointer">
-            6 Methods
-          </span>
-        </span>
-      </div>
     </div>
   );
 };
@@ -113,22 +175,6 @@ const NotificationCard = ({ className }: { className: ReactNode }) => {
         Your node will be activated once you've successfully completed the
         uniqueness verification process in your dashboard
       </p>
-    </div>
-  );
-};
-
-const TransferCard = ({ className = '' }: { className: string }) => {
-  return (
-    <div
-      className={`w-full bg-white px-6 py-9 rounded-2xl flex flex-col ${className}`}
-    >
-      <AddressInput
-        title="Node IP"
-        placeholder="Enter Node IP"
-        value={''}
-        onValueChanged={() => {}}
-      />
-      <button className="btn btn--secondary mt-auto mx-auto">Add Node</button>
     </div>
   );
 };
