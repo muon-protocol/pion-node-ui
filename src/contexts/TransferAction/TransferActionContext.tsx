@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
+import useUserProfile from '../UserProfile/useUserProfile.ts';
+import useTransfer from '../../hooks/useTransfer.ts';
 
 const TransferActionContext = createContext<{
   isTransferModalOpen: boolean;
@@ -10,6 +12,7 @@ const TransferActionContext = createContext<{
   selectedTransferBonALICE: BonALICE | null;
   handleTransferAddressChange: (address: string) => void;
   transferAddress: string;
+  transfer: () => void;
 }>({
   isTransferModalOpen: false,
   openTransferModal: () => {},
@@ -19,6 +22,7 @@ const TransferActionContext = createContext<{
   selectedTransferBonALICE: null,
   handleTransferAddressChange: () => {},
   transferAddress: '',
+  transfer: () => {},
 });
 
 const TransferActionProvider = ({ children }: { children: ReactNode }) => {
@@ -29,6 +33,13 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
   const handleTransferAddressChange = (address: string) => {
     setTransferAddress(address);
   };
+  const { walletAddress } = useUserProfile();
+
+  const { transfer } = useTransfer(
+    walletAddress,
+    transferAddress,
+    transferModalSelectedBonALICE?.tokenId,
+  );
 
   const handleTransferModalItemClicked = (bonALICE: BonALICE) => {
     if (!transferModalSelectedBonALICE) {
@@ -72,6 +83,7 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
         closeTransferModal,
         isSelectedTransferBonALICE,
         handleTransferModalItemClicked,
+        transfer,
       }}
     >
       {children}
