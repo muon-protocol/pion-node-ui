@@ -59,6 +59,8 @@ const RenderTransferBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AddressInput
+          title={'To Address'}
+          placeholder={'Enter address'}
           value={transferAddress}
           onValueChanged={handleTransferAddressChange}
         />
