@@ -24,11 +24,13 @@ const SelectButtonWithModal = ({
   removeItem: (item: BonALICE) => void;
 }) => {
   return (
-    <div className="select-button-with-modal mb-2">
+    <div className="select-button-with-modal mb-2 w-full">
       <div className="flex flex-col w-full gap-2" onClick={onClick}>
-        <div className="text-gray text-sm max-md:text-sm max-md:font-semibold">
-          {title}
-        </div>
+        {title && (
+          <div className="text-gray text-sm max-md:text-sm max-md:font-semibold">
+            {title}
+          </div>
+        )}
         <div className="select-button-with-modal__button flex items-center justify-between bg-catskill-white rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
           <span className="flex gap-1.5 md:gap-2.5 items-center">
             <img

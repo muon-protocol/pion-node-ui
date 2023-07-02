@@ -71,9 +71,11 @@ input[type=number] {
   }
 
   &--get-started,
-  &--review-details,
   &--claim-prize {
     @apply flex flex-col items-center justify-center md:max-w-[688px] mx-auto;
+  }
+  &--review-details {
+    @apply flex flex-col items-center justify-center md:max-w-[937px] mx-auto;
   }
 }
 
@@ -86,6 +88,10 @@ input[type=number] {
     @apply bg-disabled text-gray3 cursor-not-allowed;
   }
 
+  &--icon-btn {
+    @apply p-4;
+  }
+
   &--small {
     @apply px-5 py-2 text-sm;
 
@@ -93,7 +99,6 @@ input[type=number] {
       @apply px-4 py-1.5 text-sm;
     }
   }
-
 
   &--large {
     @apply px-20 py-6 text-2xl font-medium;
