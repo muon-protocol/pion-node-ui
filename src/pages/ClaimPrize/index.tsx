@@ -10,7 +10,7 @@ import { useMemo } from 'react';
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
     useClaimPrize();
-
+  const { stakingAddress } = useClaimPrize();
   // const { openSwitchBackToWalletModal } = useClaimPrize();
 
   const { eligibleAddresses } = useClaimPrize();
@@ -56,7 +56,11 @@ const ClaimPrize = () => {
             <p className="text-center">
               To claim your bonALICE, please switch back to your Staking Address
               <br />
-              <strong>(0x5a03…c7ef)</strong>
+              <strong>
+                {stakingAddress?.slice(0, 6) +
+                  '...' +
+                  stakingAddress?.slice(-5, -1)}
+              </strong>
             </p>
           </div>
         </Link>
