@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import { useMemo } from 'react';
 import { FadeIn } from '../../animations';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -81,6 +82,9 @@ const VerifyWalletCard = ({
   wallet: RewardWallet;
   className?: string;
 }) => {
+  const { handleVerifyWallet } = useClaimPrize();
+  const { walletAddress } = useUserProfile();
+
   return (
     <div
       className={`bg-primary-dark px-[18px] pb-[18px] pt-4 rounded-2xl flex flex-col text-white ${className}`}
@@ -135,8 +139,17 @@ const VerifyWalletCard = ({
         <p className="mt-auto mb-3 w-full flex items-center justify-end text-sm font-medium text-green">
           VERIFIED!
         </p>
+      ) : walletAddress === wallet.walletAddress ? (
+        <button
+          className="btn btn--small ml-auto"
+          onClick={() => handleVerifyWallet()}
+        >
+          Verify
+        </button>
       ) : (
-        <button className="btn btn--small ml-auto">Verify</button>
+        <button className="btn btn--small ml-auto" disabled>
+          Switch Wallet
+        </button>
       )}
     </div>
   );

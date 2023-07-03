@@ -7,6 +7,7 @@ import useTotalRewards from '../../hooks/useTotalRewards.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
 import useStakingAddress from '../../hooks/useStakingAddress.ts';
+import useSignMessage from '../../hooks/useSignMessage.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -15,6 +16,7 @@ const ClaimPrizeContext = createContext<{
   rewardWallets: RewardWallet[];
   totalRewards: W3bNumber;
   stakingAddress: `0x${string}` | undefined;
+  handleVerifyWallet: () => void;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -22,6 +24,7 @@ const ClaimPrizeContext = createContext<{
   rewardWallets: [],
   totalRewards: w3bNumberFromNumber(0),
   stakingAddress: undefined,
+  handleVerifyWallet: () => {},
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -40,6 +43,26 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
 
+  const { signMessageMetamask } = useSignMessage(
+    `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
+  );
+  const handleVerifyWallet = () => {
+    signMessageMetamask()
+      .then((signature) => {
+        setWalletsWithSignatures((wallets) => {
+          const newWallets = [...wallets];
+          const index = newWallets.findIndex(
+            (wallet) => wallet.walletAddress === walletAddress,
+          );
+          newWallets[index].signature = signature;
+          return newWallets;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (!walletAddress || !isConnected) return;
     if (
@@ -51,7 +74,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         ...walletsWithSignatures,
         {
           walletAddress: walletAddress,
-          signature: '',
+          signature: null,
         },
       ]);
     }
@@ -90,6 +113,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         rewardWallets,
         totalRewards,
         stakingAddress,
+        handleVerifyWallet,
       }}
     >
       {children}
