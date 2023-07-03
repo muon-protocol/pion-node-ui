@@ -72,7 +72,7 @@ const VerifyWalletCard = ({
   wallet: RewardWallet;
   className?: string;
 }) => {
-  const { handleVerifyWallet } = useClaimPrize();
+  const { handleVerifyWallet, handleRemoveWallet } = useClaimPrize();
   const { walletAddress } = useUserProfile();
 
   return (
@@ -85,11 +85,14 @@ const VerifyWalletCard = ({
             '...' +
             wallet.walletAddress.slice(-5, -1)}
         </p>
-        <img
-          src="/assets/images/modal/exit-white-icon.svg"
-          alt=""
-          className="cursor-pointer"
-        />
+        {wallet.walletAddress !== walletAddress && (
+          <img
+            onClick={() => handleRemoveWallet(wallet.walletAddress)}
+            src="/assets/images/modal/exit-white-icon.svg"
+            alt=""
+            className="cursor-pointer"
+          />
+        )}
       </span>
       <span className="reward-sources flex-col gap-2 ml-4 mb-1">
         <span className="reward-source flex gap-2">

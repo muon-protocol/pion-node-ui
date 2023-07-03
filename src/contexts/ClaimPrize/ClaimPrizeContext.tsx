@@ -17,6 +17,7 @@ const ClaimPrizeContext = createContext<{
   stakingAddress: `0x${string}` | undefined;
   handleVerifyWallet: () => void;
   eligibleAddresses: RewardWallet[];
+  handleRemoveWallet: (walletAddress: string) => void;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -25,6 +26,7 @@ const ClaimPrizeContext = createContext<{
   stakingAddress: undefined,
   handleVerifyWallet: () => {},
   eligibleAddresses: [],
+  handleRemoveWallet: () => {},
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -56,6 +58,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const { signMessageMetamask } = useSignMessage(
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   );
+
+  const handleRemoveWallet = (walletAddress: string) => {
+    setWalletsWithSignatures((wallets) =>
+      wallets.filter((wallet) => wallet.walletAddress !== walletAddress),
+    );
+  };
   const handleVerifyWallet = () => {
     signMessageMetamask()
       .then((signature) => {
@@ -124,6 +132,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         stakingAddress,
         handleVerifyWallet,
         eligibleAddresses,
+        handleRemoveWallet,
       }}
     >
       {children}
