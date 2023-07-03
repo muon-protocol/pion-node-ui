@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { getRewardsAPI } from '../../apis';
 import { RawRewards, RewardWallet, WalletWithSignature } from '../../types';
@@ -13,18 +13,18 @@ const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
   openSwitchBackToWalletModal: () => void;
   closeSwitchBackToWalletModal: () => void;
-  rewardWallets: RewardWallet[];
   totalRewards: W3bNumber;
   stakingAddress: `0x${string}` | undefined;
   handleVerifyWallet: () => void;
+  eligibleAddresses: RewardWallet[];
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
   closeSwitchBackToWalletModal: () => {},
-  rewardWallets: [],
   totalRewards: w3bNumberFromNumber(0),
   stakingAddress: undefined,
   handleVerifyWallet: () => {},
+  eligibleAddresses: [],
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -42,6 +42,16 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   >([]);
 
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
+
+  const eligibleAddresses = useMemo(() => {
+    return rewardWallets.filter(
+      (wallet) =>
+        wallet.wasInMuonPresale ||
+        wallet.wasInDeusPresale ||
+        wallet.wasAliceOperator ||
+        wallet.wasAliceOperatorEarly,
+    );
+  }, [rewardWallets]);
 
   const { signMessageMetamask } = useSignMessage(
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
@@ -110,10 +120,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         isSwitchBackToWalletModalOpen,
         openSwitchBackToWalletModal,
         closeSwitchBackToWalletModal,
-        rewardWallets,
         totalRewards,
         stakingAddress,
         handleVerifyWallet,
+        eligibleAddresses,
       }}
     >
       {children}

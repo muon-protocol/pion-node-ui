@@ -3,9 +3,9 @@ import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { Link } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
-import { useMemo } from 'react';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import { useMemo } from 'react';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -13,17 +13,7 @@ const ClaimPrize = () => {
 
   // const { openSwitchBackToWalletModal } = useClaimPrize();
 
-  const { rewardWallets } = useClaimPrize();
-
-  const eligibleAddresses = useMemo(() => {
-    return rewardWallets.filter(
-      (wallet) =>
-        wallet.wasInMuonPresale ||
-        wallet.wasInDeusPresale ||
-        wallet.wasAliceOperator ||
-        wallet.wasAliceOperatorEarly,
-    );
-  }, [rewardWallets]);
+  const { eligibleAddresses } = useClaimPrize();
 
   return (
     <FadeIn duration={0.3} className="page page--claim-prize">
@@ -158,6 +148,15 @@ const VerifyWalletCard = ({
 const ClaimCard = () => {
   const { openSwitchBackToWalletModal } = useClaimPrize();
   const { totalRewards, stakingAddress } = useClaimPrize();
+  const { walletAddress } = useUserProfile();
+  const { eligibleAddresses } = useClaimPrize();
+
+  const isClaimButtonDisabled = useMemo(() => {
+    return (
+      eligibleAddresses.length === 0 ||
+      eligibleAddresses.some((wallet) => !wallet.signature)
+    );
+  }, [eligibleAddresses]);
 
   return (
     <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex text-white">
@@ -166,9 +165,11 @@ const ClaimCard = () => {
         <span className="flex justify-between font-light mb-3">
           <p>Staking address:</p>
           <p className="font-semibold">
-            {stakingAddress?.slice(0, 6) +
-              '...' +
-              stakingAddress?.slice(-5, -1)}
+            {walletAddress
+              ? stakingAddress?.slice(0, 6) +
+                '...' +
+                stakingAddress?.slice(-5, -1)
+              : 'connect wallet'}
           </p>
         </span>
         <span className="flex justify-between font-light mb-3">
@@ -187,21 +188,27 @@ const ClaimCard = () => {
         </span>
         <span className="flex justify-between font-light mb-3">
           <p>bonALICE Tier:</p>
-          <p className="font-semibold">ALICE Starter</p>
+          <p className="font-semibold">
+            {eligibleAddresses.length > 0
+              ? 'ALICE Starter'
+              : 'No eligible wallet'}
+          </p>
         </span>
         <p className="flex justify-between font-light">
           <p>Potential APR:</p>
-          <p className="font-semibold">10%-15%</p>
+          <p className="font-semibold">
+            {eligibleAddresses.length > 0 ? '10%-15%' : 'No eligible wallet'}
+          </p>
         </p>
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-1">
         <p className="font-medium underline text-sm cursor-pointer">
-          Prize Calculation Details
+          {eligibleAddresses.length !== 0 && 'Prize Calculation Details'}
         </p>
         <button
           onClick={openSwitchBackToWalletModal}
           className="btn text-xl font-medium"
-          disabled={1 !== 1}
+          disabled={isClaimButtonDisabled}
         >
           Claim
         </button>
