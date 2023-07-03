@@ -53,7 +53,7 @@ export type RewardWallet = {
   wasInMuonPresale: boolean;
   wasInDeusPresale: boolean;
   wasAliceOperator: boolean;
-  hasBeenProcessed: boolean;
+  wasAliceOperatorEarly: boolean;
 };
 
 export enum NotificationSources {
@@ -97,4 +97,9 @@ export type BonALICE = {
   ALICELockAmount: W3bNumber;
   LPTokenLockAmount: W3bNumber;
   nodePower: number;
+};
+
+export type WalletWithSignature = {
+  walletAddress: `0x${string}`;
+  signature: string | null;
 };

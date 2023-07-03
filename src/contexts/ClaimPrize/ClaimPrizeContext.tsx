@@ -1,41 +1,61 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { getRewardsAPI } from '../../apis';
-import { RawRewards, RewardWallet } from '../../types';
+import { RawRewards, RewardWallet, WalletWithSignature } from '../../types';
 import { useRewardWallets } from '../../hooks/useRewardWallets.ts';
+import useTotalRewards from '../../hooks/useTotalRewards.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
+import { w3bNumberFromNumber } from '../../utils/web3.ts';
+import useStakingAddress from '../../hooks/useStakingAddress.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
   openSwitchBackToWalletModal: () => void;
   closeSwitchBackToWalletModal: () => void;
   rewardWallets: RewardWallet[];
-  totalRewards: number;
+  totalRewards: W3bNumber;
+  stakingAddress: `0x${string}` | undefined;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
   closeSwitchBackToWalletModal: () => {},
   rewardWallets: [],
-  totalRewards: 0,
+  totalRewards: w3bNumberFromNumber(0),
+  stakingAddress: undefined,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
+  const { walletAddress, isConnected } = useUserProfile();
+
   const [isSwitchBackToWalletModalOpen, setIsSwitchBackToWalletModalOpen] =
     useState(false);
+
   const [rawRewards, setRawRewards] = useState<RawRewards | null>(null);
-  const [totalRewards, setTotalRewards] = useState<number>(0);
 
-  const { walletAddress, isConnected } = useUserProfile();
-  const [stakingAddress, setStakingAddress] = useState<
-    `0x${string}` | undefined
-  >(undefined);
+  const { stakingAddress } = useStakingAddress();
+  const { totalRewards } = useTotalRewards(rawRewards);
+  const [walletsWithSignatures, setWalletsWithSignatures] = useState<
+    WalletWithSignature[]
+  >([]);
 
-  const { rewardWallets, updateRewardWallet } = useRewardWallets();
+  const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
 
   useEffect(() => {
-    if (!stakingAddress) {
-      setStakingAddress(walletAddress);
+    if (!walletAddress || !isConnected) return;
+    if (
+      !walletsWithSignatures.find(
+        (wallet) => wallet.walletAddress === walletAddress,
+      )
+    ) {
+      setWalletsWithSignatures([
+        ...walletsWithSignatures,
+        {
+          walletAddress: walletAddress,
+          signature: '',
+        },
+      ]);
     }
-  }, [walletAddress, stakingAddress]);
+  }, [walletsWithSignatures, walletAddress, isConnected]);
 
   useEffect(() => {
     if (!walletAddress || !isConnected) return;
@@ -43,7 +63,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     async function getRewards() {
       try {
         const walletsString: string[] = [];
-        rewardWallets.map((wallet) => {
+        walletsWithSignatures.map((wallet) => {
           walletsString.push(wallet.walletAddress);
         });
         const response = await getRewardsAPI(walletsString);
@@ -54,20 +74,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     }
 
     getRewards();
-  }, [rewardWallets, walletAddress, isConnected]);
-
-  useEffect(() => {
-    if (rawRewards) {
-      setTotalRewards(
-        rawRewards.alice_operator.reward +
-          rawRewards.deus_presale.reward +
-          rawRewards.early_alice_operator.reward +
-          rawRewards.muon_presale.reward,
-      );
-
-      updateRewardWallet(rawRewards);
-    }
-  }, [rawRewards, updateRewardWallet]);
+  }, [walletsWithSignatures, walletAddress, isConnected]);
 
   const openSwitchBackToWalletModal = () =>
     setIsSwitchBackToWalletModalOpen(true);
@@ -82,6 +89,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         closeSwitchBackToWalletModal,
         rewardWallets,
         totalRewards,
+        stakingAddress,
       }}
     >
       {children}
