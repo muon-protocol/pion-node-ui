@@ -8,14 +8,13 @@ const axiosInstance = axios.create({
 });
 
 export async function getRewardsAPI(addresses: string[]) {
-  console.log(addresses);
-  const response = await axiosInstance.get('/reward-server/rewards', {
-    headers: {
-      'Content-Type': 'application/json',
+  const response = await axiosInstance.get(
+    '/reward-server/rewards?addresses=' + addresses.join(','),
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
     },
-    data: {
-      addresses: addresses,
-    },
-  });
+  );
   return response.data;
 }

@@ -25,7 +25,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [totalRewards, setTotalRewards] = useState<number>(0);
 
   const { walletAddress, isConnected } = useUserProfile();
+  const [stakingAddress, setStakingAddress] = useState<
+    `0x${string}` | undefined
+  >(undefined);
+
   const { rewardWallets, updateRewardWallet } = useRewardWallets();
+
+  useEffect(() => {
+    if (!stakingAddress) {
+      setStakingAddress(walletAddress);
+    }
+  }, [walletAddress, stakingAddress]);
 
   useEffect(() => {
     if (!walletAddress || !isConnected) return;
