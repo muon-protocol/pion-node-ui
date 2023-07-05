@@ -24,6 +24,8 @@ export const RenderUpgradeBody = () => {
     handleUpgradeBonALICEClicked,
     LPTokenApprove,
     ALICEApprove,
+    isMetamaskLoading,
+    isTransactionLoading,
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
@@ -150,9 +152,9 @@ export const RenderUpgradeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {1 !== 1 ? (
+        {isMetamaskLoading || isTransactionLoading ? (
           <button className="btn !w-full" disabled>
-            Upgrading...
+            {isMetamaskLoading ? 'Waiting for Metamask...' : 'Waiting...'}
           </button>
         ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
           <button

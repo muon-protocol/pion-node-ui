@@ -1,13 +1,20 @@
 import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
 import { W3bNumber } from '../../types/wagmi.ts';
-import { w3bNumberFromString } from '../../utils/web3.ts';
-import useLock from '../../hooks/useLock.ts';
+import { w3bNumberFromNumber, w3bNumberFromString } from '../../utils/web3.ts';
 import useApprove from '../../hooks/useApprove.ts';
-import { ALICE_ADDRESS, LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
+import {
+  ALICE_ADDRESS,
+  BONALICE_ADDRESS,
+  LP_TOKEN_ADDRESS,
+} from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import { ALICE_ABI } from '../../abis/ALICE.ts';
-import { LP_TOKEN_ABI } from '../../abis/LPToken.ts';
+import ALICE_ABI from '../../abis/ALICE.json';
+import LP_TOKEN_ABI from '../../abis/LPToken.json';
+import useAliceContractWrite from '../../hooks/useAliceContractWrite.ts';
+import { useLockArgs } from '../../hooks/useContractArgs.ts';
+import useBonALICE from '../BonALICE/useBonALICE.ts';
+import BONALICE_ABI from '../../abis/BonALICE.json';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -23,6 +30,8 @@ const UpgradeActionContext = createContext<{
   handleUpgradeBonALICEClicked: () => void;
   ALICEApprove: () => void;
   LPTokenApprove: () => void;
+  isMetamaskLoading: boolean;
+  isTransactionLoading: boolean;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
@@ -30,21 +39,15 @@ const UpgradeActionContext = createContext<{
   selectedUpgradeBonALICE: null,
   isSelectedUpgradeBonALICE: () => false,
   handleUpgradeModalItemClicked: () => {},
-  upgradeAmount: {
-    dsp: 0,
-    big: BigInt(0),
-    hStr: '',
-  },
-  upgradeBoostAmount: {
-    dsp: 0,
-    big: BigInt(0),
-    hStr: '',
-  },
+  upgradeAmount: w3bNumberFromNumber(0),
+  upgradeBoostAmount: w3bNumberFromNumber(0),
   handleUpgradeBoostAmountChange: () => {},
   handleUpgradeAmountChange: () => {},
   handleUpgradeBonALICEClicked: () => {},
   ALICEApprove: () => {},
   LPTokenApprove: () => {},
+  isMetamaskLoading: false,
+  isTransactionLoading: false,
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -52,23 +55,35 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const [upgradeModalSelectedBonALICE, setUpgradeModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
 
-  const [upgradeAmount, setUpgradeAmount] = useState<W3bNumber>({
-    dsp: 0,
-    big: BigInt(0),
-    hStr: '',
-  });
-
-  const [upgradeBoostAmount, setUpgradeBoostAmount] = useState<W3bNumber>({
-    dsp: 0,
-    big: BigInt(0),
-    hStr: '',
-  });
-
-  const { lock } = useLock(
-    upgradeModalSelectedBonALICE?.tokenId,
-    upgradeAmount,
-    upgradeBoostAmount,
+  const [upgradeAmount, setUpgradeAmount] = useState<W3bNumber>(
+    w3bNumberFromString(''),
   );
+
+  const [upgradeBoostAmount, setUpgradeBoostAmount] = useState<W3bNumber>(
+    w3bNumberFromString(''),
+  );
+
+  const { LPTokenAllowance, ALICEAllowance } = useBonALICE();
+
+  const lockArgs = useLockArgs({
+    tokenId: upgradeModalSelectedBonALICE?.tokenId,
+    ALICEAmount: upgradeAmount,
+    LPTokenAmount: upgradeBoostAmount,
+    ALICEAllowance: ALICEAllowance,
+    LPTokenAllowance: LPTokenAllowance,
+  });
+
+  const {
+    callback: lock,
+    isMetamaskLoading,
+    isTransactionLoading,
+  } = useAliceContractWrite({
+    abi: BONALICE_ABI,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    args: lockArgs,
+    functionName: 'lock',
+    chainId: getCurrentChainId(),
+  });
 
   const { approve: ALICEApprove } = useApprove(
     ALICE_ABI,
@@ -83,10 +98,11 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const handleUpgradeBonALICEClicked = async () => {
-    if (!upgradeModalSelectedBonALICE || !upgradeAmount.dsp) {
-      return;
-    }
-    const result = await lock();
+    const result = await lock?.({
+      pending: 'Locking...',
+      success: 'Locked!',
+      failed: 'Failed to lock.',
+    });
     console.log(result);
   };
 
@@ -145,6 +161,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeBonALICEClicked,
         ALICEApprove,
         LPTokenApprove,
+        isMetamaskLoading,
+        isTransactionLoading,
       }}
     >
       {children}
