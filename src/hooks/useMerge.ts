@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { BONALICE_ADDRESS } from '../constants/addresses.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import { writeContract } from '@wagmi/core';
-import BONALICE_API from '../abis/BonALICE.json';
+import BONALICE_API from '../abis/BonALICE.ts';
 
 const useMerge = (tokenId1: number | null, tokenId2: number | null) => {
   const merge = useCallback(async () => {

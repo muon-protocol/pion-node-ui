@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import BONALICE_API from '../../abis/BonALICE.json';
-import ALICE_API from '../../abis/ALICE.json';
+import BONALICE_API from '../../abis/BonALICE.ts';
+import ALICE_API from '../../abis/ALICE.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
