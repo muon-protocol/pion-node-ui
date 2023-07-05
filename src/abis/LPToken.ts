@@ -1,4 +1,4 @@
-export default [
+export const LP_TOKEN_ABI = [
   {
     inputs: [],
     payable: false,
@@ -495,4 +495,4 @@ export default [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+] as const;

@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { writeContract } from '@wagmi/core';
-import BONALICE_API from '../abis/BonALICE.ts';
+import { BONALICE_ABI } from '../abis/BonALICE.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -32,7 +32,7 @@ const useSplit = (bonALICE: BonALICE | null, percentage: number) => {
 
   const split = useCallback(async () => {
     const { hash } = await writeContract({
-      abi: BONALICE_API,
+      abi: BONALICE_ABI,
       address: BONALICE_ADDRESS[getCurrentChainId()],
       functionName: 'split',
       args: args,

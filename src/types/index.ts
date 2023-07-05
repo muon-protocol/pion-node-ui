@@ -103,3 +103,9 @@ export type WalletWithSignature = {
   walletAddress: `0x${string}`;
   signature: string | null;
 };
+
+export type StateMessages = {
+  pending: string;
+  success: string;
+  failed: string;
+};

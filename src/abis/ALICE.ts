@@ -621,4 +621,4 @@ export const ALICE_ABI = [
     stateMutability: 'nonpayable',
     type: 'function',
   },
-];
+] as const;

@@ -1,17 +1,9 @@
-export const BONALICE_ABI = [
+export const REWARD_ABI = [
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: '_logic',
-        type: 'address',
-      },
+      { internalType: 'address', name: '_logic', type: 'address' },
       { internalType: 'address', name: 'admin_', type: 'address' },
-      {
-        internalType: 'bytes',
-        name: '_data',
-        type: 'bytes',
-      },
+      { internalType: 'bytes', name: '_data', type: 'bytes' },
     ],
     stateMutability: 'payable',
     type: 'constructor',

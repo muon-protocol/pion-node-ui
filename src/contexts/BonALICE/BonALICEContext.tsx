@@ -6,7 +6,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_API from '../../abis/BonALICE.ts';
+import { BONALICE_ABI } from '../../abis/BonALICE.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -67,7 +67,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const { config } = usePrepareContractWrite({
-    abi: BONALICE_API,
+    abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
     args: [[], [], walletAddress],
@@ -87,7 +87,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
       BonALICERefetch({ account: walletAddress }).then(({ data }) => {
         const rawBonALICEs: RawBonALICE[] = data.accountTokenIds ?? [];
         const contracts = rawBonALICEs.map((bonALICE: RawBonALICE) => ({
-          abi: BONALICE_API,
+          abi: BONALICE_ABI,
           address: BONALICE_ADDRESS[getCurrentChainId()],
           functionName: 'getLockedOf',
           args: [

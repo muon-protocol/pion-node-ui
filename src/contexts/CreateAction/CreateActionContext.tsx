@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
 import { useContractWrite, usePrepareContractWrite } from 'wagmi';
-import BONALICE_API from '../../abis/BonALICE.ts';
-import ALICE_API from '../../abis/ALICE.ts';
+import { BONALICE_ABI } from '../../abis/BonALICE.ts';
+import { ALICE_ABI } from '../../abis/ALICE.ts';
+
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -100,7 +101,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     config: mintAndLockConfigWithBoost,
     isLoading: mintAndLockWithBoostIsLoading,
   } = usePrepareContractWrite({
-    abi: BONALICE_API,
+    abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
     args: [
@@ -116,7 +117,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { config: mintAndLockConfig, isLoading: mintAndLockIsLoading } =
     usePrepareContractWrite({
-      abi: BONALICE_API,
+      abi: BONALICE_ABI,
       address: BONALICE_ADDRESS[getCurrentChainId()],
       functionName: 'mintAndLock',
       args: [
@@ -168,7 +169,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const { config: approveBonAliceConfig } = usePrepareContractWrite({
-    abi: ALICE_API,
+    abi: ALICE_ABI,
     address: ALICE_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
     args: [BONALICE_ADDRESS[getCurrentChainId()], createAmount.big],
@@ -183,7 +184,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   } = useContractWrite(approveBonAliceConfig);
 
   const { config: approveLPTokenConfig } = usePrepareContractWrite({
-    abi: ALICE_API,
+    abi: ALICE_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
     args: [BONALICE_ADDRESS[getCurrentChainId()], createBoostAmount.big],

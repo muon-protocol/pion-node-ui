@@ -6,6 +6,8 @@ import useLock from '../../hooks/useLock.ts';
 import useApprove from '../../hooks/useApprove.ts';
 import { ALICE_ADDRESS, LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
+import { ALICE_ABI } from '../../abis/ALICE.ts';
+import { LP_TOKEN_ABI } from '../../abis/LPToken.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -69,11 +71,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const { approve: ALICEApprove } = useApprove(
+    ALICE_ABI,
     ALICE_ADDRESS[getCurrentChainId()],
     upgradeAmount,
   );
 
   const { approve: LPTokenApprove } = useApprove(
+    LP_TOKEN_ABI,
     LP_TOKEN_ADDRESS[getCurrentChainId()],
     upgradeAmount,
   );
