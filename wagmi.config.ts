@@ -2298,6 +2298,70 @@ export default defineConfig({
         97: '0x998977f47C5eb2e8bC696815718B91140E307fC9',
       },
     },
+    {
+      name: 'Reward',
+      abi: [
+        {
+          inputs: [
+            { internalType: 'address', name: '_logic', type: 'address' },
+            { internalType: 'address', name: 'admin_', type: 'address' },
+            { internalType: 'bytes', name: '_data', type: 'bytes' },
+          ],
+          stateMutability: 'payable',
+          type: 'constructor',
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: 'address',
+              name: 'previousAdmin',
+              type: 'address',
+            },
+            {
+              indexed: false,
+              internalType: 'address',
+              name: 'newAdmin',
+              type: 'address',
+            },
+          ],
+          name: 'AdminChanged',
+          type: 'event',
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: 'address',
+              name: 'beacon',
+              type: 'address',
+            },
+          ],
+          name: 'BeaconUpgraded',
+          type: 'event',
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: 'address',
+              name: 'implementation',
+              type: 'address',
+            },
+          ],
+          name: 'Upgraded',
+          type: 'event',
+        },
+        { stateMutability: 'payable', type: 'fallback' },
+        { stateMutability: 'payable', type: 'receive' },
+      ],
+      address: {
+        97: '0x50dB73A29349a37b496cA451E8D295Ee6C4265C0',
+      },
+    },
   ],
   plugins: [],
 });
