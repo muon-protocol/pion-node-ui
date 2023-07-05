@@ -6,7 +6,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import { BONALICE_ABI } from '../../abis/BonALICE.ts';
+import BONALICE_ABI from '../../abis/BonALICE.json';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,

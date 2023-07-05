@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 import { writeContract } from '@wagmi/core';
-import { BONALICE_ABI } from '../abis/BonALICE.ts';
+import BONALICE_ABI from '../abis/BonALICE.json';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
