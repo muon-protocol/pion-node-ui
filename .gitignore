@@ -186,4 +186,7 @@ fabric.properties
 # and uncomment the following lines
 # .pnp.*
 
+# wagmi type generated files
+/src/abis/generated
+
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,visualstudiocode,react,yarn
