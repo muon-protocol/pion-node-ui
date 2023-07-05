@@ -1,12 +1,10 @@
-import ALICE_ABI from '../abis/ALICE.json';
 import { BONALICE_ADDRESS } from '../constants/addresses.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import { W3bNumber } from '../types/wagmi.ts';
 import useAliceContractWrite from './useAliceContractWrite.ts';
-import { LP_TOKEN_ABI } from '../abis/LPToken.ts';
 
 const useApprove = (
-  abi: typeof ALICE_ABI | typeof LP_TOKEN_ABI,
+  abi: any,
   tokenAddress: `0x${string}`,
   approveAmount: W3bNumber,
 ) => {
