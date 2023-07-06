@@ -93,14 +93,14 @@ const AmountInput = ({
           {rightText}
         </div>
       </div>
-      {balance && Number(balance) < Number(value) && (
+      {balance && Number(balance) < Number(value) ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
             You don't have sufficient amount of ALICE.{' '}
             <span className="underline cursor-pointer">BUY HERE</span>
           </p>
         </FadeIn>
-      )}
+      ) : null}
     </div>
   );
 };

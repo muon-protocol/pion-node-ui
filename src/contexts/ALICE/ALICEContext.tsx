@@ -32,7 +32,7 @@ const ALICEProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (ALICEBalanceIsFetched && ALICEBalanceData && ALICEBalanceData?.value) {
+    if (ALICEBalanceIsFetched && ALICEBalanceData) {
       setALICEBalance(w3bNumberFromBigint(ALICEBalanceData.value));
     }
   }, [ALICEBalanceIsFetched, ALICEBalanceData]);
