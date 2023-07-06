@@ -5,6 +5,8 @@ import { FadeIn, MoveUpIn, SwingIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const RenderSplitBody = () => {
   const {
@@ -17,8 +19,11 @@ const RenderSplitBody = () => {
     selectedSplitBonALICE,
     isSelectedSplitBonALICE,
     handleSplit,
+    isMetamaskLoading,
+    isTransactionLoading,
   } = useSplitAction();
   const { bonALICEs } = useBonALICE();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isSplitBonALICEsButtonDisabled = useMemo(() => {
     return !selectedSplitBonALICE;
@@ -105,15 +110,30 @@ const RenderSplitBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button
-          onClick={() => {
-            !isSplitBonALICEsButtonDisabled && handleSplit();
-          }}
-          disabled={isSplitBonALICEsButtonDisabled}
-          className="btn !w-full"
-        >
-          Split
-        </button>
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn !w-full"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn !w-full" disabled>
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              !isSplitBonALICEsButtonDisabled && handleSplit();
+            }}
+            disabled={isSplitBonALICEsButtonDisabled}
+            className="btn !w-full"
+          >
+            Split Bonded ALICE
+          </button>
+        )}
       </FadeIn>
     </>
   );

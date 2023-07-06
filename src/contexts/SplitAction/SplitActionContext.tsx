@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
 import { useSplitArgs } from '../../hooks/useContractArgs.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
@@ -16,6 +16,8 @@ const SplitActionContext = createContext<{
   isSelectedSplitBonALICE: (bonALICE: BonALICE) => boolean;
   handleSplitModalItemClicked: (bonALICE: BonALICE) => void;
   handleSplit: () => void;
+  isMetamaskLoading: boolean;
+  isTransactionLoading: boolean;
 }>({
   splitValue: 50,
   setSplitValue: () => {},
@@ -26,6 +28,8 @@ const SplitActionContext = createContext<{
   isSelectedSplitBonALICE: () => false,
   handleSplitModalItemClicked: () => {},
   handleSplit: () => {},
+  isMetamaskLoading: false,
+  isTransactionLoading: false,
 });
 
 const SplitActionProvider = ({ children }: { children: ReactNode }) => {
@@ -39,7 +43,12 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
     percentage: splitValue,
   });
 
-  const { callback: split } = useWagmiContractWrite({
+  const {
+    callback: split,
+    isTransactionLoading,
+    isMetamaskLoading,
+    isSuccess,
+  } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'split',
@@ -47,12 +56,18 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      setSplitModalSelectedBonALICE(null);
+    }
+  }, [isSuccess]);
+
   const handleSplit = () => {
     try {
       split?.({
-        pending: 'Splitting BonALICE...',
-        success: 'BonALICE splitted successfully!',
-        failed: 'Failed to split BonALICE',
+        pending: 'Splitting Bonded ALICE...',
+        success: 'Split!',
+        failed: 'Failed to split Bonded ALICE',
       });
     } catch (error) {
       console.error(error);
@@ -102,6 +117,8 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         isSelectedSplitBonALICE,
         handleSplitModalItemClicked,
         handleSplit,
+        isMetamaskLoading,
+        isTransactionLoading,
       }}
     >
       {children}
