@@ -20,16 +20,14 @@ export async function getRewardsAPI(addresses: string[]) {
 }
 
 export async function getClaimSignatureAPI(
-  signatures: string[],
-  addresses: `0x${string}`[],
+  signatures: (string | null)[],
+  addresses: string[],
   claimer: `0x${string}`,
 ) {
-  const response = await axiosInstance.post('/rewards', {
-    data: {
-      signatures: signatures,
-      addresses: addresses,
-      claimer: claimer,
-    },
+  const response = await axiosInstance.post('/reward-server/rewards', {
+    signatures: signatures,
+    addresses: addresses,
+    claimer: claimer,
   });
   return response.data;
 }

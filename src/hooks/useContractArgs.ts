@@ -117,3 +117,15 @@ export const useMergeArgs = ({
     return [tokenId1, tokenId2];
   }, [tokenId1, tokenId2]);
 };
+
+export const useClaimRewardArgs = ({
+  rewardAmount,
+  signature,
+}: {
+  rewardAmount: W3bNumber;
+  signature: string | null;
+}) => {
+  if (!rewardAmount || !signature) return null;
+
+  return [rewardAmount.big, signature];
+};

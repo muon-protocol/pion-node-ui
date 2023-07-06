@@ -8,6 +8,11 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
 import useStakingAddress from '../../hooks/useStakingAddress.ts';
 import useSignMessage from '../../hooks/useSignMessage.ts';
+import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
+import { REWARD_ABI } from '../../abis/Reward.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import { REWARD_ADDRESS } from '../../constants/addresses.ts';
+import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -45,6 +50,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     WalletWithSignature[]
   >([]);
 
+  const [claimSignature, setClaimSignature] = useState<string | null>(null);
+
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
 
   const eligibleAddresses = useMemo(() => {
@@ -61,23 +68,46 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   );
 
+  const claimRewardArgs = useClaimRewardArgs({
+    rewardAmount: totalRewards,
+    signature: claimSignature,
+  });
+
+  const { callback: claimReward } = useWagmiContractWrite({
+    abi: REWARD_ABI,
+    address: REWARD_ADDRESS[getCurrentChainId()],
+    functionName: 'claimReward',
+    args: claimRewardArgs,
+    chainId: getCurrentChainId(),
+  });
+
   const getClaimSignature = async () => {
     if (walletsWithSignatures.find((wallet) => wallet.signature === null))
       return;
-    const signatures = walletsWithSignatures.map((wallet) => wallet.signature);
-    const addresses = walletsWithSignatures.map(
-      (wallet) => wallet.walletAddress,
-    );
+    const signatures = eligibleAddresses.map((wallet) => wallet.signature);
+    const addresses = eligibleAddresses.map((wallet) => wallet.walletAddress);
     if (!stakingAddress || !isConnected || !signatures || !addresses) return;
-
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const signature = await getClaimSignatureAPI(
-      signatures,
-      addresses,
-      stakingAddress,
-    );
-    console.log('signature:' + signature);
+    try {
+      const response = await getClaimSignatureAPI(
+        signatures,
+        addresses,
+        stakingAddress,
+      );
+      if (response?.success) {
+        setClaimSignature(response.result.signature);
+        setTimeout(() => {
+          // TODO: CLEAN CODE
+          console.log();
+          claimReward?.({
+            pending: 'Waiting for confirmation',
+            success: 'Approved',
+            failed: 'Error',
+          });
+        }, 100);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleRemoveWallet = (walletAddress: string) => {
