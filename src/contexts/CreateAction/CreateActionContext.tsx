@@ -26,7 +26,7 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: (amount: string) => void;
   handleCreateBoostAmountChange: (amount: string) => void;
   handleCreateBonALICEClicked: () => void;
-  handleApproveBonALICEClicked: () => void;
+  handleApproveALICEClicked: () => void;
   handleApproveLPTokenClicked: () => void;
   isAllowanceModalOpen: boolean;
   closeAllowanceModal: () => void;
@@ -41,7 +41,7 @@ const CreateActionContext = createContext<{
   handleCreateAmountChange: () => {},
   handleCreateBoostAmountChange: () => {},
   handleCreateBonALICEClicked: () => {},
-  handleApproveBonALICEClicked: () => {},
+  handleApproveALICEClicked: () => {},
   handleApproveLPTokenClicked: () => {},
   isAllowanceModalOpen: false,
   closeAllowanceModal: () => {},
@@ -172,7 +172,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [approveLPTokenIsSuccess]);
 
-  const handleApproveBonALICEClicked = () => {
+  const handleApproveALICEClicked = () => {
     if (
       !ALICEBalance ||
       !createAmount ||
@@ -223,7 +223,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         handleCreateAmountChange,
         handleCreateBoostAmountChange,
         handleCreateBonALICEClicked,
-        handleApproveBonALICEClicked,
+        handleApproveALICEClicked,
         handleApproveLPTokenClicked,
         isAllowanceModalOpen,
         closeAllowanceModal,

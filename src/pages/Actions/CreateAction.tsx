@@ -19,7 +19,7 @@ export const RenderCreateBody = () => {
     handleCreateBoostAmountChange,
     handleCreateBonALICEClicked,
     createActionLoading,
-    handleApproveBonALICEClicked,
+    handleApproveALICEClicked,
     handleApproveLPTokenClicked,
     isAllowanceModalOpen,
     closeAllowanceModal,
@@ -118,7 +118,7 @@ export const RenderCreateBody = () => {
           </button>
         ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
           <button
-            onClick={() => handleApproveBonALICEClicked()}
+            onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
@@ -166,7 +166,11 @@ export const RenderCreateBody = () => {
           {ALICEAllowance && ALICEAllowance?.big < createAmount?.big ? (
             <button
               className="btn btn--dark-primary"
-              onClick={() => handleApproveBonALICEClicked()}
+              onClick={() =>
+                !isApproveMetamaskLoading &&
+                !isApproveTransactionLoading &&
+                handleApproveALICEClicked()
+              }
             >
               {isApproveMetamaskLoading
                 ? 'Waiting for Metamask...'
@@ -178,8 +182,9 @@ export const RenderCreateBody = () => {
             <button
               className="btn btn--dark-primary"
               onClick={() =>
-                !isMetamaskLoading ||
-                (!isTransactionLoading && handleApproveLPTokenClicked())
+                !isApproveMetamaskLoading &&
+                !isApproveTransactionLoading &&
+                handleApproveLPTokenClicked()
               }
             >
               {isApproveMetamaskLoading
