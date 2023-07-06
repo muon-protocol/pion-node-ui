@@ -1,6 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
-import useMerge from '../../hooks/useMerge.ts';
+import { useMergeArgs } from '../../hooks/useContractArgs.ts';
+import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import BONALICE_ABI from '../../abis/BonALICE.json';
+import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
@@ -9,7 +13,7 @@ const MergeActionContext = createContext<{
   selectedMergeBonALICEs: BonALICE[];
   isInSelectedMergeBonALICEs: (bonALICE: BonALICE) => boolean;
   handleMergeModalItemClicked: (bonALICE: BonALICE) => void;
-  merge: () => void;
+  handleMerge: () => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -17,7 +21,7 @@ const MergeActionContext = createContext<{
   selectedMergeBonALICEs: [],
   isInSelectedMergeBonALICEs: () => false,
   handleMergeModalItemClicked: () => {},
-  merge: () => {},
+  handleMerge: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -37,10 +41,28 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const { merge } = useMerge(
-    mergeModalSelectedBonALICEs[0]?.tokenId,
-    mergeModalSelectedBonALICEs[1]?.tokenId,
-  );
+  const mergeArgs = useMergeArgs({
+    tokenId1: mergeModalSelectedBonALICEs[0]?.tokenId,
+    tokenId2: mergeModalSelectedBonALICEs[1]?.tokenId,
+  });
+
+  const { callback: merge } = useWagmiContractWrite({
+    abi: BONALICE_ABI,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'merge',
+    args: mergeArgs,
+    chainId: getCurrentChainId(),
+  });
+
+  const handleMerge = () => {
+    if (!mergeArgs) return;
+
+    merge?.({
+      pending: 'Merging...',
+      success: 'Merged!',
+      failed: 'Error merging',
+    });
+  };
 
   useEffect(() => {
     if (mergeModalSelectedBonALICEs.length === 2) {
@@ -76,7 +98,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         selectedMergeBonALICEs: mergeModalSelectedBonALICEs,
         isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
-        merge,
+        handleMerge,
       }}
     >
       {children}

@@ -104,3 +104,16 @@ export const useMintAndLockArgs = ({
     LPTokenAddress,
   ]);
 };
+
+export const useMergeArgs = ({
+  tokenId1,
+  tokenId2,
+}: {
+  tokenId1: number | null;
+  tokenId2: number | null;
+}) => {
+  return useMemo(() => {
+    if (!tokenId1 || !tokenId2) return null;
+    return [tokenId1, tokenId2];
+  }, [tokenId1, tokenId2]);
+};

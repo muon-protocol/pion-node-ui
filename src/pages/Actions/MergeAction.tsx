@@ -13,7 +13,7 @@ const RenderMergeBody = () => {
     handleMergeModalItemClicked,
     selectedMergeBonALICEs,
     isInSelectedMergeBonALICEs,
-    merge,
+    handleMerge,
   } = useMergeAction();
   const { bonALICEs } = useBonALICE();
 
@@ -87,7 +87,7 @@ const RenderMergeBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
         <button
-          onClick={() => merge()}
+          onClick={() => handleMerge()}
           disabled={isMergeBonALICEsButtonDisabled}
           className="btn !w-full"
         >
