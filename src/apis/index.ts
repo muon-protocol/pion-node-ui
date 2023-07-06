@@ -18,3 +18,18 @@ export async function getRewardsAPI(addresses: string[]) {
   );
   return response.data;
 }
+
+export async function getClaimSignatureAPI(
+  signatures: string[],
+  addresses: `0x${string}`[],
+  claimer: `0x${string}`,
+) {
+  const response = await axiosInstance.post('/rewards', {
+    data: {
+      signatures: signatures,
+      addresses: addresses,
+      claimer: claimer,
+    },
+  });
+  return response.data;
+}

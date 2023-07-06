@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import { getRewardsAPI } from '../../apis';
+import { getClaimSignatureAPI, getRewardsAPI } from '../../apis';
 import { RawRewards, RewardWallet, WalletWithSignature } from '../../types';
 import { useRewardWallets } from '../../hooks/useRewardWallets.ts';
 import useTotalRewards from '../../hooks/useTotalRewards.ts';
@@ -17,6 +17,7 @@ const ClaimPrizeContext = createContext<{
   stakingAddress: `0x${string}` | undefined;
   handleVerifyWallet: () => void;
   eligibleAddresses: RewardWallet[];
+  getClaimSignature: () => void;
   handleRemoveWallet: (walletAddress: string) => void;
 }>({
   isSwitchBackToWalletModalOpen: false,
@@ -26,6 +27,7 @@ const ClaimPrizeContext = createContext<{
   stakingAddress: undefined,
   handleVerifyWallet: () => {},
   eligibleAddresses: [],
+  getClaimSignature: () => {},
   handleRemoveWallet: () => {},
 });
 
@@ -58,6 +60,25 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const { signMessageMetamask } = useSignMessage(
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   );
+
+  const getClaimSignature = async () => {
+    if (walletsWithSignatures.find((wallet) => wallet.signature === null))
+      return;
+    const signatures = walletsWithSignatures.map((wallet) => wallet.signature);
+    const addresses = walletsWithSignatures.map(
+      (wallet) => wallet.walletAddress,
+    );
+    if (!stakingAddress || !isConnected || !signatures || !addresses) return;
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const signature = await getClaimSignatureAPI(
+      signatures,
+      addresses,
+      stakingAddress,
+    );
+    console.log('signature:' + signature);
+  };
 
   const handleRemoveWallet = (walletAddress: string) => {
     setWalletsWithSignatures((wallets) =>
@@ -132,6 +153,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         stakingAddress,
         handleVerifyWallet,
         eligibleAddresses,
+        getClaimSignature,
         handleRemoveWallet,
       }}
     >

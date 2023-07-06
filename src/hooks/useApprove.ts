@@ -16,18 +16,6 @@ const useApprove = (
     chainId: getCurrentChainId(),
   });
 
-  // const approve = useCallback(async () => {
-  //   const { hash } = await writeContract({
-  //     abi: ALICE_ABI,
-  //     address: tokenAddress,
-  //     functionName: 'approve',
-  //     args: [BONALICE_ADDRESS[getCurrentChainId()], approveAmount.big],
-  //     chainId: getCurrentChainId(),
-  //   });
-
-  // return hash;
-  // }, [approveAmount, tokenAddress]);
-
   const approve = () => {
     approveCallback?.({
       pending: 'Approving...',

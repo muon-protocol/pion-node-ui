@@ -153,7 +153,7 @@ const VerifyWalletCard = ({
 };
 
 const ClaimCard = () => {
-  const { openSwitchBackToWalletModal } = useClaimPrize();
+  const { getClaimSignature } = useClaimPrize();
   const { totalRewards, stakingAddress } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { eligibleAddresses } = useClaimPrize();
@@ -213,7 +213,7 @@ const ClaimCard = () => {
           {eligibleAddresses.length !== 0 && 'Prize Calculation Details'}
         </p>
         <button
-          onClick={openSwitchBackToWalletModal}
+          onClick={() => getClaimSignature()}
           className="btn text-xl font-medium"
           disabled={isClaimButtonDisabled}
         >
