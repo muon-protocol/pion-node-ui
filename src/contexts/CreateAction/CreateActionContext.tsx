@@ -13,7 +13,7 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
-import useAliceContractWrite from '../../hooks/useAliceContractWrite.ts';
+import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import {
   useApproveArgs,
   useMintAndLockArgs,
@@ -96,7 +96,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     LPTokenAddress: LP_TOKEN_ADDRESS[getCurrentChainId()],
   });
 
-  const { callback: mintAndLock } = useAliceContractWrite({
+  const { callback: mintAndLock } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
@@ -109,7 +109,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     approveAmount: createAmount,
   });
 
-  const { callback: approveALICE } = useAliceContractWrite({
+  const { callback: approveALICE } = useWagmiContractWrite({
     abi: ALICE_ABI,
     address: ALICE_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
@@ -122,7 +122,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     approveAmount: createBoostAmount,
   });
 
-  const { callback: approveLPToken } = useAliceContractWrite({
+  const { callback: approveLPToken } = useWagmiContractWrite({
     abi: ALICE_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',

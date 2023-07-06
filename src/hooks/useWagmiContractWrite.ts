@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { waitForTransaction, writeContract } from '@wagmi/core';
 import toast from 'react-hot-toast';
 
-const useAliceContractWrite = ({
+const useWagmiContractWrite = ({
   abi,
   address,
   functionName,
@@ -18,6 +18,8 @@ const useAliceContractWrite = ({
 }) => {
   const [isMetamaskLoading, setIsMetamaskLoading] = useState(false);
   const [isTransactionLoading, setIsTransactionLoading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isFailed, setIsFailed] = useState(false);
   const [transactionHash, setTransactionHash] = useState<string | null>(null);
 
   const callback = useMemo(() => {
@@ -45,14 +47,23 @@ const useAliceContractWrite = ({
           error: stateMessage.failed,
         });
         setIsTransactionLoading(false);
+        setIsSuccess(true);
       } catch (error) {
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
+        setIsFailed(true);
         console.log(error);
       }
     };
   }, [abi, address, functionName, args, chainId]);
-  return { callback, isMetamaskLoading, isTransactionLoading, transactionHash };
+  return {
+    callback,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isSuccess,
+    isFailed,
+    transactionHash,
+  };
 };
 
-export default useAliceContractWrite;
+export default useWagmiContractWrite;

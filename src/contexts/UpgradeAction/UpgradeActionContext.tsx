@@ -11,7 +11,7 @@ import {
 import { getCurrentChainId } from '../../constants/chains.ts';
 import ALICE_ABI from '../../abis/ALICE.json';
 import LP_TOKEN_ABI from '../../abis/LPToken.json';
-import useAliceContractWrite from '../../hooks/useAliceContractWrite.ts';
+import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { useLockArgs } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
@@ -77,7 +77,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lock,
     isMetamaskLoading,
     isTransactionLoading,
-  } = useAliceContractWrite({
+  } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: lockArgs,
