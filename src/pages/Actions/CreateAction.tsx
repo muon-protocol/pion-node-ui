@@ -7,6 +7,8 @@ import Modal from '../../components/Common/Modal.tsx';
 import { AnimatePresence } from 'framer-motion';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -30,6 +32,7 @@ export const RenderCreateBody = () => {
   } = useCreateAction();
 
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
@@ -110,7 +113,14 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {isMetamaskLoading || isTransactionLoading ? (
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn !w-full"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'

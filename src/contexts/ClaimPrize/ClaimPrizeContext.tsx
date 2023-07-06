@@ -97,7 +97,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setClaimSignature(response.result.signature);
         setTimeout(() => {
           // TODO: CLEAN CODE
-          console.log();
           claimReward?.({
             pending: 'Waiting for confirmation',
             success: 'Approved',
