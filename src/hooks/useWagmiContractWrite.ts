@@ -27,6 +27,8 @@ const useWagmiContractWrite = ({
 
     return async (stateMessage: StateMessages) => {
       setIsMetamaskLoading(true);
+      setIsFailed(false);
+      setIsSuccess(false);
       try {
         const { hash } = await writeContract({
           abi: abi,
