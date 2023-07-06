@@ -30,6 +30,10 @@ const CreateActionContext = createContext<{
   handleApproveLPTokenClicked: () => void;
   isAllowanceModalOpen: boolean;
   closeAllowanceModal: () => void;
+  isMetamaskLoading: boolean;
+  isTransactionLoading: boolean;
+  isApproveMetamaskLoading: boolean;
+  isApproveTransactionLoading: boolean;
 }>({
   createAmount: w3bNumberFromString(''),
   createBoostAmount: w3bNumberFromString(''),
@@ -41,6 +45,10 @@ const CreateActionContext = createContext<{
   handleApproveLPTokenClicked: () => {},
   isAllowanceModalOpen: false,
   closeAllowanceModal: () => {},
+  isMetamaskLoading: false,
+  isTransactionLoading: false,
+  isApproveMetamaskLoading: false,
+  isApproveTransactionLoading: false,
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
@@ -96,7 +104,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     LPTokenAddress: LP_TOKEN_ADDRESS[getCurrentChainId()],
   });
 
-  const { callback: mintAndLock } = useWagmiContractWrite({
+  const {
+    callback: mintAndLock,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isSuccess,
+  } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
@@ -104,12 +117,24 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      setCreateAmount(w3bNumberFromString(''));
+      setCreateBoostAmount(w3bNumberFromString(''));
+    }
+  }, [isSuccess]);
+
   const approveALICEArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
     approveAmount: createAmount,
   });
 
-  const { callback: approveALICE } = useWagmiContractWrite({
+  const {
+    callback: approveALICE,
+    isMetamaskLoading: ALICEIsMetamaskLoading,
+    isTransactionLoading: ALICELPTokenIsTransactionLoading,
+    isSuccess: approveALICEIsSuccess,
+  } = useWagmiContractWrite({
     abi: ALICE_ABI,
     address: ALICE_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
@@ -117,18 +142,35 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  useEffect(() => {
+    if (approveALICEIsSuccess) {
+      setIsAllowanceModalOpen(false);
+    }
+  }, [approveALICEIsSuccess]);
+
   const approveLPTokenArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
     approveAmount: createBoostAmount,
   });
 
-  const { callback: approveLPToken } = useWagmiContractWrite({
+  const {
+    callback: approveLPToken,
+    isMetamaskLoading: LPTokenIsMetamaskLoading,
+    isTransactionLoading: LPTokenIsTransactionLoading,
+    isSuccess: approveLPTokenIsSuccess,
+  } = useWagmiContractWrite({
     abi: ALICE_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
     args: approveLPTokenArgs,
     chainId: getCurrentChainId(),
   });
+
+  useEffect(() => {
+    if (approveLPTokenIsSuccess) {
+      setIsAllowanceModalOpen(false);
+    }
+  }, [approveLPTokenIsSuccess]);
 
   const handleApproveBonALICEClicked = () => {
     if (
@@ -185,6 +227,12 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         handleApproveLPTokenClicked,
         isAllowanceModalOpen,
         closeAllowanceModal,
+        isMetamaskLoading,
+        isTransactionLoading,
+        isApproveMetamaskLoading:
+          ALICEIsMetamaskLoading || LPTokenIsMetamaskLoading,
+        isApproveTransactionLoading:
+          ALICELPTokenIsTransactionLoading || LPTokenIsTransactionLoading,
       }}
     >
       {children}

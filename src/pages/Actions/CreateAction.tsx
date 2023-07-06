@@ -23,10 +23,10 @@ export const RenderCreateBody = () => {
     handleApproveLPTokenClicked,
     isAllowanceModalOpen,
     closeAllowanceModal,
-    approveBonALICELoading,
-    approveLPTokenLoading,
-    writeMintAndLockIsLoading,
-    writeMintAndLockWithBoostIsLoading,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isApproveMetamaskLoading,
+    isApproveTransactionLoading,
   } = useCreateAction();
 
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
@@ -110,9 +110,11 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {writeMintAndLockIsLoading || writeMintAndLockWithBoostIsLoading ? (
+        {isMetamaskLoading || isTransactionLoading ? (
           <button className="btn !w-full" disabled>
-            Creating...
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
           </button>
         ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
           <button
@@ -153,30 +155,38 @@ export const RenderCreateBody = () => {
             alt=""
           />
           <p className="text-center mb-6">
-            You need to approve the ALICE token to be spent by the{' '}
+            You need to approve the{' '}
             {ALICEAllowance && ALICEAllowance?.big < createAmount?.big
-              ? 'BonALICE Contract'
-              : 'LP Token Contract'}
-            . Enter at least the amount you want to create and click Next then
-            Approve button on metamask.
+              ? 'ALICE'
+              : 'LP'}{' '}
+            token to be spent by the Bonded ALICE Contract. Enter at least the
+            amount you want to create and click Next then Approve button on
+            metamask.
           </p>
           {ALICEAllowance && ALICEAllowance?.big < createAmount?.big ? (
             <button
               className="btn btn--dark-primary"
-              onClick={() =>
-                !approveBonALICELoading && handleApproveBonALICEClicked()
-              }
+              onClick={() => handleApproveBonALICEClicked()}
             >
-              {approveBonALICELoading ? 'Waiting for Metamask...' : 'Approve'}
+              {isApproveMetamaskLoading
+                ? 'Waiting for Metamask...'
+                : isApproveTransactionLoading
+                ? 'Waiting for Tx...'
+                : 'Approve'}
             </button>
           ) : (
             <button
               className="btn btn--dark-primary"
               onClick={() =>
-                !approveLPTokenLoading && handleApproveLPTokenClicked()
+                !isMetamaskLoading ||
+                (!isTransactionLoading && handleApproveLPTokenClicked())
               }
             >
-              {approveLPTokenLoading ? 'Waiting for Metamask...' : 'Approve'}
+              {isApproveMetamaskLoading
+                ? 'Waiting for Metamask...'
+                : isApproveTransactionLoading
+                ? 'Waiting for Tx...'
+                : 'Approve'}
             </button>
           )}
         </div>
