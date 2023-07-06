@@ -30,6 +30,7 @@ const BonALICEContext = createContext<{
   bonALICEs: BonALICE[];
   ALICEAllowance: W3bNumber | null;
   LPTokenAllowance: W3bNumber | null;
+  fetchBonALICEIsLoading: boolean;
 }>({
   handleCreateBonALICEClicked: () => {},
   balance: undefined,
@@ -39,6 +40,7 @@ const BonALICEContext = createContext<{
   bonALICEs: [],
   ALICEAllowance: null,
   LPTokenAllowance: null,
+  fetchBonALICEIsLoading: false,
 });
 
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
@@ -51,6 +53,8 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { allowance: LPTokenAllowance } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
   );
+
+  const [fetchBonALICEIsLoading, setFetchBonALICEIsLoading] = useState(false);
 
   const { fastRefresh } = useRefresh();
 
@@ -83,7 +87,8 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (fastRefresh && walletAddress) {
+    if (walletAddress) {
+      setFetchBonALICEIsLoading(true);
       BonALICERefetch({ account: walletAddress }).then(({ data }) => {
         const rawBonALICEs: RawBonALICE[] = data.accountTokenIds ?? [];
         const contracts = rawBonALICEs.map((bonALICE: RawBonALICE) => ({
@@ -114,6 +119,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
             });
           });
           setBonALICEs(bonALICEs);
+          setFetchBonALICEIsLoading(false);
         });
       });
     }
@@ -130,6 +136,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
         isLoading,
         ALICEAllowance,
         LPTokenAllowance,
+        fetchBonALICEIsLoading,
       }}
     >
       {children}

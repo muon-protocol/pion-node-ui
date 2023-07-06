@@ -35,7 +35,12 @@ export const RenderUpgradeBody = () => {
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
-  const { bonALICEs } = useBonALICE();
+  const {
+    bonALICEs,
+    fetchBonALICEIsLoading,
+    ALICEAllowance,
+    LPTokenAllowance,
+  } = useBonALICE();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -50,7 +55,6 @@ export const RenderUpgradeBody = () => {
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
 
   const { LPTokenBalance } = useLPToken();
-  const { ALICEAllowance, LPTokenAllowance } = useBonALICE();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
   return (
@@ -86,9 +90,14 @@ export const RenderUpgradeBody = () => {
                   />
                 );
               })
+            ) : fetchBonALICEIsLoading ? (
+              <p className="text-center py-24 px-3 text-primary">
+                Fetching your BonALICEs...
+              </p>
             ) : (
               <p className="text-center py-24 px-3 text-primary">
-                You have no BonALICEs to upgrade. Please create some first.
+                You have no BonALICEs to upgrade. Please create Bonded ALICE
+                first.
               </p>
             )}
           </div>
