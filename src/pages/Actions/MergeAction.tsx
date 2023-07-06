@@ -4,6 +4,8 @@ import { useMemo } from 'react';
 import { FadeIn, MoveUpIn, SwingIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const RenderMergeBody = () => {
   const {
@@ -13,9 +15,12 @@ const RenderMergeBody = () => {
     handleMergeModalItemClicked,
     selectedMergeBonALICEs,
     isInSelectedMergeBonALICEs,
+    isMetamaskLoading,
+    isTransactionLoading,
     handleMerge,
   } = useMergeAction();
   const { bonALICEs } = useBonALICE();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isMergeBonALICEsButtonDisabled = useMemo(() => {
     return selectedMergeBonALICEs.length < 2;
@@ -86,13 +91,28 @@ const RenderMergeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button
-          onClick={() => handleMerge()}
-          disabled={isMergeBonALICEsButtonDisabled}
-          className="btn !w-full"
-        >
-          Merge
-        </button>
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn !w-full"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn !w-full" disabled>
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
+          </button>
+        ) : (
+          <button
+            onClick={() => handleMerge()}
+            disabled={isMergeBonALICEsButtonDisabled}
+            className="btn !w-full"
+          >
+            Merge Bonded ALICEs
+          </button>
+        )}
       </FadeIn>
     </>
   );

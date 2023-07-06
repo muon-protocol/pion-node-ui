@@ -100,9 +100,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const handleUpgradeBonALICEClicked = async () => {
     lock?.({
-      pending: 'Upgrading BonALICE...',
+      pending: 'Upgrading Bonded ALICE...',
       success: 'Upgraded!',
-      failed: 'Failed to upgrade.',
+      failed: 'Failed to upgrade Bonded ALICE.',
     });
   };
 

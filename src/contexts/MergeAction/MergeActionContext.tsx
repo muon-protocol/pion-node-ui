@@ -14,6 +14,8 @@ const MergeActionContext = createContext<{
   isInSelectedMergeBonALICEs: (bonALICE: BonALICE) => boolean;
   handleMergeModalItemClicked: (bonALICE: BonALICE) => void;
   handleMerge: () => void;
+  isMetamaskLoading: boolean;
+  isTransactionLoading: boolean;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -22,6 +24,8 @@ const MergeActionContext = createContext<{
   isInSelectedMergeBonALICEs: () => false,
   handleMergeModalItemClicked: () => {},
   handleMerge: () => {},
+  isMetamaskLoading: false,
+  isTransactionLoading: false,
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -46,7 +50,12 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     tokenId2: mergeModalSelectedBonALICEs[1]?.tokenId,
   });
 
-  const { callback: merge } = useWagmiContractWrite({
+  const {
+    callback: merge,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isSuccess,
+  } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'merge',
@@ -58,11 +67,17 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     if (!mergeArgs) return;
 
     merge?.({
-      pending: 'Merging...',
+      pending: 'Merging Bonded ALICEs...',
       success: 'Merged!',
-      failed: 'Error merging',
+      failed: 'Failed to Merge Bonded ALICEs.',
     });
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setMergeModalSelectedBonALICEs([]);
+    }
+  }, [isSuccess]);
 
   useEffect(() => {
     if (mergeModalSelectedBonALICEs.length === 2) {
@@ -99,6 +114,8 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
         handleMerge,
+        isMetamaskLoading,
+        isTransactionLoading,
       }}
     >
       {children}
