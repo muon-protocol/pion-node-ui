@@ -2,6 +2,7 @@ import { ALICE_ADDRESS, LP_TOKEN_ADDRESS } from '../constants/addresses.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import { W3bNumber } from '../types/wagmi.ts';
 import { useMemo } from 'react';
+import { BonALICE } from '../types';
 
 export const useLockArgs = ({
   tokenId,
@@ -128,4 +129,29 @@ export const useClaimRewardArgs = ({
   if (!rewardAmount || !signature) return null;
 
   return [rewardAmount.big, signature];
+};
+
+export const useSplitArgs = ({
+  bonALICE,
+  percentage,
+}: {
+  bonALICE: BonALICE | null;
+  percentage: number;
+}) => {
+  if (!bonALICE) return null;
+  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+
+  const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
+  const amounts = [
+    (bonALICE.ALICELockAmount.big * BigInt(percentage)) / BigInt(100),
+  ];
+
+  if (bonALICE.LPTokenLockAmount.dsp > 0) {
+    tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
+    amounts.push(
+      (bonALICE.LPTokenLockAmount.big * BigInt(percentage)) / BigInt(100),
+    );
+  }
+
+  return [bonALICE.tokenId, tokens, amounts];
 };

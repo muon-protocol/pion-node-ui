@@ -1,6 +1,10 @@
 import { createContext, ReactNode, useState } from 'react';
 import { BonALICE } from '../../types';
-import useSplit from '../../hooks/useSplit.ts';
+import { useSplitArgs } from '../../hooks/useContractArgs.ts';
+import BONALICE_ABI from '../../abis/BonALICE.json';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
+import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
 
 const SplitActionContext = createContext<{
   splitValue: number;
@@ -11,7 +15,7 @@ const SplitActionContext = createContext<{
   selectedSplitBonALICE: BonALICE | null;
   isSelectedSplitBonALICE: (bonALICE: BonALICE) => boolean;
   handleSplitModalItemClicked: (bonALICE: BonALICE) => void;
-  split: () => void;
+  handleSplit: () => void;
 }>({
   splitValue: 50,
   setSplitValue: () => {},
@@ -21,7 +25,7 @@ const SplitActionContext = createContext<{
   selectedSplitBonALICE: null,
   isSelectedSplitBonALICE: () => false,
   handleSplitModalItemClicked: () => {},
-  split: () => {},
+  handleSplit: () => {},
 });
 
 const SplitActionProvider = ({ children }: { children: ReactNode }) => {
@@ -29,7 +33,31 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
   const [isSplitModalOpen, setIsSplitModalOpen] = useState(false);
   const [splitModalSelectedBonALICE, setSplitModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
-  const { split } = useSplit(splitModalSelectedBonALICE, splitValue);
+
+  const splitArgs = useSplitArgs({
+    bonALICE: splitModalSelectedBonALICE,
+    percentage: splitValue,
+  });
+
+  const { callback: split } = useWagmiContractWrite({
+    abi: BONALICE_ABI,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'split',
+    args: splitArgs,
+    chainId: getCurrentChainId(),
+  });
+
+  const handleSplit = () => {
+    try {
+      split?.({
+        pending: 'Splitting BonALICE...',
+        success: 'BonALICE splitted successfully!',
+        failed: 'Failed to split BonALICE',
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleSplitModalItemClicked = (bonALICE: BonALICE) => {
     if (!splitModalSelectedBonALICE) {
@@ -73,7 +101,7 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         selectedSplitBonALICE: splitModalSelectedBonALICE,
         isSelectedSplitBonALICE,
         handleSplitModalItemClicked,
-        split,
+        handleSplit,
       }}
     >
       {children}

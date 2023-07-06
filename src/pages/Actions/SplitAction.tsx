@@ -16,7 +16,7 @@ const RenderSplitBody = () => {
     handleSplitModalItemClicked,
     selectedSplitBonALICE,
     isSelectedSplitBonALICE,
-    split,
+    handleSplit,
   } = useSplitAction();
   const { bonALICEs } = useBonALICE();
 
@@ -107,7 +107,7 @@ const RenderSplitBody = () => {
       >
         <button
           onClick={() => {
-            !isSplitBonALICEsButtonDisabled && split();
+            !isSplitBonALICEsButtonDisabled && handleSplit();
           }}
           disabled={isSplitBonALICEsButtonDisabled}
           className="btn !w-full"
