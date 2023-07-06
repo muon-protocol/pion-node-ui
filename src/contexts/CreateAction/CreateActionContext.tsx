@@ -131,8 +131,8 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   const {
     callback: approveALICE,
-    isMetamaskLoading: ALICEIsMetamaskLoading,
-    isTransactionLoading: ALICELPTokenIsTransactionLoading,
+    isMetamaskLoading: approveALICEIsMetamaskLoading,
+    isTransactionLoading: approveALICEIsTransactionLoading,
     isSuccess: approveALICEIsSuccess,
   } = useWagmiContractWrite({
     abi: ALICE_ABI,
@@ -155,8 +155,8 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   const {
     callback: approveLPToken,
-    isMetamaskLoading: LPTokenIsMetamaskLoading,
-    isTransactionLoading: LPTokenIsTransactionLoading,
+    isMetamaskLoading: approveLPTokenIsMetamaskLoading,
+    isTransactionLoading: approveLPTokenIsTransactionLoading,
     isSuccess: approveLPTokenIsSuccess,
   } = useWagmiContractWrite({
     abi: ALICE_ABI,
@@ -202,15 +202,6 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  useEffect(() => {
-    if (
-      ALICEAllowance &&
-      createAmount &&
-      Number(createAmount.big) <= Number(ALICEAllowance.big)
-    )
-      closeAllowanceModal();
-  }, [ALICEAllowance, createAmount]);
-
   const openAllowanceModal = () => setIsAllowanceModalOpen(true);
   const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
 
@@ -230,9 +221,10 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         isMetamaskLoading,
         isTransactionLoading,
         isApproveMetamaskLoading:
-          ALICEIsMetamaskLoading || LPTokenIsMetamaskLoading,
+          approveALICEIsMetamaskLoading || approveLPTokenIsMetamaskLoading,
         isApproveTransactionLoading:
-          ALICELPTokenIsTransactionLoading || LPTokenIsTransactionLoading,
+          approveALICEIsTransactionLoading ||
+          approveLPTokenIsTransactionLoading,
       }}
     >
       {children}

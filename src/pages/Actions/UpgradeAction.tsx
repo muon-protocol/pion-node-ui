@@ -2,12 +2,14 @@ import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMemo, useState } from 'react';
-import { weiToEther } from '../../utils/web3.ts';
 import { FadeIn, MoveUpIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
+import Modal from '../../components/Common/Modal.tsx';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -22,10 +24,14 @@ export const RenderUpgradeBody = () => {
     handleUpgradeBoostAmountChange,
     upgradeBoostAmount,
     handleUpgradeBonALICEClicked,
-    LPTokenApprove,
-    ALICEApprove,
     isMetamaskLoading,
     isTransactionLoading,
+    isApproveMetamaskLoading,
+    handleApproveLPTokenClicked,
+    isApproveTransactionLoading,
+    handleApproveALICEClicked,
+    isAllowanceModalOpen,
+    closeAllowanceModal,
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
@@ -37,7 +43,7 @@ export const RenderUpgradeBody = () => {
       !upgradeAmount ||
       !upgradeAmount.dsp ||
       !ALICEBalance?.hStr ||
-      Number(upgradeAmount) > Number(weiToEther(ALICEBalance.dsp.toString()))
+      upgradeAmount.dsp > ALICEBalance.dsp
     );
   }, [selectedUpgradeBonALICE, upgradeAmount, ALICEBalance]);
 
@@ -45,6 +51,7 @@ export const RenderUpgradeBody = () => {
 
   const { LPTokenBalance } = useLPToken();
   const { ALICEAllowance, LPTokenAllowance } = useBonALICE();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   return (
     <>
@@ -152,13 +159,22 @@ export const RenderUpgradeBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        {isMetamaskLoading || isTransactionLoading ? (
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn !w-full"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn !w-full" disabled>
-            {isMetamaskLoading ? 'Waiting for Metamask...' : 'Waiting...'}
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
           </button>
         ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
           <button
-            onClick={() => ALICEApprove()}
+            onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
@@ -167,7 +183,7 @@ export const RenderUpgradeBody = () => {
         ) : LPTokenAllowance &&
           LPTokenAllowance.big < upgradeBoostAmount.big ? (
           <button
-            onClick={() => LPTokenApprove()}
+            onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
@@ -179,10 +195,64 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn !w-full"
           >
-            Upgrade
+            Upgrade Bonded ALICE
           </button>
         )}
       </FadeIn>
+      <Modal
+        title=""
+        size="sm"
+        isOpen={isAllowanceModalOpen}
+        closeModalHandler={closeAllowanceModal}
+      >
+        <div className="flex flex-col justify-center items-center">
+          <img
+            className="w-[108px] mb-10"
+            src="/assets/images/claim/switch-wallet-modal-icon.svg"
+            alt=""
+          />
+          <p className="text-center mb-6">
+            You need to approve the{' '}
+            {ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big
+              ? 'ALICE'
+              : 'LP'}{' '}
+            token to be spent by the Bonded ALICE Contract. Enter at least the
+            amount you want to create and click Next then Approve button on
+            metamask.
+          </p>
+          {ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big ? (
+            <button
+              className="btn btn--dark-primary"
+              onClick={() =>
+                !isApproveMetamaskLoading &&
+                !isApproveTransactionLoading &&
+                handleApproveALICEClicked()
+              }
+            >
+              {isApproveMetamaskLoading
+                ? 'Waiting for Metamask...'
+                : isApproveTransactionLoading
+                ? 'Waiting for Tx...'
+                : 'Approve'}
+            </button>
+          ) : (
+            <button
+              className="btn btn--dark-primary"
+              onClick={() =>
+                !isApproveMetamaskLoading &&
+                !isApproveTransactionLoading &&
+                handleApproveLPTokenClicked()
+              }
+            >
+              {isApproveMetamaskLoading
+                ? 'Waiting for Metamask...'
+                : isApproveTransactionLoading
+                ? 'Waiting for Tx...'
+                : 'Approve'}
+            </button>
+          )}
+        </div>
+      </Modal>
     </>
   );
 };

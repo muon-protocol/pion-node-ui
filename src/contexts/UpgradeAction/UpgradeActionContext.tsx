@@ -1,8 +1,7 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
 import { W3bNumber } from '../../types/wagmi.ts';
-import { w3bNumberFromNumber, w3bNumberFromString } from '../../utils/web3.ts';
-import useApprove from '../../hooks/useApprove.ts';
+import { w3bNumberFromString } from '../../utils/web3.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -10,11 +9,12 @@ import {
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import ALICE_ABI from '../../abis/ALICE.json';
-import LP_TOKEN_ABI from '../../abis/LPToken.json';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import { useLockArgs } from '../../hooks/useContractArgs.ts';
+import { useApproveArgs, useLockArgs } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
+import useALICE from '../ALICE/useALICE.ts';
+import useLPToken from '../LPToken/useLPToken.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -28,10 +28,14 @@ const UpgradeActionContext = createContext<{
   handleUpgradeBoostAmountChange: (amount: string) => void;
   handleUpgradeAmountChange: (amount: string) => void;
   handleUpgradeBonALICEClicked: () => void;
-  ALICEApprove: () => void;
-  LPTokenApprove: () => void;
   isMetamaskLoading: boolean;
   isTransactionLoading: boolean;
+  isApproveMetamaskLoading: boolean;
+  isApproveTransactionLoading: boolean;
+  handleApproveALICEClicked: () => void;
+  handleApproveLPTokenClicked: () => void;
+  isAllowanceModalOpen: boolean;
+  closeAllowanceModal: () => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
@@ -39,15 +43,19 @@ const UpgradeActionContext = createContext<{
   selectedUpgradeBonALICE: null,
   isSelectedUpgradeBonALICE: () => false,
   handleUpgradeModalItemClicked: () => {},
-  upgradeAmount: w3bNumberFromNumber(0),
-  upgradeBoostAmount: w3bNumberFromNumber(0),
+  upgradeAmount: w3bNumberFromString('0'),
+  upgradeBoostAmount: w3bNumberFromString('0'),
   handleUpgradeBoostAmountChange: () => {},
   handleUpgradeAmountChange: () => {},
   handleUpgradeBonALICEClicked: () => {},
-  ALICEApprove: () => {},
-  LPTokenApprove: () => {},
   isMetamaskLoading: false,
   isTransactionLoading: false,
+  isApproveMetamaskLoading: false,
+  isApproveTransactionLoading: false,
+  handleApproveALICEClicked: () => {},
+  handleApproveLPTokenClicked: () => {},
+  isAllowanceModalOpen: false,
+  closeAllowanceModal: () => {},
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -64,6 +72,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const { LPTokenAllowance, ALICEAllowance } = useBonALICE();
+  const { ALICEBalance } = useALICE();
+  const { LPTokenBalance } = useLPToken();
+
+  const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
@@ -77,6 +89,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lock,
     isMetamaskLoading,
     isTransactionLoading,
+    isSuccess,
   } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -85,25 +98,99 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const { approve: ALICEApprove } = useApprove(
-    ALICE_ABI,
-    ALICE_ADDRESS[getCurrentChainId()],
-    upgradeAmount,
-  );
-
-  const { approve: LPTokenApprove } = useApprove(
-    LP_TOKEN_ABI,
-    LP_TOKEN_ADDRESS[getCurrentChainId()],
-    upgradeAmount,
-  );
-
   const handleUpgradeBonALICEClicked = async () => {
-    const result = await lock?.({
-      pending: 'Locking...',
-      success: 'Locked!',
-      failed: 'Failed to lock.',
+    lock?.({
+      pending: 'Upgrading BonALICE...',
+      success: 'Upgraded!',
+      failed: 'Failed to upgrade.',
     });
-    console.log(result);
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setIsUpgradeModalOpen(false);
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
+    }
+  }, [isSuccess]);
+
+  const approveALICEArgs = useApproveArgs({
+    spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
+    approveAmount: upgradeAmount,
+  });
+
+  const {
+    callback: approveALICE,
+    isMetamaskLoading: approveALICEIsMetamaskLoading,
+    isTransactionLoading: approveALICEIsTransactionLoading,
+    isSuccess: approveALICEIsSuccess,
+  } = useWagmiContractWrite({
+    abi: ALICE_ABI,
+    address: ALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'approve',
+    args: approveALICEArgs,
+    chainId: getCurrentChainId(),
+  });
+
+  useEffect(() => {
+    if (approveALICEIsSuccess) {
+      setIsAllowanceModalOpen(false);
+    }
+  }, [approveALICEIsSuccess]);
+
+  const approveLPTokenArgs = useApproveArgs({
+    spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
+    approveAmount: upgradeBoostAmount,
+  });
+
+  const {
+    callback: approveLPToken,
+    isMetamaskLoading: approveLPTokenIsMetamaskLoading,
+    isTransactionLoading: approveLPTokenIsTransactionLoading,
+    isSuccess: approveLPTokenIsSuccess,
+  } = useWagmiContractWrite({
+    abi: ALICE_ABI,
+    address: LP_TOKEN_ADDRESS[getCurrentChainId()],
+    functionName: 'approve',
+    args: approveLPTokenArgs,
+    chainId: getCurrentChainId(),
+  });
+
+  useEffect(() => {
+    if (approveLPTokenIsSuccess) {
+      setIsAllowanceModalOpen(false);
+    }
+  }, [approveLPTokenIsSuccess]);
+
+  const handleApproveALICEClicked = () => {
+    if (
+      !ALICEBalance ||
+      !upgradeAmount ||
+      Number(upgradeAmount) > Number(ALICEBalance.big)
+    )
+      return;
+    openAllowanceModal();
+    approveALICE?.({
+      pending: 'Waiting for confirmation',
+      success: 'Approved',
+      failed: 'Error',
+    });
+  };
+
+  const handleApproveLPTokenClicked = () => {
+    if (
+      !LPTokenBalance ||
+      !upgradeBoostAmount ||
+      Number(upgradeBoostAmount) > Number(LPTokenBalance.big)
+    )
+      return;
+    openAllowanceModal();
+    approveLPToken?.({
+      pending: 'Waiting for confirmation',
+      success: 'Approved',
+      failed: 'Error',
+    });
   };
 
   const handleUpgradeBoostAmountChange = (amount: string) => {
@@ -145,6 +232,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
   const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
 
+  const openAllowanceModal = () => setIsAllowanceModalOpen(true);
+  const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
+
   return (
     <UpgradeActionContext.Provider
       value={{
@@ -159,10 +249,17 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeAmountChange,
         handleUpgradeBoostAmountChange,
         handleUpgradeBonALICEClicked,
-        ALICEApprove,
-        LPTokenApprove,
         isMetamaskLoading,
         isTransactionLoading,
+        isAllowanceModalOpen,
+        closeAllowanceModal,
+        isApproveMetamaskLoading:
+          approveALICEIsMetamaskLoading || approveLPTokenIsMetamaskLoading,
+        isApproveTransactionLoading:
+          approveALICEIsTransactionLoading ||
+          approveLPTokenIsTransactionLoading,
+        handleApproveALICEClicked,
+        handleApproveLPTokenClicked,
       }}
     >
       {children}
