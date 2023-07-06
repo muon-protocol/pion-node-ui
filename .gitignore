@@ -188,5 +188,6 @@ fabric.properties
 
 # wagmi type generated files
 /src/abis/generated
+/src/abis/types
 
 # End of https://www.toptal.com/developers/gitignore/api/webstorm,visualstudiocode,react,yarn
