@@ -77,7 +77,8 @@ const VerifyWalletCard = ({
   wallet: RewardWallet;
   className?: string;
 }) => {
-  const { handleVerifyWallet, handleRemoveWallet } = useClaimPrize();
+  const { handleVerifyWallet, handleRemoveWallet, claimSignature } =
+    useClaimPrize();
   const { walletAddress } = useUserProfile();
 
   return (
@@ -90,7 +91,7 @@ const VerifyWalletCard = ({
             '...' +
             wallet.walletAddress.slice(-5, -1)}
         </p>
-        {wallet.walletAddress !== walletAddress && (
+        {wallet.walletAddress !== walletAddress && !claimSignature && (
           <img
             onClick={() => handleRemoveWallet(wallet.walletAddress)}
             src="/assets/images/modal/exit-white-icon.svg"
@@ -181,7 +182,7 @@ const ClaimCard = () => {
       navigate('/review');
       setAlreadyClaimedPrize(false);
     }
-  }, [isSuccess, navigate, alreadyClaimedPrize, ]);
+  }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
     <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex text-white">

@@ -41,6 +41,7 @@ const ClaimPrizeContext = createContext<{
   isSuccess: boolean;
   alreadyClaimedPrize: boolean;
   setAlreadyClaimedPrize: (value: boolean) => void;
+  claimSignature: string | undefined;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -56,6 +57,7 @@ const ClaimPrizeContext = createContext<{
   isSuccess: false,
   alreadyClaimedPrize: false,
   setAlreadyClaimedPrize: () => {},
+  claimSignature: undefined,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -158,11 +160,18 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         failed: 'Error',
       });
     } catch (e) {
+      console.log(e);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (e.cause.toString().includes('Already claimed the reward.')) {
         setAlreadyClaimedPrize(true);
         toast.success('You have claimed your Bonded ALICE.');
+      } else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (e.cause.toString().includes('Invalid signature.')) {
+          toast.error('Invalid signature.');
+        }
       }
     }
   }, [claimReward, stakingAddress, walletAddress]);
@@ -256,6 +265,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         walletsWithSignatures.map((wallet) => {
           walletsString.push(wallet.walletAddress);
         });
+        if (walletsString.length === 0) return;
         if (!claimSignature || !claimSignatureFromPastLoading) {
           const response = await getRewardsAPI(walletsString);
           if (
@@ -301,6 +311,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         isSuccess,
         alreadyClaimedPrize,
         setAlreadyClaimedPrize,
+        claimSignature,
       }}
     >
       {children}
