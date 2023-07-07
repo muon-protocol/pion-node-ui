@@ -41,7 +41,7 @@ const ClaimPrizeContext = createContext<{
   isSuccess: boolean;
   alreadyClaimedPrize: boolean;
   setAlreadyClaimedPrize: (value: boolean) => void;
-  claimSignature: string | undefined;
+  claimSignature: string | null;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -57,7 +57,7 @@ const ClaimPrizeContext = createContext<{
   isSuccess: false,
   alreadyClaimedPrize: false,
   setAlreadyClaimedPrize: () => {},
-  claimSignature: undefined,
+  claimSignature: null,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
