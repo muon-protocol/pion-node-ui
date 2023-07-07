@@ -19,6 +19,18 @@ export async function getRewardsAPI(addresses: string[]) {
   return response.data;
 }
 
+export async function getClaimSignatureFromPastAPI(claimer: string) {
+  const response = await axiosInstance.get(
+    '/reward-server/rewards?claimer=' + claimer,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+  return response.data;
+}
+
 export async function getClaimSignatureAPI(
   signatures: (string | null)[],
   addresses: string[],

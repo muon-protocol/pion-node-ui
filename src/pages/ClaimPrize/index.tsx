@@ -1,11 +1,12 @@
 import { RewardWallet } from '../../types';
 import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
+import { getCurrentChainId } from '../../constants/chains.ts';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -156,7 +157,15 @@ const ClaimCard = () => {
   const { getClaimSignature } = useClaimPrize();
   const { totalRewards, stakingAddress } = useClaimPrize();
   const { walletAddress } = useUserProfile();
-  const { eligibleAddresses } = useClaimPrize();
+  const {
+    eligibleAddresses,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isSuccess,
+    alreadyClaimedPrize,
+    setAlreadyClaimedPrize,
+  } = useClaimPrize();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isClaimButtonDisabled = useMemo(() => {
     return (
@@ -164,6 +173,15 @@ const ClaimCard = () => {
       eligibleAddresses.some((wallet) => !wallet.signature)
     );
   }, [eligibleAddresses]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSuccess || alreadyClaimedPrize) {
+      navigate('/review');
+      setAlreadyClaimedPrize(false);
+    }
+  }, [isSuccess, navigate, alreadyClaimedPrize, ]);
 
   return (
     <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex text-white">
@@ -212,13 +230,26 @@ const ClaimCard = () => {
         <p className="font-medium underline text-sm cursor-pointer">
           {eligibleAddresses.length !== 0 && 'Prize Calculation Details'}
         </p>
-        <button
-          onClick={() => getClaimSignature()}
-          className="btn text-xl font-medium"
-          disabled={isClaimButtonDisabled}
-        >
-          Claim
-        </button>
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn text-xl font-medium"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn text-xl font-medium" disabled>
+            {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
+          </button>
+        ) : (
+          <button
+            onClick={() => getClaimSignature()}
+            className="btn text-xl font-medium"
+            disabled={isClaimButtonDisabled}
+          >
+            Claim
+          </button>
+        )}
       </div>
     </div>
   );

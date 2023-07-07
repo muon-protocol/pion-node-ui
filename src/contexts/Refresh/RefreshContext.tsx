@@ -12,9 +12,9 @@ const RefreshContext = React.createContext({
 });
 
 const RefreshProvider = ({ children }: PropsWithChildren) => {
-  const [slowRefresh, setSlowRefresh] = useState(0);
-  const [fastRefresh, setFastRefresh] = useState(0);
-  const [mediumRefresh, setMediumRefresh] = useState(0);
+  const [slowRefresh, setSlowRefresh] = useState(1);
+  const [fastRefresh, setFastRefresh] = useState(1);
+  const [mediumRefresh, setMediumRefresh] = useState(1);
 
   useEffect(() => {
     const interval = setInterval(async () => {

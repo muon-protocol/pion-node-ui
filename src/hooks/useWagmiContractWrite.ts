@@ -54,7 +54,7 @@ const useWagmiContractWrite = ({
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
         setIsFailed(true);
-        console.log(error);
+        throw error;
       }
     };
   }, [abi, address, functionName, args, chainId]);
