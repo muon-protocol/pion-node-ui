@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
-import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
+import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 
 const ReviewDetail = () => {
   const windowHight = window.innerHeight;
   const bodyHeight = windowHight - 108 - 70;
 
-  const { walletAddress } = useUserProfile();
+  const { stakingAddress } = useClaimPrize();
   const { bonALICEs } = useBonALICE();
   const {
     setNodeIP,
@@ -69,7 +69,7 @@ const ReviewDetail = () => {
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
-              {formatWalletAddress(walletAddress)}
+              {formatWalletAddress(stakingAddress)}
             </span>
           </span>
           <span className="flex w-full justify-between leading-5 font-light">

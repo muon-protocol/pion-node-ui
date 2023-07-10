@@ -21,3 +21,7 @@ export const LP_TOKEN_ADDRESS: AddressMap = {
 export const REWARD_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x50dB73A29349a37b496cA451E8D295Ee6C4265C0',
 };
+
+export const MUON_NODE_STAKING_ADDRESS: AddressMap = {
+  [SupportedChainId.BSCTESTNET]: '0xcF7b4F6cb896cf6BaD5E32b2ef12DC26B381AE4e',
+};

@@ -25,7 +25,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 import toast from 'react-hot-toast';
-// import { useClaimPrizeDetail } from '../../hooks/useClaimPrizeDetail.tsx';
+// import { useClaimPrizeDetail } from '../../hooks/useClaimPrizeDetail.tss';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -163,7 +163,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         failed: 'Error',
       });
     } catch (e) {
-      console.log(e);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (e.cause.toString().includes('Already claimed the reward.')) {

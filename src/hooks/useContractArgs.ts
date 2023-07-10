@@ -155,3 +155,16 @@ export const useSplitArgs = ({
 
   return [bonALICE.tokenId, tokens, amounts];
 };
+
+export const useAddNodeArgs = ({
+  nodeAddress,
+  peerId,
+  tokenId,
+}: {
+  nodeAddress: `0x${string}` | undefined;
+  peerId: string;
+  tokenId: number | null;
+}) => {
+  if (!nodeAddress || !peerId || !tokenId) return null;
+  return [nodeAddress, peerId, tokenId];
+};
