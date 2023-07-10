@@ -8,6 +8,8 @@ import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const ReviewDetail = () => {
   const windowHight = window.innerHeight;
@@ -23,8 +25,11 @@ const ReviewDetail = () => {
     setNodeBonALICE,
     handleAddNodeClicked,
     nodeIP,
+    isMetamaskLoading,
+    isTransactionLoading,
   } = useNodeBonALICE();
 
+  const { chainId, handleSwitchNetwork } = useUserProfile();
   const reviewDetailCard = () => {
     return (
       <div className="bg-white px-10 py-9 rounded-2xl w-full">
@@ -126,13 +131,28 @@ const ReviewDetail = () => {
           value={nodeIP}
           onValueChanged={(value) => setNodeIP(value)}
         />
-        <button
-          className="btn btn--secondary mt-auto mx-auto"
-          onClick={() => handleAddNodeClicked()}
-          disabled={!nodeIP || !nodeBonALICE}
-        >
-          Add Node
-        </button>
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn btn--secondary mt-auto mx-auto"
+          >
+            Switch Network
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
+          </button>
+        ) : (
+          <button
+            className="btn btn--secondary mt-auto mx-auto"
+            onClick={() => handleAddNodeClicked()}
+            disabled={!nodeIP || !nodeBonALICE}
+          >
+            Add Node
+          </button>
+        )}
       </div>
     );
   };
