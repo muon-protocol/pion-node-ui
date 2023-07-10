@@ -7,6 +7,7 @@ import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { useEffect, useMemo } from 'react';
 import { getCurrentChainId } from '../../constants/chains.ts';
+import { formatWalletAddress } from '../../utils/web3.ts';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -57,11 +58,7 @@ const ClaimPrize = () => {
             <p className="text-center">
               To claim your bonALICE, please switch back to your Staking Address
               <br />
-              <strong>
-                {stakingAddress?.slice(0, 6) +
-                  '...' +
-                  stakingAddress?.slice(-5, -1)}
-              </strong>
+              <strong>{formatWalletAddress(stakingAddress)}</strong>
             </p>
           </div>
         </Link>
@@ -87,9 +84,7 @@ const VerifyWalletCard = ({
     >
       <span className="verify-wallet-card__header flex mb-4 justify-between items-center">
         <p className="text-lg text-white">
-          {wallet.walletAddress.slice(0, 6) +
-            '...' +
-            wallet.walletAddress.slice(-5, -1)}
+          {formatWalletAddress(wallet.walletAddress)}
         </p>
         {wallet.walletAddress !== walletAddress && !claimSignature && (
           <img
@@ -192,9 +187,7 @@ const ClaimCard = () => {
           <p>Staking address:</p>
           <p className="font-semibold">
             {walletAddress
-              ? stakingAddress?.slice(0, 6) +
-                '...' +
-                stakingAddress?.slice(-5, -1)
+              ? formatWalletAddress(stakingAddress)
               : 'connect wallet'}
           </p>
         </span>

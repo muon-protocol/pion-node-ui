@@ -7,6 +7,7 @@ import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import { formatWalletAddress } from '../../utils/web3.ts';
 
 const ReviewDetail = () => {
   const windowHight = window.innerHeight;
@@ -68,9 +69,7 @@ const ReviewDetail = () => {
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
-              {walletAddress?.slice(0, 6) +
-                '...' +
-                walletAddress?.slice(-5, -1)}
+              {formatWalletAddress(walletAddress)}
             </span>
           </span>
           <span className="flex w-full justify-between leading-5 font-light">

@@ -40,3 +40,13 @@ export function w3bNumberFromNumber(amount: number): W3bNumber {
     big: inputAsBigInt,
   };
 }
+
+export function formatWalletAddress(
+  walletAddress: string | `0x${string}` | null | undefined,
+): string {
+  if (!walletAddress) return '';
+  return `${walletAddress.slice(0, 4)}...${walletAddress.slice(
+    walletAddress.length - 4,
+    walletAddress.length,
+  )}`;
+}
