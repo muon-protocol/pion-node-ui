@@ -25,6 +25,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 import toast from 'react-hot-toast';
+// import { useClaimPrizeDetail } from '../../hooks/useClaimPrizeDetail.tsx';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -89,6 +90,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         wallet.wasAliceOperatorEarly,
     );
   }, [rewardWallets]);
+
+  // const claimPrizeDetails = useClaimPrizeDetail(rawRewards);
 
   const { signMessageMetamask } = useSignMessage(
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,

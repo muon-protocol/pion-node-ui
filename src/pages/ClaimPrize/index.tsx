@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
 
@@ -149,6 +149,56 @@ const VerifyWalletCard = ({
   );
 };
 
+const PrizeCalculationDetailModal = () => {
+  const {} = useClaimPrize();
+
+  return (
+    <div className="text-black">
+      <div className="prize-section mb-6">
+        <p className="section-title text-lg font-semibold mb-2">
+          1. Deus Presale
+        </p>
+        <div className="flex flex-col gap-2 pb-3 border-b-[1px] border-dashed">
+          <div className="section-description text-sm font-light flex justify-between">
+            <p className="flex gap-1">
+              <span className="font-semibold"> &#8226; 0x5a03…c7ef:</span>
+              Staked
+              <span className="font-semibold">2000</span> DEI
+              <img
+                className="ml-1"
+                src="/assets/images/modal/right-arrow-icon.svg"
+                alt=""
+              />
+            </p>
+            <p className="flex gap-1">
+              <span className="font-semibold">200</span>ALICE
+            </p>
+          </div>
+          <div className="section-description text-sm font-light flex justify-between">
+            <p className="flex gap-1">
+              <span className="font-semibold"> &#8226; 0x5a03…c7ef:</span>
+              Staked
+              <span className="font-semibold">2000</span> DEI
+              <img
+                className="ml-1"
+                src="/assets/images/modal/right-arrow-icon.svg"
+                alt=""
+              />
+            </p>
+            <p className="flex gap-1">
+              <span className="font-semibold">200</span>ALICE
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-between items-center pt-2">
+          <p>Total</p>
+          <p className="font-semibold">400 ALICE</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ClaimCard = () => {
   const { getClaimSignature } = useClaimPrize();
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -162,6 +212,10 @@ const ClaimCard = () => {
     setAlreadyClaimedPrize,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
+  const [
+    isPrizeCalculationDetailModalOpen,
+    setIsPrizeCalculationDetailModalOpen,
+  ] = useState(false);
 
   const isClaimButtonDisabled = useMemo(() => {
     return (
@@ -221,7 +275,10 @@ const ClaimCard = () => {
         </p>
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-1">
-        <p className="font-medium underline text-sm cursor-pointer">
+        <p
+          onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
+          className="font-medium underline text-sm cursor-pointer"
+        >
           {eligibleAddresses.length !== 0 && 'Prize Calculation Details'}
         </p>
         {chainId !== getCurrentChainId() ? (
@@ -245,6 +302,13 @@ const ClaimCard = () => {
           </button>
         )}
       </div>
+      <Modal
+        title=""
+        closeModalHandler={() => setIsPrizeCalculationDetailModalOpen(false)}
+        isOpen={isPrizeCalculationDetailModalOpen}
+      >
+        <PrizeCalculationDetailModal />
+      </Modal>
     </div>
   );
 };
