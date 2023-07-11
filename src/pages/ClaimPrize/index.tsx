@@ -269,6 +269,7 @@ const ClaimCard = () => {
     isSuccess,
     alreadyClaimedPrize,
     setAlreadyClaimedPrize,
+    rawRewards,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const [
@@ -338,7 +339,7 @@ const ClaimCard = () => {
           onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
           className="font-medium underline text-sm cursor-pointer"
         >
-          {eligibleAddresses.length !== 0 && 'Prize Calculation Details'}
+          {rawRewards && 'Prize Calculation Details'}
         </p>
         {chainId !== getCurrentChainId() ? (
           <button

@@ -46,12 +46,12 @@ export type RawRewards = {
 export type Contributor = {
   contributor: string;
   reward: number;
+  message: string;
 };
 
 export type RawRewardSection = {
   contributors: Contributor[];
   reward: number;
-  message: string;
 };
 
 export type RewardWallet = {
