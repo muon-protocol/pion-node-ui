@@ -42,7 +42,7 @@ export type RawRewards = {
   muon_presale: RawRewardSection;
 };
 
-type RawRewardSection = {
+export type RawRewardSection = {
   contributors: string[];
   reward: number;
 };

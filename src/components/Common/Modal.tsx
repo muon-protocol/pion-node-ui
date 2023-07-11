@@ -16,12 +16,14 @@ const Modal: FC<{
       <AnimatePresence>
         {isOpen && (
           <div
-            className={`fixed z-[100] left-0 top-0 w-full h-full overflow-hidden backdrop-blur-sm flex items-center justify-center bg-modal-backdrop ${className}`}
+            className={`fixed z-[100] left-0 top-0 w-full h-full backdrop-blur-sm flex items-center justify-center bg-modal-backdrop ${className}`}
             onClick={(_e) => closeModalHandler()}
             data-testid="modal-wrapper"
           >
             <Scale
-              className={`modal-content max-w-[400px] w-[90%] px-8 pt-5 pb-8 relative overflow-hidden -z-10 ${
+              className={`modal-content ${
+                size === 'lg' ? 'max-w-[466px]' : 'max-w-[400px]'
+              } w-[90%] px-8 pt-5 pb-8 relative -z-10 ${
                 size === 'sm' ? 'bg-modal-small' : 'bg-white'
               } rounded-3xl`}
             >
@@ -45,7 +47,7 @@ const Modal: FC<{
                     alt={'X'}
                   />
                 </div>
-                <div className="styled-scroll overflow-y-auto z-10 bg-gray20 max-h-[50vh]">
+                <div className="styled-scroll overflow-y-auto z-10 bg-gray20 max-h-[70vh]">
                   {children}
                 </div>
               </div>

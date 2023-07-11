@@ -43,6 +43,7 @@ const ClaimPrizeContext = createContext<{
   alreadyClaimedPrize: boolean;
   setAlreadyClaimedPrize: (value: boolean) => void;
   claimSignature: string | null;
+  rawRewards: RawRewards | null;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -59,6 +60,7 @@ const ClaimPrizeContext = createContext<{
   alreadyClaimedPrize: false,
   setAlreadyClaimedPrize: () => {},
   claimSignature: null,
+  rawRewards: null,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -314,6 +316,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         alreadyClaimedPrize,
         setAlreadyClaimedPrize,
         claimSignature,
+        rawRewards,
       }}
     >
       {children}

@@ -1,9 +1,9 @@
-import { RewardWallet } from '../../types';
+import { RawRewardSection, RewardWallet } from '../../types';
 import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
-import { FadeIn } from '../../animations';
+import { FadeIn, MoveUpIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -150,50 +150,104 @@ const VerifyWalletCard = ({
 };
 
 const PrizeCalculationDetailModal = () => {
-  const {} = useClaimPrize();
+  const { rawRewards } = useClaimPrize();
 
   return (
     <div className="text-black">
-      <div className="prize-section mb-6">
-        <p className="section-title text-lg font-semibold mb-2">
-          1. Deus Presale
+      <RewardSource source={rawRewards?.deus_presale} title="Deus Presale" />
+      <RewardSource source={rawRewards?.muon_presale} title="Muon Presale" />
+      <RewardSource
+        source={rawRewards?.alice_operator}
+        title="Alice Operator"
+        subTitle="(Early stage)"
+        headerDetail="20% Reward"
+        detailDescription="The early stage of the Alice Operator is from 1st of July 2021 to 31st of July 2021"
+      />
+      <RewardSource
+        source={rawRewards?.early_alice_operator}
+        title="Alice Operator"
+        subTitle="(Main stage)"
+        headerDetail="40% Reward"
+        detailDescription="The main stage of the Alice Operator is from 1st of August 2021 to 31st of August 2021"
+      />
+      <RewardSource
+        source={rawRewards?.early_alice_operator}
+        title="Alice Operator"
+        subTitle="(Bonus stage)"
+      />
+    </div>
+  );
+};
+
+const RewardSource = ({
+  source,
+  title,
+  subTitle,
+  headerDetail,
+  detailDescription,
+}: {
+  source: RawRewardSection | undefined;
+  title: string;
+  subTitle?: string;
+  headerDetail?: string;
+  detailDescription?: string;
+}) => {
+  const [detailHovered, setDetailHovered] = useState(false);
+
+  if (!source || !source.contributors) return null;
+
+  return (
+    <div className="prize-section mb-6">
+      <div className="section-title mb-2 flex items-center justify-between">
+        <p className="text-lg font-semibold">
+          {title} <span className="text-lg font-normal">{subTitle}</span>
         </p>
-        <div className="flex flex-col gap-2 pb-3 border-b-[1px] border-dashed">
+        {headerDetail && (
+          <div
+            className="flex gap-1 cursor-pointer items-center"
+            onMouseEnter={() => setDetailHovered(true)}
+            onMouseLeave={() => setDetailHovered(false)}
+          >
+            <p className="text-sm">{headerDetail}</p>
+            <img
+              className="w-4 h-4"
+              src="/assets/images/modal/detail-description-icon.svg"
+              alt=""
+            />
+            {detailHovered && (
+              <MoveUpIn y={5} duration={0.1} className="absolute w-80">
+                <p className="p-2 bg-primary-dark font-semibold -translate-y-10 -translate-x-1/4 text-xs text-center rounded-2xl text-white">
+                  {detailDescription}
+                </p>
+              </MoveUpIn>
+            )}
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col gap-2 pb-3 border-b-[1px] border-gray border-dashed">
+        {source.contributors.map((contributor) => (
           <div className="section-description text-sm font-light flex justify-between">
             <p className="flex gap-1">
-              <span className="font-semibold"> &#8226; 0x5a03…c7ef:</span>
-              Staked
-              <span className="font-semibold">2000</span> DEI
-              <img
-                className="ml-1"
-                src="/assets/images/modal/right-arrow-icon.svg"
-                alt=""
-              />
-            </p>
-            <p className="flex gap-1">
-              <span className="font-semibold">200</span>ALICE
-            </p>
-          </div>
-          <div className="section-description text-sm font-light flex justify-between">
-            <p className="flex gap-1">
-              <span className="font-semibold"> &#8226; 0x5a03…c7ef:</span>
-              Staked
-              <span className="font-semibold">2000</span> DEI
-              <img
-                className="ml-1"
-                src="/assets/images/modal/right-arrow-icon.svg"
-                alt=""
-              />
-            </p>
-            <p className="flex gap-1">
-              <span className="font-semibold">200</span>ALICE
+              <span className="font-semibold">
+                &#8226; {formatWalletAddress(contributor)}
+              </span>
+              {/*  Staked*/}
+              {/*  <span className="font-semibold">2000</span> DEI*/}
+              {/*  <img*/}
+              {/*    className="ml-1"*/}
+              {/*    src="/assets/images/modal/right-arrow-icon.svg"*/}
+              {/*    alt=""*/}
+              {/*  />*/}
+              {/*</p>*/}
+              {/*<p className="flex gap-1">*/}
+              {/*  <span className="font-semibold">200</span>ALICE*/}
             </p>
           </div>
-        </div>
-        <div className="flex justify-between items-center pt-2">
-          <p>Total</p>
-          <p className="font-semibold">400 ALICE</p>
-        </div>
+        ))}
+      </div>
+      <div className="flex justify-between items-center pt-2">
+        <p>Total</p>
+        <p className="font-semibold">{source.reward} ALICE</p>
       </div>
     </div>
   );
@@ -304,6 +358,7 @@ const ClaimCard = () => {
       </div>
       <Modal
         title=""
+        size="lg"
         closeModalHandler={() => setIsPrizeCalculationDetailModalOpen(false)}
         isOpen={isPrizeCalculationDetailModalOpen}
       >
