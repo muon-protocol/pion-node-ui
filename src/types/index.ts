@@ -40,11 +40,18 @@ export type RawRewards = {
   deus_presale: RawRewardSection;
   early_alice_operator: RawRewardSection;
   muon_presale: RawRewardSection;
+  alice_operator_bounce: RawRewardSection;
+};
+
+export type Contributor = {
+  contributor: string;
+  reward: number;
 };
 
 export type RawRewardSection = {
-  contributors: string[];
+  contributors: Contributor[];
   reward: number;
+  message: string;
 };
 
 export type RewardWallet = {

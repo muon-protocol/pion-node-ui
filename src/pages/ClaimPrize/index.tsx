@@ -171,9 +171,9 @@ const PrizeCalculationDetailModal = () => {
         detailDescription="The main stage of the Alice Operator is from 1st of August 2021 to 31st of August 2021"
       />
       <RewardSource
-        source={rawRewards?.early_alice_operator}
+        source={rawRewards?.alice_operator_bounce}
         title="Alice Operator"
-        subTitle="(Bonus stage)"
+        subTitle="(Bounce stage)"
       />
     </div>
   );
@@ -229,7 +229,7 @@ const RewardSource = ({
           <div className="section-description text-sm font-light flex justify-between">
             <p className="flex gap-1">
               <span className="font-semibold">
-                &#8226; {formatWalletAddress(contributor)}
+                &#8226; {formatWalletAddress(contributor.contributor)}
               </span>
               {/*  Staked*/}
               {/*  <span className="font-semibold">2000</span> DEI*/}

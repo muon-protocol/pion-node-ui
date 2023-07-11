@@ -11,18 +11,27 @@ export const useRewardWallets = (
       return {
         walletAddress: walletWithSignature.walletAddress,
         signature: walletWithSignature.signature,
-        wasInMuonPresale: rawRewards.muon_presale.contributors.includes(
-          walletWithSignature.walletAddress,
+        wasInMuonPresale: rawRewards.muon_presale.contributors.some(
+          (contributor) =>
+            contributor.contributor === walletWithSignature.walletAddress,
         ),
-        wasInDeusPresale: rawRewards.deus_presale.contributors.includes(
-          walletWithSignature.walletAddress,
+        wasInDeusPresale: rawRewards.deus_presale.contributors.some(
+          (contributor) =>
+            contributor.contributor === walletWithSignature.walletAddress,
         ),
-        wasAliceOperator: rawRewards.alice_operator.contributors.includes(
-          walletWithSignature.walletAddress,
+        wasAliceOperator: rawRewards.alice_operator.contributors.some(
+          (contributor) =>
+            contributor.contributor === walletWithSignature.walletAddress,
         ),
         wasAliceOperatorEarly:
-          rawRewards.early_alice_operator.contributors.includes(
-            walletWithSignature.walletAddress,
+          rawRewards.early_alice_operator.contributors.some(
+            (contributor) =>
+              contributor.contributor === walletWithSignature.walletAddress,
+          ),
+        wasAliceBounceOperator:
+          rawRewards.alice_operator_bounce.contributors.some(
+            (contributor) =>
+              contributor.contributor === walletWithSignature.walletAddress,
           ),
       };
     });
