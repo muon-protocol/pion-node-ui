@@ -7,7 +7,7 @@ import { FadeIn, MoveUpIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import { formatWalletAddress } from '../../utils/web3.ts';
+import { formatWalletAddress, w3bNumberFromNumber } from '../../utils/web3.ts';
 
 const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
@@ -231,23 +231,28 @@ const RewardSource = ({
               <span className="font-semibold">
                 &#8226; {formatWalletAddress(contributor.contributor)}
               </span>
-              {/*  Staked*/}
-              {/*  <span className="font-semibold">2000</span> DEI*/}
-              {/*  <img*/}
-              {/*    className="ml-1"*/}
-              {/*    src="/assets/images/modal/right-arrow-icon.svg"*/}
-              {/*    alt=""*/}
-              {/*  />*/}
-              {/*</p>*/}
-              {/*<p className="flex gap-1">*/}
-              {/*  <span className="font-semibold">200</span>ALICE*/}
+              {/*Staked*/}
+              {/*<span className="font-semibold">2000</span> DEI*/}
+              {/*<img*/}
+              {/*  className="ml-1"*/}
+              {/*  src="/assets/images/modal/right-arrow-icon.svg"*/}
+              {/*  alt=""*/}
+              {/*/>*/}
+            </p>
+            <p className="flex gap-1">
+              <span className="font-semibold">
+                {w3bNumberFromNumber(contributor.reward).dsp}
+              </span>
+              ALICE
             </p>
           </div>
         ))}
       </div>
       <div className="flex justify-between items-center pt-2">
         <p>Total</p>
-        <p className="font-semibold">{source.reward} ALICE</p>
+        <p className="font-semibold">
+          {w3bNumberFromNumber(source.reward).dsp} ALICE
+        </p>
       </div>
     </div>
   );

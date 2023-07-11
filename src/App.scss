@@ -16,7 +16,7 @@
 }
 
 .styled-scroll {
-  @apply pr-1;
+  @apply pr-4 -mr-4;
 
   &::-webkit-scrollbar {
     width: 3px;
