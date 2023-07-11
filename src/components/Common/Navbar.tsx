@@ -4,6 +4,8 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import { useState } from 'react';
+import { useOutsideClick } from '../../hooks/useOutsideClick.ts';
 
 const Navbar = () => {
   return (
@@ -19,9 +21,14 @@ const DesktopNavbar = () => {
   const { ALICEBalance } = useALICE();
   const { bonALICEs } = useBonALICE();
 
+  const [isManageBonALICEDialogOpen, setIsManageBonALICEDialogOpen] =
+    useState(false);
+
+  // const ref = useOutsideClick(() => setIsManageBonALICEDialogOpen(false));
+
   return (
     <FadeIn delay={0.3}>
-      <div className="hidden md:flex navbar justify-between items-center py-9 pl-14 pr-12">
+      <div className="hidden relative md:flex navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
           <Link to={'/'}>
             <img
@@ -31,23 +38,78 @@ const DesktopNavbar = () => {
             />
           </Link>
         </div>
-        <div className="navbar__right flex justify-end items-center gap-4">
-          {bonALICEs.length == 0 ? (
-            <Link to={'/create'}>
-              <button className="btn btn--small">Create BonALICE</button>
-            </Link>
-          ) : (
-            <Link to={'/review'}>
-              <button className="btn btn--small--with-icon">
-                <img
-                  className="mr-2.5"
-                  src="/assets/images/alice-icon.svg"
-                  alt=""
-                />
-                Manage bonALICE
-              </button>
-            </Link>
+        <div className="navbar__right flex justify-end items-center gap-4 relative">
+          <button
+            onClick={() =>
+              setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
+            }
+            className="btn btn--small--with-icon"
+          >
+            <img
+              className="mr-2.5"
+              src="/assets/images/alice-icon.svg"
+              alt=""
+            />
+            Manage bonALICE
+          </button>
+
+          {isManageBonALICEDialogOpen && (
+            <FadeIn
+              duration={0.1}
+              delay={0.1}
+              className="absolute bottom-0 translate-y-[110%] -left-8"
+            >
+              <div className="dialog py-5 px-4 bg-primary-dark rounded-lg flex flex-col gap-4">
+                <div className="dialog__top flex gap-4 justify-between items-center">
+                  <div className="dialog__top__left flex flex-col gap-0">
+                    <p className="text-white text-sm">Balance:</p>
+                    <p className="text-white text-sm font-medium">
+                      {bonALICEs.length > 0
+                        ? bonALICEs.length + 'BonALICEs'
+                        : 'No bonALICE'}
+                    </p>
+                  </div>
+                  <div className="dialog__top__right flex items-center">
+                    {bonALICEs.length > 0 ? (
+                      <Link to={'/review'}>
+                        <button
+                          onClick={() => setIsManageBonALICEDialogOpen(false)}
+                          className="btn btn--small"
+                        >
+                          Manage
+                        </button>
+                      </Link>
+                    ) : (
+                      <Link to={'/create'}>
+                        <button
+                          onClick={() => setIsManageBonALICEDialogOpen(false)}
+                          className="btn btn--small"
+                        >
+                          Create
+                        </button>
+                      </Link>
+                    )}
+                  </div>
+                </div>
+                <div className="dialog--bottom">
+                  <Link to={'/claim'}>
+                    <button
+                      onClick={() => setIsManageBonALICEDialogOpen(false)}
+                      className="btn btn--small--with-icon !w-full"
+                    >
+                      <img
+                        className="mr-2.5"
+                        src="/assets/images/navbar/prize-icon.svg"
+                        alt=""
+                      />
+                      Claim as a Prize
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </FadeIn>
           )}
+
           <button className="btn btn--small">Buy ALICE</button>
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
