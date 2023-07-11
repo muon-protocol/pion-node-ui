@@ -74,8 +74,12 @@ const VerifyWalletCard = ({
   wallet: RewardWallet;
   className?: string;
 }) => {
-  const { handleVerifyWallet, handleRemoveWallet, claimSignature } =
-    useClaimPrize();
+  const {
+    handleVerifyWallet,
+    isMetamaskLoadingVerify,
+    handleRemoveWallet,
+    claimSignature,
+  } = useClaimPrize();
   const { walletAddress } = useUserProfile();
 
   return (
@@ -133,16 +137,20 @@ const VerifyWalletCard = ({
         <p className="mt-auto mb-3 w-full flex items-center justify-end text-sm font-medium text-green">
           VERIFIED!
         </p>
-      ) : walletAddress === wallet.walletAddress ? (
+      ) : walletAddress !== wallet.walletAddress ? (
+        <button className="btn btn--small ml-auto" disabled>
+          Switch Wallet
+        </button>
+      ) : isMetamaskLoadingVerify ? (
+        <button className="btn btn--small ml-auto" disabled>
+          Verifying...
+        </button>
+      ) : (
         <button
           className="btn btn--small ml-auto"
           onClick={() => handleVerifyWallet()}
         >
           Verify
-        </button>
-      ) : (
-        <button className="btn btn--small ml-auto" disabled>
-          Switch Wallet
         </button>
       )}
     </div>

@@ -34,6 +34,7 @@ const ClaimPrizeContext = createContext<{
   totalRewards: W3bNumber;
   stakingAddress: `0x${string}` | undefined;
   handleVerifyWallet: () => void;
+  isMetamaskLoadingVerify: boolean;
   eligibleAddresses: RewardWallet[];
   getClaimSignature: () => void;
   handleRemoveWallet: (walletAddress: string) => void;
@@ -51,6 +52,7 @@ const ClaimPrizeContext = createContext<{
   totalRewards: w3bNumberFromNumber(0),
   stakingAddress: undefined,
   handleVerifyWallet: () => {},
+  isMetamaskLoadingVerify: false,
   eligibleAddresses: [],
   getClaimSignature: () => {},
   handleRemoveWallet: () => {},
@@ -220,9 +222,14 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       wallets.filter((wallet) => wallet.walletAddress !== walletAddress),
     );
   };
+
+  const [isMetamaskLoadingVerify, setIsMetamaskLoadingVerify] = useState(false);
+
   const handleVerifyWallet = () => {
+    setIsMetamaskLoadingVerify(true);
     signMessageMetamask()
       .then((signature) => {
+        setIsMetamaskLoadingVerify(false);
         setWalletsWithSignatures((wallets) => {
           const newWallets = [...wallets];
           const index = newWallets.findIndex(
@@ -233,6 +240,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         });
       })
       .catch((error) => {
+        setIsMetamaskLoadingVerify(false);
         console.log(error);
       });
   };
@@ -307,6 +315,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         totalRewards,
         stakingAddress,
         handleVerifyWallet,
+        isMetamaskLoadingVerify,
         eligibleAddresses,
         getClaimSignature,
         handleRemoveWallet,
