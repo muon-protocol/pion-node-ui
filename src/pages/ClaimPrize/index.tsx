@@ -194,7 +194,7 @@ const RewardSource = ({
 }) => {
   const [detailHovered, setDetailHovered] = useState(false);
 
-  if (!source || !source.contributors) return null;
+  if (!source || !source.contributors || !source.reward) return null;
 
   return (
     <div className="prize-section mb-6">
@@ -215,8 +215,8 @@ const RewardSource = ({
               alt=""
             />
             {detailHovered && (
-              <MoveUpIn y={5} duration={0.1} className="absolute w-80">
-                <p className="p-2 bg-primary-dark font-semibold -translate-y-10 -translate-x-1/4 text-xs text-center rounded-2xl text-white">
+              <MoveUpIn y={5} duration={0.1} className="absolute w-60">
+                <p className="p-2 bg-primary-dark font-semibold -translate-y-12 -translate-x-8 text-xs text-center rounded-lg text-white">
                   {detailDescription}
                 </p>
               </MoveUpIn>
@@ -225,28 +225,31 @@ const RewardSource = ({
         )}
       </div>
       <div className="flex flex-col gap-2 pb-3 border-b-[1px] border-gray border-dashed">
-        {source.contributors.map((contributor) => (
-          <div className="section-description text-sm font-light flex justify-between">
-            <p className="flex gap-1">
-              <span className="font-semibold">
-                &#8226; {formatWalletAddress(contributor.contributor)}
-              </span>
-              {/*Staked*/}
-              {/*<span className="font-semibold">2000</span> DEI*/}
-              {/*<img*/}
-              {/*  className="ml-1"*/}
-              {/*  src="/assets/images/modal/right-arrow-icon.svg"*/}
-              {/*  alt=""*/}
-              {/*/>*/}
-            </p>
-            <p className="flex gap-1">
-              <span className="font-semibold">
-                {w3bNumberFromNumber(contributor.reward).dsp}
-              </span>
-              ALICE
-            </p>
-          </div>
-        ))}
+        {source.contributors.map((contributor) => {
+          if (contributor.reward > 0)
+            return (
+              <div className="section-description text-sm font-light flex justify-between">
+                <p className="flex gap-1">
+                  <span className="font-semibold">
+                    &#8226; {formatWalletAddress(contributor.contributor)}
+                  </span>
+                  {/*Staked*/}
+                  {/*<span className="font-semibold">2000</span> DEI*/}
+                  <img
+                    className="ml-1"
+                    src="/assets/images/modal/right-arrow-icon.svg"
+                    alt=""
+                  />
+                </p>
+                <p className="flex gap-1">
+                  <span className="font-semibold">
+                    {w3bNumberFromNumber(contributor.reward).dsp}
+                  </span>
+                  ALICE
+                </p>
+              </div>
+            );
+        })}
       </div>
       <div className="flex justify-between items-center pt-2">
         <p>Total</p>
@@ -269,7 +272,6 @@ const ClaimCard = () => {
     isSuccess,
     alreadyClaimedPrize,
     setAlreadyClaimedPrize,
-    rawRewards,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const [
@@ -339,7 +341,7 @@ const ClaimCard = () => {
           onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
           className="font-medium underline text-sm cursor-pointer"
         >
-          {rawRewards && 'Prize Calculation Details'}
+          {eligibleAddresses.length > 0 && 'Prize Calculation Details'}
         </p>
         {chainId !== getCurrentChainId() ? (
           <button
