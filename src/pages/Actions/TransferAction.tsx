@@ -1,6 +1,6 @@
 import useTransferAction from '../../contexts/TransferAction/useTransferAction.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import { FadeIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
@@ -16,13 +16,13 @@ const RenderTransferBody = () => {
     handleTransferAddressChange,
     transferAddress,
     isSelectedTransferBonALICE,
-    transfer,
+    // transfer,
   } = useTransferAction();
   const { bonALICEs } = useBonALICE();
 
-  const isTransferBonALICEButtonDisabled = useMemo(() => {
-    return !selectedTransferBonALICE || !transferAddress;
-  }, [transferAddress, selectedTransferBonALICE]);
+  // const isTransferBonALICEButtonDisabled = useMemo(() => {
+  //   return !selectedTransferBonALICE || !transferAddress;
+  // }, [transferAddress, selectedTransferBonALICE]);
 
   return (
     <>
@@ -71,15 +71,19 @@ const RenderTransferBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
       >
-        <button
-          onClick={() => {
-            !isTransferBonALICEButtonDisabled && transfer();
-          }}
-          disabled={isTransferBonALICEButtonDisabled}
-          className="btn !w-full"
-        >
-          Transfer
+        <button disabled className="btn !w-full">
+          Currently Disabled
         </button>
+
+        {/*<button*/}
+        {/*  onClick={() => {*/}
+        {/*    !isTransferBonALICEButtonDisabled && transfer();*/}
+        {/*  }}*/}
+        {/*  disabled={isTransferBonALICEButtonDisabled}*/}
+        {/*  className="btn !w-full"*/}
+        {/*>*/}
+        {/*  Transfer*/}
+        {/*</button>*/}
       </FadeIn>
     </>
   );
