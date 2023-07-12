@@ -17,53 +17,59 @@ const ClaimPrize = () => {
 
   const { eligibleAddresses } = useClaimPrize();
 
+  const windowHight = window.innerHeight;
+  const bodyHeight = windowHight - 108 - 70;
+
   return (
-    <FadeIn duration={0.3} className="page page--claim-prize">
-      <ConnectWalletModal redirectRoute="/get-started" />
-      <p className="text-2xl font-light mb-9">
-        Go to your wallet and choose the address linked to your pioneer
-        activities. Repeat this step for each address associated with pioneer
-        activities
-      </p>
-      <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
-        {eligibleAddresses.length > 0 ? (
-          <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
-            {eligibleAddresses.map((wallet) => (
-              <VerifyWalletCard
-                wallet={wallet}
-                className="!min-w-[304px] scroll"
-              />
-            ))}
-          </span>
-        ) : (
-          <p className="text-2xl font-light text-center w-full my-auto">
-            No Eligible address detected
-          </p>
-        )}
-      </div>
-      <ClaimCard />
-      <Modal
-        title=""
-        size="sm"
-        isOpen={isSwitchBackToWalletModalOpen}
-        closeModalHandler={closeSwitchBackToWalletModal}
-      >
-        <Link to="/review">
-          <div className="pb-4 px-3 flex flex-col justify-center items-center">
-            <img
-              className="w-[108px] mb-10"
-              src="/assets/images/claim/switch-wallet-modal-icon.svg"
-              alt=""
-            />
-            <p className="text-center">
-              To claim your bonALICE, please switch back to your Staking Address
-              <br />
-              <strong>{formatWalletAddress(stakingAddress)}</strong>
+    <div style={{ minHeight: bodyHeight }} className="page page--claim-prize">
+      <FadeIn duration={0.3}>
+        <ConnectWalletModal redirectRoute="/get-started" />
+        <p className="text-2xl font-light mb-9">
+          Go to your wallet and choose the address linked to your pioneer
+          activities. Repeat this step for each address associated with pioneer
+          activities
+        </p>
+        <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+          {eligibleAddresses.length > 0 ? (
+            <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
+              {eligibleAddresses.map((wallet) => (
+                <VerifyWalletCard
+                  wallet={wallet}
+                  className="!min-w-[304px] scroll"
+                />
+              ))}
+            </span>
+          ) : (
+            <p className="text-2xl font-light text-center w-full my-auto">
+              No Eligible address detected
             </p>
-          </div>
-        </Link>
-      </Modal>
-    </FadeIn>
+          )}
+        </div>
+        <ClaimCard />
+        <Modal
+          title=""
+          size="sm"
+          isOpen={isSwitchBackToWalletModalOpen}
+          closeModalHandler={closeSwitchBackToWalletModal}
+        >
+          <Link to="/review">
+            <div className="pb-4 px-3 flex flex-col justify-center items-center">
+              <img
+                className="w-[108px] mb-10"
+                src="/assets/images/claim/switch-wallet-modal-icon.svg"
+                alt=""
+              />
+              <p className="text-center">
+                To claim your bonALICE, please switch back to your Staking
+                Address
+                <br />
+                <strong>{formatWalletAddress(stakingAddress)}</strong>
+              </p>
+            </div>
+          </Link>
+        </Modal>
+      </FadeIn>
+    </div>
   );
 };
 

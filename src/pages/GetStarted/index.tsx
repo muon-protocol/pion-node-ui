@@ -3,32 +3,37 @@ import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 
 const GetStarted = () => {
+  const windowHight = window.innerHeight;
+  const bodyHeight = windowHight - 108 - 70;
+
   return (
-    <FadeIn duration={0.3} className="page page--get-started">
-      <p className="text-[19px] md:text-2xl font-light mb-6">
-        You can obtain bonALICE in two ways: either create a new one
-        independently or claim it as a reward if you're part of the Muon
-        pioneers
-      </p>
-      <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
-        You're a pioneer if you:
-      </p>
-      <span className="flex w-full gap-3 justify-stretch mb-12">
-        <span className="get-started__pioneer-option">
-          Joined the Muon Presale
+    <div style={{ minHeight: bodyHeight }} className="page page--get-started">
+      <FadeIn duration={0.3}>
+        <p className="text-[19px] md:text-2xl font-light mb-6">
+          You can obtain bonALICE in two ways: either create a new one
+          independently or claim it as a reward if you're part of the Muon
+          pioneers
+        </p>
+        <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
+          You're a pioneer if you:
+        </p>
+        <span className="flex w-full gap-3 justify-stretch mb-12">
+          <span className="get-started__pioneer-option">
+            Joined the Muon Presale
+          </span>
+          <span className="get-started__pioneer-option">
+            Joined the Deus Presale
+          </span>
+          <span className="get-started__pioneer-option">
+            Operated an Alice Node
+          </span>
         </span>
-        <span className="get-started__pioneer-option">
-          Joined the Deus Presale
+        <span className="get-started__actions">
+          <NewBonALICEAction />
+          <MuanPioneerAction />
         </span>
-        <span className="get-started__pioneer-option">
-          Operated an Alice Node
-        </span>
-      </span>
-      <span className="get-started__actions">
-        <NewBonALICEAction />
-        <MuanPioneerAction />
-      </span>
-    </FadeIn>
+      </FadeIn>
+    </div>
   );
 };
 

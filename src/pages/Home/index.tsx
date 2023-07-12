@@ -24,8 +24,8 @@ const Home = () => {
           Empower Your Node with a Bonded ALICE NFT!{' '}
           <br className="hidden md:flex" />
           Secure your spot in one of our three distinguished tiers by locking
-          ALICE tokens in your bonALICE. The more tokens you lock, the higher the
-          tier and rewards.
+          ALICE tokens in your bonALICE. The more tokens you lock, the higher
+          the tier and rewards.
         </p>
       </MoveRightIn>
       <MoveRightIn delay={0.3} className="flex justify-center md:justify-start">
