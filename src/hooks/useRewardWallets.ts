@@ -32,7 +32,7 @@ export const useRewardWallets = (
               contributor.contributor === walletWithSignature.walletAddress &&
               contributor.reward > 0,
           ),
-        wasAliceBounceOperator:
+        wasAliceOperatorBounce:
           rawRewards.alice_operator_bounce.contributors.some(
             (contributor) =>
               contributor.contributor === walletWithSignature.walletAddress &&

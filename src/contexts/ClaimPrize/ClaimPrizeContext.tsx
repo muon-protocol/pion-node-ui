@@ -91,7 +91,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         wallet.wasInMuonPresale ||
         wallet.wasInDeusPresale ||
         wallet.wasAliceOperator ||
-        wallet.wasAliceOperatorEarly,
+        wallet.wasAliceOperatorEarly ||
+        wallet.wasAliceOperatorBounce,
     );
   }, [rewardWallets]);
 

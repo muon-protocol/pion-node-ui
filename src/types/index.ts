@@ -61,6 +61,7 @@ export type RewardWallet = {
   wasInDeusPresale: boolean;
   wasAliceOperator: boolean;
   wasAliceOperatorEarly: boolean;
+  wasAliceOperatorBounce: boolean;
 };
 
 export enum NotificationSources {
