@@ -124,7 +124,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     rewardAmount: totalRewards,
     signature: claimSignature,
     connectedWalletAddress: walletAddress,
-    stakingAddress: stakingAddress,
+    stakingAddress: stakingAddressFromPast || stakingAddress,
   });
 
   const {
@@ -193,7 +193,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   }, [walletAddress, getClaimSignatureFromPast]);
 
   const handleClaimReward = useCallback(async () => {
-    if (stakingAddress !== walletAddress) {
+    if (!stakingAddressFromPast && stakingAddress !== walletAddress) {
       setIsSwitchBackToWalletModalOpen(true);
       return;
     }
@@ -217,7 +217,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         }
       }
     }
-  }, [claimReward, stakingAddress, walletAddress]);
+  }, [claimReward, stakingAddress, walletAddress, stakingAddressFromPast]);
 
   useEffect(() => {
     if (walletAddress === stakingAddress) {
@@ -227,7 +227,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   }, [walletAddress, stakingAddress, isSwitchBackToWalletModalOpen]);
 
   const getClaimSignature = async () => {
-    if (claimSignature) {
+    if (claimSignature || claimSignatureFromPast) {
       handleClaimReward();
       return;
     }

@@ -24,7 +24,7 @@ export const useRawRewardsFromPast = ({
   const walletsWithSignaturesFromPast = useMemo(() => {
     if (!rawRewardsFromPast) return [];
 
-    const deusPresaleWallets = rawRewardsFromPast.deus_presale.contributors.map(
+    const wallets = rawRewardsFromPast.deus_presale.contributors.map(
       (contributor) => {
         return {
           walletAddress: contributor.contributor,
@@ -32,49 +32,62 @@ export const useRawRewardsFromPast = ({
         };
       },
     );
-    const muonPresaleWallets = rawRewardsFromPast.muon_presale.contributors.map(
-      (contributor) => {
-        return {
+    rawRewardsFromPast.muon_presale.contributors.forEach((contributor) => {
+      if (
+        !wallets.some(
+          (wallet) => wallet.walletAddress === contributor.contributor,
+        )
+      ) {
+        wallets.push({
           walletAddress: contributor.contributor,
           signature: 'signature',
-        };
+        });
+      }
+    });
+    rawRewardsFromPast.alice_operator.contributors.forEach((contributor) => {
+      if (
+        !wallets.some(
+          (wallet) => wallet.walletAddress === contributor.contributor,
+        )
+      ) {
+        wallets.push({
+          walletAddress: contributor.contributor,
+          signature: 'signature',
+        });
+      }
+    });
+
+    rawRewardsFromPast.early_alice_operator.contributors.forEach(
+      (contributor) => {
+        if (
+          !wallets.some(
+            (wallet) => wallet.walletAddress === contributor.contributor,
+          )
+        ) {
+          wallets.push({
+            walletAddress: contributor.contributor,
+            signature: 'signature',
+          });
+        }
       },
     );
-    const aliceOperatorWallets =
-      rawRewardsFromPast.alice_operator.contributors.map((contributor) => {
-        return {
-          walletAddress: contributor.contributor,
-          signature: 'signature',
-        };
-      });
-    const earlyAliceOperatorWallets =
-      rawRewardsFromPast.early_alice_operator.contributors.map(
-        (contributor) => {
-          return {
+
+    rawRewardsFromPast.alice_operator_bounce.contributors.forEach(
+      (contributor) => {
+        if (
+          !wallets.some(
+            (wallet) => wallet.walletAddress === contributor.contributor,
+          )
+        ) {
+          wallets.push({
             walletAddress: contributor.contributor,
             signature: 'signature',
-          };
-        },
-      );
-    const aliceOperatorBounceWallets =
-      rawRewardsFromPast.alice_operator_bounce.contributors.map(
-        (contributor) => {
-          return {
-            walletAddress: contributor.contributor,
-            signature: 'signature',
-          };
-        },
-      );
-    return [
-      ...new Set(
-        aliceOperatorBounceWallets.concat(
-          aliceOperatorWallets,
-          earlyAliceOperatorWallets,
-          deusPresaleWallets,
-          muonPresaleWallets,
-        ),
-      ),
-    ];
+          });
+        }
+      },
+    );
+
+    return wallets;
   }, [rawRewardsFromPast]);
 
   const { rewardWallets: rewardWalletsFromPast } = useRewardWallets(

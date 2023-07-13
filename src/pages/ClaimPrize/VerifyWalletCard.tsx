@@ -6,9 +6,11 @@ import { formatWalletAddress } from '../../utils/web3.ts';
 export const VerifyWalletCard = ({
   wallet,
   className,
+  disabled,
 }: {
   wallet: RewardWallet;
   className?: string;
+  disabled?: boolean;
 }) => {
   const {
     handleVerifyWallet,
@@ -27,14 +29,16 @@ export const VerifyWalletCard = ({
         <p className="text-lg text-white">
           {formatWalletAddress(wallet.walletAddress)}
         </p>
-        {wallet.walletAddress !== walletAddress && !claimSignature && (
-          <img
-            onClick={() => handleRemoveWallet(wallet.walletAddress)}
-            src="/assets/images/modal/exit-white-icon.svg"
-            alt=""
-            className="cursor-pointer"
-          />
-        )}
+        {wallet.walletAddress !== walletAddress &&
+          !claimSignature &&
+          !disabled && (
+            <img
+              onClick={() => handleRemoveWallet(wallet.walletAddress)}
+              src="/assets/images/modal/exit-white-icon.svg"
+              alt=""
+              className="cursor-pointer"
+            />
+          )}
       </span>
       <span className="reward-sources flex-col gap-2 ml-4 mb-1">
         <RewardSection

@@ -14,6 +14,7 @@ const ClaimPrize = () => {
   const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
     useClaimPrize();
   const { stakingAddress } = useClaimPrize();
+  const { stakingAddressFromPast, rewardWalletsFromPast } = useClaimPrize();
 
   const { eligibleAddresses } = useClaimPrize();
 
@@ -22,15 +23,36 @@ const ClaimPrize = () => {
 
   return (
     <div style={{ minHeight: bodyHeight }} className="page page--claim-prize">
-      <FadeIn duration={0.3}>
+      <FadeIn duration={0.3} className="w-full">
         <ConnectWalletModal redirectRoute="/get-started" />
         <p className="text-2xl font-light mb-9">
           Go to your wallet and choose the address linked to your pioneer
           activities. Repeat this step for each address associated with pioneer
           activities
         </p>
+        {stakingAddressFromPast && (
+          <div
+            className={`bg-pacific-blue-20 rounded-xl flex gap-6 py-5 px-6 items-center mb-2`}
+          >
+            <img src="/assets/images/review/info-icon.svg" alt="" />
+            <p className="leading-5">
+              You have already a signature for this address with the following
+              bonALICEs. Please claim them if you haven't already.
+            </p>
+          </div>
+        )}
         <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
-          {eligibleAddresses.length > 0 ? (
+          {rewardWalletsFromPast.length > 0 ? (
+            <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
+              {rewardWalletsFromPast.map((wallet) => (
+                <VerifyWalletCard
+                  wallet={wallet}
+                  disabled
+                  className="!min-w-[304px] scroll"
+                />
+              ))}
+            </span>
+          ) : eligibleAddresses.length > 0 ? (
             <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
               {eligibleAddresses.map((wallet) => (
                 <VerifyWalletCard
@@ -63,7 +85,11 @@ const ClaimPrize = () => {
                 To claim your bonALICE, please switch back to your Staking
                 Address
                 <br />
-                <strong>{formatWalletAddress(stakingAddress)}</strong>
+                <strong>
+                  {stakingAddressFromPast
+                    ? formatWalletAddress(stakingAddressFromPast)
+                    : formatWalletAddress(stakingAddress)}
+                </strong>
               </p>
             </div>
           </Link>
