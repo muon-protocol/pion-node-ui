@@ -36,6 +36,8 @@ export type UserWallet = {
 };
 
 export type RawRewards = {
+  signature: string | null;
+  claimer: `0x${string}` | null;
   alice_operator: RawRewardSection;
   deus_presale: RawRewardSection;
   early_alice_operator: RawRewardSection;
@@ -44,7 +46,7 @@ export type RawRewards = {
 };
 
 export type Contributor = {
-  contributor: string;
+  contributor: `0x${string}`;
   reward: number;
   message: string;
 };

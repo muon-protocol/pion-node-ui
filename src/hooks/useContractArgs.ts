@@ -122,11 +122,16 @@ export const useMergeArgs = ({
 export const useClaimRewardArgs = ({
   rewardAmount,
   signature,
+  connectedWalletAddress,
+  stakingAddress,
 }: {
   rewardAmount: W3bNumber;
   signature: string | null;
+  connectedWalletAddress: `0x${string}` | null | undefined;
+  stakingAddress: `0x${string}` | null | undefined;
 }) => {
   if (!rewardAmount || !signature) return null;
+  if (connectedWalletAddress !== stakingAddress) return null;
 
   return [rewardAmount.big, signature];
 };
@@ -161,7 +166,7 @@ export const useAddNodeArgs = ({
   peerId,
   tokenId,
 }: {
-  nodeAddress: `0x${string}` | undefined;
+  nodeAddress: `0x${string}` | null;
   peerId: string;
   tokenId: number | null;
 }) => {

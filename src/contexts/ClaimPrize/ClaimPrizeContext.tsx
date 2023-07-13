@@ -17,7 +17,6 @@ import { useRewardWallets } from '../../hooks/useRewardWallets.ts';
 import useTotalRewards from '../../hooks/useTotalRewards.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
-import useStakingAddress from '../../hooks/useStakingAddress.ts';
 import useSignMessage from '../../hooks/useSignMessage.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import REWARD_ABI from '../../abis/Reward.json';
@@ -25,14 +24,14 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 import toast from 'react-hot-toast';
-// import { useClaimPrizeDetail } from '../../hooks/useClaimPrizeDetail.tss';
+import { useRawRewardsFromPast } from '../../hooks/useRawRewardsFromPast.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
   openSwitchBackToWalletModal: () => void;
   closeSwitchBackToWalletModal: () => void;
   totalRewards: W3bNumber;
-  stakingAddress: `0x${string}` | undefined;
+  stakingAddress: `0x${string}` | null;
   handleVerifyWallet: () => void;
   isMetamaskLoadingVerify: boolean;
   eligibleAddresses: RewardWallet[];
@@ -45,12 +44,18 @@ const ClaimPrizeContext = createContext<{
   setAlreadyClaimedPrize: (value: boolean) => void;
   claimSignature: string | null;
   rawRewards: RawRewards | null;
+  rawRewardsFromPast: RawRewards | null;
+  stakingAddressFromPast: `0x${string}` | null;
+  walletsWithSignaturesFromPast: WalletWithSignature[];
+  claimSignatureFromPast: string | null;
+  rewardWalletsFromPast: RewardWallet[];
+  totalRewardFromPast: W3bNumber;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
   closeSwitchBackToWalletModal: () => {},
   totalRewards: w3bNumberFromNumber(0),
-  stakingAddress: undefined,
+  stakingAddress: null,
   handleVerifyWallet: () => {},
   isMetamaskLoadingVerify: false,
   eligibleAddresses: [],
@@ -63,6 +68,12 @@ const ClaimPrizeContext = createContext<{
   setAlreadyClaimedPrize: () => {},
   claimSignature: null,
   rawRewards: null,
+  rawRewardsFromPast: null,
+  stakingAddressFromPast: null,
+  walletsWithSignaturesFromPast: [],
+  claimSignatureFromPast: null,
+  rewardWalletsFromPast: [],
+  totalRewardFromPast: w3bNumberFromNumber(0),
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -72,19 +83,28 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     useState(false);
 
   const [rawRewards, setRawRewards] = useState<RawRewards | null>(null);
+  const [rawRewardsFromPast, setRawRewardsFromPast] =
+    useState<RawRewards | null>(null);
 
-  const { stakingAddress } = useStakingAddress();
+  const [stakingAddress, setStakingAddress] = useState<`0x${string}` | null>(
+    null,
+  );
+
+  const {
+    stakingAddressFromPast,
+    walletsWithSignaturesFromPast,
+    claimSignatureFromPast,
+    rewardWalletsFromPast,
+    totalRewardFromPast,
+  } = useRawRewardsFromPast({ rawRewardsFromPast });
+
   const { totalRewards } = useTotalRewards(rawRewards);
   const [walletsWithSignatures, setWalletsWithSignatures] = useState<
     WalletWithSignature[]
   >([]);
-
   const [claimSignature, setClaimSignature] = useState<string | null>(null);
-  const [claimSignatureFromPastLoading, setClaimSignatureFromPastLoading] =
-    useState(false);
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
-
   const eligibleAddresses = useMemo(() => {
     return rewardWallets.filter(
       (wallet) =>
@@ -96,8 +116,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     );
   }, [rewardWallets]);
 
-  // const claimPrizeDetails = useClaimPrizeDetail(rawRewards);
-
   const { signMessageMetamask } = useSignMessage(
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   );
@@ -105,6 +123,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const claimRewardArgs = useClaimRewardArgs({
     rewardAmount: totalRewards,
     signature: claimSignature,
+    connectedWalletAddress: walletAddress,
+    stakingAddress: stakingAddress,
   });
 
   const {
@@ -122,35 +142,51 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      setClaimSignature(null);
-      setRawRewards(null);
-      setWalletsWithSignatures([]);
+      toast.success('Claimed successfully');
     }
   }, [isSuccess]);
+
+  const newWalletConnected = useCallback(
+    (walletAddress: `0x${string}`) => {
+      if (!walletAddress || !isConnected || claimSignature) return;
+      if (!stakingAddress) {
+        setStakingAddress(walletAddress);
+      }
+      if (
+        !walletsWithSignatures.find(
+          (wallet) => wallet.walletAddress === walletAddress,
+        )
+      ) {
+        setWalletsWithSignatures([
+          ...walletsWithSignatures,
+          {
+            walletAddress: walletAddress,
+            signature: null,
+          },
+        ]);
+      }
+    },
+    [walletsWithSignatures, isConnected, claimSignature, stakingAddress],
+  );
 
   const getClaimSignatureFromPast = useCallback(async () => {
     if (!walletAddress) {
       setClaimSignature(null);
+      setRawRewards(null);
+      setWalletsWithSignatures([]);
       return;
     }
-    setClaimSignatureFromPastLoading(true);
     try {
       const result = await getClaimSignatureFromPastAPI(walletAddress);
       if (result?.success) {
-        setClaimSignature(result.result.signature);
-        setRawRewards(result.result);
-        setWalletsWithSignatures([
-          {
-            walletAddress: walletAddress,
-            signature: '0x000000000000000000000000',
-          },
-        ]);
+        setRawRewardsFromPast(result.result);
+      } else {
+        newWalletConnected(walletAddress);
       }
     } catch (e) {
       console.log(e);
     }
-    setClaimSignatureFromPastLoading(false);
-  }, [walletAddress]);
+  }, [walletAddress, newWalletConnected]);
 
   useEffect(() => {
     getClaimSignatureFromPast();
@@ -248,29 +284,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!walletAddress || !isConnected || claimSignature) return;
-    if (
-      !walletsWithSignatures.find(
-        (wallet) => wallet.walletAddress === walletAddress,
-      )
-    ) {
-      setWalletsWithSignatures([
-        ...walletsWithSignatures,
-        {
-          walletAddress: walletAddress,
-          signature: null,
-        },
-      ]);
-    }
-  }, [walletsWithSignatures, walletAddress, isConnected, claimSignature]);
-
-  useEffect(() => {
-    if (
-      !walletAddress ||
-      !isConnected ||
-      claimSignature ||
-      claimSignatureFromPastLoading
-    )
-      return;
 
     async function getRewards() {
       try {
@@ -279,13 +292,9 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
           walletsString.push(wallet.walletAddress);
         });
         if (walletsString.length === 0) return;
-        if (!claimSignature || !claimSignatureFromPastLoading) {
+        if (!claimSignature) {
           const response = await getRewardsAPI(walletsString);
-          if (
-            response.success &&
-            !claimSignature &&
-            !claimSignatureFromPastLoading
-          )
+          if (response.success && !claimSignature)
             setRawRewards(response.result);
         }
       } catch (error) {
@@ -294,13 +303,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     }
 
     getRewards();
-  }, [
-    walletsWithSignatures,
-    walletAddress,
-    isConnected,
-    claimSignature,
-    claimSignatureFromPastLoading,
-  ]);
+  }, [walletsWithSignatures, walletAddress, isConnected, claimSignature]);
 
   const openSwitchBackToWalletModal = () =>
     setIsSwitchBackToWalletModalOpen(true);
@@ -327,6 +330,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setAlreadyClaimedPrize,
         claimSignature,
         rawRewards,
+        rawRewardsFromPast,
+        claimSignatureFromPast,
+        rewardWalletsFromPast,
+        totalRewardFromPast,
+        walletsWithSignaturesFromPast,
+        stakingAddressFromPast,
       }}
     >
       {children}
