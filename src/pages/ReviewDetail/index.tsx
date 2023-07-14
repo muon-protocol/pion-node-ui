@@ -88,15 +88,15 @@ const ReviewDetail = () => {
                 (
                 <span className="font-medium">
                   {nodeBonALICE.ALICELockAmount.dsp}
-                </span>
-                ALICE +
+                </span>{' '}
+                ALICE +{' '}
                 <span className="font-medium">
                   {nodeBonALICE.LPTokenLockAmount.dsp}
-                </span>
+                </span>{' '}
                 LP)
               </span>
             ) : (
-              <span className="font-semibold">0</span>
+              <span className="font-semibold">Select BonALICE</span>
             )}
           </span>
           <span className="flex w-full justify-between leading-5 font-light">

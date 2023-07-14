@@ -24,7 +24,6 @@ const useWagmiContractWrite = ({
 
   const callback = useMemo(() => {
     if (!abi || !address || !functionName || !args || !chainId) return null;
-
     return async (stateMessage: StateMessages) => {
       setIsMetamaskLoading(true);
       setIsFailed(false);

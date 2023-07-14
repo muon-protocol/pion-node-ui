@@ -1,6 +1,10 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export const ConnectWalletButton = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
+export const ConnectWalletButton = ({
+  size,
+}: {
+  size?: 'sm' | 'md' | 'lg';
+}) => {
   return (
     <ConnectButton.Custom>
       {({
