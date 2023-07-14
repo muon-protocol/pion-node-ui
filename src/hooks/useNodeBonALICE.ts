@@ -63,7 +63,7 @@ const useNodeBonALICE = () => {
         }, 400);
       } else {
         setIsGettingNodeStatusLoading(false);
-        toast.error('Something went wrong. Please try again.');
+        toast.error(response.result);
       }
     } catch (e) {
       setIsGettingNodeStatusLoading(false);
