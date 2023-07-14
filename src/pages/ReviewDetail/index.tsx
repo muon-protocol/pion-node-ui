@@ -27,6 +27,7 @@ const ReviewDetail = () => {
     nodeIP,
     isMetamaskLoading,
     isTransactionLoading,
+    isGettingNodeStatusLoading,
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -137,6 +138,10 @@ const ReviewDetail = () => {
             className="btn btn--secondary mt-auto mx-auto"
           >
             Switch Network
+          </button>
+        ) : isGettingNodeStatusLoading ? (
+          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+            Node Status...
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn btn--secondary mt-auto mx-auto" disabled>

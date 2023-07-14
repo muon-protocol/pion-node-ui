@@ -38,3 +38,8 @@ export async function getClaimSignatureAPI(
   });
   return response.data;
 }
+
+export async function getNodeStatusAPI(ip: string) {
+  const response = await axiosInstance.get('/reward-server/status?ip=' + ip);
+  return response.data;
+}

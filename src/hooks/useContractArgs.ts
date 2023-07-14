@@ -166,7 +166,7 @@ export const useAddNodeArgs = ({
   peerId,
   tokenId,
 }: {
-  nodeAddress: `0x${string}` | null;
+  nodeAddress: string;
   peerId: string;
   tokenId: number | null;
 }) => {
