@@ -36,8 +36,9 @@ const ClaimPrize = () => {
           >
             <img src="/assets/images/review/info-icon.svg" alt="" />
             <p className="leading-5">
-              You have already a signature for this address with the following
-              bonALICEs. Please claim them if you haven't already.
+              You have already a signature for this address (
+              {formatWalletAddress(stakingAddressFromPast)}) with the following
+              information. Please claim them if you haven't already.
             </p>
           </div>
         )}
@@ -110,6 +111,8 @@ const ClaimCard = () => {
     isSuccess,
     alreadyClaimedPrize,
     setAlreadyClaimedPrize,
+    stakingAddressFromPast,
+    totalRewardFromPast,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const [
@@ -119,10 +122,11 @@ const ClaimCard = () => {
 
   const isClaimButtonDisabled = useMemo(() => {
     return (
-      eligibleAddresses.length === 0 ||
-      eligibleAddresses.some((wallet) => !wallet.signature)
+      !stakingAddressFromPast &&
+      (eligibleAddresses.length === 0 ||
+        eligibleAddresses.some((wallet) => !wallet.signature))
     );
-  }, [eligibleAddresses]);
+  }, [eligibleAddresses, stakingAddressFromPast]);
 
   const navigate = useNavigate();
 
@@ -140,14 +144,20 @@ const ClaimCard = () => {
         <span className="flex justify-between font-light mb-3">
           <p>Staking address:</p>
           <p className="font-semibold">
-            {walletAddress
+            {stakingAddressFromPast
+              ? formatWalletAddress(stakingAddressFromPast)
+              : walletAddress
               ? formatWalletAddress(stakingAddress)
               : 'connect wallet'}
           </p>
         </span>
         <span className="flex justify-between font-light mb-3">
           <p className="flex gap-1">
-            <p className="font-semibold">{totalRewards.dsp}</p>
+            <p className="font-semibold">
+              {stakingAddressFromPast
+                ? totalRewardFromPast.dsp
+                : totalRewards.dsp}
+            </p>
             ALICE
             <img
               src="/assets/images/claim/claim-card-right-arrow-icon.svg"
@@ -155,14 +165,18 @@ const ClaimCard = () => {
             />
           </p>
           <p className="flex">
-            <p className="font-semibold mr-1">{totalRewards.dsp}</p>
+            <p className="font-semibold mr-1">
+              {stakingAddressFromPast
+                ? totalRewardFromPast.dsp
+                : totalRewards.dsp}
+            </p>
             Power
           </p>
         </span>
         <span className="flex justify-between font-light mb-3">
           <p>bonALICE Tier:</p>
           <p className="font-semibold">
-            {eligibleAddresses.length > 0
+            {stakingAddressFromPast || eligibleAddresses.length > 0
               ? 'ALICE Starter'
               : 'No eligible wallet'}
           </p>
@@ -170,7 +184,9 @@ const ClaimCard = () => {
         <p className="flex justify-between font-light">
           <p>Potential APR:</p>
           <p className="font-semibold">
-            {eligibleAddresses.length > 0 ? '10%-15%' : 'No eligible wallet'}
+            {stakingAddressFromPast || eligibleAddresses.length > 0
+              ? '10%-15%'
+              : 'No eligible wallet'}
           </p>
         </p>
       </div>
