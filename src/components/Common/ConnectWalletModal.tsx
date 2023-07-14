@@ -27,7 +27,7 @@ export const ConnectWalletModal = ({
         <p className="text-center mb-4">
           please connect your wallet to continue
         </p>
-        <ConnectWalletButton />
+        <ConnectWalletButton size="md" />
       </div>
     </Modal>
   );

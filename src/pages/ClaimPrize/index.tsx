@@ -1,6 +1,6 @@
 import Modal from '../../components/Common/Modal.tsx';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
@@ -25,14 +25,14 @@ const ClaimPrize = () => {
     <div style={{ minHeight: bodyHeight }} className="page page--claim-prize">
       <FadeIn duration={0.3} className="w-full">
         <ConnectWalletModal redirectRoute="/get-started" />
-        <p className="text-2xl font-light mb-9">
+        <p className="text-2xl font-light mb-5">
           Go to your wallet and choose the address linked to your pioneer
           activities. Repeat this step for each address associated with pioneer
           activities
         </p>
         {stakingAddressFromPast && (
           <div
-            className={`bg-pacific-blue-20 rounded-xl flex gap-6 py-5 px-6 items-center mb-2`}
+            className={`bg-pacific-blue-20 rounded-xl flex gap-6 py-5 px-6 items-center`}
           >
             <img src="/assets/images/review/info-icon.svg" alt="" />
             <p className="leading-5">
@@ -42,7 +42,7 @@ const ClaimPrize = () => {
             </p>
           </div>
         )}
-        <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+        <div className="w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px] mt-4">
           {rewardWalletsFromPast.length > 0 ? (
             <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
               {rewardWalletsFromPast.map((wallet) => (
@@ -75,25 +75,22 @@ const ClaimPrize = () => {
           isOpen={isSwitchBackToWalletModalOpen}
           closeModalHandler={closeSwitchBackToWalletModal}
         >
-          <Link to="/review">
-            <div className="pb-4 px-3 flex flex-col justify-center items-center">
-              <img
-                className="w-[108px] mb-10"
-                src="/assets/images/claim/switch-wallet-modal-icon.svg"
-                alt=""
-              />
-              <p className="text-center">
-                To claim your bonALICE, please switch back to your Staking
-                Address
-                <br />
-                <strong>
-                  {stakingAddressFromPast
-                    ? formatWalletAddress(stakingAddressFromPast)
-                    : formatWalletAddress(stakingAddress)}
-                </strong>
-              </p>
-            </div>
-          </Link>
+          <div className="pb-4 px-3 flex flex-col justify-center items-center">
+            <img
+              className="w-[108px] mb-10"
+              src="/assets/images/claim/switch-wallet-modal-icon.svg"
+              alt=""
+            />
+            <p className="text-center">
+              To claim your bonALICE, please switch back to your Staking Address
+              <br />
+              <strong>
+                {stakingAddressFromPast
+                  ? formatWalletAddress(stakingAddressFromPast)
+                  : formatWalletAddress(stakingAddress)}
+              </strong>
+            </p>
+          </div>
         </Modal>
       </FadeIn>
     </div>
@@ -101,7 +98,6 @@ const ClaimPrize = () => {
 };
 
 const ClaimCard = () => {
-  const { getClaimSignature } = useClaimPrize();
   const { totalRewards, stakingAddress } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const {
@@ -113,6 +109,12 @@ const ClaimCard = () => {
     setAlreadyClaimedPrize,
     stakingAddressFromPast,
     totalRewardFromPast,
+    claimSignatureFromPast,
+    handleClaimRewardsFromPastClicked,
+    handleClaimRewardsClicked,
+    isConfirmModalOpen,
+    setIsConfirmModalOpen,
+    handleConfirmClaimClicked,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const [
@@ -200,18 +202,28 @@ const ClaimCard = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn text-xl font-medium"
+            className="btn text-xl font-medium !min-w-[180px] !px-6"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn text-xl font-medium" disabled>
+          <button
+            className="btn text-xl font-medium !min-w-[180px] !px-6"
+            disabled
+          >
             {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
+          </button>
+        ) : claimSignatureFromPast ? (
+          <button
+            onClick={() => handleClaimRewardsFromPastClicked()}
+            className="btn text-xl font-medium !min-w-[180px] !px-6"
+          >
+            Claim
           </button>
         ) : (
           <button
-            onClick={() => getClaimSignature()}
-            className="btn text-xl font-medium"
+            onClick={() => handleClaimRewardsClicked()}
+            className="btn text-xl font-medium !min-w-[180px] !px-6"
             disabled={isClaimButtonDisabled}
           >
             Claim
@@ -225,6 +237,31 @@ const ClaimCard = () => {
         isOpen={isPrizeCalculationDetailModalOpen}
       >
         <PrizeCalculationDetailModal />
+      </Modal>
+      <Modal
+        title=""
+        size="sm"
+        isOpen={isConfirmModalOpen}
+        closeModalHandler={() => setIsConfirmModalOpen(false)}
+      >
+        <div className="pb-2 px-2 flex flex-col justify-center items-center">
+          <img
+            className="w-[108px] mb-10"
+            src="/assets/images/claim/switch-wallet-modal-icon.svg"
+            alt=""
+          />
+          <p className="text-center mb-5">
+            Be aware that if you press confirm button, you will be only able to
+            claim your reward on the staking address{' '}
+            <strong>({formatWalletAddress(stakingAddress)})</strong>.
+          </p>
+          <button
+            className="btn btn--secondary"
+            onClick={() => handleConfirmClaimClicked()}
+          >
+            Confirm
+          </button>
+        </div>
       </Modal>
     </div>
   );

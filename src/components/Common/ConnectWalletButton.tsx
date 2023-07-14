@@ -1,6 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-export const ConnectWalletButton = () => {
+export const ConnectWalletButton = ({ size }: { size: 'sm' | 'md' | 'lg' }) => {
   return (
     <ConnectButton.Custom>
       {({
@@ -30,7 +30,9 @@ export const ConnectWalletButton = () => {
                 return (
                   <button
                     onClick={openConnectModal}
-                    className="btn btn--small btn--dark-primary"
+                    className={`btn ${
+                      size === 'md' ? '' : 'btn--small'
+                    } btn--dark-primary`}
                   >
                     Connect Wallet
                   </button>
@@ -41,7 +43,9 @@ export const ConnectWalletButton = () => {
                 return (
                   <button
                     onClick={openChainModal}
-                    className="btn btn--small btn--secondary"
+                    className={`btn ${
+                      size === 'md' ? '' : 'btn--small'
+                    } btn--secondary`}
                   >
                     Wrong network
                   </button>
@@ -51,7 +55,9 @@ export const ConnectWalletButton = () => {
               return (
                 <button
                   onClick={openAccountModal}
-                  className="btn btn--secondary btn--small btn--dark-primary"
+                  className={`btn btn--secondary ${
+                    size === 'md' ? '' : 'btn--small'
+                  } btn--dark-primary`}
                 >
                   {account.displayName}
                 </button>
