@@ -36,9 +36,10 @@ const ClaimPrize = () => {
           >
             <img src="/assets/images/review/info-icon.svg" alt="" />
             <p className="leading-5">
-              You have already a signature for this address (
-              {formatWalletAddress(stakingAddressFromPast)}) with the following
-              information. Please claim them if you haven't already.
+              You have already a signature for this address{' '}
+              <strong>({formatWalletAddress(stakingAddressFromPast)})</strong>{' '}
+              with the following information. Please claim them if you haven't
+              already.
             </p>
           </div>
         )}
