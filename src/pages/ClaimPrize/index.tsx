@@ -11,8 +11,12 @@ import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import { VerifyWalletCard } from './VerifyWalletCard.tsx';
 
 const ClaimPrize = () => {
-  const { isSwitchBackToWalletModalOpen, closeSwitchBackToWalletModal } =
-    useClaimPrize();
+  const {
+    isSwitchBackToWalletModalOpen,
+    alreadyRegisteredWallet,
+    closeSwitchBackToWalletModal,
+  } = useClaimPrize();
+  const { walletAddress } = useUserProfile();
   const { stakingAddress } = useClaimPrize();
   const { stakingAddressFromPast, rewardWalletsFromPast } = useClaimPrize();
 
@@ -32,7 +36,7 @@ const ClaimPrize = () => {
         </p>
         {stakingAddressFromPast && (
           <div
-            className={`bg-pacific-blue-20 rounded-xl flex gap-6 py-5 px-6 items-center`}
+            className={`bg-pacific-blue-20 rounded-2xl flex gap-6 py-5 px-6 items-center`}
           >
             <img src="/assets/images/review/info-icon.svg" alt="" />
             <p className="leading-5">
@@ -40,6 +44,19 @@ const ClaimPrize = () => {
               <strong>({formatWalletAddress(stakingAddressFromPast)})</strong>{' '}
               with the following information. Please claim them if you haven't
               already.
+            </p>
+          </div>
+        )}
+        {alreadyRegisteredWallet && (
+          <div
+            className={`bg-alert-red-20 rounded-2xl flex gap-6 py-5 px-6 items-center`}
+          >
+            <img src="/assets/images/review/alert-icon.svg" alt="" />
+            <p className="leading-5">
+              {formatWalletAddress(walletAddress) +
+                ' has been already registered with ' +
+                alreadyRegisteredWallet}
+              .
             </p>
           </div>
         )}
@@ -116,6 +133,7 @@ const ClaimCard = () => {
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     handleConfirmClaimClicked,
+    rewardWalletsFromPast,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const [
@@ -194,22 +212,24 @@ const ClaimCard = () => {
         </p>
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-[3]">
-        <p
-          onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
-          className="font-medium underline text-sm cursor-pointer"
-        >
-          {eligibleAddresses.length > 0 && 'Prize Calculation Details'}
-        </p>
+        {eligibleAddresses.length > 0 || rewardWalletsFromPast.length > 0 ? (
+          <p
+            onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
+            className="font-medium underline text-sm cursor-pointer"
+          >
+            Prize Calculation Details
+          </p>
+        ) : null}
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn text-xl font-medium !min-w-[180px] !px-6"
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button
-            className="btn text-xl font-medium !min-w-[180px] !px-6"
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
             disabled
           >
             {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
@@ -217,14 +237,14 @@ const ClaimCard = () => {
         ) : claimSignatureFromPast ? (
           <button
             onClick={() => handleClaimRewardsFromPastClicked()}
-            className="btn text-xl font-medium !min-w-[180px] !px-6"
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
           >
             Claim
           </button>
         ) : (
           <button
             onClick={() => handleClaimRewardsClicked()}
-            className="btn text-xl font-medium !min-w-[180px] !px-6"
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
             disabled={isClaimButtonDisabled}
           >
             Claim

@@ -16,6 +16,7 @@ export default {
         gray3: '#939393',
         'primary-very-dark': '#353367',
         'pacific-blue-20': '#23B5D344',
+        'alert-red-20': '#FF3A5D44',
         'primary-dark-500': '#C2C1F4',
         'modal-small': '#ECEDFFCC',
         'primary-dark': '#918EF5',

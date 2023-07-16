@@ -25,6 +25,7 @@ import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 import toast from 'react-hot-toast';
 import { useRawRewardsFromPast } from '../../hooks/useRawRewardsFromPast.ts';
+import { useAlreadyRegisteredWallets } from '../../hooks/useAlreadyRegisteredWallets.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -55,6 +56,7 @@ const ClaimPrizeContext = createContext<{
   handleClaimRewardsClicked: () => void;
   handleConfirmClaimClicked: () => void;
   setIsConfirmModalOpen: (value: boolean) => void;
+  alreadyRegisteredWallet: string | null;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -84,6 +86,7 @@ const ClaimPrizeContext = createContext<{
   handleClaimRewardsClicked: () => {},
   handleConfirmClaimClicked: () => {},
   setIsConfirmModalOpen: () => {},
+  alreadyRegisteredWallet: null,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -116,6 +119,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignatures);
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isReadyToClaim, setIsReadyToClaim] = useState(false);
   const eligibleAddresses = useMemo(() => {
     return rewardWallets.filter(
       (wallet) =>
@@ -131,9 +135,15 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   );
 
+  const alreadyRegisteredWallet: string | null = useAlreadyRegisteredWallets({
+    rawRewards,
+    walletAddress,
+  });
+
+  console.log('alreadyRegisteredWallet', alreadyRegisteredWallet);
   const claimRewardArgs = useClaimRewardArgs({
-    rewardAmount: totalRewards,
-    signature: claimSignature,
+    rewardAmount: totalRewardFromPast || totalRewards,
+    signature: claimSignatureFromPast || claimSignature,
     connectedWalletAddress: walletAddress,
     stakingAddress: stakingAddressFromPast || stakingAddress,
   });
@@ -223,10 +233,19 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         // @ts-ignore
         if (e.cause.toString().includes('Invalid signature.')) {
           toast.error('Invalid signature.');
+        } else {
+          console.log(e);
         }
       }
     }
-  }, [claimReward]);
+  }, [claimReward, setIsConfirmModalOpen]);
+
+  useEffect(() => {
+    if (isReadyToClaim && claimRewardArgs) {
+      setIsReadyToClaim(false);
+      handleClaimReward();
+    }
+  }, [isReadyToClaim, claimRewardArgs, handleClaimReward]);
 
   useEffect(() => {
     if (walletAddress === stakingAddress) {
@@ -342,21 +361,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       );
       if (response?.success) {
         setClaimSignature(response.result.signature);
-        setTimeout(() => {
-          console.log(response);
-          setClaimSignature(response.result.signature);
-          handleClaimReward();
-        }, 100);
+        setIsReadyToClaim(true);
       }
     } catch (error) {
       console.log(error);
     }
   }, [
-    eligibleAddresses,
-    walletsWithSignatures,
     stakingAddress,
+    eligibleAddresses,
     isConnected,
-    handleClaimReward,
+    setClaimSignature,
+    setIsReadyToClaim,
   ]);
 
   const handleClaimRewardsClicked = useCallback(async () => {
@@ -409,6 +424,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         isConfirmModalOpen,
         handleConfirmClaimClicked,
         setIsConfirmModalOpen,
+        alreadyRegisteredWallet,
       }}
     >
       {children}

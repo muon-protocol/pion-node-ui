@@ -5,28 +5,32 @@ import { MoveUpIn } from '../../animations';
 import { formatWalletAddress, w3bNumberFromNumber } from '../../utils/web3.ts';
 
 export const PrizeCalculationDetailModal = () => {
-  const { rawRewards } = useClaimPrize();
+  const { rawRewards, rawRewardsFromPast } = useClaimPrize();
+  let rewards = rawRewards;
+  if (rawRewardsFromPast) {
+    rewards = rawRewardsFromPast;
+  }
 
   return (
     <div className="text-black">
-      <RewardSource source={rawRewards?.deus_presale} title="Deus Presale" />
-      <RewardSource source={rawRewards?.muon_presale} title="Muon Presale" />
+      <RewardSource source={rewards?.deus_presale} title="Deus Presale" />
+      <RewardSource source={rewards?.muon_presale} title="Muon Presale" />
       <RewardSource
-        source={rawRewards?.early_alice_operator}
+        source={rewards?.early_alice_operator}
         title="Alice Operator"
         subTitle="(Early stage)"
         headerDetail="20% Reward"
         detailDescription="The early stage of the Alice Operator is from 1st of July 2021 to 31st of July 2021"
       />
       <RewardSource
-        source={rawRewards?.alice_operator}
+        source={rewards?.alice_operator}
         title="Alice Operator"
         subTitle="(Main stage)"
         headerDetail="40% Reward"
         detailDescription="The main stage of the Alice Operator is from 1st of August 2021 to 31st of August 2021"
       />
       <RewardSource
-        source={rawRewards?.alice_operator_bounce}
+        source={rewards?.alice_operator_bounce}
         title="Alice Operator"
         subTitle="(Bounce stage)"
       />
