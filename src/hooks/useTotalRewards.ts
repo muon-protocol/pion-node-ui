@@ -9,6 +9,7 @@ const useTotalRewards = (rawRewards: RawRewards | null) => {
       rawRewards.alice_operator.reward +
         rawRewards.deus_presale.reward +
         rawRewards.early_alice_operator.reward +
+        rawRewards.alice_operator_bounce.reward +
         rawRewards.muon_presale.reward,
     );
   }, [rawRewards]);
