@@ -9,12 +9,14 @@ const useWagmiContractWrite = ({
   functionName,
   args,
   chainId,
+  showErrorToast = false,
 }: {
   abi: any;
   address: `0x${string}`;
   functionName: any;
   args: any;
   chainId: number;
+  showErrorToast?: boolean;
 }) => {
   const [isMetamaskLoading, setIsMetamaskLoading] = useState(false);
   const [isTransactionLoading, setIsTransactionLoading] = useState(false);
@@ -49,7 +51,10 @@ const useWagmiContractWrite = ({
         });
         setIsTransactionLoading(false);
         setIsSuccess(true);
-      } catch (error) {
+      } catch (error: any) {
+        if (showErrorToast) {
+          toast.error(error.message.split('reason:\n')[1].split('\n')[0]);
+        }
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
         setIsFailed(true);
