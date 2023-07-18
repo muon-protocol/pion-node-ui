@@ -140,7 +140,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     walletAddress,
   });
 
-  console.log('alreadyRegisteredWallet', alreadyRegisteredWallet);
   const claimRewardArgs = useClaimRewardArgs({
     rewardAmount: totalRewardFromPast || totalRewards,
     signature: claimSignatureFromPast || claimSignature,
@@ -223,6 +222,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         failed: 'Error',
       });
     } catch (e) {
+      console.log(e)
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       if (e.cause.toString().includes('Already claimed the reward.')) {
