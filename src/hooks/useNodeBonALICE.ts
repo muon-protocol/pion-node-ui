@@ -48,11 +48,6 @@ const useNodeBonALICE = () => {
       });
     } catch (e: any) {
       setIsGettingNodeStatusLoading(false);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (e.cause.toString().includes('Insufficient amount to run a node.')) {
-        toast.error('Insufficient amount to run a node.');
-      }
     }
   }, [addNode]);
 

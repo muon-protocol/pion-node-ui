@@ -158,6 +158,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     functionName: 'claimReward',
     args: claimRewardArgs,
     chainId: getCurrentChainId(),
+    showErrorToast: true,
   });
 
   useEffect(() => {
@@ -222,21 +223,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         failed: 'Error',
       });
     } catch (e) {
-      console.log(e)
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (e.cause.toString().includes('Already claimed the reward.')) {
-        setAlreadyClaimedPrize(true);
-        toast.success('You have claimed your Bonded ALICE.');
-      } else {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        if (e.cause.toString().includes('Invalid signature.')) {
-          toast.error('Invalid signature.');
-        } else {
-          console.log(e);
-        }
-      }
+      console.log(e);
     }
   }, [claimReward, setIsConfirmModalOpen]);
 
