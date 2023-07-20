@@ -358,6 +358,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       if (response?.success) {
         setClaimSignature(response.result.signature);
         setIsReadyToClaim(true);
+      } else {
+        toast.error(response.message);
       }
     } catch (error) {
       console.log(error);
