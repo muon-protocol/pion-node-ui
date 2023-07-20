@@ -4,7 +4,7 @@ import { Scale } from '../../animations';
 import { AnimatePresence } from 'framer-motion';
 
 const Modal: FC<{
-  title: string;
+  title?: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   isOpen: boolean;

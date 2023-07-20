@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { BonALICE } from '../../types';
 
 const SelectButtonWithModal = ({
-  title,
+  title = '',
   multiple,
   children,
   isModalOpen,
@@ -13,7 +13,7 @@ const SelectButtonWithModal = ({
   selectedItems,
   removeItem,
 }: {
-  title: string;
+  title?: string;
   multiple?: boolean;
   children: ReactNode;
   isModalOpen: boolean;

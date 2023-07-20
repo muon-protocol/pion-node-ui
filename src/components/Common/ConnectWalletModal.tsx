@@ -15,7 +15,6 @@ export const ConnectWalletModal = ({
     <Modal
       closeModalHandler={() => navigate(redirectRoute || '/')}
       isOpen={!walletAddress}
-      title=""
       size="sm"
     >
       <div className="pb-4 px-3 flex flex-col justify-center items-center">

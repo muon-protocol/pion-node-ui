@@ -209,7 +209,6 @@ export const RenderUpgradeBody = () => {
         )}
       </FadeIn>
       <Modal
-        title=""
         size="sm"
         isOpen={isAllowanceModalOpen}
         closeModalHandler={closeAllowanceModal}

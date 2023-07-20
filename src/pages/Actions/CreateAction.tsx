@@ -153,7 +153,6 @@ export const RenderCreateBody = () => {
         )}
       </FadeIn>
       <Modal
-        title=""
         size="sm"
         isOpen={isAllowanceModalOpen}
         closeModalHandler={closeAllowanceModal}

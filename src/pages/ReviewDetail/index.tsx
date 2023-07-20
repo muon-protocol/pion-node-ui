@@ -33,7 +33,6 @@ const ReviewDetail = () => {
       <div className="bg-white px-10 py-9 rounded-2xl w-full">
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
-            title=""
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
             isModalOpen={isSelectNodeBonALICEModalOpen}
             closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
