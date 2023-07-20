@@ -121,3 +121,8 @@ export type StateMessages = {
   success: string;
   failed: string;
 };
+
+export type AlreadyRegisteredWallet = {
+  isAlreadyRegistered: boolean;
+  registeredTo: string;
+};

@@ -1,14 +1,15 @@
 import { RawRewards } from '../types';
 import { formatWalletAddress } from '../utils/web3.ts';
 import { useMemo } from 'react';
+import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
 
-export const useAlreadyRegisteredWallets = ({
+export const useAlreadyRegisteredWallet = ({
   rawRewards,
-  walletAddress,
 }: {
   rawRewards: RawRewards | null;
-  walletAddress: `0x${string}` | undefined;
 }) => {
+  const { walletAddress } = useUserProfile();
+
   return useMemo(() => {
     if (!rawRewards || !walletAddress) return null;
 
@@ -18,8 +19,12 @@ export const useAlreadyRegisteredWallets = ({
         wallet.contributor === walletAddress
       );
     });
-    if (deusResult)
-      return formatWalletAddress(deusResult.message.slice(-43, -1));
+    if (deusResult) {
+      return {
+        registeredTo: formatWalletAddress(deusResult.message.slice(-43, -1)),
+        isAlreadyRegistered: true,
+      };
+    }
 
     const muonResult = rawRewards.muon_presale.contributors.find((wallet) => {
       return (
@@ -27,8 +32,12 @@ export const useAlreadyRegisteredWallets = ({
         wallet.contributor === walletAddress
       );
     });
-    if (muonResult)
-      return formatWalletAddress(muonResult.message.slice(-43, -1));
+    if (muonResult) {
+      return {
+        registeredTo: formatWalletAddress(muonResult.message.slice(-43, -1)),
+        isAlreadyRegistered: true,
+      };
+    }
 
     const aliceResult = rawRewards.alice_operator.contributors.find(
       (wallet) => {
@@ -38,8 +47,12 @@ export const useAlreadyRegisteredWallets = ({
         );
       },
     );
-    if (aliceResult)
-      return formatWalletAddress(aliceResult.message.slice(-43, -1));
+    if (aliceResult) {
+      return {
+        registeredTo: formatWalletAddress(aliceResult.message.slice(-43, -1)),
+        isAlreadyRegistered: true,
+      };
+    }
 
     const earlyAliceResult = rawRewards.early_alice_operator.contributors.find(
       (wallet) => {
@@ -49,8 +62,14 @@ export const useAlreadyRegisteredWallets = ({
         );
       },
     );
-    if (earlyAliceResult)
-      return formatWalletAddress(earlyAliceResult.message.slice(-43, -1));
+    if (earlyAliceResult) {
+      return {
+        registeredTo: formatWalletAddress(
+          earlyAliceResult.message.slice(-43, -1),
+        ),
+        isAlreadyRegistered: true,
+      };
+    }
 
     const aliceBounceResult =
       rawRewards.alice_operator_bounce.contributors.find((wallet) => {
@@ -59,9 +78,18 @@ export const useAlreadyRegisteredWallets = ({
           wallet.contributor === walletAddress
         );
       });
-    if (aliceBounceResult)
-      return formatWalletAddress(aliceBounceResult.message.slice(-43, -1));
+    if (aliceBounceResult) {
+      return {
+        registeredTo: formatWalletAddress(
+          aliceBounceResult.message.slice(-43, -1),
+        ),
+        isAlreadyRegistered: true,
+      };
+    }
 
-    return null;
+    return {
+      isAlreadyRegistered: false,
+      registeredTo: '',
+    };
   }, [rawRewards, walletAddress]);
 };

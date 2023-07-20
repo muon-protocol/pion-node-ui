@@ -52,16 +52,16 @@ const useWagmiContractWrite = ({
         setIsTransactionLoading(false);
         setIsSuccess(true);
       } catch (error: any) {
-        if (showErrorToast) {
-          toast.error(error.message.split('reason:\n')[1].split('\n')[0]);
-        }
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
         setIsFailed(true);
+        if (showErrorToast) {
+          toast.error(error.message?.split('reason:\n')[1]?.split('\n')[0]);
+        }
         throw error;
       }
     };
-  }, [abi, address, functionName, args, chainId]);
+  }, [abi, address, functionName, args, chainId, showErrorToast]);
   return {
     callback,
     isMetamaskLoading,

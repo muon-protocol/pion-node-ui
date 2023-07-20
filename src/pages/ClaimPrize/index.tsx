@@ -31,14 +31,17 @@ const ClaimPrize = () => {
         </p>
 
         <Alert show={!!stakingAddressFromPast} type="info">
-          You have already a signature for this address{' '}
+          You have a signature for this address{' '}
           <strong>({formatWalletAddress(stakingAddressFromPast)})</strong> with
           the following information. Please claim them if you haven't already.
         </Alert>
-        <Alert show={!!alreadyRegisteredWallet} type="error">
+        <Alert
+          show={!!alreadyRegisteredWallet?.isAlreadyRegistered}
+          type="error"
+        >
           <strong>{formatWalletAddress(walletAddress)} </strong>
           has been already registered with{' '}
-          <strong>{alreadyRegisteredWallet}</strong>.
+          <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
         </Alert>
         <div className="reward-wallets-section w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px] mt-4">
           {rewardWalletsFromPast.length > 0 ? (

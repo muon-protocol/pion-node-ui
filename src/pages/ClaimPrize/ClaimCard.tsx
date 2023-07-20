@@ -10,7 +10,6 @@ import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
-  const { walletAddress } = useUserProfile();
   const {
     eligibleAddresses,
     isMetamaskLoading,
@@ -60,9 +59,9 @@ const ClaimCard = () => {
           <p className="font-semibold">
             {stakingAddressFromPast
               ? formatWalletAddress(stakingAddressFromPast)
-              : walletAddress
+              : stakingAddress
               ? formatWalletAddress(stakingAddress)
-              : 'connect wallet'}
+              : 'Connect eligible wallet'}
           </p>
         </span>
         <span className="flex justify-between font-light mb-3">
@@ -118,7 +117,7 @@ const ClaimCard = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className=""
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
           >
             Switch Network
           </button>

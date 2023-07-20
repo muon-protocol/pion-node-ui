@@ -21,7 +21,7 @@ export const useRawRewardsFromPast = ({
   const { totalRewards: totalRewardFromPast } =
     useTotalRewards(rawRewardsFromPast);
 
-  const walletsWithSignaturesFromPast = useMemo(() => {
+  const walletsWithSignatureFromPast = useMemo(() => {
     if (!rawRewardsFromPast) return [];
 
     const wallets = rawRewardsFromPast.deus_presale.contributors.map(
@@ -92,12 +92,12 @@ export const useRawRewardsFromPast = ({
 
   const { rewardWallets: rewardWalletsFromPast } = useRewardWallets(
     rawRewardsFromPast,
-    walletsWithSignaturesFromPast,
+    walletsWithSignatureFromPast,
   );
 
   return {
     stakingAddressFromPast,
-    walletsWithSignaturesFromPast,
+    walletsWithSignatureFromPast,
     claimSignatureFromPast,
     rewardWalletsFromPast,
     totalRewardFromPast,
