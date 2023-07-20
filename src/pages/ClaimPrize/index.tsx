@@ -22,11 +22,8 @@ const ClaimPrize = () => {
 
   const { eligibleAddresses } = useClaimPrize();
 
-  const windowHight = window.innerHeight;
-  const bodyHeight = windowHight - 108 - 70;
-
   return (
-    <div style={{ minHeight: bodyHeight }} className="page page--claim-prize">
+    <div className="page page--claim-prize">
       <FadeIn duration={0.3} className="w-full">
         <ConnectWalletModal redirectRoute="/get-started" />
         <p className="text-2xl font-light mb-5">

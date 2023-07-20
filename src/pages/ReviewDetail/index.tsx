@@ -12,9 +12,6 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const ReviewDetail = () => {
-  const windowHight = window.innerHeight;
-  const bodyHeight = windowHight - 108 - 70;
-
   const { stakingAddress } = useClaimPrize();
   const { bonALICEs } = useBonALICE();
   const {
@@ -163,10 +160,7 @@ const ReviewDetail = () => {
   };
 
   return (
-    <div
-      style={{ minHeight: bodyHeight }}
-      className={`page page--review-details`}
-    >
+    <div className="page page--review-details">
       <FadeIn duration={0.1} delay={0.1}>
         <div
           className={`content flex flex-col gap-9 justify-center items-center h-full`}

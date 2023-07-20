@@ -3,11 +3,8 @@ import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 
 const GetStarted = () => {
-  const windowHight = window.innerHeight;
-  const bodyHeight = windowHight - 108 - 70;
-
   return (
-    <div style={{ minHeight: bodyHeight }} className="page page--get-started">
+    <div className="page page--get-started">
       <FadeIn duration={0.3}>
         <p className="text-[19px] md:text-2xl font-light mb-6">
           You can obtain bonALICE in two ways: either create a new one
