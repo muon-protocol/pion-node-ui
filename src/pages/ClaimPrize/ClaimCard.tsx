@@ -6,6 +6,7 @@ import { formatWalletAddress } from '../../utils/web3.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import Modal from '../../components/Common/Modal.tsx';
 import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
+import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -24,7 +25,6 @@ const ClaimCard = () => {
     handleClaimRewardsClicked,
     isConfirmModalOpen,
     setIsConfirmModalOpen,
-    handleConfirmClaimClicked,
     rewardWalletsFromPast,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -112,11 +112,13 @@ const ClaimCard = () => {
           >
             Prize Calculation Details
           </p>
-        ) : null}
+        ) : (
+          <></>
+        )}
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
+            className=""
           >
             Switch Network
           </button>
@@ -156,24 +158,7 @@ const ClaimCard = () => {
         isOpen={isConfirmModalOpen}
         closeModalHandler={() => setIsConfirmModalOpen(false)}
       >
-        <div className="pb-2 px-2 flex flex-col justify-center items-center">
-          <img
-            className="w-[108px] mb-10"
-            src="/assets/images/claim/switch-wallet-modal-icon.svg"
-            alt=""
-          />
-          <p className="text-center mb-5">
-            Be aware that if you press confirm button, you will be only able to
-            claim your reward on the staking address{' '}
-            <strong>({formatWalletAddress(stakingAddress)})</strong>.
-          </p>
-          <button
-            className="btn btn--secondary"
-            onClick={() => handleConfirmClaimClicked()}
-          >
-            Confirm
-          </button>
-        </div>
+        <ConfirmClaimModal />
       </Modal>
     </div>
   );
