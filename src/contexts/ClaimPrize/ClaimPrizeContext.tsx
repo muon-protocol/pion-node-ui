@@ -133,10 +133,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const claimRewardArgs = useClaimRewardArgs({
-    rewardAmount: totalRewardFromPast || totalRewards,
-    signature: claimSignatureFromPast || claimSignature,
+    rewardAmount: totalRewards,
+    signature: claimSignature,
     connectedWalletAddress: walletAddress,
-    stakingAddress: stakingAddressFromPast || stakingAddress,
+    stakingAddress: stakingAddress,
+  });
+
+  const claimRewardFromPastArgs = useClaimRewardArgs({
+    rewardAmount: totalRewardFromPast,
+    signature: claimSignatureFromPast,
+    connectedWalletAddress: walletAddress,
+    stakingAddress: stakingAddressFromPast,
   });
 
   const {
@@ -148,7 +155,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     abi: REWARD_ABI,
     address: REWARD_ADDRESS[getCurrentChainId()],
     functionName: 'claimReward',
-    args: claimRewardArgs,
+    args: claimRewardFromPastArgs || claimRewardArgs,
     chainId: getCurrentChainId(),
     showErrorToast: true,
   });
@@ -218,7 +225,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     getClaimSignatureFromPast();
-  }, [walletAddress, getClaimSignatureFromPast]);
+  }, [walletAddress, getClaimSignatureFromPast, claimSignature]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
@@ -358,6 +365,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       if (response?.success) {
         setClaimSignature(response.result.signature);
         setIsReadyToClaim(true);
+        setTimeout(() => {
+          setWalletsWithSignature([]);
+          setStakingAddress(null);
+        }, 1000);
       } else {
         toast.error(response.message);
       }
