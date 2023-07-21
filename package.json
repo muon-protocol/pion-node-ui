@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "graphql-codegen"
+    "prepare": "graphql-codegen && wagmi generate"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
