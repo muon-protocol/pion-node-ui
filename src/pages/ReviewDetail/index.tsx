@@ -136,7 +136,13 @@ const ReviewDetail = () => {
           value={nodeIP}
           onValueChanged={(value) => setNodeIP(value)}
         />
-        {chainId !== getCurrentChainId() ? (
+        {nodeBonALICEAddress ===
+          MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
+        !!stakerAddressInfo ? (
+          <button className="btn btn--secondary mt-auto mx-auto">
+            Dashboard
+          </button>
+        ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
             className="btn btn--secondary mt-auto mx-auto"
