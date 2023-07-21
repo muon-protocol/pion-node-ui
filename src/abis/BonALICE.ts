@@ -1,4 +1,4 @@
-export const BONALICE_ABI = [
+export default [
   {
     inputs: [
       {

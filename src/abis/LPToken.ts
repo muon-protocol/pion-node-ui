@@ -1,4 +1,4 @@
-export const LP_TOKEN_ABI = [
+export default [
   {
     inputs: [],
     payable: false,

@@ -1,4 +1,4 @@
-export const ALICE_ABI = [
+export default [
   {
     anonymous: false,
     inputs: [
