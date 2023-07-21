@@ -39,10 +39,9 @@ export const RenderCreateBody = () => {
       !ALICEAllowance ||
       (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
       !createAmount ||
-      createAmount.big === BigInt(0) ||
-      !ALICEBalance ||
-      ALICEBalance.big === BigInt(0) ||
-      ALICEBalance.dsp < createAmount.dsp ||
+      (!createAmount.big && !createBoostAmount.big) ||
+      (!ALICEBalance?.dsp && !LPTokenBalance?.dsp) ||
+      (ALICEBalance && ALICEBalance.dsp < createAmount.dsp) ||
       createActionLoading
     );
   }, [
@@ -52,6 +51,7 @@ export const RenderCreateBody = () => {
     ALICEAllowance,
     LPTokenAllowance,
     createBoostAmount,
+    LPTokenBalance,
   ]);
 
   return (

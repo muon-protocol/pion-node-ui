@@ -32,11 +32,7 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (
-      LPTokenBalanceIsFetched &&
-      LPTokenBalanceData &&
-      LPTokenBalanceData?.value
-    ) {
+    if (LPTokenBalanceIsFetched && LPTokenBalanceData) {
       setLPTokenBalance(w3bNumberFromBigint(LPTokenBalanceData.value));
     }
   }, [LPTokenBalanceIsFetched, LPTokenBalanceData]);
