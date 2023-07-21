@@ -109,7 +109,6 @@ const useNodeBonALICE = () => {
     args: nodeBonALICE ? [nodeBonALICE.tokenId] : undefined,
     watch: true,
   });
-  console.log(approvedBonALICEAddress);
 
   const approveBonALICEArgs = useApproveBonALICEArgs({
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],

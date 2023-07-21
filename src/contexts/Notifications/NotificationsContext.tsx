@@ -47,7 +47,6 @@ const NotificationsProvider = ({ children }: { children: ReactNode }) => {
         });
       }
     }
-    console.log('toastId', toastId);
     return toastId;
   };
 
