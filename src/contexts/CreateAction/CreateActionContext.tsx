@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
-import { ALICE_ABI } from '../../abis/ALICE.ts';
+import ALICE_ABI from '../../abis/ALICE.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
