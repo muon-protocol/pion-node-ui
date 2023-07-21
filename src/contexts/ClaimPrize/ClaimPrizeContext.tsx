@@ -114,7 +114,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isReadyToClaim, setIsReadyToClaim] = useState(false);
-  const { userClaimedReward } = useUserClaimedReward();
+  const { userClaimedReward, valid } = useUserClaimedReward();
   const {
     stakingAddressFromPast,
     walletsWithSignatureFromPast,
@@ -173,14 +173,21 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (!walletAddress) return;
+
     if (
+      userClaimedReward[0] === BigInt(0) &&
       alreadyRegisteredWallet &&
       !alreadyRegisteredWallet.isAlreadyRegistered &&
       !stakingAddress
     ) {
       setStakingAddress(walletAddress);
     }
-  }, [alreadyRegisteredWallet, walletAddress, stakingAddress]);
+  }, [
+    alreadyRegisteredWallet,
+    walletAddress,
+    stakingAddress,
+    userClaimedReward,
+  ]);
 
   const newWalletConnected = useCallback(
     (walletAddress: `0x${string}`) => {
@@ -217,17 +224,22 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setRawRewardsFromPast(result.result);
       } else {
         setRawRewardsFromPast(null);
-        if (userClaimedReward[0] === BigInt(0))
+        if (userClaimedReward[0] === BigInt(0) && valid)
           newWalletConnected(walletAddress);
       }
     } catch (e) {
       console.log(e);
     }
-  }, [walletAddress, newWalletConnected, userClaimedReward]);
+  }, [walletAddress, newWalletConnected, userClaimedReward, valid]);
 
   useEffect(() => {
     getClaimSignatureFromPast();
-  }, [walletAddress, getClaimSignatureFromPast, claimSignature]);
+  }, [
+    walletAddress,
+    getClaimSignatureFromPast,
+    claimSignature,
+    userClaimedReward,
+  ]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
