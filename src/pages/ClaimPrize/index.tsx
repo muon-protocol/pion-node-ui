@@ -8,6 +8,7 @@ import { VerifyWalletCard } from './VerifyWalletCard.tsx';
 import Alert from '../../components/Common/Alert.tsx';
 import SwitchBackToWalletModal from './SwitchBackToWalletModal.tsx';
 import ClaimCard from './ClaimCard.tsx';
+import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 
 const ClaimPrize = () => {
   const {
@@ -19,6 +20,7 @@ const ClaimPrize = () => {
     rewardWalletsFromPast,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
+  const { userClaimedReward } = useUserClaimedReward();
 
   return (
     <div className="page page--claim-prize">
@@ -29,11 +31,29 @@ const ClaimPrize = () => {
           activities. Repeat this step for each address associated with pioneer
           activities.
         </p>
-
-        <Alert show={!!stakingAddressFromPast} type="info">
+        <Alert
+          show={!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
+          type="info"
+        >
+          You have already claimed your reward under{' '}
+          <strong> BonALICE #{userClaimedReward[1].toString()}</strong>.
+        </Alert>
+        <Alert
+          show={!!stakingAddressFromPast && userClaimedReward[0] === BigInt(0)}
+          type="info"
+        >
           You have a signature for this address{' '}
           <strong>({formatWalletAddress(stakingAddressFromPast)})</strong> with
           the following information. Please claim them if you haven't already.
+        </Alert>
+        <Alert
+          show={!!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
+          type="info"
+        >
+          You have claimed the rewards for this address{' '}
+          <strong>({formatWalletAddress(stakingAddressFromPast)})</strong> with
+          the following information. Click on the Create Node button to create a
+          node with this address.
         </Alert>
         <Alert
           show={!!alreadyRegisteredWallet?.isAlreadyRegistered}
@@ -44,7 +64,11 @@ const ClaimPrize = () => {
           <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
         </Alert>
         <div className="reward-wallets-section w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px] mt-4">
-          {rewardWalletsFromPast.length > 0 ? (
+          {!stakingAddressFromPast && userClaimedReward[0] > BigInt(0) ? (
+            <p className="text-2xl font-light text-center w-full my-auto">
+              No Eligible address detected
+            </p>
+          ) : rewardWalletsFromPast.length > 0 ? (
             <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
               {rewardWalletsFromPast.map((wallet) => (
                 <VerifyWalletCard

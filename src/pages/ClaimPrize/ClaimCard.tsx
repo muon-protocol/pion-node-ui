@@ -7,6 +7,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import Modal from '../../components/Common/Modal.tsx';
 import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import ConfirmClaimModal from './ConfirmClaimModal.tsx';
+import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -40,6 +41,8 @@ const ClaimCard = () => {
         eligibleAddresses.some((wallet) => !wallet.signature))
     );
   }, [eligibleAddresses, stakingAddressFromPast]);
+
+  const { userClaimedReward } = useUserClaimedReward();
 
   const navigate = useNavigate();
 
@@ -114,7 +117,14 @@ const ClaimCard = () => {
         ) : (
           <></>
         )}
-        {chainId !== getCurrentChainId() ? (
+        {userClaimedReward[0] > BigInt(0) ? (
+          <button
+            onClick={() => navigate('/review')}
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
+          >
+            Create Node
+          </button>
+        ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
             className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"

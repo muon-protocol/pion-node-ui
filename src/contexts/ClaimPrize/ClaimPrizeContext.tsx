@@ -28,6 +28,7 @@ import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
 import toast from 'react-hot-toast';
 import { useRawRewardsFromPast } from '../../hooks/useRawRewardsFromPast.ts';
 import useRawRewards from '../../hooks/useRawRewards.ts';
+import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -113,7 +114,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isReadyToClaim, setIsReadyToClaim] = useState(false);
-
+  const { userClaimedReward } = useUserClaimedReward();
   const {
     stakingAddressFromPast,
     walletsWithSignatureFromPast,
@@ -216,12 +217,13 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setRawRewardsFromPast(result.result);
       } else {
         setRawRewardsFromPast(null);
-        newWalletConnected(walletAddress);
+        if (userClaimedReward[0] === BigInt(0))
+          newWalletConnected(walletAddress);
       }
     } catch (e) {
       console.log(e);
     }
-  }, [walletAddress, newWalletConnected]);
+  }, [walletAddress, newWalletConnected, userClaimedReward]);
 
   useEffect(() => {
     getClaimSignatureFromPast();

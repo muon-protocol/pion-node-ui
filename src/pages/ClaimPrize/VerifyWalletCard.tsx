@@ -68,7 +68,7 @@ export const VerifyWalletCard = ({
         </button>
       ) : isMetamaskLoadingVerify ? (
         <button className="btn btn--small ml-auto" disabled>
-          Verifying...
+          Metamask...
         </button>
       ) : (
         <button
