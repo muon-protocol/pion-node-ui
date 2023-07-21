@@ -109,7 +109,17 @@ const DesktopNavbar = () => {
             )}
           </button>
 
-          <button className="btn btn--small">Buy ALICE</button>
+          <button
+            className="btn btn--small"
+            onClick={() =>
+              window.open(
+                'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+                '_blank',
+              )
+            }
+          >
+            Buy ALICE
+          </button>
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
               <img
