@@ -10,8 +10,13 @@ import {
 } from '../constants/addresses.ts';
 import toast from 'react-hot-toast';
 import { getNodeStatusAPI } from '../apis';
-import { useBonAliceGetApproved } from '../abis/types/generated.ts';
+import {
+  useBonAliceGetApproved,
+  useBonAliceOwnerOf,
+  useMuonNodeStakingStakerAddressInfo,
+} from '../abis/types/generated.ts';
 import BONALICE_ABI from '../abis/BonALICE';
+import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
 
 const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);
@@ -23,6 +28,18 @@ const useNodeBonALICE = () => {
   const [peerId, setPeerId] = useState<string>('');
   const [nodeAddress, setNodeAddress] = useState<string>('');
   const [readyToAddNode, setReadyToAddNode] = useState(false);
+  const { walletAddress } = useUserProfile();
+
+  const { data: nodeBonALICEAddress } = useBonAliceOwnerOf({
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    args: nodeBonALICE ? [BigInt(nodeBonALICE.tokenId)] : undefined,
+    watch: true,
+  });
+
+  const { data: stakerAddressInfo } = useMuonNodeStakingStakerAddressInfo({
+    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    args: walletAddress ? [walletAddress] : undefined,
+  });
 
   const addNodeArgs = useAddNodeArgs({
     nodeAddress: nodeAddress,
@@ -135,6 +152,8 @@ const useNodeBonALICE = () => {
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
+    nodeBonALICEAddress,
+    stakerAddressInfo,
   };
 };
 

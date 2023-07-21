@@ -12,6 +12,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import isZero from '../../utils/isZero.ts';
 import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
+import Alert from '../../components/Common/Alert.tsx';
 
 const ReviewDetail = () => {
   const { stakingAddress } = useClaimPrize();
@@ -30,6 +31,8 @@ const ReviewDetail = () => {
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
+    nodeBonALICEAddress,
+    stakerAddressInfo,
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -179,6 +182,18 @@ const ReviewDetail = () => {
 
   return (
     <div className="page page--review-details">
+      <Alert
+        className="mb-8 w-full"
+        type={'success'}
+        show={
+          nodeBonALICEAddress ===
+            MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
+          !!stakerAddressInfo
+        }
+      >
+        Successfully added node. If you want to check details, please go to the
+        Dashboard.
+      </Alert>
       <FadeIn duration={0.1} delay={0.1}>
         <div
           className={`content flex flex-col gap-9 justify-center items-center h-full`}

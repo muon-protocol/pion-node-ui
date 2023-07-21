@@ -2,38 +2,21 @@ export default [
   {
     anonymous: false,
     inputs: [
+      { indexed: true, internalType: 'string', name: 'key', type: 'string' },
       {
         indexed: false,
-        internalType: 'uint256',
-        name: 'exitPendingPeriod',
-        type: 'uint256',
+        internalType: 'string',
+        name: 'value',
+        type: 'string',
       },
     ],
-    name: 'ExitPendingPeriodUpdated',
+    name: 'ConfigSet',
     type: 'event',
   },
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'ExitRequested',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'version',
-        type: 'uint8',
-      },
+      { indexed: false, internalType: 'uint8', name: 'version', type: 'uint8' },
     ],
     name: 'Initialized',
     type: 'event',
@@ -42,168 +25,107 @@ export default [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'minStakeAmount',
-        type: 'uint256',
-      },
-    ],
-    name: 'MinStakeAmountUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'muonAppId',
-        type: 'uint256',
-      },
-    ],
-    name: 'MuonAppIdUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: true,
-        internalType: 'address',
-        name: 'nodeAddress',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'string',
-        name: 'peerId',
-        type: 'string',
-      },
-    ],
-    name: 'MuonNodeAdded',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        components: [
-          {
-            internalType: 'uint256',
-            name: 'x',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint8',
-            name: 'parity',
-            type: 'uint8',
-          },
-        ],
-        indexed: false,
-        internalType: 'struct MuonClientBase.PublicKey',
-        name: 'muonPublicKey',
-        type: 'tuple',
-      },
-    ],
-    name: 'MuonPublicKeyUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'bytes',
-        name: 'reqId',
-        type: 'bytes',
+        internalType: 'uint64',
+        name: 'nodeId',
+        type: 'uint64',
       },
       {
         components: [
+          { internalType: 'uint64', name: 'id', type: 'uint64' },
           {
-            internalType: 'uint256',
-            name: 'x',
-            type: 'uint256',
+            internalType: 'address',
+            name: 'nodeAddress',
+            type: 'address',
           },
+          { internalType: 'address', name: 'stakerAddress', type: 'address' },
+          {
+            internalType: 'string',
+            name: 'peerId',
+            type: 'string',
+          },
+          { internalType: 'bool', name: 'active', type: 'bool' },
           {
             internalType: 'uint8',
-            name: 'parity',
+            name: 'tier',
             type: 'uint8',
+          },
+          { internalType: 'uint64[]', name: 'roles', type: 'uint64[]' },
+          {
+            internalType: 'uint256',
+            name: 'startTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'lastEditTime',
+            type: 'uint256',
           },
         ],
         indexed: false,
-        internalType: 'struct MuonClientBase.PublicKey',
-        name: 'pubKey',
+        internalType: 'struct IMuonNodeManager.Node',
+        name: 'node',
         type: 'tuple',
       },
     ],
-    name: 'MuonTX',
+    name: 'NodeAdded',
     type: 'event',
   },
   {
     anonymous: false,
     inputs: [
+      { indexed: true, internalType: 'uint64', name: 'nodeId', type: 'uint64' },
+    ],
+    name: 'NodeDeactivated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: false,
-        internalType: 'bytes',
-        name: 'reqId',
-        type: 'bytes',
-      },
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
       },
     ],
-    name: 'RewardGot',
+    name: 'NodeRoleAdded',
     type: 'event',
   },
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'reward',
-        type: 'uint256',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'periodStart',
-        type: 'uint256',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'rewardPeriod',
-        type: 'uint256',
-      },
-    ],
-    name: 'RewardsDistributed',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
+      { indexed: true, internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
         indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
       },
+    ],
+    name: 'NodeRoleSet',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'uint64', name: 'nodeId', type: 'uint64' },
+      {
+        indexed: true,
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
+      },
+    ],
+    name: 'NodeRoleUnset',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'bytes32',
@@ -223,12 +145,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'address',
@@ -248,12 +165,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'address',
@@ -273,348 +185,216 @@ export default [
   {
     anonymous: false,
     inputs: [
+      { indexed: true, internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
         indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'StakeLocked',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'StakeUnlocked',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    name: 'Staked',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'token',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'multiplier',
-        type: 'uint256',
-      },
-    ],
-    name: 'StakingTokenUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
         internalType: 'uint8',
         name: 'tier',
         type: 'uint8',
       },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'maxStakeAmount',
-        type: 'uint256',
-      },
     ],
-    name: 'TierMaxStakeUpdated',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'Withdrawn',
+    name: 'TierSet',
     type: 'event',
   },
   {
     inputs: [],
     name: 'ADMIN_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'DAO_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'DEFAULT_ADMIN_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'HALF_Q',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'Q',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'REWARD_PERIOD',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'REWARD_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
+      { internalType: 'address', name: '_nodeAddress', type: 'address' },
       {
         internalType: 'address',
-        name: 'nodeAddress',
+        name: '_stakerAddress',
         type: 'address',
       },
+      { internalType: 'string', name: '_peerId', type: 'string' },
       {
-        internalType: 'string',
-        name: 'peerId',
-        type: 'string',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
+        internalType: 'bool',
+        name: '_active',
+        type: 'bool',
       },
     ],
-    name: 'addMuonNode',
+    name: 'addNode',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'bondedToken',
-    outputs: [
-      {
-        internalType: 'contract IBondedToken',
-        name: '',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'bytes32', name: 'role', type: 'bytes32' }],
+    name: 'addNodeRole',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'string', name: '', type: 'string' }],
+    name: 'configs',
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'reward',
-        type: 'uint256',
-      },
-    ],
-    name: 'distributeRewards',
+    inputs: [{ internalType: 'uint64', name: 'nodeId', type: 'uint64' }],
+    name: 'deactiveNode',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [
+      { internalType: 'uint256', name: '_lastEditTime', type: 'uint256' },
       {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
+        internalType: 'uint64',
+        name: '_from',
+        type: 'uint64',
       },
+      { internalType: 'uint64', name: '_to', type: 'uint64' },
     ],
-    name: 'earned',
+    name: 'getEditedNodes',
     outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'exitPendingPeriod',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'paidRewardPerToken',
-        type: 'uint256',
-      },
-      {
-        internalType: 'bytes',
-        name: 'reqId',
-        type: 'bytes',
-      },
       {
         components: [
+          { internalType: 'uint64', name: 'id', type: 'uint64' },
+          {
+            internalType: 'address',
+            name: 'nodeAddress',
+            type: 'address',
+          },
+          { internalType: 'address', name: 'stakerAddress', type: 'address' },
+          {
+            internalType: 'string',
+            name: 'peerId',
+            type: 'string',
+          },
+          { internalType: 'bool', name: 'active', type: 'bool' },
+          {
+            internalType: 'uint8',
+            name: 'tier',
+            type: 'uint8',
+          },
+          { internalType: 'uint64[]', name: 'roles', type: 'uint64[]' },
           {
             internalType: 'uint256',
-            name: 'signature',
+            name: 'startTime',
             type: 'uint256',
           },
+          { internalType: 'uint256', name: 'endTime', type: 'uint256' },
           {
-            internalType: 'address',
-            name: 'owner',
-            type: 'address',
-          },
-          {
-            internalType: 'address',
-            name: 'nonce',
-            type: 'address',
+            internalType: 'uint256',
+            name: 'lastEditTime',
+            type: 'uint256',
           },
         ],
-        internalType: 'struct MuonClientBase.SchnorrSign',
-        name: 'signature',
+        internalType: 'struct IMuonNodeManager.Node[]',
+        name: 'nodesList',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'string[]', name: 'configKeys', type: 'string[]' },
+    ],
+    name: 'getInfo',
+    outputs: [
+      { internalType: 'uint256', name: '', type: 'uint256' },
+      {
+        internalType: 'uint64',
+        name: '',
+        type: 'uint64',
+      },
+      { internalType: 'uint64', name: '', type: 'uint64' },
+      {
+        internalType: 'string[]',
+        name: '',
+        type: 'string[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint64', name: 'nodeId', type: 'uint64' }],
+    name: 'getNode',
+    outputs: [
+      {
+        components: [
+          { internalType: 'uint64', name: 'id', type: 'uint64' },
+          {
+            internalType: 'address',
+            name: 'nodeAddress',
+            type: 'address',
+          },
+          { internalType: 'address', name: 'stakerAddress', type: 'address' },
+          {
+            internalType: 'string',
+            name: 'peerId',
+            type: 'string',
+          },
+          { internalType: 'bool', name: 'active', type: 'bool' },
+          {
+            internalType: 'uint8',
+            name: 'tier',
+            type: 'uint8',
+          },
+          { internalType: 'uint64[]', name: 'roles', type: 'uint64[]' },
+          {
+            internalType: 'uint256',
+            name: 'startTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'lastEditTime',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct IMuonNodeManager.Node',
+        name: '',
         type: 'tuple',
       },
     ],
-    name: 'getReward',
-    outputs: [],
-    stateMutability: 'nonpayable',
+    stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
-    ],
+    inputs: [{ internalType: 'uint64', name: 'nodeId', type: 'uint64' }],
+    name: 'getNodeRoles',
+    outputs: [{ internalType: 'uint64[]', name: '', type: 'uint64[]' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'bytes32', name: 'role', type: 'bytes32' }],
     name: 'getRoleAdmin',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -628,11 +408,7 @@ export default [
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -640,323 +416,85 @@ export default [
       },
     ],
     name: 'hasRole',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'muonTokenAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: 'nodeManagerAddress',
-        type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: '_muonAppId',
-        type: 'uint256',
-      },
-      {
-        components: [
-          {
-            internalType: 'uint256',
-            name: 'x',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint8',
-            name: 'parity',
-            type: 'uint8',
-          },
-        ],
-        internalType: 'struct MuonClientBase.PublicKey',
-        name: '_muonPublicKey',
-        type: 'tuple',
-      },
-      {
-        internalType: 'address',
-        name: 'bondedTokenAddress',
-        type: 'address',
-      },
-    ],
+    inputs: [],
     name: 'initialize',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'isStakingToken',
-    outputs: [
-      {
-        internalType: 'uint16',
-        name: '',
-        type: 'uint16',
-      },
-    ],
+    inputs: [],
+    name: 'lastNodeId',
+    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
-    name: 'lastTimeRewardApplicable',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    name: 'lastRoleId',
+    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'lastUpdateTime',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'lockStake',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address[]',
-        name: 'tokens',
-        type: 'address[]',
-      },
-      {
-        internalType: 'uint256[]',
-        name: 'amounts',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'lockToBondedToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'lockedStakes',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: '', type: 'address' }],
+    name: 'nodeAddressIds',
+    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenIdA',
-        type: 'uint256',
-      },
-    ],
-    name: 'mergeBondedTokens',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'minStakeAmount',
+    inputs: [{ internalType: 'address', name: '_addr', type: 'address' }],
+    name: 'nodeAddressInfo',
     outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'muonAppId',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'muonPublicKey',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'x',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint8',
-        name: 'parity',
-        type: 'uint8',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'muonToken',
-    outputs: [
-      {
-        internalType: 'contract IERC20',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'bytes',
-        name: 'reqId',
-        type: 'bytes',
-      },
-      {
-        internalType: 'uint256',
-        name: 'hash',
-        type: 'uint256',
-      },
       {
         components: [
-          {
-            internalType: 'uint256',
-            name: 'signature',
-            type: 'uint256',
-          },
+          { internalType: 'uint64', name: 'id', type: 'uint64' },
           {
             internalType: 'address',
-            name: 'owner',
+            name: 'nodeAddress',
             type: 'address',
           },
+          { internalType: 'address', name: 'stakerAddress', type: 'address' },
           {
-            internalType: 'address',
-            name: 'nonce',
-            type: 'address',
+            internalType: 'string',
+            name: 'peerId',
+            type: 'string',
           },
-        ],
-        internalType: 'struct MuonClientBase.SchnorrSign',
-        name: 'signature',
-        type: 'tuple',
-      },
-      {
-        components: [
-          {
-            internalType: 'uint256',
-            name: 'x',
-            type: 'uint256',
-          },
+          { internalType: 'bool', name: 'active', type: 'bool' },
           {
             internalType: 'uint8',
-            name: 'parity',
+            name: 'tier',
             type: 'uint8',
           },
+          { internalType: 'uint64[]', name: 'roles', type: 'uint64[]' },
+          {
+            internalType: 'uint256',
+            name: 'startTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'lastEditTime',
+            type: 'uint256',
+          },
         ],
-        internalType: 'struct MuonClientBase.PublicKey',
-        name: 'pubKey',
+        internalType: 'struct IMuonNodeManager.Node',
+        name: 'node',
         type: 'tuple',
-      },
-    ],
-    name: 'muonVerify',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'nodeManager',
-    outputs: [
-      {
-        internalType: 'contract IMuonNodeManager',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'notPaidRewards',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'periodFinish',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
       },
     ],
     stateMutability: 'view',
@@ -964,11 +502,68 @@ export default [
   },
   {
     inputs: [
+      { internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
         internalType: 'bytes32',
         name: 'role',
         type: 'bytes32',
       },
+    ],
+    name: 'nodeHasRole',
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
+    name: 'nodes',
+    outputs: [
+      { internalType: 'uint64', name: 'id', type: 'uint64' },
+      {
+        internalType: 'address',
+        name: 'nodeAddress',
+        type: 'address',
+      },
+      { internalType: 'address', name: 'stakerAddress', type: 'address' },
+      {
+        internalType: 'string',
+        name: 'peerId',
+        type: 'string',
+      },
+      { internalType: 'bool', name: 'active', type: 'bool' },
+      {
+        internalType: 'uint8',
+        name: 'tier',
+        type: 'uint8',
+      },
+      { internalType: 'uint256', name: 'startTime', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'endTime',
+        type: 'uint256',
+      },
+      { internalType: 'uint256', name: 'lastEditTime', type: 'uint256' },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'uint64', name: '', type: 'uint64' },
+      {
+        internalType: 'uint64',
+        name: '',
+        type: 'uint64',
+      },
+    ],
+    name: 'nodesRoles',
+    outputs: [{ internalType: 'uint16', name: '', type: 'uint16' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -981,19 +576,8 @@ export default [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'requestExit',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -1006,384 +590,123 @@ export default [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'rewardPerToken',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'rewardPerTokenStored',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'rewardRate',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    inputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
+    name: 'roleIds',
+    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
+      { internalType: 'string', name: 'key', type: 'string' },
       {
-        internalType: 'uint256',
+        internalType: 'string',
         name: 'val',
-        type: 'uint256',
+        type: 'string',
       },
     ],
-    name: 'setExitPendingPeriod',
+    name: 'setConfig',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [
+      { internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
-        internalType: 'uint256',
-        name: 'val',
-        type: 'uint256',
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
       },
     ],
-    name: 'setMinStakeAmount',
+    name: 'setNodeRole',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'uint256',
-        name: '_muonAppId',
-        type: 'uint256',
-      },
-    ],
-    name: 'setMuonAppId',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
+      { internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
         internalType: 'uint8',
         name: 'tier',
         type: 'uint8',
       },
     ],
-    name: 'setMuonNodeTire',
+    name: 'setTier',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
+    inputs: [{ internalType: 'address', name: '', type: 'address' }],
+    name: 'stakerAddressIds',
+    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'address', name: '_addr', type: 'address' }],
+    name: 'stakerAddressInfo',
+    outputs: [
       {
         components: [
+          { internalType: 'uint64', name: 'id', type: 'uint64' },
           {
-            internalType: 'uint256',
-            name: 'x',
-            type: 'uint256',
+            internalType: 'address',
+            name: 'nodeAddress',
+            type: 'address',
           },
+          { internalType: 'address', name: 'stakerAddress', type: 'address' },
+          {
+            internalType: 'string',
+            name: 'peerId',
+            type: 'string',
+          },
+          { internalType: 'bool', name: 'active', type: 'bool' },
           {
             internalType: 'uint8',
-            name: 'parity',
+            name: 'tier',
             type: 'uint8',
           },
+          { internalType: 'uint64[]', name: 'roles', type: 'uint64[]' },
+          {
+            internalType: 'uint256',
+            name: 'startTime',
+            type: 'uint256',
+          },
+          { internalType: 'uint256', name: 'endTime', type: 'uint256' },
+          {
+            internalType: 'uint256',
+            name: 'lastEditTime',
+            type: 'uint256',
+          },
         ],
-        internalType: 'struct MuonClientBase.PublicKey',
-        name: '_muonPublicKey',
+        internalType: 'struct IMuonNodeManager.Node',
+        name: 'node',
         type: 'tuple',
       },
     ],
-    name: 'setMuonPublicKey',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint8',
-        name: 'tier',
-        type: 'uint8',
-      },
-      {
-        internalType: 'uint256',
-        name: 'maxStakeAmount',
-        type: 'uint256',
-      },
-    ],
-    name: 'setTierMaxStakeAmount',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    name: 'stakingTokens',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'stakingTokensMultiplier',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'bytes4',
-        name: 'interfaceId',
-        type: 'bytes4',
-      },
-    ],
+    inputs: [{ internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' }],
     name: 'supportsInterface',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
+      { internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
-        internalType: 'uint8',
-        name: '',
-        type: 'uint8',
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
       },
     ],
-    name: 'tiersMaxStakeAmount',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'totalStaked',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'unlockStake',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'updateStaking',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address[]',
-        name: 'tokens',
-        type: 'address[]',
-      },
-      {
-        internalType: 'uint256[]',
-        name: 'multipliers',
-        type: 'uint256[]',
-      },
-    ],
-    name: 'updateStakingTokens',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-    ],
-    name: 'users',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'balance',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'paidReward',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'paidRewardPerToken',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'pendingRewards',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'signingPubKeyX',
-        type: 'uint256',
-      },
-    ],
-    name: 'validatePubKey',
-    outputs: [],
-    stateMutability: 'pure',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'tokenId',
-        type: 'uint256',
-      },
-    ],
-    name: 'valueOfBondedToken',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'signingPubKeyX',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint8',
-        name: 'pubKeyYParity',
-        type: 'uint8',
-      },
-      {
-        internalType: 'uint256',
-        name: 'signature',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
-        name: 'msgHash',
-        type: 'uint256',
-      },
-      {
-        internalType: 'address',
-        name: 'nonceTimesGeneratorAddress',
-        type: 'address',
-      },
-    ],
-    name: 'verifySignature',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'pure',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'withdraw',
+    name: 'unsetNodeRole',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
