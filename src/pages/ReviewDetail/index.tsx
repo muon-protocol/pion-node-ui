@@ -10,6 +10,8 @@ import { formatWalletAddress } from '../../utils/web3.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import isZero from '../../utils/isZero.ts';
+import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 
 const ReviewDetail = () => {
   const { stakingAddress } = useClaimPrize();
@@ -25,6 +27,9 @@ const ReviewDetail = () => {
     isMetamaskLoading,
     isTransactionLoading,
     isGettingNodeStatusLoading,
+    approvedBonALICEAddress,
+    handleApproveClicked,
+    isApproving,
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -134,6 +139,20 @@ const ReviewDetail = () => {
             className="btn btn--secondary mt-auto mx-auto"
           >
             Switch Network
+          </button>
+        ) : !nodeBonALICE ? (
+          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+            Select BonALICE
+          </button>
+        ) : (approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
+          approvedBonALICEAddress !==
+            MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] ? (
+          <button
+            onClick={() => handleApproveClicked()}
+            className="btn btn--secondary mt-auto mx-auto"
+            disabled={isApproving}
+          >
+            {isApproving ? 'Approving...' : 'Approve'}
           </button>
         ) : isGettingNodeStatusLoading ? (
           <button className="btn btn--secondary mt-auto mx-auto" disabled>

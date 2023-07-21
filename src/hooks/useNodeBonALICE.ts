@@ -1,12 +1,17 @@
 import { useCallback, useEffect, useState } from 'react';
 import { BonALICE } from '../types';
-import { useAddNodeArgs } from './useContractArgs.ts';
+import { useAddNodeArgs, useApproveBonALICEArgs } from './useContractArgs.ts';
 import useWagmiContractWrite from './useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import MuonNodeStakingABI from '../abis/MuonNodeStaking.json';
-import { MUON_NODE_STAKING_ADDRESS } from '../constants/addresses.ts';
+import {
+  BONALICE_ADDRESS,
+  MUON_NODE_STAKING_ADDRESS,
+} from '../constants/addresses.ts';
 import toast from 'react-hot-toast';
 import { getNodeStatusAPI } from '../apis';
+import { useBonAliceGetApproved } from '../abis/types/generated.ts';
+import BONALICE_ABI from '../abis/BonALICE';
 
 const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);
@@ -82,6 +87,40 @@ const useNodeBonALICE = () => {
     }
   };
 
+  const { data: approvedBonALICEAddress } = useBonAliceGetApproved({
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    args: nodeBonALICE ? [nodeBonALICE.tokenId] : undefined,
+    watch: true,
+  });
+  console.log(approvedBonALICEAddress);
+
+  const approveBonALICEArgs = useApproveBonALICEArgs({
+    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    tokenId: nodeBonALICE?.tokenId,
+  });
+
+  const { callback: approveBonALICE, isTransactionLoading: isApproving } =
+    useWagmiContractWrite({
+      abi: BONALICE_ABI,
+      chainId: getCurrentChainId(),
+      functionName: 'approve',
+      args: approveBonALICEArgs,
+      address: BONALICE_ADDRESS[getCurrentChainId()],
+      showErrorToast: true,
+    });
+
+  const handleApproveClicked = () => {
+    try {
+      approveBonALICE?.({
+        pending: 'Waiting for Confirmation',
+        success: 'Approved Successfully!',
+        failed: 'Error Approving!',
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return {
     nodeBonALICE,
     setNodeBonALICE,
@@ -93,6 +132,9 @@ const useNodeBonALICE = () => {
     isMetamaskLoading,
     isTransactionLoading,
     isGettingNodeStatusLoading,
+    approvedBonALICEAddress,
+    handleApproveClicked,
+    isApproving,
   };
 };
 

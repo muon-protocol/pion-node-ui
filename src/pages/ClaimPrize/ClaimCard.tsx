@@ -117,19 +117,19 @@ const ClaimCard = () => {
         ) : (
           <></>
         )}
-        {userClaimedReward[0] > BigInt(0) ? (
-          <button
-            onClick={() => navigate('/review')}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-          >
-            Create Node
-          </button>
-        ) : chainId !== getCurrentChainId() ? (
+        {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
             className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
           >
             Switch Network
+          </button>
+        ) : userClaimedReward[0] > BigInt(0) ? (
+          <button
+            onClick={() => navigate('/review')}
+            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
+          >
+            Create Node
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button

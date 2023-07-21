@@ -173,3 +173,14 @@ export const useAddNodeArgs = ({
   if (!nodeAddress || !peerId || !tokenId) return null;
   return [nodeAddress, peerId, tokenId];
 };
+
+export const useApproveBonALICEArgs = ({
+  address,
+  tokenId,
+}: {
+  address: `0x${string}` | undefined;
+  tokenId: number | null;
+}) => {
+  if (!address || !tokenId) return null;
+  return [address, tokenId];
+};
