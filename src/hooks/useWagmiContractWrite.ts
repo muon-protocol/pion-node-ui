@@ -56,7 +56,9 @@ const useWagmiContractWrite = ({
         setIsTransactionLoading(false);
         setIsFailed(true);
         if (showErrorToast) {
-          toast.error(error.message?.split('reason:\n')[1]?.split('\n')[0]);
+          if (error.message.includes('reason:'))
+            if (error.message?.split('reason:\n')[1]?.split('\n')[0].length > 2)
+              toast.error(error.message?.split('reason:\n')[1]?.split('\n')[0]);
         }
         throw error;
       }
