@@ -4,12 +4,12 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMemo, useState } from 'react';
 import { FadeIn, MoveUpIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
-import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 import Modal from '../../components/Common/Modal.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -35,12 +35,7 @@ export const RenderUpgradeBody = () => {
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
-  const {
-    bonALICEs,
-    fetchBonALICEIsLoading,
-    ALICEAllowance,
-    LPTokenAllowance,
-  } = useBonALICE();
+  const { bonALICEs, ALICEAllowance, LPTokenAllowance } = useBonALICE();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -73,34 +68,11 @@ export const RenderUpgradeBody = () => {
           }
           removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.length > 0 ? (
-              bonALICEs.map((item) => {
-                return (
-                  <BonALICECard
-                    className="cursor-pointer"
-                    title={'BonALICE #' + item.tokenId}
-                    subTitle1="Node Power"
-                    subValue1={item.nodePower}
-                    subTitle2="Tier"
-                    subValue2={'ALICE Starter (Tier 1)'}
-                    onClick={() => handleUpgradeModalItemClicked(item)}
-                    compact
-                    selected={isSelectedUpgradeBonALICE(item)}
-                  />
-                );
-              })
-            ) : fetchBonALICEIsLoading ? (
-              <p className="text-center py-24 px-3 text-primary">
-                Fetching your BonALICEs...
-              </p>
-            ) : (
-              <p className="text-center py-24 px-3 text-primary">
-                You have no BonALICEs to upgrade. Please create Bonded ALICE
-                first.
-              </p>
-            )}
-          </div>
+          <BonALICEModalBody
+            bonALICEs={bonALICEs}
+            handleUpgradeModalItemClicked={handleUpgradeModalItemClicked}
+            isSelectedUpgradeBonALICE={isSelectedUpgradeBonALICE}
+          />
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>

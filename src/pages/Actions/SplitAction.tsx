@@ -7,6 +7,7 @@ import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 
 const RenderSplitBody = () => {
   const {
@@ -41,23 +42,11 @@ const RenderSplitBody = () => {
           selectedItems={selectedSplitBonALICE ? [selectedSplitBonALICE] : []}
           removeItem={() => {}}
         >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.map((item) => {
-              return (
-                <BonALICECard
-                  className="cursor-pointer"
-                  title={'BonALICE #' + item.tokenId}
-                  subTitle1="Node Power"
-                  subValue1={item.nodePower}
-                  subTitle2="Tier"
-                  subValue2={'ALICE Starter (Tier 1)'}
-                  onClick={() => handleSplitModalItemClicked(item)}
-                  compact
-                  selected={isSelectedSplitBonALICE(item)}
-                />
-              );
-            })}
-          </div>
+          <BonALICEModalBody
+            bonALICEs={bonALICEs}
+            handleUpgradeModalItemClicked={handleSplitModalItemClicked}
+            isSelectedUpgradeBonALICE={isSelectedSplitBonALICE}
+          />
         </SelectButtonWithModal>
       </FadeIn>
       {selectedSplitBonALICE && (

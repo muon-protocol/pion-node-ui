@@ -1,4 +1,3 @@
-import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { ReactNode } from 'react';
@@ -13,6 +12,7 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import isZero from '../../utils/isZero.ts';
 import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 import Alert from '../../components/Common/Alert.tsx';
+import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 
 const ReviewDetail = () => {
   const { stakingAddress } = useClaimPrize();
@@ -48,26 +48,16 @@ const ReviewDetail = () => {
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
           >
-            <div className="flex flex-col gap-3">
-              {bonALICEs.map((item) => {
-                return (
-                  <BonALICECard
-                    className="cursor-pointer"
-                    title={'BonALICE #' + item.tokenId}
-                    subTitle1="Node Power"
-                    subValue1={item.nodePower}
-                    subTitle2="Tier"
-                    subValue2={'ALICE Starter (Tier 1)'}
-                    onClick={() => {
-                      setNodeBonALICE(item);
-                      setIsSelectNodeBonALICEModalOpen(false);
-                    }}
-                    compact
-                    selected={item.tokenId === nodeBonALICE?.tokenId}
-                  />
-                );
-              })}
-            </div>
+            <BonALICEModalBody
+              bonALICEs={bonALICEs}
+              handleUpgradeModalItemClicked={(item) => {
+                setNodeBonALICE(item);
+                setIsSelectNodeBonALICEModalOpen(false);
+              }}
+              isSelectedUpgradeBonALICE={(item) =>
+                item.tokenId === nodeBonALICE?.tokenId
+              }
+            />
           </SelectButtonWithModal>
           <Link to="/create">
             <button className="btn btn--secondary btn--icon-btn !h-14 !w-14">

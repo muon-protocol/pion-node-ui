@@ -3,8 +3,8 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import { useMemo } from 'react';
 import { FadeIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
-import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import AddressInput from '../../components/Common/AddressInput.tsx';
+import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 
 const RenderTransferBody = () => {
   const {
@@ -38,23 +38,11 @@ const RenderTransferBody = () => {
             selectedTransferBonALICE ? [selectedTransferBonALICE] : []
           }
         >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.map((item) => {
-              return (
-                <BonALICECard
-                  className="cursor-pointer"
-                  title={'BonALICE #' + item.tokenId}
-                  subTitle1="Node Power"
-                  subValue1={item.nodePower}
-                  subTitle2="Tier"
-                  subValue2={'ALICE Starter (Tier 1)'}
-                  onClick={() => handleTransferModalItemClicked(item)}
-                  compact
-                  selected={isSelectedTransferBonALICE(item)}
-                />
-              );
-            })}
-          </div>
+          <BonALICEModalBody
+            bonALICEs={bonALICEs}
+            handleUpgradeModalItemClicked={handleTransferModalItemClicked}
+            isSelectedUpgradeBonALICE={isSelectedTransferBonALICE}
+          />
         </SelectButtonWithModal>
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>

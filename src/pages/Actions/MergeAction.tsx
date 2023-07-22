@@ -6,6 +6,7 @@ import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 
 const RenderMergeBody = () => {
   const {
@@ -39,23 +40,11 @@ const RenderMergeBody = () => {
           selectedItems={selectedMergeBonALICEs}
           removeItem={(item) => handleMergeModalItemClicked(item)}
         >
-          <div className="flex flex-col gap-3">
-            {bonALICEs.map((item) => {
-              return (
-                <BonALICECard
-                  className="cursor-pointer"
-                  title={'BonALICE #' + item.tokenId}
-                  subTitle1="Node Power"
-                  subValue1={item.nodePower}
-                  subTitle2="Tier"
-                  subValue2={'ALICE Starter (Tier 1)'}
-                  onClick={() => handleMergeModalItemClicked(item)}
-                  compact
-                  selected={isInSelectedMergeBonALICEs(item)}
-                />
-              );
-            })}
-          </div>
+          <BonALICEModalBody
+            bonALICEs={bonALICEs}
+            handleUpgradeModalItemClicked={handleMergeModalItemClicked}
+            isSelectedUpgradeBonALICE={isInSelectedMergeBonALICEs}
+          />
         </SelectButtonWithModal>
       </FadeIn>
       {selectedMergeBonALICEs.length == 2 && (
