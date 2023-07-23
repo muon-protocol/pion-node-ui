@@ -4,6 +4,8 @@ import { Inter } from "next/font/google";
 import Image from "next/image";
 import Balance from "../components/layout/balance";
 import WalletAddress from "@/components/layout/walletAddress";
+import StyledComponentsRegistry from "@/lib/registry";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -29,7 +31,9 @@ export default function RootLayout({ children }) {
               </div>
             </div>
             <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-6">
-              <main className="max-w-[1032px] w-[80%]">{children}</main>
+              <main className="max-w-[1032px] w-[80%]">
+                <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+              </main>
             </div>
           </div>
           <div className="w-full absolute bottom-0 h-10 flex justify-center pb-3">
