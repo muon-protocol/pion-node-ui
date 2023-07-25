@@ -29,9 +29,9 @@ const DesktopNavbar = () => {
         <div className="navbar__left">
           <Link to={'/'}>
             <img
-              src="/assets/images/navbar/logo.svg"
+              src="/assets/images/navbar/Alice_Logo.png"
               alt={''}
-              className="w-[120px] h-auto"
+              className="w-[105px] h-auto"
             />
           </Link>
         </div>
