@@ -60,7 +60,9 @@ const ReviewDetail = () => {
             />
           </SelectButtonWithModal>
           <Link to="/create">
-            <button className="btn btn--secondary btn--icon-btn !h-14 !w-14">
+            <button className="btn btn--secondary relative btn--icon-btn !h-14 !w-14">
+              <span className="animate-ping absolute top-0 right-0 inline-flex h-3 w-3 rounded-full bg-primary"></span>
+              <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
               <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
             </button>
           </Link>
