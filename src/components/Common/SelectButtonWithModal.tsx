@@ -35,7 +35,7 @@ const SelectButtonWithModal = ({
           <span className="flex gap-1.5 md:gap-2.5 items-center">
             <img
               className="w-5 h-5 md:w-[26px] md:h-[26px]"
-              src="/assets/images/select-button/bon-icon.svg"
+              src="/assets/images/alice-icon.svg"
               alt=""
             />
             {multiple ? (
