@@ -44,9 +44,9 @@ const AmountInput = ({
                   calculateRoundAmount(Number(balance), 25, 2).toString(),
                 )
               }
-              className="btn btn--secondary-tag"
+              className="btn btn--secondary-tag !font-normal"
             >
-              {'25%'}
+              25%
             </button>
             <button
               onClick={() =>
@@ -54,9 +54,9 @@ const AmountInput = ({
                   calculateRoundAmount(Number(balance), 50, 2).toString(),
                 )
               }
-              className="btn btn--secondary-tag"
+              className="btn btn--secondary-tag !font-normal"
             >
-              {'50%'}
+              50%
             </button>
             <button
               onClick={() =>
@@ -64,9 +64,9 @@ const AmountInput = ({
                   calculateRoundAmount(Number(balance), 75, 2).toString(),
                 )
               }
-              className="btn btn--secondary-tag"
+              className="btn btn--secondary-tag !font-normal"
             >
-              {'75%'}
+              75%
             </button>
             <button
               onClick={() =>
@@ -74,9 +74,9 @@ const AmountInput = ({
                   calculateRoundAmount(Number(balance), 100, 2).toString(),
                 )
               }
-              className="btn btn--secondary-tag"
+              className="btn btn--secondary-tag !font-normal"
             >
-              {'Max'}
+              Max
             </button>
           </div>
         </div>
