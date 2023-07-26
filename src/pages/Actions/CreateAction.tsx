@@ -9,6 +9,8 @@ import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
+import Lottie from 'lottie-react';
+import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -164,19 +166,17 @@ export const RenderCreateBody = () => {
         closeModalHandler={closeAllowanceModal}
       >
         <div className="flex flex-col justify-center items-center">
-          <img
-            className="w-[108px] mb-10"
-            src="/assets/images/claim/switch-wallet-modal-icon.svg"
-            alt=""
+          <Lottie
+            animationData={waitingForApproveAnimation}
+            className={`w-60 h-auto`}
           />
-          <p className="text-center mb-6">
-            You need to approve the{' '}
+          <p className="text-center mb-6 font-medium">
+            Please approve by signing the message that appears in your wallet.
+            This allows the smart contract to securely lock your{' '}
             {ALICEAllowance && ALICEAllowance?.big < createAmount?.big
-              ? 'ALICE'
-              : 'LP'}{' '}
-            token to be spent by the Bonded ALICE Contract. Enter at least the
-            amount you want to create and click Next then Approve button on
-            metamask.
+              ? 'ALICE '
+              : 'LP '}
+            tokens in the bonALICE.
           </p>
           {ALICEAllowance && ALICEAllowance?.big < createAmount?.big ? (
             <button

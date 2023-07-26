@@ -113,7 +113,7 @@ input[type=number] {
   @apply bg-primary text-white w-fit;
 
   &--dark-primary {
-    @apply bg-dark-soft-primary text-white;
+    @apply bg-dark-soft-primary text-primary;
   }
 
   &--secondary {
