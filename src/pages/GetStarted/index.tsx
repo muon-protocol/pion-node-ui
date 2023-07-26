@@ -48,27 +48,29 @@ const NewBonALICEAction = () => {
     },
   };
   return (
-    <motion.span
-      whileHover="animate"
+    <Link
       className="get-started__actions__action-container relative"
+      to="/create"
     >
-      <motion.img
-        variants={newBonALICEFloatingIconVariants}
-        className="get-started__actions__action__floating-object hidden h-[186px] w-auto md:absolute -left-4 -bottom-9"
-        src="/assets/images/get-started/new-bon-alice-floating-icon.svg"
-        alt=""
-      />
-      <div className="get-started__actions__action">
-        <img
-          className="h-8 mr-3 md:mr-0 md:mb-12 md:h-16 w-auto"
-          src="/assets/images/get-started/new-bon-alice-icon.svg"
+      <motion.span whileHover="animate">
+        <motion.img
+          variants={newBonALICEFloatingIconVariants}
+          className="get-started__actions__action__floating-object hidden h-[186px] w-auto md:absolute -left-4 -bottom-9"
+          src="/assets/images/get-started/new-bon-alice-floating-icon.svg"
           alt=""
         />
-        <div className="font-semibold md:text-2xl md:font-light text-white md:text-center mx-auto">
-          Get Started with a New bonALICE
+        <div className="get-started__actions__action">
+          <img
+            className="h-8 mr-3 md:mr-0 md:mb-12 md:h-16 w-auto"
+            src="/assets/images/get-started/new-bon-alice-icon.svg"
+            alt=""
+          />
+          <div className="font-semibold md:text-2xl md:font-light md:text-center mx-auto">
+            Get Started with a New bonALICE
+          </div>
         </div>
-      </div>
-    </motion.span>
+      </motion.span>
+    </Link>
   );
 };
 
@@ -103,7 +105,7 @@ const MuanPioneerAction = () => {
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:font-light text-white md:text-center mx-auto">
+          <div className="font-semibold md:text-2xl md:font-light md:text-center mx-auto">
             Claim as a Muon Pioneer
           </div>
         </div>
