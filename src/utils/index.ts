@@ -3,5 +3,5 @@ export function calculateRoundAmount(
   percentage: number,
   round: number,
 ) {
-  return Math.round(((num1 * percentage) / 100) * 10 ** round) / 10 ** round;
+  return Math.floor(((num1 * percentage) / 100) * 10 ** round) / 10 ** round;
 }
