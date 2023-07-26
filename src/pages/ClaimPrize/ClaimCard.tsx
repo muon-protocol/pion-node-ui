@@ -8,6 +8,7 @@ import Modal from '../../components/Common/Modal.tsx';
 import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
+import { getTier } from '../../utils';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -97,7 +98,11 @@ const ClaimCard = () => {
           <p>bonALICE Tier:</p>
           <p className="font-semibold">
             {stakingAddressFromPast || eligibleAddresses.length > 0
-              ? 'ALICE Starter'
+              ? getTier(
+                  stakingAddressFromPast
+                    ? totalRewardFromPast.dsp
+                    : totalRewards.dsp,
+                )
               : 'No eligible wallet'}
           </p>
         </span>

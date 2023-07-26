@@ -8,6 +8,7 @@ import Seekbar from '../../components/Common/Seekbar.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
+import { getTier } from '../../utils';
 
 const RenderSplitBody = () => {
   const {
@@ -76,7 +77,11 @@ const RenderSplitBody = () => {
                     selectedSplitBonALICE.nodePower * (splitValue / 100),
                   )}
                   subTitle2="Tier"
-                  subValue2="ALICE Starter"
+                  subValue2={getTier(
+                    Math.round(
+                      selectedSplitBonALICE.nodePower * (splitValue / 100),
+                    ),
+                  )}
                   selected
                 />
                 <BonALICECard
@@ -86,7 +91,11 @@ const RenderSplitBody = () => {
                     selectedSplitBonALICE.nodePower * (1 - splitValue / 100),
                   )}
                   subTitle2="Tier"
-                  subValue2="ALICE Starter"
+                  subValue2={getTier(
+                    Math.round(
+                      selectedSplitBonALICE.nodePower * (1 - splitValue / 100),
+                    ),
+                  )}
                   selected
                 />
               </div>

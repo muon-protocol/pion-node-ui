@@ -13,6 +13,7 @@ import isZero from '../../utils/isZero.ts';
 import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 import Alert from '../../components/Common/Alert.tsx';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
+import { getTier } from '../../utils';
 
 const ReviewDetail = () => {
   const { stakingAddress } = useClaimPrize();
@@ -98,7 +99,9 @@ const ReviewDetail = () => {
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Tier:</span>
             <span className="font-semibold ">
-              {nodeBonALICE ? 'ALICE Starter (Tier 1)' : 'Select BonALICE'}
+              {nodeBonALICE
+                ? getTier(nodeBonALICE.nodePower)
+                : 'Select BonALICE'}
             </span>
           </span>
           <span className="flex w-full justify-between leading-5 font-light">

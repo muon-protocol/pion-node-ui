@@ -1,5 +1,6 @@
 import BonALICECard from './BonALICECard.tsx';
 import { BonALICE } from '../../types';
+import { getTier } from '../../utils';
 
 const BonALICEModalBody = ({
   bonALICEs,
@@ -21,7 +22,7 @@ const BonALICEModalBody = ({
               subTitle1="Node Power"
               subValue1={item.nodePower}
               subTitle2="Tier"
-              subValue2={'ALICE Starter (Tier 1)'}
+              subValue2={getTier(item.nodePower)}
               onClick={() => handleUpgradeModalItemClicked(item)}
               compact
               selected={isSelectedUpgradeBonALICE(item)}

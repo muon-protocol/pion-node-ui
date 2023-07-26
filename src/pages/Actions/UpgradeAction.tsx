@@ -10,6 +10,7 @@ import Modal from '../../components/Common/Modal.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
+import { getTier } from '../../utils';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -128,7 +129,13 @@ export const RenderUpgradeBody = () => {
               <MoveUpIn y={-10} duration={0.2}>
                 <span className="flex justify-between text-gray10 max-md:text-sm">
                   <p className="font-light">Your tier will be</p>
-                  <p className="font-medium">ALICE Starter (Tier 1)</p>
+                  <p className="font-medium">
+                    {getTier(
+                      selectedUpgradeBonALICE.nodePower +
+                        upgradeAmount.dsp +
+                        2 * upgradeBoostAmount.dsp,
+                    )}
+                  </p>
                 </span>
               </MoveUpIn>
             </>

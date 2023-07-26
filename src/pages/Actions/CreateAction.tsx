@@ -11,6 +11,7 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import Lottie from 'lottie-react';
 import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
+import { getTier } from '../../utils';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -105,7 +106,9 @@ export const RenderCreateBody = () => {
           <MoveUpIn y={-10} duration={0.1} delay={0.1}>
             <span className="flex justify-between text-gray10 max-md:text-sm">
               <p className="font-light">Your tier will be</p>
-              <p className="font-medium">ALICE Starter (Tier 1)</p>
+              <p className="font-medium">
+                {getTier(createAmount.dsp + createBoostAmount.dsp * 2)}
+              </p>
             </span>
           </MoveUpIn>
         </>

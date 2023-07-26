@@ -7,6 +7,7 @@ import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
+import { getTier } from '../../utils';
 
 const RenderMergeBody = () => {
   const {
@@ -68,7 +69,10 @@ const RenderMergeBody = () => {
                   selectedMergeBonALICEs[1].nodePower
                 }
                 subTitle2="Tier"
-                subValue2="ALICE Starter (Tier 1)"
+                subValue2={getTier(
+                  selectedMergeBonALICEs[0].nodePower +
+                    selectedMergeBonALICEs[1].nodePower,
+                )}
                 selected
               />
             </FadeIn>
