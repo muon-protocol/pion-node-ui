@@ -4,13 +4,22 @@ import { Scale } from '../../animations';
 import { AnimatePresence } from 'framer-motion';
 
 const Modal: FC<{
+  closeable?: boolean;
   title?: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
   isOpen: boolean;
   children: React.ReactNode;
   closeModalHandler: () => void;
-}> = ({ title, children, size, isOpen, closeModalHandler, className }) => {
+}> = ({
+  title,
+  children,
+  size,
+  isOpen,
+  closeModalHandler,
+  className,
+  closeable = true,
+}) => {
   return (
     <>
       <AnimatePresence>
@@ -33,19 +42,20 @@ const Modal: FC<{
               >
                 <div className="modal-header flex justify-between items-center mb-6">
                   <p className="font-medium text-sm"> {title} </p>
-
-                  <img
-                    className="cursor-pointer"
-                    onClick={closeModalHandler}
-                    src={
-                      size === 'sm'
-                        ? '/assets/images/modal/exit-dark-icon.svg'
-                        : '/assets/images/modal/exit-dark-icon.svg'
-                    }
-                    width="18px"
-                    height="18px"
-                    alt={'X'}
-                  />
+                  {closeable && (
+                    <img
+                      className="cursor-pointer"
+                      onClick={closeModalHandler}
+                      src={
+                        size === 'sm'
+                          ? '/assets/images/modal/exit-dark-icon.svg'
+                          : '/assets/images/modal/exit-dark-icon.svg'
+                      }
+                      width="18px"
+                      height="18px"
+                      alt={'X'}
+                    />
+                  )}
                 </div>
                 <div className="styled-scroll overflow-y-auto z-10 bg-gray20 max-h-[70vh]">
                   {children}

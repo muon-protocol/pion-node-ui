@@ -9,6 +9,7 @@ import Alert from '../../components/Common/Alert.tsx';
 import SwitchBackToWalletModal from './SwitchBackToWalletModal.tsx';
 import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
+import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 
 const ClaimPrize = () => {
   const {
@@ -20,6 +21,7 @@ const ClaimPrize = () => {
     rewardWalletsFromPast,
     rawRewards,
     rawRewardsFromPast,
+    isSuccess,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
@@ -127,6 +129,14 @@ const ClaimPrize = () => {
         closeModalHandler={closeSwitchBackToWalletModal}
       >
         <SwitchBackToWalletModal />
+      </Modal>
+      <Modal
+        size="sm"
+        closeable={false}
+        isOpen={isSuccess}
+        closeModalHandler={() => {}}
+      >
+        <ClaimedRewardModal />
       </Modal>
     </div>
   );
