@@ -31,11 +31,22 @@ const DesktopNavbar = () => {
             <img
               src="/assets/images/navbar/Alice_Logo.png"
               alt={''}
-              className="w-[105px] h-auto"
+              className="w-auto h-9"
             />
           </Link>
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
+          <button
+            className="btn btn--small"
+            onClick={() =>
+              window.open(
+                'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+                '_blank',
+              )
+            }
+          >
+            Buy ALICE
+          </button>
           <button
             onClick={() =>
               setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
@@ -69,7 +80,7 @@ const DesktopNavbar = () => {
                     </div>
                     <div className="dialog__top__right flex items-center">
                       {bonALICEs.length > 0 ? (
-                        <Link to={'/review'}>
+                        <Link to={'/create'}>
                           <button
                             onClick={() => setIsManageBonALICEDialogOpen(false)}
                             className="btn btn--small"
@@ -108,18 +119,10 @@ const DesktopNavbar = () => {
               </FadeIn>
             )}
           </button>
+          <Link to="/review">
+            <button className="btn btn--small">Setup Node</button>
+          </Link>
 
-          <button
-            className="btn btn--small"
-            onClick={() =>
-              window.open(
-                'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
-                '_blank',
-              )
-            }
-          >
-            Buy ALICE
-          </button>
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
               <img
