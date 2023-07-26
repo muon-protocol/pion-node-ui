@@ -55,11 +55,11 @@ input[type=number] {
 }
 
 .app {
-  @apply min-h-screen bg-main-bg;
-  //background-image: url('../public/assets/images/app-background.svg');
-  //background-position: 0 0;
-  //background-repeat: no-repeat;
-  //background-size: cover;
+  @apply min-h-screen;
+  background-image: url('../public/assets/images/app-background.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .page {
