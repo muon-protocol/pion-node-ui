@@ -36,7 +36,7 @@ export const ConnectWalletButton = ({
                     onClick={openConnectModal}
                     className={`btn ${
                       size === 'md' ? '' : 'btn--small'
-                    } btn--dark-primary`}
+                    } btn--primary`}
                   >
                     Connect Wallet
                   </button>
