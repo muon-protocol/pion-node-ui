@@ -18,6 +18,8 @@ const ClaimPrize = () => {
     stakingAddressFromPast,
     eligibleAddresses,
     rewardWalletsFromPast,
+    rawRewards,
+    rawRewardsFromPast,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
@@ -26,12 +28,13 @@ const ClaimPrize = () => {
     <div className="page page--claim-prize">
       <FadeIn duration={0.3} className="w-full">
         <ConnectWalletModal redirectRoute="/get-started" />
-        <p className="text-2xl font-light mb-5">
+        <p className="text-2xl font-light mb-6">
           Go to your wallet and choose the address linked to your pioneer
           activities. Repeat this step for each address associated with pioneer
           activities.
         </p>
         <Alert
+          className="mb-6"
           show={!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
           type="error"
         >
@@ -43,6 +46,7 @@ const ClaimPrize = () => {
           .
         </Alert>
         <Alert
+          className="mb-6"
           show={!!stakingAddressFromPast && userClaimedReward[0] === BigInt(0)}
           type="error"
         >
@@ -54,6 +58,19 @@ const ClaimPrize = () => {
           already.
         </Alert>
         <Alert
+          className="mb-6"
+          show={
+            rawRewardsFromPast?.uniquenessVerified === false ||
+            rawRewards?.uniquenessVerified === false
+          }
+          type="error"
+        >
+          None of the provided operator node addresses have passed uniqueness
+          verification. Please visit your dashboard to complete a verification
+          method.
+        </Alert>
+        <Alert
+          className="mb-6"
           show={!!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
           type="error"
         >
@@ -72,7 +89,7 @@ const ClaimPrize = () => {
           has been already registered with{' '}
           <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
         </Alert>
-        <div className="reward-wallets-section w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px] mt-4">
+        <div className="reward-wallets-section w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
           {!stakingAddressFromPast && userClaimedReward[0] > BigInt(0) ? (
             <p className="text-2xl font-light text-center w-full my-auto">
               No Eligible address detected

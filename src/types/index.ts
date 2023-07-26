@@ -45,6 +45,7 @@ export type RawRewards = {
   early_alice_operator: RawRewardSection;
   muon_presale: RawRewardSection;
   alice_operator_bounce: RawRewardSection;
+  uniquenessVerified: boolean;
 };
 
 export type Contributor = {

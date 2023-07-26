@@ -26,6 +26,8 @@ const ClaimCard = () => {
     isConfirmModalOpen,
     setIsConfirmModalOpen,
     rewardWalletsFromPast,
+    rawRewards,
+    rawRewardsFromPast,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
@@ -36,9 +38,11 @@ const ClaimCard = () => {
 
   const isClaimButtonDisabled = useMemo(() => {
     return (
-      !stakingAddressFromPast &&
-      (eligibleAddresses.length === 0 ||
-        eligibleAddresses.some((wallet) => !wallet.signature))
+      rawRewardsFromPast?.uniquenessVerified === false ||
+      rawRewards?.uniquenessVerified === false ||
+      (!stakingAddressFromPast &&
+        (eligibleAddresses.length === 0 ||
+          eligibleAddresses.some((wallet) => !wallet.signature)))
     );
   }, [eligibleAddresses, stakingAddressFromPast]);
 
