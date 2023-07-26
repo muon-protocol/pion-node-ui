@@ -31,7 +31,7 @@ const Home = () => {
       <MoveRightIn delay={0.3} className="flex justify-center md:justify-start">
         <Link to="/get-started">
           <button className="btn btn--large mb-12 md:mb-32">
-            Start Your Node
+            Get Started Now
           </button>
         </Link>
       </MoveRightIn>
