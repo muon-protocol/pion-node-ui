@@ -1,5 +1,7 @@
 import { FadeIn } from '../../animations';
-import { calculateRoundAmount } from '../../utils';
+// import { calculateRoundAmount } from '../../utils';
+import { W3bNumber } from '../../types/wagmi.ts';
+import { ethers } from 'ethers';
 
 const AmountInput = ({
   balance,
@@ -9,8 +11,8 @@ const AmountInput = ({
   iconClicked,
   rightText,
 }: {
-  balance?: string | number | null;
-  value: string;
+  balance: W3bNumber | null;
+  value: W3bNumber;
   onValueChanged: (value: string) => void;
   withIcon?: boolean;
   iconClicked?: () => void;
@@ -33,16 +35,17 @@ const AmountInput = ({
         )}
         <span className="flex flex-col">
           <p className="balance flex text-gray">
-            Balance: <span className="value ml-1 text-black">{balance}</span>
+            Balance:{' '}
+            <span className="value ml-1 text-black">
+              {balance ? balance.dsp : '...'}
+            </span>
           </p>
         </span>
         <div className="amount-input__balance-and-actions flex items-center gap">
           <div className="flex gap-1.5 max-md:items-end h-full">
             <button
               onClick={() =>
-                onValueChanged(
-                  calculateRoundAmount(Number(balance), 25, 2).toString(),
-                )
+                balance ? onValueChanged((balance.dsp * 0.25).toString()) : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -50,9 +53,7 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                onValueChanged(
-                  calculateRoundAmount(Number(balance), 50, 2).toString(),
-                )
+                balance ? onValueChanged((balance.dsp * 0.5).toString()) : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -60,9 +61,7 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                onValueChanged(
-                  calculateRoundAmount(Number(balance), 75, 2).toString(),
-                )
+                balance ? onValueChanged((balance.dsp * 0.75).toString()) : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -70,9 +69,9 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                onValueChanged(
-                  calculateRoundAmount(Number(balance), 100, 2).toString(),
-                )
+                balance
+                  ? onValueChanged(ethers.utils.formatEther(balance.big))
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -86,14 +85,14 @@ const AmountInput = ({
           className="amount-input__input text-black placeholder-gray font-medium w-full h-full bg-transparent outline-none max-md:text-sm"
           placeholder="Amount You Want to Lock"
           type="number"
-          value={value}
+          value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
         <div className="amount-input__token-name font-semibold max-md:text-sm min-w-fit">
           {rightText}
         </div>
       </div>
-      {balance && Number(balance) < Number(value) ? (
+      {balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
             You don't have sufficient amount of ALICE.{' '}

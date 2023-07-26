@@ -78,8 +78,8 @@ export const RenderUpgradeBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
           rightText={'ALICE'}
-          balance={ALICEBalance ? ALICEBalance.dsp : '...'}
-          value={upgradeAmount.hStr}
+          balance={ALICEBalance}
+          value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
         />
       </FadeIn>
@@ -87,13 +87,13 @@ export const RenderUpgradeBody = () => {
         <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
           <AmountInput
             rightText={'LP ALICE'}
-            balance={LPTokenBalance ? LPTokenBalance.dsp : '...'}
+            balance={LPTokenBalance}
             withIcon
             iconClicked={() => {
               handleUpgradeBoostAmountChange('');
               setIsBoostSectionOpen(false);
             }}
-            value={upgradeBoostAmount.hStr}
+            value={upgradeBoostAmount}
             onValueChanged={handleUpgradeBoostAmountChange}
           />
         </MoveUpIn>
@@ -159,7 +159,10 @@ export const RenderUpgradeBody = () => {
             className="btn !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
-            Approve {upgradeAmount.hStr} ALICE
+            Approve{' '}
+            {ALICEBalance && upgradeAmount.big < ALICEBalance.big
+              ? '> ' + upgradeAmount.dsp + ' ALICEs'
+              : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance &&
           LPTokenAllowance.big < upgradeBoostAmount.big ? (
@@ -168,7 +171,10 @@ export const RenderUpgradeBody = () => {
             className="btn !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
-            Approve {upgradeBoostAmount.hStr} LP Token
+            Approve{' '}
+            {LPTokenBalance && upgradeBoostAmount.big < LPTokenBalance.big
+              ? '> ' + upgradeBoostAmount.dsp + ' LP Tokens'
+              : 'All LP Tokens'}
           </button>
         ) : (
           <button

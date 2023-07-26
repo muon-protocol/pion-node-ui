@@ -59,8 +59,8 @@ export const RenderCreateBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
           rightText={'ALICE'}
-          balance={ALICEBalance ? ALICEBalance.dsp : '...'}
-          value={createAmount.hStr}
+          balance={ALICEBalance}
+          value={createAmount}
           onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
@@ -69,13 +69,13 @@ export const RenderCreateBody = () => {
           <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
             <AmountInput
               rightText={'LP ALICE'}
-              balance={LPTokenBalance ? LPTokenBalance.dsp : '...'}
+              balance={LPTokenBalance}
               withIcon
               iconClicked={() => {
                 handleCreateBoostAmountChange('');
                 setIsBoostSectionOpen(false);
               }}
-              value={createBoostAmount.hStr}
+              value={createBoostAmount}
               onValueChanged={handleCreateBoostAmountChange}
             />
           </MoveUpIn>
@@ -132,7 +132,10 @@ export const RenderCreateBody = () => {
             className="btn !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
-            Approve {createAmount.hStr} ALICE
+            Approve{' '}
+            {ALICEBalance && createAmount.big < ALICEBalance.big
+              ? '> ' + createAmount.dsp + ' ALICEs'
+              : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
           <button
@@ -140,7 +143,10 @@ export const RenderCreateBody = () => {
             className="btn !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
-            Approve {createBoostAmount.hStr} LP Token
+            Approve{' '}
+            {LPTokenBalance && createBoostAmount.big < LPTokenBalance.big
+              ? '> ' + createBoostAmount.dsp + ' LP Tokens'
+              : 'All LP Tokens'}
           </button>
         ) : (
           <button
