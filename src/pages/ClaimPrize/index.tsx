@@ -33,27 +33,36 @@ const ClaimPrize = () => {
         </p>
         <Alert
           show={!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-          type="info"
+          type="error"
         >
           You have already claimed your reward under{' '}
-          <strong> BonALICE #{userClaimedReward[1].toString()}</strong>.
+          <p className="font-semibold inline">
+            {' '}
+            BonALICE #{userClaimedReward[1].toString()}
+          </p>
+          .
         </Alert>
         <Alert
           show={!!stakingAddressFromPast && userClaimedReward[0] === BigInt(0)}
-          type="info"
+          type="error"
         >
           You have a signature for this address{' '}
-          <strong>({formatWalletAddress(stakingAddressFromPast)})</strong> with
-          the following information. Please claim them if you haven't already.
+          <p className="font-semibold inline">
+            ({formatWalletAddress(stakingAddressFromPast)})
+          </p>{' '}
+          with the following information. Please claim them if you haven't
+          already.
         </Alert>
         <Alert
           show={!!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-          type="info"
+          type="error"
         >
           You have claimed the rewards for this address{' '}
-          <strong>({formatWalletAddress(stakingAddressFromPast)})</strong> with
-          the following information. Click on the Create Node button to create a
-          node with this address.
+          <p className="font-semibold inline">
+            ({formatWalletAddress(stakingAddressFromPast)})
+          </p>{' '}
+          with the following information. Click on the Create Node button to
+          create a node with this address.
         </Alert>
         <Alert
           show={!!alreadyRegisteredWallet?.isAlreadyRegistered}

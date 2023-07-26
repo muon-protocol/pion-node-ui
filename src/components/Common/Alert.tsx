@@ -13,9 +13,9 @@ const Notification = ({
 }) => {
   const typeStyles = useCallback(() => {
     if (type === 'error') {
-      return 'bg-alert-red-20';
+      return 'bg-alert-red-20 rounded-lg';
     } else if (type === 'info') {
-      return 'bg-pacific-blue-20';
+      return 'bg-pacific-blue-20 rounded-2xl';
     } else if (type === 'success') {
       return 'bg-success-green-20';
     }
@@ -36,10 +36,10 @@ const Notification = ({
     <>
       {show && (
         <div
-          className={`${typeStyles()} ${className} rounded-2xl flex gap-6 py-5 px-6 items-center`}
+          className={`${typeStyles()} ${className} flex w-fit gap-2.5 py-[14px] px-4 pr-5 items-center`}
         >
-          <img src={typeIcon()} alt="" />
-          <p className="leading-5">{children}</p>
+          <img src={typeIcon()} alt="" className="w-7 h-7" />
+          <p className="text-sm">{children}</p>
         </div>
       )}
     </>

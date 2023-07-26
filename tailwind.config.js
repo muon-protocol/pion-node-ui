@@ -18,7 +18,7 @@ export default {
         'primary-very-dark': '#353367',
         'pacific-blue-20': '#23B5D344',
         'success-green-20': '#8EF5AB44',
-        'alert-red-20': '#FF3A5D44',
+        'alert-red-20': '#F5956944',
         'primary-dark-500': '#C2C1F4',
         'modal-small': '#ECEDFFCC',
         'primary-dark': '#918EF5',
