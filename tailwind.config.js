@@ -1,16 +1,26 @@
 /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{html,js}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
   ],
   theme: {
     colors: {
-      primary: "rgb(var(--color-primary))",
+      primary: {
+        DEFAULT: "rgb(var(--color-primary))",
+        13: "rgba(var(--color-primary), 0.13)",
+        50: "rgba(var(--color-primary), 0.5)",
+        80: "rgba(var(--color-primary), 0.8)",
+      },
       primary13: "rgba(var(--color-primary), 0.13)",
       black: "#323245",
+      white: "#FFFFFF",
     },
     extend: {
       backgroundImage: {
@@ -20,5 +30,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
 };
