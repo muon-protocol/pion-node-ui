@@ -23,5 +23,5 @@ export const REWARD_ADDRESS: AddressMap = {
 };
 
 export const MUON_NODE_STAKING_ADDRESS: AddressMap = {
-  [SupportedChainId.BSCTESTNET]: '0xcF7b4F6cb896cf6BaD5E32b2ef12DC26B381AE4e',
+  [SupportedChainId.BSCTESTNET]: '0x34daa4F5a3d1cCB8eCE74af1c3CB209728A44a5C',
 };
