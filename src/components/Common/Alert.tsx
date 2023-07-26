@@ -15,7 +15,7 @@ const Notification = ({
     if (type === 'error') {
       return 'bg-alert-red-20 rounded-lg';
     } else if (type === 'info') {
-      return 'bg-pacific-blue-20 rounded-2xl';
+      return 'bg-pacific-blue-20 rounded-xl';
     } else if (type === 'success') {
       return 'bg-success-green-20';
     }
