@@ -84,6 +84,7 @@ const useNodeBonALICE = () => {
     setNodeBonALICE(null);
     setNodeIP('');
   }, [walletAddress]);
+
   const handleAddNodeClicked = async () => {
     if (!nodeIP || !nodeBonALICE) return;
     setIsGettingNodeStatusLoading(true);
