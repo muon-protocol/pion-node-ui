@@ -186,7 +186,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       setClaimSignature(null);
       setRawRewards(null);
     }
-  }, [isSuccess, totalRewards]);
+  }, [isSuccess]);
 
   useEffect(() => {
     if (!walletAddress) return;

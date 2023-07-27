@@ -78,6 +78,7 @@ export const RenderUpgradeBody = () => {
       </FadeIn>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
+          withLink
           rightText={'ALICE'}
           balance={ALICEBalance}
           value={upgradeAmount}
@@ -87,6 +88,7 @@ export const RenderUpgradeBody = () => {
       {isBoostSectionOpen ? (
         <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
           <AmountInput
+            withLink
             rightText={'LP ALICE'}
             balance={LPTokenBalance}
             withIcon

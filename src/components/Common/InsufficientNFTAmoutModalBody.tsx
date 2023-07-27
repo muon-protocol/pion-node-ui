@@ -14,7 +14,7 @@ const InsufficientNFTAmoutModalBody = () => {
         alt=""
       />
       <p className="text-center mb-8">
-        You've successfully claimed your bonPION #12! Unfortunately your current
+        You've successfully claimed your BonALICE! Unfortunately your current
         node power is insufficient to run a node. Please consider upgrading your
         bonPION to enable node setup.
       </p>
@@ -23,7 +23,7 @@ const InsufficientNFTAmoutModalBody = () => {
           setSelectedAction(sidebarItems[1].link);
           navigate('/create');
         }}
-        className="btn btn--primary mx-auto"
+        className="btn btn--primary mx-auto !w-full !px-8"
       >
         Upgrade Your BonALICE
       </button>

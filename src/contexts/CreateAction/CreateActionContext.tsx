@@ -136,7 +136,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       setCreateAmount(w3bNumberFromString(''));
       setCreateBoostAmount(w3bNumberFromString(''));
     }
-  }, [mintAndLockSuccess, createAmount, createBoostAmount]);
+  }, [mintAndLockSuccess]);
 
   const approveALICEArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],

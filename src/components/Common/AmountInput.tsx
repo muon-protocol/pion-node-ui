@@ -10,6 +10,7 @@ const AmountInput = ({
   withIcon,
   iconClicked,
   rightText,
+  withLink,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
@@ -17,6 +18,7 @@ const AmountInput = ({
   withIcon?: boolean;
   iconClicked?: () => void;
   rightText?: string;
+  withLink?: boolean;
 }) => {
   return (
     <div
@@ -92,7 +94,7 @@ const AmountInput = ({
           {rightText}
         </div>
       </div>
-      {balance && balance.big < value.big ? (
+      {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
             You don't have sufficient amount of ALICE.{' '}

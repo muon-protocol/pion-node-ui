@@ -70,6 +70,7 @@ export const RenderCreateBody = () => {
           rightText={'ALICE'}
           balance={ALICEBalance}
           value={createAmount}
+          withLink
           onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
@@ -77,6 +78,7 @@ export const RenderCreateBody = () => {
         {isBoostSectionOpen ? (
           <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
             <AmountInput
+              withLink
               rightText={'LP ALICE'}
               balance={LPTokenBalance}
               withIcon
