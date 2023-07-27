@@ -1,6 +1,5 @@
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
@@ -39,7 +38,7 @@ const ReviewDetail = () => {
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const reviewDetailCard = () => {
     return (
-      <div className="bg-white px-10 py-9 rounded-2xl w-full">
+      <div className="bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full">
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
@@ -61,14 +60,14 @@ const ReviewDetail = () => {
             />
           </SelectButtonWithModal>
           <Link to="/create">
-            <button className="btn btn--secondary relative btn--icon-btn !h-14 !w-14">
+            <button className="btn btn--secondary relative btn--icon-btn !h-12 !w-12 md:!w-14 md:!h-14">
               <span className="animate-ping absolute top-0 right-0 inline-flex h-3 w-3 rounded-full bg-primary"></span>
               <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
               <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
             </button>
           </Link>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 max-md:text-sm">
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
@@ -123,13 +122,14 @@ const ReviewDetail = () => {
   const transferCard = () => {
     return (
       <div
-        className={`bg-white px-6 py-9 rounded-2xl flex flex-col !w-[365px] !min-w-[365px]`}
+        className={`bg-white p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
       >
         <AddressInput
           title="Node IP"
           placeholder="Enter Node IP"
           value={nodeIP}
           onValueChanged={(value) => setNodeIP(value)}
+          className="mb-9"
         />
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
@@ -195,39 +195,44 @@ const ReviewDetail = () => {
         Successfully added node. If you want to check details, please go to the
         Dashboard.
       </Alert>
-      <FadeIn duration={0.1} delay={0.1}>
-        <div
-          className={`content flex flex-col gap-9 justify-center items-center h-full`}
-        >
-          <div className="review-details--top flex gap-9">
-            <p className="text-2xl font-light w-full">
-              Review your bonPION details closely. When you're ready, enter the
-              node IP to complete the setup.
-            </p>
-            <NotificationCard className="!w-[365px] !min-w-[365px]" />
-          </div>
-          <div className="review-details--bottom flex gap-9 w-full">
-            {reviewDetailCard()}
-            {transferCard()}
-          </div>
+      <FadeIn
+        duration={0.1}
+        delay={0.1}
+        className="content flex flex-col gap-9 justify-center items-center h-full"
+      >
+        <div className="review-details--top flex flex-col md:flex-row gap-9">
+          <p className="text-lg text-center md:text-left md:text-2xl font-light w-full">
+            Review your bonALICE details closely. When you're ready, enter the
+            node IP to complete the setup.
+          </p>
+          <Alert
+            className="md:!w-[365px] md:!min-w-[365px]"
+            type="info"
+            show={true}
+          >
+            Your node will be activated once you've successfully completed the
+            uniqueness verification process in your dashboard
+          </Alert>
+          {/*<NotificationCard  />*/}
+        </div>
+        <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
+          {reviewDetailCard()}
+          {transferCard()}
         </div>
       </FadeIn>
     </div>
   );
 };
 
-const NotificationCard = ({ className }: { className: ReactNode }) => {
-  return (
-    <div
-      className={`bg-pacific-blue-20 rounded-xl flex gap-6 py-5 px-6 items-center ${className}`}
-    >
-      <img src="/assets/images/review/info-icon.svg" alt="" />
-      <p className="leading-5">
-        Your node will be activated once you've successfully completed the
-        uniqueness verification process in your dashboard
-      </p>
-    </div>
-  );
-};
+// const NotificationCard = ({ className }: { className: ReactNode }) => {
+//   return (
+//     <div
+//       className={`bg-pacific-blue-20 rounded-xl flex gap-6 md:py-5 md:px-6 items-center ${className}`}
+//     >
+//       <img src="/assets/images/review/info-icon.svg" alt="" />
+//       <p className="leading-5"></p>
+//     </div>
+//   );
+// };
 
 export default ReviewDetail;

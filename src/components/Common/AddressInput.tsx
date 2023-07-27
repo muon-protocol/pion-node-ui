@@ -3,14 +3,18 @@ const AddressInput = ({
   value,
   onValueChanged,
   placeholder,
+  className,
 }: {
   title: string;
   value: string;
   onValueChanged: (value: string) => void;
   placeholder: string;
+  className?: string;
 }) => {
   return (
-    <div className="address-input flex flex-col w-full gap-2 mb-2">
+    <div
+      className={`address-input flex flex-col w-full gap-2 mb-2 ${className}`}
+    >
       <div className="address-input__top text-sm flex justify-between">
         <div className="address-input__title text-gray">{title}</div>
       </div>
