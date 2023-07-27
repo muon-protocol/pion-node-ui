@@ -4,7 +4,8 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
 
 const Navbar = () => {
   return (
@@ -22,6 +23,10 @@ const DesktopNavbar = () => {
 
   const [isManageBonALICEDialogOpen, setIsManageBonALICEDialogOpen] =
     useState(false);
+
+  const ref = useRef(null);
+
+  useOnClickOutside(ref, () => setIsManageBonALICEDialogOpen(false));
 
   return (
     <FadeIn delay={0.3}>
@@ -66,13 +71,14 @@ const DesktopNavbar = () => {
                 className="absolute bottom-0 translate-y-[110%] right-0"
               >
                 <div
+                  ref={ref}
                   onClick={(e) => e.stopPropagation()}
-                  className="dialog py-5 px-4 bg-primary-dark rounded-lg flex flex-col gap-4"
+                  className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
                 >
                   <div className="dialog__top flex gap-4 justify-between items-center">
                     <div className="dialog__top__left flex flex-col items-start gap-0">
-                      <p className="text-white text-sm">Balance:</p>
-                      <p className="text-white text-sm font-medium min-w-[100px] text-left">
+                      <p className="text-sm">Balance:</p>
+                      <p className="text-sm font-medium min-w-[100px] text-left">
                         {bonALICEs.length > 0
                           ? bonALICEs.length + ' BonALICEs'
                           : 'No bonALICE'}
