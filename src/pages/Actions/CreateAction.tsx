@@ -178,7 +178,6 @@ export const RenderCreateBody = () => {
       </Modal>
       <Modal
         size="sm"
-        closeable={false}
         isOpen={isSufficientModalOpen}
         closeModalHandler={() => setIsSufficientModalOpen(false)}
       >

@@ -10,6 +10,7 @@ import SwitchBackToWalletModal from './SwitchBackToWalletModal.tsx';
 import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
+import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 
 const ClaimPrize = () => {
   const {
@@ -21,7 +22,10 @@ const ClaimPrize = () => {
     rewardWalletsFromPast,
     rawRewards,
     rawRewardsFromPast,
-    isSuccess,
+    isInsufficientModalOpen,
+    setIsInsufficientModalOpen,
+    setIsSufficientModalOpen,
+    isSufficientModalOpen,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
@@ -134,8 +138,16 @@ const ClaimPrize = () => {
       <Modal
         size="sm"
         closeable={false}
-        isOpen={isSuccess}
-        closeModalHandler={() => {}}
+        isOpen={isInsufficientModalOpen}
+        closeModalHandler={() => setIsInsufficientModalOpen(false)}
+      >
+        <InsufficientNFTAmoutModalBody />
+      </Modal>
+      <Modal
+        size="sm"
+        closeable={false}
+        isOpen={isSufficientModalOpen}
+        closeModalHandler={() => setIsSufficientModalOpen(false)}
       >
         <ClaimedRewardModal />
       </Modal>

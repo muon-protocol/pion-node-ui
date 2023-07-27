@@ -60,6 +60,10 @@ const ClaimPrizeContext = createContext<{
   handleConfirmClaimClicked: () => void;
   setIsConfirmModalOpen: (value: boolean) => void;
   alreadyRegisteredWallet: AlreadyRegisteredWallet | null;
+  isInsufficientModalOpen: boolean;
+  setIsInsufficientModalOpen: (isOpen: boolean) => void;
+  isSufficientModalOpen: boolean;
+  setIsSufficientModalOpen: (isOpen: boolean) => void;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -90,6 +94,10 @@ const ClaimPrizeContext = createContext<{
   handleConfirmClaimClicked: () => {},
   setIsConfirmModalOpen: () => {},
   alreadyRegisteredWallet: null,
+  isInsufficientModalOpen: false,
+  setIsInsufficientModalOpen: () => {},
+  isSufficientModalOpen: false,
+  setIsSufficientModalOpen: () => {},
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -114,6 +122,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isReadyToClaim, setIsReadyToClaim] = useState(false);
+
+  const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
+  const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
+
   const { userClaimedReward, valid } = useUserClaimedReward();
   const {
     stakingAddressFromPast,
@@ -163,13 +175,18 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
+      if (totalRewards.dsp > 1000) {
+        setIsSufficientModalOpen(true);
+      } else {
+        setIsInsufficientModalOpen(true);
+      }
       toast.success('Claimed successfully');
       setStakingAddress(null);
       setWalletsWithSignature([]);
       setClaimSignature(null);
       setRawRewards(null);
     }
-  }, [isSuccess]);
+  }, [isSuccess, totalRewards]);
 
   useEffect(() => {
     if (!walletAddress) return;
@@ -448,6 +465,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         handleConfirmClaimClicked,
         setIsConfirmModalOpen,
         alreadyRegisteredWallet,
+        isInsufficientModalOpen,
+        setIsInsufficientModalOpen,
+        isSufficientModalOpen,
+        setIsSufficientModalOpen,
       }}
     >
       {children}
