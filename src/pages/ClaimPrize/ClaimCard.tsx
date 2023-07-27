@@ -9,6 +9,7 @@ import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import { getTier } from '../../utils';
+import { FadeIn } from '../../animations';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -64,8 +65,8 @@ const ClaimCard = () => {
   }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
-    <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex flex-col md:flex-row text-white">
-      <div className="claim-card__left flex-[4] mb-4 md:mb-0">
+    <div className="w-full bg-primary-13 px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
+      <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
         <p className="mb-8 font-semibold text-[20px]">Your Bonded ALICE</p>
         <span className="flex justify-between font-light mb-3">
           <p>Staking address:</p>
@@ -120,7 +121,7 @@ const ClaimCard = () => {
           </p>
         </p>
       </div>
-      <div className="claim-card__right flex flex-col items-end justify-between flex-[3]">
+      <div className="claim-card__right flex flex-col items-end justify-between flex-[3] gap-4">
         {eligibleAddresses.length > 0 || rewardWalletsFromPast.length > 0 ? (
           <p
             onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
@@ -131,43 +132,46 @@ const ClaimCard = () => {
         ) : (
           <></>
         )}
-        {chainId !== getCurrentChainId() ? (
-          <button
-            onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-          >
-            Switch Network
-          </button>
-        ) : userClaimedReward[0] > BigInt(0) ? (
-          <button
-            onClick={() => navigate('/review')}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-          >
-            Create Node
-          </button>
-        ) : isMetamaskLoading || isTransactionLoading ? (
-          <button
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-            disabled
-          >
-            {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
-          </button>
-        ) : claimSignatureFromPast ? (
-          <button
-            onClick={() => handleClaimRewardsFromPastClicked()}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-          >
-            Claim
-          </button>
-        ) : (
-          <button
-            onClick={() => handleClaimRewardsClicked()}
-            className="btn text-xl font-medium !min-w-[180px] !px-6 mt-auto"
-            disabled={isClaimButtonDisabled}
-          >
-            Claim
-          </button>
-        )}
+        <FadeIn
+          duration={0.1}
+          delay={0.1}
+          className="mt-auto !w-full text-xl font-medium !min-w-[180px] ml-auto"
+        >
+          {chainId !== getCurrentChainId() ? (
+            <button
+              onClick={() => handleSwitchNetwork(getCurrentChainId())}
+              className="btn md:ml-auto max-md:!w-full"
+            >
+              Switch Network
+            </button>
+          ) : userClaimedReward[0] > BigInt(0) ? (
+            <button
+              onClick={() => navigate('/review')}
+              className="btn md:ml-auto max-md:!w-full"
+            >
+              Create Node
+            </button>
+          ) : isMetamaskLoading || isTransactionLoading ? (
+            <button className="btn md:ml-auto max-md:!w-full" disabled>
+              {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
+            </button>
+          ) : claimSignatureFromPast ? (
+            <button
+              onClick={() => handleClaimRewardsFromPastClicked()}
+              className="btn md:ml-auto max-md:!w-full"
+            >
+              Claim
+            </button>
+          ) : (
+            <button
+              onClick={() => handleClaimRewardsClicked()}
+              className="btn md:ml-auto max-md:!w-full"
+              disabled={isClaimButtonDisabled}
+            >
+              Claim
+            </button>
+          )}
+        </FadeIn>
       </div>
       <Modal
         size="lg"

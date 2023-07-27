@@ -30,7 +30,7 @@ const ClaimPrize = () => {
     <div className="page page--claim-prize">
       <FadeIn duration={0.3} className="w-full">
         <ConnectWalletModal redirectRoute="/get-started" />
-        <p className="text-2xl font-light mb-6">
+        <p className="text-lg text-center md:text-left md:text-2xl font-light mb-6">
           Go to your wallet and choose the address linked to your pioneer
           activities. Repeat this step for each address associated with pioneer
           activities.
