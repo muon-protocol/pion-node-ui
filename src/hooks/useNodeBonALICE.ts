@@ -80,6 +80,10 @@ const useNodeBonALICE = () => {
     }
   }, [readyToAddNode, addNodeArgs, addNodeToNetwork, nodeBonALICE]);
 
+  useEffect(() => {
+    setNodeBonALICE(null);
+    setNodeIP('');
+  }, [walletAddress]);
   const handleAddNodeClicked = async () => {
     if (!nodeIP || !nodeBonALICE) return;
     setIsGettingNodeStatusLoading(true);

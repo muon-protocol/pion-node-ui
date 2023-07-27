@@ -230,7 +230,7 @@ const EmptyBonALICECard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="absolute left-0 right-0 top-0 bottom-0 z-10 backdrop-blur-[6px] bg-gray-75 flex flex-col justify-center items-center gap-8">
+    <div className="absolute left-0 right-0 top-0 bottom-0 z-10 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
       <p className="font-semibold text-xl text-center px-20">
         You don’t have any bonALICE in your wallet, please create one first or
         use another address
