@@ -5,7 +5,6 @@ import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
-import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import isZero from '../../utils/isZero.ts';
@@ -15,7 +14,6 @@ import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 
 const ReviewDetail = () => {
-  const { stakingAddress } = useClaimPrize();
   const { bonALICEs } = useBonALICE();
   const {
     setNodeIP,
@@ -76,7 +74,11 @@ const ReviewDetail = () => {
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
-              {formatWalletAddress(stakingAddress)}
+              {nodeBonALICE ? (
+                formatWalletAddress(nodeBonALICE?.account)
+              ) : (
+                <span className="font-semibold">Select BonALICE</span>
+              )}
             </span>
           </span>
           <span className="flex w-full justify-between leading-5 font-light">
