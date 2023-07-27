@@ -6,6 +6,7 @@ export default {
       colors: {
         primary: '#5158F6',
         'primary-13': '#5158F621',
+        'primary-13-solid': '#E9EAFE',
         gray: '#6F7787',
         gray10: '#E9EFF6',
         algo: '#D9D9D9',

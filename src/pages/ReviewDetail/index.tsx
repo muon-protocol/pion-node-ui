@@ -40,7 +40,6 @@ const ReviewDetail = () => {
   const reviewDetailCard = () => {
     return (
       <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden">
-        {bonALICEs.length === 0 && <EmptyBonALICECard />}
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
@@ -62,9 +61,13 @@ const ReviewDetail = () => {
             />
           </SelectButtonWithModal>
           <Link to="/create">
-            <button className="btn btn--secondary relative btn--icon-btn !h-12 !w-12 md:!w-14 md:!h-14">
-              <span className="animate-ping absolute top-0 right-0 inline-flex h-3 w-3 rounded-full bg-primary"></span>
-              <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
+            <button className="btn btn--secondary btn--icon-btn relative !h-12 !w-12 md:!w-14 md:!h-14 !bg-primary-13-solid">
+              {nodeBonALICE && nodeBonALICE.ALICELockAmount.dsp < 1000 && (
+                <>
+                  <span className="animate-ping absolute inline-flex top-0 right-0 w-3 h-3 rounded-lg bg-primary"></span>
+                  <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
+                </>
+              )}
               <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
             </button>
           </Link>
@@ -117,6 +120,7 @@ const ReviewDetail = () => {
             )}
           </span>
         </div>
+        {bonALICEs.length === 0 && <EmptyBonALICECard />}
       </div>
     );
   };
@@ -230,7 +234,7 @@ const EmptyBonALICECard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="absolute left-0 right-0 top-0 bottom-0 z-10 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
+    <div className="absolute left-0 right-0 top-0 bottom-0 !z-100 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
       <p className="font-semibold text-xl text-center px-20">
         You don’t have any bonALICE in your wallet, please create one first or
         use another address
