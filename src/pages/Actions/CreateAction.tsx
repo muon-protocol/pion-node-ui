@@ -12,6 +12,8 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import Lottie from 'lottie-react';
 import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
 import { getTier } from '../../utils';
+import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
+import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -32,6 +34,10 @@ export const RenderCreateBody = () => {
     isTransactionLoading,
     isApproveMetamaskLoading,
     isApproveTransactionLoading,
+    isInsufficientModalOpen,
+    setIsInsufficientModalOpen,
+    isSufficientModalOpen,
+    setIsSufficientModalOpen,
   } = useCreateAction();
 
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
@@ -163,6 +169,21 @@ export const RenderCreateBody = () => {
           </button>
         )}
       </FadeIn>
+      <Modal
+        size="sm"
+        isOpen={isInsufficientModalOpen}
+        closeModalHandler={() => setIsInsufficientModalOpen(false)}
+      >
+        <InsufficientNFTAmoutModalBody />
+      </Modal>
+      <Modal
+        size="sm"
+        closeable={false}
+        isOpen={isSufficientModalOpen}
+        closeModalHandler={() => setIsSufficientModalOpen(false)}
+      >
+        <ClaimedRewardModal />
+      </Modal>
       <Modal
         size="sm"
         isOpen={isAllowanceModalOpen}

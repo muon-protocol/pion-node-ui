@@ -34,6 +34,10 @@ const CreateActionContext = createContext<{
   isTransactionLoading: boolean;
   isApproveMetamaskLoading: boolean;
   isApproveTransactionLoading: boolean;
+  isInsufficientModalOpen: boolean;
+  setIsInsufficientModalOpen: (isOpen: boolean) => void;
+  isSufficientModalOpen: boolean;
+  setIsSufficientModalOpen: (isOpen: boolean) => void;
 }>({
   createAmount: w3bNumberFromString(''),
   createBoostAmount: w3bNumberFromString(''),
@@ -49,6 +53,10 @@ const CreateActionContext = createContext<{
   isTransactionLoading: false,
   isApproveMetamaskLoading: false,
   isApproveTransactionLoading: false,
+  isInsufficientModalOpen: false,
+  setIsInsufficientModalOpen: () => {},
+  isSufficientModalOpen: false,
+  setIsSufficientModalOpen: () => {},
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
@@ -65,7 +73,8 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const [createBoostAmount, setCreateBoostAmount] = useState<W3bNumber>(
     w3bNumberFromString(''),
   );
-
+  const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
+  const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
   const handleCreateAmountChange = (amount: string) => {
@@ -108,7 +117,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     callback: mintAndLock,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
+    isSuccess: mintAndLockSuccess,
   } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -118,11 +127,16 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (mintAndLockSuccess) {
+      if (createAmount.dsp < 1000) {
+        setIsInsufficientModalOpen(true);
+      } else {
+        setIsSufficientModalOpen(true);
+      }
       setCreateAmount(w3bNumberFromString(''));
       setCreateBoostAmount(w3bNumberFromString(''));
     }
-  }, [isSuccess]);
+  }, [mintAndLockSuccess, createAmount, createBoostAmount]);
 
   const approveALICEArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
@@ -225,6 +239,10 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         isApproveTransactionLoading:
           approveALICEIsTransactionLoading ||
           approveLPTokenIsTransactionLoading,
+        isInsufficientModalOpen,
+        setIsInsufficientModalOpen,
+        isSufficientModalOpen,
+        setIsSufficientModalOpen,
       }}
     >
       {children}
