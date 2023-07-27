@@ -135,7 +135,7 @@ const ClaimCard = () => {
         <FadeIn
           duration={0.1}
           delay={0.1}
-          className="mt-auto !w-full text-xl font-medium !min-w-[180px] ml-auto"
+          className="mt-auto max-md:!w-full text-xl font-medium !min-w-[180px] ml-auto"
         >
           {chainId !== getCurrentChainId() ? (
             <button
@@ -147,7 +147,7 @@ const ClaimCard = () => {
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
               onClick={() => navigate('/review')}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn md:ml-auto max-md:!w-full !px-10"
             >
               Create Node
             </button>

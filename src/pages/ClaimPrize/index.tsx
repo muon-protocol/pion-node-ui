@@ -62,7 +62,8 @@ const ClaimPrize = () => {
         <Alert
           className="mb-6"
           show={
-            rawRewardsFromPast?.uniquenessVerified === false ||
+            !rawRewardsFromPast &&
+            userClaimedReward[0] === BigInt(0) &&
             rawRewards?.uniquenessVerified === false
           }
           type="error"
