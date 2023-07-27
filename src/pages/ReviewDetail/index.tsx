@@ -12,6 +12,8 @@ import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 import Alert from '../../components/Common/Alert.tsx';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
+import { sidebarItems } from '../../data/constants.ts';
+import useActions from '../../contexts/Actions/useActions.ts';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -34,6 +36,9 @@ const ReviewDetail = () => {
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
+
+  const navigate = useNavigate();
+  const { setSelectedAction } = useActions();
 
   const reviewDetailCard = () => {
     return (
@@ -156,6 +161,12 @@ const ReviewDetail = () => {
           <button className="btn btn--secondary mt-auto mx-auto" disabled>
             Select BonALICE
           </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
+          </button>
         ) : (approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
           approvedBonALICEAddress !==
             MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] ? (
@@ -170,17 +181,15 @@ const ReviewDetail = () => {
           <button className="btn btn--secondary mt-auto mx-auto" disabled>
             Node Status...
           </button>
-        ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
-            {isMetamaskLoading
-              ? 'Waiting for Metamask...'
-              : 'Waiting for Tx...'}
-          </button>
         ) : (
           <button
             className="btn btn--secondary mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
-            disabled={!nodeIP || !nodeBonALICE}
+            disabled={
+              !nodeIP ||
+              !nodeBonALICE ||
+              nodeBonALICE.ALICELockAmount.dsp < 1000
+            }
           >
             Add Node
           </button>
@@ -213,14 +222,45 @@ const ReviewDetail = () => {
             Review your bonALICE details closely. When you're ready, enter the
             node IP to complete the setup.
           </p>
-          <Alert
-            className="md:!w-[365px] md:!min-w-[365px]"
-            type="info"
-            show={true}
-          >
-            Your node will be activated once you've successfully completed the
-            uniqueness verification process in your dashboard
-          </Alert>
+          {nodeBonALICE && nodeBonALICE.ALICELockAmount.dsp < 1000 ? (
+            <Alert
+              className="md:!w-[365px] md:!min-w-[365px]"
+              type="error"
+              show={true}
+            >
+              You don't have sufficient amount of ALICE on this BonALICE. Please
+              <span
+                className="hover:underline cursor-pointer"
+                onClick={() => {
+                  setSelectedAction(sidebarItems[1].link);
+                  navigate('/create');
+                }}
+              >
+                upgrade
+              </span>
+              ,{' '}
+              <span
+                className="hover:underline cursor-pointer"
+                onClick={() => {
+                  setSelectedAction(sidebarItems[2].link);
+                  navigate('/create');
+                }}
+              >
+                merge
+              </span>
+              , or select another BonALICE.
+            </Alert>
+          ) : (
+            <Alert
+              className="md:!w-[365px] md:!min-w-[365px]"
+              type="info"
+              show={true}
+            >
+              Your node will be activated once you've successfully completed the
+              uniqueness verification process in your dashboard
+            </Alert>
+          )}
+
           {/*<NotificationCard  />*/}
         </div>
         <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">

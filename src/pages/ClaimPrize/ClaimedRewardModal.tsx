@@ -33,7 +33,7 @@ const ClaimedRewardModal = () => {
         >
           Upgrade
         </span>{' '}
-        your bonPION to have earn more from running a node.
+        your bonALICE to have earn more from running a node.
       </p>
     </div>
   );

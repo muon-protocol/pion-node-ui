@@ -120,15 +120,18 @@ const useNodeBonALICE = () => {
     tokenId: nodeBonALICE?.tokenId,
   });
 
-  const { callback: approveBonALICE, isTransactionLoading: isApproving } =
-    useWagmiContractWrite({
-      abi: BONALICE_ABI,
-      chainId: getCurrentChainId(),
-      functionName: 'approve',
-      args: approveBonALICEArgs,
-      address: BONALICE_ADDRESS[getCurrentChainId()],
-      showErrorToast: true,
-    });
+  const {
+    callback: approveBonALICE,
+    isTransactionLoading: isApproving,
+    isMetamaskLoading: isApproveMetamaskLoading,
+  } = useWagmiContractWrite({
+    abi: BONALICE_ABI,
+    chainId: getCurrentChainId(),
+    functionName: 'approve',
+    args: approveBonALICEArgs,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    showErrorToast: true,
+  });
 
   const handleApproveClicked = () => {
     try {
@@ -150,7 +153,7 @@ const useNodeBonALICE = () => {
     nodeIP,
     setNodeIP,
     handleAddNodeClicked,
-    isMetamaskLoading,
+    isMetamaskLoading: isMetamaskLoading || isApproveMetamaskLoading,
     isTransactionLoading,
     isGettingNodeStatusLoading,
     approvedBonALICEAddress,
