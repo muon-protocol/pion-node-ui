@@ -45,7 +45,12 @@ const ClaimCard = () => {
         (eligibleAddresses.length === 0 ||
           eligibleAddresses.some((wallet) => !wallet.signature)))
     );
-  }, [eligibleAddresses, stakingAddressFromPast]);
+  }, [
+    eligibleAddresses,
+    stakingAddressFromPast,
+    rawRewards,
+    rawRewardsFromPast,
+  ]);
 
   const { userClaimedReward } = useUserClaimedReward();
 
@@ -59,8 +64,8 @@ const ClaimCard = () => {
   }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
-    <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex text-white">
-      <div className="claim-card__left flex-[4]">
+    <div className="w-full bg-primary-13 pl-11 pr-9 pb-7 pt-8 rounded-2xl flex flex-col md:flex-row text-white">
+      <div className="claim-card__left flex-[4] mb-4 md:mb-0">
         <p className="mb-8 font-semibold text-[20px]">Your Bonded ALICE</p>
         <span className="flex justify-between font-light mb-3">
           <p>Staking address:</p>

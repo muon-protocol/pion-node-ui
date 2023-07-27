@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="page">
+    <div className="page px-10">
       <div className="mobile-logo w-full flex justify-center mb-9 md:hidden">
         <img
           src="/assets/images/navbar/logo.svg"

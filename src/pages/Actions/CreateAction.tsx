@@ -116,7 +116,7 @@ export const RenderCreateBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
         {chainId !== getCurrentChainId() ? (
           <button

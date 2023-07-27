@@ -62,10 +62,17 @@ input[type=number] {
   background-size: cover;
 }
 
+@media (min-width: 768px) {
+  .page {
+    min-height: calc(100vh - 108px - 70px);
+  }
+
+}
+
 .page {
   // Todo: Refactor this and use tailwind spacing classes
   @apply max-w-[90vw] py-12 md:max-w-[1232px] md:py-[78px] mx-auto;
-  min-height: calc(100vh - 108px - 70px);
+  min-height: calc(100vh - 70px);
 
   &--centered {
     @apply flex items-center justify-center;

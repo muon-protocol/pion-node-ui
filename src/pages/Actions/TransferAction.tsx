@@ -57,7 +57,7 @@ const RenderTransferBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="mt-auto max-md:mt-10 max-md:w-[80vw] mx-auto"
+        className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
         <button disabled className="btn !w-full">
           Currently Disabled

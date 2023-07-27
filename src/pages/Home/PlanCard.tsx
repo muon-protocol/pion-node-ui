@@ -25,7 +25,7 @@ const PlanCard = ({
           {plan.title}
         </div>
         <div className="plan-card__content mb-1 flex flex-col gap-6">
-          <div className="plan-card__content__item flex flex-col">
+          <div className="plan-card__content__item flex flex-col z-10">
             <div className="plan-card__content__item__title">
               Required Node Power
             </div>
