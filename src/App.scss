@@ -83,7 +83,7 @@ input[type=number] {
     @apply flex flex-col items-center justify-center md:max-w-[688px] mx-auto;
   }
   &--review-details {
-    @apply flex flex-col items-center justify-center md:max-w-[957px] md:px-10 mx-auto;
+    @apply flex flex-col items-center justify-center md:max-w-[957px] md:px-2.5 mx-auto;
   }
 }
 

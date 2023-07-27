@@ -1,6 +1,6 @@
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
@@ -36,9 +36,11 @@ const ReviewDetail = () => {
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
+
   const reviewDetailCard = () => {
     return (
-      <div className="bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full">
+      <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden">
+        {bonALICEs.length === 0 && <EmptyBonALICECard />}
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
@@ -198,10 +200,10 @@ const ReviewDetail = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="content flex flex-col gap-9 justify-center items-center h-full"
+        className="content flex flex-col gap-8 justify-center items-center h-full"
       >
         <div className="review-details--top flex flex-col md:flex-row gap-9">
-          <p className="text-lg text-center md:text-left md:text-2xl font-light w-full">
+          <p className="text-lg text-center md:text-left md:text-[22px] font-light w-full">
             Review your bonALICE details closely. When you're ready, enter the
             node IP to complete the setup.
           </p>
@@ -224,15 +226,23 @@ const ReviewDetail = () => {
   );
 };
 
-// const NotificationCard = ({ className }: { className: ReactNode }) => {
-//   return (
-//     <div
-//       className={`bg-pacific-blue-20 rounded-xl flex gap-6 md:py-5 md:px-6 items-center ${className}`}
-//     >
-//       <img src="/assets/images/review/info-icon.svg" alt="" />
-//       <p className="leading-5"></p>
-//     </div>
-//   );
-// };
+const EmptyBonALICECard = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="absolute left-0 right-0 top-0 bottom-0 z-10 backdrop-blur-[6px] bg-gray-75 flex flex-col justify-center items-center gap-8">
+      <p className="font-semibold text-xl text-center px-20">
+        You don’t have any bonALICE in your wallet, please create one first or
+        use another address
+      </p>
+      <button
+        className="btn btn--primary mx-auto"
+        onClick={() => navigate('/create')}
+      >
+        Create BonALICE
+      </button>
+    </div>
+  );
+};
 
 export default ReviewDetail;

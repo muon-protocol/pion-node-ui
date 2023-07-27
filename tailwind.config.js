@@ -14,6 +14,7 @@ export default {
         green: '#8EF5AB',
         disabled: '#C0C0C0',
         gray3: '#939393',
+        gray75: '#6f7787bf',
         'main-bg': '#F8FAFF',
         'primary-very-dark': '#353367',
         'pacific-blue-20': '#23B5D344',
