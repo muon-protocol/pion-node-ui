@@ -228,9 +228,9 @@ const ReviewDetail = () => {
               type="error"
               show={true}
             >
-              You don't have sufficient amount of ALICE on this BonALICE. Please
+              You don't have sufficient amount of ALICE on this BonALICE. Please{' '}
               <span
-                className="hover:underline cursor-pointer"
+                className="hover:underline cursor-pointer text-primary"
                 onClick={() => {
                   setSelectedAction(sidebarItems[1].link);
                   navigate('/create');
@@ -240,7 +240,7 @@ const ReviewDetail = () => {
               </span>
               ,{' '}
               <span
-                className="hover:underline cursor-pointer"
+                className="hover:underline cursor-pointer text-primary"
                 onClick={() => {
                   setSelectedAction(sidebarItems[2].link);
                   navigate('/create');
