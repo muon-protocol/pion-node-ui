@@ -1,11 +1,23 @@
+"use client";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
 import PassVerification from "@/components/verification/passVerification";
 import TitleInfo from "@/components/verification/titleInfo";
-import Image from "next/image";
+import { fetchVerification } from "@/redux/features/verification";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Verification() {
+  const dispatch = useDispatch();
+  const selector = useSelector(
+    (state) => state.rootReducer.verificationReducer
+  );
+
+  useEffect(() => {
+    dispatch(fetchVerification("0xF34e2737BD4A0162daA8e306A6fb379150902A74"));
+  }, []);
   return (
     <div>
+      {selector.fetchStatus}
       <div className="flex flex-row">
         <div className="basis-2/3 mr-4">
           <TitleInfo></TitleInfo>

@@ -14,11 +14,10 @@ module.exports = {
     colors: {
       primary: {
         DEFAULT: "rgb(var(--color-primary))",
-        13: "rgba(var(--color-primary), 0.13)",
         50: "rgba(var(--color-primary), 0.5)",
         80: "rgba(var(--color-primary), 0.8)",
       },
-      primary13: "rgba(var(--color-primary), 0.13)",
+      primary13: "rgba(81, 88, 246, 0.13)",
       black: "#323245",
       white: "#FFFFFF",
     },

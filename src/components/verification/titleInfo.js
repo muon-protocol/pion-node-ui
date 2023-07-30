@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function TitleInfo() {
+  const router = useRouter();
   return (
     <div>
       <div className="flex justify-between">
@@ -12,14 +15,17 @@ export default function TitleInfo() {
           ></Image>
           <h2>Alice Uniqueness verification</h2>
         </div>
-        <a className="flex items-center">
+        <button
+          onClick={() => router.push("/")}
+          className="flex items-center transition duration-150 ease-in-out hover:bg-primary/10 rounded-[10px] px-4"
+        >
           <Image
             src="/verification/back-icon.svg"
             width="24"
             height="24"
           ></Image>
           Back to dashboard
-        </a>
+        </button>
       </div>
       <p>
         Welcome to Alice's Uniqueness Verification Center! Here, you can

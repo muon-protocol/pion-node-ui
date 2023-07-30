@@ -1,8 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { Provider } from "react-redux";
-import { reduxStore } from "@/lib/redux";
 
 import {
   RainbowKitProvider,
@@ -54,16 +52,14 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 });
 
-export function Providers({ children }) {
+export function RainbowProvider({ children }) {
   const [mounted, setMounted] = React.useState(false);
   React.useEffect(() => setMounted(true), []);
   return (
-    <Provider store={reduxStore}>
-      <WagmiConfig config={wagmiConfig}>
-        <RainbowKitProvider chains={chains} appInfo={demoAppInfo}>
-          {mounted && children}
-        </RainbowKitProvider>
-      </WagmiConfig>
-    </Provider>
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains} appInfo={demoAppInfo}>
+        {mounted && children}
+      </RainbowKitProvider>
+    </WagmiConfig>
   );
 }

@@ -1,15 +1,24 @@
+"use client";
 import CardInfo from "@/components/dashboard/cardInfo";
 import TopBanner from "@/components/dashboard/topBanner";
 import NodeUpTime from "@/components/dashboard/nodeUpTime";
 import StakeMore from "@/components/dashboard/stakeMore";
 import Withdraw from "@/components/dashboard/withdraw";
-
-export function LightBtn({ children }) {
+import { getNodeInfoData } from "@/utils/fetchNodeInfo";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useEffect } from "react";
+import {
+  fetchNodeInfo,
+  getNodeInfo,
+  setNodeActice,
+  setNodeInfo,
+} from "@/redux/features/nodeInfo";
+import { useDispatch, useSelector } from "react-redux";
+import { addressToShort } from "@/utils/showAddress";
+export function LightBtn({ children, onClick }) {
   return (
     <button
-      type="button"
-      data-te-ripple-init
-      data-te-ripple-color="light"
+      onClick={onClick}
       class="inline-block rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30"
     >
       {children}
@@ -18,17 +27,31 @@ export function LightBtn({ children }) {
 }
 
 export default function Home() {
+  // useAppDispatch(setNodeInfo(result.nodeInfo));
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state.rootReducer.nodeReducer);
+  useEffect(() => {
+    dispatch(fetchNodeInfo("0xF34e2737BD4A0162daA8e306A6fb379150902A74"));
+    // getNodeInfoData("0xF34e2737BD4A0162daA8e306A6fb379150902A74");
+  }, []);
   return (
     <div>
+      {selector.fetchStatus}
       <TopBanner></TopBanner>
       <div className="grid grid-cols-4 gap-4 mt-8">
-        <CardInfo title="IP Adress" data="0"></CardInfo>
-        <CardInfo title="Node ID" data="1"></CardInfo>
-        <CardInfo title="Node Address" data="2"></CardInfo>
-        <CardInfo title="Peer ID" data="3"></CardInfo>
+        <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>
+        <CardInfo title="Node ID" data={selector.id}></CardInfo>
+        <CardInfo
+          title="Node Address"
+          data={addressToShort(selector.nodeAddress)}
+        ></CardInfo>
+        <CardInfo
+          title="Peer ID"
+          data={addressToShort(selector.peerId)}
+        ></CardInfo>
       </div>
       <div className="grid grid-cols-3 gap-4 mt-8">
-        <NodeUpTime></NodeUpTime>
+        <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
         <StakeMore></StakeMore>
         <Withdraw></Withdraw>
       </div>
