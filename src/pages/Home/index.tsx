@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="page px-10">
-      <div className="mobile-logo w-full flex justify-center mb-9 md:hidden">
+    <div className="page md:px-10">
+      <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
         <img
           src="/assets/images/navbar/logo.svg"
           alt={''}
@@ -19,7 +19,7 @@ const Home = () => {
         </p>
       </FadeIn>
       <FadeIn delay={0.15}>
-        <p className="description font-light text-[19px] md:font-normal text-center md:text-[27px] mb-12 mx-auto max-w-[621px] leading-[42px]">
+        <p className="description text-[19px] md:font-normal text-center md:text-[27px] mb-12 mx-auto max-w-[621px] md:leading-[42px]">
           Empower Your Node with a Bonded ALICE NFT! Secure your spot in one of
           our three distinguished tiers by locking ALICE tokens in your
           bonALICE. The more tokens you lock, the higher the tier and rewards.

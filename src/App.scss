@@ -109,7 +109,7 @@ input[type=number] {
   }
 
   &--large {
-    @apply px-20 py-6 text-2xl font-medium;
+    @apply px-10 py-5 text-xl font-normal md:px-20 md:py-6 md:text-2xl md:font-medium;
   }
 
   &--secondary-tag {
