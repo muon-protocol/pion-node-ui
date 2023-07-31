@@ -9,6 +9,8 @@ import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Lottie from 'lottie-react';
 import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
 import { getTier } from '../../utils';
