@@ -68,7 +68,8 @@ const ClaimPrize = () => {
           show={
             !rawRewardsFromPast &&
             userClaimedReward[0] === BigInt(0) &&
-            rawRewards?.uniquenessVerified === false
+            rawRewards?.uniquenessVerified === false &&
+            eligibleAddresses.length > 0
           }
           type="error"
         >
