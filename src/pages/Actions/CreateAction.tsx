@@ -149,7 +149,7 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? '> ' + createAmount.dsp + ' ALICEs'
+              ? createAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
@@ -160,7 +160,7 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {LPTokenBalance && createBoostAmount.big < LPTokenBalance.big
-              ? '> ' + createBoostAmount.dsp + ' LP Tokens'
+              ? createBoostAmount.hStr + ' LP Tokens'
               : 'All LP Tokens'}
           </button>
         ) : (

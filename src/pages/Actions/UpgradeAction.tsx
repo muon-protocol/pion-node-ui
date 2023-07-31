@@ -170,7 +170,7 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {ALICEBalance && upgradeAmount.big < ALICEBalance.big
-              ? '> ' + upgradeAmount.dsp + ' ALICEs'
+              ? upgradeAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance &&
@@ -182,7 +182,7 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {LPTokenBalance && upgradeBoostAmount.big < LPTokenBalance.big
-              ? '> ' + upgradeBoostAmount.dsp + ' LP Tokens'
+              ? upgradeBoostAmount.hStr + ' LP Tokens'
               : 'All LP Tokens'}
           </button>
         ) : (
