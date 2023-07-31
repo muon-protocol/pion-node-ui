@@ -140,7 +140,7 @@ const ClaimCard = () => {
           {chainId !== getCurrentChainId() ? (
             <button
               onClick={() => handleSwitchNetwork(getCurrentChainId())}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn md:ml-auto max-md:!w-full !px-6"
             >
               Switch Network
             </button>
@@ -152,7 +152,7 @@ const ClaimCard = () => {
               Create Node
             </button>
           ) : isMetamaskLoading || isTransactionLoading ? (
-            <button className="btn md:ml-auto max-md:!w-full" disabled>
+            <button className="btn md:ml-auto max-md:!w-full !px-6" disabled>
               {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
             </button>
           ) : claimSignatureFromPast ? (
