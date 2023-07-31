@@ -102,7 +102,13 @@ const ClaimPrize = () => {
               No Eligible address detected
             </p>
           ) : rewardWalletsFromPast.length > 0 ? (
-            <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
+            <span
+              className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar"
+              onWheel={(event) => {
+                event.preventDefault();
+                event.currentTarget.scrollLeft += event.deltaY;
+              }}
+            >
               {rewardWalletsFromPast.map((wallet) => (
                 <VerifyWalletCard
                   wallet={wallet}
@@ -112,7 +118,13 @@ const ClaimPrize = () => {
               ))}
             </span>
           ) : eligibleAddresses.length > 0 ? (
-            <span className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar">
+            <span
+              className="wallets-container flex -mx-6 px-6 gap-4 overflow-x-auto no-scrollbar"
+              onWheel={(event) => {
+                event.preventDefault();
+                event.currentTarget.scrollLeft += event.deltaY;
+              }}
+            >
               {eligibleAddresses.map((wallet) => (
                 <VerifyWalletCard
                   wallet={wallet}
