@@ -32,8 +32,8 @@ const Modal: FC<{
             <Scale
               className={`modal-content ${
                 size === 'lg' ? 'max-w-[466px]' : 'max-w-[400px]'
-              } w-[90%] px-8 pt-5 pb-8 relative -z-10 ${
-                size === 'sm' ? 'bg-modal-small' : 'bg-white'
+              } w-[90%] px-4 md:px-8 pt-5 pb-4 md:pb-8 relative -z-10 ${
+                size === 'sm' ? 'bg-modal-small pb-0' : 'bg-white'
               } rounded-3xl`}
             >
               <div
