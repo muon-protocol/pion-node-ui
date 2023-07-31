@@ -14,7 +14,7 @@ const GetStarted = () => {
         <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
           You're a pioneer if you:
         </p>
-        <span className="flex w-full gap-3 justify-stretch mb-12">
+        <span className="flex flex-col md:flex-row w-full gap-3 justify-stretch mb-12">
           <span className="get-started__pioneer-option">
             Joined the Muon Presale
           </span>
