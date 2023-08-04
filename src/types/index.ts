@@ -1,6 +1,7 @@
 import { W3bNumber } from './wagmi.ts';
 
 export type Plan = {
+  verificationLink: string;
   id: number;
   title: string;
   requiredNodePower: string;
