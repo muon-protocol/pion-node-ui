@@ -30,8 +30,8 @@ const AmountInput = ({
         {withIcon && (
           <img
             onClick={iconClicked}
-            className="absolute -top-2.5 right-1/2 cursor-pointer"
-            src="/assets/images/actions/plus-icon.svg"
+            className="absolute -top-1.5 right-1/2 cursor-pointer w-7 h-7"
+            src="/assets/images/actions/minus-icon.svg"
             alt=""
           />
         )}
@@ -82,7 +82,7 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center justify-between bg-primary-13 rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
         <input
           className="amount-input__input text-black placeholder-gray font-medium w-full h-full bg-transparent outline-none max-md:text-sm"
           placeholder="Amount You Want to Lock"

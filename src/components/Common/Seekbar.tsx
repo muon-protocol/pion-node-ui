@@ -31,14 +31,14 @@ const Seekbar = ({ min, max, value, onValueChange }: SeekbarProps) => {
   };
 
   return (
-    <>
+    <div className="mb-4">
       <div className="seekbar__values flex justify-between w-full mb-2 select-none">
         <p className="font-semibold">{value}%</p>
         <p className="font-semibold">{max - value}%</p>
       </div>
       <div
         ref={barRef}
-        className="relative bg-card-bg-dark w-full h-2 cursor-pointer rounded-lg mb-6 md:mb-2.5"
+        className="relative bg-primary-dark-500 w-full h-2 cursor-pointer rounded-lg mb-6 md:mb-2.5"
         onMouseDown={(e) => {
           setMouseDown(true);
           updateValue(e.clientX);
@@ -48,10 +48,10 @@ const Seekbar = ({ min, max, value, onValueChange }: SeekbarProps) => {
       >
         <div
           style={{ left: `${((value - min) / (max - min)) * 100}%` }}
-          className="absolute bg-primary-10-solid rounded-full w-5 h-5 -translate-x-1/2 -translate-y-1/3"
+          className="absolute bg-primary rounded-full w-5 h-5 -translate-x-1/2 -translate-y-1/3"
         ></div>
       </div>
-    </>
+    </div>
   );
 };
 
