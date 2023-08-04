@@ -37,6 +37,10 @@ export const RenderUpgradeBody = () => {
 
   const { ALICEBalance } = useALICE();
   const { bonALICEs, ALICEAllowance, LPTokenAllowance } = useBonALICE();
+  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
+
+  const { LPTokenBalance } = useLPToken();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -44,14 +48,17 @@ export const RenderUpgradeBody = () => {
       !upgradeAmount ||
       !upgradeAmount.dsp ||
       !ALICEBalance?.hStr ||
-      upgradeAmount.dsp > ALICEBalance.dsp
+      upgradeAmount.dsp > ALICEBalance.dsp ||
+      !LPTokenBalance ||
+      upgradeBoostAmount.dsp > LPTokenBalance.dsp
     );
-  }, [selectedUpgradeBonALICE, upgradeAmount, ALICEBalance]);
-
-  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
-
-  const { LPTokenBalance } = useLPToken();
-  const { chainId, handleSwitchNetwork } = useUserProfile();
+  }, [
+    selectedUpgradeBonALICE,
+    upgradeAmount,
+    ALICEBalance,
+    LPTokenBalance,
+    upgradeBoostAmount.dsp,
+  ]);
 
   return (
     <>
@@ -162,7 +169,10 @@ export const RenderUpgradeBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
+        ) : ALICEAllowance &&
+          ALICEAllowance.big < upgradeAmount.big &&
+          ALICEBalance &&
+          ALICEBalance.dsp > upgradeAmount.dsp ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -174,7 +184,9 @@ export const RenderUpgradeBody = () => {
               : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance &&
-          LPTokenAllowance.big < upgradeBoostAmount.big ? (
+          LPTokenAllowance.big < upgradeBoostAmount.big &&
+          LPTokenBalance &&
+          LPTokenBalance.dsp > upgradeBoostAmount.dsp ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"

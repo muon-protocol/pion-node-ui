@@ -47,11 +47,13 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
+      createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
       !ALICEAllowance ||
       (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
       !createAmount ||
       (!createAmount.big && !createBoostAmount.big) ||
       (!ALICEBalance?.dsp && !LPTokenBalance?.dsp) ||
+      (LPTokenBalance && LPTokenBalance.dsp < createBoostAmount.dsp) ||
       (ALICEBalance && ALICEBalance.dsp < createAmount.dsp) ||
       createActionLoading
     );
@@ -113,14 +115,16 @@ export const RenderCreateBody = () => {
               </p>
             </span>
           </MoveUpIn>
-          <MoveUpIn y={-10} duration={0.1} delay={0.1}>
-            <span className="flex justify-between text-gray10 max-md:text-sm">
-              <p className="font-light">Your tier will be</p>
-              <p className="font-medium">
-                {getTier(createAmount.dsp + createBoostAmount.dsp * 2)}
-              </p>
-            </span>
-          </MoveUpIn>
+          {createAmount.dsp + createBoostAmount.dsp * 2 >= 10000 && (
+            <MoveUpIn y={-10} duration={0.1} delay={0.1}>
+              <span className="flex justify-between text-gray10 max-md:text-sm">
+                <p className="font-light">Your tier will be</p>
+                <p className="font-medium">
+                  {getTier(createAmount.dsp + createBoostAmount.dsp * 2)}
+                </p>
+              </span>
+            </MoveUpIn>
+          )}
         </>
       )}
       <FadeIn
@@ -141,7 +145,10 @@ export const RenderCreateBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
+        ) : ALICEAllowance &&
+          ALICEAllowance.big < createAmount.big &&
+          ALICEBalance &&
+          ALICEBalance.dsp > createAmount.dsp ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -152,7 +159,10 @@ export const RenderCreateBody = () => {
               ? createAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
-        ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
+        ) : LPTokenAllowance &&
+          LPTokenAllowance.big < createBoostAmount.big &&
+          LPTokenBalance &&
+          LPTokenBalance.dsp > createBoostAmount.dsp ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
@@ -169,7 +179,10 @@ export const RenderCreateBody = () => {
             className="btn !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
-            Create Bonded ALICE
+            {createAmount.dsp + createBoostAmount.dsp > 0 &&
+            createAmount.dsp + createBoostAmount.dsp < 10000
+              ? 'At Least 10000 Power'
+              : 'Create Bonded ALICE'}
           </button>
         )}
       </FadeIn>
