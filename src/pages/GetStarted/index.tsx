@@ -65,7 +65,7 @@ const NewBonALICEAction = () => {
             src="/assets/images/get-started/new-bon-alice-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:font-light md:text-center mx-auto">
+          <div className="font-semibold md:text-2xl md:font-light md:min-h-[4rem] flex items-center md:text-center mx-auto">
             Get Started with a New bonALICE
           </div>
         </div>
@@ -105,8 +105,8 @@ const MuanPioneerAction = () => {
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:font-light md:text-center mx-auto">
-            Claim as a Muon Pioneer
+          <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center mx-auto">
+            Claim Your Node-drop
           </div>
         </div>
       </motion.span>
