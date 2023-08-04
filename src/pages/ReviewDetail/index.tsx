@@ -104,15 +104,13 @@ const ReviewDetail = () => {
                 LP)
               </span>
             ) : (
-              <span className="font-semibold">Select BonALICE</span>
+              <span className="font-semibold">-</span>
             )}
           </span>
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Tier:</span>
             <span className="font-semibold ">
-              {nodeBonALICE
-                ? getTier(nodeBonALICE.nodePower)
-                : 'Select BonALICE'}
+              {nodeBonALICE ? getTier(nodeBonALICE.nodePower) : '-'}
             </span>
           </span>
           <span className="flex w-full justify-between leading-5 font-light">
@@ -123,7 +121,7 @@ const ReviewDetail = () => {
                 6 methods
               </span>
             ) : (
-              <span className="font-semibold">Select BonALICE</span>
+              <span className="font-semibold">-</span>
             )}
           </span>
         </div>

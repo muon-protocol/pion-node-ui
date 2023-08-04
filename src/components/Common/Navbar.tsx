@@ -124,7 +124,7 @@ const DesktopNavbar = () => {
                               src="/assets/images/navbar/prize-icon.svg"
                               alt=""
                             />
-                            Claim as a Prize
+                            Claim Node-drop
                           </button>
                         </Link>
                       </div>
