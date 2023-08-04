@@ -2,37 +2,37 @@
   font-family: Inter;
   font-style: normal;
   font-weight: 800;
-  src: URL('Inter-Black.ttf') format('truetype');
+  src: url('Inter/Inter-Black.ttf') format('truetype');
 }
 @font-face {
   font-family: Inter;
   font-style: normal;
   font-weight: bold;
-  src: URL('Inter-Bold.ttf') format('truetype');
+  src: url('Inter/Inter-Bold.ttf') format('truetype');
 }
 @font-face {
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  src: URL('Inter-Medium.ttf') format('truetype');
+  src: url('Inter/Inter-Medium.ttf') format('truetype');
 }
 @font-face {
   font-family: Inter;
   font-style: normal;
   font-weight: 300;
-  src: URL('Inter-Light.ttf') format('truetype');
+  src: url('Inter/Inter-Light.ttf') format('truetype');
 }
 @font-face {
   font-family: Inter;
   font-style: normal;
   font-weight: 200;
-  src: URL('Inter-Thin.ttf') format('truetype');
+  src: url('Inter/Inter-Thin.ttf') format('truetype');
 }
 @font-face {
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
-  src: URL('Inter-Regular.ttf') format('truetype');
+  src: url('Inter/Inter-Regular.ttf') format('truetype');
 }
 
 * {

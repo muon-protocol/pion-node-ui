@@ -3,8 +3,8 @@ import { ActionType, Plan, SidebarItem, UserWallet } from '../types';
 export const plans: Plan[] = [
   {
     id: 1,
-    title: 'ALICE Starter',
-    requiredNodePower: '10,000 - 50,000',
+    title: 'ALICE Tier 1',
+    requiredNodePower: '10,000',
     verificationMethods: '6 methods',
     APR: '10% - 15%',
     profitability: '200 - 250 days',
@@ -13,8 +13,8 @@ export const plans: Plan[] = [
   },
   {
     id: 2,
-    title: 'ALICE Enhancer',
-    requiredNodePower: '50,000 - 200,000',
+    title: 'ALICE Tier 2',
+    requiredNodePower: '50,000',
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
     profitability: '100 - 180 days',
@@ -23,8 +23,8 @@ export const plans: Plan[] = [
   },
   {
     id: 3,
-    title: 'ALICE Supreme',
-    requiredNodePower: '+200,000',
+    title: 'ALICE Tier 3',
+    requiredNodePower: '200,000',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',

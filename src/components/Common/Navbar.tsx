@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
@@ -20,6 +20,7 @@ const DesktopNavbar = () => {
   const { isConnected } = useUserProfile();
   const { ALICEBalance } = useALICE();
   const { bonALICEs } = useBonALICE();
+  const location = useLocation();
 
   const [isManageBonALICEDialogOpen, setIsManageBonALICEDialogOpen] =
     useState(false);
@@ -41,93 +42,101 @@ const DesktopNavbar = () => {
           </Link>
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
-          <button
-            className="btn btn--small"
-            onClick={() =>
-              window.open(
-                'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
-                '_blank',
-              )
-            }
-          >
-            Buy ALICE
-          </button>
-          <button
-            onClick={() =>
-              setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
-            }
-            className="btn btn--small--with-icon relative"
-          >
-            <img
-              className="mr-2.5"
-              src="/assets/images/alice-icon.svg"
-              alt=""
-            />
-            Manage bonALICE
-            {isManageBonALICEDialogOpen && (
-              <FadeIn
-                duration={0.1}
-                delay={0.1}
-                className="absolute bottom-0 translate-y-[110%] right-0"
+          {location && location.pathname !== '/' && (
+            <>
+              <button
+                className="btn btn--small"
+                onClick={() =>
+                  window.open(
+                    'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+                    '_blank',
+                  )
+                }
               >
-                <div
-                  ref={ref}
-                  onClick={(e) => e.stopPropagation()}
-                  className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
-                >
-                  <div className="dialog__top flex gap-4 justify-between items-center">
-                    <div className="dialog__top__left flex flex-col items-start gap-0">
-                      <p className="text-sm">Balance:</p>
-                      <p className="text-sm font-medium min-w-[100px] text-left">
-                        {bonALICEs.length > 0
-                          ? bonALICEs.length + ' BonALICEs'
-                          : 'No bonALICE'}
-                      </p>
-                    </div>
-                    <div className="dialog__top__right flex items-center">
-                      {bonALICEs.length > 0 ? (
-                        <Link to={'/create'}>
+                Buy ALICE
+              </button>
+              <button
+                onClick={() =>
+                  setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
+                }
+                className="btn btn--small--with-icon relative"
+              >
+                <img
+                  className="mr-2.5"
+                  src="/assets/images/alice-icon.svg"
+                  alt=""
+                />
+                Manage bonALICE
+                {isManageBonALICEDialogOpen && (
+                  <FadeIn
+                    duration={0.1}
+                    delay={0.1}
+                    className="absolute bottom-0 translate-y-[110%] right-0"
+                  >
+                    <div
+                      ref={ref}
+                      onClick={(e) => e.stopPropagation()}
+                      className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
+                    >
+                      <div className="dialog__top flex gap-4 justify-between items-center">
+                        <div className="dialog__top__left flex flex-col items-start gap-0">
+                          <p className="text-sm">Balance:</p>
+                          <p className="text-sm font-medium min-w-[100px] text-left">
+                            {bonALICEs.length > 0
+                              ? bonALICEs.length + ' BonALICEs'
+                              : 'No bonALICE'}
+                          </p>
+                        </div>
+                        <div className="dialog__top__right flex items-center">
+                          {bonALICEs.length > 0 ? (
+                            <Link to={'/create'}>
+                              <button
+                                onClick={() =>
+                                  setIsManageBonALICEDialogOpen(false)
+                                }
+                                className="btn btn--small"
+                              >
+                                Manage
+                              </button>
+                            </Link>
+                          ) : (
+                            <Link to={'/create'}>
+                              <button
+                                onClick={() =>
+                                  setIsManageBonALICEDialogOpen(false)
+                                }
+                                className="btn btn--small"
+                              >
+                                Create
+                              </button>
+                            </Link>
+                          )}
+                        </div>
+                      </div>
+                      <div className="dialog--bottom">
+                        <Link to={'/claim'}>
                           <button
                             onClick={() => setIsManageBonALICEDialogOpen(false)}
-                            className="btn btn--small"
+                            className="btn btn--small--with-icon !w-full"
                           >
-                            Manage
+                            <img
+                              className="mr-2.5"
+                              src="/assets/images/navbar/prize-icon.svg"
+                              alt=""
+                            />
+                            Claim as a Prize
                           </button>
                         </Link>
-                      ) : (
-                        <Link to={'/create'}>
-                          <button
-                            onClick={() => setIsManageBonALICEDialogOpen(false)}
-                            className="btn btn--small"
-                          >
-                            Create
-                          </button>
-                        </Link>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="dialog--bottom">
-                    <Link to={'/claim'}>
-                      <button
-                        onClick={() => setIsManageBonALICEDialogOpen(false)}
-                        className="btn btn--small--with-icon !w-full"
-                      >
-                        <img
-                          className="mr-2.5"
-                          src="/assets/images/navbar/prize-icon.svg"
-                          alt=""
-                        />
-                        Claim as a Prize
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </FadeIn>
-            )}
-          </button>
-          <Link to="/review">
-            <button className="btn btn--small">Setup Node</button>
-          </Link>
+                  </FadeIn>
+                )}
+              </button>
+              <Link to="/review">
+                <button className="btn btn--small">Setup Node</button>
+              </Link>
+            </>
+          )}
 
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
