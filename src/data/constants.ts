@@ -10,7 +10,8 @@ export const plans: Plan[] = [
     profitability: '200 - 250 days',
     backgroundColor: '#F58E8E80',
     shadowColor: 'text-[#ed8080]',
-    verificationLink: '',
+    verificationLink:
+      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
   },
   {
     id: 2,
@@ -21,7 +22,8 @@ export const plans: Plan[] = [
     profitability: '100 - 180 days',
     backgroundColor: '#F3C95D80',
     shadowColor: 'text-[#e6bf5a]',
-    verificationLink: '',
+    verificationLink:
+      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
   },
   {
     id: 3,
@@ -32,7 +34,8 @@ export const plans: Plan[] = [
     profitability: '50 - 80 days',
     backgroundColor: '#918EF580',
     shadowColor: 'text-[#8c8aed]',
-    verificationLink: '',
+    verificationLink:
+      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
   },
 ];
 
