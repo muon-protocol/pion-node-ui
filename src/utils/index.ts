@@ -8,7 +8,7 @@ export function calculateRoundAmount(
 
 export function getTier(nodePower: number) {
   if (nodePower < 10000) {
-    return '...';
+    return '-';
   } else if (nodePower < 50000) {
     return 'ALICE Starter (Tier 1)';
   } else if (nodePower < 200000) {

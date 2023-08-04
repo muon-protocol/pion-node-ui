@@ -65,12 +65,15 @@ const ReviewDetail = () => {
           </SelectButtonWithModal>
           <Link to="/create">
             <button className="btn btn--secondary btn--icon-btn relative !h-12 !w-12 md:!w-14 md:!h-14 !bg-primary-13-solid">
-              {nodeBonALICE && nodeBonALICE.ALICELockAmount.dsp < 1000 && (
-                <>
-                  <span className="animate-ping absolute inline-flex top-0 right-0 w-3 h-3 rounded-lg bg-primary"></span>
-                  <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
-                </>
-              )}
+              {nodeBonALICE &&
+                nodeBonALICE.ALICELockAmount.dsp +
+                  nodeBonALICE.LPTokenLockAmount.dsp * 2 <
+                  10000 && (
+                  <>
+                    <span className="animate-ping absolute inline-flex top-0 right-0 w-3 h-3 rounded-lg bg-primary"></span>
+                    <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
+                  </>
+                )}
               <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
             </button>
           </Link>
@@ -116,9 +119,27 @@ const ReviewDetail = () => {
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Verification Required:</span>
 
-            {nodeBonALICE ? (
-              <span className="font-semibold underline  cursor-pointer">
-                6 methods
+            {nodeBonALICE &&
+            nodeBonALICE.ALICELockAmount.dsp +
+              2 * nodeBonALICE.LPTokenLockAmount.dsp >=
+              10000 ? (
+              <span
+                className="font-semibold underline cursor-pointer"
+                onClick={() => window.open('', '_blank')}
+              >
+                {nodeBonALICE.ALICELockAmount.dsp +
+                  2 * nodeBonALICE.LPTokenLockAmount.dsp >=
+                10000
+                  ? '6 methods'
+                  : nodeBonALICE.ALICELockAmount.dsp +
+                      2 * nodeBonALICE.LPTokenLockAmount.dsp >=
+                    50000
+                  ? 'Aura Bronze'
+                  : nodeBonALICE.ALICELockAmount.dsp +
+                      2 * nodeBonALICE.LPTokenLockAmount.dsp >=
+                    200000
+                  ? 'Aura Silver'
+                  : ''}
               </span>
             ) : (
               <span className="font-semibold">-</span>
@@ -165,9 +186,12 @@ const ReviewDetail = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : (approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
-          approvedBonALICEAddress !==
-            MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] ? (
+        ) : nodeBonALICE.ALICELockAmount.dsp +
+            nodeBonALICE.LPTokenLockAmount.dsp * 2 >=
+            10000 &&
+          ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
+            approvedBonALICEAddress !==
+              MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
           <button
             onClick={() => handleApproveClicked()}
             className="btn btn--secondary mt-auto mx-auto"
@@ -186,7 +210,9 @@ const ReviewDetail = () => {
             disabled={
               !nodeIP ||
               !nodeBonALICE ||
-              nodeBonALICE.ALICELockAmount.dsp < 1000
+              nodeBonALICE.ALICELockAmount.dsp +
+                nodeBonALICE.LPTokenLockAmount.dsp * 2 <
+                10000
             }
           >
             Add Node
@@ -220,7 +246,10 @@ const ReviewDetail = () => {
             Review your bonALICE details closely. When you're ready, enter the
             node IP to complete the setup.
           </p>
-          {nodeBonALICE && nodeBonALICE.ALICELockAmount.dsp < 1000 ? (
+          {nodeBonALICE &&
+          nodeBonALICE.ALICELockAmount.dsp +
+            nodeBonALICE.LPTokenLockAmount.dsp * 2 <
+            10000 ? (
             <Alert
               className="md:!w-[365px] md:!min-w-[365px]"
               type="error"
