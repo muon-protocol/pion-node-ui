@@ -1,9 +1,20 @@
 import { plans } from '../../data/constants';
 import PlanCard from './PlanCard.tsx';
 import { FadeIn } from '../../animations';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import { useEffect } from 'react';
 
 const Home = () => {
+  const { bonALICEs } = useBonALICE();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (bonALICEs?.length > 0) {
+      navigate('/review');
+    }
+  }, [bonALICEs, navigate]);
+
   return (
     <div className="page md:px-10">
       <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
