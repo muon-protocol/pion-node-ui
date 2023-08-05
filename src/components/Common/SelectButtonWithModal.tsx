@@ -31,7 +31,7 @@ const SelectButtonWithModal = ({
             {title}
           </div>
         )}
-        <div className="select-button-with-modal__button flex items-center justify-between bg-primary-13 rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
+        <div className="select-button-with-modal__button flex items-center justify-between bg-catskill-white rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
           <span className="flex gap-1.5 md:gap-2.5 items-center">
             <img
               className="w-5 h-5 md:w-[26px] md:h-[26px]"

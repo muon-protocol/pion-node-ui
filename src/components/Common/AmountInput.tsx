@@ -82,7 +82,7 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-primary-13 rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
         <input
           className="amount-input__input text-black placeholder-gray font-medium w-full h-full bg-transparent outline-none max-md:text-sm"
           placeholder="Amount You Want to Lock"
