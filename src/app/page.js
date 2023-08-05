@@ -15,11 +15,15 @@ import {
 } from "@/redux/features/nodeInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { addressToShort } from "@/utils/showAddress";
-export function LightBtn({ children, onClick }) {
+export function LightBtn({ children, onClick, className, bgColor, textColor }) {
   return (
     <button
       onClick={onClick}
-      class="inline-block rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30"
+      class={`inline-block rounded-[8px] ${
+        bgColor ? bgColor : "bg-primary13"
+      }  ${
+        textColor ? textColor : "text-primary"
+      } px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30 ${className}`}
     >
       {children}
     </button>
@@ -41,10 +45,7 @@ export default function Home() {
       <div className="grid grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>
         <CardInfo title="Node ID" data={selector.id}></CardInfo>
-        <CardInfo
-          title="Node Address"
-          data={addressToShort(selector.nodeAddress)}
-        ></CardInfo>
+        <CardInfo title="Node Address" data={selector.nodeAddress}></CardInfo>
         <CardInfo
           title="Peer ID"
           data={addressToShort(selector.peerId)}

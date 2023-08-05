@@ -13,7 +13,7 @@ export default function TitleInfo() {
             width="44"
             height="44"
           ></Image>
-          <h2>Alice Uniqueness verification</h2>
+          <h2 className="text-[24px]">Alice Uniqueness verification</h2>
         </div>
         <button
           onClick={() => router.push("/")}
@@ -27,7 +27,7 @@ export default function TitleInfo() {
           Back to dashboard
         </button>
       </div>
-      <p>
+      <p className="text-lg mt-4">
         Welcome to Alice's Uniqueness Verification Center! Here, you can
         complete our verification processes to access and operate our 3-tier
         levels of nodes. Please note that each verification method corresponds
@@ -35,8 +35,11 @@ export default function TitleInfo() {
         that tier.
       </p>
       <p>
-        Want a seamless verification process? Our <a>guidance document</a> has
-        you covered.
+        Want a seamless verification process? Our{" "}
+        <a href="#" className="text-primary">
+          guidance document
+        </a>{" "}
+        has you covered.
       </p>
     </div>
   );

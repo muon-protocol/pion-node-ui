@@ -10,7 +10,6 @@ import { Providers } from "@/redux/provider";
 import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowProvider } from "../lib/rainbowProviders";
 
-import "./globals.css";
 import { Roboto } from "next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
@@ -35,7 +34,7 @@ export default function RootLayout({ children }) {
           <RainbowProvider>
             <StyledComponentsRegistry>
               <div className="min-h-[100vh] relative">
-                <div className="pb-10">
+                <div className="pb-14">
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
@@ -52,10 +51,12 @@ export default function RootLayout({ children }) {
                     </div>
                   </div>
                   <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-6">
-                    <main className="max-w-[1032px] w-[80%]">{children}</main>
+                    <main className="max-w-[1200px] 2xl:max-w-[1600px]  w-[80%]">
+                      {children}
+                    </main>
                   </div>
                 </div>
-                <div className="w-full absolute bottom-0 h-10 flex justify-center pb-3">
+                <div className="w-full absolute bottom-0 h-14 flex justify-center py-3">
                   <Image
                     src="/Footer.svg"
                     width="172"

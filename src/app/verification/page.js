@@ -1,19 +1,26 @@
 "use client";
+import GitCoinModal from "@/components/verification/GitcoinPassport";
+import BrightIdModal from "@/components/verification/brightIdModal";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
 import PassVerification from "@/components/verification/passVerification";
+import TelegramModal from "@/components/verification/telegramModal";
 import TitleInfo from "@/components/verification/titleInfo";
 import { fetchVerification } from "@/redux/features/verification";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useAccount } from "wagmi";
 
 export default function Verification() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
+  const { address, isConnecting, isDisconnected } = useAccount();
 
   useEffect(() => {
-    dispatch(fetchVerification("0xF34e2737BD4A0162daA8e306A6fb379150902A74"));
+    dispatch(fetchVerification(address));
   }, []);
   return (
     <div>
@@ -23,33 +30,42 @@ export default function Verification() {
           <TitleInfo></TitleInfo>
         </div>
         <div className="basis-1/3 ml-4">
-          <PassVerification></PassVerification>
+          <PassVerification passed={selector}></PassVerification>
         </div>
       </div>
       <div className="grid grid-cols-3 gap-4 mt-6">
         <NormalVerificationCard
           title="Muon Presale Participation"
-          data={false}
+          isActive={selector.presaleVerified}
+          onClick={() => router.push(`/verification/presale/${address}`)}
         ></NormalVerificationCard>
         <NormalVerificationCard
           title="Active Community Member (Telegram)"
-          data={false}
-        ></NormalVerificationCard>
+          isActive={selector.telegramVerified}
+        >
+          <TelegramModal isActive={selector.telegramVerified}></TelegramModal>
+        </NormalVerificationCard>
         <NormalVerificationCard
           title="Active Community Member (Discord)"
-          data={false}
+          isActive={selector.discordVerified}
         ></NormalVerificationCard>
         <NormalVerificationCard
           title="BrightID Aura Verification"
           data={true}
+          isActive={selector.brightidAuraVerified}
         ></NormalVerificationCard>
         <NormalVerificationCard
-          title="Muon Presale Participation"
-          data={false}
-        ></NormalVerificationCard>
+          title="BrightID Meet Verification"
+          isActive={selector.brightidMeetsVerified}
+        >
+          <BrightIdModal
+            isActive={selector.brightidMeetsVerified}
+          ></BrightIdModal>
+        </NormalVerificationCard>
         <NormalVerificationCard
           title="Gitcoin Passport"
-          data={false}
+          isActive={selector.gitcoinPassportVerified}
+          onClick={() => router.push(`/verification/gitCoin/${address}`)}
         ></NormalVerificationCard>
       </div>
     </div>

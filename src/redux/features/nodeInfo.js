@@ -71,7 +71,7 @@ export const node = createSlice({
         state.downNodeTimes = nodeData.downNodeTimes;
       })
       .addCase(fetchNodeInfo.rejected, (state, action) => {
-        state.fetchStatus = "faild";
+        state.fetchStatus = "failed";
         console.log(action);
       });
   },

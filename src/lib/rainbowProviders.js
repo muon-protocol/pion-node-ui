@@ -6,6 +6,7 @@ import {
   RainbowKitProvider,
   getDefaultWallets,
   connectorsForWallets,
+  Theme,
 } from "@rainbow-me/rainbowkit";
 import {
   argentWallet,
@@ -51,6 +52,47 @@ const wagmiConfig = createConfig({
   publicClient,
   webSocketPublicClient,
 });
+
+const myCustomTheme = {
+  colors: {
+    connectButtonBackground: "#D5D7FC",
+    accentColor: "...",
+    accentColorForeground: "...",
+    actionButtonBorder: "...",
+    actionButtonBorderMobile: "...",
+    actionButtonSecondaryBackground: "...",
+    closeButton: "...",
+    closeButtonBackground: "...",
+    connectButtonBackgroundError: "...",
+    connectButtonInnerBackground: "...",
+    connectButtonText: "...",
+    connectButtonTextError: "...",
+    connectionIndicator: "...",
+    downloadBottomCardBackground: "...",
+    downloadTopCardBackground: "...",
+    error: "...",
+    generalBorder: "...",
+    generalBorderDim: "...",
+    menuItemBackground: "...",
+    modalBackdrop: "...",
+    modalBackground: "...",
+    modalBorder: "...",
+    modalText: "...",
+    modalTextDim: "...",
+    modalTextSecondary: "...",
+    profileAction: "...",
+    profileActionHover: "...",
+    profileForeground: "...",
+    selectedOptionBorder: "...",
+    standby: "...",
+  },
+  radii: {
+    connectButton: "8px",
+  },
+  shadows: {
+    connectButton: "0px",
+  },
+};
 
 export function RainbowProvider({ children }) {
   const [mounted, setMounted] = React.useState(false);

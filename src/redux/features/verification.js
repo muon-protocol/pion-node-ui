@@ -9,15 +9,23 @@ const initialState = {
   gitcoinPassportVerified: false,
   presaleVerified: false,
   telegramVerified: false,
+  brightidContexId: "",
+  errorMessage: "",
+  interval: 0,
 };
 
 export const fetchVerification = createAsyncThunk(
   "get/fetchVerification",
 
   async (walletAddress) => {
-    const response = await verificationRequest(walletAddress);
-    console.log(response);
-    return response.data;
+    try {
+      const response = await verificationRequest(walletAddress);
+      console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw new Error("ehsan");
+    }
   }
 );
 
@@ -25,8 +33,32 @@ export const verification = createSlice({
   name: "verification",
   initialState,
   reducers: {
-    setVerification: (state, action) => {
-      state = action.payload;
+    setBrightidAuraVerified: (state, action) => {
+      state.brightidAuraVerified = action.payload;
+    },
+    setBrightidMeetsVerified: (state, action) => {
+      state.brightidMeetsVerified = action.payload;
+    },
+    setMyInterval: (state, action) => {
+      state.interval = action.payload;
+    },
+    resetInterval: (state, action) => {
+      state.interval = 0;
+    },
+    setBrightIdContexId: (state, action) => {
+      state.brightidContexId = action.payload;
+    },
+    setPresaleVerified: (state, action) => {
+      state.presaleVerified = action.payload;
+    },
+    resetErrorMessage: (state) => {
+      state.errorMessage = "";
+    },
+    setErrorMessage: (state, action) => {
+      state.errorMessage = action.payload;
+    },
+    setTelegramVerified: (state, action) => {
+      state.telegramVerified = action.payload;
     },
   },
   extraReducers(builder) {
@@ -35,10 +67,11 @@ export const verification = createSlice({
         state.fetchStatus = "loading";
       })
       .addCase(fetchVerification.fulfilled, (state, action) => {
+        console.log(action);
         state.fetchStatus = "succeeded";
-        if (action.payload.data.success != true) {
+        if (action.payload.success != true) {
           state = initialState;
-          state.fetchStatus = "faild";
+          state.fetchStatus = "failed";
         } else {
           const verificationData = action.payload.result;
           (state.brightidAuraVerified = verificationData.brightidAuraVerified),
@@ -52,10 +85,20 @@ export const verification = createSlice({
         }
       })
       .addCase(fetchVerification.rejected, (state, action) => {
-        state.fetchStatus = "faild";
+        state.fetchStatus = "failed";
         console.log(action);
       });
   },
 });
-
+export const {
+  setPresaleVerified,
+  resetErrorMessage,
+  setErrorMessage,
+  setTelegramVerified,
+  setBrightIdContexId,
+  resetInterval,
+  setMyInterval,
+  setBrightidAuraVerified,
+  setBrightidMeetsVerified,
+} = verification.actions;
 export default verification.reducer;

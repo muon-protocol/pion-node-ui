@@ -32,7 +32,7 @@ export const singMessage = async (msg, account) => {
   }
 };
 
-export const saleRequest = async (staker, signer, signature) => {
+export const preSaleRequest = async (staker, signer, signature) => {
   const data = JSON.stringify({
     staker: staker,
     signer: signer,

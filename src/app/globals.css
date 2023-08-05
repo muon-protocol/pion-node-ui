@@ -16,6 +16,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-primary: 81, 88, 246;
+    --color-secondary: 245, 149, 105;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -26,7 +27,9 @@ body {
   background: #F8FAFF;
   background-image: url("/blur-background.svg");
   background-size: cover;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter', sans-serif !important;
   color: #323245;
+}
+.font-Montserrat{
+  font-family: 'Montserrat', sans-serif !important;
 }

@@ -35,8 +35,8 @@ export default function UpTimesModal() {
           data-te-modal-dialog-ref
           class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[800px] "
         >
-          <div class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-            <div class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+          <div class="pointer-events-auto relative flex w-full flex-col rounded-[18px] border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+            <div class="flex flex-shrink-0 items-center justify-between rounded-[18px] border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
               <h5
                 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
                 id="exampleModalScrollableLabel"
@@ -71,7 +71,7 @@ export default function UpTimesModal() {
               <p>{selector.startTime}</p>
             </div>
             <div id="accordionExample">
-              <div class="rounded-lg  border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-neutral-800">
+              <div class="rounded-[18px]  border border-neutral-200 bg-white dark:border-neutral-600 dark:bg-neutral-800">
                 <h2 class="mb-0" id="headingOne">
                   <button
                     class="group relative flex justify-between w-full items-center rounded-none border-0 bg-white px-5 py-4 text-left text-base text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-neutral-800 dark:text-white [&:not([data-te-collapse-collapsed])]:bg-white [&:not([data-te-collapse-collapsed])]:text-primary [&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:[&:not([data-te-collapse-collapsed])]:bg-neutral-800 dark:[&:not([data-te-collapse-collapsed])]:text-primary-400 dark:[&:not([data-te-collapse-collapsed])]:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
@@ -83,7 +83,7 @@ export default function UpTimesModal() {
                     aria-controls="collapseOne"
                   >
                     Down times
-                    <div className="flex">
+                    <div className="flex rounded-[18px] ">
                       <span>{selector.downNodeTimes.length} time(s)</span>
                       <span class="mr-1 ml-auto h-5  shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                         <svg
