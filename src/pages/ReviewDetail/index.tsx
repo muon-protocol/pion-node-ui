@@ -14,6 +14,7 @@ import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
+import { useEffect } from 'react';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -222,6 +223,17 @@ const ReviewDetail = () => {
     );
   };
 
+  useEffect(() => {
+    if (
+      nodeBonALICEAddress === MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
+      !!stakerAddressInfo
+    ) {
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 5000);
+    }
+  }, [nodeBonALICEAddress, stakerAddressInfo, navigate]);
+
   return (
     <div className="page page--review-details">
       <Alert
@@ -233,8 +245,12 @@ const ReviewDetail = () => {
           !!stakerAddressInfo
         }
       >
-        Successfully added node. If you want to check details, please go to the
-        Dashboard.
+        Successfully added node. If you want to check details, we will redirect
+        you to the dashboard in few seconds. If you don't want to wait, you can{' '}
+        <Link to="/dashboard" className="underline">
+          click here
+        </Link>
+        .
       </Alert>
       <FadeIn
         duration={0.1}
