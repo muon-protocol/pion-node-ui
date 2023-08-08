@@ -48,7 +48,7 @@ export default function RootLayout({ children }) {
                     </div>
                     <div className="col-span-5 justify-self-end">
                       <div className="flex">
-                        <Balance></Balance>
+                        {/* <Balance></Balance> */}
                         <ConnectButton></ConnectButton>
                       </div>
                     </div>
