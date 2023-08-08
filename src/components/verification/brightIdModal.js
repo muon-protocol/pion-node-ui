@@ -33,7 +33,7 @@ function Step1({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -50,7 +50,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/verification/googlePlay.svg"
+              src="/dashboard/verification/googlePlay.svg"
             />
           </a>
           <a
@@ -61,7 +61,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/verification/appStore.svg"
+              src="/dashboard/verification/appStore.svg"
             />
           </a>
         </div>
@@ -86,7 +86,7 @@ function Step2({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -178,7 +178,7 @@ function Step3({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -361,7 +361,7 @@ function Step6() {
 }
 
 export default function BrightIdModal({ isActive }) {
-  const [brightIdStep, setBrightIdStep] = useState(6);
+  const [brightIdStep, setBrightIdStep] = useState(1);
   useEffect(() => {
     const myModalEl = document.getElementById("brightidModal");
     myModalEl.addEventListener("hidden.te.modal", (e) => {
@@ -380,7 +380,7 @@ export default function BrightIdModal({ isActive }) {
       <button
         className={`flex  ${
           isActive ? "bg-pacificBlue text-white" : "bg-primary13"
-        }  rounded-[8px] px-2 py-1`}
+        }  rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
         onClick={() => {
           if (isSameWallet) {
             router.push("/verification");
@@ -391,7 +391,7 @@ export default function BrightIdModal({ isActive }) {
         data-te-ripple-init
         data-te-ripple-color="light"
       >
-        Pass verification
+        {isActive ? "Verification passed!" : "Pass verification"}
       </button>
       <div
         data-te-modal-init

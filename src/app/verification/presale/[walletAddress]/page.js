@@ -28,7 +28,7 @@ export function BackToVerificationBtn({ children }) {
   return (
     <div className="flex">
       <button
-        className="flex bg-primary13 rounded-[8px] px-2 py-1"
+        className="flex content-center bg-primary13 rounded-[8px] px-2 py-1"
         onClick={() => {
           if (isSameWallet) {
             router.push("/verification");
@@ -39,7 +39,11 @@ export function BackToVerificationBtn({ children }) {
         data-te-ripple-init
         data-te-ripple-color="light"
       >
-        <Image src="/verification/back-icon.svg" width="24" height="24"></Image>
+        <Image
+          src="/dashboard/verification/back-icon.svg"
+          width="24"
+          height="24"
+        ></Image>
         {children}
       </button>
       <div

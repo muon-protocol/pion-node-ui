@@ -7,7 +7,7 @@ function Normal() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/verification/Ellipse.svg"
+          src="/dashboard/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>
@@ -23,7 +23,7 @@ function Aura() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/verification/Ellipse.svg"
+          src="/dashboard/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>
@@ -32,7 +32,7 @@ function Aura() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/verification/Ellipse.svg"
+          src="/dashboard/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>
@@ -69,7 +69,7 @@ export default function NormalVerificationCard({
             bgColor={isActive ? "bg-pacificBlue" : ""}
             onClick={onClick}
           >
-            Pass verification
+            {isActive ? "Verification passed!" : "Pass verification"}
           </LightBtn>
         )}
       </div>

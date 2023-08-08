@@ -25,10 +25,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body className={roboto.className}>
         <script
           type="text/javascript"
-          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
+          src="/dashboard../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
         ></script>
         <Providers>
           <RainbowProvider>
@@ -38,7 +41,7 @@ export default function RootLayout({ children }) {
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
-                        src="/muon-logo.svg"
+                        src="/dashboard/muon-logo.svg"
                         width="121"
                         height="32"
                       ></Image>
@@ -58,7 +61,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="w-full absolute bottom-0 h-14 flex justify-center py-3">
                   <Image
-                    src="/Footer.svg"
+                    src="/dashboard/Footer.svg"
                     width="172"
                     height="22"
                     className=""

@@ -23,7 +23,7 @@ export function LightBtn({ children, onClick, className, bgColor, textColor }) {
         bgColor ? bgColor : "bg-primary13"
       }  ${
         textColor ? textColor : "text-primary"
-      } px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30 ${className}`}
+      } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30 ${className}`}
     >
       {children}
     </button>
@@ -40,7 +40,6 @@ export default function Home() {
   }, []);
   return (
     <div>
-      {selector.fetchStatus}
       <TopBanner></TopBanner>
       <div className="grid grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>

@@ -14,7 +14,8 @@
 
 # production
 /build
-
+/out
+out.zip
 # misc
 .DS_Store
 *.pem

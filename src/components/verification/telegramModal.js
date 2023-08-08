@@ -137,7 +137,7 @@ export default function TelegramModal({ isActive }) {
       <button
         className={`flex ${
           isActive ? "bg-pacificBlue text-white" : "bg-primary13"
-        } rounded-[8px] px-2 py-1`}
+        } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
         onClick={() => {
           if (isSameWallet) {
             router.push("/verification");
@@ -148,7 +148,7 @@ export default function TelegramModal({ isActive }) {
         data-te-ripple-init
         data-te-ripple-color="light"
       >
-        Pass verification
+        {isActive ? "Verification passed!" : "Pass verification"}
       </button>
       <div
         data-te-modal-init

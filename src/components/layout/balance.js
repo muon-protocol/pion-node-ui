@@ -4,7 +4,7 @@ export default function Balance() {
   return (
     <div className="h-9 bg-primary13 flex items-center text-sm font-normal rounded-lg	px-5 mr-2">
       <Image
-        src="/mini-logo.svg"
+        src="/dashboard/mini-logo.svg"
         width="21"
         height="5"
         className="mr-3"

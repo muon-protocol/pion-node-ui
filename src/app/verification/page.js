@@ -1,6 +1,7 @@
 "use client";
 import GitCoinModal from "@/components/verification/GitcoinPassport";
 import BrightIdModal from "@/components/verification/brightIdModal";
+import { discordVerified } from "@/components/verification/discord";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
 import PassVerification from "@/components/verification/passVerification";
 import TelegramModal from "@/components/verification/telegramModal";
@@ -24,7 +25,6 @@ export default function Verification() {
   }, []);
   return (
     <div>
-      {selector.fetchStatus}
       <div className="flex flex-row">
         <div className="basis-2/3 mr-4">
           <TitleInfo></TitleInfo>
@@ -48,6 +48,7 @@ export default function Verification() {
         <NormalVerificationCard
           title="Active Community Member (Discord)"
           isActive={selector.discordVerified}
+          onClick={() => discordVerified(address)}
         ></NormalVerificationCard>
         <NormalVerificationCard
           title="BrightID Aura Verification"

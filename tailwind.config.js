@@ -12,6 +12,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      myPrimary: "rgb(var(--color-primary))",
       primary: {
         DEFAULT: "rgb(var(--color-primary))",
         50: "rgba(var(--color-primary), 0.5)",
@@ -24,6 +25,18 @@ module.exports = {
       pacificBlue: "#23B5D3",
     },
     extend: {
+      colors: {
+        primary: {
+          DEFAULT: "rgb(var(--color-primary))",
+          50: "rgba(var(--color-primary), 0.5)",
+          80: "rgba(var(--color-primary), 0.8)",
+        },
+        mysecondary: "rgb(var(--color-secondary))",
+        primary13: "rgba(81, 88, 246, 0.13)",
+        black: "#323245",
+        white: "#FFFFFF",
+        pacificBlue: "#23B5D3",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

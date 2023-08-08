@@ -16,6 +16,17 @@ import { BackToVerificationBtn } from "@/app/verification/presale/[walletAddress
 import { LightBtn } from "@/app/page";
 import { usePathname } from "next/navigation";
 
+function PrimaryBtn({ children, onClick }) {
+  return (
+    <button
+      className="bg-myPrimary hover:bg-myPrimary text-white rounded-[8px] px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out   active:bg-muPrimary/30"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+}
+
 function Step1({ setStep }) {
   const { address, isConnecting, isDisconnected } = useAccount();
   const pathName = usePathname();
@@ -37,12 +48,13 @@ function Step1({ setStep }) {
             setStep(2);
             dispatch(setPresaleVerified(true));
           } else {
-            setStep(3);
             dispatch(setErrorMessage(ERRORCODE[res.data.errorCode]("presale")));
+            setStep(3);
           }
         })
         .catch((error) => {
           console.log(error);
+          dispatch(setErrorMessage(ERRORCODE["connection"]()));
           setStep(3);
         });
     }
@@ -52,17 +64,12 @@ function Step1({ setStep }) {
       <p className="mt-12">
         select the address you used for the presale. Then use the "Verify
         Address" button to verify the ownership of the address.
-        {isLoading && "loading"} {isError && "error"} {isSuccess && "loading"}
       </p>
       <div className="w-full mt-8 flex justify-center">
         <ConnectButton></ConnectButton>
       </div>
-      <div className="w-full mt-8">
-        <div className="w-28 mx-auto">
-          <button disabled={isLoading} onClick={() => signMessage()}>
-            verify Address
-          </button>
-        </div>
+      <div className="w-full flex justify-center mt-8">
+        <PrimaryBtn onClick={() => signMessage()}>verify Address</PrimaryBtn>
       </div>
     </div>
   );

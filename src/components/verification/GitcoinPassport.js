@@ -25,7 +25,6 @@ import Style from "@/app/verification/presale/style.module.css";
 import { LightBtn } from "@/app/page";
 import { useRouter } from "next/navigation";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import QRCode from "react-qr-code";
 import { BackToVerificationBtn } from "@/app/verification/presale/[walletAddress]/page";
 
 function Step1({ setGitCoinStep }) {
@@ -35,7 +34,7 @@ function Step1({ setGitCoinStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/gitcoin.svg"
+          src="/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 
@@ -123,7 +122,7 @@ function Step2({ setGitCoinStep, staker }) {
         <Image
           width="100"
           height="100"
-          src="/verification/gitcoin.svg"
+          src="/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 

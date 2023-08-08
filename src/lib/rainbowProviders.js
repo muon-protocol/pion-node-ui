@@ -14,11 +14,11 @@ import {
   ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { bsc } from "wagmi/chains";
+import { bsc, bscTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [bsc],
+  [bscTestnet],
   [publicProvider()]
 );
 
@@ -54,15 +54,18 @@ const wagmiConfig = createConfig({
 });
 
 const myCustomTheme = {
+  blurs: {
+    modalOverlay: "...",
+  },
   colors: {
-    connectButtonBackground: "#D5D7FC",
-    accentColor: "...",
-    accentColorForeground: "...",
+    accentColor: "#E3E5FE",
+    accentColorForeground: "#5158F6",
     actionButtonBorder: "...",
     actionButtonBorderMobile: "...",
     actionButtonSecondaryBackground: "...",
     closeButton: "...",
     closeButtonBackground: "...",
+    connectButtonBackground: "...",
     connectButtonBackgroundError: "...",
     connectButtonInnerBackground: "...",
     connectButtonText: "...",
@@ -75,22 +78,34 @@ const myCustomTheme = {
     generalBorderDim: "...",
     menuItemBackground: "...",
     modalBackdrop: "...",
-    modalBackground: "...",
-    modalBorder: "...",
+    modalBackground: "#E3E5FE",
+    modalBorder: "white",
     modalText: "...",
-    modalTextDim: "...",
-    modalTextSecondary: "...",
+    modalTextDim: "white",
+    modalTextSecondary: "black",
     profileAction: "...",
     profileActionHover: "...",
     profileForeground: "...",
-    selectedOptionBorder: "...",
+    selectedOptionBorder: "#5158F6",
     standby: "...",
   },
+  fonts: {
+    body: "Inter",
+  },
   radii: {
+    actionButton: "8px",
     connectButton: "8px",
+    menuButton: "8px",
+    modal: "8px",
+    modalMobile: "8px",
   },
   shadows: {
-    connectButton: "0px",
+    connectButton: "...",
+    dialog: "...",
+    profileDetailsAction: "...",
+    selectedOption: "...",
+    selectedWallet: "...",
+    walletLogo: "...",
   },
 };
 
@@ -99,7 +114,11 @@ export function RainbowProvider({ children }) {
   React.useEffect(() => setMounted(true), []);
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} appInfo={demoAppInfo}>
+      <RainbowKitProvider
+        theme={myCustomTheme}
+        chains={chains}
+        appInfo={demoAppInfo}
+      >
         {mounted && children}
       </RainbowKitProvider>
     </WagmiConfig>
