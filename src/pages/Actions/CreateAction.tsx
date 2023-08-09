@@ -191,14 +191,14 @@ export const RenderCreateBody = () => {
         isOpen={isInsufficientModalOpen}
         closeModalHandler={() => setIsInsufficientModalOpen(false)}
       >
-        <InsufficientNFTAmoutModalBody />
+        <InsufficientNFTAmoutModalBody operation="created" />
       </Modal>
       <Modal
         size="sm"
         isOpen={isSufficientModalOpen}
         closeModalHandler={() => setIsSufficientModalOpen(false)}
       >
-        <ClaimedRewardModal />
+        <ClaimedRewardModal operation="created" />
       </Modal>
       <Modal
         size="sm"

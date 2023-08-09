@@ -154,7 +154,7 @@ const ClaimPrize = () => {
         isOpen={isInsufficientModalOpen}
         closeModalHandler={() => setIsInsufficientModalOpen(false)}
       >
-        <InsufficientNFTAmoutModalBody />
+        <InsufficientNFTAmoutModalBody operation="claimed" />
       </Modal>
       <Modal
         size="sm"
@@ -162,7 +162,7 @@ const ClaimPrize = () => {
         isOpen={isSufficientModalOpen}
         closeModalHandler={() => setIsSufficientModalOpen(false)}
       >
-        <ClaimedRewardModal />
+        <ClaimedRewardModal operation="claimed" />
       </Modal>
     </div>
   );

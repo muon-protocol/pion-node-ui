@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { sidebarItems } from '../../data/constants.ts';
 
-const ClaimedRewardModal = () => {
+const ClaimedRewardModal = ({ operation }: { operation: string }) => {
   const navigate = useNavigate();
   const { setSelectedAction } = useActions();
 
@@ -14,7 +14,7 @@ const ClaimedRewardModal = () => {
         alt=""
       />
       <p className="text-center">
-        Your BonALICE has been claimed successfully. now you can
+        Your BonALICE has been {operation} successfully. now you can
         <br />
         <button
           onClick={() => navigate('/review')}
@@ -33,7 +33,7 @@ const ClaimedRewardModal = () => {
         >
           Upgrade
         </span>{' '}
-        your bonALICE to have earn more from running a node.
+        your bonALICE for increased earnings from node operation.
       </p>
     </div>
   );

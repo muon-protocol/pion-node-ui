@@ -2,7 +2,11 @@ import { sidebarItems } from '../../data/constants.ts';
 import { useNavigate } from 'react-router-dom';
 import useActions from '../../contexts/Actions/useActions.ts';
 
-const InsufficientNFTAmoutModalBody = () => {
+const InsufficientNFTAmoutModalBody = ({
+  operation,
+}: {
+  operation: string;
+}) => {
   const navigate = useNavigate();
   const { setSelectedAction } = useActions();
 
@@ -14,9 +18,9 @@ const InsufficientNFTAmoutModalBody = () => {
         alt=""
       />
       <p className="text-center mb-8">
-        You've successfully claimed your BonALICE! Unfortunately your current
-        node power is insufficient to run a node. Please consider upgrading your
-        bonPION to enable node setup.
+        You've successfully {operation} your BonALICE! Unfortunately your
+        current node power is insufficient to run a node. Please consider
+        upgrading your bonALICE to enable node setup.
       </p>
       <button
         onClick={() => {
