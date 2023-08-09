@@ -224,31 +224,19 @@ const ReviewDetail = () => {
   };
 
   useEffect(() => {
-    console.log('stakerAddressInfo', stakerAddressInfo);
-    console.log(
-      nodeBonALICEAddress,
-      MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-    );
-    if (
-      nodeBonALICEAddress === MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
-      !!stakerAddressInfo
-    ) {
+    if (stakerAddressInfo?.active) {
       setTimeout(() => {
         navigate('/dashboard');
       }, 5000);
     }
-  }, [nodeBonALICEAddress, stakerAddressInfo, navigate]);
+  }, [stakerAddressInfo, navigate]);
 
   return (
     <div className="page page--review-details">
       <Alert
         className="mb-8 w-full"
         type={'success'}
-        show={
-          nodeBonALICEAddress ===
-            MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
-          !!stakerAddressInfo
-        }
+        show={!!stakerAddressInfo?.active}
       >
         Successfully added node. If you want to check details, we will redirect
         you to the dashboard in few seconds. If you don't want to wait, you can{' '}
