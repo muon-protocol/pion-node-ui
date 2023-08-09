@@ -7,13 +7,14 @@ import MuonNodeStakingABI from '../abis/MuonNodeStaking.json';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
+  MUON_NODE_MANAGER_ADDRESS,
 } from '../constants/addresses.ts';
 import toast from 'react-hot-toast';
 import { getNodeStatusAPI } from '../apis';
 import {
   useBonAliceGetApproved,
   useBonAliceOwnerOf,
-  useMuonNodeStakingStakerAddressInfo,
+  useMuonNodeManagerStakerAddressInfo,
 } from '../abis/types/generated.ts';
 import BONALICE_ABI from '../abis/BonALICE';
 import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
@@ -36,9 +37,10 @@ const useNodeBonALICE = () => {
     watch: true,
   });
 
-  const { data: stakerAddressInfo } = useMuonNodeStakingStakerAddressInfo({
-    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+  const { data: stakerAddressInfo } = useMuonNodeManagerStakerAddressInfo({
+    address: MUON_NODE_MANAGER_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
+    watch: true,
   });
 
   const addNodeArgs = useAddNodeArgs({
@@ -55,8 +57,8 @@ const useNodeBonALICE = () => {
     chainId: getCurrentChainId(),
     functionName: 'addMuonNode',
     abi: MuonNodeStakingABI,
-    args: addNodeArgs,
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    args: addNodeArgs,
     showErrorToast: true,
   });
 

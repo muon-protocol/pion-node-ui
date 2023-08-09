@@ -33,7 +33,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         >
           Upgrade
         </span>{' '}
-        your bonALICE for increased earnings from node operation.
+        your power to increase earnings from node operation.
       </p>
     </div>
   );

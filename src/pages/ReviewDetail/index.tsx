@@ -166,7 +166,7 @@ const ReviewDetail = () => {
         />
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
-        !!stakerAddressInfo ? (
+        stakerAddressInfo?.active ? (
           <button className="btn btn--secondary mt-auto mx-auto">
             Dashboard
           </button>
@@ -224,6 +224,11 @@ const ReviewDetail = () => {
   };
 
   useEffect(() => {
+    console.log('stakerAddressInfo', stakerAddressInfo);
+    console.log(
+      nodeBonALICEAddress,
+      MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    );
     if (
       nodeBonALICEAddress === MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
       !!stakerAddressInfo
@@ -317,12 +322,14 @@ const ReviewDetail = () => {
 
 const EmptyBonALICECard = () => {
   const navigate = useNavigate();
+  const { stakerAddressInfo } = useNodeBonALICE();
 
   return (
     <div className="absolute left-0 right-0 top-0 bottom-0 !z-100 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
       <p className="font-semibold text-xl text-center px-20">
-        You don’t have any bonALICE in your wallet, please create one first or
-        use another address
+        {stakerAddressInfo?.active
+          ? 'You have already added a node. Please go to your dashboard to check the details.'
+          : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
       </p>
       <button
         className="btn btn--primary mx-auto"
