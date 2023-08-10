@@ -126,7 +126,12 @@ const ReviewDetail = () => {
               10000 ? (
               <span
                 className="font-semibold underline cursor-pointer"
-                onClick={() => window.open('', '_blank')}
+                onClick={() =>
+                  window.open(
+                    'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+                    '_blank',
+                  )
+                }
               >
                 {nodeBonALICE.ALICELockAmount.dsp +
                   2 * nodeBonALICE.LPTokenLockAmount.dsp >=
@@ -226,7 +231,7 @@ const ReviewDetail = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       setTimeout(() => {
-        navigate('/dashboard');
+        window.open('/dashboard', '_self');
       }, 5000);
     }
   }, [stakerAddressInfo, navigate]);
@@ -240,9 +245,12 @@ const ReviewDetail = () => {
       >
         Successfully added node. If you want to check details, we will redirect
         you to the dashboard in few seconds. If you don't want to wait, you can{' '}
-        <Link to="/dashboard" className="underline">
+        <span
+          onClick={() => window.open('/dashboard', '_self')}
+          className="underline cursor-pointer hover:font-medium"
+        >
           click here
-        </Link>
+        </span>
         .
       </Alert>
       <FadeIn
