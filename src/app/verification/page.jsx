@@ -1,5 +1,4 @@
 "use client";
-import GitCoinModal from "@/components/verification/GitcoinPassport";
 import BrightIdModal from "@/components/verification/brightIdModal";
 import { discordVerified } from "@/components/verification/discord";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
@@ -18,7 +17,7 @@ export default function Verification() {
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
-  const { address, isConnecting, isDisconnected } = useAccount();
+  const { address, } = useAccount();
 
   useEffect(() => {
     dispatch(fetchVerification(address));

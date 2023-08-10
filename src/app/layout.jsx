@@ -1,8 +1,6 @@
 "use client";
 import "./globals.css";
-import { Inter } from "next/font/google";
 import Image from "next/image";
-import Balance from "../components/layout/balance";
 import StyledComponentsRegistry from "@/lib/registry";
 import "tw-elements/dist/css/tw-elements.min.css";
 import { Providers } from "@/redux/provider";
@@ -15,8 +13,6 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata = {
   title: "Alice Dashboard",
   description: "Alice Dashboard",
@@ -26,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/dashboard/favicon.ico" sizes="any" />
       </head>
       <body className={roboto.className}>
         <script

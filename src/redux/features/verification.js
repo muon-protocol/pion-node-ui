@@ -42,7 +42,7 @@ export const verification = createSlice({
     setMyInterval: (state, action) => {
       state.interval = action.payload;
     },
-    resetInterval: (state, action) => {
+    resetInterval: (state) => {
       state.interval = 0;
     },
     setBrightIdContexId: (state, action) => {
@@ -63,7 +63,7 @@ export const verification = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchVerification.pending, (state, action) => {
+      .addCase(fetchVerification.pending, (state) => {
         state.fetchStatus = "loading";
       })
       .addCase(fetchVerification.fulfilled, (state, action) => {

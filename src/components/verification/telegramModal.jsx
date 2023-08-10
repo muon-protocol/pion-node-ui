@@ -11,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import TelegramLoginButton from "react-telegram-login";
 import { useAccount } from "wagmi";
 import Style from "@/app/verification/presale/style.module.css";
-import { LightBtn } from "@/app/page";
 import { useRouter } from "next/navigation";
 
 function Step2() {
@@ -22,14 +21,14 @@ function Step2() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/Telegram.svg`}
+            src={`/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -41,7 +40,7 @@ function Step2() {
       </p>
       <button
         onClick={router.push("/verification")}
-        class={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -61,27 +60,26 @@ function Step3() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/Telegram.svg`}
+            src={`/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>
         </div>
       </div>
       <p className="px-10 text-center mt-10">
-        Sorry, it looks like you haven't met our activity requirement. Please
-        consider trying another verification method
-        {selector.errorMessage}
+        Sorry, it looks like you haven&apos;t met our activity requirement. Please
+        consider trying another verification method {selector.errorMessage}
       </p>
       <button
         onClick={router.push("/verification")}
-        class={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -94,7 +92,7 @@ function Step3() {
 export default function TelegramModal({ isActive }) {
   const dispatch = useDispatch();
   const [telegramStep, setTelegramStep] = useState(1);
-  const { address, isConnecting, isDisconnected } = useAccount();
+  const { address,  } = useAccount();
   const staker = address;
   const telegramCallbackFunction = (user) => {
     dispatch(resetErrorMessage());
@@ -128,7 +126,7 @@ export default function TelegramModal({ isActive }) {
   }, []);
   useEffect(() => {
     const myModalEl = document.getElementById("telegramModal");
-    myModalEl.addEventListener("hidden.te.modal", (e) => {
+    myModalEl.addEventListener("hidden.te.modal", () => {
       setTelegramStep(1);
     });
   });
@@ -138,11 +136,7 @@ export default function TelegramModal({ isActive }) {
         className={`flex ${
           isActive ? "bg-pacificBlue text-white" : "bg-primary13"
         } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
-        onClick={() => {
-          if (isSameWallet) {
-            router.push("/verification");
-          }
-        }}
+        
         data-te-toggle="modal"
         data-te-target="#telegramModal"
         data-te-ripple-init
@@ -152,28 +146,28 @@ export default function TelegramModal({ isActive }) {
       </button>
       <div
         data-te-modal-init
-        class="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+        className="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
         id="telegramModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalCenterTitle"
         aria-modal="true"
         role="dialog"
       >
         <div
           data-te-modal-dialog-ref
-          class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]"
+          className="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]"
         >
-          <div class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-            <div class="flex flex-shrink-0 items-center justify-between rounded-t-md  p-4">
+          <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+            <div className="flex flex-shrink-0 items-center justify-between rounded-t-md  p-4">
               {/* <!--Modal title--> */}
               <h5
-                class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
                 id="exampleModalScrollableLabel"
               ></h5>
               {/* <!--Close button--> */}
               <button
                 type="button"
-                class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                className="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                 data-te-modal-dismiss
                 aria-label="Close"
               >
@@ -181,13 +175,13 @@ export default function TelegramModal({ isActive }) {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
-                  class="h-6 w-6"
+                  className="h-6 w-6"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
@@ -195,12 +189,12 @@ export default function TelegramModal({ isActive }) {
             </div>
 
             {/* <!--Modal body--> */}
-            <div class="flex flex-wrap w-full justify-center py-4 px-6">
+            <div className="flex flex-wrap w-full justify-center py-4 px-6">
               {telegramStep === 1 && (
                 <>
                   <div>
                     <Image
-                      src={`/verification/Login.svg`}
+                      src={`/dashboard/verification/Login.svg`}
                       width="90"
                       height="94"
                     ></Image>

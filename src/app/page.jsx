@@ -4,22 +4,18 @@ import TopBanner from "@/components/dashboard/topBanner";
 import NodeUpTime from "@/components/dashboard/nodeUpTime";
 import StakeMore from "@/components/dashboard/stakeMore";
 import Withdraw from "@/components/dashboard/withdraw";
-import { getNodeInfoData } from "@/utils/fetchNodeInfo";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useEffect } from "react";
 import {
   fetchNodeInfo,
-  getNodeInfo,
-  setNodeActice,
-  setNodeInfo,
 } from "@/redux/features/nodeInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { addressToShort } from "@/utils/showAddress";
+import { useAccount } from "wagmi";
 export function LightBtn({ children, onClick, className, bgColor, textColor }) {
   return (
     <button
       onClick={onClick}
-      class={`inline-block rounded-[8px] ${
+      className={`inline-block rounded-[8px] ${
         bgColor ? bgColor : "bg-primary13"
       }  ${
         textColor ? textColor : "text-primary"
@@ -31,12 +27,11 @@ export function LightBtn({ children, onClick, className, bgColor, textColor }) {
 }
 
 export default function Home() {
-  // useAppDispatch(setNodeInfo(result.nodeInfo));
   const dispatch = useDispatch();
+  const { address } = useAccount();
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   useEffect(() => {
-    dispatch(fetchNodeInfo("0xF34e2737BD4A0162daA8e306A6fb379150902A74"));
-    // getNodeInfoData("0xF34e2737BD4A0162daA8e306A6fb379150902A74");
+    dispatch(fetchNodeInfo(address));
   }, []);
   return (
     <div>

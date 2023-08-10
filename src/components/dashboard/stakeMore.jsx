@@ -12,9 +12,7 @@ export default function StakeMore() {
     abi: json,
     functionName: "users",
     args: [address],
-    onSuccess(result) {
-      setUsersData(result);
-    },
+    
   });
   useContractRead({
     address: "0x34daa4F5a3d1cCB8eCE74af1c3CB209728A44a5C",

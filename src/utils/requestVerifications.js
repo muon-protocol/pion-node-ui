@@ -20,18 +20,6 @@ export const telegramVerification = async (user, staker) => {
   });
 };
 
-export const singMessage = async (msg, account) => {
-  try {
-    const sign = await ethereum.request({
-      method: "personal_sign",
-      params: [msg, account, "Example password"],
-    });
-    return sign;
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const preSaleRequest = async (staker, signer, signature) => {
   const data = JSON.stringify({
     staker: staker,

@@ -6,7 +6,6 @@ import {
   RainbowKitProvider,
   getDefaultWallets,
   connectorsForWallets,
-  Theme,
 } from "@rainbow-me/rainbowkit";
 import {
   argentWallet,
@@ -14,7 +13,7 @@ import {
   ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { bsc, bscTestnet } from "wagmi/chains";
+import { bscTestnet } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(

@@ -28,11 +28,11 @@ function PrimaryBtn({ children, onClick }) {
 }
 
 function Step1({ setStep }) {
-  const { address, isConnecting, isDisconnected } = useAccount();
+  const { address,  } = useAccount();
   const pathName = usePathname();
   const staker = pathName.split("presale/")[1];
   const dispatch = useDispatch();
-  const { data, isError, isLoading, isSuccess, signMessage } = useSignMessage({
+  const { data, isSuccess, signMessage } = useSignMessage({
     message:
       "Please sign this message to verify ownership of your Ethereum address to verify its uniqueness for Muon.",
   });
@@ -62,8 +62,8 @@ function Step1({ setStep }) {
   return (
     <div>
       <p className="mt-12">
-        select the address you used for the presale. Then use the "Verify
-        Address" button to verify the ownership of the address.
+        select the address you used for the presale. Then use the &quot;Verify
+        Address&quot; button to verify the ownership of the address.
       </p>
       <div className="w-full mt-8 flex justify-center">
         <ConnectButton></ConnectButton>
@@ -113,21 +113,20 @@ function Step3({ setStep }) {
 
 export default function Presale() {
   const [step, setStep] = useState(1);
-  const status = false;
   return (
     <div className="w-[570px] mt-2 rounded-[18px] bg-white min-h-[524px] px-8 py-4">
       <h2>Muon Presale Participation</h2>
       <div className="mx-auto mt-14 relative w-fit ">
         <Image
           className=""
-          src={`/verification/wallet.svg`}
+          src={`/dashboard/verification/wallet.svg`}
           width="90"
           height="81"
         ></Image>
         {step === 2 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="50"
           ></Image>
@@ -135,7 +134,7 @@ export default function Presale() {
         {step === 3 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="50"
           ></Image>

@@ -1,9 +1,4 @@
 "use client";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useAccount } from "wagmi";
-import { useRouter } from "next/navigation";
 import { BackToVerificationBtn } from "../../presale/[walletAddress]/page";
 import GitCoin from "@/components/verification/GitcoinPassport";
 

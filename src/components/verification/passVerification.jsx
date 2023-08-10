@@ -18,10 +18,10 @@ function Pass({ passed }) {
 
     return (
       <div className="mt-4">
-        {Object.keys(passed).map((pass) => {
+        {Object.keys(passed).map((pass,i) => {
           if (passed[pass]) {
             return (
-              <p className="text-[18px] font-medium mt-1">
+              <p key={i} className="text-[18px] font-medium mt-1">
                 {verificationTitle[pass]}
               </p>
             );

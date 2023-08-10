@@ -11,7 +11,6 @@ const initialState = {
   peerId: "",
   startTime: 0,
   endTime: 0,
-  haveNode: 0,
   nodeIP: "",
   staked: 0,
   onlinePercent: 0,
@@ -47,7 +46,7 @@ export const node = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchNodeInfo.pending, (state, action) => {
+      .addCase(fetchNodeInfo.pending, (state) => {
         state.fetchStatus = "loading";
       })
       .addCase(fetchNodeInfo.fulfilled, (state, action) => {

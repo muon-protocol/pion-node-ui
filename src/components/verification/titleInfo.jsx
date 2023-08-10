@@ -28,7 +28,7 @@ export default function TitleInfo() {
         </button>
       </div>
       <p className="text-lg mt-4">
-        Welcome to Alice's Uniqueness Verification Center! Here, you can
+        Welcome to Alice&apos;s Uniqueness Verification Center! Here, you can
         complete our verification processes to access and operate our 3-tier
         levels of nodes. Please note that each verification method corresponds
         to a specific node tier, granting you the ability to run nodes within

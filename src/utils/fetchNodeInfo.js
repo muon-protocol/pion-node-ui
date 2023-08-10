@@ -1,5 +1,3 @@
-import { setNodeInfo } from "@/redux/features/nodeInfo";
-import { useAppDispatch } from "@/redux/hooks";
 import axios from "axios";
 import moment from "moment";
 import { Web3 } from "web3";
@@ -95,7 +93,7 @@ export const getNodeInfoData = async (walletAddress) => {
           // var fromDate = new Date(from["timestamp"] * 1000);
           var fromDate = moment(from["timestamp"] * 1000);
           var fromMoment = moment(fromDate);
-          for (var [j, valueTo] of nodeInfoData.nodeInfo["history"]
+          for (var [valueTo] of nodeInfoData.nodeInfo["history"]
             .slice(i)
             .entries()) {
             if (valueTo["isOnline"]) {
@@ -121,14 +119,6 @@ export const getNodeInfoData = async (walletAddress) => {
         }
       }
       nodeInfoData.nodeInfo["downNodeTimes"] = messages;
-    }
-  } else if (res === "node not found") {
-    if (cardLoadingRefresh) {
-      nodeInfoData.haveNode = false;
-    }
-  } else {
-    if (cardLoadingRefresh) {
-      nodeInfoData.haveNode = "error";
     }
   }
   return nodeInfoData;

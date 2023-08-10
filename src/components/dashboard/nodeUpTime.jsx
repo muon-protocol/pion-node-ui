@@ -1,4 +1,3 @@
-import { LightBtn } from "@/app/page";
 import dynamic from "next/dynamic";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
