@@ -3,8 +3,18 @@ import ActionsHeader from './ActionsHeader.tsx';
 import ActionsContent from './ActionsContent.tsx';
 import { FadeIn } from '../../animations';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
+import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+import { useEffect } from 'react';
 
 const Actions = () => {
+  const { stakerAddressInfo } = useNodeBonALICE();
+
+  useEffect(() => {
+    if (stakerAddressInfo?.active) {
+      window.open('/dashboard', '_self');
+    }
+  }, [stakerAddressInfo]);
+
   return (
     <div className="page page--centered">
       <ConnectWalletModal />

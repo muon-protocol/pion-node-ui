@@ -4,16 +4,22 @@ import { FadeIn } from '../../animations';
 import { Link, useNavigate } from 'react-router-dom';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useEffect } from 'react';
+import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 
 const Home = () => {
   const { bonALICEs } = useBonALICE();
   const navigate = useNavigate();
+  const { stakerAddressInfo } = useNodeBonALICE();
 
   useEffect(() => {
-    if (bonALICEs?.length > 0) {
-      navigate('/review');
+    if (stakerAddressInfo?.active) {
+      window.open('/dashboard', '_self');
+    } else {
+      if (bonALICEs?.length > 0) {
+        navigate('/review');
+      }
     }
-  }, [bonALICEs, navigate]);
+  }, [bonALICEs, navigate, stakerAddressInfo]);
 
   return (
     <div className="page md:px-10">

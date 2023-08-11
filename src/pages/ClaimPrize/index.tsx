@@ -11,6 +11,8 @@ import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
+import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+import { useEffect } from 'react';
 
 const ClaimPrize = () => {
   const {
@@ -29,6 +31,13 @@ const ClaimPrize = () => {
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
+  const { stakerAddressInfo } = useNodeBonALICE();
+
+  useEffect(() => {
+    if (stakerAddressInfo?.active) {
+      window.open('/dashboard', '_self');
+    }
+  }, [stakerAddressInfo]);
 
   return (
     <div className="page page--claim-prize">

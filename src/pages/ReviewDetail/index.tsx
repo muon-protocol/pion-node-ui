@@ -234,7 +234,7 @@ const ReviewDetail = () => {
         window.open('/dashboard', '_self');
       }, 5000);
     }
-  }, [stakerAddressInfo, navigate]);
+  }, [stakerAddressInfo]);
 
   return (
     <div className="page page--review-details">

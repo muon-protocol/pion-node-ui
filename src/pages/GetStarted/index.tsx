@@ -1,8 +1,18 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
+import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+import { useEffect } from 'react';
 
 const GetStarted = () => {
+  const { stakerAddressInfo } = useNodeBonALICE();
+
+  useEffect(() => {
+    if (stakerAddressInfo?.active) {
+      window.open('/dashboard', '_self');
+    }
+  }, [stakerAddressInfo]);
+
   return (
     <div className="page page--get-started">
       <FadeIn duration={0.3}>
