@@ -79,7 +79,7 @@ const ClaimCard = () => {
           </p>
         </span>
         <span className="flex justify-between font-light mb-3">
-          <p className="flex gap-1">
+          <div className="flex gap-1 text-black">
             <p className="font-semibold">
               {stakingAddressFromPast
                 ? totalRewardFromPast.dsp
@@ -90,17 +90,17 @@ const ClaimCard = () => {
               src="/assets/images/claim/claim-card-right-arrow-icon.svg"
               alt=""
             />
-          </p>
-          <p className="flex">
+          </div>
+          <div className="flex text-black">
             <p className="font-semibold mr-1">
               {stakingAddressFromPast
                 ? totalRewardFromPast.dsp
                 : totalRewards.dsp}
             </p>
             Power
-          </p>
+          </div>
         </span>
-        <span className="flex justify-between font-light mb-3">
+        <span className="flex justify-between font-light">
           <p>bonALICE Tier:</p>
           <p className="font-semibold">
             {stakingAddressFromPast || eligibleAddresses.length > 0
@@ -112,14 +112,14 @@ const ClaimCard = () => {
               : 'No eligible wallet'}
           </p>
         </span>
-        <p className="flex justify-between font-light">
-          <p>Potential APR:</p>
-          <p className="font-semibold">
-            {stakingAddressFromPast || eligibleAddresses.length > 0
-              ? '10%-15%'
-              : 'No eligible wallet'}
-          </p>
-        </p>
+        {/*<div className="flex justify-between font-light text-black">*/}
+        {/*  <p>Potential APR:</p>*/}
+        {/*  <p className="font-semibold">*/}
+        {/*    {stakingAddressFromPast || eligibleAddresses.length > 0*/}
+        {/*      ? '10%-15%'*/}
+        {/*      : 'No eligible wallet'}*/}
+        {/*  </p>*/}
+        {/*</div>*/}
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-[3] gap-4">
         {eligibleAddresses.length > 0 || rewardWalletsFromPast.length > 0 ? (
