@@ -71,9 +71,7 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                balance
-                  ? onValueChanged(ethers.utils.formatEther(balance.big))
-                  : null
+                balance ? onValueChanged(ethers.formatEther(balance.big)) : null
               }
               className="btn btn--secondary-tag !font-normal"
             >

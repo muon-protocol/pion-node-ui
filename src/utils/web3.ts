@@ -2,13 +2,13 @@ import { ethers } from 'ethers';
 import { W3bNumber } from '../types/wagmi.ts';
 
 export function weiToEther(wei: string): string {
-  return ethers.utils.formatEther(wei);
+  return ethers.formatEther(wei);
 }
 
 export function w3bNumberFromBigint(bigint: bigint): W3bNumber {
   return {
-    hStr: ethers.utils.formatEther(bigint),
-    dsp: parseFloat(parseFloat(ethers.utils.formatEther(bigint)).toFixed(2)),
+    hStr: ethers.formatEther(bigint),
+    dsp: parseFloat(parseFloat(ethers.formatEther(bigint)).toFixed(2)),
     big: bigint,
     bigStr: bigint.toString(),
   };
@@ -18,7 +18,7 @@ export function w3bNumberFromString(amount: string): W3bNumber {
   if (!amount)
     return { dsp: 0, hStr: '', big: BigInt(0), bigStr: BigInt(0).toString() };
 
-  const inputAsWei = ethers.utils.parseUnits(amount, 18);
+  const inputAsWei = ethers.parseUnits(amount, 18);
   const inputAsBigInt = BigInt(inputAsWei.toString());
   const inputAsString = amount;
   const inputAsNumber = Math.floor(parseFloat(amount));
@@ -32,7 +32,7 @@ export function w3bNumberFromString(amount: string): W3bNumber {
 }
 
 export function w3bNumberFromNumber(amount: number): W3bNumber {
-  const inputAsWei = ethers.utils.parseUnits(amount.toString(), 18);
+  const inputAsWei = ethers.parseUnits(amount.toString(), 18);
   const inputAsBigInt = BigInt(inputAsWei.toString());
   const inputAsString = amount.toString();
   const inputAsNumber = parseFloat(parseFloat(amount.toString()).toFixed(2));
