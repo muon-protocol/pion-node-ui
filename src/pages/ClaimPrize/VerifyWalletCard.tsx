@@ -51,12 +51,12 @@ export const VerifyWalletCard = ({
         />
         <RewardSection
           title="Muon Presale"
-          validSection={wallet.wasInMuonPresale}
+          validSection={wallet.wasInMuonPresale || wallet.wasInDeusPresale}
         />
-        <RewardSection
-          title="Deus Presale"
-          validSection={wallet.wasInDeusPresale}
-        />
+        {/*<RewardSection*/}
+        {/*  title="Deus Presale"*/}
+        {/*  validSection={wallet.wasInDeusPresale}*/}
+        {/*/>*/}
       </span>
       {wallet.signature ? (
         <p className="mt-auto mb-3 w-full flex items-center justify-end text-sm font-medium text-green">

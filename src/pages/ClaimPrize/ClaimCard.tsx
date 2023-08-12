@@ -123,12 +123,14 @@ const ClaimCard = () => {
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-[3] gap-4">
         {eligibleAddresses.length > 0 || rewardWalletsFromPast.length > 0 ? (
-          <p
-            onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
-            className="font-medium underline text-sm cursor-pointer"
-          >
-            Prize Calculation Details
-          </p>
+          <>
+            {/*<p*/}
+            {/*  onClick={() => setIsPrizeCalculationDetailModalOpen(true)}*/}
+            {/*  className="font-medium underline text-sm cursor-pointer"*/}
+            {/*>*/}
+            {/*  Prize Calculation Details*/}
+            {/*</p>*/}
+          </>
         ) : (
           <></>
         )}

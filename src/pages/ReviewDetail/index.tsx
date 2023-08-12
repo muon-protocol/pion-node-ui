@@ -297,7 +297,7 @@ const ReviewDetail = () => {
           ) : (
             <Alert
               className="md:!w-[365px] md:!min-w-[365px]"
-              type="info"
+              type="error"
               show={true}
             >
               Your node will be activated once you've successfully completed the

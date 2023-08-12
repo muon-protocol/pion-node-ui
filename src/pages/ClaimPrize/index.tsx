@@ -83,8 +83,7 @@ const ClaimPrize = () => {
           type="error"
         >
           None of the provided operator node addresses have passed uniqueness
-          verification. Please visit your dashboard to complete a verification
-          method.
+          verification.
         </Alert>
         <Alert
           className="mb-6"
