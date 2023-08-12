@@ -123,6 +123,7 @@ const ClaimPrize = () => {
                   wallet={wallet}
                   disabled
                   className="!min-w-[304px] scroll"
+                  key={wallet.walletAddress}
                 />
               ))}
             </span>

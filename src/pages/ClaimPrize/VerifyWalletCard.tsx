@@ -63,16 +63,16 @@ export const VerifyWalletCard = ({
           VERIFIED!
         </p>
       ) : walletAddress !== wallet.walletAddress ? (
-        <button className="btn btn--small ml-auto" disabled>
+        <button className="btn btn--small ml-auto mt-auto" disabled>
           Switch Wallet
         </button>
       ) : isMetamaskLoadingVerify ? (
-        <button className="btn btn--small ml-auto" disabled>
+        <button className="btn btn--small ml-auto mt-auto" disabled>
           Metamask...
         </button>
       ) : (
         <button
-          className="btn btn--small ml-auto"
+          className="btn btn--small ml-auto mt-auto"
           onClick={() => handleVerifyWallet()}
         >
           Verify
