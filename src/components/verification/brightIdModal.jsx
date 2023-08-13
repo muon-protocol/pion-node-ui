@@ -326,7 +326,7 @@ function Step4({ setBrightIdStep }) {
           <p className="ml-2 text-lg">Open app and scan the QR Code below</p>
         </div>
         <div className="mx-auto mt-6">
-          <QRCode value={selector.brightidContexId} size={150}></QRCode>
+          <QRCode value={`brightid://link-verification/http:%2F%2Fbrightid2.idealmoney.io/Muon/${selector.brightidContexId}`} size={150}></QRCode>
         </div>
         <div className="flex mt-10">
           <span className="min-w-max text-lg font-semibold">Step 5:</span>
