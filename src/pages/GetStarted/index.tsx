@@ -18,7 +18,7 @@ const GetStarted = () => {
       <FadeIn duration={0.3}>
         <p className="text-[19px] md:text-2xl font-light mb-6">
           You can obtain bonALICE in two ways: either create a new one
-          independently or claim it as a reward if you're part of the Muon
+          independently or claim it as a reward if you're part of the MUON
           pioneers
         </p>
         <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
@@ -32,7 +32,7 @@ const GetStarted = () => {
           {/*  Joined the Deus Presale*/}
           {/*</span>*/}
           <span className="get-started__pioneer-option">
-            Operated an Alice Node
+            Operated an ALICE Node
           </span>
         </span>
         <span className="get-started__actions">

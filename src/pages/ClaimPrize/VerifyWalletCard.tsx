@@ -42,7 +42,7 @@ export const VerifyWalletCard = ({
       </span>
       <span className="reward-sources flex-col gap-2 ml-4 mb-1">
         <RewardSection
-          title="Alice Operator"
+          title="ALICE Operator"
           validSection={
             wallet.wasAliceOperatorEarly ||
             wallet.wasAliceOperator ||
@@ -50,7 +50,7 @@ export const VerifyWalletCard = ({
           }
         />
         <RewardSection
-          title="Muon Presale"
+          title="MUON Presale"
           validSection={wallet.wasInMuonPresale || wallet.wasInDeusPresale}
         />
         {/*<RewardSection*/}
