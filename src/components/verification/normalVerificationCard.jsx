@@ -27,7 +27,9 @@ function Aura() {
           width="10"
           height="10"
         ></Image>
-        Pion Pro: <span>bronze</span>
+        <span className="font-medium">
+        Pion Pro:
+        </span> <span className="text-[#6A3805]  font-semibold">bronze</span>
       </span>
       <span className="flex ml-4">
         <Image
@@ -36,7 +38,10 @@ function Aura() {
           width="10"
           height="10"
         ></Image>
-        Pion Pro: <span>Silver</span>
+        <span className="font-medium">
+        Pion Master:
+        </span>
+         <span className=" text-[#989898] font-semibold">Silver</span>
       </span>
     </div>
   );

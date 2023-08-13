@@ -13,18 +13,21 @@ export default function TitleInfo() {
             width="44"
             height="44"
           ></Image>
-          <h2 className="text-[24px]">Alice Uniqueness verification</h2>
+          <h2 className="text-[24px] ">Alice Uniqueness verification</h2>
         </div>
         <button
-          onClick={() => router.push("/")}
-          className="flex items-center transition duration-150 ease-in-out hover:bg-primary/10 rounded-[10px] px-4"
+          onClick={(e) => {e.preventDefault()
+            router.push("/")}}
+          className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] px-4"
         >
           <Image
             src="/dashboard/verification/back-icon.svg"
             width="24"
             height="24"
           ></Image>
+          <span className="text-primary underline ">
           Back to dashboard
+          </span>
         </button>
       </div>
       <p className="text-lg mt-4">

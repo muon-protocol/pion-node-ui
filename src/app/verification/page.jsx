@@ -6,10 +6,26 @@ import PassVerification from "@/components/verification/passVerification";
 import TelegramModal from "@/components/verification/telegramModal";
 import TitleInfo from "@/components/verification/titleInfo";
 import { fetchVerification } from "@/redux/features/verification";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount } from "wagmi";
+
+
+export function WarningBox({children}) {
+  return (
+    <div className="flex rounded-lg items-center bg-mysecondary/20 px-4 py-2">
+      <div>
+        <Image width="50"
+          height="20"
+          src="/dashboard/verification/warrning-icon.svg"
+          ></Image>
+      </div>
+      <p className="text-sm ml-3">{ children}</p>
+    </div>
+  )
+}
 
 export default function Verification() {
   const router = useRouter();

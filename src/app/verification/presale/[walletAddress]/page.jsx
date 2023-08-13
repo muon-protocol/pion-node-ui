@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
+import { addressToShort } from "@/utils/showAddress";
 
-export function BackToVerificationBtn({ children }) {
+export function BackToVerificationBtn({ children,className }) {
   const router = useRouter();
 
   const { address, } = useAccount();
@@ -28,9 +29,10 @@ export function BackToVerificationBtn({ children }) {
   return (
     <div className="flex">
       <button
-        className="flex content-center bg-primary13 rounded-[8px] px-2 py-1"
-        onClick={() => {
+        className={`${className} flex content-center items-center bg-primary13 rounded-[8px] px-4 py-1`}
+        onClick={(e) => {
           if (isSameWallet) {
+            e.preventDefault()
             router.push("/verification");
           }
         }}
@@ -60,13 +62,13 @@ export function BackToVerificationBtn({ children }) {
           className="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]"
         >
           <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-            <div className="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+            <div className="flex flex-shrink-0 items-center justify-between rounded-t-md   p-4 ">
               {/* <!--Modal title--> */}
               <h5
                 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
                 id="exampleModalScrollableLabel"
               >
-                Modal title
+               
               </h5>
               {/* <!--Close button--> */}
               <button
@@ -93,30 +95,13 @@ export function BackToVerificationBtn({ children }) {
             </div>
 
             {/* <!--Modal body--> */}
-            <div className="relative p-4">
-              <p>This is a vertically centered modal.</p>
+            <div className="relative px-4 pb-8 pt-4">
+              <Image className="mx-auto" src="/dashboard/verification/switchWallet.svg" width="106" height="106"></Image>
+              <p className="text-lg mx-auto text-center mt-4">To access your dashboard, please switch <br></br> back to your Staking Address ({addressToShort(staker)})</p>
             </div>
 
             {/* <!--Modal footer--> */}
-            <div className="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-              <button
-                type="button"
-                className="inline-block rounded bg-primary-100 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary-700 transition duration-150 ease-in-out hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200"
-                data-te-modal-dismiss
-                data-te-ripple-init
-                data-te-ripple-color="light"
-              >
-                Close
-              </button>
-              <button
-                type="button"
-                className="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                data-te-ripple-init
-                data-te-ripple-color="light"
-              >
-                Save changes
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>

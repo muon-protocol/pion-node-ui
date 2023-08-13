@@ -8,6 +8,7 @@ module.exports = {
     {
       env: {
         node: true,
+        process: true,
       },
       files: [".eslintrc.{js,cjs}"],
       parserOptions: {
@@ -24,11 +25,10 @@ module.exports = {
     "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "off",
     "react/prop-types": "off",
-    "no-process-env": 0,
-    "n/no-process-env": 0,
-    "no-process-env": "off",
-    "@next/next/no-process-env": 0,
-    "react/no-process-env": 0,
-    "no-undef": 0,
+    // "no-process-env": 0,
+    // "n/no-process-env": 0,
+    // "@next/next/no-process-env": 0,
+    // "react/no-process-env": 0,
+    // "no-undef": 0,
   },
 };

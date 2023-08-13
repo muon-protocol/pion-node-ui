@@ -10,6 +10,9 @@ import { RainbowProvider } from "../lib/rainbowProviders";
 
 import { Roboto } from "next/font/google";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
+import Balance from "@/components/layout/balance";
+import { CustomConnectButton } from "@/components/layout/CustomConnectButton";
+import { useSelector } from "react-redux";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -17,6 +20,16 @@ export const metadata = {
   title: "Alice Dashboard",
   description: "Alice Dashboard",
 };
+
+
+function Loading() {
+  const selector = useSelector((state) => state.rootReducer.generalReducer);
+  console.log(selector);
+  return 
+  
+}
+
+
 
 export default function RootLayout({ children }) {
   return (
@@ -37,15 +50,17 @@ export default function RootLayout({ children }) {
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
-                        src="/dashboard/muon-logo.svg"
+                        src="/dashboard/Alice_Logo.png"
                         width="121"
                         height="32"
                       ></Image>
                     </div>
                     <div className="col-span-5 justify-self-end">
                       <div className="flex">
-                        {/* <Balance></Balance> */}
-                        <ConnectButton></ConnectButton>
+                        <Balance></Balance>
+                        {/* <ConnectButton></ConnectButton> */}
+                      <Loading></Loading>
+                        <CustomConnectButton></CustomConnectButton>
                       </div>
                     </div>
                   </div>

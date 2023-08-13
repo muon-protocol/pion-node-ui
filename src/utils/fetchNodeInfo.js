@@ -2,9 +2,14 @@ import axios from "axios";
 import moment from "moment";
 import { Web3 } from "web3";
 
+const BASEURL =
+  process.env.NODE_ENV !== "production"
+    ? process.env.NEXT_PUBLIC_PROXY_URL_DEV
+    : process.env.NEXT_PUBLIC_PROXY_URL;
+
 const web3 = new Web3();
 const getNodeInfo = async (nodeId) => {
-  const listOfNodes = [`${process.env.NEXT_PUBLIC_PROXY_URL}/nodes`];
+  const listOfNodes = [`${BASEURL}/nodes`];
   let tryed = 0;
   let res;
   var flag = false;
@@ -46,8 +51,9 @@ export const getNodeInfoData = async (walletAddress) => {
   const res = response.data.result;
   console.log(res);
   let nodeInfoData = { nodeInfo: {} };
-
-  if (res && res != "node not found") {
+  if (res && res === "node not found") {
+    window.location.replace("https://alice-v2.muon.net/");
+  } else if (res && res != "node not found") {
     nodeInfoData.nodeInfo.haveNode = true;
     nodeInfoData.nodeIsActive = "Loading...";
     nodeInfoData.nodeInfo["isNew"] = res.node["isNew"];

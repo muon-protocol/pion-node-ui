@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASEURL = process.env.NEXT_PUBLIC_PROXY_URL;
+const BASEURL = "https://alice-v2.muon.net";
 const verificationEndPoint = BASEURL + "/uniqueness";
 
 export const verification = async (staker) => {

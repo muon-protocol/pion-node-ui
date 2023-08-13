@@ -20,6 +20,7 @@ import { useAccount, useSignMessage } from "wagmi";
 import Style from "@/app/verification/presale/style.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import QRCode from "react-qr-code";
+import { WarningBox } from "@/app/verification/page";
 
 function Step1({ setBrightIdStep }) {
   return (
@@ -33,7 +34,7 @@ function Step1({ setBrightIdStep }) {
         ></Image>
 
         <div className="flex mt-10">
-          <span>Step 1:</span>{" "}
+          <span className="text-lg font-semibold">Step 1:</span>
           <p className="ml-2">Download BrightID app and create an account</p>
         </div>
         <div className="flex justify-center mx-auto mt-10">
@@ -64,10 +65,10 @@ function Step1({ setBrightIdStep }) {
 
       <div className="px-[60px] mt-20">
         <p>
-          Need help? check our <a> step-by-step guide</a>
+          Need help? check our <a className="underline text-myPrimary hover:cursor-pointer"> step-by-step guide</a>
         </p>
-        <button onClick={() => setBrightIdStep(2)} className="w-full">
-          I have brightID account
+        <button onClick={() => setBrightIdStep(2)} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-1">
+        I Have BrightID Account
         </button>
       </div>
     </div>
@@ -86,15 +87,15 @@ function Step2({ setBrightIdStep }) {
         ></Image>
 
         <div className="flex mt-10">
-          <div className="w-[70px]">
-            <span className="w-[70px]">Step 2:</span>
-          </div>
           <div className="w-fit">
-            <p className="ml-2">
-              Join a verification party at
-              <a target="_blank" href="https://meet.brightid.org" rel="noreferrer">
-                meet.brightid.org/
-              </a>
+            <span className="text-lg font-semibold">Step&nbsp;2:</span>
+          </div>
+          <div className="">
+            <p className="ml-2 text-lg">
+              Join a verification party at &nbsp;
+              <a className="underline" target="_blank" href="https://meet.brightid.org" rel="noreferrer">
+                 meet.brightid.org/ 
+              </a> &nbsp;
               and choose from one of the scheduled meetings that fit your
               schedule. Once you&apos;ve successfully participated in a meeting,
               you&apos;ll be granted the Meet Verification badge in your BrightID
@@ -106,12 +107,13 @@ function Step2({ setBrightIdStep }) {
 
       <div className="px-[60px] mt-20 flex flex-wrap justify-center">
         <div className="flex">
-          <p>
+          <WarningBox>
+
             Please note, it typically takes about 1 hour to receive you badge
             after the meeting.
-          </p>
+          </WarningBox>
         </div>
-        <button onClick={() => setBrightIdStep(3)} className="w-full">
+        <button onClick={() => setBrightIdStep(3)} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
           I have Meet verification Badge
         </button>
       </div>
@@ -161,7 +163,6 @@ function Step3({ setBrightIdStep }) {
         .catch((err) => {
           console.log(err);
           dispatch(setErrorMessage(ERRORCODE["connection"]()));
-          this.errorMessage = ERRORCODE["connection"]();
           setBrightIdStep(6);
         });
     }
@@ -170,24 +171,37 @@ function Step3({ setBrightIdStep }) {
   return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
+        
+
         <Image
           width="100"
           height="100"
           src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
-        ></Image>
-
-        <div className="flex mt-10">
+          ></Image>
+          
+          <div className="flex mt-10">
+          <div className="w-fit">
+            <span className="text-lg font-semibold">Step 3:</span>
+          </div>
+          <div className="w-fit">
+            <p className="ml-2 text-lg">
+            Please verify your staking address
+              app.
+            </p>
+          </div>
+        </div>
+        {/* <div className="flex mt-10">
           <span>Step 3:</span>
           <p className="ml-2">Please verify your staking address</p>
-        </div>
-        <div className="w-full flex justify-center">
+        </div> */}
+        <div className="w-full flex justify-center mt-8">
           <ConnectButton></ConnectButton>
         </div>
       </div>
 
       <div className="px-[60px] mt-20 flex justify-center">
-        <button onClick={() => signMessage()} className="w-full">
+        <button onClick={() => signMessage()} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
           Verify Address
         </button>
       </div>
@@ -396,8 +410,8 @@ export default function BrightIdModal({ isActive }) {
           data-te-modal-dialog-ref
           className="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px] transform-none opacity-100"
         >
-          <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
-            <div className="flex flex-shrink-0 items-center justify-between rounded-t-md  p-4">
+          <div className="pointer-events-auto relative flex w-full flex-col rounded-[18px] border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+            <div className="flex flex-shrink-0 items-center justify-between rounded-t-[18px]  p-4">
               {/* <!--Modal title--> */}
               <h5
                 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"

@@ -19,7 +19,7 @@ export function LightBtn({ children, onClick, className, bgColor, textColor }) {
         bgColor ? bgColor : "bg-primary13"
       }  ${
         textColor ? textColor : "text-primary"
-      } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30 ${className}`}
+      } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out hover:bg-primary-20  active:bg-primary-50 ${className}`}
     >
       {children}
     </button>
@@ -32,7 +32,7 @@ export default function Home() {
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   useEffect(() => {
     dispatch(fetchNodeInfo(address));
-  }, []);
+  }, [address]);
   return (
     <div>
       <TopBanner></TopBanner>

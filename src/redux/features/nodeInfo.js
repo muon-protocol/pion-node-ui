@@ -52,6 +52,7 @@ export const node = createSlice({
       .addCase(fetchNodeInfo.fulfilled, (state, action) => {
         state.fetchStatus = "succeeded";
         const nodeData = action.payload.nodeInfo;
+        state.haveNode = nodeData.haveNode;
 
         // state.nodeIsActive = nodeData.nodeIsActive;
         state.active = nodeData.active;
@@ -60,7 +61,6 @@ export const node = createSlice({
         state.peerId = nodeData.peerId;
         state.startTime = nodeData.startTime;
         state.endTime = nodeData.endTime;
-        state.haveNode = nodeData.haveNode;
         state.nodeIP = nodeData.nodeIP;
         state.staked = nodeData.staked;
         state.onlinePercent = Number(nodeData.onlinePercent.split("%")[0]);

@@ -14,7 +14,7 @@ export default function UpTimesModal() {
   return (
     <>
       <button
-        className="inline-block rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30"
+        className="inline-block rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary-20  active:bg-primary/30"
         data-te-toggle="modal"
         data-te-target="#exampleModalCenter"
         data-te-ripple-init

@@ -61,7 +61,7 @@ function Step1({ setStep }) {
   }, [isSuccess]);
   return (
     <div>
-      <p className="mt-12">
+      <p className="mt-12 text-center text-lg">
         select the address you used for the presale. Then use the &quot;Verify
         Address&quot; button to verify the ownership of the address.
       </p>
@@ -99,10 +99,10 @@ function Step3({ setStep }) {
   );
   return (
     <div>
-      <p className="mt-10 text-center">{selector.errorMessage}</p>
+      <p className="mt-10 text-center text-lg">{selector.errorMessage}</p>
 
       <div className="flex justify-around mt-28">
-        <BackToVerificationBtn>
+        <BackToVerificationBtn className="text-primary font-medium">
           Back to verification center
         </BackToVerificationBtn>
         <LightBtn onClick={() => setStep(1)}>Try another address</LightBtn>
@@ -115,7 +115,7 @@ export default function Presale() {
   const [step, setStep] = useState(1);
   return (
     <div className="w-[570px] mt-2 rounded-[18px] bg-white min-h-[524px] px-8 py-4">
-      <h2>Muon Presale Participation</h2>
+      <h2 className="text-lg font-medium">Muon Presale Participation</h2>
       <div className="mx-auto mt-14 relative w-fit ">
         <Image
           className=""

@@ -16,9 +16,13 @@ module.exports = {
       primary: {
         DEFAULT: "rgb(var(--color-primary))",
         50: "rgba(var(--color-primary), 0.5)",
+        20: "rgba(var(--color-primary), 0.2)",
         80: "rgba(var(--color-primary), 0.8)",
       },
-      mysecondary: "rgb(var(--color-secondary))",
+      mysecondary: {
+        DEFAULT: "rgb(var(--color-secondary))",
+        20: "rgba(245, 149, 105, 0.2)",
+      },
       primary13: "rgba(81, 88, 246, 0.13)",
       black: "#323245",
       white: "#FFFFFF",
@@ -31,7 +35,11 @@ module.exports = {
           50: "rgba(var(--color-primary), 0.5)",
           80: "rgba(var(--color-primary), 0.8)",
         },
-        mysecondary: "rgb(var(--color-secondary))",
+        mysecondary: {
+          DEFAULT: "rgb245, 149, 105)",
+          20: "rgba(245, 149, 105), 0.2)",
+        },
+        mysecondary: "rgb(245, 149, 105)",
         primary13: "rgba(81, 88, 246, 0.13)",
         black: "#323245",
         white: "#FFFFFF",
