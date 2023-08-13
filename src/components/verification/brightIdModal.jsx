@@ -1,5 +1,7 @@
 "use client";
 import {
+  incBrightIdTryed,
+  resetBrightIdTryed,
   resetErrorMessage,
   setBrightIdContexId,
   setBrightidAuraVerified,
@@ -23,6 +25,8 @@ import QRCode from "react-qr-code";
 import { WarningBox } from "@/app/verification/page";
 
 function Step1({ setBrightIdStep }) {
+  const dispatch = useDispatch();
+  dispatch(resetBrightIdTryed())
   return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
@@ -210,84 +214,133 @@ function Step3({ setBrightIdStep }) {
 }
 
 function Step4({ setBrightIdStep }) {
+  
   const dispatch = useDispatch();
-
   dispatch(resetErrorMessage());
   const { address,  } = useAccount();
   const staker = address;
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
+    );
+  const brightidTryed = useSelector(
+    (state) => state.rootReducer.verificationReducer.brightIdTryed
   );
-  const [brightidTryed, setBrightidTryed] = useState(0);
-  const brigthReq = () => {
-    dispatch(resetErrorMessage());
+  console.log(brightidTryed);
 
+  const brigthReq = () => {
+    
     checkBrightIdConnection(staker)
-      .then((res) => {
-        const response = res.data;
-        console.log(res);
-        if (
-          response.success &&
-          (response.result.brightidAuraVerified ||
-            response.result.brightidMeetsVerified)
+    .then((res) => {
+      const response = res.data;
+      console.log(res);
+      if (
+        response.success &&
+        (response.result.brightidAuraVerified ||
+          response.result.brightidMeetsVerified)
         ) {
           dispatch(
             setBrightidAuraVerified(response.result.brightidMeetsVerified)
-          );
-          dispatch(
-            setBrightidMeetsVerified(response.result.brightidAuraVerified)
-          );
-          window.clearInterval(selector.interval);
-          setBrightIdStep(5);
-        } else if (!response.success && response.errorCode) {
-          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
-          setBrightIdStep(6);
-          window.clearInterval(selector.interval);
-        } else {
-          setBrightidTryed(brightidTryed + 1);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        this.errorMessage = ERRORCODE["connection"]();
-      })
-      .finally(() => {
-        if (this.brightidTryed > 12 * 3) {
+            );
+            dispatch(
+              setBrightidMeetsVerified(response.result.brightidAuraVerified)
+              );
+              window.clearInterval(selector.interval);
+              setBrightIdStep(5);
+            } else if (!response.success && response.errorCode) {
+              dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
+              setBrightIdStep(6);
+              window.clearInterval(selector.interval);
+            } else {
+              dispatch(incBrightIdTryed(brightidTryed+1))
+              console.log('plus');
+              console.log(brightidTryed);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setErrorMessage(ERRORCODE["connection"]()))
+          })
+          .finally(() => {
+            console.log(brightidTryed);
+        if (brightidTryed >  3) {
           setBrightIdStep(6);
           window.clearInterval(selector.interval);
         }
       });
   };
-
-  const verifyLink = () => {
-    setBrightidTryed(0);
-    const brighitIdIntervalRequest = window.setInterval(brigthReq, 5000);
-    dispatch(setMyInterval(brighitIdIntervalRequest));
-  };
-
-  return (
+  
+  useEffect(() => {
+    checkBrightIdConnection(staker)
+    .then((res) => {
+      const response = res.data;
+      console.log(res);
+      if (
+        response.success &&
+        (response.result.brightidAuraVerified ||
+          response.result.brightidMeetsVerified)
+        ) {
+          dispatch(
+            setBrightidAuraVerified(response.result.brightidMeetsVerified)
+            );
+            dispatch(
+              setBrightidMeetsVerified(response.result.brightidAuraVerified)
+              );
+              window.clearInterval(selector.interval);
+              setBrightIdStep(5);
+            } else if (!response.success && response.errorCode) {
+              dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
+              setBrightIdStep(6);
+              window.clearInterval(selector.interval);
+      } else {
+        setTimeout(() => {
+          dispatch(incBrightIdTryed(brightidTryed+1))
+        }, 5000);
+              console.log('plus');
+              console.log(brightidTryed);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            dispatch(setErrorMessage(ERRORCODE["connection"]()))
+          })
+          .finally(() => {
+            console.log(brightidTryed);
+        if (brightidTryed > 12 * 3) {
+          setBrightIdStep(6);
+          window.clearInterval(selector.interval);
+        }
+      });
+  }, [brightidTryed]);
+    
+    const verifyLink = () => {
+      dispatch(resetBrightIdTryed())
+      dispatch(resetErrorMessage());
+      dispatch(incBrightIdTryed(brightidTryed+1))
+    };
+    
+    return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
         <div className="flex mt-10">
-          <span className="w-[60px]">Step 4:</span>
-          <p className="ml-2 w-fit">Open app and scan the QR Code below</p>
+          <span className="min-w-max text-lg font-semibold">Step 4:</span>
+          <p className="ml-2 text-lg">Open app and scan the QR Code below</p>
         </div>
         <div className="mx-auto mt-6">
           <QRCode value={selector.brightidContexId} size={150}></QRCode>
         </div>
         <div className="flex mt-10">
-          <span className="w-[60px]">Step 5:</span>
-          <p className="ml-2 w-fit">
+          <span className="min-w-max text-lg font-semibold">Step 5:</span>
+          <p className="ml-2 text-lg">
             After scanning the QR code, wait until you the &quot;Successfully linked&quot;
             message in the app. next, click on the &apos;Verify Link&apos; button. This
             confirms the connection between your BrightID and Alice, completing
-            the linking process.
+            the linking process. {brightidTryed}
           </p>
         </div>
       </div>
 
-      <div className="px-[60px] mt-20 flex justify-center">
-        <button onClick={() => verifyLink()} className="w-full">
+      <div className="px-[60px] mt-8 flex justify-center">
+        <button onClick={() => verifyLink()} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
           Verify Link
         </button>
       </div>
@@ -369,6 +422,8 @@ function Step6() {
 }
 
 export default function BrightIdModal({ isActive }) {
+  
+
   const [brightIdStep, setBrightIdStep] = useState(1);
   useEffect(() => {
     const myModalEl = document.getElementById("brightidModal");

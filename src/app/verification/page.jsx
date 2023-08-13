@@ -27,6 +27,21 @@ export function WarningBox({children}) {
   )
 }
 
+
+export function ErrorBox({ children }) {
+  return (
+    <div className="flex rounded-lg items-center bg-[#FF3A5D]/20 px-4 py-2">
+      <div>
+        <Image width="20"
+          height="20"
+          src="/dashboard/verification/error.svg"
+          ></Image>
+      </div>
+      <p className="text-sm ml-3">{ children}</p>
+    </div>
+  )
+}
+
 export default function Verification() {
   const router = useRouter();
   const dispatch = useDispatch();

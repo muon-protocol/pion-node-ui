@@ -1,19 +1,16 @@
 "use client";
 import Presale from "@/components/verification/presale";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { addressToShort } from "@/utils/showAddress";
 
-export function BackToVerificationBtn({ children,className }) {
+export function BackToVerificationBtn({ params ,children,className }) {
   const router = useRouter();
-
-  const { address, } = useAccount();
-  const pathName = usePathname();
-  const staker = pathName.split("presale/")[1];
-
+  const { address } = useAccount();
+  const staker = useParams().walletAddress;
   const [isSameWallet, setIsSameWallet] = useState(staker === address);
 
   useEffect(() => {

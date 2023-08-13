@@ -15,7 +15,7 @@ export default function TopBanner() {
         ></Image>
         <span className="text-xl font-normal">Uniqueness Verification:</span>
       </div>
-      <h4 className="text-xl font-semibold">Muon presale Participation</h4>
+      <h4 className="text-xl font-semibold">Not Verified</h4>
       <LightBtn onClick={() => router.push("/verification")}>
         Go to verification center
       </LightBtn>

@@ -208,11 +208,7 @@ export default function TelegramModal({ isActive }) {
                   <div>
                     <TelegramLoginButton
                       dataOnauth={telegramCallbackFunction}
-                      botName={
-                        process.env.NODE_ENV === "production"
-                          ? "MuonProjectBot"
-                          : "rastegariTester_bot"
-                      }
+                      botName="MuonV2Bot"
                     ></TelegramLoginButton>
                   </div>
                 </>

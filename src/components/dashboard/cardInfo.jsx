@@ -9,7 +9,7 @@ export default function CardInfo(props) {
       <h5 className="text-[#6F7787]">{Title}</h5>
       <div className="w-full flex justify-end">
         <span className="mr-2 font-Montserrat">
-          {Data.length > 18 ? addressToShort(Data) : Data}
+          {Data&& Data.length > 18 ? addressToShort(Data) : Data}
         </span>
         <button
           onClick={() => {

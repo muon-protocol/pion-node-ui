@@ -10,6 +10,7 @@ const initialState = {
   presaleVerified: false,
   telegramVerified: false,
   brightidContexId: "",
+  brightIdTryed: 0,
   errorMessage: "",
   interval: 0,
 };
@@ -33,6 +34,15 @@ export const verification = createSlice({
   name: "verification",
   initialState,
   reducers: {
+    resetBrightIdTryed: (state) => {
+      state.brightIdTryed = 0;
+    },
+    incBrightIdTryed: (state, action) => {
+      state.brightIdTryed = action.payload;
+    },
+    setGitcoinPassportVerified: (state, action) => {
+      state.gitcoinPassportVerified = action.payload;
+    },
     setBrightidAuraVerified: (state, action) => {
       state.brightidAuraVerified = action.payload;
     },
@@ -100,5 +110,8 @@ export const {
   setMyInterval,
   setBrightidAuraVerified,
   setBrightidMeetsVerified,
+  setGitcoinPassportVerified,
+  resetBrightIdTryed,
+  incBrightIdTryed,
 } = verification.actions;
 export default verification.reducer;

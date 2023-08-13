@@ -84,7 +84,7 @@ export default function UpTimesModal() {
                   >
                     Down times
                     <div className="flex rounded-[18px] ">
-                      <span>{selector.downNodeTimes.length} time(s)</span>
+                      <span>{selector.downNodeTimes.length && selector.downNodeTimes.length} time(s)</span>
                       <span className="mr-1 ml-auto h-5  shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
