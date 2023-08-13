@@ -1,7 +1,8 @@
 export const discordVerified = (signer) => {
   console.log("click");
 
-  const URL = `https://discord.com/api/oauth2/authorize?client_id=1086713207541989428&redirect_uri=https%3A%2F%2Falice.muon.net%2Ftest%2FdiscordVerification%2Fdata&response_type=code&scope=identify&state=${signer}`;
+  const URL =`https://discord.com/api/oauth2/authorize?client_id=1140034021099831326&redirect_uri=https%3A%2F%2Falice-v2.muon.net%2Ftest%2FdiscordVerification%2Fdata&response_type=code&scope=identify&state=${signer}`
+    // `https://discord.com/api/oauth2/authorize?client_id=1086713207541989428&redirect_uri=https%3A%2F%2Falice.muon.net%2Ftest%2FdiscordVerification%2Fdata&response_type=code&scope=identify&state=${signer}`;
   try {
     window.open(
       URL,
