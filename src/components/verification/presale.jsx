@@ -119,14 +119,14 @@ export default function Presale() {
       <div className="mx-auto mt-14 relative w-fit ">
         <Image
           className=""
-          src={`/dashboard/verification/wallet.svg`}
+          src={`/verification/wallet.svg`}
           width="90"
           height="81"
         ></Image>
         {step === 2 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/dashboard/verification/Success.svg`}
+            src={`/verification/Success.svg`}
             width="20"
             height="50"
           ></Image>
@@ -134,7 +134,7 @@ export default function Presale() {
         {step === 3 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/dashboard/verification/Rejected.svg`}
+            src={`/verification/Rejected.svg`}
             width="20"
             height="50"
           ></Image>

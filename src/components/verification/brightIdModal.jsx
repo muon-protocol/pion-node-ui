@@ -33,7 +33,7 @@ function Step1({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/dashboard/verification/BrightId.svg"
+          src="/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -50,7 +50,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/dashboard/verification/googlePlay.svg"
+              src="/verification/googlePlay.svg"
             />
           </a>
           <a
@@ -61,7 +61,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/dashboard/verification/appStore.svg"
+              src="/verification/appStore.svg"
             />
           </a>
         </div>
@@ -86,7 +86,7 @@ function Step2({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/dashboard/verification/BrightId.svg"
+          src="/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -180,7 +180,7 @@ function Step3({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/dashboard/verification/BrightId.svg"
+          src="/verification/BrightId.svg"
           className="mx-auto"
           ></Image>
           
@@ -353,14 +353,14 @@ function Step5() {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/BrightId.svg`}
+            src={`/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Success.svg`}
+            src={`/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -391,14 +391,14 @@ function Step6() {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/BrightId.svg`}
+            src={`/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Rejected.svg`}
+            src={`/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>

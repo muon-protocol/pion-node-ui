@@ -1,4 +1,5 @@
 "use client";
+import { Loading } from "@/components/layout/Loading";
 import BrightIdModal from "@/components/verification/brightIdModal";
 import { discordVerified } from "@/components/verification/discord";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
@@ -19,7 +20,7 @@ export function WarningBox({children}) {
       <div>
         <Image width="50"
           height="20"
-          src="/dashboard/verification/warrning-icon.svg"
+          src="/verification/warrning-icon.svg"
           ></Image>
       </div>
       <p className="text-sm ml-3">{ children}</p>
@@ -34,7 +35,7 @@ export function ErrorBox({ children }) {
       <div>
         <Image width="20"
           height="20"
-          src="/dashboard/verification/error.svg"
+          src="/verification/error.svg"
           ></Image>
       </div>
       <p className="text-sm ml-3">{ children}</p>
@@ -44,15 +45,21 @@ export function ErrorBox({ children }) {
 
 export default function Verification() {
   const router = useRouter();
-  const dispatch = useDispatch();
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
-  );
+    );
+  const dispatch = useDispatch();
   const { address, } = useAccount();
 
   useEffect(() => {
     dispatch(fetchVerification(address));
   }, []);
+
+
+  if (selector.fetchStatus === "loading") {
+    return (<Loading></Loading>)
+  }
+
   return (
     <div>
       <div className="flex flex-row">

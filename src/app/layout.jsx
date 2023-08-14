@@ -35,12 +35,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/dashboard/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={roboto.className}>
         <script
           type="text/javascript"
-          src="/dashboard../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
+          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
         ></script>
         <Providers>
           <RainbowProvider>
@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
-                        src="/dashboard/Alice_Logo.png"
+                        src="/Alice_Logo.png"
                         width="121"
                         height="32"
                       ></Image>
@@ -72,7 +72,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="w-full absolute bottom-0 h-14 flex justify-center py-3">
                   <Image
-                    src="/dashboard/Footer.svg"
+                    src="/Footer.svg"
                     width="172"
                     height="22"
                     className=""

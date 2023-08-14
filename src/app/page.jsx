@@ -11,6 +11,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { addressToShort } from "@/utils/showAddress";
 import { useAccount } from "wagmi";
+import { fetchVerification } from "@/redux/features/verification";
+import { Loading } from "@/components/layout/Loading";
 export function LightBtn({ children, onClick, className, bgColor, textColor }) {
   return (
     <button
@@ -30,12 +32,20 @@ export default function Home() {
   const dispatch = useDispatch();
   const { address } = useAccount();
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
+  const verificationData = useSelector((state) => state.rootReducer.verificationReducer)
+  const isVerify = verificationData.brightidAuraVerified || verificationData.brightidMeetsVerified || verificationData.discordVerified || verificationData.gitcoinPassportVerified || verificationData.presaleVerified || verificationData.telegramVerified
   useEffect(() => {
     dispatch(fetchNodeInfo(address));
+    dispatch(fetchVerification(address));
   }, [address]);
+
+    if (selector.fetchStatus === "loading") {
+    return (<Loading></Loading>)
+  }
+
   return (
     <div>
-      <TopBanner></TopBanner>
+      <TopBanner isVerify={isVerify} ></TopBanner>
       <div className="grid grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>
         <CardInfo title="Node ID" data={selector.id}></CardInfo>

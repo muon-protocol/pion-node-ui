@@ -8,14 +8,14 @@ export default function StakeMore() {
   const [balance, setBalance] = useState(0);
   const { address, isDisconnected, status } = useAccount();
   const { data } = useContractRead({
-    address: "0x34daa4F5a3d1cCB8eCE74af1c3CB209728A44a5C",
+    address: "0xF7688b8104Dfe59B381963582620Cd2d316bA7a5",
     abi: json,
     functionName: "users",
     args: [address],
     
   });
   useContractRead({
-    address: "0x34daa4F5a3d1cCB8eCE74af1c3CB209728A44a5C",
+    address: "0xF7688b8104Dfe59B381963582620Cd2d316bA7a5",
     abi: json,
     functionName: "valueOfBondedToken",
     args: [data && data[4]],

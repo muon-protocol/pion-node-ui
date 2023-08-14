@@ -9,7 +9,7 @@ export default function TitleInfo() {
       <div className="flex justify-between">
         <div className="flex items-center">
           <Image
-            src="/dashboard/dashboard/wallet-check.svg"
+            src="/dashboard/wallet-check.svg"
             width="44"
             height="44"
           ></Image>
@@ -21,7 +21,7 @@ export default function TitleInfo() {
           className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] px-4"
         >
           <Image
-            src="/dashboard/verification/back-icon.svg"
+            src="/verification/back-icon.svg"
             width="24"
             height="24"
           ></Image>

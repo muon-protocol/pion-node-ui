@@ -7,7 +7,7 @@ function Normal() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/dashboard/verification/Ellipse.svg"
+          src="/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>
@@ -23,7 +23,7 @@ function Aura() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/dashboard/verification/Ellipse.svg"
+          src="/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>
@@ -34,7 +34,7 @@ function Aura() {
       <span className="flex ml-4">
         <Image
           className="mr-2"
-          src="/dashboard/verification/Ellipse.svg"
+          src="/verification/Ellipse.svg"
           width="10"
           height="10"
         ></Image>

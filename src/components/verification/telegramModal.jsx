@@ -21,14 +21,14 @@ function Step2() {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/Telegram.svg`}
+            src={`/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Success.svg`}
+            src={`/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -60,14 +60,14 @@ function Step3() {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/Telegram.svg`}
+            src={`/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Rejected.svg`}
+            src={`/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>
@@ -194,7 +194,7 @@ export default function TelegramModal({ isActive }) {
                 <>
                   <div>
                     <Image
-                      src={`/dashboard/verification/Login.svg`}
+                      src={`/verification/Login.svg`}
                       width="90"
                       height="94"
                     ></Image>
