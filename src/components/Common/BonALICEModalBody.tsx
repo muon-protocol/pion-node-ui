@@ -16,17 +16,19 @@ const BonALICEModalBody = ({
       {bonALICEs.length > 0 ? (
         bonALICEs.map((item: BonALICE) => {
           return (
-            <BonALICECard
-              className="cursor-pointer"
-              title={'BonALICE #' + item.tokenId}
-              subTitle1="Node Power"
-              subValue1={item.nodePower}
-              subTitle2="Tier"
-              subValue2={getTier(item.nodePower)}
-              onClick={() => handleUpgradeModalItemClicked(item)}
-              compact
-              selected={isSelectedUpgradeBonALICE(item)}
-            />
+            item.nodePower > 0 && (
+              <BonALICECard
+                className="cursor-pointer"
+                title={'BonALICE #' + item.tokenId}
+                subTitle1="Node Power"
+                subValue1={item.nodePower}
+                subTitle2="Tier"
+                subValue2={getTier(item.nodePower)}
+                onClick={() => handleUpgradeModalItemClicked(item)}
+                compact
+                selected={isSelectedUpgradeBonALICE(item)}
+              />
+            )
           );
         })
       ) : (
