@@ -219,16 +219,16 @@ export default [
   },
   {
     inputs: [
-      { internalType: 'address', name: '_nodeAddress', type: 'address' },
+      { internalType: 'address', name: 'nodeAddress', type: 'address' },
       {
         internalType: 'address',
-        name: '_stakerAddress',
+        name: 'stakerAddress',
         type: 'address',
       },
-      { internalType: 'string', name: '_peerId', type: 'string' },
+      { internalType: 'string', name: 'peerId', type: 'string' },
       {
         internalType: 'bool',
-        name: '_active',
+        name: 'active',
         type: 'bool',
       },
     ],
@@ -274,13 +274,13 @@ export default [
   },
   {
     inputs: [
-      { internalType: 'uint256', name: '_lastEditTime', type: 'uint256' },
+      { internalType: 'uint256', name: 'lastEditTime', type: 'uint256' },
       {
         internalType: 'uint64',
-        name: '_from',
+        name: 'startId',
         type: 'uint64',
       },
-      { internalType: 'uint64', name: '_to', type: 'uint64' },
+      { internalType: 'uint64', name: 'endId', type: 'uint64' },
     ],
     name: 'getAllNodes',
     outputs: [
@@ -327,13 +327,13 @@ export default [
   },
   {
     inputs: [
-      { internalType: 'uint256', name: '_lastEditTime', type: 'uint256' },
+      { internalType: 'uint256', name: 'lastEditTime', type: 'uint256' },
       {
         internalType: 'uint256',
         name: 'index',
         type: 'uint256',
       },
-      { internalType: 'uint16', name: '_max', type: 'uint16' },
+      { internalType: 'uint16', name: 'maxNodesToRetrieve', type: 'uint16' },
     ],
     name: 'getEditedNodes',
     outputs: [
@@ -524,7 +524,7 @@ export default [
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'address', name: '_addr', type: 'address' }],
+    inputs: [{ internalType: 'address', name: 'nodeAddress', type: 'address' }],
     name: 'nodeAddressInfo',
     outputs: [
       {
@@ -714,7 +714,9 @@ export default [
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'address', name: '_addr', type: 'address' }],
+    inputs: [
+      { internalType: 'address', name: 'stakerAddress', type: 'address' },
+    ],
     name: 'stakerAddressInfo',
     outputs: [
       {

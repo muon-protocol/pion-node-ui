@@ -28,6 +28,20 @@ export default [
   {
     anonymous: false,
     inputs: [
+      {
+        indexed: false,
+        internalType: 'string',
+        name: 'functionName',
+        type: 'string',
+      },
+      { indexed: false, internalType: 'bool', name: 'isPaused', type: 'bool' },
+    ],
+    name: 'FunctionPauseStatusChanged',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
       { indexed: false, internalType: 'uint8', name: 'version', type: 'uint8' },
     ],
     name: 'Initialized',
@@ -246,21 +260,9 @@ export default [
         name: 'stakerAddress',
         type: 'address',
       },
+      { indexed: false, internalType: 'bool', name: 'locked', type: 'bool' },
     ],
-    name: 'StakeLocked',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'stakerAddress',
-        type: 'address',
-      },
-    ],
-    name: 'StakeUnlocked',
+    name: 'StakeLockStatusChanged',
     type: 'event',
   },
   {
@@ -424,7 +426,9 @@ export default [
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'address', name: 'account', type: 'address' }],
+    inputs: [
+      { internalType: 'address', name: 'stakerAddress', type: 'address' },
+    ],
     name: 'earned',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
@@ -434,6 +438,13 @@ export default [
     inputs: [],
     name: 'exitPendingPeriod',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'string', name: '', type: 'string' }],
+    name: 'functionPauseStatus',
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
@@ -561,15 +572,6 @@ export default [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'stakerAddress', type: 'address' },
-    ],
-    name: 'lockStake',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
       { internalType: 'address[]', name: 'tokens', type: 'address[]' },
       {
         internalType: 'uint256[]',
@@ -627,7 +629,9 @@ export default [
   {
     inputs: [],
     name: 'muonToken',
-    outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
+    outputs: [
+      { internalType: 'contract IERC20Upgradeable', name: '', type: 'address' },
+    ],
     stateMutability: 'view',
     type: 'function',
   },
@@ -690,6 +694,26 @@ export default [
     name: 'notPaidRewards',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: '', type: 'address' },
+      {
+        internalType: 'address',
+        name: '',
+        type: 'address',
+      },
+      { internalType: 'uint256', name: '', type: 'uint256' },
+      {
+        internalType: 'bytes',
+        name: '',
+        type: 'bytes',
+      },
+    ],
+    name: 'onERC721Received',
+    outputs: [{ internalType: 'bytes4', name: '', type: 'bytes4' }],
+    stateMutability: 'pure',
     type: 'function',
   },
   {
@@ -756,14 +780,32 @@ export default [
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'uint256', name: 'val', type: 'uint256' }],
+    inputs: [
+      { internalType: 'uint256', name: '_exitPendingPeriod', type: 'uint256' },
+    ],
     name: 'setExitPendingPeriod',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [{ internalType: 'uint256', name: 'val', type: 'uint256' }],
+    inputs: [
+      { internalType: 'string', name: 'functionName', type: 'string' },
+      {
+        internalType: 'bool',
+        name: 'pauseStatus',
+        type: 'bool',
+      },
+    ],
+    name: 'setFunctionPauseStatus',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'uint256', name: '_minStakeAmount', type: 'uint256' },
+    ],
     name: 'setMinStakeAmount',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -785,7 +827,7 @@ export default [
         type: 'uint8',
       },
     ],
-    name: 'setMuonNodeTire',
+    name: 'setMuonNodeTier',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -807,6 +849,20 @@ export default [
       },
     ],
     name: 'setMuonPublicKey',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: 'stakerAddress', type: 'address' },
+      {
+        internalType: 'bool',
+        name: 'lockStatus',
+        type: 'bool',
+      },
+    ],
+    name: 'setStakeLockStatus',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -858,15 +914,6 @@ export default [
     name: 'totalStaked',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      { internalType: 'address', name: 'stakerAddress', type: 'address' },
-    ],
-    name: 'unlockStake',
-    outputs: [],
-    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
