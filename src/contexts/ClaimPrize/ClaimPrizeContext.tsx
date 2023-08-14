@@ -175,7 +175,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      if (totalRewards.dsp > 1000) {
+      if (totalRewards.dsp > 10000) {
         setIsSufficientModalOpen(true);
       } else {
         setIsInsufficientModalOpen(true);

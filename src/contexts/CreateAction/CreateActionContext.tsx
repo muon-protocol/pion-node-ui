@@ -86,11 +86,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleCreateBonALICEClicked = () => {
-    if (
-      !ALICEBalance ||
-      !createAmount ||
-      Number(createAmount) > Number(ALICEBalance.big)
-    )
+    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
       return;
     setCreateActionLoading(true);
 
@@ -128,7 +124,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (mintAndLockSuccess) {
-      if (createAmount.dsp < 1000) {
+      if (createAmount.dsp < 10000) {
         setIsInsufficientModalOpen(true);
       } else {
         setIsSufficientModalOpen(true);
@@ -187,11 +183,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   }, [approveLPTokenIsSuccess]);
 
   const handleApproveALICEClicked = () => {
-    if (
-      !ALICEBalance ||
-      !createAmount ||
-      Number(createAmount) > Number(ALICEBalance.big)
-    )
+    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
       return;
     openAllowanceModal();
     approveALICE?.({

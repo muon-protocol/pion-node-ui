@@ -164,11 +164,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   }, [approveLPTokenIsSuccess]);
 
   const handleApproveALICEClicked = () => {
-    if (
-      !ALICEBalance ||
-      !upgradeAmount ||
-      Number(upgradeAmount) > Number(ALICEBalance.big)
-    )
+    if (!ALICEBalance || !upgradeAmount || upgradeAmount.big > ALICEBalance.big)
       return;
     openAllowanceModal();
     approveALICE?.({
@@ -182,7 +178,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     if (
       !LPTokenBalance ||
       !upgradeBoostAmount ||
-      Number(upgradeBoostAmount) > Number(LPTokenBalance.big)
+      upgradeBoostAmount.big > LPTokenBalance.big
     )
       return;
     openAllowanceModal();
