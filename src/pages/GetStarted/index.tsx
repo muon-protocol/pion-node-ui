@@ -116,7 +116,7 @@ const MuanPioneerAction = () => {
             alt=""
           />
           <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center mx-auto">
-            Claim Your Node-drop
+            Claim Your Node-Drop
           </div>
         </div>
       </motion.span>
