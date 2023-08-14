@@ -96,7 +96,7 @@ export default function Verification() {
         <NormalVerificationCard
           title="Gitcoin Passport"
           isActive={selector.gitcoinPassportVerified}
-          onClick={() => router.push(`/verification/gitCoin/${address}`)}
+          onClick={() => router.push(`/verification/gitcoin/${address}`)}
         ></NormalVerificationCard>
       </div>
     </div>

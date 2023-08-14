@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Style from "@/app/verification/presale/style.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { BackToVerificationBtn } from "@/app/verification/presale/[walletAddress]/page";
-import { gitCoinMessage, gitCoinVerification } from "@/utils/requestVerifications";
+import { gitcoinMessage, gitcoinVerification } from "@/utils/requestVerifications";
 import { resetErrorMessage, setErrorMessage, setGitcoinPassportVerified } from "@/redux/features/verification";
 import { useAccount, useSignMessage } from "wagmi";
 import { ErrorBox, WarningBox } from "@/app/verification/page";
@@ -62,8 +62,8 @@ function Step2({ setGitCoinStep  }) {
   const { signMessage } = useSignMessage({
     message: messageForSign,
     onSuccess(signature) {
-      gitCoinVerification(staker,signer,signature,nonce).then((gitCoinVerificationResponse) => {
-          const resData = gitCoinVerificationResponse.data;
+      gitcoinVerification(staker,signer,signature,nonce).then((gitcoinVerificationResponse) => {
+          const resData = gitcoinVerificationResponse.data;
           if (resData.success) {
             setGitCoinStep(3)
             dispatch(setGitcoinPassportVerified(true))
@@ -86,9 +86,9 @@ function Step2({ setGitCoinStep  }) {
 
 
 
-  const gitCoinVerify = () => {
+  const gitcoinVerify = () => {
     dispatch(resetErrorMessage());
-    gitCoinMessage()
+    gitcoinMessage()
       .then((res) => {
         const response = res.data;
         console.log(response);
@@ -136,7 +136,7 @@ function Step2({ setGitCoinStep  }) {
           }
         </div>
         <div className="w-full flex justify-center">
-          <button onClick={() => gitCoinVerify()} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+          <button onClick={() => gitcoinVerify()} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
             Verify score
           </button>
         </div>
@@ -187,15 +187,15 @@ function Step3() {
 
 
 export default function GitCoin({ staker }) {
-  const [gitCoinStep, setGitCoinStep] = useState(1);
+  const [gitcoinStep, setGitCoinStep] = useState(1);
   return (
     <div className="w-[570px] mt-2 rounded-[18px] bg-white min-h-[524px] p-4">
       <div className="flex flex-wrap w-full justify-center py-4 px-6">
-        {gitCoinStep === 1 && <Step1 setGitCoinStep={setGitCoinStep}></Step1>}
-        {gitCoinStep === 2 && (
+        {gitcoinStep === 1 && <Step1 setGitCoinStep={setGitCoinStep}></Step1>}
+        {gitcoinStep === 2 && (
           <Step2 staker={staker} setGitCoinStep={setGitCoinStep}></Step2>
         )}
-        {gitCoinStep === 3 && <Step3 setGitCoinStep={setGitCoinStep}></Step3>}
+        {gitcoinStep === 3 && <Step3 setGitCoinStep={setGitCoinStep}></Step3>}
       </div>
     </div>
   );

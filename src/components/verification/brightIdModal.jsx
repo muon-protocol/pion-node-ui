@@ -280,17 +280,15 @@ function Step4({ setBrightIdStep }) {
           response.result.brightidMeetsVerified)
         ) {
           dispatch(
-            setBrightidAuraVerified(response.result.brightidMeetsVerified)
+            setBrightidAuraVerified(response.result.brightidAuraVerified)
             );
             dispatch(
-              setBrightidMeetsVerified(response.result.brightidAuraVerified)
+              setBrightidMeetsVerified(response.result.brightidMeetsVerified)
               );
-              window.clearInterval(selector.interval);
               setBrightIdStep(5);
             } else if (!response.success && response.errorCode) {
               dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
               setBrightIdStep(6);
-              window.clearInterval(selector.interval);
       } else {
         setTimeout(() => {
           dispatch(incBrightIdTryed(brightidTryed+1))
