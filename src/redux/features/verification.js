@@ -81,7 +81,7 @@ export const verification = createSlice({
         state.fetchStatus = "succeeded";
         if (action.payload.success != true) {
           state = initialState;
-          state.fetchStatus = "failed";
+          // state.fetchStatus = "failed";
         } else {
           const verificationData = action.payload.result;
           (state.brightidAuraVerified = verificationData.brightidAuraVerified),

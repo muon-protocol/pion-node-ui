@@ -1,12 +1,12 @@
 "use client";
-import "./globals.css";
+import "@/app/globals.css";
 import Image from "next/image";
 import StyledComponentsRegistry from "@/lib/registry";
 import "tw-elements/dist/css/tw-elements.min.css";
 import { Providers } from "@/redux/provider";
 
 import "@rainbow-me/rainbowkit/styles.css";
-import { RainbowProvider } from "../lib/rainbowProviders";
+import { RainbowProvider } from "@/lib/rainbowProviders";
 
 import { Roboto } from "next/font/google";
 import Balance from "@/components/layout/balance";
@@ -49,14 +49,6 @@ export default function RootLayout({ children }) {
                         width="121"
                         height="32"
                       ></Image>
-                    </div>
-                    <div className="col-span-5 justify-self-end">
-                      <div className="flex">
-                        <Balance></Balance>
-                        {/* <ConnectButton></ConnectButton> */}
-                        <Loading></Loading>
-                        <CustomConnectButton></CustomConnectButton>
-                      </div>
                     </div>
                   </div>
                   <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-6">

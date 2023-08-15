@@ -1,3 +1,21 @@
 .background{
     /* background-color: #F8FAFF ; */
 }
+
+.child_image{
+    bottom: 1px;
+    right: 0px;
+}
+.child_telegram{
+    bottom: 2px;
+    right: 6px;
+}
+
+.child_git_coin{
+    bottom: 4px;
+    right: 6px;
+}
+.discord{
+    bottom: 4px;
+    right: 6px;
+}

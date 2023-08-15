@@ -1,5 +1,5 @@
 "use client";
-import { BackToVerificationBtn } from "../../presale/[walletAddress]/page";
+import { BackToVerificationBtn } from "../presale/page";
 import GitCoin from "@/components/verification/GitcoinPassport";
 
 export default function PresalePage({ params }) {

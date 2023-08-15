@@ -5,6 +5,7 @@ const initialState = {
   fetchStatus: "init",
   haveNode: false,
   nodeIsActive: "Loading...",
+  isNew: false,
   active: false,
   nodeAddress: "",
   id: "",
@@ -50,24 +51,28 @@ export const node = createSlice({
         state.fetchStatus = "loading";
       })
       .addCase(fetchNodeInfo.fulfilled, (state, action) => {
-        state.fetchStatus = "succeeded";
         const nodeData = action.payload.nodeInfo;
-        state.haveNode = nodeData.haveNode;
-
-        // state.nodeIsActive = nodeData.nodeIsActive;
-        state.active = nodeData.active;
-        state.nodeAddress = nodeData.nodeAddress;
-        state.id = nodeData.id;
-        state.peerId = nodeData.peerId;
-        state.startTime = nodeData.startTime;
-        state.endTime = nodeData.endTime;
-        state.nodeIP = nodeData.nodeIP;
-        state.staked = nodeData.staked;
-        state.onlinePercent = Number(nodeData.onlinePercent.split("%")[0]);
-        state.messages = nodeData.messages;
-        state.reward = nodeData.rewardAmount;
-        state.rewardPercent = nodeData.rewardPercent;
-        state.downNodeTimes = nodeData.downNodeTimes;
+        if (action.payload === false) {
+          state.fetchStatus = "faild";
+        } else {
+          state.fetchStatus = "succeeded";
+          state.haveNode = nodeData.haveNode;
+          state.isNew = nodeData.isNew;
+          // state.nodeIsActive = nodeData.nodeIsActive;
+          state.active = nodeData.active;
+          state.nodeAddress = nodeData.nodeAddress;
+          state.id = nodeData.id;
+          state.peerId = nodeData.peerId;
+          state.startTime = nodeData.startTime;
+          state.endTime = nodeData.endTime;
+          state.nodeIP = nodeData.nodeIP;
+          state.staked = nodeData.staked;
+          state.onlinePercent = Number(nodeData.onlinePercent.split("%")[0]);
+          state.messages = nodeData.messages;
+          state.reward = nodeData.rewardAmount;
+          state.rewardPercent = nodeData.rewardPercent;
+          state.downNodeTimes = nodeData.downNodeTimes;
+        }
       })
       .addCase(fetchNodeInfo.rejected, (state, action) => {
         state.fetchStatus = "failed";

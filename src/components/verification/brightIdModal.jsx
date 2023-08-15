@@ -19,7 +19,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount, useSignMessage } from "wagmi";
-import Style from "@/app/verification/presale/style.module.css";
+import Style from "@/app/style.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import QRCode from "react-qr-code";
 import { WarningBox } from "@/app/verification/page";
@@ -33,7 +33,7 @@ function Step1({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -50,7 +50,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/verification/googlePlay.svg"
+              src="/dashboard/verification/googlePlay.svg"
             />
           </a>
           <a
@@ -61,7 +61,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/verification/appStore.svg"
+              src="/dashboard/verification/appStore.svg"
             />
           </a>
         </div>
@@ -86,7 +86,7 @@ function Step2({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -180,7 +180,7 @@ function Step3({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
           ></Image>
           
@@ -332,7 +332,7 @@ function Step4({ setBrightIdStep }) {
             After scanning the QR code, wait until you the &quot;Successfully linked&quot;
             message in the app. next, click on the &apos;Verify Link&apos; button. This
             confirms the connection between your BrightID and Alice, completing
-            the linking process. {brightidTryed}
+            the linking process.
           </p>
         </div>
       </div>
@@ -353,14 +353,14 @@ function Step5() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/BrightId.svg`}
+            src={`/dashboard/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -391,14 +391,14 @@ function Step6() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/BrightId.svg`}
+            src={`/dashboard/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>

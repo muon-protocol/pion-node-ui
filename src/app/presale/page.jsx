@@ -1,16 +1,20 @@
 "use client";
 import Presale from "@/components/verification/presale";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import {   useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { addressToShort } from "@/utils/showAddress";
 
-export function BackToVerificationBtn({ params ,children,className }) {
+export function BackToVerificationBtn({ children,className }) {
   const router = useRouter();
   const { address } = useAccount();
-  const staker = useParams().walletAddress;
+
+  const searchParams = useSearchParams()
+  const staker = searchParams.get('staker')
+  console.log(staker);
+
   const [isSameWallet, setIsSameWallet] = useState(staker === address);
 
   useEffect(() => {
@@ -39,7 +43,7 @@ export function BackToVerificationBtn({ params ,children,className }) {
         data-te-ripple-color="light"
       >
         <Image
-          src="/verification/back-icon.svg"
+          src="/dashboard/verification/back-icon.svg"
           width="24"
           height="24"
         ></Image>
@@ -93,7 +97,7 @@ export function BackToVerificationBtn({ params ,children,className }) {
 
             {/* <!--Modal body--> */}
             <div className="relative px-4 pb-8 pt-4">
-              <Image className="mx-auto" src="/verification/switchWallet.svg" width="106" height="106"></Image>
+              <Image className="mx-auto" src="/dashboard/verification/switchWallet.svg" width="106" height="106"></Image>
               <p className="text-lg mx-auto text-center mt-4">To access your dashboard, please switch <br></br> back to your Staking Address ({addressToShort(staker)})</p>
             </div>
 

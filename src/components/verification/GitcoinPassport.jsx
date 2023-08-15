@@ -2,15 +2,15 @@
 import Image from "next/image";
 import {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Style from "@/app/verification/presale/style.module.css";
+import Style from "@/app/style.module.css";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { BackToVerificationBtn } from "@/app/verification/presale/[walletAddress]/page";
+import { BackToVerificationBtn } from "@/app/presale/page";
 import { gitcoinMessage, gitcoinVerification } from "@/utils/requestVerifications";
 import { resetErrorMessage, setErrorMessage, setGitcoinPassportVerified } from "@/redux/features/verification";
 import { useAccount, useSignMessage } from "wagmi";
 import { ErrorBox, WarningBox } from "@/app/verification/page";
 import { ERRORCODE } from "@/utils/errorCodeMessage";
-import { useParams } from "next/navigation";
+import {   useSearchParams } from "next/navigation";
 
 function Step1({ setGitCoinStep }) {
   return (
@@ -19,14 +19,14 @@ function Step1({ setGitCoinStep }) {
         <Image
           width="100"
           height="100"
-          src="/verification/gitcoin.svg"
+          src="/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 
         <div className="flex mt-10">
           <span className="min-w-max text-lg font-semibold">Step 1:</span>
           <p className="ml-2 text-lg ">
-            Head over to passport.gitcoin.co and follow the provided
+            Head over to <a href="https://passport.gitcoin.co/" className="text-myPrimary">passport.gitcoin.co</a> and follow the provided
             instructions. Achieving a score of 15 or above is necessary to pass
             the verification.
           </p>
@@ -55,7 +55,11 @@ function Step2({ setGitCoinStep  }) {
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
-  const staker = useParams().walletAddress
+
+  const searchParams = useSearchParams()
+  const staker = searchParams.get('staker')
+  console.log(staker);
+
   const [messageForSign, setMessageForSign] = useState("");
   const [nonce, setNonce] = useState("");
   const {address:signer} = useAccount();
@@ -114,7 +118,7 @@ function Step2({ setGitCoinStep  }) {
         <Image
           width="100"
           height="100"
-          src="/verification/gitcoin.svg"
+          src="/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 
@@ -155,14 +159,14 @@ function Step3() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/gitcoin.svg`}
+            src={`/dashboard/verification/gitcoin.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_git_coin}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>

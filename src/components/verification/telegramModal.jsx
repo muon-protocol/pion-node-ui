@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TelegramLoginButton from "react-telegram-login";
 import { useAccount } from "wagmi";
-import Style from "@/app/verification/presale/style.module.css";
+import Style from "@/app/style.module.css";
 import { useRouter } from "next/navigation";
 
 function Step2() {
@@ -21,14 +21,14 @@ function Step2() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/Telegram.svg`}
+            src={`/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -60,14 +60,14 @@ function Step3() {
         <div className="relative">
           <Image
             className=""
-            src={`/verification/Telegram.svg`}
+            src={`/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>
@@ -194,7 +194,7 @@ export default function TelegramModal({ isActive }) {
                 <>
                   <div>
                     <Image
-                      src={`/verification/Login.svg`}
+                      src={`/dashboard/verification/Login.svg`}
                       width="90"
                       height="94"
                     ></Image>

@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
-import styles from "@/app/verification/presale/style.module.css";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import styles from "@/app/style.module.css";
 import { useAccount, useSignMessage } from "wagmi";
 import { preSaleRequest } from "@/utils/requestVerifications";
 import { useEffect, useState } from "react";
@@ -12,9 +11,10 @@ import {
 } from "@/redux/features/verification";
 import { ERRORCODE } from "@/utils/errorCodeMessage";
 import { useDispatch, useSelector } from "react-redux";
-import { BackToVerificationBtn } from "@/app/verification/presale/[walletAddress]/page";
+import { BackToVerificationBtn } from "@/app/presale/page";
 import { LightBtn } from "@/app/page";
-import { usePathname } from "next/navigation";
+import {  useSearchParams } from "next/navigation";
+import { CustomConnectButton } from "../layout/CustomConnectButton";
 
 function PrimaryBtn({ children, onClick }) {
   return (
@@ -28,9 +28,13 @@ function PrimaryBtn({ children, onClick }) {
 }
 
 function Step1({ setStep }) {
-  const { address,  } = useAccount();
-  const pathName = usePathname();
-  const staker = pathName.split("presale/")[1];
+  const { address, } = useAccount();
+  
+  const searchParams = useSearchParams()
+  const staker = searchParams.get('staker')
+  console.log(staker);
+
+  console.log(staker);
   const dispatch = useDispatch();
   const { data, isSuccess, signMessage } = useSignMessage({
     message:
@@ -66,7 +70,7 @@ function Step1({ setStep }) {
         Address&quot; button to verify the ownership of the address.
       </p>
       <div className="w-full mt-8 flex justify-center">
-        <ConnectButton></ConnectButton>
+        <CustomConnectButton></CustomConnectButton>
       </div>
       <div className="w-full flex justify-center mt-8">
         <PrimaryBtn onClick={() => signMessage()}>verify Address</PrimaryBtn>
@@ -78,17 +82,13 @@ function Step1({ setStep }) {
 function Step2() {
   return (
     <div>
-      <p>
-        Congratulations! You passed Presale participants verification Your
+      <p className="text-lg text-center mt-6">
+        Congratulations! <br /> You passed Presale participants verification Your
         access granted to run Alice Starter node
       </p>
-      <div className="w-full mt-8">
-        <div className="w-28 mx-auto">
-          <BackToVerificationBtn>
-            Back to verification center
-          </BackToVerificationBtn>
-        </div>
-      </div>
+      <BackToVerificationBtn className="mx-auto mt-14">
+        Back to verification center
+      </BackToVerificationBtn>
     </div>
   );
 }
@@ -119,14 +119,14 @@ export default function Presale() {
       <div className="mx-auto mt-14 relative w-fit ">
         <Image
           className=""
-          src={`/verification/wallet.svg`}
+          src={`/dashboard/verification/wallet.svg`}
           width="90"
           height="81"
         ></Image>
         {step === 2 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="50"
           ></Image>
@@ -134,7 +134,7 @@ export default function Presale() {
         {step === 3 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="50"
           ></Image>

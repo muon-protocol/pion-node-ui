@@ -13,51 +13,50 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 
-
-export function WarningBox({children}) {
+export function WarningBox({ children }) {
   return (
     <div className="flex rounded-lg items-center bg-mysecondary/20 px-4 py-2">
       <div>
-        <Image width="50"
+        <Image
+          width="30"
           height="20"
-          src="/verification/warrning-icon.svg"
-          ></Image>
+          src="/dashboard/verification/warrning-icon.svg"
+        ></Image>
       </div>
-      <p className="text-sm ml-3">{ children}</p>
+      <p className="text-sm ml-3">{children}</p>
     </div>
-  )
+  );
 }
-
 
 export function ErrorBox({ children }) {
   return (
     <div className="flex rounded-lg items-center bg-[#FF3A5D]/20 px-4 py-2">
       <div>
-        <Image width="20"
+        <Image
+          width="20"
           height="20"
-          src="/verification/error.svg"
-          ></Image>
+          src="/dashboard/verification/error.svg"
+        ></Image>
       </div>
-      <p className="text-sm ml-3">{ children}</p>
+      <p className="text-sm ml-3">{children}</p>
     </div>
-  )
+  );
 }
 
 export default function Verification() {
   const router = useRouter();
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
-    );
+  );
   const dispatch = useDispatch();
-  const { address, } = useAccount();
+  const { address } = useAccount();
 
   useEffect(() => {
     dispatch(fetchVerification(address));
   }, []);
 
-
   if (selector.fetchStatus === "loading") {
-    return (<Loading></Loading>)
+    return <Loading></Loading>;
   }
 
   return (
@@ -74,7 +73,7 @@ export default function Verification() {
         <NormalVerificationCard
           title="Muon Presale Participation"
           isActive={selector.presaleVerified}
-          onClick={() => router.push(`/verification/presale/${address}`)}
+          onClick={() => router.push(`/presale?staker=${address}`)}
         ></NormalVerificationCard>
         <NormalVerificationCard
           title="Active Community Member (Telegram)"
@@ -103,7 +102,7 @@ export default function Verification() {
         <NormalVerificationCard
           title="Gitcoin Passport"
           isActive={selector.gitcoinPassportVerified}
-          onClick={() => router.push(`/verification/gitcoin/${address}`)}
+          onClick={() => router.push(`/gitcoin?staker=${address}`)}
         ></NormalVerificationCard>
       </div>
     </div>

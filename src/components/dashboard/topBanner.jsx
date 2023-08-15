@@ -9,7 +9,7 @@ export default function TopBanner({isVerify}) {
     <div className="bg-primary13 h-20 w-full rounded-[10px] flex items-center px-6 justify-between">
       <div className="flex  flex-wrap items-center space-x-3">
         <Image
-          src="/dashboard/wallet-check.svg"
+          src="/dashboard/dashboard/wallet-check.svg"
           width="43"
           height="43"
         ></Image>

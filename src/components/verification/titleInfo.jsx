@@ -9,25 +9,25 @@ export default function TitleInfo() {
       <div className="flex justify-between">
         <div className="flex items-center">
           <Image
-            src="/dashboard/wallet-check.svg"
+            src="/dashboard/dashboard/wallet-check.svg"
             width="44"
             height="44"
           ></Image>
-          <h2 className="text-[24px] ">Alice Uniqueness verification</h2>
+          <h2 className="text-[24px] ml-4">Alice Uniqueness verification</h2>
         </div>
         <button
-          onClick={(e) => {e.preventDefault()
-            router.push("/")}}
+          onClick={(e) => {
+            e.preventDefault();
+            router.push("/");
+          }}
           className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] px-4"
         >
           <Image
-            src="/verification/back-icon.svg"
+            src="/dashboard/verification/back-icon.svg"
             width="24"
             height="24"
           ></Image>
-          <span className="text-primary underline ">
-          Back to dashboard
-          </span>
+          <span className="text-primary underline ">Back to dashboard</span>
         </button>
       </div>
       <p className="text-lg mt-4">
