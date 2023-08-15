@@ -9,24 +9,10 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowProvider } from "@/lib/rainbowProviders";
 
 import { Roboto } from "next/font/google";
-import Balance from "@/components/layout/balance";
-import { CustomConnectButton } from "@/components/layout/CustomConnectButton";
-import { useSelector } from "react-redux";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
-export const metadata = {
-  title: "Alice Dashboard",
-  description: "Alice Dashboard",
-};
-
-function Loading() {
-  const selector = useSelector((state) => state.rootReducer.generalReducer);
-  console.log(selector);
-  return;
-}
-
-export default function GitCoinLaout({ children }) {
+export default function GitcoinLayout({ children }) {
   return (
     <html lang="en">
       <head>
