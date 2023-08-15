@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
         <script
           type="text/javascript"
-          src="/dashboard../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
+          src="@/../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
         ></script>
         <Providers>
           <RainbowProvider>
