@@ -16,9 +16,8 @@ export default function TitleInfo() {
           <h2 className="text-[24px] ml-4">Alice Uniqueness verification</h2>
         </div>
         <button
-          onClick={(e) => {
-            e.preventDefault();
-            router.push("/");
+          onClick={() => {
+            window.location.replace("https://alice-v2.muon.net/dashboard");
           }}
           className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] px-4"
         >
