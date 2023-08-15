@@ -31,17 +31,9 @@ export default function TitleInfo() {
       </div>
       <p className="text-lg mt-4">
         Welcome to Alice&apos;s Uniqueness Verification Center! Here, you can
-        complete our verification processes to access and operate our 3-tier
-        levels of nodes. Please note that each verification method corresponds
-        to a specific node tier, granting you the ability to run nodes within
-        that tier.
-      </p>
-      <p>
-        Want a seamless verification process? Our{" "}
-        <a href="#" className="text-primary">
-          guidance document
-        </a>{" "}
-        has you covered.
+        complete the verification process to access and operate the three
+        different tiers of nodes. Please note that you should complete only ONE
+        of these methods to be granted the ability to run each node tier.
       </p>
     </div>
   );

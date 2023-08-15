@@ -1,16 +1,23 @@
 "use client";
 import Image from "next/image";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Style from "@/app/style.module.css";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { BackToVerificationBtn } from "@/app/presale/page";
-import { gitcoinMessage, gitcoinVerification } from "@/utils/requestVerifications";
-import { resetErrorMessage, setErrorMessage, setGitcoinPassportVerified } from "@/redux/features/verification";
+import {
+  gitcoinMessage,
+  gitcoinVerification,
+} from "@/utils/requestVerifications";
+import {
+  resetErrorMessage,
+  setErrorMessage,
+  setGitcoinPassportVerified,
+} from "@/redux/features/verification";
 import { useAccount, useSignMessage } from "wagmi";
 import { ErrorBox, WarningBox } from "@/app/verification/page";
 import { ERRORCODE } from "@/utils/errorCodeMessage";
-import {   useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { CustomConnectButton } from "../layout/CustomConnectButton";
 
 function Step1({ setGitCoinStep }) {
   return (
@@ -26,9 +33,12 @@ function Step1({ setGitCoinStep }) {
         <div className="flex mt-10">
           <span className="min-w-max text-lg font-semibold">Step 1:</span>
           <p className="ml-2 text-lg ">
-            Head over to <a href="https://passport.gitcoin.co/" className="text-myPrimary">passport.gitcoin.co</a> and follow the provided
-            instructions. Achieving a score of 15 or above is necessary to pass
-            the verification.
+            Head over to{" "}
+            <a href="https://passport.gitcoin.co/" className="text-myPrimary">
+              passport.gitcoin.co
+            </a>{" "}
+            and follow the provided instructions. Achieving a score of 15 or
+            above is necessary to pass the verification.
           </p>
         </div>
       </div>
@@ -41,7 +51,10 @@ function Step1({ setGitCoinStep }) {
           </WarningBox>
         </div>
         <div className="w-full flex justify-center">
-          <button onClick={() => setGitCoinStep(2)} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+          <button
+            onClick={() => setGitCoinStep(2)}
+            className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+          >
             Next step
           </button>
         </div>
@@ -50,45 +63,44 @@ function Step1({ setGitCoinStep }) {
   );
 }
 
-function Step2({ setGitCoinStep  }) {
+function Step2({ setGitCoinStep }) {
   const dispatch = useDispatch();
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
 
-  const searchParams = useSearchParams()
-  const staker = searchParams.get('staker')
+  const searchParams = useSearchParams();
+  const staker = searchParams.get("staker");
   console.log(staker);
 
   const [messageForSign, setMessageForSign] = useState("");
   const [nonce, setNonce] = useState("");
-  const {address:signer} = useAccount();
+  const { address: signer } = useAccount();
   const { signMessage } = useSignMessage({
     message: messageForSign,
     onSuccess(signature) {
-      gitcoinVerification(staker,signer,signature,nonce).then((gitcoinVerificationResponse) => {
+      gitcoinVerification(staker, signer, signature, nonce)
+        .then((gitcoinVerificationResponse) => {
           const resData = gitcoinVerificationResponse.data;
           if (resData.success) {
-            setGitCoinStep(3)
-            dispatch(setGitcoinPassportVerified(true))
+            setGitCoinStep(3);
+            dispatch(setGitcoinPassportVerified(true));
           } else {
-              dispatch(setErrorMessage(ERRORCODE[resData.errorCode]("Gitcoin")));
+            dispatch(setErrorMessage(ERRORCODE[resData.errorCode]("Gitcoin")));
           }
         })
         .catch((error) => {
           console.log(error);
           dispatch(setErrorMessage(ERRORCODE["connection"]("Gitcoin")));
         });
-    }
+    },
   });
 
   useEffect(() => {
     if (messageForSign) {
-      signMessage()
+      signMessage();
     }
   }, [messageForSign]);
-
-
 
   const gitcoinVerify = () => {
     dispatch(resetErrorMessage());
@@ -97,20 +109,17 @@ function Step2({ setGitCoinStep  }) {
         const response = res.data;
         console.log(response);
         if (response.success) {
-          
-          setMessageForSign(response.result.message)
-          setNonce(response.result.nonce)
+          setMessageForSign(response.result.message);
+          setNonce(response.result.nonce);
         } else {
-          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("Gitcoin")))
+          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("Gitcoin")));
         }
       })
       .catch((error) => {
         console.log(error);
         dispatch(setErrorMessage(ERRORCODE["connection"]("Gitcoin")));
-
       })
-      .finally(() => {
-      });
+      .finally(() => {});
   };
   return (
     <div className="grid content-between pb-4">
@@ -125,22 +134,26 @@ function Step2({ setGitCoinStep  }) {
         <div className="flex mt-10">
           <span className="min-w-max text-lg font-semibold">Step 2:</span>
           <p className="ml-2 text-lg">
-            Select the address used in your Gitcoin Passport, then click &apos;Verify
-            Score&apos; to check your eligibily
+            Select the address used in your Gitcoin Passport, then click
+            &apos;Verify Score&apos; to check your eligibily
           </p>
         </div>
         <div className="w-full flex justify-center mt-8">
-          <ConnectButton></ConnectButton>
+          <CustomConnectButton></CustomConnectButton>
         </div>
       </div>
 
       <div className="px-[60px] mt-20">
         <div>
-          {selector.errorMessage && <ErrorBox>{selector.errorMessage}</ErrorBox>
-          }
+          {selector.errorMessage && (
+            <ErrorBox>{selector.errorMessage}</ErrorBox>
+          )}
         </div>
         <div className="w-full flex justify-center">
-          <button onClick={() => gitcoinVerify()} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+          <button
+            onClick={() => gitcoinVerify()}
+            className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+          >
             Verify score
           </button>
         </div>
@@ -174,21 +187,22 @@ function Step3() {
 
         <div className="flex mt-10">
           <p className="ml-2 w-fit text-center text-lg">
-            Congratulations! <br></br> You&apos;ve passed the Gitcoin Passport verification.
-            You now have the access to run Alice Starter node.
+            Congratulations! <br></br> You&apos;ve passed the Gitcoin Passport
+            verification. You now have the access to run Alice Starter node.
           </p>
         </div>
       </div>
 
       <div className="px-[60px] mt-20">
         <div className="w-full flex justify-center">
-          <BackToVerificationBtn className="text-myPrimary">Back to verification center</BackToVerificationBtn>
+          <BackToVerificationBtn className="text-myPrimary">
+            Back to verification center
+          </BackToVerificationBtn>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default function GitCoin({ staker }) {
   const [gitcoinStep, setGitCoinStep] = useState(1);
@@ -203,5 +217,4 @@ export default function GitCoin({ staker }) {
       </div>
     </div>
   );
-  
 }

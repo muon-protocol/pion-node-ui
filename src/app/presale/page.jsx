@@ -1,18 +1,18 @@
 "use client";
 import Presale from "@/components/verification/presale";
 import Image from "next/image";
-import {   useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { addressToShort } from "@/utils/showAddress";
 
-export function BackToVerificationBtn({ children,className }) {
+export function BackToVerificationBtn({ children, className }) {
   const router = useRouter();
   const { address } = useAccount();
 
-  const searchParams = useSearchParams()
-  const staker = searchParams.get('staker')
+  const searchParams = useSearchParams();
+  const staker = searchParams.get("staker");
   console.log(staker);
 
   const [isSameWallet, setIsSameWallet] = useState(staker === address);
@@ -33,7 +33,6 @@ export function BackToVerificationBtn({ children,className }) {
         className={`${className} flex content-center items-center bg-primary13 rounded-[8px] px-4 py-1`}
         onClick={(e) => {
           if (isSameWallet) {
-            e.preventDefault()
             router.push("/verification");
           }
         }}
@@ -68,9 +67,7 @@ export function BackToVerificationBtn({ children,className }) {
               <h5
                 className="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
                 id="exampleModalScrollableLabel"
-              >
-               
-              </h5>
+              ></h5>
               {/* <!--Close button--> */}
               <button
                 type="button"
@@ -97,12 +94,19 @@ export function BackToVerificationBtn({ children,className }) {
 
             {/* <!--Modal body--> */}
             <div className="relative px-4 pb-8 pt-4">
-              <Image className="mx-auto" src="/dashboard/verification/switchWallet.svg" width="106" height="106"></Image>
-              <p className="text-lg mx-auto text-center mt-4">To access your dashboard, please switch <br></br> back to your Staking Address ({addressToShort(staker)})</p>
+              <Image
+                className="mx-auto"
+                src="/dashboard/verification/switchWallet.svg"
+                width="106"
+                height="106"
+              ></Image>
+              <p className="text-lg mx-auto text-center mt-4">
+                To access your dashboard, please switch <br></br> back to your
+                Staking Address ({addressToShort(staker)})
+              </p>
             </div>
 
             {/* <!--Modal footer--> */}
-            
           </div>
         </div>
       </div>

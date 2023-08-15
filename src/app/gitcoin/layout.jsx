@@ -26,7 +26,7 @@ function Loading() {
   return;
 }
 
-export default function RootLayout({ children }) {
+export default function GitCoinLaout({ children }) {
   return (
     <html lang="en">
       <head>
