@@ -18,6 +18,7 @@ import {
   useApproveArgs,
   useMintAndLockArgs,
 } from '../../hooks/useContractArgs.ts';
+import useClaimPrize from '../ClaimPrize/useActions.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -122,11 +123,17 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  const { setNewNFTClaimedLoading } = useClaimPrize();
+
   useEffect(() => {
     if (mintAndLockSuccess) {
       if (createAmount.dsp < 10000) {
         setIsInsufficientModalOpen(true);
       } else {
+        setNewNFTClaimedLoading(true);
+        setTimeout(() => {
+          setNewNFTClaimedLoading(false);
+        }, 10000);
         setIsSufficientModalOpen(true);
       }
       setCreateAmount(w3bNumberFromString(''));

@@ -64,6 +64,7 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: (isOpen: boolean) => void;
   isSufficientModalOpen: boolean;
   setIsSufficientModalOpen: (isOpen: boolean) => void;
+  setNewNFTClaimedLoading: (value: boolean) => void;
   newNFTClaimedLoading: boolean;
 }>({
   isSwitchBackToWalletModalOpen: false,
@@ -99,6 +100,7 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: () => {},
   isSufficientModalOpen: false,
   setIsSufficientModalOpen: () => {},
+  setNewNFTClaimedLoading: () => {},
   newNFTClaimedLoading: false,
 });
 
@@ -178,14 +180,14 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      if (totalRewards.dsp > 10000) {
+      if (totalRewards.dsp < 10000) {
+        setIsInsufficientModalOpen(true);
+      } else {
         setNewNFTClaimedLoading(true);
         setTimeout(() => {
           setNewNFTClaimedLoading(false);
         }, 10000);
         setIsSufficientModalOpen(true);
-      } else {
-        setIsInsufficientModalOpen(true);
       }
       toast.success('Claimed successfully');
       setStakingAddress(null);
@@ -495,6 +497,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         isSufficientModalOpen,
         setIsSufficientModalOpen,
         newNFTClaimedLoading,
+        setNewNFTClaimedLoading,
       }}
     >
       {children}
