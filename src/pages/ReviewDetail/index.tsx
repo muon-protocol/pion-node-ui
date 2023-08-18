@@ -15,6 +15,7 @@ import { getTier } from '../../utils';
 import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect } from 'react';
+import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -323,20 +324,31 @@ const ReviewDetail = () => {
 const EmptyBonALICECard = () => {
   const navigate = useNavigate();
   const { stakerAddressInfo } = useNodeBonALICE();
+  const { newNFTClaimedLoading } = useClaimPrize();
 
   return (
     <div className="absolute left-0 right-0 top-0 bottom-0 !z-100 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
-      <p className="font-semibold text-xl text-center px-20">
-        {stakerAddressInfo?.active
-          ? 'You have already added a node. Please go to your dashboard to check the details.'
-          : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
-      </p>
-      <button
-        className="btn btn--primary mx-auto"
-        onClick={() => navigate('/create')}
-      >
-        Create BonALICE
-      </button>
+      {newNFTClaimedLoading ? (
+        <>
+          <p className="font-semibold text-xl text-center px-20">
+            Loading BonALICEs...
+          </p>
+        </>
+      ) : (
+        <>
+          <p className="font-semibold text-xl text-center px-20">
+            {stakerAddressInfo?.active
+              ? 'You have already added a node. Please go to your dashboard to check the details.'
+              : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
+          </p>
+          <button
+            className="btn btn--primary mx-auto"
+            onClick={() => navigate('/create')}
+          >
+            Create BonALICE
+          </button>
+        </>
+      )}
     </div>
   );
 };

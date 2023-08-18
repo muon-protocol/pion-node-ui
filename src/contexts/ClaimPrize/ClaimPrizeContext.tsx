@@ -64,6 +64,7 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: (isOpen: boolean) => void;
   isSufficientModalOpen: boolean;
   setIsSufficientModalOpen: (isOpen: boolean) => void;
+  newNFTClaimedLoading: boolean;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -98,6 +99,7 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: () => {},
   isSufficientModalOpen: false,
   setIsSufficientModalOpen: () => {},
+  newNFTClaimedLoading: false,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -122,6 +124,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isReadyToClaim, setIsReadyToClaim] = useState(false);
+  const [newNFTClaimedLoading, setNewNFTClaimedLoading] = useState(false);
 
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
   const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
@@ -176,6 +179,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (isSuccess) {
       if (totalRewards.dsp > 10000) {
+        setNewNFTClaimedLoading(true);
+        setTimeout(() => {
+          setNewNFTClaimedLoading(false);
+        }, 10000);
         setIsSufficientModalOpen(true);
       } else {
         setIsInsufficientModalOpen(true);
@@ -281,7 +288,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     try {
       await claimReward?.({
         pending: 'Waiting for confirmation',
-        success: 'you have claimed your Bonded ALICE.',
+        success: 'You have claimed your Bonded ALICE.',
         failed: 'Error',
       });
     } catch (e) {
@@ -487,6 +494,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setIsInsufficientModalOpen,
         isSufficientModalOpen,
         setIsSufficientModalOpen,
+        newNFTClaimedLoading,
       }}
     >
       {children}
