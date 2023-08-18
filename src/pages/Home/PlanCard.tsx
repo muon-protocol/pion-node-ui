@@ -17,7 +17,7 @@ const PlanCard = ({
     >
       <div className={`plan-card p-7 pb-7 pt-[120px] relative max-w-[430px]`}>
         <div
-          className={`plan-card__title-shadow absolute left-9 top-9 ${plan.shadowColor} text-[40px]`}
+          className={`plan-card__title-shadow absolute left-9 top-9 ${plan.shadowColor} font-semibold text-[40px]`}
         >
           {plan.title}
         </div>

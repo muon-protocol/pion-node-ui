@@ -31,16 +31,16 @@ const Home = () => {
             className="w-[150px] h-auto"
           />
         </div>
-        <FadeIn delay={0.1}>
-          <p className="moto w-full text-center text-[32px] font-regular leading-10 mb-4 md:text-5xl md:font-bold md:leading-[58px]">
-            ALICE TESTNET
+        <FadeIn delay={0.1} className="mb-[30px]">
+          <p className="moto w-full text-center text-2xl font-semibold leading-10 mb-2 md:text-8xl md:font-extrabold">
+            ALICE
           </p>
+          <p className="font-tourney text-center text-5xl">Network</p>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <p className="description text-[19px] md:font-normal text-center md:text-[21px] mb-8 mx-auto max-w-[821px] md:leading-[38px]">
-            Empower Your Node with a Bonded ALICE NFT! Secure your spot in one
-            of our three distinguished tiers by locking ALICE tokens in your
-            bonALICE. The more tokens you lock, the higher the tier and rewards.
+          <p className="description text-[19px] md:font-semibold text-center md:text-[20px] mb-8 mx-auto max-w-[421px]">
+            Start Your Node with a Bonded ALICE NFT! Lock ALICE tokens in
+            bonALICE to access one of Alice’s three node tiers.
           </p>
         </FadeIn>
         <FadeIn delay={0.2} className="flex justify-center">

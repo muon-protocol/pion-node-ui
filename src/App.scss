@@ -6,6 +6,10 @@
   @apply box-border outline-none focus:outline-none select-none p-0 m-0;
 }
 
+.font-tourney {
+  font-family: Tourney, sans-serif;
+}
+
 .no-scrollbar {
   &::-webkit-scrollbar {
     display: none;
@@ -80,7 +84,7 @@ input[type=number] {
   }
 
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[220px] mx-auto;
+  @apply max-w-[90vw] py-12 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[190px] mx-auto;
   min-height: calc(100vh);
 
   &--centered {
@@ -119,7 +123,7 @@ input[type=number] {
   }
 
   &--large {
-    @apply px-10 py-5 text-xl font-normal md:px-16 md:py-5 md:text-2xl md:font-medium;
+    @apply px-10 py-5 text-xl font-bold md:px-16 md:py-5 md:text-2xl md:font-medium;
   }
 
   &--secondary-tag {
