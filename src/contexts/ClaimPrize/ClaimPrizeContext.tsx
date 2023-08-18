@@ -228,11 +228,19 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   const getClaimSignatureFromPast = useCallback(async () => {
     if (!walletAddress) {
-      setClaimSignature(null);
-      setRawRewards(null);
-      setRawRewardsFromPast(null);
-      setStakingAddress(null);
-      setWalletsWithSignature([]);
+      if (
+        claimSignature ||
+        rawRewardsFromPast ||
+        stakingAddressFromPast ||
+        stakingAddress ||
+        walletsWithSignature.length > 0
+      ) {
+        setClaimSignature(null);
+        setRawRewards(null);
+        setRawRewardsFromPast(null);
+        setStakingAddress(null);
+        setWalletsWithSignature([]);
+      }
       return;
     }
     try {
@@ -247,7 +255,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     } catch (e) {
       console.log(e);
     }
-  }, [walletAddress, newWalletConnected, userClaimedReward, valid]);
+  }, [
+    walletAddress,
+    userClaimedReward,
+    valid,
+    newWalletConnected,
+    claimSignature,
+    rawRewardsFromPast,
+    stakingAddressFromPast,
+    stakingAddress,
+    walletsWithSignature,
+  ]);
 
   useEffect(() => {
     getClaimSignatureFromPast();

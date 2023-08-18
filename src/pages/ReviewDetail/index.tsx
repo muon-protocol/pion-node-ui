@@ -237,81 +237,85 @@ const ReviewDetail = () => {
   }, [stakerAddressInfo]);
 
   return (
-    <div className="page page--review-details">
-      <Alert
-        className="mb-8 w-full"
-        type={'success'}
-        show={!!stakerAddressInfo?.active}
-      >
-        Successfully added node. If you want to check details, we will redirect
-        you to the dashboard in few seconds. If you don't want to wait, you can{' '}
-        <span
-          onClick={() => window.open('/dashboard', '_self')}
-          className="underline cursor-pointer hover:font-medium"
+    <div className="page__bg">
+      <div className="page page--review-details">
+        <Alert
+          className="mb-8 w-full"
+          type={'success'}
+          show={!!stakerAddressInfo?.active}
         >
-          click here
-        </span>
-        .
-      </Alert>
-      <FadeIn
-        duration={0.1}
-        delay={0.1}
-        className="content flex flex-col gap-8 justify-center items-center h-full"
-      >
-        <div className="review-details--top flex flex-col md:flex-row gap-9">
-          <p className="text-lg text-center md:text-left md:text-[22px] font-light w-full">
-            Review your bonALICE details closely. When you're ready, enter the
-            node IP to complete the setup.
-          </p>
-          {nodeBonALICE &&
-          nodeBonALICE.ALICELockAmount.dsp +
-            nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-            10000 ? (
-            <Alert
-              className="md:!w-[365px] md:!min-w-[365px]"
-              type="error"
-              show={true}
-            >
-              You don't have sufficient amount of ALICE on this BonALICE. Please{' '}
-              <span
-                className="hover:underline cursor-pointer text-primary"
-                onClick={() => {
-                  setSelectedAction(sidebarItems[1].link);
-                  navigate('/create');
-                }}
+          Successfully added node. If you want to check details, we will
+          redirect you to the dashboard in few seconds. If you don't want to
+          wait, you can{' '}
+          <span
+            onClick={() => window.open('/dashboard', '_self')}
+            className="underline cursor-pointer hover:font-medium"
+          >
+            click here
+          </span>
+          .
+        </Alert>
+        <FadeIn
+          duration={0.1}
+          delay={0.1}
+          className="content flex flex-col gap-8 justify-center items-center h-full"
+        >
+          <div className="review-details--top flex flex-col md:flex-row gap-9">
+            <p className="text-lg text-center md:text-left md:text-[22px] font-light w-full">
+              Review your bonALICE details closely. When you're ready, enter the
+              node IP to complete the setup.
+            </p>
+            {nodeBonALICE &&
+            nodeBonALICE.ALICELockAmount.dsp +
+              nodeBonALICE.LPTokenLockAmount.dsp * 2 <
+              10000 ? (
+              <Alert
+                className="md:!w-[365px] md:!min-w-[365px]"
+                type="error"
+                show={true}
               >
-                upgrade
-              </span>
-              ,{' '}
-              <span
-                className="hover:underline cursor-pointer text-primary"
-                onClick={() => {
-                  setSelectedAction(sidebarItems[2].link);
-                  navigate('/create');
-                }}
+                You don't have sufficient amount of ALICE on this BonALICE.
+                Please{' '}
+                <span
+                  className="hover:underline cursor-pointer text-primary"
+                  onClick={() => {
+                    setSelectedAction(sidebarItems[1].link);
+                    navigate('/create');
+                  }}
+                >
+                  upgrade
+                </span>
+                ,{' '}
+                <span
+                  className="hover:underline cursor-pointer text-primary"
+                  onClick={() => {
+                    setSelectedAction(sidebarItems[2].link);
+                    navigate('/create');
+                  }}
+                >
+                  merge
+                </span>
+                , or select another BonALICE.
+              </Alert>
+            ) : (
+              <Alert
+                className="md:!w-[365px] md:!min-w-[365px]"
+                type="error"
+                show={true}
               >
-                merge
-              </span>
-              , or select another BonALICE.
-            </Alert>
-          ) : (
-            <Alert
-              className="md:!w-[365px] md:!min-w-[365px]"
-              type="error"
-              show={true}
-            >
-              Your node will be activated once you've successfully completed the
-              uniqueness verification process in your dashboard
-            </Alert>
-          )}
+                Your node will be activated once you've successfully completed
+                the uniqueness verification process in your dashboard
+              </Alert>
+            )}
 
-          {/*<NotificationCard  />*/}
-        </div>
-        <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
-          {reviewDetailCard()}
-          {transferCard()}
-        </div>
-      </FadeIn>
+            {/*<NotificationCard  />*/}
+          </div>
+          <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
+            {reviewDetailCard()}
+            {transferCard()}
+          </div>
+        </FadeIn>
+      </div>
     </div>
   );
 };

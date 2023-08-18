@@ -16,13 +16,15 @@ const Actions = () => {
   }, [stakerAddressInfo]);
 
   return (
-    <div className="page page--centered">
-      <ConnectWalletModal />
+    <div className="page__bg">
+      <div className="page page--centered">
+        <ConnectWalletModal />
 
-      <FadeIn className="flex flex-col w-[664px] gap-2 md:gap-6">
-        <ActionsHeader />
-        <ActionsBody />
-      </FadeIn>
+        <FadeIn className="flex flex-col w-[664px] gap-2 md:gap-6">
+          <ActionsHeader />
+          <ActionsBody />
+        </FadeIn>
+      </div>
     </div>
   );
 };

@@ -55,11 +55,7 @@ input[type=number] {
 }
 
 .app {
-  @apply min-h-screen;
-  background-image: url('../public/assets/images/app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  background-size: cover;
+  @apply min-h-screen relative;
 }
 
 @media (max-width: 768px) {
@@ -69,9 +65,23 @@ input[type=number] {
 }
 
 .page {
+  &__bg {
+    background-image: url('../public/assets/images/app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &--home {
+      background-image: url('../public/assets/images/home-background.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+      background-position: top;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 md:px-4 md:max-w-[1264px] md:py-[78px] mx-auto;
-  min-height: calc(100vh - 108px - 70px);
+  @apply max-w-[90vw] py-12 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[220px] mx-auto;
+  min-height: calc(100vh);
 
   &--centered {
     @apply flex items-center justify-center;

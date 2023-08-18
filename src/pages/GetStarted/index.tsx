@@ -14,32 +14,34 @@ const GetStarted = () => {
   }, [stakerAddressInfo]);
 
   return (
-    <div className="page page--get-started">
-      <FadeIn duration={0.3}>
-        <p className="text-[19px] md:text-2xl font-light mb-6">
-          You can obtain bonALICE in two ways: either create a new one
-          independently or claim it as a reward if you're part of the MUON
-          pioneers
-        </p>
-        <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
-          You're a pioneer if you:
-        </p>
-        <span className="flex flex-col md:flex-row w-full gap-3 justify-stretch mb-12">
-          <span className="get-started__pioneer-option">
-            Joined the Presale
+    <div className="page__bg">
+      <div className="page page--get-started">
+        <FadeIn duration={0.3}>
+          <p className="text-[19px] md:text-2xl font-light mb-6">
+            You can obtain bonALICE in two ways: either create a new one
+            independently or claim it as a reward if you're part of the MUON
+            pioneers
+          </p>
+          <p className="text-lg md:text-xl font-semibold md:font-light mb-4 mr-auto">
+            You're a pioneer if you:
+          </p>
+          <span className="flex flex-col md:flex-row w-full gap-3 justify-stretch mb-12">
+            <span className="get-started__pioneer-option">
+              Joined the Presale
+            </span>
+            {/*<span className="get-started__pioneer-option">*/}
+            {/*  Joined the Deus Presale*/}
+            {/*</span>*/}
+            <span className="get-started__pioneer-option">
+              Operated an ALICE Node
+            </span>
           </span>
-          {/*<span className="get-started__pioneer-option">*/}
-          {/*  Joined the Deus Presale*/}
-          {/*</span>*/}
-          <span className="get-started__pioneer-option">
-            Operated an ALICE Node
+          <span className="get-started__actions">
+            <NewBonALICEAction />
+            <MuanPioneerAction />
           </span>
-        </span>
-        <span className="get-started__actions">
-          <NewBonALICEAction />
-          <MuanPioneerAction />
-        </span>
-      </FadeIn>
+        </FadeIn>
+      </div>
     </div>
   );
 };
