@@ -163,8 +163,8 @@ const ReviewDetail = () => {
         className={`bg-white p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
       >
         <AddressInput
-          title="Node IP"
-          placeholder="Enter Node IP"
+          title="Server IP"
+          placeholder="Enter Server IP"
           value={nodeIP}
           onValueChanged={(value) => setNodeIP(value)}
           className="mb-9"

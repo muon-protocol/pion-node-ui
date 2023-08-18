@@ -42,7 +42,7 @@ const Home = () => {
         <FadeIn delay={0.15}>
           <p className="description font-semibold text-[19px] md:font-semibold text-center md:text-[20px] mb-8 mx-auto max-w-[421px]">
             Start Your Node with a Bonded ALICE NFT! Lock ALICE tokens in
-            bonALICE to access one of Alice’s three node tiers.
+            bonALICE to access one of ALICE’s three node tiers.
           </p>
         </FadeIn>
         <FadeIn delay={0.2} className="flex justify-center">
