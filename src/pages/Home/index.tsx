@@ -32,13 +32,15 @@ const Home = () => {
           />
         </div>
         <FadeIn delay={0.1} className="mb-[30px]">
-          <p className="moto w-full text-center text-2xl font-semibold leading-10 mb-2 md:text-8xl md:font-extrabold">
+          <p className="moto w-full text-center mb-3 text-5xl font-semibold leading-10 md:mb-2 md:text-8xl md:font-extrabold">
             ALICE
           </p>
-          <p className="font-tourney text-center text-5xl">Network</p>
+          <p className="font-tourney text-center text-4xl md:text-5xl">
+            Network
+          </p>
         </FadeIn>
         <FadeIn delay={0.15}>
-          <p className="description text-[19px] md:font-semibold text-center md:text-[20px] mb-8 mx-auto max-w-[421px]">
+          <p className="description font-semibold text-[19px] md:font-semibold text-center md:text-[20px] mb-8 mx-auto max-w-[421px]">
             Start Your Node with a Bonded ALICE NFT! Lock ALICE tokens in
             bonALICE to access one of Alice’s three node tiers.
           </p>

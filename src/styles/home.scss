@@ -1,6 +1,8 @@
 .plan-card {
   &__content {
     &__item {
+      @apply max-md:text-center;
+
       &__title {
         @apply text-[#000] mb-0 text-[20px];
       }

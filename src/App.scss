@@ -64,7 +64,7 @@ input[type=number] {
 
 @media (max-width: 768px) {
   .page {
-    min-height: calc(100vh - 70px) !important;
+    min-height: calc(100vh) !important;
   }
 }
 
@@ -84,7 +84,7 @@ input[type=number] {
   }
 
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[190px] mx-auto;
+  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[190px] mx-auto;
   min-height: calc(100vh);
 
   &--centered {

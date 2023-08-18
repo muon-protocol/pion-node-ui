@@ -3,7 +3,7 @@ import { MoveUpIn } from '../../animations';
 
 const PlanCard = ({
   plan,
-  className,
+  className = '',
   animationDelay,
 }: {
   plan: Plan;
@@ -11,17 +11,14 @@ const PlanCard = ({
   animationDelay: number;
 }) => {
   return (
-    <MoveUpIn
-      className={(className || '') + ' rounded-3xl'}
-      delay={animationDelay}
-    >
+    <MoveUpIn className={className + ' rounded-3xl'} delay={animationDelay}>
       <div className={`plan-card p-7 pb-7 pt-[120px] relative max-w-[430px]`}>
         <div
-          className={`plan-card__title-shadow absolute left-9 top-9 ${plan.shadowColor} font-semibold text-[40px]`}
+          className={`plan-card__title-shadow max-md:left-1/2 max-md:translate-x-[-42%] absolute left-9 top-9 ${plan.shadowColor} font-semibold text-[40px]`}
         >
           {plan.title}
         </div>
-        <div className="plan-card__title absolute left-9 top-9 -ml-1 text-black font-semibold text-[32px]">
+        <div className="plan-card__title max-md:left-1/2 max-md:-translate-x-1/2 absolute left-9 top-9 -ml-1 text-black font-semibold text-[32px]">
           {plan.title}
         </div>
         <div className="plan-card__content mb-1 flex flex-col gap-6">
