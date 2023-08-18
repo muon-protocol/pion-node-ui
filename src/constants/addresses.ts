@@ -19,7 +19,7 @@ export const LP_TOKEN_ADDRESS: AddressMap = {
 };
 
 export const REWARD_ADDRESS: AddressMap = {
-  [SupportedChainId.BSCTESTNET]: '0x50dB73A29349a37b496cA451E8D295Ee6C4265C0',
+  [SupportedChainId.BSCTESTNET]: '0x9C033bB4CD12F1378E50ABcdD8FB1fE5923d9557',
 };
 
 export const MUON_NODE_STAKING_ADDRESS: AddressMap = {

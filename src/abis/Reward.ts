@@ -173,12 +173,12 @@ export default [
   },
   {
     inputs: [
-      { internalType: 'address', name: 'muonTokenAddress', type: 'address' },
       {
         internalType: 'address',
-        name: 'bondedTokenAddress',
+        name: 'muonTokenAddress',
         type: 'address',
       },
+      { internalType: 'address', name: 'bondedTokenAddress', type: 'address' },
     ],
     name: 'initialize',
     outputs: [],
