@@ -91,7 +91,9 @@ const useNodeBonALICE = () => {
     if (!nodeIP || !nodeBonALICE) return;
     setIsGettingNodeStatusLoading(true);
     try {
-      const response = await getNodeStatusAPI(nodeIP);
+      // remove https:// and / at the end of the IP
+      const serverIP = nodeIP.replace('http://', '').replace('/', '');
+      const response = await getNodeStatusAPI(serverIP);
       if (response.success) {
         if (response.result.peerId) {
           setPeerId(response.result.peerId);
