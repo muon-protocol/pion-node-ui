@@ -18,7 +18,6 @@ import {
   useApproveArgs,
   useMintAndLockArgs,
 } from '../../hooks/useContractArgs.ts';
-import useClaimPrize from '../ClaimPrize/useActions.ts';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -39,6 +38,8 @@ const CreateActionContext = createContext<{
   setIsInsufficientModalOpen: (isOpen: boolean) => void;
   isSufficientModalOpen: boolean;
   setIsSufficientModalOpen: (isOpen: boolean) => void;
+  setNewNFTClaimedLoading: (value: boolean) => void;
+  newNFTClaimedLoading: boolean;
 }>({
   createAmount: w3bNumberFromString(''),
   createBoostAmount: w3bNumberFromString(''),
@@ -58,6 +59,8 @@ const CreateActionContext = createContext<{
   setIsInsufficientModalOpen: () => {},
   isSufficientModalOpen: false,
   setIsSufficientModalOpen: () => {},
+  setNewNFTClaimedLoading: () => {},
+  newNFTClaimedLoading: false,
 });
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
@@ -77,6 +80,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
   const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
+  const [newNFTClaimedLoading, setNewNFTClaimedLoading] = useState(false);
 
   const handleCreateAmountChange = (amount: string) => {
     setCreateAmount(w3bNumberFromString(amount));
@@ -123,17 +127,17 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const { setNewNFTClaimedLoading } = useClaimPrize();
-
   useEffect(() => {
     if (mintAndLockSuccess) {
       if (createAmount.dsp < 10000) {
         setIsInsufficientModalOpen(true);
       } else {
-        setNewNFTClaimedLoading(true);
-        setTimeout(() => {
-          setNewNFTClaimedLoading(false);
-        }, 10000);
+        if (!newNFTClaimedLoading) {
+          setNewNFTClaimedLoading(true);
+          setTimeout(() => {
+            setNewNFTClaimedLoading(false);
+          }, 10000);
+        }
         setIsSufficientModalOpen(true);
       }
       setCreateAmount(w3bNumberFromString(''));
@@ -242,6 +246,8 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setIsInsufficientModalOpen,
         isSufficientModalOpen,
         setIsSufficientModalOpen,
+        newNFTClaimedLoading,
+        setNewNFTClaimedLoading,
       }}
     >
       {children}

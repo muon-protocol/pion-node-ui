@@ -29,6 +29,7 @@ import toast from 'react-hot-toast';
 import { useRawRewardsFromPast } from '../../hooks/useRawRewardsFromPast.ts';
 import useRawRewards from '../../hooks/useRawRewards.ts';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
+import useCreateAction from '../CreateAction/useCreateAction.ts';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -64,8 +65,6 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: (isOpen: boolean) => void;
   isSufficientModalOpen: boolean;
   setIsSufficientModalOpen: (isOpen: boolean) => void;
-  setNewNFTClaimedLoading: (value: boolean) => void;
-  newNFTClaimedLoading: boolean;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -100,8 +99,6 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: () => {},
   isSufficientModalOpen: false,
   setIsSufficientModalOpen: () => {},
-  setNewNFTClaimedLoading: () => {},
-  newNFTClaimedLoading: false,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -126,7 +123,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [alreadyClaimedPrize, setAlreadyClaimedPrize] = useState(false);
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isReadyToClaim, setIsReadyToClaim] = useState(false);
-  const [newNFTClaimedLoading, setNewNFTClaimedLoading] = useState(false);
 
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
   const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
@@ -178,15 +174,19 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     showErrorToast: true,
   });
 
+  const { setNewNFTClaimedLoading, newNFTClaimedLoading } = useCreateAction();
+
   useEffect(() => {
     if (isSuccess) {
       if (totalRewards.dsp < 10000) {
         setIsInsufficientModalOpen(true);
       } else {
-        setNewNFTClaimedLoading(true);
-        setTimeout(() => {
-          setNewNFTClaimedLoading(false);
-        }, 10000);
+        if (!newNFTClaimedLoading) {
+          setNewNFTClaimedLoading(true);
+          setTimeout(() => {
+            setNewNFTClaimedLoading(false);
+          }, 10000);
+        }
         setIsSufficientModalOpen(true);
       }
       toast.success('Claimed successfully');
@@ -496,8 +496,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setIsInsufficientModalOpen,
         isSufficientModalOpen,
         setIsSufficientModalOpen,
-        newNFTClaimedLoading,
-        setNewNFTClaimedLoading,
       }}
     >
       {children}

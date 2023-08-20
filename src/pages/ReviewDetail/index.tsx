@@ -15,7 +15,7 @@ import { getTier } from '../../utils';
 import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect } from 'react';
-import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -324,7 +324,7 @@ const ReviewDetail = () => {
 const EmptyBonALICECard = () => {
   const navigate = useNavigate();
   const { stakerAddressInfo } = useNodeBonALICE();
-  const { newNFTClaimedLoading } = useClaimPrize();
+  const { newNFTClaimedLoading } = useCreateAction();
 
   return (
     <div className="absolute left-0 right-0 top-0 bottom-0 !z-100 backdrop-blur-[2px] bg-gray-75 flex flex-col justify-center items-center gap-8">
