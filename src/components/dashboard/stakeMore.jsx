@@ -8,13 +8,13 @@ export default function StakeMore() {
   const [balance, setBalance] = useState(0);
   const { address, isDisconnected, status } = useAccount();
   const { data } = useContractRead({
-    address: "0xF7688b8104Dfe59B381963582620Cd2d316bA7a5",
+    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
     abi: json,
     functionName: "users",
     args: [address],
   });
   useContractRead({
-    address: "0xF7688b8104Dfe59B381963582620Cd2d316bA7a5",
+    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
     abi: json,
     functionName: "valueOfBondedToken",
     args: [data && data[4]],
