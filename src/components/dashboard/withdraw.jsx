@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { styled } from "styled-components";
 
 const OrangeCard = styled.div`
@@ -8,12 +9,14 @@ const OrangeCard = styled.div`
   );
 `;
 export default function Withdraw() {
+  const selector = useSelector((state) => state.rootReducer.nodeReducer);
+
   const disable = true;
   return (
     <OrangeCard className=" w-fulzl rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
       <div className="flex justify-between">
         <h4>Reward</h4>
-        <b>6.6142 ALICE</b>
+        <b>{selector.reward} ALICE</b>
       </div>
       <div className="w-full flex justify-end">
         <button
