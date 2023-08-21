@@ -119,8 +119,10 @@ export const getNodeInfoData = async (walletAddress) => {
               var toDate = moment(valueTo["timestamp"] * 1000);
               var toMoment = moment(toDate);
               messages.push(
-                `${fromDate.format("YYYY-M-D H:m:s A")} until ${toDate.format(
-                  "YYYY-M-D H:m:s A"
+                `${fromDate.format(
+                  "YYYY-M-D HH:mm:ss A"
+                )} until ${toDate.format(
+                  "YYYY-M-D HH:mm:ss A"
                 )} for ${toMoment.to(fromMoment, true)}`
               );
               flag = false;

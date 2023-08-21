@@ -16,7 +16,7 @@ export default function TopBanner({ isVerify }) {
         <span className="text-xl font-normal">Uniqueness Verification:</span>
       </div>
       <h4 className="text-xl font-semibold">
-        {isVerify ? "Verified For starter Node" : "Not Verified"}
+        {isVerify ? "Verified for Starter Node" : "Not Verified"}
       </h4>
       <LightBtn onClick={() => router.push("/verification")}>
         Go to verification center
