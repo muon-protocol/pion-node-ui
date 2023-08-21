@@ -95,7 +95,7 @@ export const getNodeInfoData = async (walletAddress) => {
 
     if (nodeInfoData.nodeInfo["active"]) {
       nodeInfoData.nodeIsActive = nodeInfoData.nodeInfo.isNew
-        ? "Your node has been added to the network successfully. Its initialization will take a few minutes."
+        ? "Loading...(new node)"
         : tests["networking"] && tests["peerInfo"] && tests["status"]
         ? "Online"
         : "Offline";

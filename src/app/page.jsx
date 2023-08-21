@@ -11,6 +11,7 @@ import { addressToShort } from "@/utils/showAddress";
 import { useAccount } from "wagmi";
 import { fetchVerification } from "@/redux/features/verification";
 import { Loading } from "@/components/layout/Loading";
+import { useRouter } from "next/navigation";
 export function LightBtn({
   children,
   onClick,
@@ -56,10 +57,11 @@ export default function Home() {
       dispatch(fetchVerification(address));
     }
   }, [address]);
+  const router = useRouter();
 
   useEffect(() => {
     if (selector.isNew) {
-      window.location.replace("https://alice-v2.muon.net/dashboard");
+      router.push("/newNode");
     }
   }, [selector.isNew]);
 

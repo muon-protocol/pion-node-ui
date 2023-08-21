@@ -21,7 +21,7 @@ export default function NewNode() {
       if (selector.isNew) {
         setTryed(tryed + 1);
       } else {
-        router.push("/");
+        window.location.replace("https://alice-v2.muon.net/dashboard");
       }
     }, 15000);
   }, [tryed]);
