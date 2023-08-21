@@ -72,12 +72,23 @@ export const getNodeInfoData = async (walletAddress) => {
     } else {
       nodeInfoData.nodeInfo["endTime"] = false;
     }
-    nodeInfoData.nodeInfo["rewardAmount"] = Number(
-      web3.utils.fromWei(String(res["reward"]["earned"]), "ether")
-    ).toFixed(4);
+    try {
+      nodeInfoData.nodeInfo["rewardAmount"] = Number(
+        web3.utils.fromWei(
+          res["reward"]["earned"].toLocaleString("fullwide", {
+            useGrouping: false,
+          }),
+          "ether"
+        )
+      ).toFixed(4);
+    } catch (error) {
+      console.log(error);
+    }
     nodeInfoData.nodeInfo["nodeIP"] = res["node"]["ip"];
     nodeInfoData.nodeInfo["staked"] = web3.utils.fromWei(
-      res["reward"]["balance"],
+      res["reward"]["balance"].toLocaleString("fullwide", {
+        useGrouping: false,
+      }),
       "ether"
     );
     nodeInfoData.nodeInfo["onlinePercent"] = res["reward"]["onlinePercent"];
@@ -94,8 +105,9 @@ export const getNodeInfoData = async (walletAddress) => {
 
       var messages = [];
       for (var [i, valueFrom] of nodeInfoData.nodeInfo["history"].entries()) {
+        console.log("debug");
         if (!valueFrom["isOnline"]) {
-          var flag = true;
+          var flag = false;
           var from = valueFrom;
           // var fromDate = new Date(from["timestamp"] * 1000);
           var fromDate = moment(from["timestamp"] * 1000);
@@ -114,6 +126,8 @@ export const getNodeInfoData = async (walletAddress) => {
               );
               flag = false;
               break;
+            } else {
+              flag = true;
             }
           }
           if (flag) {

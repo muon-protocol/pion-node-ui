@@ -26,7 +26,7 @@ import { WarningBox } from "@/app/verification/page";
 
 function Step1({ setBrightIdStep }) {
   const dispatch = useDispatch();
-  dispatch(resetBrightIdTryed())
+  dispatch(resetBrightIdTryed());
   return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
@@ -69,10 +69,17 @@ function Step1({ setBrightIdStep }) {
 
       <div className="px-[60px] mt-20">
         <p>
-          Need help? check our <a className="underline text-myPrimary hover:cursor-pointer"> step-by-step guide</a>
+          Need help? check our{" "}
+          <a className="underline text-myPrimary hover:cursor-pointer">
+            {" "}
+            step-by-step guide
+          </a>
         </p>
-        <button onClick={() => setBrightIdStep(2)} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-1">
-        I Have BrightID Account
+        <button
+          onClick={() => setBrightIdStep(2)}
+          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-1"
+        >
+          I Have BrightID Account
         </button>
       </div>
     </div>
@@ -97,13 +104,18 @@ function Step2({ setBrightIdStep }) {
           <div className="">
             <p className="ml-2 text-lg">
               Join a verification party at &nbsp;
-              <a className="underline" target="_blank" href="https://meet.brightid.org" rel="noreferrer">
-                 meet.brightid.org/ 
-              </a> &nbsp;
-              and choose from one of the scheduled meetings that fit your
+              <a
+                className="underline"
+                target="_blank"
+                href="https://meet.brightid.org"
+                rel="noreferrer"
+              >
+                meet.brightid.org/
+              </a>{" "}
+              &nbsp; and choose from one of the scheduled meetings that fit your
               schedule. Once you&apos;ve successfully participated in a meeting,
-              you&apos;ll be granted the Meet Verification badge in your BrightID
-              app.
+              you&apos;ll be granted the Meet Verification badge in your
+              BrightID app.
             </p>
           </div>
         </div>
@@ -112,12 +124,14 @@ function Step2({ setBrightIdStep }) {
       <div className="px-[60px] mt-20 flex flex-wrap justify-center">
         <div className="flex">
           <WarningBox>
-
             Please note, it typically takes about 1 hour to receive you badge
             after the meeting.
           </WarningBox>
         </div>
-        <button onClick={() => setBrightIdStep(3)} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+        <button
+          onClick={() => setBrightIdStep(3)}
+          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+        >
           I have Meet verification Badge
         </button>
       </div>
@@ -128,9 +142,9 @@ function Step2({ setBrightIdStep }) {
 function Step3({ setBrightIdStep }) {
   const dispatch = useDispatch();
 
-  const { address, } = useAccount();
+  const { address } = useAccount();
   const staker = address;
-  const { data,  isSuccess, signMessage } = useSignMessage({
+  const { data, isSuccess, signMessage } = useSignMessage({
     message:
       "Please sign this message to verify ownership of your Ethereum address to verify its uniqueness for Muon.",
   });
@@ -175,23 +189,20 @@ function Step3({ setBrightIdStep }) {
   return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
-        
-
         <Image
           width="100"
           height="100"
           src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
-          ></Image>
-          
-          <div className="flex mt-10">
+        ></Image>
+
+        <div className="flex mt-10">
           <div className="w-fit">
             <span className="text-lg font-semibold">Step 3:</span>
           </div>
           <div className="w-fit">
             <p className="ml-2 text-lg">
-            Please verify your staking address
-              app.
+              Please verify your staking address app.
             </p>
           </div>
         </div>
@@ -205,7 +216,10 @@ function Step3({ setBrightIdStep }) {
       </div>
 
       <div className="px-[60px] mt-20 flex justify-center">
-        <button onClick={() => signMessage()} className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+        <button
+          onClick={() => signMessage()}
+          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+        >
           Verify Address
         </button>
       </div>
@@ -214,109 +228,107 @@ function Step3({ setBrightIdStep }) {
 }
 
 function Step4({ setBrightIdStep }) {
-  
   const dispatch = useDispatch();
   dispatch(resetErrorMessage());
-  const { address,  } = useAccount();
+  const { address } = useAccount();
   const staker = address;
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
-    );
+  );
   const brightidTryed = useSelector(
     (state) => state.rootReducer.verificationReducer.brightIdTryed
   );
   console.log(brightidTryed);
 
   const brigthReq = () => {
-    
     checkBrightIdConnection(staker)
-    .then((res) => {
-      const response = res.data;
-      console.log(res);
-      if (
-        response.success &&
-        (response.result.brightidAuraVerified ||
-          response.result.brightidMeetsVerified)
+      .then((res) => {
+        const response = res.data;
+        console.log(res);
+        if (
+          response.success &&
+          (response.result.brightidAuraVerified ||
+            response.result.brightidMeetsVerified)
         ) {
           dispatch(
             setBrightidAuraVerified(response.result.brightidMeetsVerified)
-            );
-            dispatch(
-              setBrightidMeetsVerified(response.result.brightidAuraVerified)
-              );
-              window.clearInterval(selector.interval);
-              setBrightIdStep(5);
-            } else if (!response.success && response.errorCode) {
-              dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
-              setBrightIdStep(6);
-              window.clearInterval(selector.interval);
-            } else {
-              dispatch(incBrightIdTryed(brightidTryed+1))
-              console.log('plus');
-              console.log(brightidTryed);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            dispatch(setErrorMessage(ERRORCODE["connection"]()))
-          })
-          .finally(() => {
-            console.log(brightidTryed);
-        if (brightidTryed >  3) {
+          );
+          dispatch(
+            setBrightidMeetsVerified(response.result.brightidAuraVerified)
+          );
+          window.clearInterval(selector.interval);
+          setBrightIdStep(5);
+        } else if (!response.success && response.errorCode) {
+          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
+          setBrightIdStep(6);
+          window.clearInterval(selector.interval);
+        } else {
+          dispatch(incBrightIdTryed(brightidTryed + 1));
+          console.log("plus");
+          console.log(brightidTryed);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(setErrorMessage(ERRORCODE["connection"]()));
+      })
+      .finally(() => {
+        console.log(brightidTryed);
+        if (brightidTryed > 3) {
           setBrightIdStep(6);
           window.clearInterval(selector.interval);
         }
       });
   };
-  
+
   useEffect(() => {
     checkBrightIdConnection(staker)
-    .then((res) => {
-      const response = res.data;
-      console.log(res);
-      if (
-        response.success &&
-        (response.result.brightidAuraVerified ||
-          response.result.brightidMeetsVerified)
+      .then((res) => {
+        const response = res.data;
+        console.log(res);
+        if (
+          response.success &&
+          (response.result.brightidAuraVerified ||
+            response.result.brightidMeetsVerified)
         ) {
           dispatch(
             setBrightidAuraVerified(response.result.brightidAuraVerified)
-            );
-            dispatch(
-              setBrightidMeetsVerified(response.result.brightidMeetsVerified)
-              );
-              setBrightIdStep(5);
-            } else if (!response.success && response.errorCode) {
-              dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
-              setBrightIdStep(6);
-      } else {
-        setTimeout(() => {
-          dispatch(incBrightIdTryed(brightidTryed+1))
-        }, 5000);
-              console.log('plus');
-              console.log(brightidTryed);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            dispatch(setErrorMessage(ERRORCODE["connection"]()))
-          })
-          .finally(() => {
-            console.log(brightidTryed);
+          );
+          dispatch(
+            setBrightidMeetsVerified(response.result.brightidMeetsVerified)
+          );
+          setBrightIdStep(5);
+        } else if (!response.success && response.errorCode) {
+          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
+          setBrightIdStep(6);
+        } else {
+          setTimeout(() => {
+            dispatch(incBrightIdTryed(brightidTryed + 1));
+          }, 5000);
+          console.log("plus");
+          console.log(brightidTryed);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(setErrorMessage(ERRORCODE["connection"]()));
+      })
+      .finally(() => {
+        console.log(brightidTryed);
         if (brightidTryed > 12 * 3) {
           setBrightIdStep(6);
           window.clearInterval(selector.interval);
         }
       });
   }, [brightidTryed]);
-    
-    const verifyLink = () => {
-      dispatch(resetBrightIdTryed())
-      dispatch(resetErrorMessage());
-      dispatch(incBrightIdTryed(brightidTryed+1))
-    };
-    
-    return (
+
+  const verifyLink = () => {
+    dispatch(resetBrightIdTryed());
+    dispatch(resetErrorMessage());
+    dispatch(incBrightIdTryed(brightidTryed + 1));
+  };
+
+  return (
     <div className="grid content-between pb-4">
       <div className="flex flex-wrap">
         <div className="flex mt-10">
@@ -324,21 +336,27 @@ function Step4({ setBrightIdStep }) {
           <p className="ml-2 text-lg">Open app and scan the QR Code below</p>
         </div>
         <div className="mx-auto mt-6">
-          <QRCode value={`brightid://link-verification/http:%2F%2Fbrightid2.idealmoney.io/Muon/${selector.brightidContexId}`} size={150}></QRCode>
+          <QRCode
+            value={`brightid://link-verification/http:%2F%2Fbrightid2.idealmoney.io/Muon/${selector.brightidContexId}`}
+            size={150}
+          ></QRCode>
         </div>
         <div className="flex mt-10">
           <span className="min-w-max text-lg font-semibold">Step 5:</span>
           <p className="ml-2 text-lg">
-            After scanning the QR code, wait until you the &quot;Successfully linked&quot;
-            message in the app. next, click on the &apos;Verify Link&apos; button. This
-            confirms the connection between your BrightID and Alice, completing
-            the linking process.
+            After scanning the QR code, wait until you the &quot;Successfully
+            linked&quot; message in the app. next, click on the &apos;Verify
+            Link&apos; button. This confirms the connection between your
+            BrightID and Alice, completing the linking process.
           </p>
         </div>
       </div>
 
       <div className="px-[60px] mt-8 flex justify-center">
-        <button onClick={() => verifyLink()} className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2">
+        <button
+          onClick={() => verifyLink()}
+          className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+        >
           Verify Link
         </button>
       </div>
@@ -367,8 +385,8 @@ function Step5() {
         </div>
       </div>
       <p className="px-10 text-center mt-10">
-        Congratulations! You&apos;ve passed the BrightID meet verification. You now
-        have the access to run Alice Starter node.
+        Congratulations! You&apos;ve passed the BrightID meet verification. You
+        now have the access to run Alice Starter node.
       </p>
       <button
         className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
@@ -420,8 +438,6 @@ function Step6() {
 }
 
 export default function BrightIdModal({ isActive }) {
-  
-
   const [brightIdStep, setBrightIdStep] = useState(1);
   useEffect(() => {
     const myModalEl = document.getElementById("brightidModal");
@@ -429,24 +445,23 @@ export default function BrightIdModal({ isActive }) {
       setBrightIdStep(1);
     });
   });
-  useEffect(() => {
-    const init = async () => {
-      const { Collapse, Modal, Ripple, initTE } = await import("tw-elements");
-      initTE({ Collapse, Modal, Ripple });
-    };
-    init();
-  }, []);
+  // useEffect(() => {
+  //   const init = async () => {
+  //     const { Collapse, Modal, Ripple, initTE } = await import("tw-elements");
+  //     initTE({ Collapse, Modal, Ripple });
+  //   };
+  //   init();
+  // }, []);
   return (
     <div className="flex">
       <button
         className={`flex  ${
-          isActive ? "bg-pacificBlue text-white" : "bg-primary13"
+          isActive
+            ? "bg-pacificBlue text-white"
+            : "bg-primary13 text-primary hover:bg-primary-20 active:bg-primary-50"
         }  rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
-        
         data-te-toggle="modal"
         data-te-target="#brightidModal"
-        data-te-ripple-init
-        data-te-ripple-color="light"
       >
         {isActive ? "Verification passed!" : "Pass verification"}
       </button>

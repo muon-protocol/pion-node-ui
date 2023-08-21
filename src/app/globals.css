@@ -27,7 +27,7 @@
 
 body {
   background: #F8FAFF;
-  background-image: url("/blur-background.svg");
+  background-image: url("/dashboard/blur-background.svg");
   background-size: cover;
   font-family: 'Inter', sans-serif !important;
   color: #323245;

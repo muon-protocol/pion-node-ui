@@ -27,9 +27,8 @@ function Aura() {
           width="10"
           height="10"
         ></Image>
-        <span className="font-medium">
-        Pion Pro:
-        </span> <span className="text-[#6A3805]  font-semibold">bronze</span>
+        <span className="font-medium">Pion Pro:</span>{" "}
+        <span className="text-[#6A3805]  font-semibold">bronze</span>
       </span>
       <span className="flex ml-4">
         <Image
@@ -38,10 +37,8 @@ function Aura() {
           width="10"
           height="10"
         ></Image>
-        <span className="font-medium">
-        Pion Master:
-        </span>
-         <span className=" text-[#989898] font-semibold">Silver</span>
+        <span className="font-medium">Pion Master:</span>
+        <span className=" text-[#989898] font-semibold">Silver</span>
       </span>
     </div>
   );
@@ -53,10 +50,11 @@ export default function NormalVerificationCard({
   data,
   onClick,
   children,
+  disable,
 }) {
   return (
     <div
-      className={` ${
+      className={` ${disable && "opacity-50"} ${
         isActive ? "bg-pacificBlue/30" : "bg-primary13"
       } w-full grid grid-cols-1 rounded-[10px] min-h-[116px] content-between py-2 px-4`}
     >
@@ -70,6 +68,7 @@ export default function NormalVerificationCard({
           children
         ) : (
           <LightBtn
+            disable={disable}
             textColor={isActive ? "text-white" : ""}
             bgColor={isActive ? "bg-pacificBlue" : ""}
             onClick={onClick}

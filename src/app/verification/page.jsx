@@ -1,7 +1,7 @@
 "use client";
 import { Loading } from "@/components/layout/Loading";
 import BrightIdModal from "@/components/verification/brightIdModal";
-import { discordVerified } from "@/components/verification/discord";
+import DiscordVerified from "@/components/verification/discord";
 import NormalVerificationCard from "@/components/verification/normalVerificationCard";
 import PassVerification from "@/components/verification/passVerification";
 import TelegramModal from "@/components/verification/telegramModal";
@@ -84,13 +84,12 @@ export default function Verification() {
         <NormalVerificationCard
           title="Active Community Member (Discord)"
           isActive={selector.discordVerified}
-          onClick={() => discordVerified(address)}
-        ></NormalVerificationCard>
-        <NormalVerificationCard
-          title="BrightID Aura Verification"
-          data={true}
-          isActive={selector.brightidAuraVerified}
-        ></NormalVerificationCard>
+        >
+          <DiscordVerified
+            signer={address}
+            isActive={selector.discordVerified}
+          ></DiscordVerified>
+        </NormalVerificationCard>
         <NormalVerificationCard
           title="BrightID Meet Verification"
           isActive={selector.brightidMeetsVerified}
@@ -103,6 +102,12 @@ export default function Verification() {
           title="Gitcoin Passport"
           isActive={selector.gitcoinPassportVerified}
           onClick={() => router.push(`/gitcoin?staker=${address}`)}
+        ></NormalVerificationCard>
+        <NormalVerificationCard
+          title="BrightID Aura Verification"
+          data={true}
+          disable={true}
+          isActive={selector.brightidAuraVerified}
         ></NormalVerificationCard>
       </div>
     </div>

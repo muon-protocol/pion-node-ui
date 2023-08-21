@@ -11,15 +11,25 @@ import { addressToShort } from "@/utils/showAddress";
 import { useAccount } from "wagmi";
 import { fetchVerification } from "@/redux/features/verification";
 import { Loading } from "@/components/layout/Loading";
-export function LightBtn({ children, onClick, className, bgColor, textColor }) {
+export function LightBtn({
+  children,
+  onClick,
+  className,
+  bgColor,
+  textColor,
+  disable,
+}) {
   return (
     <button
+      disabled={disable}
       onClick={onClick}
       className={`inline-block rounded-[8px] ${
         bgColor ? bgColor : "bg-primary13"
       }  ${
         textColor ? textColor : "text-primary"
-      } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out hover:bg-primary-20  active:bg-primary-50 ${className}`}
+      } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out ${
+        disable ? "opacity-50" : "hover:bg-primary-20 active:bg-primary-50"
+      }   ${className}`}
     >
       {children}
     </button>
@@ -28,7 +38,7 @@ export function LightBtn({ children, onClick, className, bgColor, textColor }) {
 
 export default function Home() {
   const dispatch = useDispatch();
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, isDisconnected } = useAccount();
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const verificationData = useSelector(
     (state) => state.rootReducer.verificationReducer
@@ -58,7 +68,7 @@ export default function Home() {
   }
 
   return (
-    <div>
+    <div className={`${isDisconnected ? "opacity-50" : ""}`} aria-disabled>
       <TopBanner isVerify={isVerify}></TopBanner>
       <div className="grid grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>

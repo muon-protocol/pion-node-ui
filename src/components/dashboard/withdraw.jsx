@@ -8,6 +8,7 @@ const OrangeCard = styled.div`
   );
 `;
 export default function Withdraw() {
+  const disable = true;
   return (
     <OrangeCard className=" w-fulzl rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
       <div className="flex justify-between">
@@ -16,8 +17,12 @@ export default function Withdraw() {
       </div>
       <div className="w-full flex justify-end">
         <button
-          disabled={true}
-          className={`inline-block rounded-[8px] bg-[#FEEFE9] text-[#f59569] px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30 }`}
+          disabled={disable}
+          className={`inline-block rounded-[8px] bg-[#FEEFE9] text-[#f59569] px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out ${
+            disable
+              ? "opacity-50"
+              : " hover:bg-mysecondary/10  active:bg-mysecondary/30"
+          }   }`}
         >
           Withdraw
         </button>

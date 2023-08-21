@@ -12,7 +12,6 @@ export default function StakeMore() {
     abi: json,
     functionName: "users",
     args: [address],
-    
   });
   useContractRead({
     address: "0xF7688b8104Dfe59B381963582620Cd2d316bA7a5",
@@ -36,7 +35,7 @@ export default function StakeMore() {
         <b>{balance}</b>
       </div>
       <div className="w-full flex justify-end">
-        <LightBtn>Upgrade</LightBtn>
+        <LightBtn disable={true}>Upgrade</LightBtn>
       </div>
     </div>
   );

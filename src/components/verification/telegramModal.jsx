@@ -74,8 +74,9 @@ function Step3() {
         </div>
       </div>
       <p className="px-10 text-center mt-10">
-        Sorry, it looks like you haven&apos;t met our activity requirement. Please
-        consider trying another verification method {selector.errorMessage}
+        Sorry, it looks like you haven&apos;t met our activity requirement.
+        Please consider trying another verification method{" "}
+        {selector.errorMessage}
       </p>
       <button
         onClick={router.push("/verification")}
@@ -92,7 +93,7 @@ function Step3() {
 export default function TelegramModal({ isActive }) {
   const dispatch = useDispatch();
   const [telegramStep, setTelegramStep] = useState(1);
-  const { address,  } = useAccount();
+  const { address } = useAccount();
   const staker = address;
   const telegramCallbackFunction = (user) => {
     dispatch(resetErrorMessage());
@@ -134,13 +135,12 @@ export default function TelegramModal({ isActive }) {
     <div className="flex">
       <button
         className={`flex ${
-          isActive ? "bg-pacificBlue text-white" : "bg-primary13"
+          isActive
+            ? "bg-pacificBlue text-white"
+            : "bg-primary13 text-primary hover:bg-primary-20 active:bg-primary-50"
         } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
-        
         data-te-toggle="modal"
         data-te-target="#telegramModal"
-        data-te-ripple-init
-        data-te-ripple-color="light"
       >
         {isActive ? "Verification passed!" : "Pass verification"}
       </button>
