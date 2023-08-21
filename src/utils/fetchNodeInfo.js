@@ -105,14 +105,13 @@ export const getNodeInfoData = async (walletAddress) => {
 
       var messages = [];
       for (var [i, valueFrom] of nodeInfoData.nodeInfo["history"].entries()) {
-        console.log("debug");
         if (!valueFrom["isOnline"]) {
           var flag = false;
           var from = valueFrom;
           // var fromDate = new Date(from["timestamp"] * 1000);
           var fromDate = moment(from["timestamp"] * 1000);
           var fromMoment = moment(fromDate);
-          for (var [valueTo] of nodeInfoData.nodeInfo["history"]
+          for (var [j, valueTo] of nodeInfoData.nodeInfo["history"]
             .slice(i)
             .entries()) {
             if (valueTo["isOnline"]) {
