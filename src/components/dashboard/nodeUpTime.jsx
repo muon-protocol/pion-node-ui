@@ -26,7 +26,7 @@ export default function NodeUpTime(props) {
       <div className="w-[50%] content-between grid justify-center">
         <div className="text-center">
           <h4>Status</h4>
-          <b>{selector.active ? "Online" : "Offline"}</b>
+          <b>{selector.nodeIsActive}</b>
         </div>
         <DynamicComponent></DynamicComponent>
       </div>
