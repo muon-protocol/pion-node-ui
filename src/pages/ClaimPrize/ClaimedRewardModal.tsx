@@ -1,10 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { sidebarItems } from '../../data/constants.ts';
+import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
+import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 
 const ClaimedRewardModal = ({ operation }: { operation: string }) => {
   const navigate = useNavigate();
   const { setSelectedAction } = useActions();
+  const { setIsSufficientModalOpen: createModal } = useCreateAction();
+  const { setIsSufficientModalOpen: claimModal } = useClaimPrize();
 
   return (
     <div className="px-3 flex flex-col justify-center items-center">
@@ -17,7 +21,11 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         Your BonALICE has been {operation} successfully. now you can
         <br />
         <button
-          onClick={() => navigate('/review')}
+          onClick={() => {
+            createModal(false);
+            claimModal(false);
+            navigate('/review');
+          }}
           className="btn btn--primary mb-2 mt-5 mx-auto"
         >
           Setup Your Node
@@ -27,6 +35,8 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         <span
           onClick={() => {
             setSelectedAction(sidebarItems[1].link);
+            createModal(false);
+            claimModal(false);
             navigate('/create');
           }}
           className="text-primary hover:underline cursor-pointer"

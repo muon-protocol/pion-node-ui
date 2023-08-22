@@ -1,6 +1,8 @@
 import { sidebarItems } from '../../data/constants.ts';
 import { useNavigate } from 'react-router-dom';
 import useActions from '../../contexts/Actions/useActions.ts';
+import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
+import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 
 const InsufficientNFTAmoutModalBody = ({
   operation,
@@ -9,6 +11,8 @@ const InsufficientNFTAmoutModalBody = ({
 }) => {
   const navigate = useNavigate();
   const { setSelectedAction } = useActions();
+  const { setIsInsufficientModalOpen: createModal } = useCreateAction();
+  const { setIsInsufficientModalOpen: claimModal } = useClaimPrize();
 
   return (
     <div className="px-3 flex flex-col justify-center items-center">
@@ -25,6 +29,8 @@ const InsufficientNFTAmoutModalBody = ({
       <button
         onClick={() => {
           setSelectedAction(sidebarItems[1].link);
+          createModal(false);
+          claimModal(false);
           navigate('/create');
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
