@@ -169,10 +169,7 @@ export const RenderUpgradeBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance &&
-          ALICEAllowance.big < upgradeAmount.big &&
-          ALICEBalance &&
-          ALICEBalance.dsp > upgradeAmount.dsp ? (
+        ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -184,9 +181,7 @@ export const RenderUpgradeBody = () => {
               : 'All ALICEs'}
           </button>
         ) : LPTokenAllowance &&
-          LPTokenAllowance.big < upgradeBoostAmount.big &&
-          LPTokenBalance &&
-          LPTokenBalance.dsp > upgradeBoostAmount.dsp ? (
+          LPTokenAllowance.big < upgradeBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"

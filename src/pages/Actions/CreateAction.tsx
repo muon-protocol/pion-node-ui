@@ -145,10 +145,7 @@ export const RenderCreateBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance &&
-          ALICEAllowance.big < createAmount.big &&
-          ALICEBalance &&
-          ALICEBalance.dsp > createAmount.dsp ? (
+        ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -159,10 +156,7 @@ export const RenderCreateBody = () => {
               ? createAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
-        ) : LPTokenAllowance &&
-          LPTokenAllowance.big < createBoostAmount.big &&
-          LPTokenBalance &&
-          LPTokenBalance.dsp > createBoostAmount.dsp ? (
+        ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
