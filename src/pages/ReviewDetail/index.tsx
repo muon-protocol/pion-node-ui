@@ -16,6 +16,7 @@ import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect } from 'react';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
+import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -45,6 +46,7 @@ const ReviewDetail = () => {
   const reviewDetailCard = () => {
     return (
       <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden">
+        <ConnectWalletModal redirectRoute="/get-started" />
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
