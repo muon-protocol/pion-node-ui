@@ -83,20 +83,6 @@ export default [
   {
     anonymous: false,
     inputs: [
-      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
-      {
-        indexed: false,
-        internalType: 'uint64',
-        name: 'roleId',
-        type: 'uint64',
-      },
-    ],
-    name: 'NodeRoleAdded',
-    type: 'event',
-  },
-  {
-    anonymous: false,
-    inputs: [
       { indexed: true, internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
         indexed: true,
@@ -233,13 +219,6 @@ export default [
       },
     ],
     name: 'addNode',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'bytes32', name: 'role', type: 'bytes32' }],
-    name: 'addNodeRole',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -391,12 +370,7 @@ export default [
         name: '',
         type: 'uint64',
       },
-      { internalType: 'uint64', name: '', type: 'uint64' },
-      {
-        internalType: 'string[]',
-        name: '',
-        type: 'string[]',
-      },
+      { internalType: 'string[]', name: '', type: 'string[]' },
     ],
     stateMutability: 'view',
     type: 'function',
@@ -504,13 +478,6 @@ export default [
   },
   {
     inputs: [],
-    name: 'lastRoleId',
-    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'lastUpdateTime',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
@@ -572,9 +539,9 @@ export default [
     inputs: [
       { internalType: 'uint64', name: 'nodeId', type: 'uint64' },
       {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
+        internalType: 'uint64',
+        name: 'roleId',
+        type: 'uint64',
       },
     ],
     name: 'nodeHasRole',
@@ -655,13 +622,6 @@ export default [
     name: 'revokeRole',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    name: 'roleIds',
-    outputs: [{ internalType: 'uint64', name: '', type: 'uint64' }],
-    stateMutability: 'view',
     type: 'function',
   },
   {

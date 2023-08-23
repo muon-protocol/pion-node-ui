@@ -29,7 +29,7 @@ export default [
     anonymous: false,
     inputs: [
       {
-        indexed: false,
+        indexed: true,
         internalType: 'string',
         name: 'functionName',
         type: 'string',
@@ -176,7 +176,7 @@ export default [
         type: 'uint256',
       },
       {
-        indexed: false,
+        indexed: true,
         internalType: 'uint256',
         name: 'periodStart',
         type: 'uint256',
@@ -306,7 +306,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      { indexed: false, internalType: 'uint8', name: 'tier', type: 'uint8' },
+      { indexed: true, internalType: 'uint8', name: 'tier', type: 'uint8' },
       {
         indexed: false,
         internalType: 'uint256',
@@ -335,13 +335,6 @@ export default [
     ],
     name: 'Withdrawn',
     type: 'event',
-  },
-  {
-    inputs: [],
-    name: 'ADMIN_ROLE',
-    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
-    stateMutability: 'view',
-    type: 'function',
   },
   {
     inputs: [],
@@ -520,10 +513,10 @@ export default [
     inputs: [
       {
         internalType: 'address',
-        name: 'muonTokenAddress',
+        name: '_muonTokenAddress',
         type: 'address',
       },
-      { internalType: 'address', name: 'nodeManagerAddress', type: 'address' },
+      { internalType: 'address', name: '_nodeManagerAddress', type: 'address' },
       {
         internalType: 'uint256',
         name: '_muonAppId',
@@ -542,7 +535,7 @@ export default [
         name: '_muonPublicKey',
         type: 'tuple',
       },
-      { internalType: 'address', name: 'bondedTokenAddress', type: 'address' },
+      { internalType: 'address', name: '_bondedTokenAddress', type: 'address' },
     ],
     name: 'initialize',
     outputs: [],
@@ -827,7 +820,7 @@ export default [
         type: 'uint8',
       },
     ],
-    name: 'setMuonNodeTier',
+    name: 'setMuonNodeTire',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',

@@ -277,12 +277,15 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   ]);
 
   useEffect(() => {
-    getClaimSignatureFromPast();
+    if (valid) {
+      getClaimSignatureFromPast();
+    }
   }, [
     walletAddress,
     getClaimSignatureFromPast,
     claimSignature,
     userClaimedReward,
+    valid,
   ]);
 
   const handleClaimReward = useCallback(async () => {
