@@ -7,6 +7,7 @@ import PassVerification from "@/components/verification/passVerification";
 import TelegramModal from "@/components/verification/telegramModal";
 import TitleInfo from "@/components/verification/titleInfo";
 import { fetchVerification } from "@/redux/features/verification";
+import { LiveChatWidget } from "@livechat/widget-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -110,6 +111,10 @@ export default function Verification() {
           isActive={selector.brightidAuraVerified}
         ></NormalVerificationCard>
       </div>
+      <LiveChatWidget
+        license="15138837"
+        visibility="minimized"
+      ></LiveChatWidget>
     </div>
   );
 }

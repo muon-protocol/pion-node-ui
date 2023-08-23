@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { LiveChatWidget } from "@livechat/widget-react";
 
 export default function NewNode() {
   const dispatch = useDispatch();
@@ -40,6 +41,10 @@ export default function NewNode() {
           <Lottie animationData={loading}></Lottie>
         </div>
       </div>
+      <LiveChatWidget
+        license="15138837"
+        visibility="minimized"
+      ></LiveChatWidget>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { addressToShort } from "@/utils/showAddress";
+import { LiveChatWidget } from "@livechat/widget-react";
 
 export function BackToVerificationBtn({ children, className }) {
   const router = useRouter();
@@ -121,6 +122,10 @@ export default function PresalePage() {
         <BackToVerificationBtn>Back to dashboard</BackToVerificationBtn>
       </div>
       <Presale></Presale>
+      <LiveChatWidget
+        license="15138837"
+        visibility="minimized"
+      ></LiveChatWidget>
     </div>
   );
 }

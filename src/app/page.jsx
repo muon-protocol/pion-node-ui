@@ -12,6 +12,7 @@ import { useAccount } from "wagmi";
 import { fetchVerification } from "@/redux/features/verification";
 import { Loading } from "@/components/layout/Loading";
 import { useRouter } from "next/navigation";
+import { LiveChatWidget } from "@livechat/widget-react";
 export function LightBtn({
   children,
   onClick,
@@ -86,6 +87,10 @@ export default function Home() {
         <StakeMore></StakeMore>
         <Withdraw></Withdraw>
       </div>
+      <LiveChatWidget
+        license="15138837"
+        visibility="minimized"
+      ></LiveChatWidget>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import styles from "@/app/style.module.css";
 import Image from "next/image";
 import { WarningBox } from "../verification/page";
+import { LiveChatWidget } from "@livechat/widget-react";
 
 export default function DiscordVerification() {
   const searchParams = useSearchParams();
@@ -77,6 +78,10 @@ export default function DiscordVerification() {
             <WarningBox>Requirement: a few messages before 27th Feb</WarningBox>
           </>
         )}
+        <LiveChatWidget
+          license="15138837"
+          visibility="minimized"
+        ></LiveChatWidget>
       </div>
     );
   }
