@@ -50,7 +50,13 @@ export default function Verification() {
     (state) => state.rootReducer.verificationReducer
   );
   const dispatch = useDispatch();
-  const { address } = useAccount();
+  const { address, isDisconnected } = useAccount();
+
+  useEffect(() => {
+    if (isDisconnected) {
+      window.location.replace("https://alice-v2.muon.net");
+    }
+  }, [isDisconnected]);
 
   useEffect(() => {
     dispatch(fetchVerification(address));

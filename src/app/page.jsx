@@ -52,6 +52,12 @@ export default function Home() {
     verificationData.gitcoinPassportVerified ||
     verificationData.presaleVerified ||
     verificationData.telegramVerified;
+
+  useEffect(() => {
+    if (isDisconnected) {
+      window.location.replace("https://alice-v2.muon.net");
+    }
+  }, [isDisconnected]);
   useEffect(() => {
     if (isConnected) {
       dispatch(fetchNodeInfo(address));
