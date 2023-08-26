@@ -20,9 +20,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount, useSignMessage } from "wagmi";
 import Style from "@/app/style.module.css";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import QRCode from "react-qr-code";
 import { WarningBox } from "@/app/verification/page";
+import { CustomConnectButton } from "../layout/CustomConnectButton";
 
 function Step1({ setBrightIdStep }) {
   const dispatch = useDispatch();
@@ -211,7 +211,7 @@ function Step3({ setBrightIdStep }) {
           <p className="ml-2">Please verify your staking address</p>
         </div> */}
         <div className="w-full flex justify-center mt-8">
-          <ConnectButton></ConnectButton>
+          <CustomConnectButton></CustomConnectButton>
         </div>
       </div>
 
@@ -240,86 +240,48 @@ function Step4({ setBrightIdStep }) {
   );
   console.log(brightidTryed);
 
-  const brigthReq = () => {
-    checkBrightIdConnection(staker)
-      .then((res) => {
-        const response = res.data;
-        console.log(res);
-        if (
-          response.success &&
-          (response.result.brightidAuraVerified ||
-            response.result.brightidMeetsVerified)
-        ) {
-          dispatch(
-            setBrightidAuraVerified(response.result.brightidMeetsVerified)
-          );
-          dispatch(
-            setBrightidMeetsVerified(response.result.brightidAuraVerified)
-          );
-          window.clearInterval(selector.interval);
-          setBrightIdStep(5);
-        } else if (!response.success && response.errorCode) {
-          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
-          setBrightIdStep(6);
-          window.clearInterval(selector.interval);
-        } else {
-          dispatch(incBrightIdTryed(brightidTryed + 1));
-          console.log("plus");
-          console.log(brightidTryed);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(setErrorMessage(ERRORCODE["connection"]()));
-      })
-      .finally(() => {
-        console.log(brightidTryed);
-        if (brightidTryed > 3) {
-          setBrightIdStep(6);
-          window.clearInterval(selector.interval);
-        }
-      });
-  };
-
   useEffect(() => {
-    checkBrightIdConnection(staker)
-      .then((res) => {
-        const response = res.data;
-        console.log(res);
-        if (
-          response.success &&
-          (response.result.brightidAuraVerified ||
-            response.result.brightidMeetsVerified)
-        ) {
-          dispatch(
-            setBrightidAuraVerified(response.result.brightidAuraVerified)
-          );
-          dispatch(
-            setBrightidMeetsVerified(response.result.brightidMeetsVerified)
-          );
-          setBrightIdStep(5);
-        } else if (!response.success && response.errorCode) {
-          dispatch(setErrorMessage(ERRORCODE[response.errorCode]("BrightID")));
-          setBrightIdStep(6);
-        } else {
-          setTimeout(() => {
-            dispatch(incBrightIdTryed(brightidTryed + 1));
-          }, 5000);
-          console.log("plus");
+    if (brightidTryed) {
+      checkBrightIdConnection(staker)
+        .then((res) => {
+          const response = res.data;
+          console.log(res);
+          if (
+            response.success &&
+            (response.result.brightidAuraVerified ||
+              response.result.brightidMeetsVerified)
+          ) {
+            dispatch(
+              setBrightidAuraVerified(response.result.brightidAuraVerified)
+            );
+            dispatch(
+              setBrightidMeetsVerified(response.result.brightidMeetsVerified)
+            );
+            setBrightIdStep(5);
+          } else if (!response.success && response.errorCode) {
+            dispatch(
+              setErrorMessage(ERRORCODE[response.errorCode]("BrightID"))
+            );
+            setBrightIdStep(6);
+          } else {
+            setTimeout(() => {
+              dispatch(incBrightIdTryed(brightidTryed + 1));
+            }, 5000);
+            console.log("plus");
+            console.log(brightidTryed);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          dispatch(setErrorMessage(ERRORCODE["connection"]()));
+        })
+        .finally(() => {
           console.log(brightidTryed);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch(setErrorMessage(ERRORCODE["connection"]()));
-      })
-      .finally(() => {
-        console.log(brightidTryed);
-        if (brightidTryed > 12 * 3) {
-          setBrightIdStep(6);
-          window.clearInterval(selector.interval);
-        }
-      });
+          if (brightidTryed > 12 * 3) {
+            setBrightIdStep(6);
+          }
+        });
+    }
   }, [brightidTryed]);
 
   const verifyLink = () => {
