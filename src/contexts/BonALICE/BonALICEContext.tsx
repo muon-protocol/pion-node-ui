@@ -20,6 +20,7 @@ import { BonALICE, RawBonALICE } from '../../types';
 import useRefresh from '../Refresh/useRefresh.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
 import useAllowance from '../../hooks/useAllowance.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
@@ -53,6 +54,8 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { allowance: LPTokenAllowance } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
   );
+
+  const { nodeBonALICE } = useMuonNodeStaking();
 
   const [fetchBonALICEIsLoading, setFetchBonALICEIsLoading] = useState(false);
 
@@ -128,7 +131,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   return (
     <BonALICEContext.Provider
       value={{
-        bonALICEs,
+        bonALICEs: [...nodeBonALICE, ...bonALICEs],
         handleCreateBonALICEClicked,
         balance,
         isError,
