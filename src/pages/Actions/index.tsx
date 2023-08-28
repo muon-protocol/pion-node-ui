@@ -9,21 +9,34 @@ import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaki
 import { Plans } from './Plans.tsx';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { ActionType } from '../../types';
+import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
-  const { muonNodeStakingUsers } = useMuonNodeStaking();
+  const { setUpgradeModalSelectedBonALICE } = useUpgradeAction();
+  const { muonNodeStakingUsers, nodeBonALICE } = useMuonNodeStaking();
   const { setSelectedAction } = useActions();
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
         window.open('/dashboard', '_self');
-      } else {
+      } else if (
+        muonNodeStakingUsers &&
+        muonNodeStakingUsers[4] > BigInt(0) &&
+        nodeBonALICE.length > 0
+      ) {
         setSelectedAction(ActionType.UPGRADE);
+        setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
       }
     }
-  }, [stakerAddressInfo, muonNodeStakingUsers, setSelectedAction]);
+  }, [
+    stakerAddressInfo,
+    muonNodeStakingUsers,
+    setSelectedAction,
+    nodeBonALICE,
+    setUpgradeModalSelectedBonALICE,
+  ]);
 
   return (
     <div className="page__bg">

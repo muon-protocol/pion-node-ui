@@ -36,6 +36,7 @@ const UpgradeActionContext = createContext<{
   handleApproveLPTokenClicked: () => void;
   isAllowanceModalOpen: boolean;
   closeAllowanceModal: () => void;
+  setUpgradeModalSelectedBonALICE: (bonALICE: BonALICE) => void;
 }>({
   isUpgradeModalOpen: false,
   openUpgradeModal: () => {},
@@ -56,6 +57,7 @@ const UpgradeActionContext = createContext<{
   handleApproveLPTokenClicked: () => {},
   isAllowanceModalOpen: false,
   closeAllowanceModal: () => {},
+  setUpgradeModalSelectedBonALICE: () => {},
 });
 
 const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -256,6 +258,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           approveLPTokenIsTransactionLoading,
         handleApproveALICEClicked,
         handleApproveLPTokenClicked,
+        setUpgradeModalSelectedBonALICE,
       }}
     >
       {children}
