@@ -16,8 +16,7 @@ const Actions = () => {
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
-      if (muonNodeStakingUsers && muonNodeStakingUsers[0] === BigInt(0)) {
-        console.log(muonNodeStakingUsers);
+      if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
         window.open('/dashboard', '_self');
       }
     }

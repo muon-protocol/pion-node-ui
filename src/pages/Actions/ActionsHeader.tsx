@@ -21,7 +21,7 @@ const ActionsHeader = () => {
       {/*  </p>*/}
       {/*</div>*/}
 
-      {muonNodeStakingUsers && muonNodeStakingUsers[0] !== BigInt(0) && (
+      {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
         <div
           className="ml-auto flex gap-1.5 items-center cursor-pointer"
           onClick={() => window.open('/dashboard', '_self')}

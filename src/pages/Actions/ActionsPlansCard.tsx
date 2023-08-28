@@ -1,5 +1,5 @@
 import { Plan } from '../../types';
-import { Scale } from '../../animations';
+import { FadeIn } from '../../animations';
 
 export const ActionsPlansCard = ({
   plan,
@@ -17,7 +17,7 @@ export const ActionsPlansCard = ({
   color?: string;
 }) => {
   return (
-    <Scale delay={animationDelay} duration={animationDuration}>
+    <FadeIn delay={animationDelay} duration={animationDuration}>
       <div
         className={`actions-plans-card rounded-2xl p-8 pt-5 flex flex-col ${
           active ? '!border-2' : 'border-0'
@@ -41,6 +41,6 @@ export const ActionsPlansCard = ({
           </p>
         </div>
       </div>
-    </Scale>
+    </FadeIn>
   );
 };
