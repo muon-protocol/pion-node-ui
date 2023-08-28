@@ -128,3 +128,11 @@ export type AlreadyRegisteredWallet = {
   isAlreadyRegistered: boolean;
   registeredTo: string;
 };
+
+export type MuonNodeStakingUsersResult = readonly [
+  bigint,
+  bigint,
+  bigint,
+  bigint,
+  bigint,
+];

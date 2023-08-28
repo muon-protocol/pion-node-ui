@@ -5,15 +5,22 @@ import { FadeIn } from '../../animations';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { useEffect } from 'react';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const Actions = () => {
+  const { walletAddress } = useUserProfile();
   const { stakerAddressInfo } = useNodeBonALICE();
+  const { muonNodeStakingUsers } = useMuonNodeStaking(walletAddress);
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
-      window.open('/dashboard', '_self');
+      if (muonNodeStakingUsers && muonNodeStakingUsers[0] === BigInt(0)) {
+        console.log(muonNodeStakingUsers);
+        window.open('/dashboard', '_self');
+      }
     }
-  }, [stakerAddressInfo]);
+  }, [stakerAddressInfo, muonNodeStakingUsers]);
 
   return (
     <div className="page__bg">
