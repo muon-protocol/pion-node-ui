@@ -7,6 +7,7 @@ import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { useEffect } from 'react';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import { Plans } from './Plans.tsx';
 
 const Actions = () => {
   const { walletAddress } = useUserProfile();
@@ -27,7 +28,7 @@ const Actions = () => {
       <div className="page page--centered">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[664px] gap-4 md:gap-5">
+        <FadeIn className="flex flex-col w-[1130px] gap-4 md:gap-5">
           <ActionsHeader />
           <ActionsBody />
         </FadeIn>
@@ -38,9 +39,10 @@ const Actions = () => {
 
 const ActionsBody = () => {
   return (
-    <div className="actions-body flex flex-col-reverse md:flex-row w-full gap-10">
+    <div className="actions-body flex flex-col-reverse md:flex-row w-full gap-9">
       <ActionsSidebar />
       <ActionsContent />
+      <Plans />
     </div>
   );
 };
