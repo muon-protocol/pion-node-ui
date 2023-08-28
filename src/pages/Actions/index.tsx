@@ -7,18 +7,23 @@ import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { useEffect } from 'react';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { Plans } from './Plans.tsx';
+import useActions from '../../contexts/Actions/useActions.ts';
+import { ActionType } from '../../types';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
   const { muonNodeStakingUsers } = useMuonNodeStaking();
+  const { setSelectedAction } = useActions();
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
         window.open('/dashboard', '_self');
+      } else {
+        setSelectedAction(ActionType.UPGRADE);
       }
     }
-  }, [stakerAddressInfo, muonNodeStakingUsers]);
+  }, [stakerAddressInfo, muonNodeStakingUsers, setSelectedAction]);
 
   return (
     <div className="page__bg">
