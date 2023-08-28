@@ -111,6 +111,7 @@ export type BonALICE = {
   ALICELockAmount: W3bNumber;
   LPTokenLockAmount: W3bNumber;
   nodePower: number;
+  isNodeBonALICE?: boolean;
 };
 
 export type WalletWithSignature = {

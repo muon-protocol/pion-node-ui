@@ -18,6 +18,7 @@ const BonALICEModalBody = ({
           return (
             item.nodePower > 0 && (
               <BonALICECard
+                isNodeBonALICE={item.isNodeBonALICE}
                 className="cursor-pointer"
                 title={'BonALICE #' + item.tokenId}
                 subTitle1="Node Power"

@@ -10,6 +10,7 @@ const BonALICECard: FC<{
   onClick?: () => void;
   compact?: boolean;
   selected?: boolean;
+  isNodeBonALICE?: boolean;
 }> = ({
   title,
   className,
@@ -20,6 +21,7 @@ const BonALICECard: FC<{
   onClick,
   compact,
   selected,
+  isNodeBonALICE,
 }) => {
   return (
     <div
@@ -31,13 +33,16 @@ const BonALICECard: FC<{
           : 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
       }`}
     >
-      <p
-        className={`text-inherit font-semibold ${
+      <div
+        className={`text-inherit font-semibold flex w-full justify-between gap-1.5 items-center ${
           compact ? 'md:mb-3' : 'mb-4 md:mb-6'
         }`}
       >
-        {title}
-      </p>
+        <p className="text-inherit">{title}</p>
+        <p className="text-inherit text-xs pt-[3px] font-medium">
+          {isNodeBonALICE && '(Active Node)'}
+        </p>
+      </div>
       <span className="text-sm flex mb-0.5 md:mb-2 justify-between">
         <p className="text-inherit font-light">{subTitle1}</p>
         <p className="text-inherit font-medium">{subValue1}</p>

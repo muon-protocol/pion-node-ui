@@ -55,6 +55,7 @@ export const useMuonNodeStaking = () => {
         nodePower:
           w3bNumberFromBigint(nodeBonALICEPower[0]).dsp +
           w3bNumberFromBigint(nodeBonALICEPower[1]).dsp * 2,
+        isNodeBonALICE: true,
       },
     ];
   }, [nodeBonALICEPower, walletAddress, muonNodeStakingUsers]);

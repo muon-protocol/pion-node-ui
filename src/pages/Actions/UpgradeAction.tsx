@@ -11,6 +11,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -42,6 +43,8 @@ export const RenderUpgradeBody = () => {
   const { LPTokenBalance } = useLPToken();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
+  const { nodeBonALICE } = useMuonNodeStaking();
+
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
@@ -69,7 +72,9 @@ export const RenderUpgradeBody = () => {
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle={
-            bonALICEs.length > 0 ? 'Select BonALICE' : 'No BonALICEs to Upgrade'
+            [...nodeBonALICE, ...bonALICEs].length > 0
+              ? 'Select BonALICE'
+              : 'No BonALICEs to Upgrade'
           }
           selectedItems={
             selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []
@@ -77,7 +82,7 @@ export const RenderUpgradeBody = () => {
           removeItem={(item) => handleUpgradeModalItemClicked(item)}
         >
           <BonALICEModalBody
-            bonALICEs={bonALICEs}
+            bonALICEs={[...nodeBonALICE, ...bonALICEs]}
             handleUpgradeModalItemClicked={handleUpgradeModalItemClicked}
             isSelectedUpgradeBonALICE={isSelectedUpgradeBonALICE}
           />
