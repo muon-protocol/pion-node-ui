@@ -13,7 +13,7 @@ const ActionsHeader = () => {
   const { muonNodeStakingUsers } = useMuonNodeStaking(walletAddress);
 
   return (
-    <div className="actions-header flex flex-col items-center md:items-start md:flex-row gap-10 w-full">
+    <div className="actions-header flex items-center w-full">
       {/*<div className="w-[90px]">{renderActionImageAndName(selectedAction)}</div>*/}
       {/*<div className="w-full">*/}
       {/*  <p className="text-center md:text-left md:text-lg font-light text-white md:min-h-[112px]">*/}
@@ -22,7 +22,13 @@ const ActionsHeader = () => {
       {/*</div>*/}
 
       {muonNodeStakingUsers && muonNodeStakingUsers[0] !== BigInt(0) && (
-        <div></div>
+        <div
+          className="ml-auto flex gap-1.5 items-center cursor-pointer"
+          onClick={() => window.open('/dashboard', '_self')}
+        >
+          <img src="/assets/images/actions/back-icon.svg" alt="" />
+          <p className="underline font-medium text-sm">Back to Dashboard</p>
+        </div>
       )}
     </div>
   );
