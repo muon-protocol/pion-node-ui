@@ -46,6 +46,9 @@ export const RenderUpgradeBody = () => {
   const { nodeBonALICE } = useMuonNodeStaking();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
+    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
+      return false;
+    }
     return (
       !selectedUpgradeBonALICE ||
       !upgradeAmount ||
@@ -61,6 +64,8 @@ export const RenderUpgradeBody = () => {
     ALICEBalance,
     LPTokenBalance,
     upgradeBoostAmount.dsp,
+    nodeBonALICE,
+    isSelectedUpgradeBonALICE,
   ]);
 
   return (
