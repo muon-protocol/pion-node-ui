@@ -4,13 +4,10 @@
 // import { AnimatePresence } from 'framer-motion';
 
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
-import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 
 const ActionsHeader = () => {
   // const { selectedAction } = useActions();
-
-  const { walletAddress } = useUserProfile();
-  const { muonNodeStakingUsers } = useMuonNodeStaking(walletAddress);
+  const { muonNodeStakingUsers } = useMuonNodeStaking();
 
   return (
     <div className="actions-header flex items-center w-full">
@@ -27,7 +24,7 @@ const ActionsHeader = () => {
           onClick={() => window.open('/dashboard', '_self')}
         >
           <img src="/assets/images/actions/back-icon.svg" alt="" />
-          <p className="underline font-medium text-sm">Back to Dashboard</p>
+          <p className="font-medium text-sm underline ">Back to Dashboard</p>
         </div>
       )}
     </div>
