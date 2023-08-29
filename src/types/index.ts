@@ -21,6 +21,7 @@ export enum ActionType {
 }
 
 export type SidebarItem = {
+  grayIcon: string;
   id: number;
   title: string;
   icon: string;

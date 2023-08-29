@@ -14,7 +14,7 @@ const ActionsSidebar = () => {
 };
 
 const SidebarItem = ({ item }: { item: SidebarItem }) => {
-  const { setSelectedAction } = useActions();
+  const { selectedAction, setSelectedAction } = useActions();
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
@@ -39,14 +39,14 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       onClick={() => handleSidebarItemClick(item.link)}
     >
       <img
-        src={item.icon}
+        src={selectedAction === item.link ? item.icon : item.grayIcon}
         alt={item.title}
         className={`transition-opacity top-0 w-6 h-[22px] md:h-6 z-10`}
       />
       <div
-        className={`text-xs md:text-sm font-semibold transition-all text-primary ${
-          isHovered ? 'md:text-primary' : 'md:text-primary'
-        }`}
+        className={`text-xs md:text-sm font-semibold transition-all text-primary 
+          ${isHovered && 'md:text-primary'} 
+          ${selectedAction === item.link ? 'md:text-primary' : 'md:text-gray'}`}
       >
         {item.title}
       </div>
