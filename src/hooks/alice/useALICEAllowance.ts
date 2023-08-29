@@ -31,7 +31,10 @@ export const useALICEAllowance = () => {
     watch: true,
   });
 
-  if (!allowanceForMuonNodeStaking || !allowanceForBonALICE) {
+  if (
+    allowanceForMuonNodeStaking === undefined ||
+    allowanceForBonALICE === undefined
+  ) {
     return {
       allowanceForMuonNodeStaking: null,
       allowanceForBonALICE: null,
