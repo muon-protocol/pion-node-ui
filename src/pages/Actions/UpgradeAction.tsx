@@ -52,6 +52,37 @@ export const RenderUpgradeBody = () => {
 
   const { nodeBonALICE } = useMuonNodeStaking();
 
+  const showApproveALICE = useMemo(() => {
+    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
+      if (aliceAllowanceForMuon)
+        return aliceAllowanceForMuon.big < upgradeAmount.big;
+    } else {
+      if (ALICEAllowance) return ALICEAllowance.big < upgradeAmount.big;
+    }
+  }, [
+    nodeBonALICE,
+    isSelectedUpgradeBonALICE,
+    aliceAllowanceForMuon,
+    ALICEAllowance,
+    upgradeAmount,
+  ]);
+
+  const showApproveLPToken = useMemo(() => {
+    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
+      if (lpTokenAllowanceForMuon)
+        return lpTokenAllowanceForMuon.big < upgradeBoostAmount.big;
+    } else {
+      if (LPTokenAllowance)
+        return LPTokenAllowance.big < upgradeBoostAmount.big;
+    }
+  }, [
+    nodeBonALICE,
+    isSelectedUpgradeBonALICE,
+    lpTokenAllowanceForMuon,
+    LPTokenAllowance,
+    upgradeBoostAmount,
+  ]);
+
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
@@ -181,11 +212,7 @@ export const RenderUpgradeBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : (nodeBonALICE.length > 0 &&
-            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
-            aliceAllowanceForMuon &&
-            aliceAllowanceForMuon.big < upgradeAmount.big) ||
-          (ALICEAllowance && ALICEAllowance.big < upgradeAmount.big) ? (
+        ) : showApproveALICE ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -196,12 +223,7 @@ export const RenderUpgradeBody = () => {
               ? upgradeAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
-        ) : (nodeBonALICE.length > 0 &&
-            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
-            lpTokenAllowanceForMuon &&
-            lpTokenAllowanceForMuon.big < upgradeBoostAmount.big) ||
-          (LPTokenAllowance &&
-            LPTokenAllowance.big < upgradeBoostAmount.big) ? (
+        ) : showApproveLPToken ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
