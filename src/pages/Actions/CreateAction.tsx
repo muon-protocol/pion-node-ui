@@ -50,8 +50,8 @@ export const RenderCreateBody = () => {
       createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
       !ALICEAllowance ||
       (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
-      !createAmount ||
-      (!createAmount.big && !createBoostAmount.big) ||
+      !(createAmount || createBoostAmount) ||
+      !(createAmount.big || createBoostAmount.big) ||
       (!ALICEBalance?.dsp && !LPTokenBalance?.dsp) ||
       (LPTokenBalance && LPTokenBalance.dsp < createBoostAmount.dsp) ||
       (ALICEBalance && ALICEBalance.dsp < createAmount.dsp) ||
@@ -105,7 +105,7 @@ export const RenderCreateBody = () => {
           </FadeIn>
         )}
       </AnimatePresence>
-      {createAmount.dsp > 0 && (
+      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) && (
         <>
           <MoveUpIn y={-10} duration={0.1} delay={0.1}>
             <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
