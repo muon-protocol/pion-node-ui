@@ -6,6 +6,7 @@ import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
   LP_TOKEN_ADDRESS,
+  MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import ALICE_ABI from '../../abis/ALICE.json';
@@ -15,6 +16,7 @@ import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -79,6 +81,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
+  const { nodeBonALICE } = useMuonNodeStaking();
+
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
@@ -86,6 +90,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     ALICEAllowance: ALICEAllowance,
     LPTokenAllowance: LPTokenAllowance,
   });
+
+  const isSelectedUpgradeBonALICE = (bonALICE: BonALICE) => {
+    return (
+      !!upgradeModalSelectedBonALICE &&
+      upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId
+    );
+  };
 
   const {
     callback: lock,
@@ -118,7 +129,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   }, [isSuccess]);
 
   const approveALICEArgs = useApproveArgs({
-    spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
+    spenderAddress:
+      nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])
+        ? MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
+        : BONALICE_ADDRESS[getCurrentChainId()],
     approveAmount: upgradeAmount,
   });
 
@@ -142,7 +156,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   }, [approveALICEIsSuccess]);
 
   const approveLPTokenArgs = useApproveArgs({
-    spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
+    spenderAddress:
+      nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])
+        ? MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
+        : BONALICE_ADDRESS[getCurrentChainId()],
     approveAmount: upgradeBoostAmount,
   });
 
@@ -218,13 +235,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const unselectUpgradeModalSelectedBonALICE = () => {
     setUpgradeModalSelectedBonALICE(null);
-  };
-
-  const isSelectedUpgradeBonALICE = (bonALICE: BonALICE) => {
-    return (
-      !!upgradeModalSelectedBonALICE &&
-      upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId
-    );
   };
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);

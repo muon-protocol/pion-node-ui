@@ -12,6 +12,8 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
+import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -40,19 +42,21 @@ export const RenderUpgradeBody = () => {
   const { bonALICEs, ALICEAllowance, LPTokenAllowance } = useBonALICE();
   const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
 
+  const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
+    useALICEAllowance();
+  const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
+    useLPTokenAllowance();
+
   const { LPTokenBalance } = useLPToken();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const { nodeBonALICE } = useMuonNodeStaking();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
-    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
-      return false;
-    }
     return (
       !selectedUpgradeBonALICE ||
-      !upgradeAmount ||
-      !upgradeAmount.dsp ||
+      !(upgradeAmount || upgradeBoostAmount) ||
+      !(upgradeAmount.dsp || upgradeBoostAmount.dsp) ||
       !ALICEBalance?.hStr ||
       upgradeAmount.dsp > ALICEBalance.dsp ||
       !LPTokenBalance ||
@@ -63,9 +67,7 @@ export const RenderUpgradeBody = () => {
     upgradeAmount,
     ALICEBalance,
     LPTokenBalance,
-    upgradeBoostAmount.dsp,
-    nodeBonALICE,
-    isSelectedUpgradeBonALICE,
+    upgradeBoostAmount,
   ]);
 
   return (
@@ -179,7 +181,11 @@ export const RenderUpgradeBody = () => {
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance && ALICEAllowance.big < upgradeAmount.big ? (
+        ) : (nodeBonALICE.length > 0 &&
+            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
+            aliceAllowanceForMuon &&
+            aliceAllowanceForMuon.big < upgradeAmount.big) ||
+          (ALICEAllowance && ALICEAllowance.big < upgradeAmount.big) ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -190,8 +196,12 @@ export const RenderUpgradeBody = () => {
               ? upgradeAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
-        ) : LPTokenAllowance &&
-          LPTokenAllowance.big < upgradeBoostAmount.big ? (
+        ) : (nodeBonALICE.length > 0 &&
+            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
+            lpTokenAllowanceForMuon &&
+            lpTokenAllowanceForMuon.big < upgradeBoostAmount.big) ||
+          (LPTokenAllowance &&
+            LPTokenAllowance.big < upgradeBoostAmount.big) ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
@@ -225,14 +235,26 @@ export const RenderUpgradeBody = () => {
           />
           <p className="text-center mb-6">
             You need to approve the{' '}
-            {ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big
+            {(nodeBonALICE.length > 0 &&
+              isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
+              aliceAllowanceForMuon &&
+              aliceAllowanceForMuon.big < upgradeAmount.big) ||
+            (ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big)
               ? 'ALICE'
               : 'LP'}{' '}
-            token to be spent by the Bonded ALICE Contract. Enter at least the
-            amount you want to create and click Next then Approve button on
-            metamask.
+            token to be spent by the{' '}
+            {nodeBonALICE.length > 0 &&
+            isSelectedUpgradeBonALICE(nodeBonALICE[0])
+              ? 'Muon node staking'
+              : 'Bonded ALICE'}{' '}
+            Contract. Enter at least the amount you want to create and click
+            Next then Approve button on metamask.
           </p>
-          {ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big ? (
+          {(nodeBonALICE.length > 0 &&
+            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
+            aliceAllowanceForMuon &&
+            aliceAllowanceForMuon.big < upgradeAmount.big) ||
+          (ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big) ? (
             <button
               className="btn btn--dark-primary"
               onClick={() =>

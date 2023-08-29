@@ -6,8 +6,9 @@ import {
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import { w3bNumberFromBigint } from '../../utils/web3.ts';
 
-export const useAllowance = () => {
+export const useLPTokenAllowance = () => {
   const { walletAddress } = useUserProfile();
 
   const { data: allowanceForMuonNodeStaking } = useLpTokenAllowance({
@@ -30,8 +31,16 @@ export const useAllowance = () => {
     watch: true,
   });
 
+  if (!allowanceForMuonNodeStaking || !allowanceForBonALICE)
+    return {
+      allowanceForMuonNodeStaking: null,
+      allowanceForBonALICE: null,
+    };
+
   return {
-    allowanceForMuonNodeStaking,
-    allowanceForBonALICE,
+    allowanceForMuonNodeStaking: w3bNumberFromBigint(
+      allowanceForMuonNodeStaking,
+    ),
+    allowanceForBonALICE: w3bNumberFromBigint(allowanceForBonALICE),
   };
 };
