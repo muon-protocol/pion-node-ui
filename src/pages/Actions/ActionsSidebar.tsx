@@ -2,6 +2,7 @@ import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect, useState } from 'react';
 import { ActionType, SidebarItem } from '../../types';
+import { useNavigate } from 'react-router-dom';
 
 const ActionsSidebar = () => {
   return (
@@ -14,8 +15,9 @@ const ActionsSidebar = () => {
 };
 
 const SidebarItem = ({ item }: { item: SidebarItem }) => {
-  const { selectedAction, setSelectedAction } = useActions();
+  const { selectedAction } = useActions();
   const [isHovered, setIsHovered] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     document
@@ -28,7 +30,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
 
   const handleSidebarItemClick = (item: ActionType) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setSelectedAction(item);
+    navigate('/' + item);
   };
 
   return (

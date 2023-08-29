@@ -13,11 +13,11 @@ export type Plan = {
 };
 
 export enum ActionType {
-  CREATE = 'Create',
-  UPGRADE = 'Upgrade',
-  MERGE = 'Merge',
-  SPLIT = 'Split',
-  TRANSFER = 'Transfer',
+  CREATE = 'create',
+  UPGRADE = 'upgrade',
+  MERGE = 'merge',
+  SPLIT = 'split',
+  TRANSFER = 'transfer',
 }
 
 export type SidebarItem = {

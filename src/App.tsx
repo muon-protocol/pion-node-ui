@@ -54,6 +54,22 @@ function App() {
                                           element={<Actions />}
                                         />
                                         <Route
+                                          path="/upgrade"
+                                          element={<Actions />}
+                                        />
+                                        <Route
+                                          path="/merge"
+                                          element={<Actions />}
+                                        />
+                                        <Route
+                                          path="/split"
+                                          element={<Actions />}
+                                        />
+                                        <Route
+                                          path="/transfer"
+                                          element={<Actions />}
+                                        />
+                                        <Route
                                           path="/get-started"
                                           element={<GetStarted />}
                                         />

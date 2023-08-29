@@ -8,14 +8,30 @@ import { useEffect } from 'react';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { Plans } from './Plans.tsx';
 import useActions from '../../contexts/Actions/useActions.ts';
-import { ActionType } from '../../types';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
+import { useNavigate } from 'react-router-dom';
+import { ActionType } from '../../types';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
   const { setUpgradeModalSelectedBonALICE } = useUpgradeAction();
   const { muonNodeStakingUsers, nodeBonALICE } = useMuonNodeStaking();
   const { setSelectedAction } = useActions();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === '/create') {
+      setSelectedAction(ActionType.CREATE);
+    } else if (location.pathname === '/upgrade') {
+      setSelectedAction(ActionType.UPGRADE);
+    } else if (location.pathname === '/merge') {
+      setSelectedAction(ActionType.MERGE);
+    } else if (location.pathname === '/split') {
+      setSelectedAction(ActionType.SPLIT);
+    } else if (location.pathname === '/transfer') {
+      setSelectedAction(ActionType.TRANSFER);
+    }
+  }, [setSelectedAction, location.pathname]);
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
@@ -26,7 +42,6 @@ const Actions = () => {
         muonNodeStakingUsers[4] > BigInt(0) &&
         nodeBonALICE.length > 0
       ) {
-        setSelectedAction(ActionType.UPGRADE);
         setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
       }
     }
@@ -36,6 +51,7 @@ const Actions = () => {
     setSelectedAction,
     nodeBonALICE,
     setUpgradeModalSelectedBonALICE,
+    navigate,
   ]);
 
   return (

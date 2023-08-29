@@ -24,6 +24,7 @@ export default {
         'primary-dark-500': '#C2C1F4',
         'modal-small': '#ECEDFFCC',
         'primary-dark': '#918EF5',
+        'primary-dark-50': '#918EF580',
         'dark-soft-primary': '#5158F640',
         'xyz-75': '#E9EFF6BF',
         'soft-sky': '#BCC8DE',
