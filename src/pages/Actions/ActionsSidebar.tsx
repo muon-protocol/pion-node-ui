@@ -41,7 +41,9 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       onClick={() => handleSidebarItemClick(item.link)}
     >
       <img
-        src={selectedAction === item.link ? item.icon : item.grayIcon}
+        src={
+          selectedAction === item.link || isHovered ? item.icon : item.grayIcon
+        }
         alt={item.title}
         className={`transition-opacity top-0 w-6 h-[22px] md:h-6 z-10`}
       />
