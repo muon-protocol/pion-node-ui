@@ -27,6 +27,7 @@ import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
+import useUserProfile from '../UserProfile/useUserProfile.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -286,6 +287,22 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const unselectUpgradeModalSelectedBonALICE = () => {
     setUpgradeModalSelectedBonALICE(null);
   };
+
+  const { walletAddress } = useUserProfile();
+  const { hasNodeBonALICE } = useMuonNodeStaking();
+
+  useEffect(() => {
+    if (!walletAddress) {
+      setIsUpgradeModalOpen(false);
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
+    } else {
+      if (!hasNodeBonALICE) {
+        setUpgradeModalSelectedBonALICE(null);
+      }
+    }
+  }, [walletAddress, hasNodeBonALICE]);
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
   const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
