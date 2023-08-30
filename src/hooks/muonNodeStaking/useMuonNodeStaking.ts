@@ -60,5 +60,15 @@ export const useMuonNodeStaking = () => {
     ];
   }, [nodeBonALICEPower, walletAddress, muonNodeStakingUsers]);
 
-  return { muonNodeStakingUsers, valueOfBondedToken, nodeBonALICE };
+  const hasNodeBonALICE = useMemo(() => {
+    if (!muonNodeStakingUsers) return false;
+    return muonNodeStakingUsers[4] !== BigInt(0);
+  }, [muonNodeStakingUsers]);
+
+  return {
+    muonNodeStakingUsers,
+    valueOfBondedToken,
+    nodeBonALICE,
+    hasNodeBonALICE,
+  };
 };

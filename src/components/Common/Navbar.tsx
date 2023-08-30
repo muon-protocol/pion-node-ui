@@ -6,6 +6,7 @@ import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useRef, useState } from 'react';
 import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const Navbar = () => {
   return (
@@ -26,6 +27,8 @@ const DesktopNavbar = () => {
     useState(false);
 
   const ref = useRef(null);
+
+  const { hasNodeBonALICE } = useMuonNodeStaking();
 
   useOnClickOutside(ref, () => setIsManageBonALICEDialogOpen(false));
 
@@ -55,86 +58,96 @@ const DesktopNavbar = () => {
               >
                 Buy ALICE
               </button>
-              <button
-                onClick={() =>
-                  setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
-                }
-                className="btn btn--small--with-icon relative"
-              >
-                <img
-                  className="mr-2.5"
-                  src="/assets/images/alice-icon.svg"
-                  alt=""
-                />
-                Manage bonALICE
-                {isManageBonALICEDialogOpen && (
-                  <FadeIn
-                    duration={0.1}
-                    delay={0.1}
-                    className="absolute bottom-0 translate-y-[110%] right-0"
-                  >
-                    <div
-                      ref={ref}
-                      onClick={(e) => e.stopPropagation()}
-                      className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
+              {!hasNodeBonALICE && (
+                <button
+                  onClick={() =>
+                    setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
+                  }
+                  className="btn btn--small--with-icon relative"
+                >
+                  <img
+                    className="mr-2.5"
+                    src="/assets/images/alice-icon.svg"
+                    alt=""
+                  />
+                  Manage bonALICE
+                  {isManageBonALICEDialogOpen && (
+                    <FadeIn
+                      duration={0.1}
+                      delay={0.1}
+                      className="absolute bottom-0 translate-y-[110%] right-0"
                     >
-                      <div className="dialog__top flex gap-4 justify-between items-center">
-                        <div className="dialog__top__left flex flex-col items-start gap-0">
-                          <p className="text-sm">Balance:</p>
-                          <p className="text-sm font-medium min-w-[100px] text-left">
-                            {bonALICEs.length > 0
-                              ? bonALICEs.length + ' BonALICEs'
-                              : 'No bonALICE'}
-                          </p>
+                      <div
+                        ref={ref}
+                        onClick={(e) => e.stopPropagation()}
+                        className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
+                      >
+                        <div className="dialog__top flex gap-4 justify-between items-center">
+                          <div className="dialog__top__left flex flex-col items-start gap-0">
+                            <p className="text-sm">Balance:</p>
+                            <p className="text-sm font-medium min-w-[100px] text-left">
+                              {bonALICEs.length > 0
+                                ? bonALICEs.length + ' BonALICEs'
+                                : 'No bonALICE'}
+                            </p>
+                          </div>
+                          <div className="dialog__top__right flex items-center">
+                            {bonALICEs.length > 0 ? (
+                              <Link to={'/create'}>
+                                <button
+                                  onClick={() =>
+                                    setIsManageBonALICEDialogOpen(false)
+                                  }
+                                  className="btn btn--small"
+                                >
+                                  Manage
+                                </button>
+                              </Link>
+                            ) : (
+                              <Link to={'/create'}>
+                                <button
+                                  onClick={() =>
+                                    setIsManageBonALICEDialogOpen(false)
+                                  }
+                                  className="btn btn--small"
+                                >
+                                  Create
+                                </button>
+                              </Link>
+                            )}
+                          </div>
                         </div>
-                        <div className="dialog__top__right flex items-center">
-                          {bonALICEs.length > 0 ? (
-                            <Link to={'/create'}>
-                              <button
-                                onClick={() =>
-                                  setIsManageBonALICEDialogOpen(false)
-                                }
-                                className="btn btn--small"
-                              >
-                                Manage
-                              </button>
-                            </Link>
-                          ) : (
-                            <Link to={'/create'}>
-                              <button
-                                onClick={() =>
-                                  setIsManageBonALICEDialogOpen(false)
-                                }
-                                className="btn btn--small"
-                              >
-                                Create
-                              </button>
-                            </Link>
-                          )}
+                        <div className="dialog--bottom">
+                          <Link to={'/claim'}>
+                            <button
+                              onClick={() =>
+                                setIsManageBonALICEDialogOpen(false)
+                              }
+                              className="btn btn--small--with-icon !w-full"
+                            >
+                              <img
+                                className="mr-2.5"
+                                src="/assets/images/navbar/prize-icon.svg"
+                                alt=""
+                              />
+                              Claim Node-Drop
+                            </button>
+                          </Link>
                         </div>
                       </div>
-                      <div className="dialog--bottom">
-                        <Link to={'/claim'}>
-                          <button
-                            onClick={() => setIsManageBonALICEDialogOpen(false)}
-                            className="btn btn--small--with-icon !w-full"
-                          >
-                            <img
-                              className="mr-2.5"
-                              src="/assets/images/navbar/prize-icon.svg"
-                              alt=""
-                            />
-                            Claim Node-Drop
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                  </FadeIn>
-                )}
-              </button>
-              <Link to="/review">
-                <button className="btn btn--small">Setup Node</button>
-              </Link>
+                    </FadeIn>
+                  )}
+                </button>
+              )}
+              {!hasNodeBonALICE ? (
+                <Link to="/review">
+                  <button className="btn btn--small">Setup Node</button>
+                </Link>
+              ) : (
+                <div onClick={() => window.open('/dashboard', '_self')}>
+                  <button className="btn btn--small">Dashboard</button>
+                </div>
+              )}
             </>
           )}
 
