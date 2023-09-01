@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import useTransfer from '../../hooks/useTransfer.ts';
@@ -68,6 +68,11 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
       transferModalSelectedBonALICE.tokenId === bonALICE.tokenId
     );
   };
+
+  useEffect(() => {
+    setTransferModalSelectedBonALICE(null);
+    setTransferAddress('');
+  }, [walletAddress]);
 
   const openTransferModal = () => setIsTransferModalOpen(true);
   const closeTransferModal = () => setIsTransferModalOpen(false);

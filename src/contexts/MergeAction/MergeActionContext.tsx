@@ -5,6 +5,7 @@ import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
 import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
+import useUserProfile from '../UserProfile/useUserProfile.ts';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
@@ -100,6 +101,12 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
       (b) => b.tokenId === bonALICE.tokenId,
     );
   };
+
+  const { walletAddress } = useUserProfile();
+
+  useEffect(() => {
+    setMergeModalSelectedBonALICEs([]);
+  }, [walletAddress]);
 
   const openMergeModal = () => setIsMergeModalOpen(true);
   const closeMergeModal = () => setIsMergeModalOpen(false);

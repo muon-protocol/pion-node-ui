@@ -5,6 +5,7 @@ import BONALICE_ABI from '../../abis/BonALICE.json';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
+import useUserProfile from '../UserProfile/useUserProfile.ts';
 
 const SplitActionContext = createContext<{
   splitValue: number;
@@ -73,6 +74,13 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
       console.error(error);
     }
   };
+
+  const { walletAddress } = useUserProfile();
+
+  useEffect(() => {
+    setSplitModalSelectedBonALICE(null);
+    setSplitValue(50);
+  }, [walletAddress]);
 
   const handleSplitModalItemClicked = (bonALICE: BonALICE) => {
     if (!splitModalSelectedBonALICE) {
