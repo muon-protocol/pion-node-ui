@@ -292,17 +292,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const { hasNodeBonALICE } = useMuonNodeStaking();
 
   useEffect(() => {
-    if (!walletAddress) {
-      setIsUpgradeModalOpen(false);
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
-    } else {
-      if (!hasNodeBonALICE) {
-        setUpgradeModalSelectedBonALICE(null);
-      }
+    setUpgradeModalSelectedBonALICE(null);
+    setUpgradeAmount(w3bNumberFromString(''));
+    setUpgradeBoostAmount(w3bNumberFromString(''));
+    if (hasNodeBonALICE) {
+      setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
     }
-  }, [walletAddress, hasNodeBonALICE]);
+  }, [walletAddress, hasNodeBonALICE, nodeBonALICE]);
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
   const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
