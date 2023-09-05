@@ -35,7 +35,13 @@ export default function StakeMore() {
         <b>{balance}</b>
       </div>
       <div className="w-full flex justify-end">
-        <LightBtn disable={true}>Upgrade</LightBtn>
+        <LightBtn
+          onClick={() => {
+            window.location.replace("https://alice-test.muon.net/upgrade");
+          }}
+        >
+          Upgrade
+        </LightBtn>
       </div>
     </div>
   );

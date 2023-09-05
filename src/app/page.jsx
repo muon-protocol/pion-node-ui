@@ -7,12 +7,12 @@ import Withdraw from "@/components/dashboard/withdraw";
 import { useEffect } from "react";
 import { fetchNodeInfo } from "@/redux/features/nodeInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { addressToShort } from "@/utils/showAddress";
 import { useAccount } from "wagmi";
 import { fetchVerification } from "@/redux/features/verification";
 import { Loading } from "@/components/layout/Loading";
 import { useRouter } from "next/navigation";
 import { LiveChatWidget } from "@livechat/widget-react";
+import Messages from "@/components/dashboard/Messages";
 export function LightBtn({
   children,
   onClick,
@@ -54,7 +54,7 @@ export default function Home() {
     verificationData.telegramVerified;
 
   useEffect(() => {
-    if (isDisconnected) {
+    if (isDisconnected && process.env.NODE_ENV === "production") {
       window.location.replace("https://alice-v2.muon.net");
     }
   }, [isDisconnected]);
@@ -79,6 +79,7 @@ export default function Home() {
   return (
     <div className={`${isDisconnected ? "opacity-50" : ""}`} aria-disabled>
       <TopBanner isVerify={isVerify}></TopBanner>
+
       <div className="grid grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>
         <CardInfo title="Node ID" data={selector.id}></CardInfo>
@@ -94,6 +95,7 @@ export default function Home() {
         license="15138837"
         visibility="minimized"
       ></LiveChatWidget>
+      <Messages></Messages>
     </div>
   );
 }

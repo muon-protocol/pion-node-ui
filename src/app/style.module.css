@@ -19,3 +19,9 @@
     bottom: 4px;
     right: 6px;
 }
+
+.close_btn{
+    position: absolute;
+    top: 15px;
+    right: 5px;
+}

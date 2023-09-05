@@ -23,6 +23,7 @@ import Style from "@/app/style.module.css";
 import QRCode from "react-qr-code";
 import { WarningBox } from "@/app/verification/page";
 import { CustomConnectButton } from "../layout/CustomConnectButton";
+import PrimaryBtn from "../layout/PrimaryBtn";
 
 function Step1({ setBrightIdStep }) {
   const dispatch = useDispatch();

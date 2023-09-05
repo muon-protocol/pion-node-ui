@@ -14,17 +14,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 
-export function WarningBox({ children }) {
+export function WarningBox({ children, className, dangerouslySetInnerHTML }) {
   return (
-    <div className="flex rounded-lg items-center bg-mysecondary/20 px-4 py-2">
-      <div>
+    <div
+      className={`${className} flex rounded-lg items-center bg-[#F7E2DB] px-4 py-2`}
+    >
+      <div className="min-w-[30px]">
         <Image
           width="30"
           height="20"
           src="/dashboard/verification/warrning-icon.svg"
         ></Image>
       </div>
-      <p className="text-sm ml-3">{children}</p>
+      <p
+        className={` text-sm ml-3`}
+        dangerouslySetInnerHTML={{ __html: dangerouslySetInnerHTML }}
+      >
+        {children}
+      </p>
     </div>
   );
 }
