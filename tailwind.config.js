@@ -51,22 +51,22 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
-    screens: {
-      sm: "640px",
-      // => @media (min-width: 640px) { ... }
+    // screens: {
+    //   sm: "640px",
+    //   // => @media (min-width: 640px) { ... }
 
-      md: "768px",
-      // => @media (min-width: 768px) { ... }
+    //   md: "768px",
+    //   // => @media (min-width: 768px) { ... }
 
-      lg: "1366px",
-      // => @media (min-width: 1024px) { ... }
+    //   lg: "1366px",
+    //   // => @media (min-width: 1024px) { ... }
 
-      xl: "1536px",
-      // => @media (min-width: 1280px) { ... }
+    //   xl: "1536px",
+    //   // => @media (min-width: 1280px) { ... }
 
-      "2xl": "1920px",
-      // => @media (min-width: 1536px) { ... }
-    },
+    //   "2xl": "1920px",
+    //   // => @media (min-width: 1536px) { ... }
+    // },
   },
   plugins: [require("tw-elements/dist/plugin.cjs")],
 };

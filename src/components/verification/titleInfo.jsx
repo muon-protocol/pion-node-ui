@@ -6,7 +6,7 @@ export default function TitleInfo() {
   const router = useRouter();
   return (
     <div>
-      <div className="flex justify-between">
+      <div className="flex flex-wrap justify-between">
         <div className="flex items-center">
           <Image
             src="/dashboard/dashboard/wallet-check.svg"
@@ -19,7 +19,7 @@ export default function TitleInfo() {
           onClick={() => {
             window.location.replace("https://alice-v2.muon.net/dashboard");
           }}
-          className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] px-4"
+          className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] "
         >
           <Image
             src="/dashboard/verification/back-icon.svg"

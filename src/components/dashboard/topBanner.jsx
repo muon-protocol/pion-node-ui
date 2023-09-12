@@ -6,8 +6,8 @@ import { LightBtn } from "@/app/page";
 export default function TopBanner({ isVerify }) {
   const router = useRouter();
   return (
-    <div className="bg-primary13 h-20 w-full rounded-[10px] flex items-center px-6 justify-between">
-      <div className="flex  flex-wrap items-center space-x-3">
+    <div className="bg-primary13 grid grid-cols-1 lg:h-20 py-5 lg:py-0 w-full rounded-[10px] lg:flex items-center px-6 justify-between">
+      <div className="flex flex-wrap items-center space-x-3">
         <Image
           src="/dashboard/dashboard/wallet-check.svg"
           width="43"
@@ -18,7 +18,10 @@ export default function TopBanner({ isVerify }) {
       <h4 className="text-xl font-semibold">
         {isVerify ? "Verified for Starter Node" : "Not Verified"}
       </h4>
-      <LightBtn onClick={() => router.push("/verification")}>
+      <LightBtn
+        className="mt-5 lg:mt-0"
+        onClick={() => router.push("/verification")}
+      >
         Go to verification center
       </LightBtn>
     </div>

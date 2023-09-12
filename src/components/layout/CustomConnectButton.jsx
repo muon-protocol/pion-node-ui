@@ -1,4 +1,4 @@
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 export const CustomConnectButton = () => {
   return (
@@ -14,29 +14,31 @@ export const CustomConnectButton = () => {
       }) => {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
-        const ready = mounted && authenticationStatus !== 'loading';
+        const ready = mounted && authenticationStatus !== "loading";
         const connected =
           ready &&
           account &&
           chain &&
-          (!authenticationStatus ||
-            authenticationStatus === 'authenticated');
+          (!authenticationStatus || authenticationStatus === "authenticated");
 
         return (
           <div
             {...(!ready && {
-              'aria-hidden': true,
-              'style': {
+              "aria-hidden": true,
+              style: {
                 opacity: 0,
-                pointerEvents: 'none',
-                userSelect: 'none',
+                pointerEvents: "none",
+                userSelect: "none",
               },
             })}
           >
             {(() => {
               if (!connected) {
                 return (
-                  <button className='bg-primary13 py-2 flex items-center text-sm font-medium text-primary rounded-lg px-5 mr-2' onClick={openConnectModal} >
+                  <button
+                    className="bg-primary13 py-2 flex items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
+                    onClick={openConnectModal}
+                  >
                     Connect Wallet
                   </button>
                 );
@@ -44,14 +46,17 @@ export const CustomConnectButton = () => {
 
               if (chain.unsupported) {
                 return (
-                  <button className='bg-mysecondary py-2 flex items-center text-sm font-medium text-amber rounded-lg px-5 mr-2' onClick={openChainModal} >
+                  <button
+                    className="bg-mysecondary py-2 flex items-center text-sm font-medium text-amber rounded-lg px-5 mr-2"
+                    onClick={openChainModal}
+                  >
                     Wrong network
                   </button>
                 );
               }
 
               return (
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div style={{ display: "flex", gap: 12 }}>
                   {/* <button
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
@@ -80,7 +85,10 @@ export const CustomConnectButton = () => {
                     {chain.name}
                   </button> */}
 
-                  <button className='bg-primary13 py-2 flex items-center text-sm font-medium text-primary rounded-lg px-5 mr-2' onClick={openAccountModal} >
+                  <button
+                    className="bg-primary13 py-2 flex w-full md:grow-0 items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
+                    onClick={openAccountModal}
+                  >
                     {account.displayName}
                     {/* {account.displayBalance
                       ? ` (${account.displayBalance})`

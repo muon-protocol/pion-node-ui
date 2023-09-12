@@ -42,8 +42,8 @@ export default function RootLayout({ children }) {
             <StyledComponentsRegistry>
               <div className="min-h-[100vh] relative">
                 <div className="pb-14">
-                  <div className="flex justify-between px-10 pt-4">
-                    <div className="col-span-1">
+                  <div className="flex flex-wrap justify-between pl-10 md:px-10 pt-4">
+                    <div className="col-span-1 mb-1">
                       <Image
                         src="/dashboard/Alice_Logo.png"
                         width="121"
@@ -51,10 +51,9 @@ export default function RootLayout({ children }) {
                       ></Image>
                     </div>
                     <div className="col-span-5 justify-self-end">
-                      <div className="flex">
+                      <div className="flex flex-wrap">
                         <Balance></Balance>
                         {/* <ConnectButton></ConnectButton> */}
-                        <Loading></Loading>
                         <CustomConnectButton></CustomConnectButton>
                       </div>
                     </div>

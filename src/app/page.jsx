@@ -80,13 +80,13 @@ export default function Home() {
     <div className={`${isDisconnected ? "opacity-50" : ""}`} aria-disabled>
       <TopBanner isVerify={isVerify}></TopBanner>
 
-      <div className="grid grid-cols-4 gap-4 mt-8">
-        <CardInfo title="IP Adress" data={selector.nodeIP}></CardInfo>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+        <CardInfo title="IP Address" data={selector.nodeIP}></CardInfo>
         <CardInfo title="Node ID" data={selector.id}></CardInfo>
         <CardInfo title="Node Address" data={selector.nodeAddress}></CardInfo>
         <CardInfo title="Peer ID" data={selector.peerId}></CardInfo>
       </div>
-      <div className="grid grid-cols-3 gap-4 mt-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
         <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
         <StakeMore></StakeMore>
         <Withdraw></Withdraw>

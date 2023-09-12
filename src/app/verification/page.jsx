@@ -75,15 +75,15 @@ export default function Verification() {
 
   return (
     <div>
-      <div className="flex flex-row">
-        <div className="basis-2/3 mr-4">
+      <div className="flex flex-wrap">
+        <div className="mr-4 lg:max-w-[60%]">
           <TitleInfo></TitleInfo>
         </div>
-        <div className="basis-1/3 ml-4">
+        <div className="lg:ml-4 grow">
           <PassVerification passed={selector}></PassVerification>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6">
         <NormalVerificationCard
           title="Muon Presale Participation"
           isActive={selector.presaleVerified}
