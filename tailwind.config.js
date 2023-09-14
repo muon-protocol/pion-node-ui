@@ -1,8 +1,13 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,css,scss}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        tomorrow: ['Tomorrow', 'sans-serif'],
+        tourney: ['Tourney', 'sans-serif'],
+      },
       colors: {
         primary: '#5158F6',
         'primary-13': '#5158F621',
@@ -11,6 +16,7 @@ export default {
         gray10: '#E9EFF6',
         algo: '#D9D9D9',
         black: '#323245',
+        black1: '#000000',
         glass: '#00000059',
         green: '#8EF5AB',
         disabled: '#C0C0C0',

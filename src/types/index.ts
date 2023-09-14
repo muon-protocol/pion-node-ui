@@ -12,6 +12,15 @@ export type Plan = {
   shadowColor: string;
 };
 
+export type Step = {
+  id: number;
+  title: string;
+  descriptions: string[];
+  buttonText: string;
+  buttonLink: string;
+  buttonLinkTarget: string;
+};
+
 export enum ActionType {
   CREATE = 'create',
   UPGRADE = 'upgrade',

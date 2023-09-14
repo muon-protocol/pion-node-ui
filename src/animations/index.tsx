@@ -17,7 +17,7 @@ export const MoveUpIn: FC<{
       transition: {
         duration: duration || 0.5,
         delay: delay || 0,
-        ease: 'easeOut',
+        ease: 'easeInOut',
       },
     });
   }, [controls, delay, duration]);

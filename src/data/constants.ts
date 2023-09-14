@@ -1,4 +1,4 @@
-import { ActionType, Plan, SidebarItem, UserWallet } from '../types';
+import { ActionType, Plan, SidebarItem, Step, UserWallet } from '../types';
 
 export const plans: Plan[] = [
   {
@@ -36,6 +36,39 @@ export const plans: Plan[] = [
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
       'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+  },
+];
+
+export const steps: Step[] = [
+  {
+    id: 1,
+    title: 'Buy ALICE',
+    descriptions: [
+      'First you need to buy ALICE to create your bonALICE NFT, minimum amount for starting is 1000 ALICE',
+      'Your Balance: 2310.03 ALICE',
+    ],
+    buttonText: 'Buy ALICE',
+    buttonLink:
+      'https://app.uniswap.org/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
+    buttonLinkTarget: '_blank',
+  },
+  {
+    id: 2,
+    title: 'Create bonALICE',
+    descriptions: ['Lock your PION into bonPION  and gain node power'],
+    buttonText: 'Create bonded ALICE',
+    buttonLink: '/create',
+    buttonLinkTarget: '_self',
+  },
+  {
+    id: 3,
+    title: 'Setup Node',
+    descriptions: [
+      'When you have your bonPION ready, it’s time to setup your node and start earning',
+    ],
+    buttonText: 'Setup Node',
+    buttonLink: '/review',
+    buttonLinkTarget: '_self',
   },
 ];
 

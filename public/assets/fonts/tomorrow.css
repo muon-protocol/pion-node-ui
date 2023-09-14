@@ -1,0 +1,41 @@
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: 800;
+    src: url('Tomorrow/Tomorrow-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: bold;
+    src: url('Tomorrow/Tomorrow-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: 500;
+    src: url('Tomorrow/Tomorrow-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: normal;
+    src: url('Tomorrow/Tomorrow-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: 300;
+    src: url('Tomorrow/Tomorrow-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Tomorrow;
+    font-style: normal;
+    font-weight: 200;
+    src: url('Tomorrow/Tomorrow-Thin.ttf') format('truetype');
+}
