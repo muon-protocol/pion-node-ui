@@ -45,111 +45,113 @@ const DesktopNavbar = () => {
           </Link>
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
-          {location && location.pathname !== '/' && (
-            <>
-              <button
-                className="btn btn--small"
-                onClick={() =>
-                  window.open(
-                    'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
-                    '_blank',
-                  )
-                }
-              >
-                Buy ALICE
-              </button>
-              {!hasNodeBonALICE && (
+          {location &&
+            location.pathname !== '/' &&
+            location.pathname !== '/claim' && (
+              <>
                 <button
+                  className="btn btn--small"
                   onClick={() =>
-                    setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
+                    window.open(
+                      'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+                      '_blank',
+                    )
                   }
-                  className="btn btn--small--with-icon relative"
                 >
-                  <img
-                    className="mr-2.5"
-                    src="/assets/images/alice-icon.svg"
-                    alt=""
-                  />
-                  Manage bonALICE
-                  {isManageBonALICEDialogOpen && (
-                    <FadeIn
-                      duration={0.1}
-                      delay={0.1}
-                      className="absolute bottom-0 translate-y-[110%] right-0"
-                    >
-                      <div
-                        ref={ref}
-                        onClick={(e) => e.stopPropagation()}
-                        className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
-                      >
-                        <div className="dialog__top flex gap-4 justify-between items-center">
-                          <div className="dialog__top__left flex flex-col items-start gap-0">
-                            <p className="text-sm">Balance:</p>
-                            <p className="text-sm font-medium min-w-[100px] text-left">
-                              {bonALICEs.length > 0
-                                ? bonALICEs.length + ' BonALICEs'
-                                : 'No bonALICE'}
-                            </p>
-                          </div>
-                          <div className="dialog__top__right flex items-center">
-                            {bonALICEs.length > 0 ? (
-                              <Link to={'/create'}>
-                                <button
-                                  onClick={() =>
-                                    setIsManageBonALICEDialogOpen(false)
-                                  }
-                                  className="btn btn--small"
-                                >
-                                  Manage
-                                </button>
-                              </Link>
-                            ) : (
-                              <Link to={'/create'}>
-                                <button
-                                  onClick={() =>
-                                    setIsManageBonALICEDialogOpen(false)
-                                  }
-                                  className="btn btn--small"
-                                >
-                                  Create
-                                </button>
-                              </Link>
-                            )}
-                          </div>
-                        </div>
-                        <div className="dialog--bottom">
-                          <Link to={'/claim'}>
-                            <button
-                              onClick={() =>
-                                setIsManageBonALICEDialogOpen(false)
-                              }
-                              className="btn btn--small--with-icon !w-full"
-                            >
-                              <img
-                                className="mr-2.5"
-                                src="/assets/images/navbar/prize-icon.svg"
-                                alt=""
-                              />
-                              Claim Node-Drop
-                            </button>
-                          </Link>
-                        </div>
-                      </div>
-                    </FadeIn>
-                  )}
+                  Buy ALICE
                 </button>
-              )}
-              {!hasNodeBonALICE ? (
-                <Link to="/review">
-                  <button className="btn btn--small">Setup Node</button>
-                </Link>
-              ) : (
-                <div onClick={() => window.open('/dashboard', '_self')}>
-                  <button className="btn btn--small">Dashboard</button>
-                </div>
-              )}
-            </>
-          )}
+                {!hasNodeBonALICE && (
+                  <button
+                    onClick={() =>
+                      setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
+                    }
+                    className="btn btn--small--with-icon relative"
+                  >
+                    <img
+                      className="mr-2.5"
+                      src="/assets/images/alice-icon.svg"
+                      alt=""
+                    />
+                    Manage bonALICE
+                    {isManageBonALICEDialogOpen && (
+                      <FadeIn
+                        duration={0.1}
+                        delay={0.1}
+                        className="absolute bottom-0 translate-y-[110%] right-0"
+                      >
+                        <div
+                          ref={ref}
+                          onClick={(e) => e.stopPropagation()}
+                          className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
+                        >
+                          <div className="dialog__top flex gap-4 justify-between items-center">
+                            <div className="dialog__top__left flex flex-col items-start gap-0">
+                              <p className="text-sm">Balance:</p>
+                              <p className="text-sm font-medium min-w-[100px] text-left">
+                                {bonALICEs.length > 0
+                                  ? bonALICEs.length + ' BonALICEs'
+                                  : 'No bonALICE'}
+                              </p>
+                            </div>
+                            <div className="dialog__top__right flex items-center">
+                              {bonALICEs.length > 0 ? (
+                                <Link to={'/create'}>
+                                  <button
+                                    onClick={() =>
+                                      setIsManageBonALICEDialogOpen(false)
+                                    }
+                                    className="btn btn--small"
+                                  >
+                                    Manage
+                                  </button>
+                                </Link>
+                              ) : (
+                                <Link to={'/create'}>
+                                  <button
+                                    onClick={() =>
+                                      setIsManageBonALICEDialogOpen(false)
+                                    }
+                                    className="btn btn--small"
+                                  >
+                                    Create
+                                  </button>
+                                </Link>
+                              )}
+                            </div>
+                          </div>
+                          <div className="dialog--bottom">
+                            <Link to={'/claim'}>
+                              <button
+                                onClick={() =>
+                                  setIsManageBonALICEDialogOpen(false)
+                                }
+                                className="btn btn--small--with-icon !w-full"
+                              >
+                                <img
+                                  className="mr-2.5"
+                                  src="/assets/images/navbar/prize-icon.svg"
+                                  alt=""
+                                />
+                                Claim Node-Drop
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </FadeIn>
+                    )}
+                  </button>
+                )}
+                {!hasNodeBonALICE ? (
+                  <Link to="/review">
+                    <button className="btn btn--small">Setup Node</button>
+                  </Link>
+                ) : (
+                  <div onClick={() => window.open('/dashboard', '_self')}>
+                    <button className="btn btn--small">Dashboard</button>
+                  </div>
+                )}
+              </>
+            )}
 
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small btn--secondary flex">
