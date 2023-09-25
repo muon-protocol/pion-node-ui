@@ -49,7 +49,7 @@ export const steps: Step[] = [
     ],
     buttonText: 'Buy ALICE',
     buttonLink:
-      'https://app.uniswap.org/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
+      'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
     buttonLinkTarget: '_blank',
   },
   {
