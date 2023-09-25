@@ -8,7 +8,6 @@ import Modal from '../../components/Common/Modal.tsx';
 import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
-import { getTier } from '../../utils';
 import { FadeIn } from '../../animations';
 
 const ClaimCard = () => {
@@ -68,9 +67,9 @@ const ClaimCard = () => {
     <div className="w-full bg-primary-13 px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
       <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
         <p className="mb-8 font-semibold text-[20px]">Your Bonded ALICE</p>
-        <span className="flex justify-between font-light mb-3">
-          <p>Staking address:</p>
-          <p className="font-semibold">
+        <span className="flex font-light mb-3">
+          <p className="w-[143px] text-left">Staking address:</p>
+          <p className="font-medium">
             {stakingAddressFromPast
               ? formatWalletAddress(stakingAddressFromPast)
               : stakingAddress
@@ -78,40 +77,40 @@ const ClaimCard = () => {
               : 'Connect eligible wallet'}
           </p>
         </span>
-        <span className="flex justify-between font-light mb-3">
-          <div className="flex gap-1 text-black">
-            <p className="font-semibold">
+        <span className="flex font-light">
+          <div className="flex gap-1 text-black w-[143px] text-left">
+            {/*<p className="font-medium">*/}
+            {/*  {stakingAddressFromPast*/}
+            {/*    ? totalRewardFromPast.dsp*/}
+            {/*    : totalRewards.dsp}*/}
+            {/*</p>*/}
+            Value:
+            {/*<img*/}
+            {/*  src="/assets/images/claim/claim-card-right-arrow-icon.svg"*/}
+            {/*  alt=""*/}
+            {/*/>*/}
+          </div>
+          <div className="flex text-black font-medium">
+            <p className="mr-1">
               {stakingAddressFromPast
                 ? totalRewardFromPast.dsp
                 : totalRewards.dsp}
             </p>
             ALICE
-            <img
-              src="/assets/images/claim/claim-card-right-arrow-icon.svg"
-              alt=""
-            />
-          </div>
-          <div className="flex text-black">
-            <p className="font-semibold mr-1">
-              {stakingAddressFromPast
-                ? totalRewardFromPast.dsp
-                : totalRewards.dsp}
-            </p>
-            Power
           </div>
         </span>
-        <span className="flex justify-between font-light">
-          <p>bonALICE Tier:</p>
-          <p className="font-semibold">
-            {stakingAddressFromPast || eligibleAddresses.length > 0
-              ? getTier(
-                  stakingAddressFromPast
-                    ? totalRewardFromPast.dsp
-                    : totalRewards.dsp,
-                )
-              : 'No eligible wallet'}
-          </p>
-        </span>
+        {/*<span className="flex justify-between font-light">*/}
+        {/*  <p>bonALICE Tier:</p>*/}
+        {/*  <p className="font-semibold">*/}
+        {/*    {stakingAddressFromPast || eligibleAddresses.length > 0*/}
+        {/*      ? getTier(*/}
+        {/*          stakingAddressFromPast*/}
+        {/*            ? totalRewardFromPast.dsp*/}
+        {/*            : totalRewards.dsp,*/}
+        {/*        )*/}
+        {/*      : 'No eligible wallet'}*/}
+        {/*  </p>*/}
+        {/*</span>*/}
         {/*<div className="flex justify-between font-light text-black">*/}
         {/*  <p>Potential APR:</p>*/}
         {/*  <p className="font-semibold">*/}
