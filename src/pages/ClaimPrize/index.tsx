@@ -44,7 +44,15 @@ const ClaimPrize = () => {
       <div className="page page--claim-prize">
         <FadeIn duration={0.3} className="w-full">
           <ConnectWalletModal redirectRoute="/get-started" />
-          <p className="text-lg text-center md:text-left md:text-2xl font-light mb-6">
+          <div className="w-full flex items-center justify-center gap-4 mb-8">
+            <img
+              src="/assets/images/claim/node-drop-icon.svg"
+              alt=""
+              className="w-12 h-12"
+            />
+            <p className="text-5xl font-bold">ALICE Node-Drop</p>
+          </div>
+          <p className="text-lg text-center md:text-left md:text-xl font-light mb-6">
             Go to your wallet and choose the address linked to your pioneer
             activities. Repeat this step for each address associated with
             pioneer activities.

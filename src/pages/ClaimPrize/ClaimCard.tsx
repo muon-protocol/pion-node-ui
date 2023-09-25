@@ -67,7 +67,7 @@ const ClaimCard = () => {
     <div className="w-full bg-primary-13 px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
       <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
         <p className="mb-8 font-semibold text-[20px]">Your Bonded ALICE</p>
-        <span className="flex font-light mb-3">
+        <span className="flex font-light mb-2">
           <p className="w-[143px] text-left">Staking address:</p>
           <p className="font-medium">
             {stakingAddressFromPast
