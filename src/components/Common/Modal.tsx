@@ -41,7 +41,15 @@ const Modal: FC<{
                 data-testid="modal-content"
               >
                 <div className="modal-header flex justify-between items-center mb-6">
-                  <p className="font-medium text-sm"> {title} </p>
+                  <p
+                    className={`${
+                      size === 'lg'
+                        ? 'text-lg font-bold'
+                        : 'font-medium text-sm'
+                    }`}
+                  >
+                    {title}
+                  </p>
                   {closeable && (
                     <img
                       className="cursor-pointer"
@@ -51,9 +59,9 @@ const Modal: FC<{
                           ? '/assets/images/modal/exit-dark-icon.svg'
                           : '/assets/images/modal/exit-dark-icon.svg'
                       }
-                      width="18px"
-                      height="18px"
-                      alt={'X'}
+                      width="14px"
+                      height="14px"
+                      alt={'x'}
                     />
                   )}
                 </div>

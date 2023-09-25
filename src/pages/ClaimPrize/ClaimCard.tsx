@@ -9,6 +9,7 @@ import { PrizeCalculationDetailModal } from './PrizeCalculationDetailModal.tsx';
 import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import { FadeIn } from '../../animations';
+import { TermsAndConditionsModal } from './TermsAndConditionsModal.tsx';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -180,6 +181,14 @@ const ClaimCard = () => {
         isOpen={isPrizeCalculationDetailModalOpen}
       >
         <PrizeCalculationDetailModal />
+      </Modal>
+      <Modal
+        size="lg"
+        title="Terms and conditions"
+        closeModalHandler={() => {}}
+        isOpen={true}
+      >
+        <TermsAndConditionsModal />
       </Modal>
       <Modal
         size="sm"
