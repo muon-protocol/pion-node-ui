@@ -45,7 +45,6 @@ export const steps: Step[] = [
     title: 'Buy ALICE',
     descriptions: [
       'First you need to buy ALICE to create your bonALICE NFT, minimum amount for starting is 1000 ALICE',
-      'Your Balance: 2310.03 ALICE',
     ],
     buttonText: 'Buy ALICE',
     buttonLink:
