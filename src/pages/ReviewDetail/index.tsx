@@ -2,7 +2,7 @@ import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { Link, useNavigate } from 'react-router-dom';
 import { FadeIn } from '../../animations';
-import AddressInput from '../../components/Common/AddressInput.tsx';
+// import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -165,13 +165,31 @@ const ReviewDetail = () => {
       <div
         className={`bg-white p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
       >
-        <AddressInput
-          title="Server IP"
-          placeholder="Enter Server IP"
-          value={nodeIP}
-          onValueChanged={(value) => setNodeIP(value)}
-          className="mb-9"
-        />
+        {/*<AddressInput*/}
+        {/*  title="Server IP"*/}
+        {/*  placeholder="Enter Server IP"*/}
+        {/*  value={nodeIP}*/}
+        {/*  onValueChanged={(value) => setNodeIP(value)}*/}
+        {/*  className="mb-9"*/}
+        {/*/>*/}
+        <div className="address-input__input-wrapper mb-6 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
+          <input
+            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
+            placeholder={'Node Address'}
+            type="text"
+            value={nodeIP}
+            onChange={(e) => setNodeIP(e.target.value)}
+          />
+        </div>
+        <div className="address-input__input-wrapper mb-5 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
+          <input
+            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
+            placeholder={'Peer ID'}
+            type="text"
+            value={nodeIP}
+            onChange={(e) => setNodeIP(e.target.value)}
+          />
+        </div>
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
         stakerAddressInfo?.active ? (
