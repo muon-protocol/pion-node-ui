@@ -65,6 +65,8 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: (isOpen: boolean) => void;
   isSufficientModalOpen: boolean;
   setIsSufficientModalOpen: (isOpen: boolean) => void;
+  agreeWithTermsAndConditionsSig: string | null;
+  handleApproveTermsAndConditions: () => void;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -99,6 +101,8 @@ const ClaimPrizeContext = createContext<{
   setIsInsufficientModalOpen: () => {},
   isSufficientModalOpen: false,
   setIsSufficientModalOpen: () => {},
+  agreeWithTermsAndConditionsSig: null,
+  handleApproveTermsAndConditions: () => {},
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -145,6 +149,11 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const { signMessageMetamask } = useSignMessage({
     message: `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
   });
+
+  const { signMessageMetamask: signTermsAndConditionsMessageMetamask } =
+    useSignMessage({
+      message: `Please sign this message to confirm that you agree with ALICE network's terms and conditions.`,
+    });
 
   const claimRewardArgs = useClaimRewardArgs({
     rewardAmount: totalRewards,
@@ -380,6 +389,22 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  const [agreeWithTermsAndConditionsSig, setAgreeWithTermsAndConditionsSig] =
+    useState<null | string>(null);
+
+  const handleApproveTermsAndConditions = () => {
+    setIsMetamaskLoadingVerify(true);
+    signTermsAndConditionsMessageMetamask()
+      .then((signature) => {
+        setIsMetamaskLoadingVerify(false);
+        setAgreeWithTermsAndConditionsSig(signature);
+      })
+      .catch((error) => {
+        setIsMetamaskLoadingVerify(false);
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
     if (!walletAddress || !isConnected || claimSignature) return;
 
@@ -497,6 +522,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setIsInsufficientModalOpen,
         isSufficientModalOpen,
         setIsSufficientModalOpen,
+        agreeWithTermsAndConditionsSig,
+        handleApproveTermsAndConditions,
       }}
     >
       {children}

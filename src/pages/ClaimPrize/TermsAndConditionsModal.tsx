@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ClaimPrizeContext } from '../../contexts/ClaimPrize/ClaimPrizeContext.tsx';
 
 export const TermsAndConditionsModal = () => {
   const [checked, setChecked] = useState(false);
+  const { agreeWithTermsAndConditionsSig, handleApproveTermsAndConditions } =
+    useContext(ClaimPrizeContext);
 
   return (
     <div className="text-black">
@@ -77,11 +80,15 @@ export const TermsAndConditionsModal = () => {
 
       <section className="actions">
         <button
-          onClick={() => {}}
+          onClick={() => {
+            agreeWithTermsAndConditionsSig
+              ? handleApproveTermsAndConditions()
+              : handleApproveTermsAndConditions();
+          }}
           disabled={!checked}
           className="btn btn--primary mb-2 mt-5 mx-auto !w-[280px]"
         >
-          Approve
+          {agreeWithTermsAndConditionsSig ? 'Claim' : 'Approve'}
         </button>
       </section>
     </div>
