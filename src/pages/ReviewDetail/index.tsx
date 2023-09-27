@@ -21,16 +21,19 @@ import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.t
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
   const {
-    setNodeIP,
     isSelectNodeBonALICEModalOpen,
     nodeBonALICE,
     setIsSelectNodeBonALICEModalOpen,
     setNodeBonALICE,
     handleAddNodeClicked,
-    nodeIP,
+    peerID,
+    setPeerID,
+    nodeAddress,
+    setNodeAddress,
     isMetamaskLoading,
     isTransactionLoading,
-    isGettingNodeStatusLoading,
+    // isGettingNodeStatusLoading,
+    isAddingNodeLoading,
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
@@ -177,8 +180,8 @@ const ReviewDetail = () => {
             className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Node Address'}
             type="text"
-            value={nodeIP}
-            onChange={(e) => setNodeIP(e.target.value)}
+            value={nodeAddress}
+            onChange={(e) => setNodeAddress(e.target.value)}
           />
         </div>
         <div className="address-input__input-wrapper mb-5 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
@@ -186,8 +189,8 @@ const ReviewDetail = () => {
             className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Peer ID'}
             type="text"
-            value={nodeIP}
-            onChange={(e) => setNodeIP(e.target.value)}
+            value={peerID}
+            onChange={(e) => setPeerID(e.target.value)}
           />
         </div>
         {nodeBonALICEAddress ===
@@ -226,16 +229,17 @@ const ReviewDetail = () => {
           >
             {isApproving ? 'Approving...' : 'Approve'}
           </button>
-        ) : isGettingNodeStatusLoading ? (
+        ) : isAddingNodeLoading ? (
           <button className="btn btn--secondary mt-auto mx-auto" disabled>
-            Node Status...
+            Adding Node...
           </button>
         ) : (
           <button
             className="btn btn--secondary mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
             disabled={
-              !nodeIP ||
+              !nodeAddress ||
+              !peerID ||
               !nodeBonALICE ||
               nodeBonALICE.ALICELockAmount.dsp +
                 nodeBonALICE.LPTokenLockAmount.dsp * 2 <

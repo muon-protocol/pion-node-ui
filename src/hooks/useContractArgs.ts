@@ -163,15 +163,15 @@ export const useSplitArgs = ({
 
 export const useAddNodeArgs = ({
   nodeAddress,
-  peerId,
+  peerID,
   tokenId,
 }: {
   nodeAddress: string;
-  peerId: string;
+  peerID: string;
   tokenId: number | null;
 }) => {
-  if (!nodeAddress || !peerId || !tokenId) return null;
-  return [nodeAddress, peerId, tokenId];
+  if (!nodeAddress || !peerID || !tokenId) return null;
+  return [nodeAddress, peerID, tokenId];
 };
 
 export const useApproveBonALICEArgs = ({

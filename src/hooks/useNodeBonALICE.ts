@@ -9,8 +9,8 @@ import {
   MUON_NODE_STAKING_ADDRESS,
   MUON_NODE_MANAGER_ADDRESS,
 } from '../constants/addresses.ts';
-import toast from 'react-hot-toast';
-import { getNodeStatusAPI } from '../apis';
+// import toast from 'react-hot-toast';
+// import { getNodeStatusAPI } from '../apis';
 import {
   useBonAliceGetApproved,
   useBonAliceOwnerOf,
@@ -23,12 +23,12 @@ const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);
   const [isSelectNodeBonALICEModalOpen, setIsSelectNodeBonALICEModalOpen] =
     useState(false);
-  const [nodeIP, setNodeIP] = useState<string>('');
-  const [isGettingNodeStatusLoading, setIsGettingNodeStatusLoading] =
-    useState(false);
-  const [peerId, setPeerId] = useState<string>('');
+  // const [nodeIP, setNodeIP] = useState<string>('');
+  // const [isGettingNodeStatusLoading, setIsGettingNodeStatusLoading] =
+  useState(false);
+  const [peerID, setPeerID] = useState<string>('');
   const [nodeAddress, setNodeAddress] = useState<string>('');
-  const [readyToAddNode, setReadyToAddNode] = useState(false);
+  // const [readyToAddNode, setReadyToAddNode] = useState(false);
   const { walletAddress } = useUserProfile();
 
   const { data: nodeBonALICEAddress } = useBonAliceOwnerOf({
@@ -45,7 +45,7 @@ const useNodeBonALICE = () => {
 
   const addNodeArgs = useAddNodeArgs({
     nodeAddress: nodeAddress,
-    peerId: peerId,
+    peerID: peerID,
     tokenId: nodeBonALICE?.tokenId,
   });
 
@@ -62,55 +62,61 @@ const useNodeBonALICE = () => {
     showErrorToast: true,
   });
 
+  const [isAddingNodeLoading, setIsAddingNodeLoading] = useState(false);
+
   const addNodeToNetwork = useCallback(async () => {
+    setIsAddingNodeLoading(true);
     try {
-      setIsGettingNodeStatusLoading(false);
       await addNode?.({
         pending: 'Waiting for Confirmation',
         success: 'Node Added Successfully!',
         failed: 'Error Adding Node!',
       });
+      setIsAddingNodeLoading(false);
     } catch (e: any) {
-      setIsGettingNodeStatusLoading(false);
+      console.log(e);
+      setIsAddingNodeLoading(false);
     }
   }, [addNode]);
 
-  useEffect(() => {
-    if (readyToAddNode && addNodeArgs && nodeBonALICE) {
-      setReadyToAddNode(false);
-      addNodeToNetwork();
-    }
-  }, [readyToAddNode, addNodeArgs, addNodeToNetwork, nodeBonALICE]);
+  // useEffect(() => {
+  //   if (readyToAddNode && addNodeArgs && nodeBonALICE) {
+  //     setReadyToAddNode(false);
+  //     addNodeToNetwork();
+  //   }
+  // }, [readyToAddNode, addNodeArgs, addNodeToNetwork, nodeBonALICE]);
 
   useEffect(() => {
     setNodeBonALICE(null);
-    setNodeIP('');
+    setPeerID('');
+    setNodeAddress('');
   }, [walletAddress]);
 
   const handleAddNodeClicked = async () => {
-    if (!nodeIP || !nodeBonALICE) return;
-    setIsGettingNodeStatusLoading(true);
-    try {
-      // remove https:// and / at the end of the IP
-      const serverIP = nodeIP.replace('http://', '').replace('/', '');
-      const response = await getNodeStatusAPI(serverIP);
-      if (response.success) {
-        if (response.result.peerId) {
-          setPeerId(response.result.peerId);
-          setNodeAddress(response.result.address);
-          setReadyToAddNode(true);
-        } else {
-          toast.success('Node is already added to the network.');
-          setIsGettingNodeStatusLoading(false);
-        }
-      } else {
-        setIsGettingNodeStatusLoading(false);
-        toast.error(response.result);
-      }
-    } catch (e) {
-      setIsGettingNodeStatusLoading(false);
-      toast.error('Something went wrong. Please try again.');
-    }
+    addNodeToNetwork();
+    // if (!nodeIP || !nodeBonALICE) return;
+    // setIsGettingNodeStatusLoading(true);
+    // try {
+    //   // remove https:// and / at the end of the IP
+    //   const serverIP = nodeIP.replace('http://', '').replace('/', '');
+    //   const response = await getNodeStatusAPI(serverIP);
+    //   if (response.success) {
+    //     if (response.result.peerID) {
+    //       setPeerID(response.result.peerID);
+    //       setNodeAddress(response.result.address);
+    //       setReadyToAddNode(true);
+    //     } else {
+    //       toast.success('Node is already added to the network.');
+    //       setIsGettingNodeStatusLoading(false);
+    //     }
+    //   } else {
+    //     setIsGettingNodeStatusLoading(false);
+    //     toast.error(response.result);
+    //   }
+    // } catch (e) {
+    //   setIsGettingNodeStatusLoading(false);
+    //   toast.error('Something went wrong. Please try again.');
+    // }
   };
 
   const { data: approvedBonALICEAddress } = useBonAliceGetApproved({
@@ -154,17 +160,23 @@ const useNodeBonALICE = () => {
     setNodeBonALICE,
     isSelectNodeBonALICEModalOpen,
     setIsSelectNodeBonALICEModalOpen,
-    nodeIP,
-    setNodeIP,
+    // nodeIP,
+    // setNodeIP,
     handleAddNodeClicked,
     isMetamaskLoading: isMetamaskLoading || isApproveMetamaskLoading,
     isTransactionLoading,
-    isGettingNodeStatusLoading,
+    // isGettingNodeStatusLoading,
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
     nodeBonALICEAddress,
     stakerAddressInfo,
+    peerID,
+    setPeerID,
+    nodeAddress,
+    setNodeAddress,
+    isAddingNodeLoading,
+    setIsAddingNodeLoading,
   };
 };
 
