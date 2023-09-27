@@ -30,6 +30,8 @@ const ClaimCard = () => {
     rewardWalletsFromPast,
     rawRewards,
     rawRewardsFromPast,
+    isTermsAndConditionsModalOpen,
+    setIsTermsAndConditionsModalOpen,
   } = useClaimPrize();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
@@ -185,8 +187,8 @@ const ClaimCard = () => {
       <Modal
         size="lg"
         title="Terms and conditions"
-        closeModalHandler={() => {}}
-        isOpen={true}
+        closeModalHandler={() => setIsTermsAndConditionsModalOpen(false)}
+        isOpen={isTermsAndConditionsModalOpen}
       >
         <TermsAndConditionsModal />
       </Modal>

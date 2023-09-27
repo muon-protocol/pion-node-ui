@@ -30,11 +30,13 @@ export async function getClaimSignatureAPI(
   signatures: (string | null)[],
   addresses: string[],
   claimer: `0x${string}`,
+  agreeWithTermsAndConditionsSig: string | null,
 ) {
   const response = await axiosInstance.post('/reward-server/rewards', {
     signatures: signatures,
     addresses: addresses,
     claimer: claimer,
+    tosSig: agreeWithTermsAndConditionsSig,
   });
   return response.data;
 }
