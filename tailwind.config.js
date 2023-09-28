@@ -21,6 +21,7 @@ export default {
         green: '#8EF5AB',
         disabled: '#C0C0C0',
         gray3: '#939393',
+        uptime: '#6e9809',
         'gray-75': '#d0c8e0bf',
         'main-bg': '#F8FAFF',
         'primary-very-dark': '#353367',

@@ -7,34 +7,18 @@ const AmountInput = ({
   balance,
   value,
   onValueChanged,
-  withIcon,
-  iconClicked,
   rightText,
   withLink,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
   onValueChanged: (value: string) => void;
-  withIcon?: boolean;
-  iconClicked?: () => void;
   rightText?: string;
   withLink?: boolean;
 }) => {
   return (
-    <div
-      className={`amount-input flex flex-col w-full gap-2 mb-2 ${
-        withIcon ? 'mt-1.5' : ''
-      }`}
-    >
+    <div className={`amount-input flex flex-col w-full gap-2 mb-2`}>
       <div className="amount-input__top relative text-sm flex justify-between">
-        {withIcon && (
-          <img
-            onClick={iconClicked}
-            className="absolute -top-1.5 right-1/2 cursor-pointer w-7 h-7"
-            src="/assets/images/actions/minus-icon.svg"
-            alt=""
-          />
-        )}
         <span className="flex flex-col">
           <p className="balance flex text-gray">
             Balance:{' '}
@@ -82,8 +66,8 @@ const AmountInput = ({
       </div>
       <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
         <input
-          className="amount-input__input text-black placeholder-gray font-medium w-full h-full bg-transparent outline-none max-md:text-sm"
-          placeholder="Amount You Want to Lock"
+          className="amount-input__input text-black placeholder-gray font-medium w-full h-full bg-transparent outline-none text-sm"
+          placeholder="Enter amount"
           type="number"
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}

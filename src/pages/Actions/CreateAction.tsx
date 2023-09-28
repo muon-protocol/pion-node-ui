@@ -1,10 +1,9 @@
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { FadeIn, MoveUpIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
-import { AnimatePresence } from 'framer-motion';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
@@ -13,7 +12,6 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 // @ts-ignore
 import Lottie from 'lottie-react';
 import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
-import { getTier } from '../../utils';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
@@ -43,7 +41,6 @@ export const RenderCreateBody = () => {
     setIsSufficientModalOpen,
   } = useCreateAction();
 
-  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
@@ -79,53 +76,40 @@ export const RenderCreateBody = () => {
           onValueChanged={handleCreateAmountChange}
         />
       </FadeIn>
-      <AnimatePresence>
-        {isBoostSectionOpen ? (
-          <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
-            <BoostingAmountInput
-              withLink
-              rightText={'USDC'}
-              balance={LPTokenBalance}
-              withIcon
-              iconClicked={() => {
-                handleCreateBoostAmountChange('');
-                setIsBoostSectionOpen(false);
-              }}
-              value={createBoostAmount}
-              onValueChanged={handleCreateBoostAmountChange}
-            />
-          </MoveUpIn>
-        ) : (
-          <FadeIn duration={0.1} delay={0.1}>
-            <p
-              onClick={() => setIsBoostSectionOpen(true)}
-              className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer"
-            >
-              I Want to Boost Bonded ALICE Power with LP Tokens
-            </p>
-          </FadeIn>
-        )}
-      </AnimatePresence>
+
+      <FadeIn className="mb-4" duration={0.1} delay={0.1}>
+        <BoostingAmountInput
+          withLink
+          rightText={'USDC'}
+          balance={LPTokenBalance}
+          value={createBoostAmount}
+          onValueChanged={handleCreateBoostAmountChange}
+        />
+      </FadeIn>
+
       {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) && (
         <>
-          <MoveUpIn y={-10} duration={0.1} delay={0.1}>
-            <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-              <p className="font-light">Your bonALICE power will be</p>
-              <p className="font-medium">
-                {createAmount.dsp + createBoostAmount.dsp * 2}
+          <MoveUpIn
+            y={-10}
+            duration={0.1}
+            delay={0.1}
+            className="flex w-full justify-between items-center"
+          >
+            <span className="text-gray10">
+              <p className="font-light">Your new bonALICE amount:</p>
+              <p className="font-light text-sm flex gap-1">
+                {createBoostAmount.dsp +
+                  ' USDC -> ' +
+                  createBoostAmount.dsp +
+                  ' ALICE '}
+                <p className="text-uptime">x2</p>
+                {' + ' + createAmount.dsp + ' ALICE'}
               </p>
             </span>
+            <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
+              {createBoostAmount.dsp * 2 + createAmount.dsp}
+            </span>
           </MoveUpIn>
-          {createAmount.dsp + createBoostAmount.dsp * 2 >= 10000 && (
-            <MoveUpIn y={-10} duration={0.1} delay={0.1}>
-              <span className="flex justify-between text-gray10 max-md:text-sm">
-                <p className="font-light">Your tier will be</p>
-                <p className="font-medium">
-                  {getTier(createAmount.dsp + createBoostAmount.dsp * 2)}
-                </p>
-              </span>
-            </MoveUpIn>
-          )}
         </>
       )}
       <FadeIn

@@ -1,7 +1,7 @@
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { FadeIn, MoveUpIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import AmountInput from '../../components/Common/AmountInput.tsx';
@@ -14,6 +14,7 @@ import { getTier } from '../../utils';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
+import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -40,7 +41,6 @@ export const RenderUpgradeBody = () => {
 
   const { ALICEBalance } = useALICE();
   const { bonALICEs, ALICEAllowance, LPTokenAllowance } = useBonALICE();
-  const [isBoostSectionOpen, setIsBoostSectionOpen] = useState(false);
 
   const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
     useALICEAllowance();
@@ -135,59 +135,48 @@ export const RenderUpgradeBody = () => {
           onValueChanged={handleUpgradeAmountChange}
         />
       </FadeIn>
-      {isBoostSectionOpen ? (
-        <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
-          <AmountInput
-            withLink
-            rightText={'LP ALICE'}
-            balance={LPTokenBalance}
-            withIcon
-            iconClicked={() => {
-              handleUpgradeBoostAmountChange('');
-              setIsBoostSectionOpen(false);
-            }}
-            value={upgradeBoostAmount}
-            onValueChanged={handleUpgradeBoostAmountChange}
-          />
-        </MoveUpIn>
-      ) : (
-        <FadeIn duration={0.1} delay={0.1}>
-          <p
-            onClick={() => setIsBoostSectionOpen(true)}
-            className="max-md:text-sm font-light underline mb-8 md:mb-10 cursor-pointer"
-          >
-            I Want to Boost Bonded ALICE Power with LP Tokens
-          </p>
-        </FadeIn>
-      )}
+      <FadeIn className="mb-4" duration={0.1} delay={0.1}>
+        <BoostingAmountInput
+          withLink
+          rightText={'USDC'}
+          balance={LPTokenBalance}
+          value={upgradeBoostAmount}
+          onValueChanged={handleUpgradeBoostAmountChange}
+        />
+      </FadeIn>
+
       {selectedUpgradeBonALICE && (
         <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-            <p className="font-light">Your current bonALICE power</p>
+            <p className="font-light">Your bonALICE current amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
           {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) && (
             <>
-              <MoveUpIn y={-10} duration={0.1}>
-                <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-                  <p className="font-light">Your bonALICE power will be</p>
-                  <p className="font-medium">
-                    {selectedUpgradeBonALICE.nodePower +
+              <MoveUpIn
+                y={-10}
+                duration={0.1}
+                delay={0.1}
+                className="flex w-full justify-between items-center"
+              >
+                <span className="text-gray10">
+                  <p className="font-light">Your bonALICE amount will be:</p>
+                  <p className="font-light text-sm flex gap-1">
+                    {upgradeBoostAmount.dsp +
+                      ' USDC -> ' +
+                      upgradeBoostAmount.dsp +
+                      ' ALICE '}
+                    <p className="text-uptime">x2</p>
+                    {' + ' +
                       upgradeAmount.dsp +
-                      2 * upgradeBoostAmount.dsp}
+                      ' ALICE + ' +
+                      selectedUpgradeBonALICE.nodePower}
                   </p>
                 </span>
-              </MoveUpIn>
-              <MoveUpIn y={-10} duration={0.2}>
-                <span className="flex justify-between text-gray10 max-md:text-sm">
-                  <p className="font-light">Your tier will be</p>
-                  <p className="font-medium">
-                    {getTier(
-                      selectedUpgradeBonALICE.nodePower +
-                        upgradeAmount.dsp +
-                        2 * upgradeBoostAmount.dsp,
-                    )}
-                  </p>
+                <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
+                  {upgradeBoostAmount.dsp * 2 +
+                    upgradeAmount.dsp +
+                    selectedUpgradeBonALICE.nodePower}
                 </span>
               </MoveUpIn>
             </>

@@ -6,34 +6,18 @@ const AmountInput = ({
   balance,
   value,
   onValueChanged,
-  withIcon,
-  iconClicked,
   rightText,
   withLink,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
   onValueChanged: (value: string) => void;
-  withIcon?: boolean;
-  iconClicked?: () => void;
   rightText?: string;
   withLink?: boolean;
 }) => {
   return (
-    <div
-      className={`amount-input flex flex-col w-full gap-2 mb-2 ${
-        withIcon ? 'mt-1.5' : ''
-      }`}
-    >
+    <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
       <div className="amount-input__top relative text-sm flex justify-between">
-        {withIcon && (
-          <img
-            onClick={iconClicked}
-            className="absolute -top-1.5 right-1/2 cursor-pointer w-7 h-7"
-            src="/assets/images/actions/minus-icon.svg"
-            alt=""
-          />
-        )}
         <span className="flex flex-col">
           <p className="balance flex text-gray">
             Balance:{' '}
@@ -55,18 +39,18 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 overflow-hidden  md:pl-5 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 overflow-hidden md:pl-5 h-12 md:h-14">
         <input
-          className="amount-input__input text-black placeholder-gray font-medium h-full bg-transparent outline-none max-md:text-sm"
-          placeholder="Amount You Want to Lock"
+          className="amount-input__input text-black placeholder-gray font-medium h-full bg-transparent outline-none text-sm"
+          placeholder="Enter amount"
           type="number"
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
-        <div className="amount-input__token-name font-semibold max-md:text-sm min-w-fit pr-4">
+        <div className="amount-input__token-name font-semibold max-md:text-sm min-w-fit">
           {rightText}
         </div>
-        <div className="bg-primary-dark-500 px-4 h-full flex items-center gap-2">
+        <div className="bg-primary px-4 h-full flex items-center gap-2">
           <p className="text-xl font-bold text-white">{2}x</p>
           <p className="font-semibold text-sm mr-1 text-white leading-5">
             Power
