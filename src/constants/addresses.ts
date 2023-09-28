@@ -29,3 +29,7 @@ export const MUON_NODE_STAKING_ADDRESS: AddressMap = {
 export const MUON_NODE_MANAGER_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x25B019d98CF6FBcD73C92C468A352449e2BB39C2',
 };
+
+export const BOOSTER: AddressMap = {
+  [SupportedChainId.BSCTESTNET]: '0x39005e9fABf4960055A5c503F943D6a34eDDA5cb',
+};

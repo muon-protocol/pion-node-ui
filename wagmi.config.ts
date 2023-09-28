@@ -7,6 +7,7 @@ import LP_TOKEN_ABI from './src/abis/LPToken';
 import REWARD_ABI from './src/abis/Reward';
 import MUON_NODE_STAKING from './src/abis/MuonNodeStaking';
 import MUON_NODE_MANAGER from './src/abis/MuonNodeManager';
+import BOOSTER from './src/abis/Booster';
 
 export default defineConfig({
   out: 'src/abis/types/generated.ts',
@@ -34,6 +35,10 @@ export default defineConfig({
     {
       name: 'MuonNodeManager',
       abi: MUON_NODE_MANAGER,
+    },
+    {
+      name: 'Booster',
+      abi: BOOSTER,
     },
   ],
   plugins: [react()],
