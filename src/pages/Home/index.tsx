@@ -1,25 +1,19 @@
 import { steps } from '../../data/constants';
 import { FadeIn } from '../../animations';
 import { useNavigate } from 'react-router-dom';
-import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useEffect } from 'react';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { StepCard } from './StepCard.tsx';
 
 const Home = () => {
-  const { bonALICEs } = useBonALICE();
   const navigate = useNavigate();
   const { stakerAddressInfo } = useNodeBonALICE();
 
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       window.open('/dashboard', '_self');
-    } else {
-      if (bonALICEs?.length > 0) {
-        navigate('/review');
-      }
     }
-  }, [bonALICEs, navigate, stakerAddressInfo]);
+  }, [navigate, stakerAddressInfo]);
 
   return (
     <div className="page__bg--home">
