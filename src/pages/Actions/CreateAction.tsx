@@ -16,6 +16,7 @@ import waitingForApproveAnimation from '../../../public/assets/animations/waitin
 import { getTier } from '../../utils';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
+import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -81,9 +82,9 @@ export const RenderCreateBody = () => {
       <AnimatePresence>
         {isBoostSectionOpen ? (
           <MoveUpIn className="mb-4" y={-10} duration={0.3} delay={0}>
-            <AmountInput
+            <BoostingAmountInput
               withLink
-              rightText={'LP ALICE'}
+              rightText={'USDC'}
               balance={LPTokenBalance}
               withIcon
               iconClicked={() => {
