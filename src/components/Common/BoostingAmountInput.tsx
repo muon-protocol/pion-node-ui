@@ -8,12 +8,14 @@ const AmountInput = ({
   onValueChanged,
   rightText,
   withLink,
+  max,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
   onValueChanged: (value: string) => void;
   rightText?: string;
   withLink?: boolean;
+  max: W3bNumber | undefined;
 }) => {
   return (
     <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
@@ -42,7 +44,7 @@ const AmountInput = ({
       <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 overflow-hidden md:pl-5 h-12 md:h-14">
         <input
           className="amount-input__input text-black placeholder-gray font-medium h-full bg-transparent outline-none text-sm"
-          placeholder="Enter amount"
+          placeholder={`Enter amount ${max ? '(max: ' + max.dsp + ')' : ''}`}
           type="number"
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}

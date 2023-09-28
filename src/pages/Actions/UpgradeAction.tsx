@@ -14,6 +14,7 @@ import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaki
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
+import { useBooster } from '../../hooks/booster/useBooster.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -45,6 +46,8 @@ export const RenderUpgradeBody = () => {
     useALICEAllowance();
   const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
     useLPTokenAllowance();
+
+  const { boostableAmount } = useBooster(selectedUpgradeBonALICE?.tokenId);
 
   const { LPTokenBalance } = useLPToken();
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -140,6 +143,7 @@ export const RenderUpgradeBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={upgradeBoostAmount}
+          max={boostableAmount}
           onValueChanged={handleUpgradeBoostAmountChange}
         />
       </FadeIn>
