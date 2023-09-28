@@ -14,7 +14,7 @@ export default function UpTimesModal() {
   return (
     <>
       <button
-        className="inline-block rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary-20  active:bg-primary/30"
+        className="inline-block rounded-[8px] bg-primaryL3 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-[#4D3E9E] transition duration-150 ease-in-out hover:bg-primary-20  active:bg-primary/30"
         data-te-toggle="modal"
         data-te-target="#exampleModalCenter"
         data-te-ripple-init
@@ -84,7 +84,11 @@ export default function UpTimesModal() {
                   >
                     Down times
                     <div className="flex rounded-[18px] ">
-                      <span>{selector.downNodeTimes.length && selector.downNodeTimes.length} time(s)</span>
+                      <span>
+                        {selector.downNodeTimes.length &&
+                          selector.downNodeTimes.length}{" "}
+                        time(s)
+                      </span>
                       <span className="mr-1 ml-auto h-5  shrink-0 rotate-[-180deg] fill-[#336dec] transition-transform duration-200 ease-in-out group-[[data-te-collapse-collapsed]]:mr-0 group-[[data-te-collapse-collapsed]]:rotate-0 group-[[data-te-collapse-collapsed]]:fill-[#212529] motion-reduce:transition-none dark:fill-blue-300 dark:group-[[data-te-collapse-collapsed]]:fill-white">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +116,7 @@ export default function UpTimesModal() {
                   data-te-parent="#accordionExample"
                 >
                   <div className="px-5 py-4 max-h-[300px] overflow-y-auto">
-                    {selector.downNodeTimes.map((downTime , i) => (
+                    {selector.downNodeTimes.map((downTime, i) => (
                       <p key={i}>{downTime}</p>
                     ))}
                   </div>

@@ -20,17 +20,26 @@ export function LightBtn({
   bgColor,
   textColor,
   disable,
+  btnDisabeld,
+  dataTeToggle,
+  dataTeTarget,
 }) {
   return (
     <button
-      disabled={disable}
+      data-te-toggle={dataTeToggle}
+      data-te-target={dataTeTarget}
+      disabled={disable || btnDisabeld}
       onClick={onClick}
       className={`inline-block rounded-[8px] ${
-        bgColor ? bgColor : "bg-primary13"
+        bgColor ? bgColor : "bg-primaryL3"
       }  ${
-        textColor ? textColor : "text-primary"
+        textColor ? textColor : "text-[#4D3E9E]"
       } px-4 pb-2 pt-2.5 font-medium  leading-normal transition duration-150 ease-in-out ${
-        disable ? "opacity-50" : "hover:bg-primary-20 active:bg-primary-50"
+        disable
+          ? "opacity-50"
+          : btnDisabeld
+          ? ""
+          : "hover:bg-primaryL3/50 active:bg-primary-50"
       }   ${className}`}
     >
       {children}

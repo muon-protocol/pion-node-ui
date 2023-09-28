@@ -36,7 +36,7 @@ export const CustomConnectButton = () => {
               if (!connected) {
                 return (
                   <button
-                    className="bg-primary13 py-2 flex items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
+                    className="bg-primary/13 py-2 flex items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
                     onClick={openConnectModal}
                   >
                     Connect Wallet
@@ -86,7 +86,7 @@ export const CustomConnectButton = () => {
                   </button> */}
 
                   <button
-                    className="bg-primary13 py-2 flex w-full md:grow-0 items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
+                    className="bg-primary/13 py-2 flex w-full md:grow-0 items-center text-sm font-medium text-primary rounded-lg px-5 mr-2"
                     onClick={openAccountModal}
                   >
                     {account.displayName}

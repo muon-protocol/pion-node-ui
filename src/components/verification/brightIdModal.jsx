@@ -24,12 +24,13 @@ import QRCode from "react-qr-code";
 import { WarningBox } from "@/app/verification/page";
 import { CustomConnectButton } from "../layout/CustomConnectButton";
 import PrimaryBtn from "../layout/PrimaryBtn";
+import { LightBtn } from "@/app/page";
 
 function Step1({ setBrightIdStep }) {
   const dispatch = useDispatch();
   dispatch(resetBrightIdTryed());
   return (
-    <div className="grid content-between pb-4">
+    <div className="grid content-between pb-4 ">
       <div className="flex flex-wrap">
         <Image
           width="100"
@@ -38,7 +39,7 @@ function Step1({ setBrightIdStep }) {
           className="mx-auto"
         ></Image>
 
-        <div className="flex mt-10">
+        <div className="flex mt-10 ">
           <span className="text-lg font-semibold">Step 1:</span>
           <p className="ml-2">Download BrightID app and create an account</p>
         </div>
@@ -78,7 +79,7 @@ function Step1({ setBrightIdStep }) {
         </p>
         <button
           onClick={() => setBrightIdStep(2)}
-          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-1"
+          className="w-full bg-primaryMain text-primaryText  text-xl font-semibold rounded-xl py-2 mt-2 "
         >
           I Have BrightID Account
         </button>
@@ -131,7 +132,7 @@ function Step2({ setBrightIdStep }) {
         </div>
         <button
           onClick={() => setBrightIdStep(3)}
-          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+          className="w-full bg-primaryMain text-primaryText  text-xl font-semibold rounded-xl py-2 mt-2"
         >
           I have Meet verification Badge
         </button>
@@ -219,7 +220,7 @@ function Step3({ setBrightIdStep }) {
       <div className="px-[60px] mt-20 flex justify-center">
         <button
           onClick={() => signMessage()}
-          className="w-full bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+          className="w-full bg-primaryMain text-primaryText  text-xl font-semibold rounded-xl py-2 mt-2"
         >
           Verify Address
         </button>
@@ -318,7 +319,7 @@ function Step4({ setBrightIdStep }) {
       <div className="px-[60px] mt-8 flex justify-center">
         <button
           onClick={() => verifyLink()}
-          className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+          className="px-8 bg-primaryMain text-primaryText  text-xl font-semibold rounded-xl py-2 mt-2"
         >
           Verify Link
         </button>
@@ -352,7 +353,7 @@ function Step5() {
         now have the access to run Alice Starter node.
       </p>
       <button
-        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -390,7 +391,7 @@ function Step6() {
         {selector.errorMessage}
       </p>
       <button
-        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -417,17 +418,25 @@ export default function BrightIdModal({ isActive }) {
   // }, []);
   return (
     <div className="flex">
-      <button
+      {/* <button
         className={`flex  ${
           isActive
             ? "bg-pacificBlue text-white"
-            : "bg-primary13 text-primary hover:bg-primary-20 active:bg-primary-50"
+            : "bg-primary/13 text-primary hover:bg-primary-20 active:bg-primary-50"
         }  rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
         data-te-toggle="modal"
         data-te-target="#brightidModal"
       >
         {isActive ? "Verification passed!" : "Pass verification"}
-      </button>
+      </button> */}
+      <LightBtn
+        btnDisabeld={isActive}
+        bgColor={isActive ? "bg-uptime" : ""}
+        dataTeToggle="modal"
+        dataTeTarget="#brightidModal"
+      >
+        {isActive ? "Verification passed!" : "Pass verification"}
+      </LightBtn>
       <div
         data-te-modal-init
         className="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
@@ -441,7 +450,7 @@ export default function BrightIdModal({ isActive }) {
           data-te-modal-dialog-ref
           className="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px] transform-none opacity-100"
         >
-          <div className="pointer-events-auto relative flex w-full flex-col rounded-[18px] border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+          <div className="pointer-events-auto relative flex w-full flex-col rounded-[18px] border-none bg-[#ECEDFF] bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
             <div className="flex flex-shrink-0 items-center justify-between rounded-t-[18px]  p-4">
               {/* <!--Modal title--> */}
               <h5
@@ -475,7 +484,7 @@ export default function BrightIdModal({ isActive }) {
             </div>
 
             {/* <!--Modal body--> */}
-            <div className="flex flex-wrap w-full justify-center py-4 px-6">
+            <div className="flex flex-wrap w-full justify-center py-4 px-6 text-black">
               {brightIdStep === 1 && (
                 <Step1 setBrightIdStep={setBrightIdStep}></Step1>
               )}

@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
                   <div className="flex flex-wrap justify-between pl-10 md:px-10 pt-4">
                     <div className="col-span-1 mb-1">
                       <Image
-                        src="/dashboard/Alice_Logo.png"
+                        src="/dashboard/Logo.svg"
                         width="121"
                         height="32"
                       ></Image>
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-6">
+                  <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-2">
                     <main className="max-w-[1200px] 2xl:max-w-[1600px]  w-[80%]">
                       {children}
                     </main>

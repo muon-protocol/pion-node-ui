@@ -18,7 +18,7 @@ function Pass({ passed }) {
 
     return (
       <div className="mt-4">
-        {Object.keys(passed).map((pass,i) => {
+        {Object.keys(passed).map((pass, i) => {
           if (passed[pass]) {
             return (
               <p key={i} className="text-[18px] font-medium mt-1">
@@ -43,7 +43,7 @@ export default function PassVerification(props) {
     gitcoinPassportVerified: selector.gitcoinPassportVerified,
   };
   return (
-    <div className="bg-primary13 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[148px]">
+    <div className="bg-primary/13 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[148px]">
       <h4 className="text-[#6F7787]">Your verification pass</h4>
       <Pass passed={pass}></Pass>
     </div>

@@ -13,7 +13,7 @@ import { ERRORCODE } from "@/utils/errorCodeMessage";
 import { useDispatch, useSelector } from "react-redux";
 import { BackToVerificationBtn } from "@/app/presale/page";
 import { LightBtn } from "@/app/page";
-import {  useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { CustomConnectButton } from "../layout/CustomConnectButton";
 
 function PrimaryBtn({ children, onClick }) {
@@ -28,10 +28,10 @@ function PrimaryBtn({ children, onClick }) {
 }
 
 function Step1({ setStep }) {
-  const { address, } = useAccount();
-  
-  const searchParams = useSearchParams()
-  const staker = searchParams.get('staker')
+  const { address } = useAccount();
+
+  const searchParams = useSearchParams();
+  const staker = searchParams.get("staker");
   console.log(staker);
 
   console.log(staker);
@@ -73,7 +73,7 @@ function Step1({ setStep }) {
         <CustomConnectButton></CustomConnectButton>
       </div>
       <div className="w-full flex justify-center mt-8">
-        <PrimaryBtn onClick={() => signMessage()}>verify Address</PrimaryBtn>
+        <LightBtn onClick={() => signMessage()}>verify Address</LightBtn>
       </div>
     </div>
   );
@@ -83,10 +83,10 @@ function Step2() {
   return (
     <div>
       <p className="text-lg text-center mt-6">
-        Congratulations! <br /> You passed Presale participants verification Your
-        access granted to run Alice Starter node
+        Congratulations! <br /> You passed Presale participants verification
+        Your access granted to run Alice Starter node
       </p>
-      <BackToVerificationBtn className="mx-auto mt-14">
+      <BackToVerificationBtn className="mx-auto mt-14 py-2">
         Back to verification center
       </BackToVerificationBtn>
     </div>
@@ -102,7 +102,7 @@ function Step3({ setStep }) {
       <p className="mt-10 text-center text-lg">{selector.errorMessage}</p>
 
       <div className="flex justify-around mt-28">
-        <BackToVerificationBtn className="text-primary font-medium">
+        <BackToVerificationBtn className="text-primaryText font-medium">
           Back to verification center
         </BackToVerificationBtn>
         <LightBtn onClick={() => setStep(1)}>Try another address</LightBtn>
@@ -114,7 +114,7 @@ function Step3({ setStep }) {
 export default function Presale() {
   const [step, setStep] = useState(1);
   return (
-    <div className="w-[570px] mt-2 rounded-[18px] bg-white min-h-[524px] px-8 py-4">
+    <div className="w-[570px] mt-2 rounded-[18px] bg-formCardBackground min-h-[524px] px-8 py-4">
       <h2 className="text-lg font-medium">Muon Presale Participation</h2>
       <div className="mx-auto mt-14 relative w-fit ">
         <Image

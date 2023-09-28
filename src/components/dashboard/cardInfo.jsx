@@ -5,11 +5,11 @@ export default function CardInfo(props) {
   const Title = props.title;
   const Data = props.data;
   return (
-    <div className="w-full grid grid-cols-1 bg-primary13 rounded-[10px] min-h-[116px] content-between py-2 px-4">
-      <h5 className="text-[#6F7787]">{Title}</h5>
+    <div className="w-full grid grid-cols-1 bg-cardBackground/50 rounded-[10px] min-h-[116px] content-between py-2 px-4">
+      <h5 className="text-primaryText">{Title}</h5>
       <div className="w-full flex justify-end">
-        <span className="mr-2 font-Montserrat">
-          {Data&& Data.length > 18 ? addressToShort(Data) : Data}
+        <span className="mr-2 font-Montserrat text-primaryText">
+          {Data && Data.length > 18 ? addressToShort(Data) : Data}
         </span>
         <button
           onClick={() => {

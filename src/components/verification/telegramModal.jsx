@@ -12,6 +12,7 @@ import TelegramLoginButton from "react-telegram-login";
 import { useAccount } from "wagmi";
 import Style from "@/app/style.module.css";
 import { useRouter } from "next/navigation";
+import { LightBtn } from "@/app/page";
 
 function Step2() {
   const router = useRouter();
@@ -40,7 +41,7 @@ function Step2() {
       </p>
       <button
         onClick={router.push("/verification")}
-        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -80,7 +81,7 @@ function Step3() {
       </p>
       <button
         onClick={router.push("/verification")}
-        className={`inline-block mt-10 rounded-[8px] bg-primary13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -133,17 +134,25 @@ export default function TelegramModal({ isActive }) {
   });
   return (
     <div className="flex">
-      <button
+      {/* <button
         className={`flex ${
           isActive
             ? "bg-pacificBlue text-white"
-            : "bg-primary13 text-primary hover:bg-primary-20 active:bg-primary-50"
+            : "bg-primaryL3 text-primary hover:bg-primary-20 active:bg-primary-50"
         } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
         data-te-toggle="modal"
         data-te-target="#telegramModal"
       >
         {isActive ? "Verification passed!" : "Pass verification"}
-      </button>
+      </button> */}
+      <LightBtn
+        btnDisabeld={isActive}
+        bgColor={isActive ? "bg-uptime" : ""}
+        dataTeToggle="modal"
+        dataTeTarget="#telegramModal"
+      >
+        {isActive ? "Verification passed!" : "Pass verification"}
+      </LightBtn>
       <div
         data-te-modal-init
         className="fixed left-0 top-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"

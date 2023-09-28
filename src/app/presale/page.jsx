@@ -31,7 +31,7 @@ export function BackToVerificationBtn({ children, className }) {
   return (
     <div className="flex">
       <button
-        className={`${className} flex content-center items-center bg-primary13 rounded-[8px] px-4 py-1`}
+        className={`${className} flex content-center items-center bg-primary/13 rounded-[8px] px-4 py-1`}
         onClick={(e) => {
           if (isSameWallet) {
             router.push("/verification");

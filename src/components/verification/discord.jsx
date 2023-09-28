@@ -1,5 +1,6 @@
 "use client";
 
+import { LightBtn } from "@/app/page";
 import { fetchNodeInfo } from "@/redux/features/nodeInfo";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,18 +48,30 @@ export default function DiscordVerified({ signer, isActive }) {
   // `https://discord.com/api/oauth2/authorize?client_id=1140034021099831326&redirect_uri=https%3A%2F%2Falice-v2.muon.net%2Fdashboard%2FdiscordVerification&response_type=code&scope=identify&state=${signer}`;
 
   return (
-    <button
+    // <button
+    //   onClick={() => {
+    //     openDiscord(URL);
+    //     setState(1);
+    //   }}
+    //   className={`flex ${
+    //     isActive
+    //       ? "bg-pacificBlue text-white"
+    //       : "bg-primaryL3 text-primary hover:bg-primary-20 active:bg-primary-50"
+    //   } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
+    // >
+    //   {isActive ? "Verification passed!" : "Pass verification"}
+    // </button>
+    <LightBtn
       onClick={() => {
         openDiscord(URL);
         setState(1);
       }}
-      className={`flex ${
-        isActive
-          ? "bg-pacificBlue text-white"
-          : "bg-primary13 text-primary hover:bg-primary-20 active:bg-primary-50"
-      } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
+      btnDisabeld={isActive}
+      bgColor={isActive ? "bg-uptime" : ""}
+      dataTeToggle="modal"
+      dataTeTarget="#telegramModal"
     >
       {isActive ? "Verification passed!" : "Pass verification"}
-    </button>
+    </LightBtn>
   );
 }

@@ -29,10 +29,10 @@ export default function StakeMore() {
     }
   }, [status]);
   return (
-    <div className="bg-primary13 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
+    <div className="bg-cardBackground/50 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
       <div className="flex justify-between">
-        <h4>Bonded ALICE Power</h4>
-        <b>{balance}</b>
+        <h4 className="text-xl">Node Power</h4>
+        <b className="text-2xl font-medium">{balance}</b>
       </div>
       <div className="w-full flex justify-end">
         <LightBtn

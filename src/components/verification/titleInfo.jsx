@@ -26,7 +26,7 @@ export default function TitleInfo() {
             width="24"
             height="24"
           ></Image>
-          <span className="text-primary underline ">Back to dashboard</span>
+          <span className=" underline ">Back to dashboard</span>
         </button>
       </div>
       <p className="text-lg mt-4">

@@ -26,7 +26,7 @@ export default function Balance() {
     }
   }, [status]);
   return (
-    <div className="h-9 mb-1 bg-primary13 flex items-center text-sm font-normal rounded-lg	px-5 mr-2">
+    <div className="h-9 mb-1 bg-primaryMain flex items-center text-sm font-normal rounded-lg	px-5 mr-2">
       <Image
         src="/dashboard/mini-logo.svg"
         width="21"
