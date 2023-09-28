@@ -9,8 +9,6 @@ import {
   MUON_NODE_STAKING_ADDRESS,
   MUON_NODE_MANAGER_ADDRESS,
 } from '../constants/addresses.ts';
-// import toast from 'react-hot-toast';
-// import { getNodeStatusAPI } from '../apis';
 import {
   useBonAliceGetApproved,
   useBonAliceOwnerOf,
@@ -23,12 +21,9 @@ const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);
   const [isSelectNodeBonALICEModalOpen, setIsSelectNodeBonALICEModalOpen] =
     useState(false);
-  // const [nodeIP, setNodeIP] = useState<string>('');
-  // const [isGettingNodeStatusLoading, setIsGettingNodeStatusLoading] =
   useState(false);
   const [peerID, setPeerID] = useState<string>('');
   const [nodeAddress, setNodeAddress] = useState<string>('');
-  // const [readyToAddNode, setReadyToAddNode] = useState(false);
   const { walletAddress } = useUserProfile();
 
   const { data: nodeBonALICEAddress } = useBonAliceOwnerOf({
@@ -79,13 +74,6 @@ const useNodeBonALICE = () => {
     }
   }, [addNode]);
 
-  // useEffect(() => {
-  //   if (readyToAddNode && addNodeArgs && nodeBonALICE) {
-  //     setReadyToAddNode(false);
-  //     addNodeToNetwork();
-  //   }
-  // }, [readyToAddNode, addNodeArgs, addNodeToNetwork, nodeBonALICE]);
-
   useEffect(() => {
     setNodeBonALICE(null);
     setPeerID('');
@@ -94,29 +82,6 @@ const useNodeBonALICE = () => {
 
   const handleAddNodeClicked = async () => {
     addNodeToNetwork();
-    // if (!nodeIP || !nodeBonALICE) return;
-    // setIsGettingNodeStatusLoading(true);
-    // try {
-    //   // remove https:// and / at the end of the IP
-    //   const serverIP = nodeIP.replace('http://', '').replace('/', '');
-    //   const response = await getNodeStatusAPI(serverIP);
-    //   if (response.success) {
-    //     if (response.result.peerID) {
-    //       setPeerID(response.result.peerID);
-    //       setNodeAddress(response.result.address);
-    //       setReadyToAddNode(true);
-    //     } else {
-    //       toast.success('Node is already added to the network.');
-    //       setIsGettingNodeStatusLoading(false);
-    //     }
-    //   } else {
-    //     setIsGettingNodeStatusLoading(false);
-    //     toast.error(response.result);
-    //   }
-    // } catch (e) {
-    //   setIsGettingNodeStatusLoading(false);
-    //   toast.error('Something went wrong. Please try again.');
-    // }
   };
 
   const { data: approvedBonALICEAddress } = useBonAliceGetApproved({
@@ -160,12 +125,9 @@ const useNodeBonALICE = () => {
     setNodeBonALICE,
     isSelectNodeBonALICEModalOpen,
     setIsSelectNodeBonALICEModalOpen,
-    // nodeIP,
-    // setNodeIP,
     handleAddNodeClicked,
     isMetamaskLoading: isMetamaskLoading || isApproveMetamaskLoading,
     isTransactionLoading,
-    // isGettingNodeStatusLoading,
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
