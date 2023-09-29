@@ -15,7 +15,7 @@ export const BONALICE_ADDRESS: AddressMap = {
 };
 
 export const LP_TOKEN_ADDRESS: AddressMap = {
-  [SupportedChainId.BSCTESTNET]: '0xb82ce77FE7BA7253f133B7B6935Df0545e33dBb9',
+  [SupportedChainId.BSCTESTNET]: '0x13c42Aa47f15778155F5c48885bDdC3E1C72Acd7',
 };
 
 export const REWARD_ADDRESS: AddressMap = {
@@ -30,6 +30,6 @@ export const MUON_NODE_MANAGER_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x25B019d98CF6FBcD73C92C468A352449e2BB39C2',
 };
 
-export const BOOSTER: AddressMap = {
+export const BOOSTER_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x39005e9fABf4960055A5c503F943D6a34eDDA5cb',
 };

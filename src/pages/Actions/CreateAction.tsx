@@ -15,6 +15,7 @@ import waitingForApproveAnimation from '../../../public/assets/animations/waitin
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
+import { w3bNumberFromNumber } from '../../utils/web3.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -39,6 +40,7 @@ export const RenderCreateBody = () => {
     setIsInsufficientModalOpen,
     isSufficientModalOpen,
     setIsSufficientModalOpen,
+    boostingLoading,
   } = useCreateAction();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -83,6 +85,7 @@ export const RenderCreateBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={createBoostAmount}
+          max={w3bNumberFromNumber(createAmount.dsp)}
           onValueChanged={handleCreateBoostAmountChange}
         />
       </FadeIn>
@@ -124,10 +127,12 @@ export const RenderCreateBody = () => {
           >
             Switch Network
           </button>
-        ) : isMetamaskLoading || isTransactionLoading ? (
+        ) : isMetamaskLoading || isTransactionLoading || boostingLoading ? (
           <button className="btn !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
+              : boostingLoading
+              ? 'Boosting you bonALICE...'
               : 'Waiting for Tx...'}
           </button>
         ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
@@ -149,8 +154,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {LPTokenBalance && createBoostAmount.big < LPTokenBalance.big
-              ? createBoostAmount.hStr + ' LP Tokens'
-              : 'All LP Tokens'}
+              ? createBoostAmount.hStr + ' USDC'
+              : 'All USDCs'}
           </button>
         ) : (
           <button

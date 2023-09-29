@@ -12,6 +12,7 @@ import { w3bNumberFromString } from '../../utils/web3.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
+  BOOSTER_ADDRESS,
   LP_TOKEN_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
@@ -210,7 +211,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     spenderAddress:
       nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])
         ? MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
-        : BONALICE_ADDRESS[getCurrentChainId()],
+        : BOOSTER_ADDRESS[getCurrentChainId()],
     approveAmount: upgradeBoostAmount,
   });
 

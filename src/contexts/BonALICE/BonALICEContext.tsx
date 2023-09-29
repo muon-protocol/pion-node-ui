@@ -10,6 +10,7 @@ import BONALICE_ABI from '../../abis/BonALICE.json';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
+  BOOSTER_ADDRESS,
   LP_TOKEN_ADDRESS,
 } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
@@ -52,6 +53,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   );
   const { allowance: LPTokenAllowance } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
+    BOOSTER_ADDRESS[getCurrentChainId()],
   );
 
   const [fetchBonALICEIsLoading, setFetchBonALICEIsLoading] = useState(false);

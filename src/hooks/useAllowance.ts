@@ -7,7 +7,10 @@ import { getCurrentChainId } from '../constants/chains.ts';
 import { w3bNumberFromBigint } from '../utils/web3.ts';
 import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
 
-const useAllowance = (contractAddress: `0x${string}`) => {
+const useAllowance = (
+  contractAddress: `0x${string}`,
+  spenderAddress?: `0x${string}`,
+) => {
   const [allowance, setAllowance] = useState<W3bNumber | null>(null);
   const { walletAddress } = useUserProfile();
 
@@ -15,7 +18,10 @@ const useAllowance = (contractAddress: `0x${string}`) => {
     abi: ALICE_ABI,
     address: contractAddress,
     functionName: 'allowance',
-    args: [walletAddress, BONALICE_ADDRESS[getCurrentChainId()]],
+    args: [
+      walletAddress,
+      spenderAddress ? spenderAddress : BONALICE_ADDRESS[getCurrentChainId()],
+    ],
     chainId: getCurrentChainId(),
     watch: true,
   });

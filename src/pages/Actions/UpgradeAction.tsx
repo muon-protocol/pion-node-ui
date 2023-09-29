@@ -169,7 +169,7 @@ export const RenderUpgradeBody = () => {
                       ' USDC -> ' +
                       upgradeBoostAmount.dsp +
                       ' ALICE '}
-                    <p className="text-uptime">x2</p>
+                    <p className="text-primary font-bold">x2</p>
                     {' + ' +
                       upgradeAmount.dsp +
                       ' ALICE + ' +
@@ -223,8 +223,8 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {LPTokenBalance && upgradeBoostAmount.big < LPTokenBalance.big
-              ? upgradeBoostAmount.hStr + ' LP Tokens'
-              : 'All LP Tokens'}
+              ? upgradeBoostAmount.hStr + ' USDC'
+              : 'All USDCs'}
           </button>
         ) : (
           <button
