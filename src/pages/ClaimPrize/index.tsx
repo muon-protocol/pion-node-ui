@@ -31,13 +31,13 @@ const ClaimPrize = () => {
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
-  const { stakerAddressInfo } = useNodeBonALICE();
+  // const { stakerAddressInfo } = useNodeBonALICE();
 
-  useEffect(() => {
-    if (stakerAddressInfo?.active) {
-      window.open('/dashboard', '_self');
-    }
-  }, [stakerAddressInfo]);
+  // useEffect(() => {
+  // if (stakerAddressInfo?.active) {
+  //   window.open('/dashboard', '_self');
+  // }
+  // }, [stakerAddressInfo]);
 
   return (
     <div className="page__bg">
