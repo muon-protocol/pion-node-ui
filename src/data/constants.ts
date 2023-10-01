@@ -54,7 +54,7 @@ export const steps: Step[] = [
   {
     id: 2,
     title: 'Create bonALICE',
-    descriptions: ['Lock your PION into bonPION  and gain node power'],
+    descriptions: ['Lock your ALICE into bonALICE and gain node power'],
     buttonText: 'Create bonded ALICE',
     buttonLink: '/create',
     buttonLinkTarget: '_self',
@@ -63,7 +63,7 @@ export const steps: Step[] = [
     id: 3,
     title: 'Setup Node',
     descriptions: [
-      'When you have your bonPION ready, it’s time to setup your node and start earning',
+      'When you have your bonALICE ready, it’s time to setup your node and start earning',
     ],
     buttonText: 'Setup Node',
     buttonLink: '/review',
