@@ -80,14 +80,14 @@ const ClaimCard = () => {
               : 'Connect eligible wallet'}
           </p>
         </span>
-        <span className="flex font-light">
+        <span className="flex font-light mb-2">
           <div className="flex gap-1 text-black w-[143px] text-left">
             {/*<p className="font-medium">*/}
             {/*  {stakingAddressFromPast*/}
             {/*    ? totalRewardFromPast.dsp*/}
             {/*    : totalRewards.dsp}*/}
             {/*</p>*/}
-            Value:
+            Amount:
             {/*<img*/}
             {/*  src="/assets/images/claim/claim-card-right-arrow-icon.svg"*/}
             {/*  alt=""*/}
@@ -102,9 +102,9 @@ const ClaimCard = () => {
             ALICE
           </div>
         </span>
-        {/*<span className="flex justify-between font-light">*/}
-        {/*  <p>bonALICE Tier:</p>*/}
-        {/*  <p className="font-semibold">*/}
+        {/*<span className="flex font-light">*/}
+        {/*  <p className="w-[143px]">bonALICE Tier:</p>*/}
+        {/*  <p className="flex text-black font-medium">*/}
         {/*    {stakingAddressFromPast || eligibleAddresses.length > 0*/}
         {/*      ? getTier(*/}
         {/*          stakingAddressFromPast*/}
@@ -125,14 +125,12 @@ const ClaimCard = () => {
       </div>
       <div className="claim-card__right flex flex-col items-end justify-between flex-[3] gap-4">
         {eligibleAddresses.length > 0 || rewardWalletsFromPast.length > 0 ? (
-          <>
-            {/*<p*/}
-            {/*  onClick={() => setIsPrizeCalculationDetailModalOpen(true)}*/}
-            {/*  className="font-medium underline text-sm cursor-pointer"*/}
-            {/*>*/}
-            {/*  Prize Calculation Details*/}
-            {/*</p>*/}
-          </>
+          <p
+            onClick={() => setIsPrizeCalculationDetailModalOpen(true)}
+            className="font-medium underline text-sm cursor-pointer"
+          >
+            Node-Drop Calculation Details
+          </p>
         ) : (
           <></>
         )}
