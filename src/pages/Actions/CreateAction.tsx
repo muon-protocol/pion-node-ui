@@ -16,6 +16,7 @@ import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientN
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
+import { useBooster } from '../../hooks/booster/useBooster.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -44,6 +45,7 @@ export const RenderCreateBody = () => {
   } = useCreateAction();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
+  const { boostCoefficient } = useBooster();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
@@ -85,6 +87,7 @@ export const RenderCreateBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={createBoostAmount}
+          boostCoefficient={boostCoefficient}
           max={w3bNumberFromNumber(createAmount.dsp)}
           onValueChanged={handleCreateBoostAmountChange}
         />
@@ -105,7 +108,7 @@ export const RenderCreateBody = () => {
                   ' USDC -> ' +
                   createBoostAmount.dsp +
                   ' ALICE '}
-                <p className="text-uptime">x2</p>
+                <p className="text-uptime">x{boostCoefficient?.dsp}</p>
                 {' + ' + createAmount.dsp + ' ALICE'}
               </p>
             </span>

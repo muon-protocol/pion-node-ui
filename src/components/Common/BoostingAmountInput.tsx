@@ -8,6 +8,7 @@ const AmountInput = ({
   onValueChanged,
   rightText,
   withLink,
+  boostCoefficient,
   max,
 }: {
   balance: W3bNumber | null;
@@ -15,6 +16,7 @@ const AmountInput = ({
   onValueChanged: (value: string) => void;
   rightText?: string;
   withLink?: boolean;
+  boostCoefficient?: W3bNumber;
   max: W3bNumber | undefined;
 }) => {
   return (
@@ -44,7 +46,9 @@ const AmountInput = ({
       <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 overflow-hidden md:pl-5 h-12 md:h-14">
         <input
           className="amount-input__input text-black placeholder-gray font-medium h-full bg-transparent outline-none text-sm"
-          placeholder={`Enter amount ${max ? '(max: ' + max.dsp + ')' : ''}`}
+          placeholder={`Enter amount ${
+            max?.dsp ? '(max: ' + max.dsp + ')' : ''
+          }`}
           type="number"
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
@@ -53,7 +57,9 @@ const AmountInput = ({
           {rightText}
         </div>
         <div className="bg-primary px-4 h-full flex items-center gap-2">
-          <p className="text-xl font-bold text-white">{2}x</p>
+          <p className="text-xl font-bold text-white">
+            {boostCoefficient?.dsp}x
+          </p>
           <p className="font-semibold text-sm mr-1 text-white leading-5">
             Power
             <br />
