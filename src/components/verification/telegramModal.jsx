@@ -41,7 +41,7 @@ function Step2() {
       </p>
       <button
         onClick={router.push("/verification")}
-        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primaryMain text-primaryText px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out hover:bg-primaryMain/80  active:bg-primaryMain/50`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -81,7 +81,7 @@ function Step3() {
       </p>
       <button
         onClick={router.push("/verification")}
-        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primaryMain text-primaryText px-6 pb-2 pt-2.5 text-sm font-medium leading-normal  transition duration-150 ease-in-out hover:bg-primaryMain/80 active:bg-primaryMain/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -134,17 +134,6 @@ export default function TelegramModal({ isActive }) {
   });
   return (
     <div className="flex">
-      {/* <button
-        className={`flex ${
-          isActive
-            ? "bg-pacificBlue text-white"
-            : "bg-primaryL3 text-primary hover:bg-primary-20 active:bg-primary-50"
-        } rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
-        data-te-toggle="modal"
-        data-te-target="#telegramModal"
-      >
-        {isActive ? "Verification passed!" : "Pass verification"}
-      </button> */}
       <LightBtn
         btnDisabeld={isActive}
         bgColor={isActive ? "bg-uptime" : ""}
@@ -166,7 +155,7 @@ export default function TelegramModal({ isActive }) {
           data-te-modal-dialog-ref
           className="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]"
         >
-          <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+          <div className="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-[#ECEDFF] bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
             <div className="flex flex-shrink-0 items-center justify-between rounded-t-md  p-4">
               {/* <!--Modal title--> */}
               <h5
@@ -198,7 +187,7 @@ export default function TelegramModal({ isActive }) {
             </div>
 
             {/* <!--Modal body--> */}
-            <div className="flex flex-wrap w-full justify-center py-4 px-6">
+            <div className="flex flex-wrap w-full justify-center py-4 px-6 text-black">
               {telegramStep === 1 && (
                 <>
                   <div>

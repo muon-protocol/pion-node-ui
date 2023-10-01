@@ -45,7 +45,7 @@ export default function RootLayout({ children }) {
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
-                        src="/dashboard/Alice_Logo.png"
+                        src="/dashboard/Logo.svg"
                         width="121"
                         height="32"
                       ></Image>

@@ -68,8 +68,6 @@ export default function DiscordVerified({ signer, isActive }) {
       }}
       btnDisabeld={isActive}
       bgColor={isActive ? "bg-uptime" : ""}
-      dataTeToggle="modal"
-      dataTeTarget="#telegramModal"
     >
       {isActive ? "Verification passed!" : "Pass verification"}
     </LightBtn>

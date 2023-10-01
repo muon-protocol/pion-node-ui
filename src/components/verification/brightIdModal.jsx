@@ -353,7 +353,7 @@ function Step5() {
         now have the access to run Alice Starter node.
       </p>
       <button
-        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primaryMain/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primaryMain/20  active:bg-primaryMain/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >
@@ -391,7 +391,7 @@ function Step6() {
         {selector.errorMessage}
       </p>
       <button
-        className={`inline-block mt-10 rounded-[8px] bg-primary/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primary/20  active:bg-primary/30`}
+        className={`inline-block mt-10 rounded-[8px] bg-primaryMain px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primaryMain/20  active:bg-primaryMain/30`}
         data-te-modal-dismiss
         aria-label="Close"
       >

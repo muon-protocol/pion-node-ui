@@ -45,7 +45,7 @@ function Step1({ setGitCoinStep }) {
 
       <div className="px-[60px] mt-20">
         <div>
-          <WarningBox>
+          <WarningBox className="text-black">
             We recommend linking your Staking Address to your Gitcoin Passport
             for an optimal verification experience.
           </WarningBox>
@@ -53,7 +53,7 @@ function Step1({ setGitCoinStep }) {
         <div className="w-full flex justify-center">
           <button
             onClick={() => setGitCoinStep(2)}
-            className="px-8 bg-myPrimary text-white text-xl font-semibold rounded-xl py-2 mt-2"
+            className="px-8 bg-primaryMain text-white text-xl font-semibold rounded-xl py-2 mt-2"
           >
             Next step
           </button>
@@ -68,6 +68,7 @@ function Step2({ setGitCoinStep }) {
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
+  // dispatch(resetErrorMessage());
 
   const searchParams = useSearchParams();
   const staker = searchParams.get("staker");
@@ -207,7 +208,7 @@ function Step3() {
 export default function GitCoin({ staker }) {
   const [gitcoinStep, setGitCoinStep] = useState(1);
   return (
-    <div className="w-[570px] mt-2 rounded-[18px] bg-white min-h-[524px] p-4">
+    <div className="w-[570px] mt-2 rounded-[18px] bg-formCardBackground min-h-[524px] p-4">
       <div className="flex flex-wrap w-full justify-center py-4 px-6">
         {gitcoinStep === 1 && <Step1 setGitCoinStep={setGitCoinStep}></Step1>}
         {gitcoinStep === 2 && (

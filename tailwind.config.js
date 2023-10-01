@@ -24,34 +24,20 @@ module.exports = {
         80: "rgba(var(--color-primaryL3), 0.8)",
       },
       myPrimary: "rgb(var(--color-primary))",
-      primary: {
-        DEFAULT: "rgba(var(--color-primary),1)",
-        50: "rgba(var(--color-primary), 0.5)",
-        20: "rgba(var(--color-primary), 0.2)",
-        80: "rgba(var(--color-primary), 0.8)",
-      },
+      primary: "rgba(var(--color-primary), 1)",
+
       mysecondary: {
         DEFAULT: "rgb(var(--color-secondary))",
         20: "rgba(245, 149, 105, 0.2)",
       },
-      primary: "rgba(81, 88, 246, 0.13)",
       black: "#323245",
       white: "#FFFFFF",
       pacificBlue: "#23B5D3",
     },
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "rgb(var(--color-primary))",
-          50: "rgba(var(--color-primary), 0.5)",
-          80: "rgba(var(--color-primary), 0.8)",
-        },
-        mysecondary: {
-          DEFAULT: "rgb245, 149, 105)",
-          20: "rgba(245, 149, 105), 0.2)",
-        },
-        mysecondary: "rgb(245, 149, 105)",
-        primary: "rgba(81, 88, 246, 0.13)",
+        primary: "rgba(var(--color-primary), 1)",
+        mysecondary: "rgba(245, 149, 105), 1)",
         black: "#323245",
         white: "#FFFFFF",
         pacificBlue: "#23B5D3",
