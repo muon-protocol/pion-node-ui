@@ -8,6 +8,7 @@ const initialState = {
   discordVerified: false,
   gitcoinPassportVerified: false,
   presaleVerified: false,
+  privateSaleVerified: false,
   telegramVerified: false,
   brightidContexId: "",
   brightIdTryed: 0,
@@ -91,7 +92,8 @@ export const verification = createSlice({
             (state.gitcoinPassportVerified =
               verificationData.gitcoinPassportVerified),
             (state.presaleVerified = verificationData.presaleVerified),
-            (state.telegramVerified = verificationData.telegramVerified);
+            (state.telegramVerified = verificationData.telegramVerified),
+            (state.privateSaleVerified = verificationData.privateSaleVerified);
         }
       })
       .addCase(fetchVerification.rejected, (state, action) => {

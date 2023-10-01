@@ -55,7 +55,7 @@ export default function Home() {
 
   useEffect(() => {
     if (isDisconnected && process.env.NODE_ENV === "production") {
-      window.location.replace("https://alice-v2.muon.net");
+      window.location.replace("/");
     }
   }, [isDisconnected]);
   useEffect(() => {
@@ -78,7 +78,10 @@ export default function Home() {
 
   return (
     <div className={`${isDisconnected ? "opacity-50" : ""}`} aria-disabled>
-      <TopBanner isVerify={isVerify}></TopBanner>
+      <TopBanner
+        isVerify={isVerify}
+        privateSaleVerified={verificationData.privateSaleVerified}
+      ></TopBanner>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
         <CardInfo title="IP Address" data={selector.nodeIP}></CardInfo>

@@ -14,11 +14,12 @@ function Pass({ passed }) {
       brightidMeetsVerified: "BrightID Meet Verification",
       brightidAuraVerified: "BrightID Aura Verification",
       gitcoinPassportVerified: "Gitcoin Verification",
+      privateSaleVerified: "Private Sale Verification",
     };
 
     return (
       <div className="mt-4">
-        {Object.keys(passed).map((pass,i) => {
+        {Object.keys(passed).map((pass, i) => {
           if (passed[pass]) {
             return (
               <p key={i} className="text-[18px] font-medium mt-1">
@@ -41,6 +42,7 @@ export default function PassVerification(props) {
     brightidAuraVerified: selector.brightidAuraVerified,
     brightidMeetsVerified: selector.brightidMeetsVerified,
     gitcoinPassportVerified: selector.gitcoinPassportVerified,
+    privateSaleVerified: selector.privateSaleVerified,
   };
   return (
     <div className="bg-primary13 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[148px]">

@@ -52,7 +52,7 @@ export const getNodeInfoData = async (walletAddress) => {
   console.log(res);
   let nodeInfoData = { nodeInfo: {} };
   if (res && res === "node not found") {
-    window.location.replace("https://alice-v2.muon.net/");
+    window.location.replace("/");
     return false;
   } else if (res && res != "node not found") {
     nodeInfoData.nodeInfo.haveNode = true;

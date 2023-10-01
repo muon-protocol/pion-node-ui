@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { LightBtn } from "@/app/page";
 
-export default function TopBanner({ isVerify }) {
+export default function TopBanner({ isVerify, privateSaleVerified }) {
   const router = useRouter();
   return (
     <div className="bg-primary13 grid grid-cols-1 lg:h-20 py-5 lg:py-0 w-full rounded-[10px] lg:flex items-center px-6 justify-between">
@@ -16,7 +16,11 @@ export default function TopBanner({ isVerify }) {
         <span className="text-xl font-normal">Uniqueness Verification:</span>
       </div>
       <h4 className="text-xl font-semibold">
-        {isVerify ? "Verified for Starter Node" : "Not Verified"}
+        {privateSaleVerified
+          ? "Verified for Master Node"
+          : isVerify
+          ? "Verified for Starter Node"
+          : "Not Verified"}
       </h4>
       <LightBtn
         className="mt-5 lg:mt-0"

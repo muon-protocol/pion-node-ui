@@ -17,9 +17,9 @@ export default function TitleInfo() {
         </div>
         <button
           onClick={() => {
-            window.location.replace("https://alice-v2.muon.net/dashboard");
+            window.location.replace("/dashboard");
           }}
-          className="flex items-center transition duration-150 ease-in-out hover:bg-primary-20 rounded-[10px] "
+          className="flex items-center transition duration-150 ease-in-out hover:opacity-80 rounded-[10px] "
         >
           <Image
             src="/dashboard/verification/back-icon.svg"

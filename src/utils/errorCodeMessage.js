@@ -19,6 +19,7 @@ export const ERRORCODE = {
   15: () =>
     `Unable to get score due to an internal issue. Please try again later.`,
   16: () => `The user's Gitcoin passport score is too low.`,
+  17: () => `registration has been closed`,
   connection: () =>
     "Something went wrong. Please try after a while. (connection problem)",
 };

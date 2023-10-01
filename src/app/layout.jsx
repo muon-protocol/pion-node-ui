@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
                       </div>
                     </div>
                   </div>
-                  <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap	mt-6">
+                  <div className="w-full min-h-[80vh] flex content-center justify-center flex-wrap">
                     <main className="max-w-[1200px] 2xl:max-w-[1600px]  w-[80%]">
                       {children}
                     </main>

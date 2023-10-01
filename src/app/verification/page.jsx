@@ -61,7 +61,7 @@ export default function Verification() {
 
   useEffect(() => {
     if (isDisconnected) {
-      window.location.replace("https://alice-v2.muon.net");
+      window.location.replace("/");
     }
   }, [isDisconnected]);
 
