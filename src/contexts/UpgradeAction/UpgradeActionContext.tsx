@@ -22,6 +22,7 @@ import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import {
   useApproveArgs,
   useLockArgs,
+  useLockToBondedTokenArgs,
   useLockUSDCArgs,
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
@@ -122,6 +123,18 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     return false;
   }, [nodeBonALICE, isSelectedUpgradeBonALICE]);
 
+  const lockToBondedTokenArgs = useLockToBondedTokenArgs({
+    tokenId: upgradeModalSelectedBonALICE?.tokenId,
+    ALICEAmount: upgradeAmount,
+    ALICEAllowance: isNodeBonALICESelected
+      ? aliceAllowanceForMuon
+      : ALICEAllowance,
+    LPTokenAmount: upgradeBoostAmount,
+    LPTokenAllowance: isNodeBonALICESelected
+      ? lpTokenAllowanceForMuon
+      : LPTokenAllowance,
+  });
+
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
@@ -169,7 +182,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   } = useWagmiContractWrite({
     abi: MUON_NODE_STAKING_ABI,
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-    args: lockArgs ? [lockArgs[1], lockArgs[2]] : [],
+    args: lockToBondedTokenArgs
+      ? [lockToBondedTokenArgs[1], lockToBondedTokenArgs[2]]
+      : [],
     functionName: 'lockToBondedToken',
     chainId: getCurrentChainId(),
   });
@@ -177,11 +192,23 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const handleUpgradeBonALICEClicked = async () => {
     try {
       if (isNodeBonALICESelected) {
-        lockToBondedToken?.({
-          pending: 'Upgrading Bonded ALICE...',
-          success: 'Upgraded!',
-          failed: 'Failed to upgrade Bonded ALICE.',
-        });
+        if (upgradeAmount.dsp > 0) {
+          await lockToBondedToken?.({
+            pending: 'Upgrading Bonded ALICE with ALICE...',
+            success:
+              upgradeBoostAmount.dsp > 0
+                ? 'Upgraded, wait for USDC upgrade...'
+                : 'Upgraded!',
+            failed: 'Failed to upgrade Bonded ALICE with ALICE!',
+          });
+        }
+        if (upgradeBoostAmount.dsp > 0) {
+          await lockUSDC?.({
+            pending: 'Upgrading Bonded ALICE with USDC...',
+            success: 'Upgraded!',
+            failed: 'Failed to upgrade Bonded ALICE with USDC!',
+          });
+        }
       } else {
         if (upgradeAmount.dsp > 0) {
           await lock?.({
@@ -200,11 +227,11 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
             failed: 'Failed to upgrade Bonded ALICE with USDC!',
           });
         }
-        setIsUpgradeModalOpen(false);
-        setUpgradeAmount(w3bNumberFromString(''));
-        setUpgradeBoostAmount(w3bNumberFromString(''));
-        setUpgradeModalSelectedBonALICE(null);
       }
+      setIsUpgradeModalOpen(false);
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
     } catch (e) {
       console.log(e);
     }
