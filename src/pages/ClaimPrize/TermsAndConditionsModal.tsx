@@ -7,6 +7,7 @@ export const TermsAndConditionsModal = () => {
     handleClaimRewardsClicked,
     agreeWithTermsAndConditionsSig,
     handleApproveTermsAndConditions,
+    isMetamaskLoadingVerify,
   } = useContext(ClaimPrizeContext);
 
   return (
@@ -46,10 +47,14 @@ export const TermsAndConditionsModal = () => {
               ? handleClaimRewardsClicked()
               : handleApproveTermsAndConditions();
           }}
-          disabled={!checked}
+          disabled={!checked || isMetamaskLoadingVerify}
           className="btn btn--primary mb-2 mt-5 mx-auto !w-[280px]"
         >
-          {agreeWithTermsAndConditionsSig ? 'Claim rewards' : 'Approve'}
+          {isMetamaskLoadingVerify
+            ? 'Metamask...'
+            : agreeWithTermsAndConditionsSig
+            ? 'Claim rewards'
+            : 'Approve'}
         </button>
       </section>
     </div>

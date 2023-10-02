@@ -402,6 +402,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       .then((signature) => {
         setIsMetamaskLoadingVerify(false);
         setAgreeWithTermsAndConditionsSig(signature);
+        setIsTermsAndConditionsModalOpen(false);
         setIsConfirmModalOpen(true);
       })
       .catch((error) => {
@@ -484,9 +485,18 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       setIsSwitchBackToWalletModalOpen(true);
       return;
     }
-    setIsTermsAndConditionsModalOpen(true);
-    // setIsConfirmModalOpen(true);
-  }, [stakingAddress, walletAddress, stakingAddressFromPast]);
+    if (agreeWithTermsAndConditionsSig) {
+      setIsTermsAndConditionsModalOpen(false);
+      setIsConfirmModalOpen(true);
+    } else {
+      setIsTermsAndConditionsModalOpen(true);
+    }
+  }, [
+    stakingAddress,
+    walletAddress,
+    stakingAddressFromPast,
+    agreeWithTermsAndConditionsSig,
+  ]);
 
   const handleClaimRewardsFromPastClicked = useCallback(async () => {
     if (!stakingAddressFromPast) return;

@@ -182,8 +182,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   ]);
 
   const handleCreateBonALICEClicked = async () => {
-    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
-      return;
+    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big) return;
     setCreateActionLoading(true);
 
     try {
