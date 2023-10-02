@@ -17,6 +17,7 @@ import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
+import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -69,6 +70,8 @@ export const RenderCreateBody = () => {
     LPTokenBalance,
   ]);
 
+  const { USDCPrice } = usePancakePair();
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1}>
@@ -93,7 +96,7 @@ export const RenderCreateBody = () => {
         />
       </FadeIn>
 
-      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) && (
+      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) && USDCPrice && (
         <>
           <MoveUpIn
             y={-10}
@@ -106,14 +109,15 @@ export const RenderCreateBody = () => {
               <p className="font-light text-sm flex gap-1">
                 {createBoostAmount.dsp +
                   ' USDC -> ' +
-                  createBoostAmount.dsp +
+                  (createBoostAmount.dsp * Math.round(USDCPrice * 100)) / 100 +
                   ' ALICE '}
                 <p className="text-uptime">x{boostCoefficient?.dsp}</p>
                 {' + ' + createAmount.dsp + ' ALICE'}
               </p>
             </span>
             <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
-              {createBoostAmount.dsp * 2 + createAmount.dsp}
+              {createBoostAmount.dsp * (Math.round(USDCPrice * 100) / 100) * 2 +
+                createAmount.dsp}
             </span>
           </MoveUpIn>
         </>

@@ -173,7 +173,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
           console.log(error);
           setBoostingLoading(false);
         });
-    }, 4000);
+    }, 10000);
   }, [
     BonALICERefetch,
     walletAddress,
