@@ -119,11 +119,12 @@ export const RenderCreateBody = () => {
             </span>
             <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
               {Math.round(
-                createBoostAmount.dsp *
+                (createBoostAmount.dsp *
                   (Math.round(USDCPrice * 100) / 100) *
                   2 +
-                  createAmount.dsp,
-              )}
+                  createAmount.dsp) *
+                  100,
+              ) / 100}
             </span>
           </MoveUpIn>
         </>

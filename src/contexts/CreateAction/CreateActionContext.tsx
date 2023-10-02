@@ -132,48 +132,40 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const boostNewNFT = useCallback(() => {
-    if (createBoostAmount.dsp === 0) {
-      setCreateAmount(w3bNumberFromString(''));
-      setCreateBoostAmount(w3bNumberFromString(''));
-      return;
-    }
-    setBoostingLoading(true);
-    setTimeout(() => {
-      BonALICERefetch({ account: walletAddress })
-        .then(async ({ data }) => {
-          const tokens = data.accountTokenIds;
-          // find token with maximum tokenId
-          const lastNFT = tokens.reduce((prev, current) =>
-            prev.tokenId > current.tokenId ? prev : current,
-          );
-          const { hash: boostSuccess } = await writeContract({
-            abi: BOOSTER_ABI,
-            address: BOOSTER_ADDRESS[getCurrentChainId()],
-            functionName: 'boost',
-            args: [lastNFT.tokenId, createBoostAmount.big],
-          });
-
-          console.log(boostSuccess);
-          if (createAmount.dsp < 10000) {
-            setIsInsufficientModalOpen(true);
-          } else {
-            if (!newNFTClaimedLoading) {
-              setNewNFTClaimedLoading(true);
-              setTimeout(() => {
-                setNewNFTClaimedLoading(false);
-              }, 10000);
-            }
-            setIsSufficientModalOpen(true);
-          }
-          setCreateAmount(w3bNumberFromString(''));
-          setCreateBoostAmount(w3bNumberFromString(''));
-          setBoostingLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setBoostingLoading(false);
+    BonALICERefetch({ account: walletAddress })
+      .then(async ({ data }) => {
+        const tokens = data.accountTokenIds;
+        // find token with maximum tokenId
+        const lastNFT = tokens.reduce((prev, current) =>
+          prev.tokenId > current.tokenId ? prev : current,
+        );
+        const { hash: boostSuccess } = await writeContract({
+          abi: BOOSTER_ABI,
+          address: BOOSTER_ADDRESS[getCurrentChainId()],
+          functionName: 'boost',
+          args: [lastNFT.tokenId, createBoostAmount.big],
         });
-    }, 10000);
+
+        console.log(boostSuccess);
+        if (createAmount.dsp < 10000) {
+          setIsInsufficientModalOpen(true);
+        } else {
+          if (!newNFTClaimedLoading) {
+            setNewNFTClaimedLoading(true);
+            setTimeout(() => {
+              setNewNFTClaimedLoading(false);
+            }, 10000);
+          }
+          setIsSufficientModalOpen(true);
+        }
+        setCreateAmount(w3bNumberFromString(''));
+        setCreateBoostAmount(w3bNumberFromString(''));
+        setBoostingLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setBoostingLoading(false);
+      });
   }, [
     BonALICERefetch,
     walletAddress,
@@ -182,12 +174,15 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     newNFTClaimedLoading,
   ]);
 
+  const [nftCounts, setNftCounts] = useState(0);
+  const { bonALICEs } = useBonALICE();
   const handleCreateBonALICEClicked = async () => {
     if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
       return;
     setCreateActionLoading(true);
 
     try {
+      setNftCounts(bonALICEs.length);
       await mintAndLock?.({
         pending: 'Waiting for confirmation...',
         success:
@@ -196,8 +191,20 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
             : 'BonALICE created!',
         failed: 'Error',
       });
-
-      boostNewNFT();
+      if (createBoostAmount.dsp === 0) {
+        setCreateAmount(w3bNumberFromString(''));
+        setCreateBoostAmount(w3bNumberFromString(''));
+        return;
+      } else {
+        setBoostingLoading(true);
+      }
+      console.log('mintAndLock success', bonALICEs.length);
+      const interval = setInterval(() => {
+        if (bonALICEs.length === nftCounts + 1) {
+          clearInterval(interval);
+          boostNewNFT();
+        }
+      }, 1000);
     } catch (error) {
       console.log(error);
       setBoostingLoading(false);
