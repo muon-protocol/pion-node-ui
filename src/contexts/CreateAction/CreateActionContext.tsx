@@ -138,41 +138,43 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
     setBoostingLoading(true);
-    BonALICERefetch({ account: walletAddress })
-      .then(async ({ data }) => {
-        const tokens = data.accountTokenIds;
-        // find token with maximum tokenId
-        const lastNFT = tokens.reduce((prev, current) =>
-          prev.tokenId > current.tokenId ? prev : current,
-        );
-        console.log(lastNFT);
-        const { hash: boostSuccess } = await writeContract({
-          abi: BOOSTER_ABI,
-          address: BOOSTER_ADDRESS[getCurrentChainId()],
-          functionName: 'boost',
-          args: [lastNFT.tokenId, createBoostAmount.big],
-        });
+    setTimeout(() => {
+      BonALICERefetch({ account: walletAddress })
+        .then(async ({ data }) => {
+          const tokens = data.accountTokenIds;
+          // find token with maximum tokenId
+          const lastNFT = tokens.reduce((prev, current) =>
+            prev.tokenId > current.tokenId ? prev : current,
+          );
+          console.log(lastNFT);
+          const { hash: boostSuccess } = await writeContract({
+            abi: BOOSTER_ABI,
+            address: BOOSTER_ADDRESS[getCurrentChainId()],
+            functionName: 'boost',
+            args: [lastNFT.tokenId, createBoostAmount.big],
+          });
 
-        console.log(boostSuccess);
-        if (createAmount.dsp < 10000) {
-          setIsInsufficientModalOpen(true);
-        } else {
-          if (!newNFTClaimedLoading) {
-            setNewNFTClaimedLoading(true);
-            setTimeout(() => {
-              setNewNFTClaimedLoading(false);
-            }, 10000);
+          console.log(boostSuccess);
+          if (createAmount.dsp < 10000) {
+            setIsInsufficientModalOpen(true);
+          } else {
+            if (!newNFTClaimedLoading) {
+              setNewNFTClaimedLoading(true);
+              setTimeout(() => {
+                setNewNFTClaimedLoading(false);
+              }, 10000);
+            }
+            setIsSufficientModalOpen(true);
           }
-          setIsSufficientModalOpen(true);
-        }
-        setCreateAmount(w3bNumberFromString(''));
-        setCreateBoostAmount(w3bNumberFromString(''));
-        setBoostingLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setBoostingLoading(false);
-      });
+          setCreateAmount(w3bNumberFromString(''));
+          setCreateBoostAmount(w3bNumberFromString(''));
+          setBoostingLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setBoostingLoading(false);
+        });
+    }, 4000);
   }, [
     BonALICERefetch,
     walletAddress,
@@ -182,13 +184,17 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   ]);
 
   const handleCreateBonALICEClicked = async () => {
-    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big) return;
+    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
+      return;
     setCreateActionLoading(true);
 
     try {
       await mintAndLock?.({
-        pending: 'Waiting for confirmation',
-        success: 'Success',
+        pending: 'Waiting for confirmation...',
+        success:
+          createBoostAmount.dsp > 0
+            ? 'BonALICE created, wait for boost...'
+            : 'BonALICE created!',
         failed: 'Error',
       });
 
