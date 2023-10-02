@@ -8,6 +8,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const RenderMergeBody = () => {
   const {
@@ -22,6 +23,8 @@ const RenderMergeBody = () => {
     handleMerge,
   } = useMergeAction();
   const { bonALICEs } = useBonALICE();
+  const { nodeBonALICE } = useMuonNodeStaking();
+
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
   const isMergeBonALICEsButtonDisabled = useMemo(() => {
@@ -36,13 +39,17 @@ const RenderMergeBody = () => {
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
-          modalTitle="Select BonALICEs to Merge"
+          modalTitle={
+            [...nodeBonALICE, ...bonALICEs].length > 0
+              ? 'Select BonALICEs to Merge'
+              : 'No BonALICEs to Merge'
+          }
           multiple
           selectedItems={selectedMergeBonALICEs}
           removeItem={(item) => handleMergeModalItemClicked(item)}
         >
           <BonALICEModalBody
-            bonALICEs={bonALICEs}
+            bonALICEs={[...nodeBonALICE, ...bonALICEs]}
             handleUpgradeModalItemClicked={handleMergeModalItemClicked}
             isSelectedUpgradeBonALICE={isInSelectedMergeBonALICEs}
           />

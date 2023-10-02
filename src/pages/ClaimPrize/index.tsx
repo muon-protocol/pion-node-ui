@@ -11,8 +11,8 @@ import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
-import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
-import { useEffect } from 'react';
+// import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+// import { useEffect } from 'react';
 
 const ClaimPrize = () => {
   const {
