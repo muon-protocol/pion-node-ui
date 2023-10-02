@@ -85,6 +85,8 @@ export const RenderUpgradeBody = () => {
     upgradeBoostAmount,
   ]);
 
+  const { boostCoefficient } = useBooster();
+
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
@@ -169,7 +171,9 @@ export const RenderUpgradeBody = () => {
                       ' USDC -> ' +
                       upgradeBoostAmount.dsp +
                       ' ALICE '}
-                    <p className="text-primary font-bold">x2</p>
+                    <p className="text-primary font-bold">
+                      x{boostCoefficient?.dsp}
+                    </p>
                     {' + ' +
                       upgradeAmount.dsp +
                       ' ALICE + ' +

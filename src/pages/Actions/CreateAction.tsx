@@ -111,13 +111,19 @@ export const RenderCreateBody = () => {
                   ' USDC -> ' +
                   (createBoostAmount.dsp * Math.round(USDCPrice * 100)) / 100 +
                   ' ALICE '}
-                <p className="text-uptime">x{boostCoefficient?.dsp}</p>
+                <p className="text-primary font-bold">
+                  x{boostCoefficient?.dsp}
+                </p>
                 {' + ' + createAmount.dsp + ' ALICE'}
               </p>
             </span>
             <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
-              {createBoostAmount.dsp * (Math.round(USDCPrice * 100) / 100) * 2 +
-                createAmount.dsp}
+              {Math.round(
+                createBoostAmount.dsp *
+                  (Math.round(USDCPrice * 100) / 100) *
+                  2 +
+                  createAmount.dsp,
+              )}
             </span>
           </MoveUpIn>
         </>
