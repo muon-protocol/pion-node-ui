@@ -199,7 +199,6 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       } else {
         setBoostingLoading(true);
       }
-      console.log('mintAndLock success', bonALICEs.length);
       const interval = setInterval(() => {
         if (bonALICEs.length === nftCounts + 1) {
           clearInterval(interval);

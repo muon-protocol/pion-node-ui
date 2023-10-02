@@ -96,39 +96,46 @@ export const RenderCreateBody = () => {
         />
       </FadeIn>
 
-      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) && USDCPrice && (
-        <>
-          <MoveUpIn
-            y={-10}
-            duration={0.1}
-            delay={0.1}
-            className="flex w-full justify-between items-center"
-          >
-            <span className="text-gray10">
-              <p className="font-light">Your new bonALICE amount:</p>
-              <p className="font-light text-sm flex gap-1">
-                {createBoostAmount.dsp +
-                  ' USDC -> ' +
-                  (createBoostAmount.dsp * Math.round(USDCPrice * 100)) / 100 +
-                  ' ALICE '}
-                <p className="text-primary font-bold">
-                  x{boostCoefficient?.dsp}
+      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) &&
+        USDCPrice &&
+        boostCoefficient && (
+          <>
+            <MoveUpIn
+              y={-10}
+              duration={0.1}
+              delay={0.1}
+              className="flex w-full justify-between items-center"
+            >
+              <span className="text-gray10">
+                <p className="font-light">Your new bonALICE amount:</p>
+                <p className="font-light text-sm flex gap-1">
+                  {createBoostAmount.dsp +
+                    ' USDC -> ' +
+                    Math.round(
+                      ((createBoostAmount.dsp * Math.round(USDCPrice * 100)) /
+                        100) *
+                        100,
+                    ) /
+                      100 +
+                    ' ALICE '}
+                  <p className="text-primary font-bold">
+                    x{boostCoefficient?.dsp}
+                  </p>
+                  {' + ' + createAmount.dsp + ' ALICE'}
                 </p>
-                {' + ' + createAmount.dsp + ' ALICE'}
-              </p>
-            </span>
-            <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
-              {Math.round(
-                (createBoostAmount.dsp *
-                  (Math.round(USDCPrice * 100) / 100) *
-                  2 +
-                  createAmount.dsp) *
-                  100,
-              ) / 100}
-            </span>
-          </MoveUpIn>
-        </>
-      )}
+              </span>
+              <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
+                {Math.round(
+                  (createBoostAmount.dsp *
+                    (Math.round(USDCPrice * 100) / 100) *
+                    boostCoefficient.dsp +
+                    createAmount.dsp) *
+                    100,
+                ) / 100}
+              </span>
+            </MoveUpIn>
+          </>
+        )}
       <FadeIn
         duration={0.1}
         delay={0.1}

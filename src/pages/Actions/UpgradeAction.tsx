@@ -15,6 +15,7 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
+import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -105,6 +106,8 @@ export const RenderUpgradeBody = () => {
     upgradeBoostAmount,
   ]);
 
+  const { USDCPrice } = usePancakePair();
+
   return (
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
@@ -146,6 +149,7 @@ export const RenderUpgradeBody = () => {
           balance={LPTokenBalance}
           value={upgradeBoostAmount}
           max={boostableAmount}
+          boostCoefficient={boostCoefficient}
           onValueChanged={handleUpgradeBoostAmountChange}
         />
       </FadeIn>
@@ -156,38 +160,49 @@ export const RenderUpgradeBody = () => {
             <p className="font-light">Your bonALICE current amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
-          {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) && (
-            <>
-              <MoveUpIn
-                y={-10}
-                duration={0.1}
-                delay={0.1}
-                className="flex w-full justify-between items-center"
-              >
-                <span className="text-gray10">
-                  <p className="font-light">Your bonALICE amount will be:</p>
-                  <p className="font-light text-sm flex gap-1">
-                    {upgradeBoostAmount.dsp +
-                      ' USDC -> ' +
-                      upgradeBoostAmount.dsp +
-                      ' ALICE '}
-                    <p className="text-primary font-bold">
-                      x{boostCoefficient?.dsp}
+          {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) &&
+            boostCoefficient &&
+            USDCPrice && (
+              <>
+                <MoveUpIn
+                  y={-10}
+                  duration={0.1}
+                  delay={0.1}
+                  className="flex w-full justify-between items-center"
+                >
+                  <span className="text-gray10">
+                    <p className="font-light">Your bonALICE amount will be:</p>
+                    <p className="font-light text-sm flex gap-1">
+                      {upgradeBoostAmount.dsp +
+                        ' USDC -> ' +
+                        Math.round(
+                          upgradeBoostAmount.dsp *
+                            (Math.round(USDCPrice * 100) / 100) *
+                            100,
+                        ) /
+                          100 +
+                        ' ALICE '}
+                      <p className="text-primary font-bold">
+                        x{boostCoefficient?.dsp}
+                      </p>
+                      {' + ' +
+                        upgradeAmount.dsp +
+                        ' ALICE + ' +
+                        selectedUpgradeBonALICE.nodePower}
                     </p>
-                    {' + ' +
-                      upgradeAmount.dsp +
-                      ' ALICE + ' +
-                      selectedUpgradeBonALICE.nodePower}
-                  </p>
-                </span>
-                <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
-                  {upgradeBoostAmount.dsp * 2 +
-                    upgradeAmount.dsp +
-                    selectedUpgradeBonALICE.nodePower}
-                </span>
-              </MoveUpIn>
-            </>
-          )}
+                  </span>
+                  <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
+                    {Math.round(
+                      upgradeBoostAmount.dsp *
+                        (Math.round(USDCPrice * 100) / 100) *
+                        boostCoefficient.dsp +
+                        upgradeAmount.dsp +
+                        selectedUpgradeBonALICE.nodePower * 100,
+                    ) / 100}
+                  </span>
+                </MoveUpIn>
+              </>
+            )}
         </MoveUpIn>
       )}
       <FadeIn
