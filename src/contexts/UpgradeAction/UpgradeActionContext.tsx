@@ -129,10 +129,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     ALICEAllowance: isNodeBonALICESelected
       ? aliceAllowanceForMuon
       : ALICEAllowance,
-    LPTokenAmount: upgradeBoostAmount,
-    LPTokenAllowance: isNodeBonALICESelected
-      ? lpTokenAllowanceForMuon
-      : LPTokenAllowance,
+    // LPTokenAmount: upgradeBoostAmount,
+    // LPTokenAllowance: isNodeBonALICESelected
+    //   ? lpTokenAllowanceForMuon
+    //   : LPTokenAllowance,
   });
 
   const lockArgs = useLockArgs({

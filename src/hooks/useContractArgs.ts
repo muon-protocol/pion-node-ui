@@ -45,15 +45,15 @@ export const useLockArgs = ({
 export const useLockToBondedTokenArgs = ({
   tokenId,
   ALICEAmount,
-  LPTokenAmount,
+  // LPTokenAmount,
   ALICEAllowance,
-  LPTokenAllowance,
-}: {
+}: // LPTokenAllowance,
+{
   tokenId: number | null;
   ALICEAmount: W3bNumber;
-  LPTokenAmount: W3bNumber;
+  // LPTokenAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  LPTokenAllowance: W3bNumber | null;
+  // LPTokenAllowance: W3bNumber | null;
 }) => {
   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
@@ -69,15 +69,15 @@ export const useLockToBondedTokenArgs = ({
     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
     const amounts = [ALICEAmount.big];
 
-    if (LPTokenAmount.dsp > 0) {
-      if (!LPTokenAllowance || LPTokenAmount.dsp > LPTokenAllowance.dsp)
-        return null;
-      tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
-      amounts.push(LPTokenAmount.big);
-    }
+    // if (LPTokenAmount.dsp > 0) {
+    //   if (!LPTokenAllowance || LPTokenAmount.dsp > LPTokenAllowance.dsp)
+    //     return null;
+    //   tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
+    //   amounts.push(LPTokenAmount.big);
+    // }
 
     return [tokenId, tokens, amounts];
-  }, [tokenId, ALICEAmount, ALICEAllowance, LPTokenAmount, LPTokenAllowance]);
+  }, [tokenId, ALICEAmount, ALICEAllowance]);
 };
 
 export const useLockUSDCArgs = ({

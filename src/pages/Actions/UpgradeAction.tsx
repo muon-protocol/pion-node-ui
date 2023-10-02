@@ -12,7 +12,7 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
-import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
+// import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
@@ -45,8 +45,8 @@ export const RenderUpgradeBody = () => {
 
   const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
     useALICEAllowance();
-  const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
-    useLPTokenAllowance();
+  // const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
+  //   useLPTokenAllowance();
 
   const { boostableAmount } = useBooster(selectedUpgradeBonALICE?.tokenId);
 
@@ -71,17 +71,16 @@ export const RenderUpgradeBody = () => {
   ]);
 
   const showApproveLPToken = useMemo(() => {
-    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
-      if (lpTokenAllowanceForMuon)
-        return lpTokenAllowanceForMuon.big < upgradeBoostAmount.big;
-    } else {
-      if (LPTokenAllowance)
-        return LPTokenAllowance.big < upgradeBoostAmount.big;
-    }
+    // if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
+    //   if (lpTokenAllowanceForMuon)
+    //     return lpTokenAllowanceForMuon.big < upgradeBoostAmount.big;
+    // } else {
+    if (LPTokenAllowance) return LPTokenAllowance.big < upgradeBoostAmount.big;
+    // }
   }, [
-    nodeBonALICE,
-    isSelectedUpgradeBonALICE,
-    lpTokenAllowanceForMuon,
+    // nodeBonALICE,
+    // isSelectedUpgradeBonALICE,
+    // lpTokenAllowanceForMuon,
     LPTokenAllowance,
     upgradeBoostAmount,
   ]);
