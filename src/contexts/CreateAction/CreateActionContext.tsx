@@ -194,6 +194,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       if (createBoostAmount.dsp === 0) {
         setCreateAmount(w3bNumberFromString(''));
         setCreateBoostAmount(w3bNumberFromString(''));
+        setIsSufficientModalOpen(true);
         return;
       } else {
         setBoostingLoading(true);
