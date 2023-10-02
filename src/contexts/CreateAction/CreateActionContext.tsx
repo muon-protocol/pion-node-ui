@@ -146,7 +146,6 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
           const lastNFT = tokens.reduce((prev, current) =>
             prev.tokenId > current.tokenId ? prev : current,
           );
-          console.log(lastNFT);
           const { hash: boostSuccess } = await writeContract({
             abi: BOOSTER_ABI,
             address: BOOSTER_ADDRESS[getCurrentChainId()],

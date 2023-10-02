@@ -8,6 +8,7 @@ import REWARD_ABI from './src/abis/Reward';
 import MUON_NODE_STAKING from './src/abis/MuonNodeStaking';
 import MUON_NODE_MANAGER from './src/abis/MuonNodeManager';
 import BOOSTER from './src/abis/Booster';
+import PANCAKE_PAIR from './src/abis/PancakePair';
 
 export default defineConfig({
   out: 'src/abis/types/generated.ts',
@@ -39,6 +40,10 @@ export default defineConfig({
     {
       name: 'Booster',
       abi: BOOSTER,
+    },
+    {
+      name: 'PancakePair',
+      abi: PANCAKE_PAIR,
     },
   ],
   plugins: [react()],

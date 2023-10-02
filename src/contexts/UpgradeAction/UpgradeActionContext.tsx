@@ -21,7 +21,7 @@ import ALICE_ABI from '../../abis/ALICE.json';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { useApproveArgs, useLockArgs } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
+import BOOSTER_ABI from '../../abis/Booster.ts';
 import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.json';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
@@ -135,10 +135,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     isTransactionLoading,
     isSuccess,
   } = useWagmiContractWrite({
-    abi: BONALICE_ABI,
-    address: BONALICE_ADDRESS[getCurrentChainId()],
+    abi: BOOSTER_ABI,
+    address: BOOSTER_ADDRESS[getCurrentChainId()],
     args: lockArgs,
-    functionName: 'lock',
+    functionName: 'boost',
     chainId: getCurrentChainId(),
   });
 
