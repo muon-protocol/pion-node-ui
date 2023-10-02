@@ -139,14 +139,13 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         const lastNFT = tokens.reduce((prev, current) =>
           prev.tokenId > current.tokenId ? prev : current,
         );
-        const { hash: boostSuccess } = await writeContract({
+        await writeContract({
           abi: BOOSTER_ABI,
           address: BOOSTER_ADDRESS[getCurrentChainId()],
           functionName: 'boost',
           args: [lastNFT.tokenId, createBoostAmount.big],
         });
 
-        console.log(boostSuccess);
         if (createAmount.dsp < 10000) {
           setIsInsufficientModalOpen(true);
         } else {

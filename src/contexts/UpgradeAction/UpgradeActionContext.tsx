@@ -19,9 +19,13 @@ import {
 import { getCurrentChainId } from '../../constants/chains.ts';
 import ALICE_ABI from '../../abis/ALICE.json';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import { useApproveArgs, useLockArgs } from '../../hooks/useContractArgs.ts';
+import {
+  useApproveArgs,
+  useLockArgs,
+  useLockUSDCArgs,
+} from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
-import BOOSTER_ABI from '../../abis/Booster.ts';
+import BONALICE_ABI from '../../abis/BonALICE.ts';
 import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.json';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
@@ -29,6 +33,7 @@ import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaki
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
+import BOOSTER_ABI from '../../abis/Booster.ts';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -120,25 +125,40 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
-    LPTokenAmount: upgradeBoostAmount,
     ALICEAllowance: isNodeBonALICESelected
       ? aliceAllowanceForMuon
       : ALICEAllowance,
-    LPTokenAllowance: isNodeBonALICESelected
-      ? lpTokenAllowanceForMuon
-      : LPTokenAllowance,
   });
 
   const {
     callback: lock,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
+  } = useWagmiContractWrite({
+    abi: BONALICE_ABI,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    args: lockArgs,
+    functionName: 'lock',
+    chainId: getCurrentChainId(),
+  });
+
+  const lockUSDCArgs = useLockUSDCArgs({
+    tokenId: upgradeModalSelectedBonALICE?.tokenId,
+    LPTokenAmount: upgradeBoostAmount,
+    LPTokenAllowance: isNodeBonALICESelected
+      ? lpTokenAllowanceForMuon
+      : LPTokenAllowance,
+  });
+
+  const {
+    callback: lockUSDC,
+    isMetamaskLoading: isLockUSDCMetamaskLoading,
+    isTransactionLoading: isLockUSDCTransactionLoading,
   } = useWagmiContractWrite({
     abi: BOOSTER_ABI,
     address: BOOSTER_ADDRESS[getCurrentChainId()],
-    args: lockArgs,
     functionName: 'boost',
+    args: lockUSDCArgs,
     chainId: getCurrentChainId(),
   });
 
@@ -146,7 +166,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lockToBondedToken,
     isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
     isTransactionLoading: lockToBondedTokenIsTransactionLoading,
-    isSuccess: lockToBondedTokenIsSuccess,
   } = useWagmiContractWrite({
     abi: MUON_NODE_STAKING_ABI,
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
@@ -156,29 +175,40 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const handleUpgradeBonALICEClicked = async () => {
-    if (isNodeBonALICESelected) {
-      lockToBondedToken?.({
-        pending: 'Upgrading Bonded ALICE...',
-        success: 'Upgraded!',
-        failed: 'Failed to upgrade Bonded ALICE.',
-      });
-    } else {
-      lock?.({
-        pending: 'Upgrading Bonded ALICE...',
-        success: 'Upgraded!',
-        failed: 'Failed to upgrade Bonded ALICE.',
-      });
+    try {
+      if (isNodeBonALICESelected) {
+        lockToBondedToken?.({
+          pending: 'Upgrading Bonded ALICE...',
+          success: 'Upgraded!',
+          failed: 'Failed to upgrade Bonded ALICE.',
+        });
+      } else {
+        if (upgradeAmount.dsp > 0) {
+          await lock?.({
+            pending: 'Upgrading Bonded ALICE with ALICE...',
+            success:
+              upgradeBoostAmount.dsp > 0
+                ? 'Upgraded, wait for USDC upgrade...'
+                : 'Upgraded!',
+            failed: 'Failed to upgrade Bonded ALICE with ALICE!',
+          });
+        }
+        if (upgradeBoostAmount.dsp > 0) {
+          await lockUSDC?.({
+            pending: 'Upgrading Bonded ALICE with USDC...',
+            success: 'Upgraded!',
+            failed: 'Failed to upgrade Bonded ALICE with USDC!',
+          });
+        }
+        setIsUpgradeModalOpen(false);
+        setUpgradeAmount(w3bNumberFromString(''));
+        setUpgradeBoostAmount(w3bNumberFromString(''));
+        setUpgradeModalSelectedBonALICE(null);
+      }
+    } catch (e) {
+      console.log(e);
     }
   };
-
-  useEffect(() => {
-    if (isSuccess || lockToBondedTokenIsSuccess) {
-      setIsUpgradeModalOpen(false);
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
-    }
-  }, [isSuccess, lockToBondedTokenIsSuccess]);
 
   const approveALICEArgs = useApproveArgs({
     spenderAddress:
@@ -322,9 +352,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeBoostAmountChange,
         handleUpgradeBonALICEClicked,
         isMetamaskLoading:
-          lockToBondedTokenIsMetamaskLoading || isMetamaskLoading,
+          lockToBondedTokenIsMetamaskLoading ||
+          isMetamaskLoading ||
+          isLockUSDCMetamaskLoading,
         isTransactionLoading:
-          lockToBondedTokenIsTransactionLoading || isTransactionLoading,
+          lockToBondedTokenIsTransactionLoading ||
+          isTransactionLoading ||
+          isLockUSDCTransactionLoading,
         isAllowanceModalOpen,
         closeAllowanceModal,
         isApproveMetamaskLoading:

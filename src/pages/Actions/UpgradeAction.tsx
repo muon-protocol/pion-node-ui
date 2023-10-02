@@ -193,11 +193,12 @@ export const RenderUpgradeBody = () => {
                   </span>
                   <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
                     {Math.round(
-                      upgradeBoostAmount.dsp *
+                      (upgradeBoostAmount.dsp *
                         (Math.round(USDCPrice * 100) / 100) *
                         boostCoefficient.dsp +
                         upgradeAmount.dsp +
-                        selectedUpgradeBonALICE.nodePower * 100,
+                        selectedUpgradeBonALICE.nodePower) *
+                        100,
                     ) / 100}
                   </span>
                 </MoveUpIn>
