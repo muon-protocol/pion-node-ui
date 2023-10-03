@@ -28,7 +28,8 @@ import {
 } from '../../hooks/useContractArgs.ts';
 import { useQuery } from '@apollo/client';
 import { USER_BON_ALICES } from '../../apollo/queries.ts';
-import { writeContract } from '@wagmi/core';
+import { waitForTransaction, writeContract } from '@wagmi/core';
+import toast from 'react-hot-toast';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -132,24 +133,28 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const boostNewNFT = useCallback(() => {
-    console.log('boosting new nft');
     BonALICERefetch({ account: walletAddress })
       .then(async ({ data }) => {
-        console.log('finding new nft');
         const tokens = data.accountTokenIds;
-        // find token with maximum tokenId
         const lastNFT = tokens.reduce((prev, current) =>
           prev.tokenId > current.tokenId ? prev : current,
         );
-        console.log('last nft', lastNFT);
-        console.log('boosting new nft');
-        await writeContract({
+
+        const { hash } = await writeContract({
           abi: BOOSTER_ABI,
           address: BOOSTER_ADDRESS[getCurrentChainId()],
           functionName: 'boost',
           args: [lastNFT.tokenId, createBoostAmount.big],
         });
-        console.log('boosted new nft');
+
+        const transaction = waitForTransaction({ hash });
+
+        await toast.promise(transaction, {
+          loading: 'Boosting Your NFT with USDC...',
+          success: 'Your NFT Boosted Successfully!',
+          error: 'Failed, try again from upgrade tab!',
+        });
+
         setIsSufficientModalOpen(true);
         setCreateAmount(w3bNumberFromString(''));
         setCreateBoostAmount(w3bNumberFromString(''));
@@ -161,16 +166,34 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       });
   }, [BonALICERefetch, walletAddress, createBoostAmount]);
 
-  const [nftCounts, setNftCounts] = useState(0);
   const { bonALICEs } = useBonALICE();
-  const handleCreateBonALICEClicked = async () => {
+  const [nftCounts, setNFTCounts] = useState<number | null>(null);
+  const [checkNFTCounts, setCheckNFTCounts] = useState<number>(0);
+  const [intervalHandler, setIntervalHandler] = useState<any>(null);
+
+  useEffect(() => {
+    if (checkNFTCounts > 0 && nftCounts !== null) {
+      if (bonALICEs.length > nftCounts) {
+        clearInterval(intervalHandler);
+        boostNewNFT();
+        setCheckNFTCounts(0);
+        setNFTCounts(null);
+      }
+    }
+  }, [
+    bonALICEs.length,
+    boostNewNFT,
+    checkNFTCounts,
+    intervalHandler,
+    nftCounts,
+  ]);
+
+  const handleCreateBonALICEClicked = useCallback(async () => {
     if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
       return;
     setCreateActionLoading(true);
-
+    setNFTCounts(bonALICEs.length);
     try {
-      setNftCounts(bonALICEs.length);
-      console.log('number of nfts', bonALICEs.length);
       await mintAndLock?.({
         pending: 'Waiting for confirmation...',
         success:
@@ -179,7 +202,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
             : 'BonALICE created!',
         failed: 'Error',
       });
-      console.log('create amount', createAmount.dsp);
+
       if (createBoostAmount.dsp === 0) {
         setCreateAmount(w3bNumberFromString(''));
         setCreateBoostAmount(w3bNumberFromString(''));
@@ -189,24 +212,23 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setBoostingLoading(true);
       }
       const interval = setInterval(() => {
-        console.log(
-          'checking to see if new nft is created, nftCounts now: ',
-          bonALICEs.length,
-          ' nftCounts before: ',
-          nftCounts,
-        );
-        if (bonALICEs.length > nftCounts) {
-          clearInterval(interval);
-          boostNewNFT();
-        }
+        setCheckNFTCounts(checkNFTCounts + 1);
       }, 1000);
+      setIntervalHandler(interval);
     } catch (error) {
       console.log(error);
       setBoostingLoading(false);
     }
 
     setCreateActionLoading(false);
-  };
+  }, [
+    ALICEBalance,
+    createAmount,
+    bonALICEs.length,
+    mintAndLock,
+    createBoostAmount.dsp,
+    checkNFTCounts,
+  ]);
 
   const approveALICEArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],
