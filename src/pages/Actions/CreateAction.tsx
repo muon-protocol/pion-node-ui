@@ -141,7 +141,11 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {chainId !== getCurrentChainId() ? (
+        {createAmount.dsp < 10000 ? (
+          <button disabled className="btn !w-full" onClick={() => {}}>
+            At Least 10000 Power
+          </button>
+        ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
             className="btn !w-full"
