@@ -27,6 +27,7 @@ import {
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.ts';
+import LP_TOKEN_ABI from '../../abis/LPToken.ts';
 import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.json';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
@@ -265,10 +266,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   }, [approveALICEIsSuccess]);
 
   const approveLPTokenArgs = useApproveArgs({
-    spenderAddress:
-      nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])
-        ? MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
-        : BOOSTER_ADDRESS[getCurrentChainId()],
+    spenderAddress: BOOSTER_ADDRESS[getCurrentChainId()],
     approveAmount: upgradeBoostAmount,
   });
 
@@ -278,7 +276,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     isTransactionLoading: approveLPTokenIsTransactionLoading,
     isSuccess: approveLPTokenIsSuccess,
   } = useWagmiContractWrite({
-    abi: ALICE_ABI,
+    abi: LP_TOKEN_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
     args: approveLPTokenArgs,
