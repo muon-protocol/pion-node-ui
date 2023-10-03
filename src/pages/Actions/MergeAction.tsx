@@ -9,6 +9,7 @@ import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 
 const RenderMergeBody = () => {
   const {
@@ -21,7 +22,10 @@ const RenderMergeBody = () => {
     isMetamaskLoading,
     isTransactionLoading,
     handleMerge,
+    tokenApprovedContractAddress,
+    handleApproveNFT,
   } = useMergeAction();
+
   const { bonALICEs } = useBonALICE();
   const { nodeBonALICE } = useMuonNodeStaking();
 
@@ -30,6 +34,19 @@ const RenderMergeBody = () => {
   const isMergeBonALICEsButtonDisabled = useMemo(() => {
     return selectedMergeBonALICEs.length < 2;
   }, [selectedMergeBonALICEs]);
+
+  const isApproveNFTActive = useMemo(() => {
+    if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
+      console.log(tokenApprovedContractAddress);
+      if (
+        tokenApprovedContractAddress !==
+        MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }, [tokenApprovedContractAddress, nodeBonALICE, isInSelectedMergeBonALICEs]);
 
   return (
     <>
@@ -103,6 +120,10 @@ const RenderMergeBody = () => {
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
+          </button>
+        ) : isApproveNFTActive ? (
+          <button className="btn !w-full" onClick={() => handleApproveNFT()}>
+            Approve NFT Token
           </button>
         ) : (
           <button

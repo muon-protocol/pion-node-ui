@@ -1,4 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { BonALICE } from '../../types';
 import { useMergeArgs } from '../../hooks/useContractArgs.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
@@ -11,6 +18,7 @@ import {
 } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import { useBonAliceGetApproved } from '../../abis/types/generated.ts';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
@@ -22,6 +30,8 @@ const MergeActionContext = createContext<{
   handleMerge: () => void;
   isMetamaskLoading: boolean;
   isTransactionLoading: boolean;
+  tokenApprovedContractAddress: string | undefined;
+  handleApproveNFT: () => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -32,6 +42,8 @@ const MergeActionContext = createContext<{
   handleMerge: () => {},
   isMetamaskLoading: false,
   isTransactionLoading: false,
+  tokenApprovedContractAddress: undefined,
+  handleApproveNFT: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -69,6 +81,32 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const { nodeBonALICE } = useMuonNodeStaking();
+
+  const isInSelectedMergeBonALICEs = useCallback(
+    (bonALICE: BonALICE) => {
+      return !!mergeModalSelectedBonALICEs.find(
+        (b) => b.tokenId === bonALICE.tokenId,
+      );
+    },
+    [mergeModalSelectedBonALICEs],
+  );
+
+  const selectedTokenId = useMemo(() => {
+    if (mergeModalSelectedBonALICEs.length < 2 || nodeBonALICE.length === 0)
+      return undefined;
+    if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
+      return mergeModalSelectedBonALICEs.find(
+        (nft) => nft.tokenId !== nodeBonALICE[0]?.tokenId,
+      )?.tokenId;
+    }
+    return undefined;
+  }, [mergeModalSelectedBonALICEs, nodeBonALICE, isInSelectedMergeBonALICEs]);
+
+  const { data: tokenApprovedContractAddress } = useBonAliceGetApproved({
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    args: [selectedTokenId],
+    watch: true,
+  });
 
   const {
     callback: mergeWithNodeNFT,
@@ -110,6 +148,30 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  const {
+    callback: approveNFT,
+    isMetamaskLoading: isApproveNFTLoading,
+    isTransactionLoading: isApproveNFTTransactionLoading,
+  } = useWagmiContractWrite({
+    abi: BONALICE_ABI,
+    address: BONALICE_ADDRESS[getCurrentChainId()],
+    functionName: 'approve',
+    args: [MUON_NODE_STAKING_ADDRESS[getCurrentChainId()], selectedTokenId],
+    chainId: getCurrentChainId(),
+  });
+
+  const handleApproveNFT = useCallback(async () => {
+    try {
+      await approveNFT?.({
+        pending: 'Approving NFT...',
+        success: 'Approved!',
+        failed: 'Failed to Approve NFT.',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }, [approveNFT]);
+
   useEffect(() => {
     if (mergeModalSelectedBonALICEs.length === 2) {
       closeMergeModal();
@@ -123,12 +185,6 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   const removeMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
     setMergeModalSelectedBonALICEs(
       mergeModalSelectedBonALICEs.filter((b) => b.tokenId !== bonALICE.tokenId),
-    );
-  };
-
-  const isInSelectedMergeBonALICEs = (bonALICE: BonALICE) => {
-    return !!mergeModalSelectedBonALICEs.find(
-      (b) => b.tokenId === bonALICE.tokenId,
     );
   };
 
@@ -151,9 +207,14 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
         handleMerge,
-        isMetamaskLoading: isMetamaskLoading || isMergeWithNodeNFTLoading,
+        isMetamaskLoading:
+          isMetamaskLoading || isMergeWithNodeNFTLoading || isApproveNFTLoading,
         isTransactionLoading:
-          isTransactionLoading || isMergeWithNodeNFTTransactionLoading,
+          isTransactionLoading ||
+          isMergeWithNodeNFTTransactionLoading ||
+          isApproveNFTTransactionLoading,
+        tokenApprovedContractAddress,
+        handleApproveNFT,
       }}
     >
       {children}
