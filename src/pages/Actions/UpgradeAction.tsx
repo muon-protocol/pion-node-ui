@@ -16,6 +16,7 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
+import { w3bNumberFromNumber } from '../../utils/web3.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -105,7 +106,7 @@ export const RenderUpgradeBody = () => {
     upgradeBoostAmount,
   ]);
 
-  const { USDCPrice } = usePancakePair();
+  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   return (
     <>
@@ -147,7 +148,11 @@ export const RenderUpgradeBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={upgradeBoostAmount}
-          max={boostableAmount}
+          max={
+            ALICEPrice && boostableAmount
+              ? w3bNumberFromNumber(boostableAmount.dsp * ALICEPrice)
+              : w3bNumberFromNumber(0)
+          }
           boostCoefficient={boostCoefficient}
           onValueChanged={handleUpgradeBoostAmountChange}
         />

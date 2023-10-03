@@ -169,12 +169,14 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { bonALICEs } = useBonALICE();
   const [nftCounts, setNFTCounts] = useState<number | null>(null);
   const [checkNFTCounts, setCheckNFTCounts] = useState<number>(0);
-  const [intervalHandler, setIntervalHandler] = useState<any>(null);
+  const [intervalHandler, setIntervalHandler] = useState<null | NodeJS.Timer>(
+    null,
+  );
 
   useEffect(() => {
     if (checkNFTCounts > 0 && nftCounts !== null) {
       if (bonALICEs.length > nftCounts) {
-        clearInterval(intervalHandler);
+        if (intervalHandler) clearInterval(intervalHandler);
         boostNewNFT();
         setCheckNFTCounts(0);
         setNFTCounts(null);

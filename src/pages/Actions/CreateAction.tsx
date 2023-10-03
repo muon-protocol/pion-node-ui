@@ -70,7 +70,7 @@ export const RenderCreateBody = () => {
     LPTokenBalance,
   ]);
 
-  const { USDCPrice } = usePancakePair();
+  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   return (
     <>
@@ -91,7 +91,11 @@ export const RenderCreateBody = () => {
           balance={LPTokenBalance}
           value={createBoostAmount}
           boostCoefficient={boostCoefficient}
-          max={w3bNumberFromNumber(createAmount.dsp)}
+          max={
+            ALICEPrice
+              ? w3bNumberFromNumber(createAmount.dsp * ALICEPrice)
+              : w3bNumberFromNumber(0)
+          }
           onValueChanged={handleCreateBoostAmountChange}
         />
       </FadeIn>
