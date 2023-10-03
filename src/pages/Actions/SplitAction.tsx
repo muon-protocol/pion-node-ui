@@ -1,12 +1,12 @@
 import useSplitAction from '../../contexts/SplitAction/useSplitAction.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useMemo } from 'react';
+// import { useMemo } from 'react';
 import { FadeIn, MoveUpIn, SwingIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import BonALICECard from '../../components/Common/BonALICECard.tsx';
 import Seekbar from '../../components/Common/Seekbar.tsx';
-import { getCurrentChainId } from '../../constants/chains.ts';
-import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+// import { getCurrentChainId } from '../../constants/chains.ts';
+// import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 
@@ -20,16 +20,16 @@ const RenderSplitBody = () => {
     handleSplitModalItemClicked,
     selectedSplitBonALICE,
     isSelectedSplitBonALICE,
-    handleSplit,
-    isMetamaskLoading,
-    isTransactionLoading,
+    // handleSplit,
+    // isMetamaskLoading,
+    // isTransactionLoading,
   } = useSplitAction();
   const { bonALICEs } = useBonALICE();
-  const { chainId, handleSwitchNetwork } = useUserProfile();
+  // const { chainId, handleSwitchNetwork } = useUserProfile();
 
-  const isSplitBonALICEsButtonDisabled = useMemo(() => {
-    return !selectedSplitBonALICE;
-  }, [selectedSplitBonALICE]);
+  // const isSplitBonALICEsButtonDisabled = useMemo(() => {
+  //   return !selectedSplitBonALICE;
+  // }, [selectedSplitBonALICE]);
 
   return (
     <>
@@ -108,30 +108,33 @@ const RenderSplitBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {chainId !== getCurrentChainId() ? (
-          <button
-            onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
-          >
-            Switch Network
-          </button>
-        ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
-            {isMetamaskLoading
-              ? 'Waiting for Metamask...'
-              : 'Waiting for Tx...'}
-          </button>
-        ) : (
-          <button
-            onClick={() => {
-              !isSplitBonALICEsButtonDisabled && handleSplit();
-            }}
-            disabled={isSplitBonALICEsButtonDisabled}
-            className="btn !w-full"
-          >
-            Split Bonded ALICE
-          </button>
-        )}
+        <button disabled className="btn !w-full">
+          Currently Disabled
+        </button>
+        {/*{chainId !== getCurrentChainId() ? (*/}
+        {/*  <button*/}
+        {/*    onClick={() => handleSwitchNetwork(getCurrentChainId())}*/}
+        {/*    className="btn !w-full"*/}
+        {/*  >*/}
+        {/*    Switch Network*/}
+        {/*  </button>*/}
+        {/*) : isMetamaskLoading || isTransactionLoading ? (*/}
+        {/*  <button className="btn !w-full" disabled>*/}
+        {/*    {isMetamaskLoading*/}
+        {/*      ? 'Waiting for Metamask...'*/}
+        {/*      : 'Waiting for Tx...'}*/}
+        {/*  </button>*/}
+        {/*) : (*/}
+        {/*  <button*/}
+        {/*    onClick={() => {*/}
+        {/*      !isSplitBonALICEsButtonDisabled && handleSplit();*/}
+        {/*    }}*/}
+        {/*    disabled={isSplitBonALICEsButtonDisabled}*/}
+        {/*    className="btn !w-full"*/}
+        {/*  >*/}
+        {/*    Split Bonded ALICE*/}
+        {/*  </button>*/}
+        {/*)}*/}
       </FadeIn>
     </>
   );

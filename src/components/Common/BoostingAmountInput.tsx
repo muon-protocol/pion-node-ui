@@ -72,21 +72,16 @@ const AmountInput = ({
           />
         </div>
       </div>
-      {withLink && balance && balance.big < value.big ? (
+      {value && max && value.big > max?.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
-            You don't have sufficient amount of ALICE.{' '}
-            <span
-              className="underline cursor-pointer"
-              onClick={() =>
-                window.open(
-                  'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
-                  '_blank',
-                )
-              }
-            >
-              BUY HERE
-            </span>
+            You can't use more than max amount ({max.dsp} USDC) to boost.
+          </p>
+        </FadeIn>
+      ) : withLink && balance && balance.big < value.big ? (
+        <FadeIn duration={0.3}>
+          <p className="text-red-600 font-bold text-xs">
+            You don't have sufficient amount of USDC.
           </p>
         </FadeIn>
       ) : null}

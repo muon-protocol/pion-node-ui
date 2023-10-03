@@ -87,6 +87,7 @@ export const RenderUpgradeBody = () => {
   ]);
 
   const { boostCoefficient } = useBooster();
+  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -96,17 +97,21 @@ export const RenderUpgradeBody = () => {
       !ALICEBalance?.hStr ||
       upgradeAmount.dsp > ALICEBalance.dsp ||
       !LPTokenBalance ||
-      upgradeBoostAmount.dsp > LPTokenBalance.dsp
+      upgradeBoostAmount.dsp > LPTokenBalance.dsp ||
+      (ALICEPrice !== undefined &&
+        boostableAmount &&
+        upgradeBoostAmount.dsp > boostableAmount.dsp * ALICEPrice)
     );
   }, [
     selectedUpgradeBonALICE,
     upgradeAmount,
-    ALICEBalance,
-    LPTokenBalance,
     upgradeBoostAmount,
+    ALICEBalance?.hStr,
+    ALICEBalance?.dsp,
+    LPTokenBalance,
+    boostableAmount,
+    ALICEPrice,
   ]);
-
-  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   return (
     <>

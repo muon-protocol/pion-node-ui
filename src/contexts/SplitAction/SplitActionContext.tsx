@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { BonALICE } from '../../types';
-import { useSplitArgs } from '../../hooks/useContractArgs.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
-import { getCurrentChainId } from '../../constants/chains.ts';
-import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
+// import { useSplitArgs } from '../../hooks/useContractArgs.ts';
+// import BONALICE_ABI from '../../abis/BonALICE.json';
+// import { getCurrentChainId } from '../../constants/chains.ts';
+// import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
+// import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 
 const SplitActionContext = createContext<{
@@ -17,8 +17,8 @@ const SplitActionContext = createContext<{
   isSelectedSplitBonALICE: (bonALICE: BonALICE) => boolean;
   handleSplitModalItemClicked: (bonALICE: BonALICE) => void;
   handleSplit: () => void;
-  isMetamaskLoading: boolean;
-  isTransactionLoading: boolean;
+  // isMetamaskLoading: boolean;
+  // isTransactionLoading: boolean;
 }>({
   splitValue: 50,
   setSplitValue: () => {},
@@ -29,8 +29,8 @@ const SplitActionContext = createContext<{
   isSelectedSplitBonALICE: () => false,
   handleSplitModalItemClicked: () => {},
   handleSplit: () => {},
-  isMetamaskLoading: false,
-  isTransactionLoading: false,
+  // isMetamaskLoading: false,
+  // isTransactionLoading: false,
 });
 
 const SplitActionProvider = ({ children }: { children: ReactNode }) => {
@@ -39,40 +39,40 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
   const [splitModalSelectedBonALICE, setSplitModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
 
-  const splitArgs = useSplitArgs({
-    bonALICE: splitModalSelectedBonALICE,
-    percentage: splitValue,
-  });
+  // const splitArgs = useSplitArgs({
+  //   bonALICE: splitModalSelectedBonALICE,
+  //   percentage: splitValue,
+  // });
+  //
+  // const {
+  //   callback: split,
+  //   isTransactionLoading,
+  //   isMetamaskLoading,
+  //   isSuccess,
+  // } = useWagmiContractWrite({
+  //   abi: BONALICE_ABI,
+  //   address: BONALICE_ADDRESS[getCurrentChainId()],
+  //   functionName: 'split',
+  //   args: splitArgs,
+  //   chainId: getCurrentChainId(),
+  // });
 
-  const {
-    callback: split,
-    isTransactionLoading,
-    isMetamaskLoading,
-    isSuccess,
-  } = useWagmiContractWrite({
-    abi: BONALICE_ABI,
-    address: BONALICE_ADDRESS[getCurrentChainId()],
-    functionName: 'split',
-    args: splitArgs,
-    chainId: getCurrentChainId(),
-  });
-
-  useEffect(() => {
-    if (isSuccess) {
-      setSplitModalSelectedBonALICE(null);
-    }
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     setSplitModalSelectedBonALICE(null);
+  //   }
+  // }, [isSuccess]);
 
   const handleSplit = () => {
-    try {
-      split?.({
-        pending: 'Splitting Bonded ALICE...',
-        success: 'Split!',
-        failed: 'Failed to split Bonded ALICE',
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   split?.({
+    //     pending: 'Splitting Bonded ALICE...',
+    //     success: 'Split!',
+    //     failed: 'Failed to split Bonded ALICE',
+    //   });
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   const { walletAddress } = useUserProfile();
@@ -125,8 +125,8 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
         isSelectedSplitBonALICE,
         handleSplitModalItemClicked,
         handleSplit,
-        isMetamaskLoading,
-        isTransactionLoading,
+        // isMetamaskLoading,
+        // isTransactionLoading,
       }}
     >
       {children}

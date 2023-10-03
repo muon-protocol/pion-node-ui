@@ -47,6 +47,7 @@ export const RenderCreateBody = () => {
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const { boostCoefficient } = useBooster();
+  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
@@ -58,19 +59,21 @@ export const RenderCreateBody = () => {
       (!ALICEBalance?.dsp && !LPTokenBalance?.dsp) ||
       (LPTokenBalance && LPTokenBalance.dsp < createBoostAmount.dsp) ||
       (ALICEBalance && ALICEBalance.dsp < createAmount.dsp) ||
-      createActionLoading
+      createActionLoading ||
+      (createBoostAmount.dsp > 0 &&
+        ALICEPrice !== undefined &&
+        createBoostAmount.dsp > ALICEPrice * createAmount.dsp)
     );
   }, [
-    ALICEBalance,
     createAmount,
-    createActionLoading,
+    createBoostAmount,
     ALICEAllowance,
     LPTokenAllowance,
-    createBoostAmount,
+    ALICEBalance,
     LPTokenBalance,
+    createActionLoading,
+    ALICEPrice,
   ]);
-
-  const { USDCPrice, ALICEPrice } = usePancakePair();
 
   return (
     <>
