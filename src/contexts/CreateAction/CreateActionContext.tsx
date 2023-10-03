@@ -213,7 +213,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       }
       const interval = setInterval(() => {
         setCheckNFTCounts(checkNFTCounts + 1);
-      }, 1000);
+      }, 300);
       setIntervalHandler(interval);
     } catch (error) {
       console.log(error);
