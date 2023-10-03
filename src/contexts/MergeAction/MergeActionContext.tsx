@@ -4,8 +4,13 @@ import { useMergeArgs } from '../../hooks/useContractArgs.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import BONALICE_ABI from '../../abis/BonALICE.json';
-import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
+import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.ts';
+import {
+  BONALICE_ADDRESS,
+  MUON_NODE_STAKING_ADDRESS,
+} from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const MergeActionContext = createContext<{
   isMergeModalOpen: boolean;
@@ -55,7 +60,6 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: merge,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
   } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -64,21 +68,47 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const handleMerge = () => {
+  const { nodeBonALICE } = useMuonNodeStaking();
+
+  const {
+    callback: mergeWithNodeNFT,
+    isMetamaskLoading: isMergeWithNodeNFTLoading,
+    isTransactionLoading: isMergeWithNodeNFTTransactionLoading,
+  } = useWagmiContractWrite({
+    abi: MUON_NODE_STAKING_ABI,
+    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    functionName: 'mergeBondedTokens',
+    args: [
+      mergeModalSelectedBonALICEs.find(
+        (nft) => nft.tokenId !== nodeBonALICE[0]?.tokenId,
+      )?.tokenId,
+    ],
+    chainId: getCurrentChainId(),
+  });
+  const handleMerge = async () => {
     if (!mergeArgs) return;
-
-    merge?.({
-      pending: 'Merging Bonded ALICEs...',
-      success: 'Merged!',
-      failed: 'Failed to Merge Bonded ALICEs.',
-    });
-  };
-
-  useEffect(() => {
-    if (isSuccess) {
+    try {
+      if (
+        nodeBonALICE.length > 0 &&
+        isInSelectedMergeBonALICEs(nodeBonALICE[0])
+      ) {
+        await mergeWithNodeNFT?.({
+          pending: 'Merging with Node BonALICE...',
+          success: 'Merged!',
+          failed: 'Failed to Merge with Node BonALICE.',
+        });
+      } else {
+        await merge?.({
+          pending: 'Merging Bonded ALICEs...',
+          success: 'Merged!',
+          failed: 'Failed to Merge Bonded ALICEs.',
+        });
+      }
       setMergeModalSelectedBonALICEs([]);
+    } catch (error) {
+      console.log(error);
     }
-  }, [isSuccess]);
+  };
 
   useEffect(() => {
     if (mergeModalSelectedBonALICEs.length === 2) {
@@ -121,8 +151,9 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isInSelectedMergeBonALICEs,
         handleMergeModalItemClicked,
         handleMerge,
-        isMetamaskLoading,
-        isTransactionLoading,
+        isMetamaskLoading: isMetamaskLoading || isMergeWithNodeNFTLoading,
+        isTransactionLoading:
+          isTransactionLoading || isMergeWithNodeNFTTransactionLoading,
       }}
     >
       {children}
