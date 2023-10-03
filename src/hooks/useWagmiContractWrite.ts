@@ -42,13 +42,17 @@ const useWagmiContractWrite = ({
         if (!hash) throw new Error('No hash returned from writeContract');
         setIsTransactionLoading(true);
         setTransactionHash(hash);
-        const transaction = waitForTransaction({ hash });
+        const transaction = waitForTransaction({ hash: hash });
 
+        console.log('=================\nhash', hash);
+        console.log('transaction', transaction);
         await toast.promise(transaction, {
           loading: stateMessage.pending,
           success: stateMessage.success,
           error: stateMessage.failed,
         });
+        console.log('transaction', transaction);
+        console.log('hash', hash);
         setIsTransactionLoading(false);
         setIsSuccess(true);
       } catch (error: any) {

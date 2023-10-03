@@ -132,31 +132,25 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   });
 
   const boostNewNFT = useCallback(() => {
+    console.log('boosting new nft');
     BonALICERefetch({ account: walletAddress })
       .then(async ({ data }) => {
+        console.log('finding new nft');
         const tokens = data.accountTokenIds;
         // find token with maximum tokenId
         const lastNFT = tokens.reduce((prev, current) =>
           prev.tokenId > current.tokenId ? prev : current,
         );
+        console.log('last nft', lastNFT);
+        console.log('boosting new nft');
         await writeContract({
           abi: BOOSTER_ABI,
           address: BOOSTER_ADDRESS[getCurrentChainId()],
           functionName: 'boost',
           args: [lastNFT.tokenId, createBoostAmount.big],
         });
-
-        if (createAmount.dsp < 10000) {
-          setIsInsufficientModalOpen(true);
-        } else {
-          if (!newNFTClaimedLoading) {
-            setNewNFTClaimedLoading(true);
-            setTimeout(() => {
-              setNewNFTClaimedLoading(false);
-            }, 10000);
-          }
-          setIsSufficientModalOpen(true);
-        }
+        console.log('boosted new nft');
+        setIsSufficientModalOpen(true);
         setCreateAmount(w3bNumberFromString(''));
         setCreateBoostAmount(w3bNumberFromString(''));
         setBoostingLoading(false);
@@ -165,13 +159,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         console.log(error);
         setBoostingLoading(false);
       });
-  }, [
-    BonALICERefetch,
-    walletAddress,
-    createBoostAmount,
-    createAmount,
-    newNFTClaimedLoading,
-  ]);
+  }, [BonALICERefetch, walletAddress, createBoostAmount]);
 
   const [nftCounts, setNftCounts] = useState(0);
   const { bonALICEs } = useBonALICE();
@@ -182,6 +170,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
     try {
       setNftCounts(bonALICEs.length);
+      console.log('number of nfts', bonALICEs.length);
       await mintAndLock?.({
         pending: 'Waiting for confirmation...',
         success:
@@ -190,6 +179,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
             : 'BonALICE created!',
         failed: 'Error',
       });
+      console.log('create amount', createAmount.dsp);
       if (createBoostAmount.dsp === 0) {
         setCreateAmount(w3bNumberFromString(''));
         setCreateBoostAmount(w3bNumberFromString(''));
@@ -199,7 +189,13 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
         setBoostingLoading(true);
       }
       const interval = setInterval(() => {
-        if (bonALICEs.length === nftCounts + 1) {
+        console.log(
+          'checking to see if new nft is created, nftCounts now: ',
+          bonALICEs.length,
+          ' nftCounts before: ',
+          nftCounts,
+        );
+        if (bonALICEs.length > nftCounts) {
           clearInterval(interval);
           boostNewNFT();
         }
