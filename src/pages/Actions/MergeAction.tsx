@@ -36,6 +36,7 @@ const RenderMergeBody = () => {
   }, [selectedMergeBonALICEs]);
 
   const isApproveNFTActive = useMemo(() => {
+    if (selectedMergeBonALICEs.length !== 2) return false;
     if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
       console.log(tokenApprovedContractAddress);
       if (
@@ -46,7 +47,12 @@ const RenderMergeBody = () => {
       }
     }
     return false;
-  }, [tokenApprovedContractAddress, nodeBonALICE, isInSelectedMergeBonALICEs]);
+  }, [
+    tokenApprovedContractAddress,
+    nodeBonALICE,
+    isInSelectedMergeBonALICEs,
+    selectedMergeBonALICEs,
+  ]);
 
   return (
     <>
