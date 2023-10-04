@@ -33,7 +33,6 @@ export default function Withdraw({ address }) {
         <h4>Reward</h4>
         <b>{selector.reward} ALICE</b>
       </div>
-      {/* {error && error.message} */}
       <div className="w-full flex justify-end">
         <button
           onClick={async () => {
