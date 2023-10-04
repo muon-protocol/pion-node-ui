@@ -130,10 +130,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     ALICEAllowance: isNodeBonALICESelected
       ? aliceAllowanceForMuon
       : ALICEAllowance,
-    // LPTokenAmount: upgradeBoostAmount,
-    // LPTokenAllowance: isNodeBonALICESelected
-    //   ? lpTokenAllowanceForMuon
-    //   : LPTokenAllowance,
   });
 
   const lockArgs = useLockArgs({
@@ -221,11 +217,16 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           success: 'Upgraded!',
           failed: 'Failed to upgrade Bonded ALICE with USDC!',
         });
+        setIsUpgradeModalOpen(false);
+        setUpgradeAmount(w3bNumberFromString(''));
+        setUpgradeBoostAmount(w3bNumberFromString(''));
+        setUpgradeModalSelectedBonALICE(null);
+      } else {
+        setIsUpgradeModalOpen(false);
+        setUpgradeAmount(w3bNumberFromString(''));
+        setUpgradeBoostAmount(w3bNumberFromString(''));
+        setUpgradeModalSelectedBonALICE(null);
       }
-      setIsUpgradeModalOpen(false);
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
     } catch (e) {
       console.log(e);
     }
@@ -308,46 +309,57 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const handleUpgradeBoostAmountChange = (amount: string) => {
+  const handleUpgradeBoostAmountChange = useCallback((amount: string) => {
     setUpgradeBoostAmount(w3bNumberFromString(amount));
-  };
+  }, []);
 
-  const handleUpgradeAmountChange = (amount: string) => {
+  const handleUpgradeAmountChange = useCallback((amount: string) => {
     setUpgradeAmount(w3bNumberFromString(amount));
-  };
+  }, []);
+  const changeUpgradeModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setUpgradeModalSelectedBonALICE(bonALICE);
+      closeUpgradeModal();
+    },
+    [],
+  );
 
-  const handleUpgradeModalItemClicked = (bonALICE: BonALICE) => {
-    if (!upgradeModalSelectedBonALICE) {
-      changeUpgradeModalSelectedBonALICE(bonALICE);
-      return;
-    }
-    if (upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
-      unselectUpgradeModalSelectedBonALICE();
-    } else {
-      changeUpgradeModalSelectedBonALICE(bonALICE);
-    }
-  };
+  const handleUpgradeModalItemClicked = useCallback(
+    (bonALICE: BonALICE) => {
+      if (!upgradeModalSelectedBonALICE) {
+        changeUpgradeModalSelectedBonALICE(bonALICE);
+        return;
+      }
+      if (upgradeModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
+        unselectUpgradeModalSelectedBonALICE();
+      } else {
+        changeUpgradeModalSelectedBonALICE(bonALICE);
+      }
+    },
+    [changeUpgradeModalSelectedBonALICE, upgradeModalSelectedBonALICE],
+  );
 
-  const changeUpgradeModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setUpgradeModalSelectedBonALICE(bonALICE);
-    closeUpgradeModal();
-  };
-
-  const unselectUpgradeModalSelectedBonALICE = () => {
+  const unselectUpgradeModalSelectedBonALICE = useCallback(() => {
     setUpgradeModalSelectedBonALICE(null);
-  };
+  }, []);
 
   const { walletAddress } = useUserProfile();
   const { hasNodeBonALICE } = useMuonNodeStaking();
 
   useEffect(() => {
+    if (upgradeModalSelectedBonALICE) return;
     setUpgradeModalSelectedBonALICE(null);
     setUpgradeAmount(w3bNumberFromString(''));
     setUpgradeBoostAmount(w3bNumberFromString(''));
     if (hasNodeBonALICE) {
       setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
     }
-  }, [walletAddress, hasNodeBonALICE, nodeBonALICE]);
+  }, [
+    walletAddress,
+    hasNodeBonALICE,
+    nodeBonALICE,
+    upgradeModalSelectedBonALICE,
+  ]);
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
   const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
