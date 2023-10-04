@@ -60,25 +60,20 @@ export const useLockToBondedTokenArgs = ({
 
 export const useLockUSDCArgs = ({
   tokenId,
-  // ALICEAmount,
   LPTokenAmount,
-  // ALICEAllowance,
   LPTokenAllowance,
 }: {
   tokenId: number | null;
-  // ALICEAmount: W3bNumber;
   LPTokenAmount: W3bNumber;
-  // ALICEAllowance: W3bNumber | null;
   LPTokenAllowance: W3bNumber | null;
 }) => {
-  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
     if (
       !tokenId ||
       !LPTokenAmount ||
       !LPTokenAllowance ||
       LPTokenAmount.dsp === 0 ||
-      LPTokenAmount.dsp > LPTokenAllowance.dsp
+      LPTokenAmount.big > LPTokenAllowance.big
     )
       return null;
 

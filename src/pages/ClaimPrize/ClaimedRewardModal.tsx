@@ -37,7 +37,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
             setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/create');
+            navigate('/upgrade');
           }}
           className="text-primary hover:underline cursor-pointer"
         >

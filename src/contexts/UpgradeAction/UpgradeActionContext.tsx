@@ -33,7 +33,7 @@ import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
-import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
+// import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import BOOSTER_ABI from '../../abis/Booster.ts';
 
@@ -104,8 +104,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
     useALICEAllowance();
-  const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
-    useLPTokenAllowance();
+  // const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
+  //   useLPTokenAllowance();
 
   const isSelectedUpgradeBonALICE = useCallback(
     (bonALICE: BonALICE) => {
@@ -127,24 +127,19 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const lockToBondedTokenArgs = useLockToBondedTokenArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
-    ALICEAllowance: isNodeBonALICESelected
-      ? aliceAllowanceForMuon
-      : ALICEAllowance,
+    ALICEAllowance: aliceAllowanceForMuon,
   });
 
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
-    ALICEAllowance: isNodeBonALICESelected
-      ? aliceAllowanceForMuon
-      : ALICEAllowance,
+    ALICEAllowance: ALICEAllowance,
   });
 
   const {
     callback: lock,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
   } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -156,16 +151,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const lockUSDCArgs = useLockUSDCArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     LPTokenAmount: upgradeBoostAmount,
-    LPTokenAllowance: isNodeBonALICESelected
-      ? lpTokenAllowanceForMuon
-      : LPTokenAllowanceForBooster,
+    LPTokenAllowance: LPTokenAllowanceForBooster,
   });
 
   const {
     callback: lockUSDC,
     isMetamaskLoading: isLockUSDCMetamaskLoading,
     isTransactionLoading: isLockUSDCTransactionLoading,
-    isSuccess: isLockUSDCSuccess,
   } = useWagmiContractWrite({
     abi: BOOSTER_ABI,
     address: BOOSTER_ADDRESS[getCurrentChainId()],
@@ -178,7 +170,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lockToBondedToken,
     isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
     isTransactionLoading: lockToBondedTokenIsTransactionLoading,
-    isSuccess: lockToBondedTokenIsSuccess,
   } = useWagmiContractWrite({
     abi: MUON_NODE_STAKING_ABI,
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
@@ -189,28 +180,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  useEffect(() => {
-    console.log(
-      isSuccess,
-      lockToBondedTokenIsSuccess,
-      upgradeBoostAmount.dsp,
-      upgradeAmount.dsp,
-    );
-    if (
-      ((isSuccess || lockToBondedTokenIsSuccess) &&
-        (upgradeBoostAmount.dsp === 0 || !upgradeBoostAmount)) ||
-      isLockUSDCSuccess
-    ) {
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
-    }
-  }, [isSuccess, isLockUSDCSuccess, lockToBondedTokenIsSuccess]);
-
   const handleUpgradeBonALICEClicked = async () => {
     try {
-      if (isNodeBonALICESelected) {
-        if (upgradeAmount.dsp > 0) {
+      if (upgradeAmount.dsp > 0) {
+        if (isNodeBonALICESelected) {
           await lockToBondedToken?.({
             pending: 'Upgrading Bonded ALICE with ALICE...',
             success:
@@ -219,9 +192,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
                 : 'Upgraded!',
             failed: 'Failed to upgrade Bonded ALICE with ALICE!',
           });
-        }
-      } else {
-        if (upgradeAmount.dsp > 0) {
+        } else {
           await lock?.({
             pending: 'Upgrading Bonded ALICE with ALICE...',
             success:
@@ -233,12 +204,17 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         }
       }
       if (upgradeBoostAmount.dsp > 0) {
+        console.log('lockUSDC');
         await lockUSDC?.({
           pending: 'Upgrading Bonded ALICE with USDC...',
           success: 'Upgraded!',
           failed: 'Failed to upgrade Bonded ALICE with USDC!',
         });
       }
+      console.log('reset');
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
       setIsUpgradeModalOpen(false);
     } catch (e) {
       console.log(e);
@@ -296,31 +272,32 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [approveLPTokenIsSuccess]);
 
-  const handleApproveALICEClicked = () => {
+  const handleApproveALICEClicked = useCallback(async () => {
     if (!ALICEBalance || !upgradeAmount || upgradeAmount.big > ALICEBalance.big)
       return;
     openAllowanceModal();
-    approveALICE?.({
+    await approveALICE?.({
       pending: 'Waiting for confirmation',
       success: 'Approved',
       failed: 'Error',
     });
-  };
+  }, [approveALICE, ALICEBalance, upgradeAmount]);
 
-  const handleApproveLPTokenClicked = () => {
+  const handleApproveLPTokenClicked = useCallback(async () => {
     if (
       !LPTokenBalance ||
       !upgradeBoostAmount ||
       upgradeBoostAmount.big > LPTokenBalance.big
     )
       return;
+    console.log('approveLPToken');
     openAllowanceModal();
-    approveLPToken?.({
-      pending: 'Waiting for confirmation',
+    await approveLPToken?.({
+      pending: 'Waiting for confirmation...',
       success: 'Approved',
       failed: 'Error',
     });
-  };
+  }, [approveLPToken, LPTokenBalance, upgradeBoostAmount]);
 
   const handleUpgradeBoostAmountChange = useCallback((amount: string) => {
     setUpgradeBoostAmount(w3bNumberFromString(amount));
@@ -329,6 +306,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const handleUpgradeAmountChange = useCallback((amount: string) => {
     setUpgradeAmount(w3bNumberFromString(amount));
   }, []);
+
   const changeUpgradeModalSelectedBonALICE = useCallback(
     (bonALICE: BonALICE) => {
       setUpgradeModalSelectedBonALICE(bonALICE);
