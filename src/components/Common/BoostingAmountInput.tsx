@@ -1,6 +1,5 @@
 import { FadeIn } from '../../animations';
 import { W3bNumber } from '../../types/wagmi.ts';
-import { ethers } from 'ethers';
 
 const AmountInput = ({
   balance,
@@ -36,9 +35,9 @@ const AmountInput = ({
               onClick={() =>
                 balance && max
                   ? onValueChanged(
-                      ethers.formatEther(
-                        max.big < balance.big ? max.big : balance.big,
-                      ),
+                      max.big < balance.big
+                        ? max.dsp.toFixed(2)
+                        : balance.dsp.toFixed(2),
                     )
                   : null
               }
