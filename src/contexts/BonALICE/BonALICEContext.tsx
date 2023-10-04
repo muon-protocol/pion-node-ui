@@ -30,7 +30,8 @@ const BonALICEContext = createContext<{
   isLoading: boolean;
   bonALICEs: BonALICE[];
   ALICEAllowance: W3bNumber | null;
-  LPTokenAllowance: W3bNumber | null;
+  LPTokenAllowanceForBooster: W3bNumber | null;
+  ALICEAllowanceForBooster: W3bNumber | null;
   fetchBonALICEIsLoading: boolean;
 }>({
   handleCreateBonALICEClicked: () => {},
@@ -40,7 +41,8 @@ const BonALICEContext = createContext<{
   isLoading: false,
   bonALICEs: [],
   ALICEAllowance: null,
-  LPTokenAllowance: null,
+  LPTokenAllowanceForBooster: null,
+  ALICEAllowanceForBooster: null,
   fetchBonALICEIsLoading: false,
 });
 
@@ -51,8 +53,12 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { allowance: ALICEAllowance } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
   );
-  const { allowance: LPTokenAllowance } = useAllowance(
+  const { allowance: LPTokenAllowanceForBooster } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
+    BOOSTER_ADDRESS[getCurrentChainId()],
+  );
+  const { allowance: ALICEAllowanceForBooster } = useAllowance(
+    ALICE_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],
   );
 
@@ -137,8 +143,9 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
         isFetched,
         isLoading,
         ALICEAllowance,
-        LPTokenAllowance,
+        LPTokenAllowanceForBooster,
         fetchBonALICEIsLoading,
+        ALICEAllowanceForBooster,
       }}
     >
       {children}

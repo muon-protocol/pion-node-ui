@@ -42,7 +42,8 @@ export const RenderUpgradeBody = () => {
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
-  const { bonALICEs, ALICEAllowance, LPTokenAllowance } = useBonALICE();
+  const { bonALICEs, ALICEAllowance, LPTokenAllowanceForBooster } =
+    useBonALICE();
 
   const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
     useALICEAllowance();
@@ -76,13 +77,14 @@ export const RenderUpgradeBody = () => {
     //   if (lpTokenAllowanceForMuon)
     //     return lpTokenAllowanceForMuon.big < upgradeBoostAmount.big;
     // } else {
-    if (LPTokenAllowance) return LPTokenAllowance.big < upgradeBoostAmount.big;
+    if (LPTokenAllowanceForBooster)
+      return LPTokenAllowanceForBooster.big < upgradeBoostAmount.big;
     // }
   }, [
     // nodeBonALICE,
     // isSelectedUpgradeBonALICE,
     // lpTokenAllowanceForMuon,
-    LPTokenAllowance,
+    LPTokenAllowanceForBooster,
     upgradeBoostAmount,
   ]);
 

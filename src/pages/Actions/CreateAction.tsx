@@ -21,7 +21,11 @@ import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
-  const { ALICEAllowance, LPTokenAllowance } = useBonALICE();
+  const {
+    ALICEAllowanceForBooster,
+    ALICEAllowance,
+    LPTokenAllowanceForBooster,
+  } = useBonALICE();
   const { LPTokenBalance } = useLPToken();
   const {
     createAmount,
@@ -31,6 +35,7 @@ export const RenderCreateBody = () => {
     handleCreateBonALICEClicked,
     createActionLoading,
     handleApproveALICEClicked,
+    handleApproveALICEForBoosterClicked,
     handleApproveLPTokenClicked,
     isAllowanceModalOpen,
     closeAllowanceModal,
@@ -42,7 +47,6 @@ export const RenderCreateBody = () => {
     setIsInsufficientModalOpen,
     isSufficientModalOpen,
     setIsSufficientModalOpen,
-    boostingLoading,
   } = useCreateAction();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -52,8 +56,8 @@ export const RenderCreateBody = () => {
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
       createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
-      !ALICEAllowance ||
-      (!LPTokenAllowance && createBoostAmount.big > BigInt(0)) ||
+      !ALICEAllowanceForBooster ||
+      (!LPTokenAllowanceForBooster && createBoostAmount.big > BigInt(0)) ||
       !(createAmount || createBoostAmount) ||
       !(createAmount.big || createBoostAmount.big) ||
       (!ALICEBalance?.dsp && !LPTokenBalance?.dsp) ||
@@ -67,8 +71,8 @@ export const RenderCreateBody = () => {
   }, [
     createAmount,
     createBoostAmount,
-    ALICEAllowance,
-    LPTokenAllowance,
+    ALICEAllowanceForBooster,
+    LPTokenAllowanceForBooster,
     ALICEBalance,
     LPTokenBalance,
     createActionLoading,
@@ -159,15 +163,28 @@ export const RenderCreateBody = () => {
           >
             Switch Network
           </button>
-        ) : isMetamaskLoading || isTransactionLoading || boostingLoading ? (
+        ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
-              : boostingLoading
-              ? 'Boosting you bonALICE...'
               : 'Waiting for Tx...'}
           </button>
-        ) : ALICEAllowance && ALICEAllowance.big < createAmount.big ? (
+        ) : createBoostAmount.dsp > 0 &&
+          ALICEAllowanceForBooster &&
+          ALICEAllowanceForBooster.big < createAmount.big ? (
+          <button
+            onClick={() => handleApproveALICEForBoosterClicked()}
+            className="btn !w-full"
+            disabled={isCreateBondedALICEButtonDisabled}
+          >
+            Approve{' '}
+            {ALICEBalance && createAmount.big < ALICEBalance.big
+              ? createAmount.hStr + ' ALICEs'
+              : 'All ALICEs'}
+          </button>
+        ) : createBoostAmount.dsp === 0 &&
+          ALICEAllowance &&
+          ALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn !w-full"
@@ -178,7 +195,8 @@ export const RenderCreateBody = () => {
               ? createAmount.hStr + ' ALICEs'
               : 'All ALICEs'}
           </button>
-        ) : LPTokenAllowance && LPTokenAllowance.big < createBoostAmount.big ? (
+        ) : LPTokenAllowanceForBooster &&
+          LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
             className="btn !w-full"
@@ -229,12 +247,14 @@ export const RenderCreateBody = () => {
           <p className="text-center mb-6 font-medium">
             Please approve by signing the message that appears in your wallet.
             This allows the smart contract to securely lock your{' '}
-            {ALICEAllowance && ALICEAllowance?.big < createAmount?.big
+            {ALICEAllowanceForBooster &&
+            ALICEAllowanceForBooster?.big < createAmount?.big
               ? 'ALICE '
               : 'LP '}
             tokens in the bonALICE.
           </p>
-          {ALICEAllowance && ALICEAllowance?.big < createAmount?.big ? (
+          {ALICEAllowanceForBooster &&
+          ALICEAllowanceForBooster?.big < createAmount?.big ? (
             <button
               className="btn btn--dark-primary"
               onClick={() =>

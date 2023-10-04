@@ -134,6 +134,20 @@ export default [
     type: 'function',
   },
   {
+    inputs: [
+      { internalType: 'uint256', name: 'muonAmount', type: 'uint256' },
+      {
+        internalType: 'uint256',
+        name: 'usdcAmount',
+        type: 'uint256',
+      },
+    ],
+    name: 'createAndBoost',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
     inputs: [{ internalType: 'uint256', name: 'nftId', type: 'uint256' }],
     name: 'getBoostableAmount',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],

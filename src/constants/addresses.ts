@@ -31,7 +31,7 @@ export const MUON_NODE_MANAGER_ADDRESS: AddressMap = {
 };
 
 export const BOOSTER_ADDRESS: AddressMap = {
-  [SupportedChainId.BSCTESTNET]: '0x39005e9fABf4960055A5c503F943D6a34eDDA5cb',
+  [SupportedChainId.BSCTESTNET]: '0xF474C0B12BCf5323Ce032e12D93B57F177fE09BD',
 };
 
 export const PANCAKE_PAIR_ADDRESS: AddressMap = {

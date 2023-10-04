@@ -7,15 +7,11 @@ import { BonALICE } from '../types';
 export const useLockArgs = ({
   tokenId,
   ALICEAmount,
-  // LPTokenAmount,
   ALICEAllowance,
-}: // LPTokenAllowance,
-{
+}: {
   tokenId: number | null;
   ALICEAmount: W3bNumber;
-  // LPTokenAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  // LPTokenAllowance: W3bNumber | null;
 }) => {
   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
@@ -30,13 +26,6 @@ export const useLockArgs = ({
 
     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
     const amounts = [ALICEAmount.big];
-
-    // if (LPTokenAmount.dsp > 0) {
-    //   if (!LPTokenAllowance || LPTokenAmount.dsp > LPTokenAllowance.dsp)
-    //     return null;
-    //   tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
-    //   amounts.push(LPTokenAmount.big);
-    // }
 
     return [tokenId, tokens, amounts];
   }, [tokenId, ALICEAmount, ALICEAllowance]);
@@ -45,15 +34,11 @@ export const useLockArgs = ({
 export const useLockToBondedTokenArgs = ({
   tokenId,
   ALICEAmount,
-  // LPTokenAmount,
   ALICEAllowance,
-}: // LPTokenAllowance,
-{
+}: {
   tokenId: number | null;
   ALICEAmount: W3bNumber;
-  // LPTokenAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  // LPTokenAllowance: W3bNumber | null;
 }) => {
   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
@@ -68,13 +53,6 @@ export const useLockToBondedTokenArgs = ({
 
     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
     const amounts = [ALICEAmount.big];
-
-    // if (LPTokenAmount.dsp > 0) {
-    //   if (!LPTokenAllowance || LPTokenAmount.dsp > LPTokenAllowance.dsp)
-    //     return null;
-    //   tokens.push(LP_TOKEN_ADDRESS[getCurrentChainId()]);
-    //   amounts.push(LPTokenAmount.big);
-    // }
 
     return [tokenId, tokens, amounts];
   }, [tokenId, ALICEAmount, ALICEAllowance]);
@@ -122,22 +100,16 @@ export const useApproveArgs = ({
   }, [spenderAddress, approveAmount]);
 };
 
-export const useMintAndLockArgs = ({
+export const useMintArgs = ({
   walletAddress,
   ALICEAmount,
-  // LPTokenAmount,
   ALICEAllowance,
-  // LPTokenAllowance,
   ALICEAddress,
-}: // LPTokenAddress,
-{
+}: {
   walletAddress: `0x${string}` | null | undefined;
   ALICEAmount: W3bNumber;
-  // LPTokenAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  // LPTokenAllowance: W3bNumber | null;
   ALICEAddress: `0x${string}`;
-  // LPTokenAddress: `0x${string}`;
 }) => {
   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
@@ -152,24 +124,37 @@ export const useMintAndLockArgs = ({
 
     const tokens = [ALICEAddress];
     const amounts = [ALICEAmount.big];
-    //
-    // if (LPTokenAmount.dsp > 0) {
-    //   if (!LPTokenAllowance || LPTokenAmount.dsp > LPTokenAllowance.dsp)
-    //     return null;
-    //   tokens.push(LPTokenAddress);
-    //   amounts.push(LPTokenAmount.big);
-    // }
 
     return [tokens, amounts, walletAddress];
-  }, [
-    walletAddress,
-    ALICEAmount,
-    ALICEAllowance,
-    ALICEAddress,
-    // LPTokenAmount,
-    // LPTokenAllowance,
-    // LPTokenAddress,
-  ]);
+  }, [walletAddress, ALICEAmount, ALICEAllowance, ALICEAddress]);
+};
+
+export const useCreateAndBoostArgs = ({
+  ALICEAmount,
+  ALICEAllowance,
+  LPTokenAmount,
+  LPTokenAllowance,
+}: {
+  ALICEAmount: W3bNumber;
+  ALICEAllowance: W3bNumber | null;
+  LPTokenAmount: W3bNumber;
+  LPTokenAllowance: W3bNumber | null;
+}) => {
+  return useMemo(() => {
+    if (
+      !ALICEAmount ||
+      !ALICEAllowance ||
+      !LPTokenAmount ||
+      !LPTokenAllowance ||
+      ALICEAmount.dsp === 0 ||
+      ALICEAmount.dsp > ALICEAllowance.dsp ||
+      LPTokenAmount.dsp === 0 ||
+      LPTokenAmount.dsp > LPTokenAllowance.dsp
+    )
+      return null;
+
+    return [ALICEAmount.big, LPTokenAmount.big];
+  }, [ALICEAmount, ALICEAllowance, LPTokenAmount, LPTokenAllowance]);
 };
 
 export const useBoostArgs = ({

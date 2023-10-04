@@ -94,7 +94,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     w3bNumberFromString(''),
   );
 
-  const { LPTokenAllowance, ALICEAllowance } = useBonALICE();
+  const { LPTokenAllowanceForBooster, ALICEAllowance } = useBonALICE();
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance } = useLPToken();
 
@@ -161,7 +161,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     LPTokenAmount: upgradeBoostAmount,
     LPTokenAllowance: isNodeBonALICESelected
       ? lpTokenAllowanceForMuon
-      : LPTokenAllowance,
+      : LPTokenAllowanceForBooster,
   });
 
   const {
