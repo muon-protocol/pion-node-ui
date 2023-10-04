@@ -217,16 +217,11 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           success: 'Upgraded!',
           failed: 'Failed to upgrade Bonded ALICE with USDC!',
         });
-        setIsUpgradeModalOpen(false);
-        setUpgradeAmount(w3bNumberFromString(''));
-        setUpgradeBoostAmount(w3bNumberFromString(''));
-        setUpgradeModalSelectedBonALICE(null);
-      } else {
-        setIsUpgradeModalOpen(false);
-        setUpgradeAmount(w3bNumberFromString(''));
-        setUpgradeBoostAmount(w3bNumberFromString(''));
-        setUpgradeModalSelectedBonALICE(null);
       }
+      setIsUpgradeModalOpen(false);
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
     } catch (e) {
       console.log(e);
     }
@@ -324,6 +319,10 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     [],
   );
 
+  const unselectUpgradeModalSelectedBonALICE = useCallback(() => {
+    setUpgradeModalSelectedBonALICE(null);
+  }, []);
+
   const handleUpgradeModalItemClicked = useCallback(
     (bonALICE: BonALICE) => {
       if (!upgradeModalSelectedBonALICE) {
@@ -336,12 +335,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         changeUpgradeModalSelectedBonALICE(bonALICE);
       }
     },
-    [changeUpgradeModalSelectedBonALICE, upgradeModalSelectedBonALICE],
+    [
+      changeUpgradeModalSelectedBonALICE,
+      unselectUpgradeModalSelectedBonALICE,
+      upgradeModalSelectedBonALICE,
+    ],
   );
-
-  const unselectUpgradeModalSelectedBonALICE = useCallback(() => {
-    setUpgradeModalSelectedBonALICE(null);
-  }, []);
 
   const { walletAddress } = useUserProfile();
   const { hasNodeBonALICE } = useMuonNodeStaking();
