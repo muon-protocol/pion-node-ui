@@ -92,7 +92,7 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
         <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
         <StakeMore></StakeMore>
-        <Withdraw></Withdraw>
+        <Withdraw address={address}></Withdraw>
       </div>
       <LiveChatWidget
         license="15138837"
