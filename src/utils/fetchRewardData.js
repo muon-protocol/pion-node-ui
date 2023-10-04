@@ -1,8 +1,13 @@
 import axios from "axios";
 
+const BASEURL =
+  process.env.NODE_ENV !== "production"
+    ? process.env.NEXT_PUBLIC_ALICE_URL_DEV
+    : "";
+
 const fetchRewardData = async (staker, blockNumber) => {
   const response = await axios.get(
-    `/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
+    `${BASEURL}/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
   );
   console.log(response);
   if (!response.data.success) return false;

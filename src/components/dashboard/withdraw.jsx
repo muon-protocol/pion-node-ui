@@ -2,12 +2,35 @@ import fetchRewardData from "@/utils/fetchRewardData";
 import { useSelector } from "react-redux";
 import contractABI from "@/jsons/abi.json";
 import { styled } from "styled-components";
-import {
-  useBlockNumber,
-  useContractWrite,
-  usePrepareContractWrite,
-} from "wagmi";
+import { useBlockNumber, useContractWrite } from "wagmi";
+import { Loading } from "../layout/Loading";
 import { useState } from "react";
+
+const Absolute = styled.div`
+  position: absolute;
+  bottom: -70px;
+  right: -50px;
+  width: 180px;
+`;
+
+function Btn({ onclick, loading }) {
+  const disable = loading;
+  return (
+    <button
+      onClick={onclick}
+      disabled={disable}
+      className={`relative min-w-[80px] min-h-[40px] inline-block rounded-[8px] bg-[#FEEFE9] text-[#f59569] px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-outhover:bg-mysecondary/10  active:bg-mysecondary/30`}
+    >
+      {loading ? (
+        <Absolute className="absolute ">
+          <Loading></Loading>
+        </Absolute>
+      ) : (
+        "Claim"
+      )}
+    </button>
+  );
+}
 
 const OrangeCard = styled.div`
   background: linear-gradient(
@@ -19,7 +42,8 @@ const OrangeCard = styled.div`
 export default function Withdraw({ address }) {
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const { data: blockNumber } = useBlockNumber();
-  const { write } = useContractWrite({
+  const [state, setstate] = useState(false);
+  const { write, isLoading: trLoading } = useContractWrite({
     address: "0xd788C2276A6f75a8B9360E9695028329C925b0AB",
     abi: contractABI,
     functionName: "getReward",
@@ -37,7 +61,7 @@ export default function Withdraw({ address }) {
         <b>{selector.reward} ALICE</b>
       </div>
       <div className="w-full flex justify-end">
-        <button
+        {/* <button
           onClick={async () => {
             fetchRewardData(address, blockNumber).then((response) => {
               write({
@@ -58,7 +82,27 @@ export default function Withdraw({ address }) {
           }   }`}
         >
           Claim
-        </button>
+        </button> */}
+        <Btn
+          onclick={async () => {
+            setstate(true);
+            fetchRewardData(address, blockNumber)
+              .then((response) => {
+                write({
+                  args: [
+                    response.amount,
+                    response.paidRewardPerToken,
+                    response.reqId,
+                    [response.signature, response.owner, response.nonce],
+                  ],
+                });
+              })
+              .finally(() => {
+                setstate(false);
+              });
+          }}
+          loading={trLoading || state}
+        ></Btn>
       </div>
     </OrangeCard>
   );
