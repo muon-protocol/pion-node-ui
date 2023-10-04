@@ -4,18 +4,17 @@ const fetchRewardData = async (staker, blockNumber) => {
   const response = await axios.get(
     `http://52.14.41.79:8000/v1/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
   );
-  if (!response.success) return false;
+  console.log(response);
+  if (!response.data.success) return false;
   else {
-    console.log(response);
+    const data = response.data;
     return {
-      amount: response.result.data.result.reward,
-      paidRewardPerToken: response.result.data.result.rewardPerToken,
-      reqId: result.reqId,
-      signature: [
-        result.signatures[0].signature,
-        result.signatures[0].owner,
-        result.data.result.init.nonceAddress,
-      ],
+      amount: data.result.data.result.reward,
+      paidRewardPerToken: data.result.data.result.rewardPerToken,
+      reqId: data.result.reqId,
+      signature: data.result.signatures[0].signature,
+      owner: data.result.signatures[0].owner,
+      nonce: data.result.data.init.nonceAddress,
     };
   }
 };

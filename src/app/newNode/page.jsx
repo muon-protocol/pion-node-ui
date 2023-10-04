@@ -22,7 +22,7 @@ export default function NewNode() {
       if (selector.isNew) {
         setTryed(tryed + 1);
       } else {
-        window.location.replace("https://alice-v2.muon.net/dashboard");
+        window.location.replace("/dashboard");
       }
     }, 15000);
   }, [tryed]);
