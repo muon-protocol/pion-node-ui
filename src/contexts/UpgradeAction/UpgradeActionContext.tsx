@@ -144,6 +144,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lock,
     isMetamaskLoading,
     isTransactionLoading,
+    isSuccess,
   } = useWagmiContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -164,6 +165,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     callback: lockUSDC,
     isMetamaskLoading: isLockUSDCMetamaskLoading,
     isTransactionLoading: isLockUSDCTransactionLoading,
+    isSuccess: isLockUSDCSuccess,
   } = useWagmiContractWrite({
     abi: BOOSTER_ABI,
     address: BOOSTER_ADDRESS[getCurrentChainId()],
@@ -171,6 +173,14 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     args: lockUSDCArgs,
     chainId: getCurrentChainId(),
   });
+
+  useEffect(() => {
+    if (isSuccess && (isLockUSDCSuccess || upgradeBoostAmount.dsp === 0)) {
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
+    }
+  }, [isSuccess, isLockUSDCSuccess]);
 
   const {
     callback: lockToBondedToken,
@@ -219,9 +229,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         });
       }
       setIsUpgradeModalOpen(false);
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
     } catch (e) {
       console.log(e);
     }
@@ -346,7 +353,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const { hasNodeBonALICE } = useMuonNodeStaking();
 
   useEffect(() => {
-    if (upgradeModalSelectedBonALICE) return;
+    if (
+      upgradeModalSelectedBonALICE ||
+      upgradeAmount.dsp > 0 ||
+      upgradeBoostAmount.dsp > 0
+    )
+      return;
     setUpgradeModalSelectedBonALICE(null);
     setUpgradeAmount(w3bNumberFromString(''));
     setUpgradeBoostAmount(w3bNumberFromString(''));
@@ -358,6 +370,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     hasNodeBonALICE,
     nodeBonALICE,
     upgradeModalSelectedBonALICE,
+    upgradeAmount.dsp,
+    upgradeBoostAmount.dsp,
   ]);
 
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
