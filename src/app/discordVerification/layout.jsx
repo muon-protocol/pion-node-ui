@@ -9,8 +9,6 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowProvider } from "@/lib/rainbowProviders";
 
 import { Roboto } from "next/font/google";
-import Balance from "@/components/layout/balance";
-import { CustomConnectButton } from "@/components/layout/CustomConnectButton";
 import { useSelector } from "react-redux";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
@@ -30,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <title>ALICE dashboard</title>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className={roboto.className}>
