@@ -63,8 +63,12 @@ export default function Home() {
     verificationData.telegramVerified;
 
   useEffect(() => {
-    if (isDisconnected && process.env.NODE_ENV === "production") {
-      window.location.replace("https://alice-v2.muon.net");
+    if (
+      isDisconnected &&
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_REDIRECT_FOR_DISCONNECT_WALLET
+    ) {
+      window.location.replace("/");
     }
   }, [isDisconnected]);
   useEffect(() => {

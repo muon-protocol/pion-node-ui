@@ -52,7 +52,7 @@ export const getNodeInfoData = async (walletAddress) => {
   console.log(res);
   let nodeInfoData = { nodeInfo: {} };
   if (res && res === "node not found") {
-    window.location.replace("/");
+    // window.location.replace("/"); // redirect to Home page
     return false;
   } else if (res && res != "node not found") {
     nodeInfoData.nodeInfo.haveNode = true;

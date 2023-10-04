@@ -60,8 +60,11 @@ export default function Verification() {
   const { address, isDisconnected } = useAccount();
 
   useEffect(() => {
-    if (isDisconnected) {
-      window.location.replace("https://alice-v2.muon.net");
+    if (
+      isDisconnected &&
+      process.env.NEXT_PUBLIC_REDIRECT_FOR_DISCONNECT_WALLET
+    ) {
+      window.location.replace("/");
     }
   }, [isDisconnected]);
 
