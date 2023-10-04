@@ -16,7 +16,7 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
-import { w3bNumberFromNumber } from '../../utils/web3.ts';
+import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -91,6 +91,16 @@ export const RenderUpgradeBody = () => {
   const { boostCoefficient } = useBooster();
   const { USDCPrice, ALICEPrice } = usePancakePair();
 
+  const maxAmountToBoost = useMemo(() => {
+    return ALICEPrice && boostableAmount
+      ? w3bNumberFromBigint(
+          ((boostableAmount.big + upgradeAmount.big) *
+            w3bNumberFromNumber(ALICEPrice).big) /
+            BigInt(10 ** 18),
+        )
+      : w3bNumberFromNumber(0);
+  }, [boostableAmount, upgradeAmount, ALICEPrice]);
+
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
@@ -102,7 +112,7 @@ export const RenderUpgradeBody = () => {
       upgradeBoostAmount.dsp > LPTokenBalance.dsp ||
       (ALICEPrice !== undefined &&
         boostableAmount &&
-        upgradeBoostAmount.dsp > boostableAmount.dsp * ALICEPrice)
+        upgradeBoostAmount.big > maxAmountToBoost.big)
     );
   }, [
     selectedUpgradeBonALICE,
@@ -111,8 +121,9 @@ export const RenderUpgradeBody = () => {
     ALICEBalance?.hStr,
     ALICEBalance?.dsp,
     LPTokenBalance,
-    boostableAmount,
     ALICEPrice,
+    boostableAmount,
+    maxAmountToBoost.big,
   ]);
 
   return (
@@ -155,11 +166,7 @@ export const RenderUpgradeBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={upgradeBoostAmount}
-          max={
-            ALICEPrice && boostableAmount
-              ? w3bNumberFromNumber(boostableAmount.dsp * ALICEPrice)
-              : w3bNumberFromNumber(0)
-          }
+          max={maxAmountToBoost}
           boostCoefficient={boostCoefficient}
           onValueChanged={handleUpgradeBoostAmountChange}
         />

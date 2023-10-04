@@ -59,7 +59,7 @@ const Actions = () => {
       <div className="page page--centered">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[1130px] gap-4 md:gap-5">
+        <FadeIn className="flex flex-col w-[1170px] gap-4 md:gap-5">
           <ActionsHeader />
           <ActionsBody />
         </FadeIn>

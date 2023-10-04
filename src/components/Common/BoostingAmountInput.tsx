@@ -34,7 +34,13 @@ const AmountInput = ({
           <div className="flex gap-1.5 max-md:items-end h-full">
             <button
               onClick={() =>
-                balance ? onValueChanged(ethers.formatEther(balance.big)) : null
+                balance && max
+                  ? onValueChanged(
+                      ethers.formatEther(
+                        max.big < balance.big ? max.big : balance.big,
+                      ),
+                    )
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -72,7 +78,7 @@ const AmountInput = ({
           />
         </div>
       </div>
-      {value && max && value.big > max?.big ? (
+      {value && max && value.big > max.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
             You can't use more than max amount ({max.dsp} USDC) to boost.

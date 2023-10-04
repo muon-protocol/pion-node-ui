@@ -15,7 +15,7 @@ import waitingForApproveAnimation from '../../../public/assets/animations/waitin
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
-import { w3bNumberFromNumber } from '../../utils/web3.ts';
+import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 
@@ -53,6 +53,15 @@ export const RenderCreateBody = () => {
   const { boostCoefficient } = useBooster();
   const { USDCPrice, ALICEPrice } = usePancakePair();
 
+  const maxAmountToBoost = useMemo(() => {
+    return ALICEPrice
+      ? w3bNumberFromBigint(
+          (createAmount.big * w3bNumberFromNumber(ALICEPrice).big) /
+            BigInt(10 ** 18),
+        )
+      : w3bNumberFromNumber(0);
+  }, [createAmount, ALICEPrice]);
+
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
       createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
@@ -66,7 +75,7 @@ export const RenderCreateBody = () => {
       createActionLoading ||
       (createBoostAmount.dsp > 0 &&
         ALICEPrice !== undefined &&
-        createBoostAmount.dsp > ALICEPrice * createAmount.dsp)
+        createBoostAmount.big > maxAmountToBoost.big)
     );
   }, [
     createAmount,
@@ -77,6 +86,7 @@ export const RenderCreateBody = () => {
     LPTokenBalance,
     createActionLoading,
     ALICEPrice,
+    maxAmountToBoost.big,
   ]);
 
   return (
@@ -98,11 +108,7 @@ export const RenderCreateBody = () => {
           balance={LPTokenBalance}
           value={createBoostAmount}
           boostCoefficient={boostCoefficient}
-          max={
-            ALICEPrice
-              ? w3bNumberFromNumber(createAmount.dsp * ALICEPrice)
-              : w3bNumberFromNumber(0)
-          }
+          max={maxAmountToBoost}
           onValueChanged={handleCreateBoostAmountChange}
         />
       </FadeIn>
@@ -123,7 +129,10 @@ export const RenderCreateBody = () => {
                   {createBoostAmount.dsp +
                     ' USDC -> ' +
                     Math.round(
-                      ((createBoostAmount.dsp * Math.round(USDCPrice * 100)) /
+                      (w3bNumberFromBigint(
+                        createBoostAmount.big *
+                          BigInt(Math.round(USDCPrice * 100)),
+                      ).dsp /
                         100) *
                         100,
                     ) /
