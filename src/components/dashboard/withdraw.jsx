@@ -1,5 +1,7 @@
+import fetchRewardData from "@/utils/fetchRewardData";
 import { useSelector } from "react-redux";
 import { styled } from "styled-components";
+import { useBlockNumber } from "wagmi";
 
 const OrangeCard = styled.div`
   background: linear-gradient(
@@ -8,9 +10,9 @@ const OrangeCard = styled.div`
     rgba(246, 81, 121, 0.18) 100%
   );
 `;
-export default function Withdraw() {
+export default function Withdraw({ address }) {
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
-
+  const { data: blockNumber } = useBlockNumber();
   const disable = true;
   return (
     <div className="bg-cardBackground/50 w-fulzl rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
@@ -20,7 +22,10 @@ export default function Withdraw() {
       </div>
       <div className="w-full flex justify-end">
         <button
-          disabled={disable}
+          onClick={() => {
+            fetchRewardData(address, blockNumber);
+          }}
+          disabled={false}
           className={`inline-block rounded-[8px] bg-primaryL3 text-[#4D3E9E] px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out ${
             disable
               ? "opacity-50"
