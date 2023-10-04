@@ -256,11 +256,23 @@ export const RenderCreateBody = () => {
           <p className="text-center mb-6 font-medium">
             Please approve by signing the message that appears in your wallet.
             This allows the smart contract to securely lock your{' '}
-            {ALICEAllowanceForBooster &&
-            ALICEAllowanceForBooster?.big < createAmount?.big
+            {createBoostAmount.dsp > 0 &&
+            ALICEAllowanceForBooster &&
+            ALICEAllowanceForBooster.big < createAmount.big
               ? 'ALICE '
-              : 'LP '}
-            tokens in the bonALICE.
+              : createBoostAmount.dsp === 0 &&
+                ALICEAllowance &&
+                ALICEAllowance.big < createAmount.big
+              ? 'ALICE '
+              : LPTokenAllowanceForBooster &&
+                LPTokenAllowanceForBooster.big < createBoostAmount.big
+              ? 'USDC '
+              : ''}
+            tokens in the{' '}
+            {createBoostAmount && createBoostAmount.dsp > 0
+              ? 'Booster contract'
+              : 'BonALICE contract'}
+            .
           </p>
           {ALICEAllowanceForBooster &&
           ALICEAllowanceForBooster?.big < createAmount?.big ? (

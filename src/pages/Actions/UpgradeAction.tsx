@@ -277,18 +277,18 @@ export const RenderUpgradeBody = () => {
           />
           <p className="text-center mb-6">
             You need to approve the{' '}
-            {(nodeBonALICE.length > 0 &&
-              isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
-              aliceAllowanceForMuon &&
-              aliceAllowanceForMuon.big < upgradeAmount.big) ||
-            (ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big)
-              ? 'ALICE'
-              : 'LP'}{' '}
-            token to be spent by the{' '}
+            {showApproveALICE
+              ? 'ALICE '
+              : showApproveLPToken
+              ? 'USDC '
+              : 'tokens '}
+            to be spent by the{' '}
             {nodeBonALICE.length > 0 &&
             isSelectedUpgradeBonALICE(nodeBonALICE[0])
-              ? 'Muon node staking'
-              : 'Bonded ALICE'}{' '}
+              ? showApproveALICE
+                ? 'Muon node staking '
+                : 'Booster '
+              : 'Bonded ALICE '}
             Contract. Enter at least the amount you want to create and click
             Next then Approve button on metamask.
           </p>
