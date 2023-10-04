@@ -203,13 +203,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
             failed: 'Failed to upgrade Bonded ALICE with ALICE!',
           });
         }
-        if (upgradeBoostAmount.dsp > 0) {
-          await lockUSDC?.({
-            pending: 'Upgrading Bonded ALICE with USDC...',
-            success: 'Upgraded!',
-            failed: 'Failed to upgrade Bonded ALICE with USDC!',
-          });
-        }
       } else {
         if (upgradeAmount.dsp > 0) {
           await lock?.({
@@ -221,13 +214,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
             failed: 'Failed to upgrade Bonded ALICE with ALICE!',
           });
         }
-        if (upgradeBoostAmount.dsp > 0) {
-          await lockUSDC?.({
-            pending: 'Upgrading Bonded ALICE with USDC...',
-            success: 'Upgraded!',
-            failed: 'Failed to upgrade Bonded ALICE with USDC!',
-          });
-        }
+      }
+      if (upgradeBoostAmount.dsp > 0) {
+        await lockUSDC?.({
+          pending: 'Upgrading Bonded ALICE with USDC...',
+          success: 'Upgraded!',
+          failed: 'Failed to upgrade Bonded ALICE with USDC!',
+        });
       }
       setIsUpgradeModalOpen(false);
       setUpgradeAmount(w3bNumberFromString(''));
