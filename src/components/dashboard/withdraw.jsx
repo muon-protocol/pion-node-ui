@@ -24,6 +24,9 @@ export default function Withdraw({ address }) {
     abi: contractABI,
     functionName: "getReward",
     chainId: 97,
+    onError(error) {
+      console.log("Error", error);
+    },
   });
 
   const disable = false;

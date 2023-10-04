@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchRewardData = async (staker, blockNumber) => {
   const response = await axios.get(
-    `/v1/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
+    `/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
   );
   console.log(response);
   if (!response.data.success) return false;
