@@ -174,18 +174,11 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  useEffect(() => {
-    if (isSuccess && (isLockUSDCSuccess || upgradeBoostAmount.dsp === 0)) {
-      setUpgradeAmount(w3bNumberFromString(''));
-      setUpgradeBoostAmount(w3bNumberFromString(''));
-      setUpgradeModalSelectedBonALICE(null);
-    }
-  }, [isSuccess, isLockUSDCSuccess]);
-
   const {
     callback: lockToBondedToken,
     isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
     isTransactionLoading: lockToBondedTokenIsTransactionLoading,
+    isSuccess: lockToBondedTokenIsSuccess,
   } = useWagmiContractWrite({
     abi: MUON_NODE_STAKING_ABI,
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
@@ -195,6 +188,24 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     functionName: 'lockToBondedToken',
     chainId: getCurrentChainId(),
   });
+
+  useEffect(() => {
+    console.log(
+      isSuccess,
+      lockToBondedTokenIsSuccess,
+      upgradeBoostAmount.dsp,
+      upgradeAmount.dsp,
+    );
+    if (
+      ((isSuccess || lockToBondedTokenIsSuccess) &&
+        (upgradeBoostAmount.dsp === 0 || !upgradeBoostAmount)) ||
+      isLockUSDCSuccess
+    ) {
+      setUpgradeAmount(w3bNumberFromString(''));
+      setUpgradeBoostAmount(w3bNumberFromString(''));
+      setUpgradeModalSelectedBonALICE(null);
+    }
+  }, [isSuccess, isLockUSDCSuccess, lockToBondedTokenIsSuccess]);
 
   const handleUpgradeBonALICEClicked = async () => {
     try {

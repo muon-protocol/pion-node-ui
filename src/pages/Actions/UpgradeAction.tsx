@@ -73,20 +73,10 @@ export const RenderUpgradeBody = () => {
   ]);
 
   const showApproveLPToken = useMemo(() => {
-    // if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
-    //   if (lpTokenAllowanceForMuon)
-    //     return lpTokenAllowanceForMuon.big < upgradeBoostAmount.big;
-    // } else {
     if (LPTokenAllowanceForBooster)
       return LPTokenAllowanceForBooster.big < upgradeBoostAmount.big;
-    // }
-  }, [
-    // nodeBonALICE,
-    // isSelectedUpgradeBonALICE,
-    // lpTokenAllowanceForMuon,
-    LPTokenAllowanceForBooster,
-    upgradeBoostAmount,
-  ]);
+    return false;
+  }, [LPTokenAllowanceForBooster, upgradeBoostAmount]);
 
   const { boostCoefficient } = useBooster();
   const { USDCPrice, ALICEPrice } = usePancakePair();
