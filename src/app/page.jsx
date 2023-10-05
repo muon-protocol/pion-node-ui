@@ -68,7 +68,7 @@ export default function Home() {
 
   useEffect(() => {
     if (selector.isNew) {
-      router.push("/preparing");
+      router.push("/dashboard/preparing");
     }
   }, [selector.isNew]);
 
