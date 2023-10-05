@@ -163,7 +163,7 @@ export const RenderCreateBody = () => {
       >
         {createAmount.dsp < 10000 ? (
           <button disabled className="btn !w-full" onClick={() => {}}>
-            At Least 10000 Power
+            insufficient ALICE amount (min: 10000)
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
