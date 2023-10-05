@@ -1,6 +1,6 @@
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 // import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
@@ -12,8 +12,8 @@ import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 import Alert from '../../components/Common/Alert.tsx';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
-import { sidebarItems } from '../../data/constants.ts';
-import useActions from '../../contexts/Actions/useActions.ts';
+// import { sidebarItems } from '../../data/constants.ts';
+// import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect } from 'react';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
@@ -43,13 +43,16 @@ const ReviewDetail = () => {
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
-  const navigate = useNavigate();
-  const { setSelectedAction } = useActions();
+  // const navigate = useNavigate();
+  // const { setSelectedAction } = useActions();
 
   const reviewDetailCard = () => {
     return (
-      <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden">
+      <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
         <ConnectWalletModal redirectRoute="/get-started" />
+        <div className="address-input__top text-sm mb-2 flex justify-between">
+          <div className="address-input__title text-gray">Select BonALICE</div>
+        </div>
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
@@ -70,22 +73,22 @@ const ReviewDetail = () => {
               }
             />
           </SelectButtonWithModal>
-          <Link to="/create">
-            <button className="btn btn--secondary btn--icon-btn relative !h-12 !w-12 md:!w-14 md:!h-14 !bg-primary-13-solid">
-              {nodeBonALICE &&
-                nodeBonALICE.ALICELockAmount.dsp +
-                  nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-                  10000 && (
-                  <>
-                    <span className="animate-ping absolute inline-flex top-0 right-0 w-3 h-3 rounded-lg bg-primary"></span>
-                    <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>
-                  </>
-                )}
-              <img src="/assets/images/actions/upgrade-icon.svg" alt="" />
-            </button>
-          </Link>
+          {/*<Link to="/create">*/}
+          {/*  <button className="btn btn--secondary btn--icon-btn relative !h-12 !w-12 md:!w-14 md:!h-14 !bg-primary-13-solid">*/}
+          {/*    {nodeBonALICE &&*/}
+          {/*      nodeBonALICE.ALICELockAmount.dsp +*/}
+          {/*        nodeBonALICE.LPTokenLockAmount.dsp * 2 <*/}
+          {/*        10000 && (*/}
+          {/*        <>*/}
+          {/*          <span className="animate-ping absolute inline-flex top-0 right-0 w-3 h-3 rounded-lg bg-primary"></span>*/}
+          {/*          <span className="absolute inline-flex rounded-full top-0 right-0 h-3 w-3 bg-primary"></span>*/}
+          {/*        </>*/}
+          {/*      )}*/}
+          {/*    <img src="/assets/images/actions/upgrade-icon.svg" alt="" />*/}
+          {/*  </button>*/}
+          {/*</Link>*/}
         </div>
-        <div className="flex flex-col gap-3 max-md:text-sm">
+        <div className="flex flex-col gap-3 max-md:text-sm mt-auto">
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
@@ -111,7 +114,7 @@ const ReviewDetail = () => {
                 <span className="font-medium">
                   {nodeBonALICE.LPTokenLockAmount.dsp}
                 </span>{' '}
-                LP)
+                USDC)
               </span>
             ) : (
               <span className="font-semibold">-</span>
@@ -142,7 +145,7 @@ const ReviewDetail = () => {
                 {nodeBonALICE.ALICELockAmount.dsp +
                   2 * nodeBonALICE.LPTokenLockAmount.dsp >=
                 10000
-                  ? '6 methods'
+                  ? 'Beginner Verification'
                   : nodeBonALICE.ALICELockAmount.dsp +
                       2 * nodeBonALICE.LPTokenLockAmount.dsp >=
                     50000
@@ -175,7 +178,10 @@ const ReviewDetail = () => {
         {/*  onValueChanged={(value) => setNodeIP(value)}*/}
         {/*  className="mb-9"*/}
         {/*/>*/}
-        <div className="address-input__input-wrapper mb-6 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
+        <div className="address-input__top text-sm mb-2 flex justify-between">
+          <div className="address-input__title text-gray">Node Address</div>
+        </div>
+        <div className="address-input__input-wrapper mb-4 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
           <input
             className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Node Address'}
@@ -184,7 +190,10 @@ const ReviewDetail = () => {
             onChange={(e) => setNodeAddress(e.target.value)}
           />
         </div>
-        <div className="address-input__input-wrapper mb-5 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
+        <div className="address-input__top text-sm mb-2 flex justify-between">
+          <div className="address-input__title text-gray">Peer ID</div>
+        </div>
+        <div className="address-input__input-wrapper mb-9 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
           <input
             className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Peer ID'}
@@ -256,7 +265,7 @@ const ReviewDetail = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       setTimeout(() => {
-        window.open('/dashboard', '_self');
+        window.open('/dashboard/preparing', '_self');
       }, 5000);
     }
   }, [stakerAddressInfo]);
@@ -286,52 +295,73 @@ const ReviewDetail = () => {
           className="content flex flex-col gap-8 justify-center items-center h-full"
         >
           <div className="review-details--top flex flex-col md:flex-row gap-9">
-            <p className="text-lg text-center md:text-left md:text-[22px] font-light w-full">
-              Review your bonALICE details closely. When you're ready, enter the
-              node IP to complete the setup.
+            <p className="text-lg text-center md:text-left md:text-[20px] font-light w-full">
+              Please review the bonALICE details you're staking for node
+              operation. When ready, fill out the requested information and
+              click ‘Add node’ to complete the setup.
             </p>
-            {nodeBonALICE &&
-            nodeBonALICE.ALICELockAmount.dsp +
-              nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-              10000 ? (
-              <Alert
-                className="md:!w-[365px] md:!min-w-[365px]"
-                type="error"
-                show={true}
-              >
-                You don't have sufficient amount of ALICE on this BonALICE.
-                Please{' '}
-                <span
-                  className="hover:underline cursor-pointer text-primary"
-                  onClick={() => {
-                    setSelectedAction(sidebarItems[1].link);
-                    navigate('/create');
-                  }}
+            {/*{nodeBonALICE &&*/}
+            {/*nodeBonALICE.ALICELockAmount.dsp +*/}
+            {/*  nodeBonALICE.LPTokenLockAmount.dsp * 2 <*/}
+            {/*  10000 ? (*/}
+            {/*  <Alert*/}
+            {/*    className="md:!w-[365px] md:!min-w-[365px]"*/}
+            {/*    type="error"*/}
+            {/*    show={true}*/}
+            {/*  >*/}
+            {/*    You don't have sufficient amount of ALICE on this BonALICE.*/}
+            {/*    Please{' '}*/}
+            {/*    <span*/}
+            {/*      className="hover:underline cursor-pointer text-primary"*/}
+            {/*      onClick={() => {*/}
+            {/*        setSelectedAction(sidebarItems[1].link);*/}
+            {/*        navigate('/create');*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      upgrade*/}
+            {/*    </span>*/}
+            {/*    ,{' '}*/}
+            {/*    <span*/}
+            {/*      className="hover:underline cursor-pointer text-primary"*/}
+            {/*      onClick={() => {*/}
+            {/*        setSelectedAction(sidebarItems[2].link);*/}
+            {/*        navigate('/create');*/}
+            {/*      }}*/}
+            {/*    >*/}
+            {/*      merge*/}
+            {/*    </span>*/}
+            {/*    , or select another BonALICE.*/}
+            {/*  </Alert>*/}
+            {/*) : (*/}
+            {/*  <Alert*/}
+            {/*    className="md:!w-[365px] md:!min-w-[365px]"*/}
+            {/*    type="error"*/}
+            {/*    show={true}*/}
+            {/*  >*/}
+            {/*    Your node will be activated once you've successfully completed*/}
+            {/*    the uniqueness verification process in your dashboard*/}
+            {/*  </Alert>*/}
+            {/*)}*/}
+
+            <div className="bg-primary md:!w-[365px] md:!min-w-[365px] flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl">
+              <img src="/assets/images/review/guide-icon.svg" alt="" />
+              <div>
+                <p className="text-white text-sm">
+                  Neet help setting up your node?
+                </p>
+                <p
+                  className="text-white text-xl underline cursor-pointer"
+                  onClick={() =>
+                    window.open(
+                      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-v2',
+                      '_blank',
+                    )
+                  }
                 >
-                  upgrade
-                </span>
-                ,{' '}
-                <span
-                  className="hover:underline cursor-pointer text-primary"
-                  onClick={() => {
-                    setSelectedAction(sidebarItems[2].link);
-                    navigate('/create');
-                  }}
-                >
-                  merge
-                </span>
-                , or select another BonALICE.
-              </Alert>
-            ) : (
-              <Alert
-                className="md:!w-[365px] md:!min-w-[365px]"
-                type="error"
-                show={true}
-              >
-                Your node will be activated once you've successfully completed
-                the uniqueness verification process in your dashboard
-              </Alert>
-            )}
+                  See Our Setup Guide
+                </p>
+              </div>
+            </div>
 
             {/*<NotificationCard  />*/}
           </div>
