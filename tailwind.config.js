@@ -29,7 +29,7 @@ export default {
         'success-green-20': '#8EF5AB44',
         'alert-red-20': '#F5956944',
         'primary-dark-500': '#C2C1F4',
-        'modal-small': '#ECEDFFCC',
+        'modal-small': '#ECEDFF',
         'primary-dark': '#918EF5',
         'primary-dark-50': '#918EF580',
         'dark-soft-primary': '#5158F640',
