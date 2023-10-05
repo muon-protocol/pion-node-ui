@@ -79,7 +79,7 @@ const myCustomTheme = {
     modalBackdrop: "...",
     modalBackground: "#E3E5FE",
     modalBorder: "white",
-    modalText: "...",
+    modalText: "black",
     modalTextDim: "white",
     modalTextSecondary: "black",
     profileAction: "...",
