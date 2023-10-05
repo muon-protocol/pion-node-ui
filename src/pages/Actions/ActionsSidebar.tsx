@@ -40,7 +40,12 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       }`}
       key={item.id}
       id={'sidebar-item-' + item.id}
-      onClick={() => !item.disabled && handleSidebarItemClick(item.link)}
+      onClick={() =>
+        !item.disabled &&
+        handleSidebarItemClick(
+          item.link.slice(1, item.link.length) as ActionType,
+        )
+      }
     >
       <img
         src={

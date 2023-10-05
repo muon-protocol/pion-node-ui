@@ -41,7 +41,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
           }}
           className="text-primary hover:underline cursor-pointer"
         >
-          Upgrade
+          Boost
         </span>{' '}
         your power to increase earnings from node operation.
       </p>

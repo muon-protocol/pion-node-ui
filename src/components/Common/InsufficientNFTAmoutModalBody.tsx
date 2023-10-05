@@ -24,7 +24,7 @@ const InsufficientNFTAmoutModalBody = ({
       <p className="text-center mb-8">
         You've successfully {operation} your BonALICE! Unfortunately your
         current node power is insufficient to run a node. Please consider
-        upgrading your bonALICE to enable node setup.
+        boosting your bonALICE to enable node setup.
       </p>
       <button
         onClick={() => {
@@ -35,7 +35,7 @@ const InsufficientNFTAmoutModalBody = ({
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >
-        Upgrade Your BonALICE
+        Boost Your BonALICE
       </button>
     </div>
   );

@@ -59,7 +59,7 @@ const Actions = () => {
       <div className="page page--centered">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[1170px] gap-4 md:gap-5">
+        <FadeIn className="flex flex-col w-[1200px] gap-4 md:gap-5">
           <ActionsHeader />
           <ActionsBody />
         </FadeIn>
@@ -70,7 +70,7 @@ const Actions = () => {
 
 const ActionsBody = () => {
   return (
-    <div className="actions-body flex flex-col-reverse md:flex-row w-full gap-9">
+    <div className="actions-body flex md:min-h-[552px] flex-col-reverse md:flex-row w-full gap-9">
       <ActionsSidebar />
       <ActionsContent />
       <Plans />
