@@ -68,7 +68,7 @@ export default function Home() {
 
   useEffect(() => {
     if (selector.isNew) {
-      router.push("/newNode");
+      router.push("/preparing");
     }
   }, [selector.isNew]);
 
