@@ -50,23 +50,23 @@ function App() {
                                       <Routes>
                                         <Route path="/" element={<Home />} />
                                         <Route
-                                          path="/create"
+                                          path="/bonALICE/create"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/upgrade"
+                                          path="/bonALICE/boost"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/merge"
+                                          path="/bonALICE/merge"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/split"
+                                          path="/bonALICE/split-"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/transfer"
+                                          path="/bonALICE/transfer-"
                                           element={<Actions />}
                                         />
                                         <Route

@@ -95,7 +95,7 @@ const DesktopNavbar = () => {
                             </div>
                             <div className="dialog__top__right flex items-center">
                               {bonALICEs.length > 0 ? (
-                                <Link to={'/create'}>
+                                <Link to={'/bonALICE/create'}>
                                   <button
                                     onClick={() =>
                                       setIsManageBonALICEDialogOpen(false)
@@ -106,7 +106,7 @@ const DesktopNavbar = () => {
                                   </button>
                                 </Link>
                               ) : (
-                                <Link to={'/create'}>
+                                <Link to={'/bonALICE/create'}>
                                   <button
                                     onClick={() =>
                                       setIsManageBonALICEDialogOpen(false)

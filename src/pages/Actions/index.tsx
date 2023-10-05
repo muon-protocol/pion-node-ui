@@ -20,15 +20,15 @@ const Actions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/create') {
+    if (location.pathname === '/bonALICE/create') {
       setSelectedAction(ActionType.CREATE);
-    } else if (location.pathname === '/upgrade') {
+    } else if (location.pathname === '/bonALICE/boost') {
       setSelectedAction(ActionType.UPGRADE);
-    } else if (location.pathname === '/merge') {
+    } else if (location.pathname === '/bonALICE/merge') {
       setSelectedAction(ActionType.MERGE);
-    } else if (location.pathname === '/split') {
+    } else if (location.pathname === '/bonALICE/split') {
       setSelectedAction(ActionType.SPLIT);
-    } else if (location.pathname === '/transfer') {
+    } else if (location.pathname === '/bonALICE/transfer') {
       setSelectedAction(ActionType.TRANSFER);
     }
   }, [setSelectedAction, location.pathname]);

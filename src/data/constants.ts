@@ -55,7 +55,7 @@ export const steps: Step[] = [
     title: 'Create bonALICE',
     description: 'Lock your ALICE into bonALICE and gain node power',
     buttonText: 'Create bonded ALICE',
-    buttonLink: '/create',
+    buttonLink: '/bonALICE/create',
     buttonLinkTarget: '_self',
   },
   {
@@ -80,7 +80,7 @@ export const sidebarItems: SidebarItem[] = [
   },
   {
     id: 2,
-    title: 'Upgrade',
+    title: 'Boost',
     icon: '/assets/images/actions/upgrade-icon.svg',
     hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
     link: ActionType.UPGRADE,

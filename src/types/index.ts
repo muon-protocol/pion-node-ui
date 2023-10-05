@@ -22,9 +22,9 @@ export type Step = {
 };
 
 export enum ActionType {
-  CREATE = 'create',
-  UPGRADE = 'upgrade',
-  MERGE = 'merge',
+  CREATE = 'bonALICE/create',
+  UPGRADE = 'bonALICE/boost',
+  MERGE = 'bonALICE/merge',
   SPLIT = 'split',
   TRANSFER = 'transfer',
 }

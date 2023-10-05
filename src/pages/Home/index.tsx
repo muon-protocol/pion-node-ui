@@ -101,7 +101,7 @@ const Home = () => {
                 </div>
                 <div
                   className="btn !px-6 mx-auto font-tomorrow"
-                  onClick={() => window.open('/upgrade', '_self')}
+                  onClick={() => window.open('/bonALICE/boost', '_self')}
                 >
                   Manage Bonded ALICE
                 </div>
@@ -111,7 +111,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto font-tomorrow"
-                  onClick={() => window.open('/create', '_self')}
+                  onClick={() => window.open('/bonALICE/create', '_self')}
                 >
                   Create Bonded ALICE
                 </div>
