@@ -5,7 +5,7 @@ export const plans: Plan[] = [
     id: 1,
     title: 'Tier 1',
     requiredNodePower: '10,000',
-    verificationMethods: '6 methods',
+    verificationMethods: 'Beginner Verification',
     APR: '10% - 15%',
     profitability: '200 - 250 days',
     backgroundColor: '#F58E8E80',
