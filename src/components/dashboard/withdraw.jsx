@@ -63,7 +63,7 @@ export default function Withdraw({ address }) {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if (isConnected) {
+    if (trSuccess) {
       dispatch(fetchNodeInfo(address));
     }
   }, [trSuccess]);
