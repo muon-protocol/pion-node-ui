@@ -15,7 +15,7 @@ export type Plan = {
 export type Step = {
   id: number;
   title: string;
-  descriptions: string[];
+  description: string;
   buttonText: string;
   buttonLink: string;
   buttonLinkTarget: string;

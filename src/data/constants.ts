@@ -43,9 +43,8 @@ export const steps: Step[] = [
   {
     id: 1,
     title: 'Buy ALICE',
-    descriptions: [
+    description:
       'First you need to buy ALICE to create your bonALICE NFT, minimum amount for starting is 1000 ALICE',
-    ],
     buttonText: 'Buy ALICE',
     buttonLink:
       'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
@@ -54,7 +53,7 @@ export const steps: Step[] = [
   {
     id: 2,
     title: 'Create bonALICE',
-    descriptions: ['Lock your ALICE into bonALICE and gain node power'],
+    description: 'Lock your ALICE into bonALICE and gain node power',
     buttonText: 'Create bonded ALICE',
     buttonLink: '/create',
     buttonLinkTarget: '_self',
@@ -62,9 +61,8 @@ export const steps: Step[] = [
   {
     id: 3,
     title: 'Setup Node',
-    descriptions: [
+    description:
       'When you have your bonALICE ready, it’s time to setup your node and start earning',
-    ],
     buttonText: 'Setup Node',
     buttonLink: '/review',
     buttonLinkTarget: '_self',

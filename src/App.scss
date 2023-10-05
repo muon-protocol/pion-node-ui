@@ -91,6 +91,10 @@ input[type=number] {
     @apply flex items-center justify-center;
   }
 
+  &--home {
+    @apply md:max-w-[1161px];
+  }
+
   &--get-started,
   &--claim-prize {
     @apply flex flex-col items-center justify-center md:max-w-[704px] mx-auto;
