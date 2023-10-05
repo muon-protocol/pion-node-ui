@@ -144,7 +144,7 @@ const Home = () => {
             ) : (
               <div
                 className="btn !px-6 mx-auto font-tomorrow"
-                onClick={() => window.open('/review', '_self')}
+                onClick={() => window.open('/setup-node', '_self')}
               >
                 Setup Node
               </div>

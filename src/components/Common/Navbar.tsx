@@ -142,7 +142,7 @@ const DesktopNavbar = () => {
                   </button>
                 )}
                 {!hasNodeBonALICE ? (
-                  <Link to="/review">
+                  <Link to="/setup-node">
                     <button className="btn btn--small">Setup Node</button>
                   </Link>
                 ) : (

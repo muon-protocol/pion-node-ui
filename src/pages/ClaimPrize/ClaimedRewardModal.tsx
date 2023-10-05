@@ -24,7 +24,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
           onClick={() => {
             createModal(false);
             claimModal(false);
-            navigate('/review');
+            navigate('/setup-node');
           }}
           className="btn btn--primary mb-2 mt-5 mx-auto"
         >

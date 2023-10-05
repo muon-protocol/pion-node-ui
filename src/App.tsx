@@ -78,7 +78,7 @@ function App() {
                                           element={<ClaimPrize />}
                                         />
                                         <Route
-                                          path="/review"
+                                          path="/setup-node"
                                           element={<ReviewDetail />}
                                         />
                                       </Routes>

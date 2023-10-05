@@ -61,7 +61,7 @@ const ClaimCard = () => {
 
   useEffect(() => {
     if (isSuccess || alreadyClaimedPrize) {
-      navigate('/review');
+      navigate('/setup-node');
       setAlreadyClaimedPrize(false);
     }
   }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
@@ -148,7 +148,7 @@ const ClaimCard = () => {
             </button>
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
-              onClick={() => navigate('/review')}
+              onClick={() => navigate('/setup-node')}
               className="btn md:ml-auto max-md:!w-full !px-10"
             >
               Create Node

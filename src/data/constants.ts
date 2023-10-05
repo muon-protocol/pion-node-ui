@@ -64,7 +64,7 @@ export const steps: Step[] = [
     description:
       'When you have your bonALICE ready, it’s time to setup your node and start earning',
     buttonText: 'Setup Node',
-    buttonLink: '/review',
+    buttonLink: '/setup-node',
     buttonLinkTarget: '_self',
   },
 ];
