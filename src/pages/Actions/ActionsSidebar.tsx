@@ -35,21 +35,25 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
 
   return (
     <div
-      className="sidebar-item flex-1 flex flex-col gap-1.5 md:gap-2 items-center justify-center cursor-pointer"
+      className={`sidebar-item flex-1 flex flex-col gap-1.5 md:gap-2 items-center justify-center ${
+        !item.disabled ? 'cursor-pointer' : 'cursor-default'
+      }`}
       key={item.id}
       id={'sidebar-item-' + item.id}
-      onClick={() => handleSidebarItemClick(item.link)}
+      onClick={() => !item.disabled && handleSidebarItemClick(item.link)}
     >
       <img
         src={
-          selectedAction === item.link || isHovered ? item.icon : item.grayIcon
+          (selectedAction === item.link || isHovered) && !item.disabled
+            ? item.icon
+            : item.grayIcon
         }
         alt={item.title}
         className={`transition-opacity top-0 w-6 h-[22px] md:h-6 z-10`}
       />
       <div
         className={`text-xs md:text-sm font-semibold transition-all text-primary 
-          ${isHovered && 'md:text-primary'} 
+          ${isHovered && !item.disabled && 'md:text-primary'} 
           ${selectedAction === item.link ? 'md:text-primary' : 'md:text-gray'}`}
       >
         {item.title}

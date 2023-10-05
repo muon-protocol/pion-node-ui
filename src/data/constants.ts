@@ -77,6 +77,7 @@ export const sidebarItems: SidebarItem[] = [
     hoverIcon: '/assets/images/actions/create-colored-icon.svg',
     link: ActionType.CREATE,
     grayIcon: '/assets/images/actions/create-gray-icon.svg',
+    disabled: false,
   },
   {
     id: 2,
@@ -85,6 +86,7 @@ export const sidebarItems: SidebarItem[] = [
     hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
     link: ActionType.UPGRADE,
     grayIcon: '/assets/images/actions/upgrade-gray-icon.svg',
+    disabled: false,
   },
   {
     id: 3,
@@ -93,6 +95,7 @@ export const sidebarItems: SidebarItem[] = [
     hoverIcon: '/assets/images/actions/merge-colored-icon.svg',
     link: ActionType.MERGE,
     grayIcon: '/assets/images/actions/merge-gray-icon.svg',
+    disabled: false,
   },
   {
     id: 4,
@@ -101,6 +104,7 @@ export const sidebarItems: SidebarItem[] = [
     hoverIcon: '/assets/images/actions/split-colored-icon.svg',
     link: ActionType.SPLIT,
     grayIcon: '/assets/images/actions/split-gray-icon.svg',
+    disabled: true,
   },
   {
     id: 5,
@@ -109,6 +113,7 @@ export const sidebarItems: SidebarItem[] = [
     hoverIcon: '/assets/images/actions/transfer-colored-icon.svg',
     link: ActionType.TRANSFER,
     grayIcon: '/assets/images/actions/transfer-gray-icon.svg',
+    disabled: true,
   },
 ];
 
