@@ -24,11 +24,11 @@ const Actions = () => {
       setSelectedAction(ActionType.CREATE);
     } else if (location.pathname === '/bonPION/boost') {
       setSelectedAction(ActionType.UPGRADE);
-    } else if (location.pathname === '/bonALICE/merge') {
+    } else if (location.pathname === '/bonPION/merge') {
       setSelectedAction(ActionType.MERGE);
-    } else if (location.pathname === '/bonALICE/split') {
+    } else if (location.pathname === '/bonPION/split') {
       setSelectedAction(ActionType.SPLIT);
-    } else if (location.pathname === '/bonALICE/transfer') {
+    } else if (location.pathname === '/bonPION/transfer') {
       setSelectedAction(ActionType.TRANSFER);
     }
   }, [setSelectedAction, location.pathname]);

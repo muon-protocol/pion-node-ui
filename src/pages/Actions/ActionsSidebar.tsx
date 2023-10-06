@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ActionsSidebar = () => {
   return (
-    <div className="action-sidebar bg-white rounded-2xl z-[100] w-auto fixed bottom-2 left-2 right-2 flex justify-evenly px-2 pb-1.5 pt-3 md:left-0 md:right-0 md:bottom-0 md:relative md:w-auto md:rounded-2xl md:flex-col md:gap-10 md:bg-primary-13 md:px-4 md:py-14">
+    <div className="action-sidebar bg-white rounded-2xl z-[100] w-auto fixed bottom-2 left-2 right-2 flex justify-evenly px-2 pb-1.5 pt-3 md:left-0 md:right-0 md:bottom-0 md:relative md:w-auto md:rounded-2xl md:flex-col md:gap-10 md:bg-so-dark-gray md:px-4 md:py-14">
       {sidebarItems.map((item) => (
         <SidebarItem item={item} key={item.id} />
       ))}

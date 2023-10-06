@@ -21,7 +21,7 @@ export const ActionsPlansCard = ({
   return (
     <FadeIn delay={animationDelay} duration={animationDuration}>
       <div
-        className={`actions-plans-card rounded-2xl p-8 pb-[30px] pt-5 flex flex-col ${
+        className={`actions-plans-card rounded-2xl p-8 pb-[30px] pt-5 flex flex-col bg-so-dark-gray ${
           active ? '!border-2' : 'border-0'
         } ${className}`}
       >

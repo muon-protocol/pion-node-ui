@@ -121,14 +121,14 @@ export const RenderUpgradeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICE"
+          title="Select BonPION"
           onClick={() => openUpgradeModal()}
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select BonALICE'
-              : 'No BonALICEs to Upgrade'
+              ? 'Select BonPION'
+              : 'No BonPIONs to Upgrade'
           }
           selectedItems={
             selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []
@@ -145,7 +145,7 @@ export const RenderUpgradeBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
           withLink
-          rightText={'ALICE'}
+          rightText={'PION'}
           balance={ALICEBalance}
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
@@ -166,7 +166,7 @@ export const RenderUpgradeBody = () => {
       {selectedUpgradeBonALICE && (
         <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-            <p className="font-light">Your bonALICE current amount:</p>
+            <p className="font-light">Your bonPION current amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
           {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) &&
@@ -180,7 +180,7 @@ export const RenderUpgradeBody = () => {
                   className="flex w-full justify-between items-center"
                 >
                   <span className="text-gray10">
-                    <p className="font-light">Your bonALICE amount will be:</p>
+                    <p className="font-light">Your bonPION amount will be:</p>
                     <p className="font-light text-sm flex gap-1">
                       {upgradeBoostAmount.dsp +
                         ' USDC -> ' +
@@ -190,13 +190,13 @@ export const RenderUpgradeBody = () => {
                             100,
                         ) /
                           100 +
-                        ' ALICE '}
+                        ' PION '}
                       <p className="text-primary font-bold">
                         x{boostCoefficient?.dsp}
                       </p>
                       {' + ' +
                         upgradeAmount.dsp +
-                        ' ALICE + ' +
+                        ' PION + ' +
                         selectedUpgradeBonALICE.nodePower}
                     </p>
                   </span>
@@ -241,8 +241,8 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {ALICEBalance && upgradeAmount.big < ALICEBalance.big
-              ? upgradeAmount.hStr + ' ALICEs'
-              : 'All ALICEs'}
+              ? upgradeAmount.hStr + ' PIONs'
+              : 'All PIONs'}
           </button>
         ) : showApproveLPToken ? (
           <button
@@ -261,7 +261,7 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn !w-full"
           >
-            Upgrade Bonded ALICE
+            Upgrade Bonded PION
           </button>
         )}
       </FadeIn>
@@ -279,7 +279,7 @@ export const RenderUpgradeBody = () => {
           <p className="text-center mb-6">
             You need to approve the{' '}
             {showApproveALICE
-              ? 'ALICE '
+              ? 'PION '
               : showApproveLPToken
               ? 'USDC '
               : 'tokens '}
@@ -289,7 +289,7 @@ export const RenderUpgradeBody = () => {
               ? showApproveALICE
                 ? 'Muon node staking '
                 : 'Booster '
-              : 'Bonded ALICE '}
+              : 'Bonded PION '}
             Contract. Enter at least the amount you want to create and click
             Next then Approve button on metamask.
           </p>

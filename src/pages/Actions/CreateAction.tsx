@@ -93,7 +93,7 @@ export const RenderCreateBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          rightText={'ALICE'}
+          rightText={'PION'}
           balance={ALICEBalance}
           value={createAmount}
           withLink
@@ -137,11 +137,11 @@ export const RenderCreateBody = () => {
                         100,
                     ) /
                       100 +
-                    ' ALICE '}
+                    ' PION '}
                   <p className="text-primary font-bold">
                     x{boostCoefficient?.dsp}
                   </p>
-                  {' + ' + createAmount.dsp + ' ALICE'}
+                  {' + ' + createAmount.dsp + ' PION'}
                 </p>
               </span>
               <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
@@ -163,7 +163,7 @@ export const RenderCreateBody = () => {
       >
         {createAmount.dsp < 10000 ? (
           <button disabled className="btn !w-full" onClick={() => {}}>
-            insufficient ALICE amount (min: 10000)
+            insufficient PION amount (min: 10000)
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
@@ -188,8 +188,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' ALICEs'
-              : 'All ALICEs'}
+              ? createAmount.hStr + ' PIONs'
+              : 'All PIONs'}
           </button>
         ) : createBoostAmount.dsp === 0 &&
           ALICEAllowance &&
@@ -201,8 +201,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' ALICEs'
-              : 'All ALICEs'}
+              ? createAmount.hStr + ' PIONs'
+              : 'All PIONs'}
           </button>
         ) : LPTokenAllowanceForBooster &&
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
@@ -225,7 +225,7 @@ export const RenderCreateBody = () => {
             {createAmount.dsp + createBoostAmount.dsp > 0 &&
             createAmount.dsp + createBoostAmount.dsp < 10000
               ? 'At Least 10000 Power'
-              : 'Create Bonded ALICE'}
+              : 'Create Bonded PION'}
           </button>
         )}
       </FadeIn>
@@ -259,11 +259,11 @@ export const RenderCreateBody = () => {
             {createBoostAmount.dsp > 0 &&
             ALICEAllowanceForBooster &&
             ALICEAllowanceForBooster.big < createAmount.big
-              ? 'ALICE '
+              ? 'PION '
               : createBoostAmount.dsp === 0 &&
                 ALICEAllowance &&
                 ALICEAllowance.big < createAmount.big
-              ? 'ALICE '
+              ? 'PION '
               : LPTokenAllowanceForBooster &&
                 LPTokenAllowanceForBooster.big < createBoostAmount.big
               ? 'USDC '
@@ -271,7 +271,7 @@ export const RenderCreateBody = () => {
             tokens in the{' '}
             {createBoostAmount && createBoostAmount.dsp > 0
               ? 'Booster contract'
-              : 'BonALICE contract'}
+              : 'BonPION contract'}
             .
           </p>
           {ALICEAllowanceForBooster &&

@@ -58,14 +58,14 @@ const RenderMergeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICEs"
+          title="Select BonPIONs"
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select BonALICEs to Merge'
-              : 'No BonALICEs to Merge'
+              ? 'Select BonPIONs to Merge'
+              : 'No BonPIONs to Merge'
           }
           multiple
           selectedItems={selectedMergeBonALICEs}
@@ -92,7 +92,7 @@ const RenderMergeBody = () => {
           <MoveUpIn y={-10} duration={0.5} delay={0.3}>
             <FadeIn duration={0.2} delay={0.3}>
               <BonALICECard
-                title="New Bonded ALICE"
+                title="New Bonded PION"
                 subTitle1="Node Power"
                 subValue1={
                   selectedMergeBonALICEs[0].nodePower +
@@ -137,7 +137,7 @@ const RenderMergeBody = () => {
             disabled={isMergeBonALICEsButtonDisabled}
             className="btn !w-full"
           >
-            Merge Bonded ALICEs
+            Merge Bonded PIONs
           </button>
         )}
       </FadeIn>

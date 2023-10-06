@@ -23,6 +23,7 @@ export default {
         green: '#8EF5AB',
         disabled: '#C0C0C0',
         gray3: '#939393',
+        'so-dark-gray': '#3D3D3D',
         'modal-small': '#ECEDFFCC',
         'primary-dark': '#918EF5',
         'dark-soft-primary': '#4D3E9E40',
