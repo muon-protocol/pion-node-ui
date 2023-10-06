@@ -98,6 +98,7 @@ export const Plans = () => {
   };
 
   const activePower = useMemo(() => {
+    console.log(location.pathname);
     if (location.pathname === ActionType.CREATE) {
       return createAmountInW3BNumber.dsp;
     } else if (location.pathname === ActionType.UPGRADE) {
@@ -107,17 +108,17 @@ export const Plans = () => {
     }
     return valueOfBondedTokenInW3BNumber.dsp;
   }, [
-    valueOfBondedTokenInW3BNumber.dsp,
-    createAmountInW3BNumber.dsp,
-    upgradeAmountInW3BNumber.dsp,
-    mergeAmountInW3BNumber.dsp,
+    valueOfBondedTokenInW3BNumber,
+    createAmountInW3BNumber,
+    upgradeAmountInW3BNumber,
+    mergeAmountInW3BNumber,
   ]);
 
   return (
     <div className="plans min-w-[470px] flex flex-col justify-between flex-grow">
       <ActionsPlansCard
         plan={plans[0]}
-        className="w-full bg-white border-plan-1"
+        className="w-full border-plan-1"
         animationDelay={0.1}
         animationDuration={0.3}
         active={isPlanActive(10000, 50000)}
@@ -126,7 +127,7 @@ export const Plans = () => {
       />
       <ActionsPlansCard
         plan={plans[1]}
-        className="w-full bg-white border-plan-2"
+        className="w-full border-plan-2"
         animationDelay={0.2}
         animationDuration={0.3}
         active={isPlanActive(50000, 200000)}
@@ -135,7 +136,7 @@ export const Plans = () => {
       />
       <ActionsPlansCard
         plan={plans[2]}
-        className="w-full bg-white border-plan-3"
+        className="w-full border-plan-3"
         animationDelay={0.3}
         animationDuration={0.3}
         active={isPlanActive(200000, 100000000000000)}
