@@ -38,7 +38,7 @@ const DesktopNavbar = () => {
         <div className="navbar__left">
           <Link to={'/'}>
             <img
-              src="/assets/images/navbar/Alice_Logo.png"
+              src="/assets/images/navbar/pion-logo.svg"
               alt={''}
               className="w-auto h-9"
             />
@@ -58,7 +58,7 @@ const DesktopNavbar = () => {
                     )
                   }
                 >
-                  Buy ALICE
+                  Buy PION
                 </button>
                 {!hasNodeBonALICE && (
                   <button
@@ -72,7 +72,7 @@ const DesktopNavbar = () => {
                       src="/assets/images/alice-icon.svg"
                       alt=""
                     />
-                    Manage bonALICE
+                    Manage bonPION
                     {isManageBonALICEDialogOpen && (
                       <FadeIn
                         duration={0.1}
@@ -89,13 +89,13 @@ const DesktopNavbar = () => {
                               <p className="text-sm">Balance:</p>
                               <p className="text-sm font-medium min-w-[100px] text-left">
                                 {bonALICEs.length > 0
-                                  ? bonALICEs.length + ' BonALICEs'
-                                  : 'No bonALICE'}
+                                  ? bonALICEs.length + ' BonPIONs'
+                                  : 'No bonPION'}
                               </p>
                             </div>
                             <div className="dialog__top__right flex items-center">
                               {bonALICEs.length > 0 ? (
-                                <Link to={'/bonALICE/create'}>
+                                <Link to={'/bonPION/create'}>
                                   <button
                                     onClick={() =>
                                       setIsManageBonALICEDialogOpen(false)
@@ -106,7 +106,7 @@ const DesktopNavbar = () => {
                                   </button>
                                 </Link>
                               ) : (
-                                <Link to={'/bonALICE/create'}>
+                                <Link to={'/bonPION/create'}>
                                   <button
                                     onClick={() =>
                                       setIsManageBonALICEDialogOpen(false)
@@ -154,15 +154,17 @@ const DesktopNavbar = () => {
             )}
 
           {isConnected && ALICEBalance !== null && (
-            <button className="btn btn--small btn--secondary flex">
+            <button className="btn btn--small flex">
               <img
                 src="/assets/images/navbar/muon-icon.svg"
                 alt=""
                 className="mr-3 h-[18px]"
               />
-              <span className="text-black">Balance: </span>
-              <strong className="ml-2 mr-1">{ALICEBalance.dsp}</strong>
-              <strong className="text-black font-semibold">ALICE</strong>
+              <span className="text-white">Balance: </span>
+              <strong className="text-white ml-2 mr-1">
+                {ALICEBalance.dsp}
+              </strong>
+              <strong className="text-white font-semibold">PION</strong>
             </button>
           )}
           <ConnectWalletButton />

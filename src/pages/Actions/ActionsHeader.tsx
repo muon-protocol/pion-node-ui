@@ -102,15 +102,15 @@ const ActionsHeader = () => {
 //       {action === ActionType.CREATE ? (
 //         <FadeIn key={action} duration={0.1} delay={0.1}>
 //           <p>
-//             Begin your journey by crafting your Bonded ALICE NFT This requires
-//             locking ALICE and ALICE LP tokens. Remember, the amount of tokens you
+//             Begin your journey by crafting your Bonded PION NFT This requires
+//             locking PION and PION LP tokens. Remember, the amount of tokens you
 //             lock will directly influence your NFT Power, tier, and rewards.
 //           </p>
 //         </FadeIn>
 //       ) : action === ActionType.UPGRADE ? (
 //         <FadeIn key={action} duration={0.1} delay={0.1}>
 //           <p>
-//             Boost your Node Power by adding more ALICE and ALICE LP tokens to your
+//             Boost your Node Power by adding more PION and ALICE LP tokens to your
 //             Bonded ALICE NFT. This upgrade could change your tier and enhance
 //             your APR.
 //           </p>

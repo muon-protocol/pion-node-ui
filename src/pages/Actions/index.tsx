@@ -20,9 +20,9 @@ const Actions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/bonALICE/create') {
+    if (location.pathname === '/bonPION/create') {
       setSelectedAction(ActionType.CREATE);
-    } else if (location.pathname === '/bonALICE/boost') {
+    } else if (location.pathname === '/bonPION/boost') {
       setSelectedAction(ActionType.UPGRADE);
     } else if (location.pathname === '/bonALICE/merge') {
       setSelectedAction(ActionType.MERGE);

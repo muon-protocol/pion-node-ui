@@ -14,14 +14,14 @@ export const PrizeCalculationDetailModal = () => {
       <RewardSource source={rewards?.muon_presale} title="MUON Presale" />
       <RewardSource
         source={rewards?.early_alice_operator}
-        title="ALICE Operator"
+        title="PION Operator"
         subTitle="(Early stage)"
         headerDetail="20% Reward"
-        detailDescription="The early stage of the ALICE Operator is from 1st of July 2021 to 31st of July 2021"
+        detailDescription="The early stage of the PION Operator is from 1st of July 2021 to 31st of July 2021"
       />
       <RewardSource
         source={rewards?.alice_operator}
-        title="ALICE Operator"
+        title="PION Operator"
         subTitle="(Main stage)"
         headerDetail="40% Reward"
         detailDescription="The main stage of the ALICE Operator is from 1st of August 2021 to 31st of August 2021"

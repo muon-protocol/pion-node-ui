@@ -59,7 +59,7 @@ export const ConnectWalletButton = ({
               return (
                 <button
                   onClick={openAccountModal}
-                  className={`btn btn--secondary ${
+                  className={`btn btn--secondary !text-white ${
                     size === 'md' ? '' : 'btn--small'
                   } btn--dark-primary`}
                 >

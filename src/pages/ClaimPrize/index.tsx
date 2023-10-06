@@ -48,7 +48,7 @@ const ClaimPrize = () => {
               alt=""
               className="w-12 h-12"
             />
-            <p className="text-5xl font-bold">ALICE Node-Drop</p>
+            <p className="text-5xl font-bold">PION Node-Drop</p>
           </div>
           <p className="text-lg text-center md:text-left md:text-xl font-light mb-6">
             Go to your wallet and choose the address linked to your pioneer
@@ -63,7 +63,7 @@ const ClaimPrize = () => {
             You have already claimed your reward under{' '}
             <p className="font-semibold inline">
               {' '}
-              BonALICE #{userClaimedReward[1].toString()}
+              BonPION #{userClaimedReward[1].toString()}
             </p>
             .
           </Alert>

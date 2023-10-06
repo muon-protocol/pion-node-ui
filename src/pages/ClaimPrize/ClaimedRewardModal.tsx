@@ -18,7 +18,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         alt=""
       />
       <p className="text-center">
-        Your BonALICE has been {operation} successfully. now you can
+        Your BonPION has been {operation} successfully. now you can
         <br />
         <button
           onClick={() => {
@@ -37,7 +37,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
             setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/bonALICE/boost');
+            navigate('/bonPION/boost');
           }}
           className="text-primary hover:underline cursor-pointer"
         >

@@ -18,7 +18,7 @@ const GetStarted = () => {
       <div className="page page--get-started">
         <FadeIn duration={0.3}>
           <p className="text-[19px] md:text-2xl font-light mb-6">
-            You can obtain bonALICE in two ways: either create a new one
+            You can obtain bonPION in two ways: either create a new one
             independently or claim it as a reward if you're part of the MUON
             pioneers
           </p>
@@ -33,7 +33,7 @@ const GetStarted = () => {
             {/*  Joined the Deus Presale*/}
             {/*</span>*/}
             <span className="get-started__pioneer-option">
-              Operated an ALICE Node
+              Operated an PION Node
             </span>
           </span>
           <span className="get-started__actions">
@@ -62,7 +62,7 @@ const NewBonALICEAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/BonALICE/create"
+      to="/BonPION/create"
     >
       <motion.span whileHover="animate">
         <motion.img

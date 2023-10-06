@@ -42,27 +42,27 @@ export const plans: Plan[] = [
 export const steps: Step[] = [
   {
     id: 1,
-    title: 'Buy ALICE',
+    title: 'Buy PION',
     description:
-      'First you need to buy ALICE to create your bonALICE NFT, minimum amount for starting is 1000 ALICE',
-    buttonText: 'Buy ALICE',
+      'First you need to buy PION to create your BonPION NFT, minimum amount for starting is 1000 PION',
+    buttonText: 'Buy PION',
     buttonLink:
       'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
     buttonLinkTarget: '_blank',
   },
   {
     id: 2,
-    title: 'Create bonALICE',
-    description: 'Lock your ALICE into bonALICE and gain node power',
-    buttonText: 'Create bonded ALICE',
-    buttonLink: '/bonALICE/create',
+    title: 'Create bonPION',
+    description: 'Lock your PION into bonPION and gain node power',
+    buttonText: 'Create bonded PION',
+    buttonLink: '/bonPION/create',
     buttonLinkTarget: '_self',
   },
   {
     id: 3,
     title: 'Setup Node',
     description:
-      'When you have your bonALICE ready, it’s time to setup your node and start earning',
+      'When you have your bonPION ready, it’s time to setup your node and start earning',
     buttonText: 'Setup Node',
     buttonLink: '/setup-node',
     buttonLinkTarget: '_self',
@@ -122,21 +122,21 @@ export const userWallets: UserWallet[] = [
     id: 1,
     title: 'Deus Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+600 ALICE',
+    balance: '+600 PION',
     verified: true,
   },
   {
     id: 2,
     title: 'Muon Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+400 ALICE',
+    balance: '+400 PION',
     verified: false,
   },
   {
     id: 3,
-    title: 'Alice Operator',
+    title: 'PION Operator',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+200 ALICE',
+    balance: '+200 PION',
     verified: false,
   },
 ];

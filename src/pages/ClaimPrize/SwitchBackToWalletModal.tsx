@@ -12,7 +12,7 @@ const SwitchBackToWalletModal = () => {
         alt=""
       />
       <p className="text-center">
-        To claim your bonALICE, please switch back to your Staking Address
+        To claim your bonPION, please switch back to your Staking Address
         <br />
         <strong>
           {stakingAddressFromPast

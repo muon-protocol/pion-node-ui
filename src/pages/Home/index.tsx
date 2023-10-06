@@ -32,7 +32,7 @@ const Home = () => {
         </div>
         <FadeIn delay={0.1}>
           <p className="moto w-full text-center mb-3 text-5xl font-semibold leading-10 md:mb-0 md:text-6xl md:font-bold">
-            ALICE NETWORK
+            PION NETWORK
           </p>
         </FadeIn>
         <FadeIn delay={0.15} className="mb-20">
@@ -48,7 +48,7 @@ const Home = () => {
           >
             <>
               <p className="font-tomorrow text-2xl font-medium mb-6">
-                Buy ALICE
+                Buy PION
               </p>
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
@@ -58,9 +58,13 @@ const Home = () => {
               </span>
               <div className="mb-5 mt-auto">
                 {ALICEBalance && (
-                  <p className="text-primary">
-                    Your Balance: <strong>{ALICEBalance.dsp}</strong> ALICE
-                  </p>
+                  <div className="text-light-text">
+                    Your Balance:{' '}
+                    <strong className="text-primary-L3">
+                      {ALICEBalance.dsp}
+                    </strong>{' '}
+                    <span className="text-primary-L3">PION</span>
+                  </div>
                 )}
               </div>
               <div
@@ -72,7 +76,7 @@ const Home = () => {
                   )
                 }
               >
-                Buy ALICE
+                Buy PION
               </div>
             </>
           </StepCard>
@@ -82,28 +86,30 @@ const Home = () => {
             animationDelay={0.2}
           >
             <p className="font-tomorrow text-2xl font-medium mb-6">
-              {nodeBonALICE.length > 0 ? 'Manage bonALICE' : 'Create bonALICE'}
+              {nodeBonALICE.length > 0 ? 'Manage bonPION' : 'Create bonPION'}
             </p>
             <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
               <p>
                 {nodeBonALICE.length > 0
-                  ? 'You can add more ALICE and USDC to increase your bonALICE amount and node power'
-                  : 'Use your ALICE to create a bonALICE, which is essential for for setting up your node'}
+                  ? 'You can add more PION and USDC to increase your bonPION amount and node power'
+                  : 'Use your PION to create a bonPION, which is essential for for setting up your node'}
               </p>
             </span>
             {nodeBonALICE.length > 0 ? (
               <>
                 <div className="mb-5">
-                  <p className="text-primary">
-                    bonALICE#{nodeBonALICE[0].tokenId.toString()} amount:{' '}
-                    <strong>{nodeBonALICE[0].nodePower}</strong>
+                  <p className="text-light-text">
+                    bonPION#{nodeBonALICE[0].tokenId.toString()} amount:{' '}
+                    <strong className="text-primary-L3">
+                      {nodeBonALICE[0].nodePower}
+                    </strong>
                   </p>
                 </div>
                 <div
                   className="btn !px-6 mx-auto font-tomorrow"
-                  onClick={() => window.open('/bonALICE/boost', '_self')}
+                  onClick={() => window.open('/bonPION/boost', '_self')}
                 >
-                  Manage Bonded ALICE
+                  Manage Bonded PION
                 </div>
               </>
             ) : (
@@ -111,9 +117,9 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto font-tomorrow"
-                  onClick={() => window.open('/bonALICE/create', '_self')}
+                  onClick={() => window.open('/bonPION/create', '_self')}
                 >
-                  Create Bonded ALICE
+                  Create Bonded PION
                 </div>
               </>
             )}
@@ -130,7 +136,7 @@ const Home = () => {
               <p>
                 {nodeBonALICE.length > 0
                   ? `Go to your dashboard to view details about your node and manage its operation`
-                  : `When you have your bonALICE ready, it’s time to setup your node and start earning`}
+                  : `When you have your bonPION ready, it’s time to setup your node and start earning`}
               </p>
             </span>
             <p className="mb-auto"></p>

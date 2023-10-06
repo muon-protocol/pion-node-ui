@@ -51,14 +51,14 @@ const ReviewDetail = () => {
       <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
         <ConnectWalletModal redirectRoute="/get-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Select BonALICE</div>
+          <div className="address-input__title text-gray">Select BonPION</div>
         </div>
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
             isModalOpen={isSelectNodeBonALICEModalOpen}
             closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
-            modalTitle="Select BonALICE"
+            modalTitle="Select BonPION"
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
           >

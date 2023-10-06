@@ -35,7 +35,7 @@ export const ActionsPlansCard = ({
         </div>
         {active && activePower && (
           <div className=" flex justify-between w-full items-center">
-            <p className="text-lg">Your BonALICE Node Power</p>
+            <p className="text-lg">Your BonPION Node Power</p>
             <p className="font-semibold text-xl">{activePower}</p>
           </div>
         )}
