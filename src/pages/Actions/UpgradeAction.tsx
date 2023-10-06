@@ -73,7 +73,6 @@ export const RenderUpgradeBody = () => {
   ]);
 
   const showApproveLPToken = useMemo(() => {
-    console.log(LPTokenAllowanceForBooster, upgradeBoostAmount);
     if (LPTokenAllowanceForBooster)
       return LPTokenAllowanceForBooster.big < upgradeBoostAmount.big;
     return false;

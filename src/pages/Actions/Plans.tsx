@@ -107,10 +107,10 @@ export const Plans = () => {
     }
     return valueOfBondedTokenInW3BNumber.dsp;
   }, [
-    valueOfBondedTokenInW3BNumber.dsp,
-    createAmountInW3BNumber.dsp,
-    upgradeAmountInW3BNumber.dsp,
-    mergeAmountInW3BNumber.dsp,
+    valueOfBondedTokenInW3BNumber,
+    createAmountInW3BNumber,
+    upgradeAmountInW3BNumber,
+    mergeAmountInW3BNumber,
   ]);
 
   return (
