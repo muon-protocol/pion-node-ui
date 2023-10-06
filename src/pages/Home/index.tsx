@@ -31,7 +31,7 @@ const Home = () => {
           />
         </div>
         <FadeIn delay={0.1}>
-          <p className="moto w-full text-center mb-3 text-5xl font-semibold leading-10 md:mb-0 md:text-6xl md:font-bold">
+          <p className="moto w-full text-center mb-3 text-5xl font-semibold leading-10 md:mb-2 md:text-[65px] md:font-bold">
             PION NETWORK
           </p>
         </FadeIn>
