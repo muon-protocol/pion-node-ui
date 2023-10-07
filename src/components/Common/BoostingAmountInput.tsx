@@ -22,9 +22,9 @@ const AmountInput = ({
     <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
       <div className="amount-input__top relative text-sm flex justify-between">
         <span className="flex flex-col">
-          <p className="balance flex text-gray">
+          <p className="balance flex text-xyz-2">
             Balance:{' '}
-            <span className="value ml-1 text-black">
+            <span className="value ml-1 text-xyz-75">
               {balance ? balance.dsp : '...'}
             </span>
           </p>
@@ -41,16 +41,16 @@ const AmountInput = ({
                     )
                   : null
               }
-              className="btn btn--secondary-tag !font-normal"
+              className="btn btn--secondary-tag !font-normal text-black"
             >
               Max
             </button>
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-catskill-white rounded-xl pl-4 overflow-hidden md:pl-5 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center justify-between bg-input-bg rounded-xl pl-4 overflow-hidden md:pl-5 h-12 md:h-14">
         <input
-          className="amount-input__input text-black placeholder-gray font-medium h-full bg-transparent outline-none text-sm"
+          className="amount-input__input text-white placeholder-white font-medium h-full bg-transparent outline-none text-sm"
           placeholder={`Enter amount ${
             max?.dsp ? '(max: ' + max.dsp + ')' : ''
           }`}
@@ -58,7 +58,7 @@ const AmountInput = ({
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
-        <div className="amount-input__token-name font-semibold max-md:text-sm min-w-fit">
+        <div className="amount-input__token-name text-gray10 font-semibold max-md:text-sm min-w-fit">
           {rightText}
         </div>
         <div className="bg-primary px-4 h-full flex items-center gap-2">

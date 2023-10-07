@@ -132,6 +132,10 @@ input[type=number] {
     }
   }
 
+  &--white {
+    @apply bg-white text-primary;
+  }
+
   &--large {
     @apply px-10 py-5 text-xl font-bold md:px-16 md:py-5 md:text-2xl md:font-medium;
   }
@@ -152,7 +156,7 @@ input[type=number] {
   }
 
   &--secondary-tag {
-    @apply bg-primary-10-solid text-primary;
+    @apply bg-tag-bg text-black;
   }
 
   // border properties
