@@ -1,4 +1,4 @@
-import { usePionAllowance } from '../../abis/types/generated.ts';
+import { useAliceAllowance } from '../../abis/types/generated.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import {
   ALICE_ADDRESS,
@@ -11,7 +11,7 @@ import { w3bNumberFromBigint } from '../../utils/web3.ts';
 export const useALICEAllowance = () => {
   const { walletAddress } = useUserProfile();
 
-  const { data: allowanceForMuonNodeStaking } = usePionAllowance({
+  const { data: allowanceForMuonNodeStaking } = useAliceAllowance({
     address: ALICE_ADDRESS[getCurrentChainId()],
     args: [
       walletAddress ||
@@ -21,7 +21,7 @@ export const useALICEAllowance = () => {
     watch: true,
   });
 
-  const { data: allowanceForBonALICE } = usePionAllowance({
+  const { data: allowanceForBonALICE } = useAliceAllowance({
     address: ALICE_ADDRESS[getCurrentChainId()],
     args: [
       walletAddress ||
