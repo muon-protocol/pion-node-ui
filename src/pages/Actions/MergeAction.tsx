@@ -117,25 +117,28 @@ const RenderMergeBody = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button className="btn btn--white !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
         ) : isApproveNFTActive ? (
-          <button className="btn !w-full" onClick={() => handleApproveNFT()}>
+          <button
+            className="btn btn--white !w-full"
+            onClick={() => handleApproveNFT()}
+          >
             Approve NFT Token
           </button>
         ) : (
           <button
             onClick={() => handleMerge()}
             disabled={isMergeBonALICEsButtonDisabled}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
           >
             Merge Bonded PIONs
           </button>

@@ -222,12 +222,12 @@ export const RenderUpgradeBody = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button className="btn btn--white !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -235,7 +235,7 @@ export const RenderUpgradeBody = () => {
         ) : showApproveALICE ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
@@ -246,7 +246,7 @@ export const RenderUpgradeBody = () => {
         ) : showApproveLPToken ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
@@ -258,7 +258,7 @@ export const RenderUpgradeBody = () => {
           <button
             onClick={() => handleUpgradeBonALICEClicked()}
             disabled={isUpgradeBonALICEButtonDisabled}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
           >
             Upgrade Bonded PION
           </button>

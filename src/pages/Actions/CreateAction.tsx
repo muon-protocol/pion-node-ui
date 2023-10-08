@@ -162,18 +162,22 @@ export const RenderCreateBody = () => {
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
         {createAmount.dsp < 10000 ? (
-          <button disabled className="btn !w-full" onClick={() => {}}>
+          <button
+            disabled
+            className="btn btn--white !w-full"
+            onClick={() => {}}
+          >
             insufficient PION amount (min: 10000)
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button className="btn btn--white !w-full" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -183,7 +187,7 @@ export const RenderCreateBody = () => {
           ALICEAllowanceForBooster.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEForBoosterClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -196,7 +200,7 @@ export const RenderCreateBody = () => {
           ALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -208,7 +212,7 @@ export const RenderCreateBody = () => {
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -219,7 +223,7 @@ export const RenderCreateBody = () => {
         ) : (
           <button
             onClick={() => handleCreateBonALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white !w-full"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             {createAmount.dsp + createBoostAmount.dsp > 0 &&
