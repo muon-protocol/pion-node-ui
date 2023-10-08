@@ -35,6 +35,7 @@ const RenderViewBody = () => {
                     subTitle2="Tier"
                     subValue2={getTier(item.nodePower)}
                     compact
+                    inverted
                   />
                 )
               );

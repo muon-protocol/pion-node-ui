@@ -11,6 +11,7 @@ const BonALICECard: FC<{
   compact?: boolean;
   selected?: boolean;
   isNodeBonALICE?: boolean;
+  inverted?: boolean;
 }> = ({
   title,
   className,
@@ -22,23 +23,27 @@ const BonALICECard: FC<{
   compact,
   selected,
   isNodeBonALICE,
+  inverted,
 }) => {
   return (
     <div
       onClick={() => onClick && onClick()}
       className={`new-bounded-ALICE-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col 
         ${className} ${
-        selected
-          ? 'bg-primary-dark text-gray10'
-          : onClick
-          ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
-          : 'bg-primary-10-solid text-black'
+        !inverted
+          ? selected
+            ? 'bg-primary-dark text-gray10'
+            : onClick
+            ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
+            : 'bg-primary-10-solid text-black'
+          : 'bg-so-dark-gray-2 text-white'
       }`}
     >
       <div
         className={`text-inherit font-semibold flex w-full justify-between gap-1.5 items-center ${
           compact ? 'md:mb-3' : 'mb-4 md:mb-6'
-        }`}
+        } 
+        `}
       >
         <p className="text-inherit">{title}</p>
         <p className="text-inherit text-xs pt-[3px] font-medium">
