@@ -41,6 +41,7 @@ export default {
         'plan-1': '#F58E8E',
         'plan-2': '#F3C95D',
         'plan-3': '#918EF5',
+        'plan-4': '#84ca88',
         'xyz-2': '#E0E5EB',
         'xyz-75': '#E9EFF6BF',
         gray: '#6F7787',
