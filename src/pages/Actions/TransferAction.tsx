@@ -28,11 +28,11 @@ const RenderTransferBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICE"
+          title="Select bonPION"
           onClick={() => openTransferModal()}
           isModalOpen={isTransferModalOpen}
           closeModalHandler={() => closeTransferModal()}
-          modalTitle="Select BonALICE"
+          modalTitle="Select bonPION"
           removeItem={() => {}}
           selectedItems={
             selectedTransferBonALICE ? [selectedTransferBonALICE] : []

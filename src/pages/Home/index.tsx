@@ -47,7 +47,7 @@ const Home = () => {
             animationDelay={0.1}
           >
             <>
-              <p className="font-tomorrow text-2xl font-medium mb-6">
+              <p className=" text-2xl font-medium mb-6">
                 Buy PION
               </p>
 
@@ -68,7 +68,7 @@ const Home = () => {
                 )}
               </div>
               <div
-                className="btn !px-6 mx-auto font-tomorrow"
+                className="btn !px-6 mx-auto "
                 onClick={() =>
                   window.open(
                     'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
@@ -106,7 +106,7 @@ const Home = () => {
                   </p>
                 </div>
                 <div
-                  className="btn !px-6 mx-auto font-tomorrow"
+                  className="btn !px-6 mx-auto "
                   onClick={() => window.open('/bonPION/boost', '_self')}
                 >
                   Manage Bonded PION
@@ -116,7 +116,7 @@ const Home = () => {
               <>
                 <p className="mb-auto"></p>
                 <div
-                  className="btn !px-6 mx-auto font-tomorrow"
+                  className="btn !px-6 mx-auto "
                   onClick={() => window.open('/bonPION/create', '_self')}
                 >
                   Create Bonded PION
@@ -149,7 +149,7 @@ const Home = () => {
               </div>
             ) : (
               <div
-                className="btn !px-6 mx-auto font-tomorrow"
+                className="btn !px-6 mx-auto"
                 onClick={() => window.open('/setup-node', '_self')}
               >
                 Setup Node

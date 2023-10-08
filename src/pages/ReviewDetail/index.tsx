@@ -95,7 +95,7 @@ const ReviewDetail = () => {
               {nodeBonALICE ? (
                 formatWalletAddress(nodeBonALICE?.account)
               ) : (
-                <span className="font-semibold">Select BonALICE</span>
+                <span className="font-semibold">Select bonPION</span>
               )}
             </span>
           </span>
@@ -217,7 +217,7 @@ const ReviewDetail = () => {
           </button>
         ) : !nodeBonALICE ? (
           <button className="btn btn--secondary mt-auto mx-auto" disabled>
-            Select BonALICE
+            Select bonPION
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn btn--secondary mt-auto mx-auto" disabled>
@@ -296,7 +296,7 @@ const ReviewDetail = () => {
         >
           <div className="review-details--top flex flex-col md:flex-row gap-9">
             <p className="text-lg text-center md:text-left md:text-[20px] font-light w-full">
-              Please review the bonALICE details you're staking for node
+              Please review the bonPION details you're staking for node
               operation. When ready, fill out the requested information and
               click ‘Add node’ to complete the setup.
             </p>
