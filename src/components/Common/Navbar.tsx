@@ -68,8 +68,8 @@ const DesktopNavbar = () => {
                     className="btn btn--small--with-icon relative"
                   >
                     <img
-                      className="mr-2.5"
-                      src="/assets/images/alice-icon.svg"
+                      className="mr-2.5 w-6"
+                      src="/assets/images/pion-nft.png"
                       alt=""
                     />
                     Manage bonPION
