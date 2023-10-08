@@ -156,7 +156,7 @@ const DesktopNavbar = () => {
           {isConnected && ALICEBalance !== null && (
             <button className="btn btn--small flex">
               <img
-                src="/assets/images/navbar/muon-icon.svg"
+                src="/assets/images/pion-token.svg"
                 alt=""
                 className="mr-3 h-[18px]"
               />
