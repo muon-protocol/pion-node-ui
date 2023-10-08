@@ -45,7 +45,7 @@ export default {
         gray: '#6F7787',
         black1: '#000000',
         uptime: '#6e9809',
-        'gray-75': '#d0c8e0bf',
+        'gray-75': '#6F7787BF',
         'main-bg': '#F8FAFF',
         'primary-very-dark': '#353367',
         'pacific-blue-20': '#23B5D344',

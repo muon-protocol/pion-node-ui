@@ -209,22 +209,20 @@ const ReviewDetail = () => {
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
         stakerAddressInfo?.active ? (
-          <button className="btn btn--secondary mt-auto mx-auto">
-            Dashboard
-          </button>
+          <button className="btn btn--white mt-auto mx-auto">Dashboard</button>
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
           >
             Switch Network
           </button>
         ) : !nodeBonALICE ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+          <button className="btn btn--white mt-auto mx-auto" disabled>
             Select bonPION
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+          <button className="btn btn--white mt-auto mx-auto" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -237,18 +235,18 @@ const ReviewDetail = () => {
               MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
           <button
             onClick={() => handleApproveClicked()}
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
             disabled={isApproving}
           >
             {isApproving ? 'Approving...' : 'Approve'}
           </button>
         ) : isAddingNodeLoading ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+          <button className="btn btn--white mt-auto mx-auto" disabled>
             Adding Node...
           </button>
         ) : (
           <button
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
             disabled={
               !nodeAddress ||
@@ -400,7 +398,7 @@ const EmptyBonALICECard = () => {
               : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
           </p>
           <button
-            className="btn btn--primary mx-auto"
+            className="btn btn--white mx-auto"
             onClick={() => navigate('/create')}
           >
             Create BonALICE
