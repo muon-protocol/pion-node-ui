@@ -9,7 +9,7 @@ export const PrizeCalculationDetailModal = () => {
   const rewards = rawRewardsFromPast || rawRewards;
 
   return (
-    <div className="text-black">
+    <div className="text-white">
       {/*<RewardSource source={rewards?.deus_presale} title="Deus Presale" />*/}
       <RewardSource source={rewards?.muon_presale} title="MUON Presale" />
       <RewardSource

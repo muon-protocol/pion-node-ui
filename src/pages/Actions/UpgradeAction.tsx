@@ -199,7 +199,7 @@ export const RenderUpgradeBody = () => {
                         selectedUpgradeBonALICE.nodePower}
                     </p>
                   </span>
-                  <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
+                  <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
                     {Math.round(
                       (upgradeBoostAmount.dsp *
                         (Math.round(USDCPrice * 100) / 100) *

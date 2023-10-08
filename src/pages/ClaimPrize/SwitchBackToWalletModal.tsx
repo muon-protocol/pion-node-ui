@@ -11,7 +11,7 @@ const SwitchBackToWalletModal = () => {
         src="/assets/images/claim/switch-wallet-modal-icon.svg"
         alt=""
       />
-      <p className="text-center">
+      <p className="text-center text-black">
         To claim your bonPION, please switch back to your Staking Address
         <br />
         <strong>

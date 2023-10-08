@@ -48,7 +48,7 @@ export const TermsAndConditionsModal = () => {
               : handleApproveTermsAndConditions();
           }}
           disabled={!checked || isMetamaskLoadingVerify}
-          className="btn btn--primary mb-2 mt-5 mx-auto !w-[280px]"
+          className="btn btn--white mb-2 mt-5 mx-auto !w-[280px]"
         >
           {isMetamaskLoadingVerify
             ? 'Metamask...'

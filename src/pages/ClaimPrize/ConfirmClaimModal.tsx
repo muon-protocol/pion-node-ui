@@ -11,13 +11,13 @@ const ConfirmClaimModal = () => {
         src="/assets/images/claim/switch-wallet-modal-icon.svg"
         alt=""
       />
-      <p className="text-center mb-5">
+      <p className="text-center mb-5 text-black">
         Be aware that if you press confirm button, you will be only able to
         claim your reward on the staking address{' '}
         <strong>({formatWalletAddress(stakingAddress)})</strong>.
       </p>
       <button
-        className="btn btn--secondary"
+        className="btn btn--white"
         onClick={() => handleConfirmClaimClicked()}
       >
         Confirm
