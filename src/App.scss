@@ -140,7 +140,7 @@ input[type=number] {
   @apply px-16 py-3.5 font-medium text-center;
 
   &:disabled {
-    @apply bg-disabled text-gray3 cursor-not-allowed;
+    @apply bg-disabled text-gray cursor-not-allowed;
   }
 
   &--icon-btn {
