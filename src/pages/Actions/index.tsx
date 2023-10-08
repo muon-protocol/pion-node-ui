@@ -22,6 +22,8 @@ const Actions = () => {
   useEffect(() => {
     if (location.pathname === '/bonPION/create') {
       setSelectedAction(ActionType.CREATE);
+    } else if (location.pathname === '/bonPION/view') {
+      setSelectedAction(ActionType.VIEW);
     } else if (location.pathname === '/bonPION/boost') {
       setSelectedAction(ActionType.UPGRADE);
     } else if (location.pathname === '/bonPION/merge') {

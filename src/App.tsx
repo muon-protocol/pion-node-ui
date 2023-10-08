@@ -50,6 +50,10 @@ function App() {
                                       <Routes>
                                         <Route path="/" element={<Home />} />
                                         <Route
+                                          path="/bonPION/view"
+                                          element={<Actions />}
+                                        />
+                                        <Route
                                           path="/bonPION/create"
                                           element={<Actions />}
                                         />

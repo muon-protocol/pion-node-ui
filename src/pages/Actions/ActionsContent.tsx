@@ -5,13 +5,16 @@ import { RenderUpgradeBody } from './UpgradeAction.tsx';
 import RenderMergeBody from './MergeAction.tsx';
 import RenderSplitBody from './SplitAction.tsx';
 import RenderTransferBody from './TransferAction.tsx';
+import RenderViewBody from './ViewAction.tsx';
 
 const ActionsContent = () => {
   const { selectedAction } = useActions();
 
   return (
-    <div className="actions-content w-full max-w-[576px] md:bg-so-dark-gray md:px-11 py-10 rounded-2xl flex flex-col">
-      {selectedAction === ActionType.CREATE ? (
+    <div className="actions-content w-full max-w-[576px] max-h-[624px] overflow-hidden md:bg-so-dark-gray md:px-11 py-10 rounded-2xl flex flex-col">
+      {selectedAction === ActionType.VIEW ? (
+        <RenderViewBody />
+      ) : selectedAction === ActionType.CREATE ? (
         <RenderCreateBody />
       ) : selectedAction === ActionType.UPGRADE ? (
         <RenderUpgradeBody />

@@ -71,6 +71,15 @@ export const steps: Step[] = [
 
 export const sidebarItems: SidebarItem[] = [
   {
+    id: 0,
+    title: 'View',
+    icon: '/assets/images/actions/view-icon.svg',
+    hoverIcon: '/assets/images/actions/view-colored-icon.svg',
+    link: ActionType.VIEW,
+    grayIcon: '/assets/images/actions/view-gray-icon.svg',
+    disabled: false,
+  },
+  {
     id: 1,
     title: 'Create',
     icon: '/assets/images/actions/create-icon.svg',
