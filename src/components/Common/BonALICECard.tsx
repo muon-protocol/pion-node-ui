@@ -30,7 +30,9 @@ const BonALICECard: FC<{
         ${className} ${
         selected
           ? 'bg-primary-dark text-gray10'
-          : 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
+          : onClick
+          ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
+          : 'bg-primary-10-solid text-black'
       }`}
     >
       <div
