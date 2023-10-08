@@ -35,11 +35,11 @@ const RenderSplitBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICE"
+          title="Select bonPION"
           onClick={() => openSplitModal()}
           isModalOpen={isSplitModalOpen}
           closeModalHandler={() => closeSplitModal()}
-          modalTitle="Select BonALICE"
+          modalTitle="Select bonPION"
           selectedItems={selectedSplitBonALICE ? [selectedSplitBonALICE] : []}
           removeItem={() => {}}
         >
