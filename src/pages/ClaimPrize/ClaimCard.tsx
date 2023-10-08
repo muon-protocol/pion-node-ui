@@ -67,7 +67,7 @@ const ClaimCard = () => {
   }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
-    <div className="w-full bg-primary-13 px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
+    <div className="w-full bg-primary-dark px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
       <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
         <p className="mb-8 font-semibold text-[20px]">Your Bonded PION</p>
         <span className="flex font-light mb-2">
@@ -81,7 +81,7 @@ const ClaimCard = () => {
           </p>
         </span>
         <span className="flex font-light mb-2">
-          <div className="flex gap-1 text-black w-[143px] text-left">
+          <div className="flex gap-1 w-[143px] text-left">
             {/*<p className="font-medium">*/}
             {/*  {stakingAddressFromPast*/}
             {/*    ? totalRewardFromPast.dsp*/}
@@ -93,7 +93,7 @@ const ClaimCard = () => {
             {/*  alt=""*/}
             {/*/>*/}
           </div>
-          <div className="flex text-black font-medium">
+          <div className="flex font-medium">
             <p className="mr-1">
               {stakingAddressFromPast
                 ? totalRewardFromPast.dsp
@@ -142,32 +142,35 @@ const ClaimCard = () => {
           {chainId !== getCurrentChainId() ? (
             <button
               onClick={() => handleSwitchNetwork(getCurrentChainId())}
-              className="btn md:ml-auto max-md:!w-full !px-6"
+              className="btn btn--white md:ml-auto max-md:!w-full !px-6"
             >
               Switch Network
             </button>
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
               onClick={() => navigate('/setup-node')}
-              className="btn md:ml-auto max-md:!w-full !px-10"
+              className="btn btn--white md:ml-auto max-md:!w-full !px-10"
             >
               Create Node
             </button>
           ) : isMetamaskLoading || isTransactionLoading ? (
-            <button className="btn md:ml-auto max-md:!w-full !px-6" disabled>
+            <button
+              className="btn btn--white md:ml-auto max-md:!w-full !px-6"
+              disabled
+            >
               {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
             </button>
           ) : claimSignatureFromPast ? (
             <button
               onClick={() => handleClaimRewardsFromPastClicked()}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn btn--white md:ml-auto max-md:!w-full"
             >
               Claim
             </button>
           ) : (
             <button
               onClick={() => handleClaimRewardsClicked()}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn btn--white md:ml-auto max-md:!w-full"
               disabled={isClaimButtonDisabled}
             >
               Claim
