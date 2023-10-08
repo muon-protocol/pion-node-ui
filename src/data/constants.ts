@@ -4,7 +4,7 @@ export const plans: Plan[] = [
   {
     id: 1,
     title: 'Tier 1',
-    requiredNodePower: '10,000',
+    requiredNodePower: '500',
     verificationMethods: 'Beginner Verification',
     APR: '10% - 15%',
     profitability: '200 - 250 days',
@@ -16,7 +16,7 @@ export const plans: Plan[] = [
   {
     id: 2,
     title: 'Tier 2',
-    requiredNodePower: '50,000',
+    requiredNodePower: '5,000',
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
     profitability: '100 - 180 days',
@@ -28,7 +28,19 @@ export const plans: Plan[] = [
   {
     id: 3,
     title: 'Tier 3',
-    requiredNodePower: '200,000',
+    requiredNodePower: '25,000',
+    verificationMethods: 'Aura Silver',
+    APR: '35% - 50%',
+    profitability: '50 - 80 days',
+    backgroundColor: '#918EF5',
+    shadowColor: 'text-[#8c8aed]',
+    verificationLink:
+      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+  },
+  {
+    id: 4,
+    title: 'POA',
+    requiredNodePower: '50,000',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
@@ -36,7 +48,7 @@ export const plans: Plan[] = [
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
       'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
-  },
+  }
 ];
 
 export const steps: Step[] = [

@@ -121,7 +121,7 @@ export const Plans = () => {
         className="w-full border-plan-1"
         animationDelay={0.1}
         animationDuration={0.3}
-        active={isPlanActive(10000, 50000)}
+        active={isPlanActive(500, 5000)}
         activePower={activePower}
         color="text-plan-1"
       />
@@ -130,7 +130,7 @@ export const Plans = () => {
         className="w-full border-plan-2"
         animationDelay={0.2}
         animationDuration={0.3}
-        active={isPlanActive(50000, 200000)}
+        active={isPlanActive(5000, 25000)}
         activePower={activePower}
         color="text-plan-2"
       />
@@ -139,7 +139,17 @@ export const Plans = () => {
         className="w-full border-plan-3"
         animationDelay={0.3}
         animationDuration={0.3}
-        active={isPlanActive(200000, 100000000000000)}
+        active={isPlanActive(25000, 50000)}
+        activePower={activePower}
+        color="text-[#84ca88]"
+      />
+      <ActionsPlansCard
+        POA
+        plan={plans[3]}
+        className="w-full border-plan-3"
+        animationDelay={0.4}
+        animationDuration={0.3}
+        active={isPlanActive(50000, 1000000)}
         activePower={activePower}
         color="text-plan-3"
       />
