@@ -61,7 +61,7 @@ const AmountInput = ({
         <div className="amount-input__token-name text-gray10 font-semibold max-md:text-sm min-w-fit">
           {rightText}
         </div>
-        <div className="bg-primary px-4 h-full flex items-center gap-2">
+        <div className="bg-primary-dark px-4 h-full flex items-center gap-2">
           <p className="text-xl font-bold text-white">
             {boostCoefficient?.dsp}x
           </p>
