@@ -82,7 +82,7 @@ const DesktopNavbar = () => {
                         <div
                           ref={ref}
                           onClick={(e) => e.stopPropagation()}
-                          className="dialog py-5 px-4 bg-primary-13-solid rounded-lg flex flex-col gap-4"
+                          className="dialog py-5 px-4 bg-primary-very-dark rounded-lg flex flex-col gap-4"
                         >
                           <div className="dialog__top flex gap-4 justify-between items-center">
                             <div className="dialog__top__left flex flex-col items-start gap-0">
