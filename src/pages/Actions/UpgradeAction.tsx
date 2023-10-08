@@ -190,7 +190,7 @@ export const RenderUpgradeBody = () => {
                         ) /
                           100 +
                         ' PION '}
-                      <p className="text-primary font-bold">
+                      <p className="text-uptime font-bold">
                         x{boostCoefficient?.dsp}
                       </p>
                       {' + ' +

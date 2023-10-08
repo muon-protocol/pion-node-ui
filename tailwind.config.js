@@ -44,7 +44,7 @@ export default {
         'xyz-75': '#E9EFF6BF',
         gray: '#6F7787',
         black1: '#000000',
-        uptime: '#6e9809',
+        uptime: '#B7F03C',
         'gray-75': '#6F7787BF',
         'main-bg': '#F8FAFF',
         'primary-very-dark': '#353367',
