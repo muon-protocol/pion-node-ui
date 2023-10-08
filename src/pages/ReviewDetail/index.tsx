@@ -134,7 +134,7 @@ const ReviewDetail = () => {
             {nodeBonALICE &&
             nodeBonALICE.ALICELockAmount.dsp +
               2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-              10000 ? (
+              500 ? (
               <span
                 className="font-semibold underline cursor-pointer"
                 onClick={() =>
@@ -146,7 +146,7 @@ const ReviewDetail = () => {
               >
                 {nodeBonALICE.ALICELockAmount.dsp +
                   2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-                10000
+                500
                   ? 'Beginner Verification'
                   : nodeBonALICE.ALICELockAmount.dsp +
                       2 * nodeBonALICE.LPTokenLockAmount.dsp >=
@@ -229,7 +229,7 @@ const ReviewDetail = () => {
           </button>
         ) : nodeBonALICE.ALICELockAmount.dsp +
             nodeBonALICE.LPTokenLockAmount.dsp * 2 >=
-            10000 &&
+            500 &&
           ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
             approvedBonALICEAddress !==
               MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
@@ -254,7 +254,7 @@ const ReviewDetail = () => {
               !nodeBonALICE ||
               nodeBonALICE.ALICELockAmount.dsp +
                 nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-                10000
+                500
             }
           >
             Add Node

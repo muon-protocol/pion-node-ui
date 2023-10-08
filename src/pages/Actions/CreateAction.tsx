@@ -64,7 +64,7 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
-      createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
+      createAmount.dsp + 2 * createBoostAmount.dsp < 500 ||
       !ALICEAllowanceForBooster ||
       (!LPTokenAllowanceForBooster && createBoostAmount.big > BigInt(0)) ||
       !(createAmount || createBoostAmount) ||
@@ -161,13 +161,13 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {createAmount.dsp < 10000 ? (
+        {createAmount.dsp < 500 ? (
           <button
             disabled
             className="btn btn--white !w-full"
             onClick={() => {}}
           >
-            insufficient PION amount (min: 10000)
+            insufficient PION amount (min: 500)
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
@@ -227,8 +227,8 @@ export const RenderCreateBody = () => {
             disabled={isCreateBondedALICEButtonDisabled}
           >
             {createAmount.dsp + createBoostAmount.dsp > 0 &&
-            createAmount.dsp + createBoostAmount.dsp < 10000
-              ? 'At Least 10000 Power'
+            createAmount.dsp + createBoostAmount.dsp < 500
+              ? 'At Least 500 Power'
               : 'Create Bonded PION'}
           </button>
         )}

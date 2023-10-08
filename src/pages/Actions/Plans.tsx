@@ -148,7 +148,7 @@ export const Plans = () => {
         className="w-full border-plan-3"
         animationDelay={0.4}
         animationDuration={0.3}
-        active={isPlanActive(50000, 1000000)}
+        active={isPlanActive(50000, 100000000)}
         activePower={activePower}
         color="text-plan-3"
       />
