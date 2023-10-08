@@ -17,7 +17,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         src="/assets/images/modal/successfully-claimed-icon.svg"
         alt=""
       />
-      <p className="text-center">
+      <p className="text-center text-black">
         Your BonPION has been {operation} successfully. now you can
         <br />
         <button

@@ -98,7 +98,6 @@ export const Plans = () => {
   };
 
   const activePower = useMemo(() => {
-    console.log(location.pathname);
     if (location.pathname === ActionType.CREATE) {
       return createAmountInW3BNumber.dsp;
     } else if (location.pathname === ActionType.UPGRADE) {
