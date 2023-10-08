@@ -48,10 +48,12 @@ const ReviewDetail = () => {
 
   const reviewDetailCard = () => {
     return (
-      <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
+      <div className="relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
         <ConnectWalletModal redirectRoute="/get-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Select BonPION</div>
+          <div className="address-input__title text-light-text">
+            Select BonPION
+          </div>
         </div>
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
@@ -88,7 +90,7 @@ const ReviewDetail = () => {
           {/*  </button>*/}
           {/*</Link>*/}
         </div>
-        <div className="flex flex-col gap-3 max-md:text-sm mt-auto">
+        <div className="flex flex-col gap-3 max-md:text-sm mt-auto text-white">
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
@@ -169,7 +171,7 @@ const ReviewDetail = () => {
   const transferCard = () => {
     return (
       <div
-        className={`bg-white p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
+        className={`bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}
@@ -179,11 +181,13 @@ const ReviewDetail = () => {
         {/*  className="mb-9"*/}
         {/*/>*/}
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Node Address</div>
+          <div className="address-input__title text-light-text">
+            Node Address
+          </div>
         </div>
         <div className="address-input__input-wrapper mb-4 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
           <input
-            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
+            className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Node Address'}
             type="text"
             value={nodeAddress}
@@ -191,11 +195,11 @@ const ReviewDetail = () => {
           />
         </div>
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Peer ID</div>
+          <div className="address-input__title text-light-text">Peer ID</div>
         </div>
         <div className="address-input__input-wrapper mb-9 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
           <input
-            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
+            className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
             placeholder={'Peer ID'}
             type="text"
             value={peerID}

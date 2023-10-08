@@ -58,7 +58,9 @@ const SelectButtonWithModal = ({
                     </span>
                   ))
                 ) : (
-                  <p className="text-gray font-medium max-md:text-sm">Select</p>
+                  <p className="text-white font-medium max-md:text-sm">
+                    Select
+                  </p>
                 )}
               </>
             ) : (
@@ -68,7 +70,9 @@ const SelectButtonWithModal = ({
                     {'BonPION #' + selectedItems[0].tokenId}
                   </p>
                 ) : (
-                  <p className="text-gray font-medium max-md:text-sm">Select</p>
+                  <p className="text-white font-medium max-md:text-sm">
+                    Select
+                  </p>
                 )}
               </>
             )}
