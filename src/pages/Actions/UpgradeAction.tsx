@@ -190,7 +190,7 @@ export const RenderUpgradeBody = () => {
                         ) /
                           100 +
                         ' PION '}
-                      <p className="text-primary font-bold">
+                      <p className="text-uptime font-bold">
                         x{boostCoefficient?.dsp}
                       </p>
                       {' + ' +
@@ -275,7 +275,7 @@ export const RenderUpgradeBody = () => {
             src="/assets/images/claim/switch-wallet-modal-icon.svg"
             alt=""
           />
-          <p className="text-center mb-6">
+          <p className="text-center text-black mb-6">
             You need to approve the{' '}
             {showApproveALICE
               ? 'PION '
@@ -298,7 +298,7 @@ export const RenderUpgradeBody = () => {
             aliceAllowanceForMuon.big < upgradeAmount.big) ||
           (ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big) ? (
             <button
-              className="btn btn--dark-primary"
+              className="btn btn--primary"
               onClick={() =>
                 !isApproveMetamaskLoading &&
                 !isApproveTransactionLoading &&
@@ -313,7 +313,7 @@ export const RenderUpgradeBody = () => {
             </button>
           ) : (
             <button
-              className="btn btn--dark-primary"
+              className="btn btn--primary"
               onClick={() =>
                 !isApproveMetamaskLoading &&
                 !isApproveTransactionLoading &&

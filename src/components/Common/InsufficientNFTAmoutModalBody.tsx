@@ -21,7 +21,7 @@ const InsufficientNFTAmoutModalBody = ({
         src="/assets/images/modal/successfully-claimed-icon.svg"
         alt=""
       />
-      <p className="text-center mb-8">
+      <p className="text-center mb-8 text-black">
         You've successfully {operation} your BonPION! Unfortunately your current
         node power is insufficient to run a node. Please consider boosting your
         BonPION to enable node setup.

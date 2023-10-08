@@ -14,7 +14,7 @@ export default defineConfig({
   out: 'src/abis/types/generated.ts',
   contracts: [
     {
-      name: 'PION',
+      name: 'Alice',
       abi: ALICE_ABI,
     },
     {

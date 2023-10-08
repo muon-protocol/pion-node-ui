@@ -138,7 +138,7 @@ export const RenderCreateBody = () => {
                     ) /
                       100 +
                     ' PION '}
-                  <p className="text-primary font-bold">
+                  <p className="text-uptime font-bold">
                     x{boostCoefficient?.dsp}
                   </p>
                   {' + ' + createAmount.dsp + ' PION'}
@@ -253,7 +253,7 @@ export const RenderCreateBody = () => {
             animationData={waitingForApproveAnimation}
             className={`w-60 h-auto`}
           />
-          <p className="text-center mb-6 font-medium">
+          <p className="text-center text-black mb-6 font-medium">
             Please approve by signing the message that appears in your wallet.
             This allows the smart contract to securely lock your{' '}
             {createBoostAmount.dsp > 0 &&
@@ -277,7 +277,7 @@ export const RenderCreateBody = () => {
           {ALICEAllowanceForBooster &&
           ALICEAllowanceForBooster?.big < createAmount?.big ? (
             <button
-              className="btn btn--dark-primary"
+              className="btn btn--primary"
               onClick={() =>
                 !isApproveMetamaskLoading &&
                 !isApproveTransactionLoading &&
@@ -292,7 +292,7 @@ export const RenderCreateBody = () => {
             </button>
           ) : (
             <button
-              className="btn btn--dark-primary"
+              className="btn btn--primary"
               onClick={() =>
                 !isApproveMetamaskLoading &&
                 !isApproveTransactionLoading &&

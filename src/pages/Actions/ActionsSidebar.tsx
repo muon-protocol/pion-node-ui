@@ -57,9 +57,9 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
         className={`transition-opacity top-0 w-6 h-[22px] md:h-6 z-10`}
       />
       <div
-        className={`text-xs md:text-sm font-semibold transition-all text-primary 
-          ${isHovered && !item.disabled && 'md:text-primary'} 
-          ${selectedAction === item.link ? 'md:text-primary' : 'md:text-gray'}`}
+        className={`text-xs md:text-sm font-semibold transition-all text-gray3 
+          ${isHovered && !item.disabled && 'md:text-white'} 
+          ${selectedAction === item.link && 'md:text-white'}`}
       >
         {item.title}
       </div>

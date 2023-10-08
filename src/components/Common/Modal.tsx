@@ -33,7 +33,7 @@ const Modal: FC<{
               className={`modal-content ${
                 size === 'lg' ? 'max-w-[466px]' : 'max-w-[400px]'
               } w-[90%] px-4 md:px-8 pt-5 pb-4 md:pb-8 relative -z-10 ${
-                size === 'sm' ? 'bg-modal-small pb-0' : 'bg-white'
+                size === 'sm' ? 'bg-modal-small pb-0' : 'bg-gray-bg-70'
               } rounded-3xl`}
             >
               <div
@@ -57,7 +57,7 @@ const Modal: FC<{
                       src={
                         size === 'sm'
                           ? '/assets/images/modal/exit-dark-icon.svg'
-                          : '/assets/images/modal/exit-dark-icon.svg'
+                          : '/assets/images/modal/exit-white-icon.svg'
                       }
                       width="14px"
                       height="14px"
