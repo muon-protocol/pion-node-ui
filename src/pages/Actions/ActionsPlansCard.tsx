@@ -33,25 +33,34 @@ export const ActionsPlansCard = ({
         </div>
         <div className=" flex justify-between w-full items-center">
           <p className="">Minimum Required Node Power</p>
-          <p className="font-semibold text-lg">+{plan.requiredNodePower}</p>
+          <p className="font-semibold text-lg">
+            +{plan.requiredNodePower} PION
+          </p>
         </div>
 
         {active && activePower && !POA && (
           <div className=" flex justify-between w-full items-center">
             <p className="">Your BonPION Node Power</p>
-            <p className="font-semibold text-xl">{activePower}</p>
+            <p className="font-semibold text-xl">{activePower} PION</p>
           </div>
         )}
-        { !POA && (<div className="flex justify-between w-full items-center">
-          <p className="">Verification Required</p>
-          <p
-            className="underline cursor-pointer font-semibold text-lg"
-            onClick={() => window.open(plan.verificationLink, '_blank')}
-          >
-            {plan.verificationMethods}
+        {!POA && (
+          <div className="flex justify-between w-full items-center">
+            <p className="">Verification Required</p>
+            <p
+              className="underline cursor-pointer font-semibold text-lg"
+              onClick={() => window.open(plan.verificationLink, '_blank')}
+            >
+              {plan.verificationMethods}
+            </p>
+          </div>
+        )}
+        {POA && (
+          <p className="text-[#918EF5] text-center">
+            This tier is a Proof of Authority based network, to get POA Tier
+            please contact the team
           </p>
-        </div>)}
-        { POA && (<p className='text-[#918EF5] text-center'>This tier is a Proof of Authority based network, to get POA Tier please contact the team</p>)}
+        )}
       </div>
     </FadeIn>
   );
