@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { FadeIn } from '../../animations';
-import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+// import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 // import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
