@@ -191,7 +191,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      if (totalRewards.dsp < 10000) {
+      if (totalRewards.dsp < 500) {
         setIsInsufficientModalOpen(true);
       } else {
         if (!newNFTClaimedLoading) {

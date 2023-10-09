@@ -135,12 +135,12 @@ export const Plans = () => {
       />
       <ActionsPlansCard
         plan={plans[2]}
-        className="w-full border-plan-3"
+        className="w-full border-plan-4"
         animationDelay={0.3}
         animationDuration={0.3}
         active={isPlanActive(25000, 50000)}
         activePower={activePower}
-        color="text-[#84ca88]"
+        color="text-plan-4"
       />
       <ActionsPlansCard
         POA
@@ -148,7 +148,7 @@ export const Plans = () => {
         className="w-full border-plan-3"
         animationDelay={0.4}
         animationDuration={0.3}
-        active={isPlanActive(50000, 1000000)}
+        active={isPlanActive(50000, 100000000)}
         activePower={activePower}
         color="text-plan-3"
       />

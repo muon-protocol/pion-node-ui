@@ -48,7 +48,7 @@ const ReviewDetail = () => {
 
   const reviewDetailCard = () => {
     return (
-      <div className="relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
+      <div className="review-detail__nft relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
         <ConnectWalletModal redirectRoute="/get-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
           <div className="address-input__title text-light-text">
@@ -134,7 +134,7 @@ const ReviewDetail = () => {
             {nodeBonALICE &&
             nodeBonALICE.ALICELockAmount.dsp +
               2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-              10000 ? (
+              500 ? (
               <span
                 className="font-semibold underline cursor-pointer"
                 onClick={() =>
@@ -146,7 +146,7 @@ const ReviewDetail = () => {
               >
                 {nodeBonALICE.ALICELockAmount.dsp +
                   2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-                10000
+                500
                   ? 'Beginner Verification'
                   : nodeBonALICE.ALICELockAmount.dsp +
                       2 * nodeBonALICE.LPTokenLockAmount.dsp >=
@@ -171,7 +171,7 @@ const ReviewDetail = () => {
   const transferCard = () => {
     return (
       <div
-        className={`bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
+        className={`review-detail__actions bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}
@@ -229,7 +229,7 @@ const ReviewDetail = () => {
           </button>
         ) : nodeBonALICE.ALICELockAmount.dsp +
             nodeBonALICE.LPTokenLockAmount.dsp * 2 >=
-            10000 &&
+            500 &&
           ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
             approvedBonALICEAddress !==
               MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
@@ -254,7 +254,7 @@ const ReviewDetail = () => {
               !nodeBonALICE ||
               nodeBonALICE.ALICELockAmount.dsp +
                 nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-                10000
+                500
             }
           >
             Add Node

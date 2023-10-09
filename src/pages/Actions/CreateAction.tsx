@@ -64,7 +64,7 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
-      createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
+      createAmount.dsp + 2 * createBoostAmount.dsp < 500 ||
       !ALICEAllowanceForBooster ||
       (!LPTokenAllowanceForBooster && createBoostAmount.big > BigInt(0)) ||
       !(createAmount || createBoostAmount) ||
@@ -161,19 +161,26 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {createAmount.dsp < 10000 ? (
-          <button disabled className="btn !w-full" onClick={() => {}}>
-            insufficient PION amount (min: 10000)
+        {createAmount.dsp < 500 ? (
+          <button
+            disabled
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            onClick={() => {}}
+          >
+            insufficient PION amount (min: 500)
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            disabled
+          >
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -183,7 +190,7 @@ export const RenderCreateBody = () => {
           ALICEAllowanceForBooster.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEForBoosterClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -196,7 +203,7 @@ export const RenderCreateBody = () => {
           ALICEAllowance.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -208,7 +215,7 @@ export const RenderCreateBody = () => {
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
@@ -219,12 +226,12 @@ export const RenderCreateBody = () => {
         ) : (
           <button
             onClick={() => handleCreateBonALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             {createAmount.dsp + createBoostAmount.dsp > 0 &&
-            createAmount.dsp + createBoostAmount.dsp < 10000
-              ? 'At Least 10000 Power'
+            createAmount.dsp + createBoostAmount.dsp < 500
+              ? 'At Least 500 Power'
               : 'Create Bonded PION'}
           </button>
         )}

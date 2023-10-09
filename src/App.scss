@@ -19,6 +19,29 @@
   scrollbar-width: none;
 }
 
+.actions-content {
+    background-image: url("../public/assets/images/actions/bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.review-detail {
+  &__nft {
+    background-image: url("../public/assets/images/review/nft-bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  &__actions {
+    background-image: url("../public/assets/images/review/actions-bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+
 .styled-scroll {
   @apply pr-3 -mr-3;
 
@@ -117,7 +140,7 @@ input[type=number] {
   @apply px-16 py-3.5 font-medium text-center;
 
   &:disabled {
-    @apply bg-disabled text-gray3 cursor-not-allowed;
+    @apply bg-disabled text-gray cursor-not-allowed;
   }
 
   &--icon-btn {

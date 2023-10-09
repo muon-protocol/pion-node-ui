@@ -222,12 +222,15 @@ export const RenderUpgradeBody = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            disabled
+          >
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -235,7 +238,7 @@ export const RenderUpgradeBody = () => {
         ) : showApproveALICE ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
@@ -246,7 +249,7 @@ export const RenderUpgradeBody = () => {
         ) : showApproveLPToken ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
@@ -258,7 +261,7 @@ export const RenderUpgradeBody = () => {
           <button
             onClick={() => handleUpgradeBonALICEClicked()}
             disabled={isUpgradeBonALICEButtonDisabled}
-            className="btn !w-full"
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
             Boost Bonded PION
           </button>
