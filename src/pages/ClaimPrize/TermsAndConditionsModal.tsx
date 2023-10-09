@@ -12,12 +12,12 @@ export const TermsAndConditionsModal = () => {
 
   return (
     <div className="text-black">
-      <section className="terms-and-conditions w-full h-[300px] mb-6 overflow-y-auto styled-scroll">
-        <iframe
-          className="h-full max-h-[300px] w-full"
-          src="https://docs.muon.net/muon-network/terms-of-service main"
-        ></iframe>
-      </section>
+      {/*<section className="terms-and-conditions w-full h-[300px] mb-6 overflow-y-auto styled-scroll">*/}
+      {/*  <iframe*/}
+      {/*    className="h-full max-h-[300px] w-full"*/}
+      {/*    src="https://docs.muon.net/muon-network/terms-of-service main"*/}
+      {/*  ></iframe>*/}
+      {/*</section>*/}
 
       <section
         className={`checkbox flex gap-4 mb-6 justify-start items-center ${
@@ -36,7 +36,19 @@ export const TermsAndConditionsModal = () => {
           alt=""
         />
         <p className="font-medium">
-          I have read and agree to the PION network Terms and Conditions.
+          By signing this I confirm that I have read and I agree to the{' '}
+          <span
+            className="underline cursor-pointer"
+            onClick={() =>
+              window.open(
+                'https://docs.muon.net/muon-network/terms-of-service',
+                '_blank',
+              )
+            }
+          >
+            Terms of Service
+          </span>
+          .
         </p>
       </section>
 

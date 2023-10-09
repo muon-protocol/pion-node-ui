@@ -53,7 +53,7 @@ const Home = () => {
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
                 <p>
-                  First you need to buy PION to create or boost your bonPION NFT
+                  Buy PION to create your bonPION and start earning rewards!
                 </p>
               </span>
               <div className="mb-5 mt-auto">
@@ -92,7 +92,7 @@ const Home = () => {
               <p>
                 {nodeBonALICE.length > 0
                   ? 'You can add more PION and USDC to increase your bonPION amount and node power'
-                  : 'Use your PION to create a bonPION, which is essential for setting up your node'}
+                  : 'Create bonPION using your $PION to be able to setup your node'}
               </p>
             </span>
             {nodeBonALICE.length > 0 ? (
@@ -136,7 +136,7 @@ const Home = () => {
               <p>
                 {nodeBonALICE.length > 0
                   ? `Go to your dashboard to view details about your node and manage its operation`
-                  : `When you have your bonPION ready, it’s time to setup your node and start earning`}
+                  : `Setup your node an enjoy earning rewards!`}
               </p>
             </span>
             <p className="mb-auto"></p>
