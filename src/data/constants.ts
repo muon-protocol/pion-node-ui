@@ -4,7 +4,7 @@ export const plans: Plan[] = [
   {
     id: 1,
     title: 'Tier 1',
-    requiredNodePower: '500 - 5k',
+    requiredNodePower: '500 - 5K',
     verificationMethods: 'Beginner Verification',
     APR: '10% - 15%',
     profitability: '200 - 250 days',
@@ -16,7 +16,7 @@ export const plans: Plan[] = [
   {
     id: 2,
     title: 'Tier 2',
-    requiredNodePower: '5k - 25k',
+    requiredNodePower: '5K - 25K',
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
     profitability: '100 - 180 days',
@@ -28,7 +28,7 @@ export const plans: Plan[] = [
   {
     id: 3,
     title: 'Tier 3',
-    requiredNodePower: '25k - 50k',
+    requiredNodePower: '25K - 50K',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
@@ -40,7 +40,7 @@ export const plans: Plan[] = [
   {
     id: 4,
     title: 'PoA',
-    requiredNodePower: '+50k',
+    requiredNodePower: '+50K',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
