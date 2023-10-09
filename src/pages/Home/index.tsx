@@ -47,9 +47,7 @@ const Home = () => {
             animationDelay={0.1}
           >
             <>
-              <p className=" text-2xl font-medium mb-6">
-                Buy PION
-              </p>
+              <p className=" text-2xl font-medium mb-6">Buy PION</p>
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
                 <p>
@@ -92,7 +90,7 @@ const Home = () => {
               <p>
                 {nodeBonALICE.length > 0
                   ? 'You can add more PION and USDC to increase your bonPION amount and node power'
-                  : 'Use your PION to create a bonPION, which is essential for for setting up your node'}
+                  : 'Use your PION to create a bonPION, which is essential for setting up your node'}
               </p>
             </span>
             {nodeBonALICE.length > 0 ? (

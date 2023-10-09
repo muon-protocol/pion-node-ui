@@ -33,7 +33,7 @@ const BonALICEModalBody = ({
           );
         })
       ) : (
-        <p className="text-center py-24 px-3 text-primary">
+        <p className="text-center py-24 px-3 text-white">
           You have no BonALICE NFTs to show. Please create Bonded ALICE NFT
           first.
         </p>

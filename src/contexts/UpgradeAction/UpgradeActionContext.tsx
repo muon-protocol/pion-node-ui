@@ -363,6 +363,15 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     upgradeBoostAmount.dsp,
   ]);
 
+  useEffect(() => {
+    setUpgradeModalSelectedBonALICE(null);
+    setUpgradeAmount(w3bNumberFromString(''));
+    setUpgradeBoostAmount(w3bNumberFromString(''));
+    if (hasNodeBonALICE) {
+      setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
+    }
+  }, [walletAddress, hasNodeBonALICE, nodeBonALICE]);
+
   const openUpgradeModal = () => setIsUpgradeModalOpen(true);
   const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
 
