@@ -48,12 +48,12 @@ const Home = () => {
           >
             <>
               <p className="font-tomorrow text-2xl font-medium mb-6">
-                Buy PION
+                Buy $PION
               </p>
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
                 <p>
-                  Buy PION to create your bonPION and start earning rewards!
+                  Buy $PION to create your bonPION and start earning rewards!
                 </p>
               </span>
               <div className="mb-5 mt-auto">
@@ -76,7 +76,7 @@ const Home = () => {
                   )
                 }
               >
-                Buy PION
+                Buy $PION
               </div>
             </>
           </StepCard>
@@ -91,7 +91,7 @@ const Home = () => {
             <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
               <p>
                 {nodeBonALICE.length > 0
-                  ? 'You can add more PION and USDC to increase your bonPION amount and node power'
+                  ? 'You can add more $PION and USDC to increase your bonPION amount and node power'
                   : 'Create bonPION using your $PION to be able to setup your node'}
               </p>
             </span>

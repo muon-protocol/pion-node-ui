@@ -38,7 +38,7 @@ export default {
         'titan-white': '#ECEDFF',
         'modal-backdrop': '#00000066',
         'catskill-white': '#E9EFF666',
-        'input-bg': '#D2E7FF66',
+        'input-bg': '#4b4b4b',
         'plan-1': '#F58E8E',
         'plan-2': '#F3C95D',
         'plan-3': '#918EF5',

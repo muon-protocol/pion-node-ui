@@ -14,7 +14,7 @@ const RenderViewBody = () => {
         {nodeBonALICE.length > 0 && (
           <BonALICECard
             isNodeBonALICE={nodeBonALICE[0].isNodeBonALICE}
-            title={'BonALICE #' + nodeBonALICE[0].tokenId}
+            title={'bonPION #' + nodeBonALICE[0].tokenId}
             subTitle1="Node Power"
             subValue1={nodeBonALICE[0].nodePower}
             subTitle2="Tier"

@@ -54,7 +54,7 @@ export const plans: Plan[] = [
 export const steps: Step[] = [
   {
     id: 1,
-    title: 'Buy PION',
+    title: 'Buy $PION',
     description:
       'First you need to buy PION to create your bonPION NFT, minimum amount for starting is 1000 PION',
     buttonText: 'Buy PION',

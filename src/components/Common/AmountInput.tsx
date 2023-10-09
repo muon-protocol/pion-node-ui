@@ -79,7 +79,7 @@ const AmountInput = ({
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
-            You don't have sufficient amount of PION.{' '}
+            You don't have sufficient amount of $PION.{' '}
             <span
               className="underline cursor-pointer"
               onClick={() =>
