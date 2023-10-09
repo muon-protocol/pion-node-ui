@@ -1,10 +1,13 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import useALICE from '../../contexts/ALICE/useALICE.ts';
 
 export const ConnectWalletButton = ({
   size,
 }: {
   size?: 'sm' | 'md' | 'lg';
 }) => {
+  const { ALICEBalance } = useALICE();
+
   return (
     <ConnectButton.Custom>
       {({
@@ -63,7 +66,7 @@ export const ConnectWalletButton = ({
                     size === 'md' ? '' : 'btn--small'
                   } btn--dark-primary`}
                 >
-                  {account.displayName}
+                  {account.displayName} | {ALICEBalance?.dsp} PION
                 </button>
               );
             })()}

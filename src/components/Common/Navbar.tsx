@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import useALICE from '../../contexts/ALICE/useALICE.ts';
+// import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useRef, useState } from 'react';
@@ -18,8 +18,8 @@ const Navbar = () => {
 };
 
 const DesktopNavbar = () => {
-  const { isConnected } = useUserProfile();
-  const { ALICEBalance } = useALICE();
+  // const { isConnected } = useUserProfile();
+  // const { ALICEBalance } = useALICE();
   const { bonALICEs } = useBonALICE();
   const location = useLocation();
 
@@ -153,20 +153,20 @@ const DesktopNavbar = () => {
               </>
             )}
 
-          {isConnected && ALICEBalance !== null && (
-            <button className="btn btn--small flex">
-              <img
-                src="/assets/images/pion-token.svg"
-                alt=""
-                className="mr-3 h-[18px]"
-              />
-              <span className="text-white">Balance: </span>
-              <strong className="text-white ml-2 mr-1">
-                {ALICEBalance.dsp}
-              </strong>
-              <strong className="text-white font-semibold">PION</strong>
-            </button>
-          )}
+          {/*{isConnected && ALICEBalance !== null && (*/}
+          {/*  <button className="btn btn--small flex">*/}
+          {/*    <img*/}
+          {/*      src="/assets/images/pion-token.svg"*/}
+          {/*      alt=""*/}
+          {/*      className="mr-3 h-[18px]"*/}
+          {/*    />*/}
+          {/*    <span className="text-white">Balance: </span>*/}
+          {/*    <strong className="text-white ml-2 mr-1">*/}
+          {/*      {ALICEBalance.dsp}*/}
+          {/*    </strong>*/}
+          {/*    <strong className="text-white font-semibold">PION</strong>*/}
+          {/*  </button>*/}
+          {/*)}*/}
           <ConnectWalletButton />
         </div>
       </div>
