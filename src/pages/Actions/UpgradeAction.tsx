@@ -260,7 +260,7 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn !w-full"
           >
-            Upgrade Bonded PION
+            Boost Bonded PION
           </button>
         )}
       </FadeIn>
