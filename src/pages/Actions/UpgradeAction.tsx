@@ -263,7 +263,7 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
-            Boost Bonded PION
+            Increase Bonded PION
           </button>
         )}
       </FadeIn>

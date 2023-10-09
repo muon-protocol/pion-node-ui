@@ -24,7 +24,7 @@ export type Step = {
 export enum ActionType {
   VIEW = '/bonPION/view',
   CREATE = '/bonPION/create',
-  UPGRADE = '/bonPION/boost',
+  UPGRADE = '/bonPION/increase',
   MERGE = '/bonPION/merge',
   SPLIT = 'split',
   TRANSFER = 'transfer',

@@ -107,7 +107,7 @@ const Home = () => {
                 </div>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => window.open('/bonPION/boost', '_self')}
+                  onClick={() => window.open('/bonPION/increase', '_self')}
                 >
                   Manage Bonded PION
                 </div>

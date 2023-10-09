@@ -80,7 +80,7 @@ const AmountInput = ({
       {value && max && value.big > max.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
-            You can't use more than max amount ({max.dsp} USDC) to boost.
+            You can't use more than max amount ({max.dsp} USDC) to increase.
           </p>
         </FadeIn>
       ) : withLink && balance && balance.big < value.big ? (

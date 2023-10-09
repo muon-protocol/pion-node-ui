@@ -37,11 +37,11 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
             setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/bonPION/boost');
+            navigate('/bonPION/increase');
           }}
           className="text-primary hover:underline cursor-pointer"
         >
-          Boost
+          Increase
         </span>{' '}
         your power to increase earnings from node operation.
       </p>

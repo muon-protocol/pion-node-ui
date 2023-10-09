@@ -24,7 +24,7 @@ const Actions = () => {
       setSelectedAction(ActionType.CREATE);
     } else if (location.pathname === '/bonPION/view') {
       setSelectedAction(ActionType.VIEW);
-    } else if (location.pathname === '/bonPION/boost') {
+    } else if (location.pathname === '/bonPION/increase') {
       setSelectedAction(ActionType.UPGRADE);
     } else if (location.pathname === '/bonPION/merge') {
       setSelectedAction(ActionType.MERGE);

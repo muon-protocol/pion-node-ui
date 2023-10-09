@@ -35,7 +35,7 @@ const InsufficientNFTAmoutModalBody = ({
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >
-        Boost Your bonPION
+        increase Your bonPION
       </button>
     </div>
   );

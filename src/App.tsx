@@ -58,7 +58,7 @@ function App() {
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/boost"
+                                          path="/bonPION/increase"
                                           element={<Actions />}
                                         />
                                         <Route

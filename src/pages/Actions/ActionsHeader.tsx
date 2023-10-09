@@ -110,7 +110,7 @@ const ActionsHeader = () => {
 //       ) : action === ActionType.UPGRADE ? (
 //         <FadeIn key={action} duration={0.1} delay={0.1}>
 //           <p>
-//             Boost your Node Power by adding more PION and ALICE LP tokens to your
+//             Increase your Node Power by adding more PION and ALICE LP tokens to your
 //             Bonded ALICE NFT. This upgrade could change your tier and enhance
 //             your APR.
 //           </p>
