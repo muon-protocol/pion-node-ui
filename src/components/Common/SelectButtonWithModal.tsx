@@ -40,7 +40,7 @@ const SelectButtonWithModal = ({
                   selectedItems.map((selectedItem) => (
                     <span className="rounded-lg bg-algo px-2 text-black md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
                       <p className="text-xs md:text-sm text-black">
-                        {'BonPION #' + selectedItem.tokenId}
+                        {'bonPION #' + selectedItem.tokenId}
                       </p>
                       <img
                         onClick={(e) => {
@@ -63,7 +63,7 @@ const SelectButtonWithModal = ({
               <>
                 {selectedItems.length > 0 ? (
                   <p className="font-medium max-md:text-sm">
-                    {'BonPION #' +
+                    {'bonPION #' +
                       selectedItems[0].tokenId +
                       ' | Amount: ' +
                       selectedItems[0].nodePower}

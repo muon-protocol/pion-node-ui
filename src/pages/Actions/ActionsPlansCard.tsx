@@ -40,7 +40,7 @@ export const ActionsPlansCard = ({
 
         {active && activePower && !POA && (
           <div className=" flex justify-between w-full items-center">
-            <p className="">Your BonPION Node Power</p>
+            <p className="">Your bonPION Node Power</p>
             <p className="font-semibold text-xl">{activePower} PION</p>
           </div>
         )}
@@ -57,7 +57,7 @@ export const ActionsPlansCard = ({
         )}
         {POA && (
           <p className="text-[#918EF5] text-center">
-            This tier is a Proof of Authority based network, to get POA Tier
+            This tier is a Proof of Authority based network, to get PoA Tier
             please contact the team
           </p>
         )}

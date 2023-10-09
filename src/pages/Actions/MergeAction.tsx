@@ -58,14 +58,14 @@ const RenderMergeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPIONs"
+          title="Select bonPIONs"
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select BonPIONs to Merge'
-              : 'No BonPIONs to Merge'
+              ? 'Select bonPIONs to Merge'
+              : 'No bonPIONs to Merge'
           }
           multiple
           selectedItems={selectedMergeBonALICEs}

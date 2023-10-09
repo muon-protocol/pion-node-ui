@@ -62,7 +62,7 @@ const NewBonALICEAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/BonPION/create"
+      to="/bonPION/create"
     >
       <motion.span whileHover="animate">
         <motion.img

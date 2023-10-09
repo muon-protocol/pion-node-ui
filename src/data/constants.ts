@@ -39,7 +39,7 @@ export const plans: Plan[] = [
   },
   {
     id: 4,
-    title: 'POA',
+    title: 'PoA',
     requiredNodePower: '50,000',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
@@ -48,7 +48,7 @@ export const plans: Plan[] = [
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
       'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
-  }
+  },
 ];
 
 export const steps: Step[] = [
@@ -56,7 +56,7 @@ export const steps: Step[] = [
     id: 1,
     title: 'Buy PION',
     description:
-      'First you need to buy PION to create your BonPION NFT, minimum amount for starting is 1000 PION',
+      'First you need to buy PION to create your bonPION NFT, minimum amount for starting is 1000 PION',
     buttonText: 'Buy PION',
     buttonLink:
       'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',

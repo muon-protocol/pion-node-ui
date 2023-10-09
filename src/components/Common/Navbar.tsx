@@ -89,7 +89,7 @@ const DesktopNavbar = () => {
                               <p className="text-sm">Balance:</p>
                               <p className="text-sm font-medium min-w-[100px] text-left">
                                 {bonALICEs.length > 0
-                                  ? bonALICEs.length + ' BonPIONs'
+                                  ? bonALICEs.length + ' bonPIONs'
                                   : 'No bonPION'}
                               </p>
                             </div>

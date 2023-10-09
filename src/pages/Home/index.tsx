@@ -47,7 +47,9 @@ const Home = () => {
             animationDelay={0.1}
           >
             <>
-              <p className=" text-2xl font-medium mb-6">Buy PION</p>
+              <p className="font-tomorrow text-2xl font-medium mb-6">
+                Buy PION
+              </p>
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
                 <p>

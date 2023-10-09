@@ -52,7 +52,7 @@ const ReviewDetail = () => {
         <ConnectWalletModal redirectRoute="/get-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
           <div className="address-input__title text-light-text">
-            Select BonPION
+            Select bonPION
           </div>
         </div>
         <div className="flex w-full gap-3 mb-7">
@@ -60,7 +60,7 @@ const ReviewDetail = () => {
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
             isModalOpen={isSelectNodeBonALICEModalOpen}
             closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
-            modalTitle="Select BonPION"
+            modalTitle="Select bonPION"
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
           >

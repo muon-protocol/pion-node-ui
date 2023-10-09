@@ -22,20 +22,20 @@ const InsufficientNFTAmoutModalBody = ({
         alt=""
       />
       <p className="text-center mb-8 text-black">
-        You've successfully {operation} your BonPION! Unfortunately your current
+        You've successfully {operation} your bonPION! Unfortunately your current
         node power is insufficient to run a node. Please consider boosting your
-        BonPION to enable node setup.
+        bonPION to enable node setup.
       </p>
       <button
         onClick={() => {
           setSelectedAction(sidebarItems[1].link);
           createModal(false);
           claimModal(false);
-          navigate('/BonPION/create');
+          navigate('/bonPION/create');
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >
-        Boost Your BonPION
+        Boost Your bonPION
       </button>
     </div>
   );

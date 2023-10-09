@@ -63,7 +63,7 @@ const ClaimPrize = () => {
             You have already claimed your reward under{' '}
             <p className="font-semibold inline">
               {' '}
-              BonPION #{userClaimedReward[1].toString()}
+              bonPION #{userClaimedReward[1].toString()}
             </p>
             .
           </Alert>

@@ -36,7 +36,7 @@ export const TermsAndConditionsModal = () => {
           alt=""
         />
         <p className="font-medium">
-          I have read and agree to the ALICE network Terms and Conditions.
+          I have read and agree to the PION network Terms and Conditions.
         </p>
       </section>
 

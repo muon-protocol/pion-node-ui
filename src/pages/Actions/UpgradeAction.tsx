@@ -120,14 +120,14 @@ export const RenderUpgradeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonPION"
+          title="Select bonPION"
           onClick={() => openUpgradeModal()}
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select BonPION'
-              : 'No BonPIONs to Upgrade'
+              ? 'Select bonPION'
+              : 'No bonPIONs to Upgrade'
           }
           selectedItems={
             selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []
@@ -243,8 +243,8 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {ALICEBalance && upgradeAmount.big < ALICEBalance.big
-              ? upgradeAmount.hStr + ' PIONs'
-              : 'All PIONs'}
+              ? upgradeAmount.hStr + ' PION'
+              : 'All PION'}
           </button>
         ) : showApproveLPToken ? (
           <button
@@ -255,7 +255,7 @@ export const RenderUpgradeBody = () => {
             Approve{' '}
             {LPTokenBalance && upgradeBoostAmount.big < LPTokenBalance.big
               ? upgradeBoostAmount.hStr + ' USDC'
-              : 'All USDCs'}
+              : 'All USDC'}
           </button>
         ) : (
           <button

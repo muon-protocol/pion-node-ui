@@ -18,7 +18,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         alt=""
       />
       <p className="text-center text-black">
-        Your BonPION has been {operation} successfully. now you can
+        Your bonPION has been {operation} successfully. now you can
         <br />
         <button
           onClick={() => {

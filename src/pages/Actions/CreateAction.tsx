@@ -124,7 +124,7 @@ export const RenderCreateBody = () => {
               className="flex w-full justify-between items-center"
             >
               <span className="text-gray10">
-                <p className="font-light">Your new BonPION amount:</p>
+                <p className="font-light">Your new bonPION amount:</p>
                 <p className="font-light text-sm flex gap-1">
                   {createBoostAmount.dsp +
                     ' USDC -> ' +
@@ -195,8 +195,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' PIONs'
-              : 'All PIONs'}
+              ? createAmount.hStr + ' PION'
+              : 'All PION'}
           </button>
         ) : createBoostAmount.dsp === 0 &&
           ALICEAllowance &&
@@ -208,8 +208,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' PIONs'
-              : 'All PIONs'}
+              ? createAmount.hStr + ' PION'
+              : 'All PION'}
           </button>
         ) : LPTokenAllowanceForBooster &&
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
@@ -221,7 +221,7 @@ export const RenderCreateBody = () => {
             Approve{' '}
             {LPTokenBalance && createBoostAmount.big < LPTokenBalance.big
               ? createBoostAmount.hStr + ' USDC'
-              : 'All USDCs'}
+              : 'All USDC'}
           </button>
         ) : (
           <button
@@ -278,7 +278,7 @@ export const RenderCreateBody = () => {
             tokens in the{' '}
             {createBoostAmount && createBoostAmount.dsp > 0
               ? 'Booster contract'
-              : 'BonPION contract'}
+              : 'bonPION contract'}
             .
           </p>
           {ALICEAllowanceForBooster &&

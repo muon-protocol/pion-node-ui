@@ -29,7 +29,7 @@ const RenderViewBody = () => {
                 item.nodePower > 0 && (
                   <BonALICECard
                     isNodeBonALICE={item.isNodeBonALICE}
-                    title={'BonALICE #' + item.tokenId}
+                    title={'bonPION #' + item.tokenId}
                     subTitle1="Amount"
                     subValue1={item.nodePower}
                     subTitle2="Tier"
@@ -42,7 +42,7 @@ const RenderViewBody = () => {
             })
           : nodeBonALICE.length === 0 && (
               <p className="text-center py-56 px-3 mt-auto mb-auto text-white">
-                You have no BonPION NFTs to show. Please create Bonded PION NFT
+                You have no bonPION NFTs to show. Please create Bonded PION NFT
                 first.
               </p>
             )}

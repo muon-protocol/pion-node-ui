@@ -71,7 +71,7 @@ const RenderSplitBody = () => {
               />
               <div className="new-bounded-ALICEs flex flex-col md:flex-row gap-3 w-full select-none">
                 <BonALICECard
-                  title="New Bonded ALICE"
+                  title="New Bonded PION"
                   subTitle1="Node Power"
                   subValue1={Math.round(
                     selectedSplitBonALICE.nodePower * (splitValue / 100),
@@ -85,7 +85,7 @@ const RenderSplitBody = () => {
                   selected
                 />
                 <BonALICECard
-                  title="New Bonded ALICE"
+                  title="New Bonded PION"
                   subTitle1="Node Power"
                   subValue1={Math.round(
                     selectedSplitBonALICE.nodePower * (1 - splitValue / 100),

@@ -20,7 +20,7 @@ const BonALICEModalBody = ({
               <BonALICECard
                 isNodeBonALICE={item.isNodeBonALICE}
                 className="cursor-pointer"
-                title={'BonALICE #' + item.tokenId}
+                title={'bonPION #' + item.tokenId}
                 subTitle1="Node Power"
                 subValue1={item.nodePower}
                 subTitle2="Tier"
@@ -34,8 +34,7 @@ const BonALICEModalBody = ({
         })
       ) : (
         <p className="text-center py-24 px-3 text-white">
-          You have no BonALICE NFTs to show. Please create Bonded ALICE NFT
-          first.
+          You have no bonPION NFTs to show. Please create Bonded PION NFT first.
         </p>
       )}
     </div>

@@ -24,11 +24,11 @@ export const PrizeCalculationDetailModal = () => {
         title="PION Operator"
         subTitle="(Main stage)"
         headerDetail="40% Reward"
-        detailDescription="The main stage of the ALICE Operator is from 1st of August 2021 to 31st of August 2021"
+        detailDescription="The main stage of the PION Operator is from 1st of August 2021 to 31st of August 2021"
       />
       <RewardSource
         source={rewards?.alice_operator_bounce}
-        title="ALICE Operator"
+        title="PION Operator"
         subTitle="(Bounce stage)"
       />
     </div>
@@ -101,7 +101,7 @@ const RewardSource = ({
                   <span className="font-semibold">
                     {w3bNumberFromNumber(contributor.reward).dsp}
                   </span>
-                  ALICE
+                  PION
                 </p>
               </div>
             );
@@ -110,7 +110,7 @@ const RewardSource = ({
       <div className="flex justify-between items-center pt-2">
         <p>Total</p>
         <p className="font-semibold">
-          {w3bNumberFromNumber(source.reward).dsp} ALICE
+          {w3bNumberFromNumber(source.reward).dsp} PION
         </p>
       </div>
     </div>
