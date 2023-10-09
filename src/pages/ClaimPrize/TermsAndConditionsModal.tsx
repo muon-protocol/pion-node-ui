@@ -66,7 +66,7 @@ export const TermsAndConditionsModal = () => {
             ? 'Metamask...'
             : agreeWithTermsAndConditionsSig
             ? 'Claim rewards'
-            : 'Approve'}
+            : 'Sign & Accept Terms of Service'}
         </button>
       </section>
     </div>

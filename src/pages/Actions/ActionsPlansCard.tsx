@@ -31,17 +31,15 @@ export const ActionsPlansCard = ({
           <p className={`text-2xl font-semibold ${color}`}>{plan.title}</p>
           {active && <p className={color}>Your tier</p>}
         </div>
-        <div className=" flex justify-between w-full items-center">
+        <div className="flex justify-between w-full items-center">
           <p className="">Minimum Required Node Power</p>
-          <p className="font-semibold text-lg">
-            +{plan.requiredNodePower} PION
-          </p>
+          <p className="font-semibold text-lg">{plan.requiredNodePower} PION</p>
         </div>
 
         {active && activePower && !POA && (
-          <div className=" flex justify-between w-full items-center">
+          <div className="flex justify-between w-full items-center">
             <p className="">Your bonPION Node Power</p>
-            <p className="font-semibold text-xl">{activePower} PION</p>
+            <p className="font-semibold text-lg">{activePower} PION</p>
           </div>
         )}
         {!POA && (
