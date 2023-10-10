@@ -32,7 +32,7 @@ export const ActionsPlansCard = ({
           {active && <p className={color}>Your tier</p>}
         </div>
         <div className="flex justify-between w-full items-center">
-          <p className="">Minimum Required Node Power</p>
+          <p className="">Required Node Power</p>
           <p className="font-semibold text-lg">{plan.requiredNodePower} PION</p>
         </div>
 
