@@ -151,7 +151,7 @@ input[type=number] {
     @apply px-5 py-2 text-sm;
 
     &--with-icon {
-      @apply px-4 py-1.5 text-sm;
+      @apply px-4 py-[7px] text-sm;
     }
   }
 

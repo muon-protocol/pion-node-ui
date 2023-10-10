@@ -3,9 +3,9 @@ import { FadeIn } from '../../animations';
 // import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 // import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
-import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
-import { useRef, useState } from 'react';
-import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
+// import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+// import { useRef, useState } from 'react';
+// import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const Navbar = () => {
@@ -20,17 +20,17 @@ const Navbar = () => {
 const DesktopNavbar = () => {
   // const { isConnected } = useUserProfile();
   // const { ALICEBalance } = useALICE();
-  const { bonALICEs } = useBonALICE();
+  // const { bonALICEs } = useBonALICE();
   const location = useLocation();
 
-  const [isManageBonALICEDialogOpen, setIsManageBonALICEDialogOpen] =
-    useState(false);
+  // const [isManageBonALICEDialogOpen, setIsManageBonALICEDialogOpen] =
+  //   useState(false);
 
-  const ref = useRef(null);
+  // const ref = useRef(null);
 
   const { hasNodeBonALICE } = useMuonNodeStaking();
 
-  useOnClickOutside(ref, () => setIsManageBonALICEDialogOpen(false));
+  // useOnClickOutside(ref, () => setIsManageBonALICEDialogOpen(false));
 
   return (
     <FadeIn delay={0.3}>
@@ -60,87 +60,101 @@ const DesktopNavbar = () => {
                 >
                   Buy PION
                 </button>
-                {!hasNodeBonALICE && (
-                  <button
-                    onClick={() =>
-                      setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)
-                    }
-                    className="btn btn--small--with-icon relative"
-                  >
-                    <img
-                      className="mr-2.5 w-6"
-                      src="/assets/images/pion-nft.png"
-                      alt=""
-                    />
-                    Manage bonPION
-                    {isManageBonALICEDialogOpen && (
-                      <FadeIn
-                        duration={0.1}
-                        delay={0.1}
-                        className="absolute bottom-0 translate-y-[110%] right-0"
-                      >
-                        <div
-                          ref={ref}
-                          onClick={(e) => e.stopPropagation()}
-                          className="dialog py-5 px-4 bg-primary-very-dark rounded-lg flex flex-col gap-4"
-                        >
-                          <div className="dialog__top flex gap-4 justify-between items-center">
-                            <div className="dialog__top__left flex flex-col items-start gap-0">
-                              <p className="text-sm">Balance:</p>
-                              <p className="text-sm font-medium min-w-[100px] text-left">
-                                {bonALICEs.length > 0
-                                  ? bonALICEs.length + ' bonPIONs'
-                                  : 'No bonPION'}
-                              </p>
-                            </div>
-                            <div className="dialog__top__right flex items-center">
-                              {bonALICEs.length > 0 ? (
-                                <Link to={'/bonPION/create'}>
-                                  <button
-                                    onClick={() =>
-                                      setIsManageBonALICEDialogOpen(false)
-                                    }
-                                    className="btn btn--small"
-                                  >
-                                    Manage
-                                  </button>
-                                </Link>
-                              ) : (
-                                <Link to={'/bonPION/create'}>
-                                  <button
-                                    onClick={() =>
-                                      setIsManageBonALICEDialogOpen(false)
-                                    }
-                                    className="btn btn--small"
-                                  >
-                                    Create
-                                  </button>
-                                </Link>
-                              )}
-                            </div>
-                          </div>
-                          <div className="dialog--bottom">
-                            <Link to={'/claim'}>
-                              <button
-                                onClick={() =>
-                                  setIsManageBonALICEDialogOpen(false)
-                                }
-                                className="btn btn--small--with-icon !w-full"
-                              >
-                                <img
-                                  className="mr-2.5"
-                                  src="/assets/images/navbar/prize-icon.svg"
-                                  alt=""
-                                />
-                                Claim Node-Drop
-                              </button>
-                            </Link>
-                          </div>
-                        </div>
-                      </FadeIn>
-                    )}
-                  </button>
-                )}
+                {/*{!hasNodeBonALICE && (*/}
+                {/*  <button*/}
+                {/*    onClick={() =>*/}
+                {/*      setIsManageBonALICEDialogOpen(!isManageBonALICEDialogOpen)*/}
+                {/*    }*/}
+                {/*    className="btn btn--small--with-icon relative"*/}
+                {/*  >*/}
+                {/*    <img*/}
+                {/*      className="mr-2.5 w-6"*/}
+                {/*      src="/assets/images/pion-nft.png"*/}
+                {/*      alt=""*/}
+                {/*    />*/}
+                {/*    Manage bonPION*/}
+                {/*    {isManageBonALICEDialogOpen && (*/}
+                {/*      <FadeIn*/}
+                {/*        duration={0.1}*/}
+                {/*        delay={0.1}*/}
+                {/*        className="absolute bottom-0 translate-y-[110%] right-0"*/}
+                {/*      >*/}
+                {/*        <div*/}
+                {/*          ref={ref}*/}
+                {/*          onClick={(e) => e.stopPropagation()}*/}
+                {/*          className="dialog py-5 px-4 bg-primary-very-dark rounded-lg flex flex-col gap-4"*/}
+                {/*        >*/}
+                {/*          <div className="dialog__top flex gap-4 justify-between items-center">*/}
+                {/*            <div className="dialog__top__left flex flex-col items-start gap-0">*/}
+                {/*              <p className="text-sm">Balance:</p>*/}
+                {/*              <p className="text-sm font-medium min-w-[100px] text-left">*/}
+                {/*                {bonALICEs.length > 0*/}
+                {/*                  ? bonALICEs.length + ' bonPIONs'*/}
+                {/*                  : 'No bonPION'}*/}
+                {/*              </p>*/}
+                {/*            </div>*/}
+                {/*            <div className="dialog__top__right flex items-center">*/}
+                {/*              {bonALICEs.length > 0 ? (*/}
+                {/*                <Link to={'/bonPION/create'}>*/}
+                {/*                  <button*/}
+                {/*                    onClick={() =>*/}
+                {/*                      setIsManageBonALICEDialogOpen(false)*/}
+                {/*                    }*/}
+                {/*                    className="btn btn--small"*/}
+                {/*                  >*/}
+                {/*                    Manage*/}
+                {/*                  </button>*/}
+                {/*                </Link>*/}
+                {/*              ) : (*/}
+                {/*                <Link to={'/bonPION/create'}>*/}
+                {/*                  <button*/}
+                {/*                    onClick={() =>*/}
+                {/*                      setIsManageBonALICEDialogOpen(false)*/}
+                {/*                    }*/}
+                {/*                    className="btn btn--small"*/}
+                {/*                  >*/}
+                {/*                    Create*/}
+                {/*                  </button>*/}
+                {/*                </Link>*/}
+                {/*              )}*/}
+                {/*            </div>*/}
+                {/*          </div>*/}
+                {/*          <div className="dialog--bottom">*/}
+                {/*            <Link to={'/claim'}>*/}
+                {/*              <button*/}
+                {/*                onClick={() =>*/}
+                {/*                  setIsManageBonALICEDialogOpen(false)*/}
+                {/*                }*/}
+                {/*                className="btn btn--small--with-icon !w-full"*/}
+                {/*              >*/}
+                {/*                <img*/}
+                {/*                  className="mr-2.5"*/}
+                {/*                  src="/assets/images/navbar/prize-icon.svg"*/}
+                {/*                  alt=""*/}
+                {/*                />*/}
+                {/*                Claim Node-Drop*/}
+                {/*              </button>*/}
+                {/*            </Link>*/}
+                {/*          </div>*/}
+                {/*        </div>*/}
+                {/*      </FadeIn>*/}
+                {/*    )}*/}
+                {/*  </button>*/}
+                {/*)}*/}
+                {!hasNodeBonALICE &&
+                  !location.pathname.includes('/bonPION/') && (
+                    <Link
+                      to={'/bonPION/create'}
+                      className="btn btn--small--with-icon relative"
+                    >
+                      <img
+                        className="mr-2.5 w-6"
+                        src="/assets/images/pion-nft.png"
+                        alt=""
+                      />
+                      Manage bonPION
+                    </Link>
+                  )}
                 {!hasNodeBonALICE ? (
                   <Link to="/setup-node">
                     <button className="btn btn--small">Setup Node</button>
