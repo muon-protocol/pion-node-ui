@@ -37,6 +37,7 @@ const RenderMergeBody = () => {
 
   const isApproveNFTActive = useMemo(() => {
     if (selectedMergeBonALICEs.length !== 2) return false;
+    if (nodeBonALICE.length === 0) return false;
     if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
       console.log(tokenApprovedContractAddress);
       if (

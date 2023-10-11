@@ -399,7 +399,7 @@ const EmptyBonALICECard = () => {
           </p>
           <button
             className="btn btn--white mx-auto"
-            onClick={() => navigate('/create')}
+            onClick={() => navigate('/bonPION/create')}
           >
             Create BonALICE
           </button>
