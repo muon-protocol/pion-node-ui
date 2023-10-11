@@ -39,7 +39,6 @@ const RenderMergeBody = () => {
     if (selectedMergeBonALICEs.length !== 2) return false;
     if (nodeBonALICE.length === 0) return false;
     if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
-      console.log(tokenApprovedContractAddress);
       if (
         tokenApprovedContractAddress !==
         MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
@@ -59,13 +58,15 @@ const RenderMergeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select bonPIONs"
+          title="Select two bonPIONs to merge"
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select bonPIONs to Merge'
+              ? 'Select from Your bonPION Collection (' +
+                selectedMergeBonALICEs.length +
+                '/2)'
               : 'No bonPIONs to Merge'
           }
           multiple

@@ -62,6 +62,7 @@ export const Plans = () => {
   const { selectedMergeBonALICEs } = useMergeAction();
 
   const mergeAmountInW3BNumber = useMemo(() => {
+    if (selectedMergeBonALICEs.length < 2) return w3bNumberFromNumber(0);
     return selectedMergeBonALICEs
       ? w3bNumberFromNumber(
           Math.round(
