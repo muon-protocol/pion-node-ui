@@ -109,7 +109,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto "
                   onClick={() => window.open('/bonPION/increase', '_self')}
                 >
-                  Manage BonPION
+                  Manage bonPION
                 </div>
               </>
             ) : (
