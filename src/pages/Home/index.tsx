@@ -109,7 +109,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto "
                   onClick={() => window.open('/bonPION/increase', '_self')}
                 >
-                  Manage Bonded PION
+                  Manage BonPION
                 </div>
               </>
             ) : (
@@ -119,7 +119,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto "
                   onClick={() => window.open('/bonPION/create', '_self')}
                 >
-                  Create Bonded PION
+                  Create bonPION
                 </div>
               </>
             )}
