@@ -16,6 +16,6 @@ export function getTier(nodePower: number) {
   } else if (nodePower < 50000) {
     return 'Tier 3';
   } else {
-    return 'PoA';
+    return 'Proof of Authority (PoA)';
   }
 }

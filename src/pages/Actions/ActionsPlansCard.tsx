@@ -36,7 +36,7 @@ export const ActionsPlansCard = ({
           <p className="font-semibold text-lg">{plan.requiredNodePower} PION</p>
         </div>
 
-        {active && activePower && !POA && (
+        {active && activePower && (
           <div className="flex justify-between w-full items-center">
             <p className="">Your bonPION Node Power</p>
             <p className="font-semibold text-lg">{activePower} PION</p>
@@ -54,9 +54,16 @@ export const ActionsPlansCard = ({
           </div>
         )}
         {POA && (
-          <p className="text-[#918EF5] text-center">
-            This tier is a Proof of Authority based network, to get PoA Tier
-            please contact the team
+          <p
+            onClick={() =>
+              window.open(
+                'https://en.wikipedia.org/wiki/Power_of_attorney',
+                '_blank',
+              )
+            }
+            className="text-white underline cursor-pointer font-bold"
+          >
+            Learn more about PION's PoA Network.
           </p>
         )}
       </div>
