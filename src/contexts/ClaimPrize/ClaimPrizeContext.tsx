@@ -191,17 +191,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      if (totalRewards.dsp < 500) {
-        setIsInsufficientModalOpen(true);
-      } else {
-        if (!newNFTClaimedLoading) {
-          setNewNFTClaimedLoading(true);
-          setTimeout(() => {
-            setNewNFTClaimedLoading(false);
-          }, 10000);
-        }
-        setIsSufficientModalOpen(true);
+      // if (totalRewards.dsp < 500) {
+      //   setIsInsufficientModalOpen(true);
+      // } else {
+      if (!newNFTClaimedLoading) {
+        setNewNFTClaimedLoading(true);
+        setTimeout(() => {
+          setNewNFTClaimedLoading(false);
+        }, 10000);
       }
+      setIsSufficientModalOpen(true);
+      // }
       toast.success('Claimed successfully');
       setStakingAddress(null);
       setWalletsWithSignature([]);
