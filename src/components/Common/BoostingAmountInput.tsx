@@ -48,7 +48,7 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg rounded-xl overflow-hidden h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg rounded-xl  h-12 md:h-14">
         <input
           className="amount-input__input text-white flex-1 placeholder-white font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm"
           placeholder={`Enter amount ${
@@ -58,10 +58,10 @@ const AmountInput = ({
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
-        <div className="amount-input__token-name text-gray10 font-semibold max-md:text-sm min-w-fit">
+        <div className="amount-input__token-name group text-gray10 font-semibold max-md:text-sm min-w-fit">
           {rightText}
         </div>
-        <div className="bg-primary-dark px-4 h-full flex items-center gap-2">
+        <div className="bg-primary-dark px-4 h-full flex relative items-center rounded-r-xl gap-2 group">
           <p className="text-xl font-bold text-white">
             {boostCoefficient?.dsp}x
           </p>
@@ -75,6 +75,12 @@ const AmountInput = ({
             alt=""
             className="w-6 h-6"
           />
+          <div className="absolute top-0 -translate-y-[120%] -translate-x-1/2 flex left-1/2 flex-col items-center hidden mb-6 group-hover:flex">
+            <span className="relative z-10 px-3 py-2 w-40 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
+              Use USDC to increase your power by {boostCoefficient?.dsp}x
+            </span>
+            <div className="w-3 h-3 -mt-2 rotate-45 bg-white"></div>
+          </div>
         </div>
       </div>
       {value && max && value.big > max.big ? (

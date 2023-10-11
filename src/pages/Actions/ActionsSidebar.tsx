@@ -35,7 +35,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
 
   return (
     <div
-      className={`sidebar-item flex-1 flex flex-col gap-1.5 md:gap-2 items-center justify-center ${
+      className={`sidebar-item flex-1 relative flex flex-col gap-1.5 md:gap-2 items-center justify-center group ${
         !item.disabled ? 'cursor-pointer' : 'cursor-default'
       }`}
       key={item.id}
@@ -47,6 +47,14 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
         )
       }
     >
+      {item.disabled && (
+        <div className="absolute top-0 -translate-y-[120%] flex flex-col items-center hidden mb-6 group-hover:flex">
+          <span className="relative z-10 p-2 w-32 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
+            Coming in 2024
+          </span>
+          <div className="w-3 h-3 -mt-2 rotate-45 bg-white"></div>
+        </div>
+      )}
       <img
         src={
           (selectedAction === item.link || isHovered) && !item.disabled
