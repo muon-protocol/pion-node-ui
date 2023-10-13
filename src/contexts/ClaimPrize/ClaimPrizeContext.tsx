@@ -148,11 +148,32 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     totalRewardFromPast,
   } = useRawRewardsFromPast({ rawRewardsFromPast });
 
-  const { totalRewards, eligibleAddresses, alreadyRegisteredWallet } =
-    useRawRewards({
-      rawRewards,
-      walletsWithSignature,
-    });
+  const {
+    totalRewards,
+    eligibleAddresses,
+    eligibleAddressesUpdated,
+    alreadyRegisteredWallet,
+  } = useRawRewards({
+    rawRewards,
+    walletsWithSignature,
+  });
+
+  useEffect(() => {
+    if (eligibleAddressesUpdated && walletAddress) {
+      if (
+        !eligibleAddresses.find(
+          (wallet) => wallet.walletAddress === walletAddress,
+        )
+      ) {
+        toast.error(
+          'Selected address is not eligible \n(no pioneer activities found)',
+          {
+            duration: 5000,
+          },
+        );
+      }
+    }
+  }, [eligibleAddressesUpdated]);
 
   const { signMessageMetamask } = useSignMessage({
     message: `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,

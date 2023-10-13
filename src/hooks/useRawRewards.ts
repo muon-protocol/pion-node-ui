@@ -1,7 +1,7 @@
 import useTotalRewards from './useTotalRewards.ts';
 import { RawRewards, WalletWithSignature } from '../types';
 import { useRewardWallets } from './useRewardWallets.ts';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useAlreadyRegisteredWallet } from './useAlreadyRegisteredWallet.ts';
 
 const useRawRewards = ({
@@ -15,7 +15,14 @@ const useRawRewards = ({
 
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignature);
 
+  const [eligibleAddressesUpdated, setEligibleAddressesUpdated] =
+    useState(false);
+
   const eligibleAddresses = useMemo(() => {
+    setEligibleAddressesUpdated(false);
+    setTimeout(() => {
+      setEligibleAddressesUpdated(true);
+    }, 300);
     return rewardWallets.filter(
       (wallet) =>
         wallet.wasInMuonPresale ||
@@ -30,7 +37,12 @@ const useRawRewards = ({
     rawRewards,
   });
 
-  return { totalRewards, eligibleAddresses, alreadyRegisteredWallet };
+  return {
+    totalRewards,
+    eligibleAddresses,
+    eligibleAddressesUpdated,
+    alreadyRegisteredWallet,
+  };
 };
 
 export default useRawRewards;
