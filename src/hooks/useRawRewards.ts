@@ -22,7 +22,7 @@ const useRawRewards = ({
     setEligibleAddressesUpdated(false);
     setTimeout(() => {
       setEligibleAddressesUpdated(true);
-    }, 300);
+    }, 1000);
     return rewardWallets.filter(
       (wallet) =>
         wallet.wasInMuonPresale ||
