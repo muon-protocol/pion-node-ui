@@ -25,7 +25,7 @@ const Home = () => {
       <div className="page page--home page--centered flex flex-col md:px-10">
         <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
           <img
-            src="/assets/images/navbar/logo.svg"
+            src="/assets/images/navbar/pion-logo.svg"
             alt={''}
             className="w-[150px] h-auto"
           />
