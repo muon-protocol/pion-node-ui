@@ -176,12 +176,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   }, [eligibleAddressesUpdated]);
 
   const { signMessageMetamask } = useSignMessage({
-    message: `Please sign this message to confirm that you would like to use "${stakingAddress}" as your reward claim destination.`,
+    message: `Please sign this message to confirm that you would like to claim your PION node-drop using "${stakingAddress}".`,
   });
 
   const { signMessageMetamask: signTermsAndConditionsMessageMetamask } =
     useSignMessage({
-      message: `Please sign this message to confirm that you agree with ALICE network's terms and conditions.`,
+      message: `Please sign this message to confirm that you agree with PION network's terms and conditions.`,
     });
 
   const claimRewardArgs = useClaimRewardArgs({
