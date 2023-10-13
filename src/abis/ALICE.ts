@@ -27,12 +27,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: false,
-        internalType: 'uint8',
-        name: 'version',
-        type: 'uint8',
-      },
+      { indexed: false, internalType: 'uint8', name: 'version', type: 'uint8' },
     ],
     name: 'Initialized',
     type: 'event',
@@ -53,12 +48,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'bytes32',
@@ -78,12 +68,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'address',
@@ -103,12 +88,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { indexed: true, internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         indexed: true,
         internalType: 'address',
@@ -128,12 +108,7 @@ export default [
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
+      { indexed: true, internalType: 'address', name: 'from', type: 'address' },
       {
         indexed: true,
         internalType: 'address',
@@ -166,49 +141,27 @@ export default [
   {
     inputs: [],
     name: 'DEFAULT_ADMIN_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'MINTER_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'PAUSER_ROLE',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'owner',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'owner', type: 'address' },
       {
         internalType: 'address',
         name: 'spender',
@@ -216,23 +169,13 @@ export default [
       },
     ],
     name: 'allowance',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'spender',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'spender', type: 'address' },
       {
         internalType: 'uint256',
         name: 'amount',
@@ -240,43 +183,19 @@ export default [
       },
     ],
     name: 'approve',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
-    ],
+    inputs: [{ internalType: 'address', name: 'account', type: 'address' }],
     name: 'balanceOf',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
-    ],
+    inputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
     name: 'burn',
     outputs: [],
     stateMutability: 'nonpayable',
@@ -284,11 +203,7 @@ export default [
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'account',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'account', type: 'address' },
       {
         internalType: 'uint256',
         name: 'amount',
@@ -303,23 +218,13 @@ export default [
   {
     inputs: [],
     name: 'decimals',
-    outputs: [
-      {
-        internalType: 'uint8',
-        name: '',
-        type: 'uint8',
-      },
-    ],
+    outputs: [{ internalType: 'uint8', name: '', type: 'uint8' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'spender',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'spender', type: 'address' },
       {
         internalType: 'uint256',
         name: 'subtractedValue',
@@ -327,42 +232,20 @@ export default [
       },
     ],
     name: 'decreaseAllowance',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
-    ],
+    inputs: [{ internalType: 'bytes32', name: 'role', type: 'bytes32' }],
     name: 'getRoleAdmin',
-    outputs: [
-      {
-        internalType: 'bytes32',
-        name: '',
-        type: 'bytes32',
-      },
-    ],
+    outputs: [{ internalType: 'bytes32', name: '', type: 'bytes32' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -376,11 +259,7 @@ export default [
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -388,23 +267,13 @@ export default [
       },
     ],
     name: 'hasRole',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'spender',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'spender', type: 'address' },
       {
         internalType: 'uint256',
         name: 'addedValue',
@@ -412,13 +281,7 @@ export default [
       },
     ],
     name: 'increaseAllowance',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'nonpayable',
     type: 'function',
   },
@@ -431,11 +294,7 @@ export default [
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'to', type: 'address' },
       {
         internalType: 'uint256',
         name: 'amount',
@@ -450,13 +309,7 @@ export default [
   {
     inputs: [],
     name: 'name',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
     stateMutability: 'view',
     type: 'function',
   },
@@ -470,23 +323,13 @@ export default [
   {
     inputs: [],
     name: 'paused',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -500,11 +343,7 @@ export default [
   },
   {
     inputs: [
-      {
-        internalType: 'bytes32',
-        name: 'role',
-        type: 'bytes32',
-      },
+      { internalType: 'bytes32', name: 'role', type: 'bytes32' },
       {
         internalType: 'address',
         name: 'account',
@@ -517,57 +356,29 @@ export default [
     type: 'function',
   },
   {
-    inputs: [
-      {
-        internalType: 'bytes4',
-        name: 'interfaceId',
-        type: 'bytes4',
-      },
-    ],
+    inputs: [{ internalType: 'bytes4', name: 'interfaceId', type: 'bytes4' }],
     name: 'supportsInterface',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'symbol',
-    outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
+    outputs: [{ internalType: 'string', name: '', type: 'string' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [],
     name: 'totalSupply',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'to',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'to', type: 'address' },
       {
         internalType: 'uint256',
         name: 'amount',
@@ -575,42 +386,22 @@ export default [
       },
     ],
     name: 'transfer',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [
-      {
-        internalType: 'address',
-        name: 'from',
-        type: 'address',
-      },
+      { internalType: 'address', name: 'from', type: 'address' },
       {
         internalType: 'address',
         name: 'to',
         type: 'address',
       },
-      {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
-      },
+      { internalType: 'uint256', name: 'amount', type: 'uint256' },
     ],
     name: 'transferFrom',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
+    outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
     stateMutability: 'nonpayable',
     type: 'function',
   },

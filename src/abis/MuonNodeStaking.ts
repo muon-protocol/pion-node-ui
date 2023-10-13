@@ -184,7 +184,7 @@ export default [
       {
         indexed: false,
         internalType: 'uint256',
-        name: 'rewardPeriod',
+        name: '_rewardPeriod',
         type: 'uint256',
       },
     ],
@@ -321,6 +321,19 @@ export default [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'address',
+        name: 'verifierAddress',
+        type: 'address',
+      },
+    ],
+    name: 'VerifierUpdated',
+    type: 'event',
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
         indexed: true,
         internalType: 'address',
         name: 'stakerAddress',
@@ -360,13 +373,6 @@ export default [
   {
     inputs: [],
     name: 'Q',
-    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'REWARD_PERIOD',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
     type: 'function',
@@ -767,6 +773,13 @@ export default [
   },
   {
     inputs: [],
+    name: 'rewardPeriod',
+    outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'rewardRate',
     outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
     stateMutability: 'view',
@@ -820,7 +833,7 @@ export default [
         type: 'uint8',
       },
     ],
-    name: 'setMuonNodeTire',
+    name: 'setMuonNodeTier',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -842,6 +855,13 @@ export default [
       },
     ],
     name: 'setMuonPublicKey',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [{ internalType: 'uint256', name: 'period', type: 'uint256' }],
+    name: 'setRewardPeriod',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -870,6 +890,15 @@ export default [
       },
     ],
     name: 'setTierMaxStakeAmount',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [
+      { internalType: 'address', name: '_verifierAddress', type: 'address' },
+    ],
+    name: 'setVerifier',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -964,6 +993,19 @@ export default [
     inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
     name: 'valueOfBondedToken',
     outputs: [{ internalType: 'uint256', name: 'amount', type: 'uint256' }],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'verifier',
+    outputs: [
+      {
+        internalType: 'contract SchnorrSECP256K1VerifierV2',
+        name: '',
+        type: 'address',
+      },
+    ],
     stateMutability: 'view',
     type: 'function',
   },

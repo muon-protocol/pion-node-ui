@@ -8,10 +8,12 @@ export const MULTICALL_ADDRESS: AddressMap = {};
 
 export const ALICE_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0xF43CD517385237fe7A48927073151D12f4eADC53',
+  [SupportedChainId.MAINNET]: '0xF81dF93aB37D5b1396139F294418B2741143b280',
 };
 
 export const BONALICE_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x834b6cE191BaB7F724983357eCD98EC1929A441a',
+  [SupportedChainId.MAINNET]: '0x3EB5c60EC8b1D90321f280Ade4697cD31C3eE47E',
 };
 
 export const LP_TOKEN_ADDRESS: AddressMap = {
@@ -24,10 +26,12 @@ export const REWARD_ADDRESS: AddressMap = {
 
 export const MUON_NODE_STAKING_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0xd788C2276A6f75a8B9360E9695028329C925b0AB',
+  [SupportedChainId.MAINNET]: '0x349a34804F8740c3202baDdeC0216c66A40c02e5',
 };
 
 export const MUON_NODE_MANAGER_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x25B019d98CF6FBcD73C92C468A352449e2BB39C2',
+  [SupportedChainId.MAINNET]: '0xD884634095AB3058264eE3143078F27D8fD78b9F',
 };
 
 export const BOOSTER_ADDRESS: AddressMap = {
