@@ -7,13 +7,15 @@ import {
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { bscTestnet } from 'wagmi/chains';
+import { bscTestnet, mainnet } from 'wagmi/chains';
 import { publicProvider } from 'wagmi/providers/public';
+import { getCurrentChainId } from '../../constants/chains.ts';
+
 const Web3Context = createContext({});
 
 const Web3Provider = ({ children }: { children: ReactNode }) => {
   const { chains, publicClient } = configureChains(
-    [bscTestnet],
+    [getCurrentChainId() === 1 ? mainnet : bscTestnet],
     [publicProvider()],
   );
 
