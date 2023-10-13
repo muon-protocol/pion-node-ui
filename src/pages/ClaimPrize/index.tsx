@@ -11,6 +11,7 @@ import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
+import NewWalletModal from './NewWalletModal.tsx';
 
 const ClaimPrize = () => {
   const {
@@ -26,6 +27,8 @@ const ClaimPrize = () => {
     setIsInsufficientModalOpen,
     setIsSufficientModalOpen,
     isSufficientModalOpen,
+    setIsNewWalletModalOpen,
+    isNewWalletModalOpen,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
@@ -148,9 +151,22 @@ const ClaimPrize = () => {
                 {eligibleAddresses.map((wallet) => (
                   <VerifyWalletCard
                     wallet={wallet}
-                    className="!min-w-[304px] scroll"
+                    className="!min-w-[307px] scroll"
                   />
                 ))}
+                <div
+                  className="add-new-wallet-card border-2 rounded-xl border-titan-white min-w-[184px] flex flex-col items-center justify-center gap-6 h-full hover:bg-card-hover transition-all cursor-pointer"
+                  onClick={() => setIsNewWalletModalOpen(true)}
+                >
+                  <img
+                    src="/assets/images/claim/add-wallet-icon.svg"
+                    alt=""
+                    className="w-16 h-16"
+                  />
+                  <p className="font-medium text-white text-center">
+                    Add New Wallet
+                  </p>
+                </div>
               </span>
             ) : (
               <p className="text-2xl font-light text-center w-full my-auto">
@@ -182,6 +198,13 @@ const ClaimPrize = () => {
           closeModalHandler={() => setIsSufficientModalOpen(false)}
         >
           <ClaimedRewardModal operation="claimed" />
+        </Modal>
+        <Modal
+          size="sm"
+          isOpen={isNewWalletModalOpen}
+          closeModalHandler={() => setIsNewWalletModalOpen(false)}
+        >
+          <NewWalletModal />
         </Modal>
       </div>
     </div>

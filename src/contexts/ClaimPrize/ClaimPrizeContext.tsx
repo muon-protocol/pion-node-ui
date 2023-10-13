@@ -69,6 +69,8 @@ const ClaimPrizeContext = createContext<{
   handleApproveTermsAndConditions: () => void;
   isTermsAndConditionsModalOpen: boolean;
   setIsTermsAndConditionsModalOpen: (isOpen: boolean) => void;
+  setIsNewWalletModalOpen: (isOpen: boolean) => void;
+  isNewWalletModalOpen: boolean;
 }>({
   isSwitchBackToWalletModalOpen: false,
   openSwitchBackToWalletModal: () => {},
@@ -107,6 +109,8 @@ const ClaimPrizeContext = createContext<{
   handleApproveTermsAndConditions: () => {},
   isTermsAndConditionsModalOpen: false,
   setIsTermsAndConditionsModalOpen: () => {},
+  setIsNewWalletModalOpen: () => {},
+  isNewWalletModalOpen: false,
 });
 
 const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
@@ -503,6 +507,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     handleClaimReward();
   }, [stakingAddressFromPast, handleClaimReward]);
 
+  const [isNewWalletModalOpen, setIsNewWalletModalOpen] = useState(false);
+
+  useEffect(() => {
+    setIsNewWalletModalOpen(false);
+  }, [walletAddress]);
+
   const openSwitchBackToWalletModal = () =>
     setIsSwitchBackToWalletModalOpen(true);
   const closeSwitchBackToWalletModal = () =>
@@ -548,6 +558,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         handleApproveTermsAndConditions,
         isTermsAndConditionsModalOpen,
         setIsTermsAndConditionsModalOpen,
+        setIsNewWalletModalOpen,
+        isNewWalletModalOpen,
       }}
     >
       {children}

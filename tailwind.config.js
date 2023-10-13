@@ -36,6 +36,7 @@ export default {
         'card-bg': '#6C677B',
         'card-bg-dark': '#F6F3FF99',
         'titan-white': '#ECEDFF',
+        'card-hover': '#4D3E9E59',
         'modal-backdrop': '#00000066',
         'catskill-white': '#E9EFF666',
         'input-bg': '#4b4b4b',
