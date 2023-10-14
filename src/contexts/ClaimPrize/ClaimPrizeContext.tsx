@@ -460,7 +460,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
       if (!flag) {
         toast.error(
-          'Selected address is not eligible \n(no pioneer activities found)',
+          'Selected address is not eligible for receiving PION node-drop.',
           {
             duration: 5000,
           },
