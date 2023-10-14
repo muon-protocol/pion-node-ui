@@ -47,7 +47,7 @@ const DesktopNavbar = () => {
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
             location.pathname !== '/' &&
-            location.pathname !== '/claim' && (
+            location.pathname !== '/app/claim' && (
               <>
                 <button
                   className="btn btn--small"
