@@ -291,13 +291,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     console.log(valid);
 
     getClaimSignatureFromPast();
-  }, [
-    walletAddress,
-    getClaimSignatureFromPast,
-    claimSignature,
-    userClaimedReward,
-    valid,
-  ]);
+  }, [walletAddress, claimSignature, userClaimedReward, valid]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
