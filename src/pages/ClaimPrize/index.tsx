@@ -110,8 +110,8 @@ const ClaimPrize = () => {
             <p className="font-semibold inline">
               ({formatWalletAddress(stakingAddressFromPast)})
             </p>{' '}
-            with the following information. You can setup your node using your
-            bonPION on October 18th.
+            under bonPION #{userClaimedReward[1].toString()}. You can setup your
+            node using your bonPION on October 18th.
           </Alert>
           <Alert
             show={!!alreadyRegisteredWallet?.isAlreadyRegistered}
