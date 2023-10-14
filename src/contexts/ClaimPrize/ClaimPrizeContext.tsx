@@ -212,6 +212,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       setWalletsWithSignature([]);
       setClaimSignature(null);
       setRawRewards(null);
+      setTimeout(() => {
+        //refresh page
+        window.location.reload();
+      }, 1000);
     }
   }, [isSuccess]);
 
