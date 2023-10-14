@@ -148,11 +148,19 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     totalRewardFromPast,
   } = useRawRewardsFromPast({ rawRewardsFromPast });
 
-  const { totalRewards, eligibleAddresses, alreadyRegisteredWallet } =
-    useRawRewards({
-      rawRewards,
-      walletsWithSignature,
-    });
+  const {
+    totalRewards,
+    eligibleAddresses,
+    rewardWallets,
+    alreadyRegisteredWallet,
+  } = useRawRewards({
+    rawRewards,
+    walletsWithSignature,
+  });
+
+  useEffect(() => {
+    console.log('rewardWallets', rewardWallets);
+  }, [rewardWallets]);
 
   const { signMessageMetamask } = useSignMessage({
     message: `Please sign this message to confirm that you would like to claim your PION node-drop using "${stakingAddress}".`,
@@ -415,8 +423,64 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  const checkConnectedWalletHasRewards = useCallback(
+    (res: RawRewards) => {
+      if (!walletAddress) return;
+      if (
+        !res.muon_presale.contributors.find(
+          (wallet) => wallet.contributor === walletAddress,
+        )
+      )
+        return;
+
+      console.log('res', res);
+      let flag = false;
+
+      if (
+        res.alice_operator.contributors.find(
+          (wallet) => wallet.contributor === walletAddress && wallet.reward > 0,
+        )
+      )
+        flag = true;
+      if (
+        res.alice_operator_bounce.contributors.find(
+          (wallet) => wallet.contributor === walletAddress && wallet.reward > 0,
+        )
+      )
+        flag = true;
+      if (
+        res.deus_presale.contributors.find(
+          (wallet) => wallet.contributor === walletAddress && wallet.reward > 0,
+        )
+      )
+        flag = true;
+      if (
+        res.early_alice_operator.contributors.find(
+          (wallet) => wallet.contributor === walletAddress && wallet.reward > 0,
+        )
+      )
+        flag = true;
+      if (
+        res.muon_presale.contributors.find(
+          (wallet) => wallet.contributor === walletAddress && wallet.reward > 0,
+        )
+      )
+        flag = true;
+
+      if (!flag) {
+        toast.error(
+          'Selected address is not eligible \n(no pioneer activities found)',
+          {
+            duration: 5000,
+          },
+        );
+      }
+    },
+    [walletAddress],
+  );
+
   useEffect(() => {
-    if (!walletAddress || !isConnected || claimSignature) return;
+    if (!walletAddress || claimSignature) return;
 
     async function getRewards() {
       try {
@@ -427,8 +491,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         if (walletsString.length === 0) return;
         if (!claimSignature) {
           const response = await getRewardsAPI(walletsString);
-          if (response.success && !claimSignature)
+          if (response.success && !claimSignature) {
             setRawRewards(response.result);
+            checkConnectedWalletHasRewards(response.result);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -436,7 +502,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     }
 
     getRewards();
-  }, [walletsWithSignature, walletAddress, isConnected, claimSignature]);
+  }, [
+    walletsWithSignature,
+    walletAddress,
+    claimSignature,
+    checkConnectedWalletHasRewards,
+  ]);
 
   const handleConfirmClaimClicked = useCallback(async () => {
     if (eligibleAddresses.find((wallet) => wallet.signature === null)) return;

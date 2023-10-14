@@ -16,7 +16,7 @@ const useRawRewards = ({
   const { rewardWallets } = useRewardWallets(rawRewards, walletsWithSignature);
 
   const eligibleAddresses = useMemo(() => {
-    const eligibleAddresses = rewardWallets.filter(
+    return rewardWallets.filter(
       (wallet) =>
         wallet.wasInMuonPresale ||
         wallet.wasInDeusPresale ||
@@ -24,8 +24,6 @@ const useRawRewards = ({
         wallet.wasAliceOperatorEarly ||
         wallet.wasAliceOperatorBounce,
     );
-
-    return eligibleAddresses;
   }, [rewardWallets]);
 
   const alreadyRegisteredWallet = useAlreadyRegisteredWallet({
@@ -35,6 +33,7 @@ const useRawRewards = ({
   return {
     totalRewards,
     eligibleAddresses,
+    rewardWallets,
     alreadyRegisteredWallet,
   };
 };
