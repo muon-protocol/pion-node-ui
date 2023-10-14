@@ -415,6 +415,10 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       });
   };
 
+  const [lastAlertedWallet, setLastAlertedWallet] = useState<
+    `0x${string}` | null
+  >(null);
+
   const checkConnectedWalletHasRewards = useCallback(
     (res: RawRewards) => {
       if (!walletAddress) return;
@@ -459,16 +463,23 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         flag = true;
 
       if (!flag) {
-        toast.error(
-          'Selected address is not eligible for receiving PION node-drop.',
-          {
-            duration: 5000,
-          },
-        );
+        if (walletAddress !== lastAlertedWallet) {
+          toast.error(
+            'Selected address is not eligible for receiving PION node-drop.',
+            {
+              duration: 5000,
+            },
+          );
+          setLastAlertedWallet(walletAddress);
+        }
       }
     },
     [walletAddress],
   );
+
+  useEffect(() => {
+    setLastAlertedWallet(null);
+  }, [walletAddress]);
 
   useEffect(() => {
     if (!walletAddress || claimSignature) return;
