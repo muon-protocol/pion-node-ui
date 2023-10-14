@@ -262,16 +262,17 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
           setRawRewardsFromPast(result.result);
         } else {
           setRawRewardsFromPast(null);
-          if (userClaimedReward[0] === BigInt(0) && valid)
+          if (userClaimedReward[0] === BigInt(0) && valid) {
             newWalletConnected(walletAddress);
+          }
         }
       } catch (e) {
         console.log(e);
       }
     };
 
-    if (isSuccess || walletAddress) getClaimSignatureFromPast();
-  }, [walletAddress, isSuccess]);
+    if (valid) getClaimSignatureFromPast();
+  }, [walletAddress, isSuccess, valid]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
