@@ -6,9 +6,10 @@ const NewWalletModal = () => {
         src="/assets/images/claim/add-wallet-icon-colored.svg"
         alt=""
       />
-      <p className="text-center text-black">
-        You can easily switch to your new wallet using metamask or other wallet
-        providers to claim your node-drop together.
+      <p className="text-black">
+        1. Open your wallet
+        <br />
+        2. Switch to your other eligible address
       </p>
     </div>
   );

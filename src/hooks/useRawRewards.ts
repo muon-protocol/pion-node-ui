@@ -33,7 +33,6 @@ const useRawRewards = ({
   return {
     totalRewards,
     eligibleAddresses,
-    rewardWallets,
     alreadyRegisteredWallet,
   };
 };

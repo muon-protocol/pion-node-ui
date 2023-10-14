@@ -148,19 +148,11 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     totalRewardFromPast,
   } = useRawRewardsFromPast({ rawRewardsFromPast });
 
-  const {
-    totalRewards,
-    eligibleAddresses,
-    rewardWallets,
-    alreadyRegisteredWallet,
-  } = useRawRewards({
-    rawRewards,
-    walletsWithSignature,
-  });
-
-  useEffect(() => {
-    console.log('rewardWallets', rewardWallets);
-  }, [rewardWallets]);
+  const { totalRewards, eligibleAddresses, alreadyRegisteredWallet } =
+    useRawRewards({
+      rawRewards,
+      walletsWithSignature,
+    });
 
   const { signMessageMetamask } = useSignMessage({
     message: `Please sign this message to confirm that you would like to claim your PION node-drop using "${stakingAddress}".`,
@@ -433,7 +425,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       )
         return;
 
-      console.log('res', res);
       let flag = false;
 
       if (

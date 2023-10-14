@@ -53,10 +53,14 @@ const ClaimPrize = () => {
             />
             <p className="text-5xl font-bold">PION Node-Drop</p>
           </div>
+          <p className="text-lg text-center md:text-left md:text-xl font-light mb-1.5">
+            Alice node operators and Muon presale participants are eligible for
+            the PION Node-Drop. <br />
+          </p>
           <p className="text-lg text-center md:text-left md:text-xl font-light mb-6">
-            Go to your wallet and choose the address linked to your pioneer
-            activities. Repeat this step for each address associated with
-            pioneer activities.
+            1. Connect your eligible addresses <br />
+            2. Claim your bonPION <br />
+            3. Wait for October 18th to run your node and start earning reward
           </p>
           <Alert
             className="mb-6"
@@ -164,7 +168,7 @@ const ClaimPrize = () => {
                     className="w-16 h-16"
                   />
                   <p className="font-medium text-white text-center">
-                    Add New Wallet
+                    Add New Address
                   </p>
                 </div>
               </span>
