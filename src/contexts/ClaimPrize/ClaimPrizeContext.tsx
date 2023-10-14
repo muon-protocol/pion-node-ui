@@ -297,12 +297,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     if (walletAddress === stakingAddress) {
       if (isSwitchBackToWalletModalOpen) {
         setIsSwitchBackToWalletModalOpen(false);
-        setIsConfirmModalOpen(true);
+        setIsTermsAndConditionsModalOpen(true);
       }
     }
     if (isConfirmModalOpen) {
       if (stakingAddress !== walletAddress) {
-        setIsConfirmModalOpen(false);
+        setIsTermsAndConditionsModalOpen(false);
         setIsSwitchBackToWalletModalOpen(true);
       }
     }

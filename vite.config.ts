@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/reward-server': 'https://pion-test.muon.net/',
+      '/reward-server': 'https://monitor-pion.muon.net/',
     },
   },
 });
