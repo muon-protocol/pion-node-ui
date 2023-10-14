@@ -65,7 +65,7 @@ const ClaimPrize = () => {
           <Alert
             className="mb-6"
             show={!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-            type="error"
+            type="success"
           >
             You have already claimed your reward under{' '}
             <p className="font-semibold inline">

@@ -1,6 +1,6 @@
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatWalletAddress } from '../../utils/web3.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -17,9 +17,9 @@ const ClaimCard = () => {
     eligibleAddresses,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
-    alreadyClaimedPrize,
-    setAlreadyClaimedPrize,
+    // isSuccess,
+    // alreadyClaimedPrize,
+    // setAlreadyClaimedPrize,
     stakingAddressFromPast,
     totalRewardFromPast,
     claimSignatureFromPast,
