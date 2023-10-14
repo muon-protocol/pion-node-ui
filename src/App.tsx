@@ -78,7 +78,7 @@ function App() {
                                           element={<GetStarted />}
                                         />
                                         <Route
-                                          path="/app/claim"
+                                          path="/pion/claim"
                                           element={<ClaimPrize />}
                                         />
                                         <Route

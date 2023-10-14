@@ -102,7 +102,7 @@ const MuanPioneerAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/app/claim"
+      to="/pion/claim"
     >
       <motion.span whileHover="animate">
         <motion.img
