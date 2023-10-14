@@ -17,10 +17,7 @@ const ConfirmClaimModal = () => {
         will NOT be able to change it afterwards. You will have to run your node
         on this address.
       </p>
-      <button
-        className="btn btn--white"
-        onClick={() => handleConfirmClaimClicked()}
-      >
+      <button className="btn" onClick={() => handleConfirmClaimClicked()}>
         Confirm
       </button>
     </div>

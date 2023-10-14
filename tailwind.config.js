@@ -26,7 +26,7 @@ export default {
         'so-dark-gray': '#3D3D3D',
         'so-dark-gray-2': '#4d4c4c',
         'modal-small': '#C5C6D4',
-        'primary-dark': '#918EF5',
+        'primary-dark': '#876FED',
         'dark-soft-primary': '#4D3E9E40',
         'soft-sky': '#BCC8DE',
         'primary-10-solid': '#ECEDFF',
