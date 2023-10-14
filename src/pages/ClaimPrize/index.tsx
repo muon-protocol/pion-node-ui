@@ -104,7 +104,7 @@ const ClaimPrize = () => {
           <Alert
             className="mb-6"
             show={!!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-            type="error"
+            type="success"
           >
             You have claimed the rewards for this address{' '}
             <p className="font-semibold inline">
