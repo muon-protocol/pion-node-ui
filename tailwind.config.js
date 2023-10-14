@@ -13,7 +13,7 @@ export default {
         secondary: '#48427D',
         'primary-13': '#4D3E9E21',
         'primary-13-solid': '#E2E6FE',
-        'primary-L3': '#CDC9FD',
+        'primary-L3': '#f1eeff',
         'light-text': '#BCC8DE',
         gray10: '#E9EFF6',
         'body-background': '#252528',

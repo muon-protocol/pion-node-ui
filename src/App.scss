@@ -140,7 +140,7 @@ input[type=number] {
   @apply px-16 py-3.5 font-medium text-center;
 
   &:disabled {
-    @apply bg-disabled text-gray cursor-not-allowed;
+    @apply bg-disabled text-gray cursor-not-allowed hover:bg-disabled;
   }
 
   &--icon-btn {
@@ -156,7 +156,7 @@ input[type=number] {
   }
 
   &--white {
-    @apply bg-white text-primary;
+    @apply bg-primary-L3 text-primary hover:bg-white transition-all;
   }
 
   &--large {
