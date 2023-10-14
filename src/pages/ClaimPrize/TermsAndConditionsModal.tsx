@@ -46,7 +46,7 @@ export const TermsAndConditionsModal = () => {
               )
             }
           >
-            Terms of Service
+            Terms of Service & Terms of Acquisition of $PION tokens.
           </span>
           .
         </p>
@@ -60,7 +60,7 @@ export const TermsAndConditionsModal = () => {
               : handleApproveTermsAndConditions();
           }}
           disabled={!checked || isMetamaskLoadingVerify}
-          className="btn btn--white mb-2 mt-5 mx-auto !w-[280px]"
+          className="btn btn--white mb-2 mt-5 mx-auto !min-w-[280px]"
         >
           {isMetamaskLoadingVerify
             ? 'Metamask...'
