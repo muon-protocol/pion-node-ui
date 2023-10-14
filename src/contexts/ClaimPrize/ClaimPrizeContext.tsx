@@ -206,7 +206,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
           setNewNFTClaimedLoading(false);
         }, 10000);
       }
-      setIsSufficientModalOpen(true);
+      // setIsSufficientModalOpen(true);
       // }
       setStakingAddress(null);
       setWalletsWithSignature([]);
