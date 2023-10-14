@@ -7,8 +7,8 @@ const SwitchBackToWalletModal = () => {
   return (
     <div className="pb-4 px-3 flex flex-col justify-center items-center">
       <img
-        className="w-[108px] mb-10"
-        src="/assets/images/claim/switch-wallet-modal-icon.svg"
+        className="w-24 h-24 mb-10"
+        src="/assets/images/modal/wrong-wallet-icon.svg"
         alt=""
       />
       <p className="text-center text-black">

@@ -397,6 +397,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   const checkConnectedWalletHasRewards = useCallback(
     (res: RawRewards) => {
+      if (location.pathname !== '/pion/claim') return;
       if (!walletAddress) return;
       if (
         !res.muon_presale.contributors.find(
