@@ -198,6 +198,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       // if (totalRewards.dsp < 500) {
       //   setIsInsufficientModalOpen(true);
       // } else {
+      toast.success('Claimed successfully');
       if (!newNFTClaimedLoading) {
         setNewNFTClaimedLoading(true);
         setTimeout(() => {
@@ -206,7 +207,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       }
       setIsSufficientModalOpen(true);
       // }
-      toast.success('Claimed successfully');
       setStakingAddress(null);
       setWalletsWithSignature([]);
       setClaimSignature(null);
@@ -270,8 +270,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       }
     };
 
-    getClaimSignatureFromPast();
-  }, [walletAddress]);
+    if (isSuccess || walletAddress) getClaimSignatureFromPast();
+  }, [walletAddress, isSuccess]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
