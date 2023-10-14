@@ -59,12 +59,12 @@ const ClaimCard = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isSuccess || alreadyClaimedPrize) {
-      navigate('/setup-node');
-      setAlreadyClaimedPrize(false);
-    }
-  }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
+  // useEffect(() => {
+  //   if (isSuccess || alreadyClaimedPrize) {
+  //     navigate('/setup-node');
+  //     setAlreadyClaimedPrize(false);
+  //   }
+  // }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
     <div className="w-full bg-primary-dark px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
