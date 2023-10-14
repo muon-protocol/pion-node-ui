@@ -182,6 +182,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     isMetamaskLoading,
     isTransactionLoading,
     isSuccess,
+    isFailed,
   } = useWagmiContractWrite({
     abi: REWARD_ABI,
     address: REWARD_ADDRESS[getCurrentChainId()],
@@ -272,7 +273,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     };
 
     if (valid) getClaimSignatureFromPast();
-  }, [walletAddress, isSuccess, valid]);
+  }, [walletAddress, isSuccess, valid, isFailed]);
 
   const handleClaimReward = useCallback(async () => {
     setIsConfirmModalOpen(false);
