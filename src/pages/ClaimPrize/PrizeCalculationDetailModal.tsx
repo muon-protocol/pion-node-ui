@@ -17,19 +17,21 @@ export const PrizeCalculationDetailModal = () => {
         title="PION Operator"
         subTitle="(Early stage)"
         headerDetail="20% Reward"
-        detailDescription="The early stage of the PION Operator is from 1st of July 2021 to 31st of July 2021"
+        detailDescription="The early stage of the PION Operator is before the 27th of February 2023"
       />
       <RewardSource
         source={rewards?.alice_operator}
         title="PION Operator"
         subTitle="(Main stage)"
         headerDetail="40% Reward"
-        detailDescription="The main stage of the PION Operator is from 1st of August 2021 to 31st of August 2021"
+        detailDescription="The main stage of the PION Operator is from the 27th of February 2023 to the 27th of April 2023"
       />
       <RewardSource
         source={rewards?.alice_operator_bounce}
         title="PION Operator"
         subTitle="(Bounce stage)"
+        headerDetail="Reward"
+        detailDescription="The bounce stage of the PION Operator is from the 27th of April 2023"
       />
     </div>
   );

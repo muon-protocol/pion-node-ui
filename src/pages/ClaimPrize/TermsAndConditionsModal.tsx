@@ -2,7 +2,11 @@ import { useContext, useState } from 'react';
 import { ClaimPrizeContext } from '../../contexts/ClaimPrize/ClaimPrizeContext.tsx';
 
 export const TermsAndConditionsModal = () => {
-  const [checked, setChecked] = useState(false);
+  const [termsAndConditionsChecked, setTermsAndConditionsChecked] =
+    useState(false);
+  const [termsOfAcquisitionChecked, setTermsOfAcquisitionChecked] =
+    useState(false);
+
   const {
     handleClaimRewardsClicked,
     agreeWithTermsAndConditionsSig,
@@ -12,45 +16,42 @@ export const TermsAndConditionsModal = () => {
 
   return (
     <div className="text-black">
-      {/*<section className="terms-and-conditions w-full h-[300px] mb-6 overflow-y-auto styled-scroll">*/}
-      {/*  <iframe*/}
-      {/*    className="h-full max-h-[300px] w-full"*/}
-      {/*    src="https://docs.muon.net/muon-network/terms-of-service main"*/}
-      {/*  ></iframe>*/}
-      {/*</section>*/}
-
-      <section
-        className={`checkbox flex gap-4 mb-6 justify-start items-center ${
-          !agreeWithTermsAndConditionsSig ? 'cursor-pointer' : ''
-        }`}
-        onClick={() => {
-          if (!agreeWithTermsAndConditionsSig) setChecked(!checked);
-        }}
+      <Checkbox
+        checked={termsAndConditionsChecked}
+        setChecked={setTermsAndConditionsChecked}
       >
-        <img
-          src={
-            checked
-              ? '/assets/images/checkbox-checked.svg'
-              : '/assets/images/checkbox-unchecked.svg'
+        Please sign this message to confirm that you agree with{' '}
+        <span
+          className="underline cursor-pointer"
+          onClick={() =>
+            window.open(
+              'https://docs.muon.net/muon-network/terms-of-service',
+              '_blank',
+            )
           }
-          alt=""
-        />
-        <p className="font-medium">
-          By signing this I confirm that I have read and I agree to the{' '}
-          <span
-            className="underline cursor-pointer"
-            onClick={() =>
-              window.open(
-                'https://docs.muon.net/muon-network/terms-of-service',
-                '_blank',
-              )
-            }
-          >
-            Terms of Service & Terms of Acquisition of $PION tokens.
-          </span>
-          .
-        </p>
-      </section>
+        >
+          Terms and Conditions of MUON Network
+        </span>
+        .
+      </Checkbox>
+      <Checkbox
+        checked={termsOfAcquisitionChecked}
+        setChecked={setTermsOfAcquisitionChecked}
+      >
+        Please sign this message to confirm that you agree with{' '}
+        <span
+          className="underline cursor-pointer"
+          onClick={() =>
+            window.open(
+              'https://docs.muon.net/muon-network/terms-of-aquisition',
+              '_blank',
+            )
+          }
+        >
+          Terms of Acquisition of $PION tokens
+        </span>
+        .
+      </Checkbox>
 
       <section className="actions">
         <button
@@ -59,7 +60,11 @@ export const TermsAndConditionsModal = () => {
               ? handleClaimRewardsClicked()
               : handleApproveTermsAndConditions();
           }}
-          disabled={!checked || isMetamaskLoadingVerify}
+          disabled={
+            !termsAndConditionsChecked ||
+            !termsOfAcquisitionChecked ||
+            isMetamaskLoadingVerify
+          }
           className="btn btn--white mb-2 mt-5 mx-auto !min-w-[280px]"
         >
           {isMetamaskLoadingVerify
@@ -70,5 +75,38 @@ export const TermsAndConditionsModal = () => {
         </button>
       </section>
     </div>
+  );
+};
+
+const Checkbox = ({
+  checked,
+  setChecked,
+  children,
+}: {
+  checked: boolean;
+  setChecked: (checked: boolean) => void;
+  children: React.ReactNode;
+}) => {
+  const { agreeWithTermsAndConditionsSig } = useContext(ClaimPrizeContext);
+
+  return (
+    <section
+      className={`checkbox flex gap-4 mb-6 justify-start items-center ${
+        !agreeWithTermsAndConditionsSig ? 'cursor-pointer' : ''
+      }`}
+      onClick={() => {
+        if (!agreeWithTermsAndConditionsSig) setChecked(!checked);
+      }}
+    >
+      <img
+        src={
+          checked
+            ? '/assets/images/checkbox-checked.svg'
+            : '/assets/images/checkbox-unchecked.svg'
+        }
+        alt=""
+      />
+      <p className="font-medium">{children}</p>
+    </section>
   );
 };

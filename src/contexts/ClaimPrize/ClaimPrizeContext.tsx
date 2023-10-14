@@ -148,32 +148,11 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     totalRewardFromPast,
   } = useRawRewardsFromPast({ rawRewardsFromPast });
 
-  const {
-    totalRewards,
-    eligibleAddresses,
-    eligibleAddressesUpdated,
-    alreadyRegisteredWallet,
-  } = useRawRewards({
-    rawRewards,
-    walletsWithSignature,
-  });
-
-  useEffect(() => {
-    if (eligibleAddressesUpdated && walletAddress) {
-      if (
-        !eligibleAddresses.find(
-          (wallet) => wallet.walletAddress === walletAddress,
-        )
-      ) {
-        toast.error(
-          'Selected address is not eligible \n(no pioneer activities found)',
-          {
-            duration: 5000,
-          },
-        );
-      }
-    }
-  }, [eligibleAddressesUpdated]);
+  const { totalRewards, eligibleAddresses, alreadyRegisteredWallet } =
+    useRawRewards({
+      rawRewards,
+      walletsWithSignature,
+    });
 
   const { signMessageMetamask } = useSignMessage({
     message: `Please sign this message to confirm that you would like to claim your PION node-drop using "${stakingAddress}".`,
@@ -181,7 +160,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   const { signMessageMetamask: signTermsAndConditionsMessageMetamask } =
     useSignMessage({
-      message: `Please sign this message to confirm that you agree with PION network's terms and conditions.`,
+      message: `Please sign this message to confirm that you agree with terms and conditions of MUON network located at https://docs.muon.net/muon-network/terms-of-service  as well as the terms of acquisition of $PION tokens located at https://docs.muon.net/muon-network/terms-of-acquisition`,
     });
 
   const claimRewardArgs = useClaimRewardArgs({

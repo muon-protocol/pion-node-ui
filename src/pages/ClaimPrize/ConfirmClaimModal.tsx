@@ -12,9 +12,10 @@ const ConfirmClaimModal = () => {
         alt=""
       />
       <p className="text-center mb-5 text-black">
-        Be aware that if you press confirm button, you will be only able to
-        claim your reward on the staking address{' '}
-        <strong>({formatWalletAddress(stakingAddress)})</strong>.
+        Be aware that if you press the Confirm button, you will claim your
+        bonPION on <strong>({formatWalletAddress(stakingAddress)})</strong> and
+        will NOT be able to change it afterwards. You will have to run your node
+        on this address.
       </p>
       <button
         className="btn btn--white"
