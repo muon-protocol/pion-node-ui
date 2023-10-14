@@ -150,8 +150,9 @@ const ClaimCard = () => {
             <button
               onClick={() => navigate('/setup-node')}
               className="btn btn--white md:ml-auto max-md:!w-full !px-10"
+              disabled
             >
-              Create Node
+              Claimed!
             </button>
           ) : isMetamaskLoading || isTransactionLoading ? (
             <button

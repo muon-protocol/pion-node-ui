@@ -256,14 +256,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     if (!walletAddress) {
       if (
         claimSignature ||
-        rawRewardsFromPast ||
         stakingAddressFromPast ||
         stakingAddress ||
         walletsWithSignature.length > 0
       ) {
         setClaimSignature(null);
         setRawRewards(null);
-        setRawRewardsFromPast(null);
         setStakingAddress(null);
         setWalletsWithSignature([]);
       }
@@ -287,7 +285,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     valid,
     newWalletConnected,
     claimSignature,
-    rawRewardsFromPast,
     stakingAddressFromPast,
     stakingAddress,
     walletsWithSignature,
