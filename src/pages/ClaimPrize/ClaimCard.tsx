@@ -183,6 +183,7 @@ const ClaimCard = () => {
         size="lg"
         closeModalHandler={() => setIsPrizeCalculationDetailModalOpen(false)}
         isOpen={isPrizeCalculationDetailModalOpen}
+        title={'Node-Drop Calculation Details'}
       >
         <PrizeCalculationDetailModal />
       </Modal>

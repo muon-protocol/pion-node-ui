@@ -13,7 +13,7 @@ const BonALICEModalBody = ({
 }) => {
   return (
     <div className="flex flex-col gap-3">
-      {bonALICEs.length > 0 ? (
+      {bonALICEs.find((nft) => nft.nodePower > 0) ? (
         bonALICEs.map((item: BonALICE) => {
           return (
             item.nodePower > 0 && (
