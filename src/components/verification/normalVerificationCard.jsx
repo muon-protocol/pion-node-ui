@@ -11,7 +11,7 @@ function Normal() {
           width="10"
           height="10"
         ></Image>
-        Alice Starter
+        Pion Starter
       </span>
     </div>
   );
@@ -54,9 +54,9 @@ export default function NormalVerificationCard({
 }) {
   return (
     <div
-      className={` ${disable && "opacity-50"} ${
-        isActive ? "bg-pacificBlue/30" : "bg-cardBackground/50"
-      } w-full grid grid-cols-1 rounded-[10px] min-h-[116px] content-between py-2 px-4`}
+      className={` ${
+        disable && "opacity-50"
+      } bg-cardBackground/50 w-full grid grid-cols-1 rounded-[10px] min-h-[116px] content-between py-2 px-4`}
     >
       <h5 className=" font-medium	">{title}</h5>
       <div className="w-full flex justify-between items-end">
@@ -70,8 +70,8 @@ export default function NormalVerificationCard({
           <LightBtn
             disable={disable}
             btnDisabeld={isActive}
-            textColor={isActive ? "text-white" : ""}
-            bgColor={isActive ? "bg-uptime" : ""}
+            bgColor={isActive ? "bg-transparent" : ""}
+            textColor={isActive ? "text-uptime" : ""}
             onClick={onClick}
           >
             {isActive ? "Verification passed!" : "Pass verification"}

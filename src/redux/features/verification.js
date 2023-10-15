@@ -1,4 +1,7 @@
-import { verification as verificationRequest } from "@/utils/requestVerifications";
+import {
+  getTierSig,
+  verification as verificationRequest,
+} from "@/utils/requestVerifications";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -14,6 +17,11 @@ const initialState = {
   brightIdTryed: 0,
   errorMessage: "",
   interval: 0,
+  fetchTierSigStatus: "init",
+  tier: 0,
+  isSetTier: false,
+  tierSig: "",
+  tierErrorMessage: "",
 };
 
 export const fetchVerification = createAsyncThunk(
@@ -22,11 +30,23 @@ export const fetchVerification = createAsyncThunk(
   async (walletAddress) => {
     try {
       const response = await verificationRequest(walletAddress);
-      console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
-      throw new Error("ehsan");
+      throw new Error("fetchVerification error");
+    }
+  }
+);
+
+export const fetchTierSig = createAsyncThunk(
+  "get/fetchTierSig",
+
+  async (walletAddress) => {
+    try {
+      const response = await getTierSig(walletAddress);
+      return response;
+    } catch (error) {
+      console.log(error);
     }
   }
 );
@@ -35,6 +55,9 @@ export const verification = createSlice({
   name: "verification",
   initialState,
   reducers: {
+    setIsSetTier(state, action) {
+      state.isSetTier = action.payload;
+    },
     resetBrightIdTryed: (state) => {
       state.brightIdTryed = 0;
     },
@@ -78,7 +101,6 @@ export const verification = createSlice({
         state.fetchStatus = "loading";
       })
       .addCase(fetchVerification.fulfilled, (state, action) => {
-        console.log(action);
         state.fetchStatus = "succeeded";
         if (action.payload.success != true) {
           state = initialState;
@@ -98,11 +120,30 @@ export const verification = createSlice({
       })
       .addCase(fetchVerification.rejected, (state, action) => {
         state.fetchStatus = "failed";
-        console.log(action);
+      })
+      .addCase(fetchTierSig.pending, (state) => {
+        state.fetchTierSigStatus = "loading";
+      })
+      .addCase(fetchTierSig.fulfilled, (state, action) => {
+        state.fetchTierSigStatus = "succeeded";
+        if (action.payload.success) {
+          const data = action.payload.result;
+          state.tier = data.tier;
+          state.tierSig = data.signature;
+        } else {
+          state.tierErrorMessage = action.payload.message;
+          if (action.payload.errorCode === 7) {
+            state.isSetTier = true;
+          }
+        }
+      })
+      .addCase(fetchTierSig.rejected, () => {
+        console.log("fetchTierSig rejected");
       });
   },
 });
 export const {
+  setIsSetTier,
   setPresaleVerified,
   resetErrorMessage,
   setErrorMessage,

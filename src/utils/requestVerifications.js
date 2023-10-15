@@ -94,3 +94,9 @@ export const gitcoinVerification = async (staker, signer, signature, nonce) => {
     },
   });
 };
+
+export const getTierSig = async (staker) => {
+  return await axios.get(
+    `https://monitor-pion.muon.net/uniqueness/getTierSig?staker=${staker}`
+  );
+};

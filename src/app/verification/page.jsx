@@ -14,6 +14,17 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAccount } from "wagmi";
 
+export function SubmitTier() {
+  return (
+    <button
+      onClick={() => verifyLink()}
+      className="px-8 bg-primaryMain text-primaryText  text-xl font-semibold rounded-xl py-2 mt-2"
+    >
+      Submit Tier Update
+    </button>
+  );
+}
+
 export function WarningBox({ children, className, dangerouslySetInnerHTML }) {
   return (
     <div
@@ -79,10 +90,10 @@ export default function Verification() {
   return (
     <div>
       <div className="flex flex-wrap">
-        <div className="mr-4 lg:max-w-[60%]">
+        <div className="mr-4 lg:max-w-[65%]">
           <TitleInfo></TitleInfo>
         </div>
-        <div className="lg:ml-4 grow">
+        <div className="lg:ml-4 grow md:mt-4">
           <PassVerification passed={selector}></PassVerification>
         </div>
       </div>

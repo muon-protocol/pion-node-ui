@@ -14,7 +14,6 @@ export function BackToVerificationBtn({ children, className }) {
 
   const searchParams = useSearchParams();
   const staker = searchParams.get("staker");
-  console.log(staker);
 
   const [isSameWallet, setIsSameWallet] = useState(staker === address);
 

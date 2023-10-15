@@ -33,7 +33,7 @@ export default function NewNode() {
         <Lottie width={50} height={50} animationData={done} />
       </div>
       <p className="text-xl mx-auto text-center">
-        Your node has been added to Alice network
+        Your node has been added to Pion network
       </p>
       <div className="flex mx-auto items-center justify-center">
         <p className="text-myPrimary">Preparing your dashboard</p>

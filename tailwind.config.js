@@ -12,6 +12,7 @@ module.exports = {
   ],
   theme: {
     colors: {
+      helperWarning: "rgba(245, 149, 105, 1)",
       primaryText: "rgba(var(--color-primaryText), 1)",
       formCardBackground: "rgba(61, 61, 61, 1)",
       uptime: "rgb(var(--color-uptime))",
@@ -36,6 +37,8 @@ module.exports = {
     },
     extend: {
       colors: {
+        gray: "#6F7787",
+        helperWarning: "#F59569",
         primary: "rgba(var(--color-primary), 1)",
         mysecondary: "rgba(245, 149, 105), 1)",
         black: "#323245",
@@ -48,22 +51,6 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
-    // screens: {
-    //   sm: "640px",
-    //   // => @media (min-width: 640px) { ... }
-
-    //   md: "768px",
-    //   // => @media (min-width: 768px) { ... }
-
-    //   lg: "1366px",
-    //   // => @media (min-width: 1024px) { ... }
-
-    //   xl: "1536px",
-    //   // => @media (min-width: 1280px) { ... }
-
-    //   "2xl": "1920px",
-    //   // => @media (min-width: 1536px) { ... }
-    // },
   },
   plugins: [require("tw-elements/dist/plugin.cjs")],
 };

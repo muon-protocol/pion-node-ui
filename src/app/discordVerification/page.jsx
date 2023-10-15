@@ -28,7 +28,6 @@ export default function DiscordVerification() {
         }
       })
       .catch((error) => {
-        console.log(error);
         setErrorMessage(ERRORCODE["connection"]());
         setStep(2);
       });
@@ -70,7 +69,7 @@ export default function DiscordVerification() {
             <p className="text-lg text-center max-w-fit">
               Congratulations! <br />
               You passed Discord active community member verification Your
-              access granted to run Alice Starter node
+              access granted to run Pion Starter node
             </p>
           ) : (
             <>

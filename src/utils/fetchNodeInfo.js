@@ -49,7 +49,6 @@ export const getNodeInfoData = async (walletAddress) => {
   const response = await getNodeInfo(walletAddress);
 
   const res = response.data.result;
-  console.log(res);
   let nodeInfoData = { nodeInfo: {} };
   if (res && res === "node not found") {
     // window.location.replace("/"); // redirect to Home page

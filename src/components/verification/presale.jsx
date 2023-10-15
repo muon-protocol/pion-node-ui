@@ -15,6 +15,7 @@ import { BackToVerificationBtn } from "@/app/presale/page";
 import { LightBtn } from "@/app/page";
 import { useSearchParams } from "next/navigation";
 import { CustomConnectButton } from "../layout/CustomConnectButton";
+import { SubmitTier } from "@/app/verification/page";
 
 function PrimaryBtn({ children, onClick }) {
   return (
@@ -32,9 +33,7 @@ function Step1({ setStep }) {
 
   const searchParams = useSearchParams();
   const staker = searchParams.get("staker");
-  console.log(staker);
 
-  console.log(staker);
   const dispatch = useDispatch();
   const { data, isSuccess, signMessage } = useSignMessage({
     message:
@@ -43,11 +42,9 @@ function Step1({ setStep }) {
 
   useEffect(() => {
     if (isSuccess) {
-      console.log(data);
       preSaleRequest(staker, address, data)
         .then((res) => {
           dispatch(resetErrorMessage());
-          console.log(res);
           if (res.data.success) {
             setStep(2);
             dispatch(setPresaleVerified(true));
@@ -79,13 +76,14 @@ function Step1({ setStep }) {
   );
 }
 
-function Step2() {
+function Step2({ needSubmitTier }) {
   return (
     <div>
       <p className="text-lg text-center mt-6">
         Congratulations! <br /> You passed Presale participants verification
-        Your access granted to run Alice Starter node
+        Your access granted to run Pion Starter node
       </p>
+      {needSubmitTier && <SubmitTier></SubmitTier>}
       <BackToVerificationBtn className="mx-auto mt-14 py-2">
         Back to verification center
       </BackToVerificationBtn>
@@ -111,7 +109,7 @@ function Step3({ setStep }) {
   );
 }
 
-export default function Presale() {
+export default function Presale({ needSubmitTier }) {
   const [step, setStep] = useState(1);
   return (
     <div className="w-[570px] mt-2 rounded-[18px] bg-formCardBackground min-h-[524px] px-8 py-4">
@@ -141,7 +139,7 @@ export default function Presale() {
         )}
       </div>
       {step === 1 && <Step1 setStep={setStep}></Step1>}
-      {step === 2 && <Step2></Step2>}
+      {step === 2 && <Step2 needSubmitTier={needSubmitTier}></Step2>}
       {step === 3 && <Step3 setStep={setStep}></Step3>}
     </div>
   );

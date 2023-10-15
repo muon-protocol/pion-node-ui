@@ -26,7 +26,6 @@ export const fetchNodeInfo = createAsyncThunk(
   "get/fetchNodeInfo",
   async (walletAddress) => {
     const response = await getNodeInfoData(walletAddress);
-    console.log(response);
     return response;
   }
 );
@@ -76,7 +75,6 @@ export const node = createSlice({
       })
       .addCase(fetchNodeInfo.rejected, (state, action) => {
         state.fetchStatus = "failed";
-        console.log(action);
       });
   },
 });

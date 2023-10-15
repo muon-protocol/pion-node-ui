@@ -9,7 +9,6 @@ const fetchRewardData = async (staker, blockNumber) => {
   const response = await axios.get(
     `${BASEURL}/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
   );
-  console.log(response);
   if (!response.data.success) return false;
   else {
     const data = response.data;

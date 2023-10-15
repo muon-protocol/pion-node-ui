@@ -156,7 +156,6 @@ function Step3({ setBrightIdStep }) {
       dispatch(resetErrorMessage());
       getBrightIdContextId(staker, data)
         .then((res) => {
-          console.log(res);
           if (!res.data.success) {
             dispatch(
               setErrorMessage(ERRORCODE[res.data.errorCode]("BrightID"))
@@ -164,11 +163,9 @@ function Step3({ setBrightIdStep }) {
             setBrightIdStep(6);
           } else {
             sponsorBrightIdRequest(staker).then((sponsorRes) => {
-              console.log(sponsorRes);
               if (sponsorRes.data.success) {
                 dispatch(setBrightIdContexId(res.data.result.contextId));
                 setBrightIdStep(4);
-                console.log("SUCCESS");
               } else {
                 dispatch(
                   setErrorMessage(
@@ -240,14 +237,12 @@ function Step4({ setBrightIdStep }) {
   const brightidTryed = useSelector(
     (state) => state.rootReducer.verificationReducer.brightIdTryed
   );
-  console.log(brightidTryed);
 
   useEffect(() => {
     if (brightidTryed) {
       checkBrightIdConnection(staker)
         .then((res) => {
           const response = res.data;
-          console.log(res);
           if (
             response.success &&
             (response.result.brightidAuraVerified ||
@@ -269,8 +264,6 @@ function Step4({ setBrightIdStep }) {
             setTimeout(() => {
               dispatch(incBrightIdTryed(brightidTryed + 1));
             }, 5000);
-            console.log("plus");
-            console.log(brightidTryed);
           }
         })
         .catch((err) => {
@@ -278,7 +271,6 @@ function Step4({ setBrightIdStep }) {
           dispatch(setErrorMessage(ERRORCODE["connection"]()));
         })
         .finally(() => {
-          console.log(brightidTryed);
           if (brightidTryed > 12 * 3) {
             setBrightIdStep(6);
           }
@@ -311,7 +303,7 @@ function Step4({ setBrightIdStep }) {
             After scanning the QR code, wait until you the &quot;Successfully
             linked&quot; message in the app. next, click on the &apos;Verify
             Link&apos; button. This confirms the connection between your
-            BrightID and Alice, completing the linking process.
+            BrightID and Pion, completing the linking process.
           </p>
         </div>
       </div>
@@ -328,7 +320,7 @@ function Step4({ setBrightIdStep }) {
   );
 }
 
-function Step5() {
+function Step5({ needSubmitTier }) {
   return (
     <>
       <div>
@@ -352,6 +344,7 @@ function Step5() {
         Congratulations! You&apos;ve passed the BrightID meet verification. You
         now have the access to run Alice Starter node.
       </p>
+      {needSubmitTier && <SubmitTier></SubmitTier>}
       <button
         className={`inline-block mt-10 rounded-[8px] bg-primaryMain/13 px-6 pb-2 pt-2.5 text-sm font-medium leading-normal text-primary transition duration-150 ease-in-out hover:bg-primaryMain/20  active:bg-primaryMain/30`}
         data-te-modal-dismiss
@@ -401,7 +394,7 @@ function Step6() {
   );
 }
 
-export default function BrightIdModal({ isActive }) {
+export default function BrightIdModal({ isActive, needSubmitTier }) {
   const [brightIdStep, setBrightIdStep] = useState(1);
   useEffect(() => {
     const myModalEl = document.getElementById("brightidModal");
@@ -409,29 +402,12 @@ export default function BrightIdModal({ isActive }) {
       setBrightIdStep(1);
     });
   });
-  // useEffect(() => {
-  //   const init = async () => {
-  //     const { Collapse, Modal, Ripple, initTE } = await import("tw-elements");
-  //     initTE({ Collapse, Modal, Ripple });
-  //   };
-  //   init();
-  // }, []);
   return (
     <div className="flex">
-      {/* <button
-        className={`flex  ${
-          isActive
-            ? "bg-pacificBlue text-white"
-            : "bg-primary/13 text-primary hover:bg-primary-20 active:bg-primary-50"
-        }  rounded-[8px]  py-1 px-4 pb-2 pt-2.5 font-medium`}
-        data-te-toggle="modal"
-        data-te-target="#brightidModal"
-      >
-        {isActive ? "Verification passed!" : "Pass verification"}
-      </button> */}
       <LightBtn
         btnDisabeld={isActive}
-        bgColor={isActive ? "bg-uptime" : ""}
+        bgColor={isActive ? "bg-transparent" : ""}
+        textColor={isActive ? "text-uptime" : ""}
         dataTeToggle="modal"
         dataTeTarget="#brightidModal"
       >
@@ -498,7 +474,10 @@ export default function BrightIdModal({ isActive }) {
                 <Step4 setBrightIdStep={setBrightIdStep}></Step4>
               )}
               {brightIdStep === 5 && (
-                <Step5 setBrightIdStep={setBrightIdStep}></Step5>
+                <Step5
+                  setBrightIdStep={setBrightIdStep}
+                  needSubmitTier={needSubmitTier}
+                ></Step5>
               )}
               {brightIdStep === 6 && (
                 <Step6 setBrightIdStep={setBrightIdStep}></Step6>

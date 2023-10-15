@@ -13,7 +13,7 @@ export default function TitleInfo() {
             width="44"
             height="44"
           ></Image>
-          <h2 className="text-[24px] ml-4">Alice Uniqueness verification</h2>
+          <h2 className="text-[24px] ml-4">Pion Uniqueness verification</h2>
         </div>
         <button
           onClick={() => {
@@ -30,7 +30,7 @@ export default function TitleInfo() {
         </button>
       </div>
       <p className="text-lg mt-4">
-        Welcome to Alice&apos;s Uniqueness Verification Center! Here, you can
+        Welcome to Pion&apos;s Uniqueness Verification Center! Here, you can
         complete the verification process to access and operate the three
         different tiers of nodes. Please note that you should complete only ONE
         of these methods to be granted the ability to run each node tier.

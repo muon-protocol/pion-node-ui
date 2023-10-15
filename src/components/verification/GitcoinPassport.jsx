@@ -14,7 +14,7 @@ import {
   setGitcoinPassportVerified,
 } from "@/redux/features/verification";
 import { useAccount, useSignMessage } from "wagmi";
-import { ErrorBox, WarningBox } from "@/app/verification/page";
+import { ErrorBox, SubmitTier, WarningBox } from "@/app/verification/page";
 import { ERRORCODE } from "@/utils/errorCodeMessage";
 import { useSearchParams } from "next/navigation";
 import { CustomConnectButton } from "../layout/CustomConnectButton";
@@ -72,7 +72,6 @@ function Step2({ setGitCoinStep }) {
 
   const searchParams = useSearchParams();
   const staker = searchParams.get("staker");
-  console.log(staker);
 
   const [messageForSign, setMessageForSign] = useState("");
   const [nonce, setNonce] = useState("");
@@ -108,7 +107,6 @@ function Step2({ setGitCoinStep }) {
     gitcoinMessage()
       .then((res) => {
         const response = res.data;
-        console.log(response);
         if (response.success) {
           setMessageForSign(response.result.message);
           setNonce(response.result.nonce);
@@ -163,7 +161,7 @@ function Step2({ setGitCoinStep }) {
   );
 }
 
-function Step3() {
+function Step3({ needSubmitTier }) {
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
@@ -189,13 +187,14 @@ function Step3() {
         <div className="flex mt-10">
           <p className="ml-2 w-fit text-center text-lg">
             Congratulations! <br></br> You&apos;ve passed the Gitcoin Passport
-            verification. You now have the access to run Alice Starter node.
+            verification. You now have the access to run Pion Starter node.
           </p>
         </div>
       </div>
 
       <div className="px-[60px] mt-20">
         <div className="w-full flex justify-center">
+          {needSubmitTier && <SubmitTier></SubmitTier>}
           <BackToVerificationBtn className="text-myPrimary">
             Back to verification center
           </BackToVerificationBtn>
@@ -205,7 +204,7 @@ function Step3() {
   );
 }
 
-export default function GitCoin({ staker }) {
+export default function GitCoin({ staker, needSubmitTier }) {
   const [gitcoinStep, setGitCoinStep] = useState(1);
   return (
     <div className="w-[570px] mt-2 rounded-[18px] bg-formCardBackground min-h-[524px] p-4">
@@ -214,7 +213,12 @@ export default function GitCoin({ staker }) {
         {gitcoinStep === 2 && (
           <Step2 staker={staker} setGitCoinStep={setGitCoinStep}></Step2>
         )}
-        {gitcoinStep === 3 && <Step3 setGitCoinStep={setGitCoinStep}></Step3>}
+        {gitcoinStep === 3 && (
+          <Step3
+            setGitCoinStep={setGitCoinStep}
+            needSubmitTier={needSubmitTier}
+          ></Step3>
+        )}
       </div>
     </div>
   );

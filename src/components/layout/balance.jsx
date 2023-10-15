@@ -13,9 +13,7 @@ export default function Balance() {
     functionName: "balanceOf",
     args: [address],
     onSuccess(res) {
-      console.log(res);
       const balance = Web3.utils.fromWei(String(res), "ether");
-      console.log(balance);
       setBalance(Number(balance).toFixed(4));
     },
   });
@@ -35,7 +33,7 @@ export default function Balance() {
       ></Image>
       <span className="mr-3">Balance:</span>
       <b className="text-primary font-semibold mr-2">{balance}</b>
-      <b className="font-semibold">Alice</b>
+      <b className="font-semibold">Pion</b>
     </div>
   );
 }

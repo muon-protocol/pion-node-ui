@@ -13,8 +13,9 @@ import { useAccount } from "wagmi";
 import Style from "@/app/style.module.css";
 import { useRouter } from "next/navigation";
 import { LightBtn } from "@/app/page";
+import { SubmitTier } from "@/app/verification/page";
 
-function Step2() {
+function Step2({ needSubmitTier }) {
   const router = useRouter();
   return (
     <>
@@ -37,8 +38,9 @@ function Step2() {
       </div>
       <p className="px-10 text-center mt-10">
         Congratulations! You passed Telegram active community member
-        verification Your access granted to run Alice Starter node
+        verification Your access granted to run Pion Starter node
       </p>
+      {needSubmitTier && <SubmitTier></SubmitTier>}
       <button
         onClick={router.push("/verification")}
         className={`inline-block mt-10 rounded-[8px] bg-primaryMain text-primaryText px-6 pb-2 pt-2.5 text-sm font-medium leading-normal transition duration-150 ease-in-out hover:bg-primaryMain/80  active:bg-primaryMain/50`}
@@ -91,25 +93,19 @@ function Step3() {
   );
 }
 
-export default function TelegramModal({ isActive }) {
+export default function TelegramModal({ isActive, needSubmitTier }) {
   const dispatch = useDispatch();
   const [telegramStep, setTelegramStep] = useState(1);
   const { address } = useAccount();
   const staker = address;
   const telegramCallbackFunction = (user) => {
     dispatch(resetErrorMessage());
-    // gets user as an input
-    // id, first_name, last_name, username,
-    // photo_url, auth_date and hash
-    console.log(user);
     telegramVerification(user, staker)
       .then((res) => {
-        console.log(res);
         if (res.data.success) {
           dispatch(setTelegramVerified(true));
           setTelegramStep(2);
         } else {
-          console.log(res.data.message);
           dispatch(setErrorMessage(ERRORCODE[res.data.errorCode]("Telegram")));
           setTelegramStep(3);
         }
@@ -136,7 +132,8 @@ export default function TelegramModal({ isActive }) {
     <div className="flex">
       <LightBtn
         btnDisabeld={isActive}
-        bgColor={isActive ? "bg-uptime" : ""}
+        bgColor={isActive ? "bg-transparent" : ""}
+        textColor={isActive ? "text-uptime" : ""}
         dataTeToggle="modal"
         dataTeTarget="#telegramModal"
       >
@@ -211,7 +208,9 @@ export default function TelegramModal({ isActive }) {
                   </div>
                 </>
               )}
-              {telegramStep === 2 && <Step2></Step2>}
+              {telegramStep === 2 && (
+                <Step2 needSubmitTier={needSubmitTier}></Step2>
+              )}
               {telegramStep === 3 && <Step3></Step3>}
             </div>
           </div>

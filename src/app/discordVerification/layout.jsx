@@ -16,13 +16,12 @@ import { useSelector } from "react-redux";
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
 export const metadata = {
-  title: "Alice Dashboard",
-  description: "Alice Dashboard",
+  title: "Pion Dashboard",
+  description: "Pion Dashboard",
 };
 
 function Loading() {
   const selector = useSelector((state) => state.rootReducer.generalReducer);
-  console.log(selector);
   return;
 }
 

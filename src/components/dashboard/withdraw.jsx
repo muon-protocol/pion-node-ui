@@ -36,22 +36,20 @@ function Btn({ onclick, loading }) {
     </button>
   );
 }
-export default function Withdraw({ address }) {
+export default function Withdraw({ address, needSubmitTier }) {
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const { data: blockNumber } = useBlockNumber();
   const [state, setstate] = useState(false);
   const {
     data: contractData,
-    write,
+    write: writeGetReward,
     isLoading: walletLoading,
   } = useContractWrite({
     address: "0xd788C2276A6f75a8B9360E9695028329C925b0AB",
     abi: contractABI,
     functionName: "getReward",
     chainId: 97,
-    onError(error) {
-      console.log("Error", error);
-    },
+    onError(error) {},
   });
   const { isSuccess: trSuccess, isLoading: trLoading } = useWaitForTransaction({
     hash: contractData?.hash,
@@ -64,10 +62,10 @@ export default function Withdraw({ address }) {
     }
   }, [trSuccess]);
   return (
-    <div className="bg-cardBackground/50 w-fulzl rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
+    <div className="relative overflow-hidden bg-cardBackground/50 w-fulzl rounded-[10px] grid content-between py-4 px-8 h-full min-h-[200px]">
       <div className="flex justify-between">
         <h4>Reward</h4>
-        <b>{selector.reward} ALICE</b>
+        <b>{selector.reward} PION</b>
       </div>
       <div className="w-full flex justify-end">
         <Btn
@@ -75,7 +73,7 @@ export default function Withdraw({ address }) {
             setstate(true);
             fetchRewardData(address, blockNumber)
               .then((response) => {
-                write({
+                writeGetReward({
                   args: [
                     response.amount,
                     response.paidRewardPerToken,
@@ -91,6 +89,13 @@ export default function Withdraw({ address }) {
           loading={walletLoading || state || trLoading}
         ></Btn>
       </div>
+      {needSubmitTier && (
+        <div className="absolute flex z-40 bg-gray/80 w-full h-full justify-center items-center px-4">
+          <h4 className="text-xl text-center">
+            Complete <b>Uniqness Verification</b> to start earning
+          </h4>
+        </div>
+      )}
     </div>
   );
 }
