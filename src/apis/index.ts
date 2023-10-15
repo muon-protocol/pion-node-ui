@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Address } from 'wagmi';
 
 const axiosInstance = axios.create();
 
@@ -38,6 +39,13 @@ export async function getClaimSignatureAPI(
     claimer: claimer,
     tosSig: agreeWithTermsAndConditionsSig,
   });
+  return response.data;
+}
+
+export async function getUserSignatureForBoostAPI(address: Address) {
+  const response = await axiosInstance.get(
+    'https://pion-price.muon.net/api/price/' + address,
+  );
   return response.data;
 }
 

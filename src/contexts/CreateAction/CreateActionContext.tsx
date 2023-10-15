@@ -22,11 +22,10 @@ import { w3bNumberFromString } from '../../utils/web3.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import {
-  useApproveArgs,
-  useCreateAndBoostArgs,
-  useMintArgs,
-} from '../../hooks/useContractArgs.ts';
+import { useApproveArgs, useMintArgs } from '../../hooks/useContractArgs.ts';
+import { getUserSignatureForBoostAPI } from '../../apis';
+import { waitForTransaction, writeContract } from '@wagmi/core';
+import toast from 'react-hot-toast';
 
 const CreateActionContext = createContext<{
   createAmount: W3bNumber;
@@ -77,11 +76,7 @@ const CreateActionContext = createContext<{
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance } = useLPToken();
-  const {
-    ALICEAllowanceForBooster,
-    LPTokenAllowanceForBooster,
-    ALICEAllowance,
-  } = useBonALICE();
+  const { ALICEAllowance } = useBonALICE();
   const { walletAddress } = useUserProfile();
 
   const [createActionLoading, setCreateActionLoading] = useState(false);
@@ -124,36 +119,51 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const createAndBoostArgs = useCreateAndBoostArgs({
-    ALICEAmount: createAmount,
-    ALICEAllowance: ALICEAllowanceForBooster,
-    LPTokenAmount: createBoostAmount,
-    LPTokenAllowance: LPTokenAllowanceForBooster,
-  });
-
-  const {
-    callback: createAndBoost,
-    isMetamaskLoading: isCreateAndBoostMetamaskLoading,
-    isTransactionLoading: isCreateAndBoostTransactionLoading,
-  } = useWagmiContractWrite({
-    abi: BOOSTER_ABI,
-    address: BOOSTER_ADDRESS[getCurrentChainId()],
-    functionName: 'createAndBoost',
-    args: createAndBoostArgs,
-    chainId: getCurrentChainId(),
-  });
+  const [isCreateAndBoostMetamaskLoading, setIsCreateAndBoostMetamaskLoading] =
+    useState(false);
+  const [
+    isCreateAndBoostTransactionLoading,
+    setIsCreateAndBoostTransactionLoading,
+  ] = useState(false);
 
   const handleCreateBonALICEClicked = useCallback(async () => {
-    if (!ALICEBalance || !createAmount || createAmount.big > ALICEBalance.big)
+    if (
+      !walletAddress ||
+      !ALICEBalance ||
+      !createAmount ||
+      createAmount.big > ALICEBalance.big
+    )
       return;
     setCreateActionLoading(true);
     try {
       if (createBoostAmount.dsp > 0) {
-        await createAndBoost?.({
-          pending: 'Waiting for confirmation...',
-          success: 'BonALICE created!',
-          failed: 'Failed, please try again!',
-        });
+        const response = await getUserSignatureForBoostAPI(walletAddress);
+        if (response.success) {
+          setIsCreateAndBoostMetamaskLoading(true);
+          const { hash } = await writeContract({
+            abi: BOOSTER_ABI,
+            address: BOOSTER_ADDRESS[getCurrentChainId()],
+            functionName: 'createAndBoost',
+            args: [
+              createAmount.big,
+              createBoostAmount.big,
+              response.amount,
+              response.timestamp,
+              response.signature,
+            ],
+            chainId: getCurrentChainId(),
+          });
+          setIsCreateAndBoostTransactionLoading(true);
+          setIsCreateAndBoostMetamaskLoading(false);
+          const transaction = waitForTransaction({ hash });
+
+          await toast.promise(transaction, {
+            loading: 'Waiting for confirmation...',
+            success: 'BonALICE created!',
+            error: 'Failed, please try again!',
+          });
+          setIsCreateAndBoostTransactionLoading(false);
+        }
       } else {
         await mint?.({
           pending: 'Waiting for confirmation...',
@@ -166,11 +176,13 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
       setCreateBoostAmount(w3bNumberFromString(''));
       setIsSufficientModalOpen(true);
     } catch (error) {
+      setIsCreateAndBoostTransactionLoading(false);
+      setIsCreateAndBoostMetamaskLoading(false);
       console.log(error);
     }
 
     setCreateActionLoading(false);
-  }, [ALICEBalance, createAmount, createAndBoost, createBoostAmount.dsp, mint]);
+  }, [ALICEBalance, createAmount, createBoostAmount, mint, walletAddress]);
 
   const approveALICEArgs = useApproveArgs({
     spenderAddress: BONALICE_ADDRESS[getCurrentChainId()],

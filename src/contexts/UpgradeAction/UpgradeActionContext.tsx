@@ -23,7 +23,6 @@ import {
   useApproveArgs,
   useLockArgs,
   useLockToBondedTokenArgs,
-  useLockUSDCArgs,
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.ts';
@@ -36,6 +35,9 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 // import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import BOOSTER_ABI from '../../abis/Booster.ts';
+import { getUserSignatureForBoostAPI } from '../../apis';
+import { waitForTransaction, writeContract } from '@wagmi/core';
+import toast from 'react-hot-toast';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -94,7 +96,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     w3bNumberFromString(''),
   );
 
-  const { LPTokenAllowanceForBooster, ALICEAllowance } = useBonALICE();
+  const { ALICEAllowance } = useBonALICE();
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance } = useLPToken();
 
@@ -148,24 +150,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
-  const lockUSDCArgs = useLockUSDCArgs({
-    tokenId: upgradeModalSelectedBonALICE?.tokenId,
-    LPTokenAmount: upgradeBoostAmount,
-    LPTokenAllowance: LPTokenAllowanceForBooster,
-  });
-
-  const {
-    callback: lockUSDC,
-    isMetamaskLoading: isLockUSDCMetamaskLoading,
-    isTransactionLoading: isLockUSDCTransactionLoading,
-  } = useWagmiContractWrite({
-    abi: BOOSTER_ABI,
-    address: BOOSTER_ADDRESS[getCurrentChainId()],
-    functionName: 'boost',
-    args: lockUSDCArgs,
-    chainId: getCurrentChainId(),
-  });
-
   const {
     callback: lockToBondedToken,
     isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
@@ -180,7 +164,14 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  const [isLockUSDCMetamaskLoading, setIsLockUSDCMetamaskLoading] =
+    useState(false);
+  const [isLockUSDCTransactionLoading, setIsLockUSDCTransactionLoading] =
+    useState(false);
+
   const handleUpgradeBonALICEClicked = async () => {
+    if (!walletAddress) return;
+
     try {
       if (upgradeAmount.dsp > 0) {
         if (isNodeBonALICESelected) {
@@ -204,19 +195,42 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         }
       }
       if (upgradeBoostAmount.dsp > 0) {
-        console.log('lockUSDC');
-        await lockUSDC?.({
-          pending: 'Upgrading Bonded ALICE with USDC...',
-          success: 'Upgraded!',
-          failed: 'Failed to upgrade Bonded ALICE with USDC!',
-        });
+        const response = await getUserSignatureForBoostAPI(walletAddress);
+        if (response.success) {
+          setIsLockUSDCMetamaskLoading(true);
+          const { hash } = await writeContract({
+            abi: BOOSTER_ABI,
+            address: BOOSTER_ADDRESS[getCurrentChainId()],
+            functionName: 'boost',
+            args: [
+              upgradeModalSelectedBonALICE?.tokenId,
+              upgradeBoostAmount.big,
+              response.amount,
+              response.timestamp,
+              response.signature,
+            ],
+            chainId: getCurrentChainId(),
+          });
+          setIsLockUSDCTransactionLoading(true);
+          setIsLockUSDCMetamaskLoading(false);
+          const transaction = waitForTransaction({ hash });
+
+          await toast.promise(transaction, {
+            loading: 'Upgrading Bonded ALICE with USDC...',
+            success: 'Upgraded!',
+            error: 'Failed to upgrade Bonded ALICE with USDC!',
+          });
+          setIsLockUSDCTransactionLoading(false);
+        }
       }
-      console.log('reset');
+
       setUpgradeAmount(w3bNumberFromString(''));
       setUpgradeBoostAmount(w3bNumberFromString(''));
       setUpgradeModalSelectedBonALICE(null);
       setIsUpgradeModalOpen(false);
     } catch (e) {
+      setIsLockUSDCTransactionLoading(false);
+      setIsLockUSDCMetamaskLoading(false);
       console.log(e);
     }
   };
