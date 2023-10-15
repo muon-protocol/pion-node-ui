@@ -51,7 +51,12 @@ export const VerifyWalletCard = ({
         />
         <RewardSection
           title="MUON Presale"
-          validSection={wallet.wasInMuonPresale || wallet.wasInDeusPresale}
+          validSection={
+            wallet.wasInMuonPresale ||
+            wallet.wasInDeusPresale ||
+            wallet.wasMuonPrivateSale ||
+            wallet.wasInDeusAllocation
+          }
         />
         {/*<RewardSection*/}
         {/*  title="Deus Presale"*/}

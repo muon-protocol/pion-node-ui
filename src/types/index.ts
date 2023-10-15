@@ -54,10 +54,12 @@ export type RawRewards = {
   signature: string | null;
   claimer: `0x${string}` | null;
   alice_operator: RawRewardSection;
+  alice_operator_bounce: RawRewardSection;
+  deus_allocation: RawRewardSection;
   deus_presale: RawRewardSection;
   early_alice_operator: RawRewardSection;
   muon_presale: RawRewardSection;
-  alice_operator_bounce: RawRewardSection;
+  muon_private_sale: RawRewardSection;
   uniquenessVerified: boolean;
 };
 
@@ -77,6 +79,8 @@ export type RewardWallet = {
   signature: string | null;
   wasInMuonPresale: boolean;
   wasInDeusPresale: boolean;
+  wasInDeusAllocation: boolean;
+  wasMuonPrivateSale: boolean;
   wasAliceOperator: boolean;
   wasAliceOperatorEarly: boolean;
   wasAliceOperatorBounce: boolean;

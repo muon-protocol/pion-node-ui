@@ -20,6 +20,8 @@ const useRawRewards = ({
       (wallet) =>
         wallet.wasInMuonPresale ||
         wallet.wasInDeusPresale ||
+        wallet.wasInDeusAllocation ||
+        wallet.wasMuonPrivateSale ||
         wallet.wasAliceOperator ||
         wallet.wasAliceOperatorEarly ||
         wallet.wasAliceOperatorBounce,

@@ -33,6 +33,10 @@ export const PrizeCalculationDetailModal = () => {
         headerDetail="Reward"
         detailDescription="The bounce stage of the PION Operator is from the 27th of April 2023"
       />
+      <RewardSource
+        source={rewards?.muon_private_sale}
+        title="MUON Private Sale"
+      />
     </div>
   );
 };
