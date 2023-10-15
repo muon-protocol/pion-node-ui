@@ -151,7 +151,12 @@ export default [
   {
     anonymous: false,
     inputs: [
-      { indexed: true, internalType: 'address', name: 'from', type: 'address' },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'from',
+        type: 'address',
+      },
       {
         indexed: true,
         internalType: 'address',
@@ -281,7 +286,11 @@ export default [
         name: '_reserve1',
         type: 'uint112',
       },
-      { internalType: 'uint32', name: '_blockTimestampLast', type: 'uint32' },
+      {
+        internalType: 'uint32',
+        name: '_blockTimestampLast',
+        type: 'uint32',
+      },
     ],
     payable: false,
     stateMutability: 'view',

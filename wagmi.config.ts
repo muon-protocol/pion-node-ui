@@ -9,10 +9,15 @@ import MUON_NODE_STAKING from './src/abis/MuonNodeStaking';
 import MUON_NODE_MANAGER from './src/abis/MuonNodeManager';
 import BOOSTER from './src/abis/Booster';
 import PANCAKE_PAIR from './src/abis/PancakePair';
+import { erc20ABI } from 'wagmi';
 
 export default defineConfig({
   out: 'src/abis/types/generated.ts',
   contracts: [
+    {
+      name: 'erc20',
+      abi: erc20ABI,
+    },
     {
       name: 'Alice',
       abi: ALICE_ABI,

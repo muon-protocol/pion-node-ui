@@ -199,6 +199,8 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
       // if (totalRewards.dsp < 500) {
       //   setIsInsufficientModalOpen(true);
       // } else {
+      // setIsSufficientModalOpen(true);
+      // }
       toast.success('Claimed successfully');
       if (!newNFTClaimedLoading) {
         setNewNFTClaimedLoading(true);
@@ -206,14 +208,11 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
           setNewNFTClaimedLoading(false);
         }, 10000);
       }
-      // setIsSufficientModalOpen(true);
-      // }
       setStakingAddress(null);
       setWalletsWithSignature([]);
       setClaimSignature(null);
       setRawRewards(null);
       setTimeout(() => {
-        //refresh page
         window.location.reload();
       }, 1000);
     }
