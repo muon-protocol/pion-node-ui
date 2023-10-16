@@ -30,15 +30,15 @@ export const PrizeCalculationDetailModal = () => {
         title="ALICE Operator"
         rewardSections={[
           {
-            title: 'Jan 19th - Feb 27th',
+            title: 'Jan 19 - Feb 27',
             reward: rewards.early_alice_operator.reward,
           },
           {
-            title: 'Feb 28th - Apr 28th',
+            title: 'Feb 28 - Apr 28',
             reward: rewards.alice_operator.reward,
           },
           {
-            title: 'Apr 27th - Oct 10th',
+            title: 'Apr 29 - Oct 10',
             reward: rewards.alice_operator_bounce.reward,
           },
         ]}
