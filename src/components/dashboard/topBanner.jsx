@@ -74,7 +74,7 @@ export default function TopBanner({
                 : "Not Verified"}
             </h4>
           </div>
-          {needSubmitTier ? (
+          {isVerify && needSubmitTier ? (
             <p className="text-helperWarning">
               You haven't finalized your verification, Click ‘Submit Tier
               Update’ to start earning rewards
@@ -94,7 +94,7 @@ export default function TopBanner({
         loading={walletLoading || trLoading || serverRequestLoading}
         className="mt-5 lg:mt-0 min-w-[176px]"
         onClick={() => {
-          if (needSubmitTier) {
+          if (needSubmitTier && isVerify) {
             getTierSig(address)
               .then((response) => {
                 setServerRequestLoading(true);
@@ -119,7 +119,7 @@ export default function TopBanner({
           }
         }}
       >
-        {needSubmitTier ? "Submit tier Update" : "Go to verification center"}
+        {isVerify ? "Submit tier Update" : "Go to verification center"}
       </LightBtn>
     </div>
   );

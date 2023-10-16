@@ -2,7 +2,7 @@ import axios from "axios";
 
 const BASEURL =
   process.env.NODE_ENV !== "production"
-    ? process.env.NEXT_PUBLIC_ALICE_URL_DEV
+    ? process.env.NEXT_PUBLIC_PROXY_URL_DEV
     : "";
 
 const fetchRewardData = async (staker, blockNumber) => {

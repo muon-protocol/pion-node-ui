@@ -53,6 +53,7 @@ export const node = createSlice({
         const nodeData = action.payload.nodeInfo;
         if (action.payload === false) {
           state.fetchStatus = "faild";
+          state.nodeIsActive = "node not found";
         } else {
           state.fetchStatus = "succeeded";
           state.haveNode = nodeData.haveNode;

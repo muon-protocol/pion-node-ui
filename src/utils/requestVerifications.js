@@ -96,5 +96,5 @@ export const gitcoinVerification = async (staker, signer, signature, nonce) => {
 };
 
 export const getTierSig = async (staker) => {
-  return await axios.get(`/uniqueness/getTierSig?staker=${staker}`);
+  return await axios.get(`${verificationEndPoint}/getTierSig?staker=${staker}`);
 };
