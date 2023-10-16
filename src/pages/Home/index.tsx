@@ -67,17 +67,13 @@ const Home = () => {
                   </div>
                 )}
               </div>
-              <div
+              <button
+                disabled
                 className="btn !px-6 mx-auto "
-                onClick={() =>
-                  window.open(
-                    'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
-                    '_blank',
-                  )
-                }
+                onClick={() => {}}
               >
                 Buy $PION
-              </div>
+              </button>
             </>
           </StepCard>
           <StepCard

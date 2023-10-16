@@ -19,6 +19,7 @@ export type Step = {
   buttonText: string;
   buttonLink: string;
   buttonLinkTarget: string;
+  buttonDisabled: boolean;
 };
 
 export enum ActionType {

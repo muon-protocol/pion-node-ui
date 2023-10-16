@@ -79,18 +79,17 @@ const AmountInput = ({
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
-            You don't have sufficient amount of $PION.{' '}
-            <span
-              className="underline cursor-pointer"
-              onClick={() =>
-                window.open(
-                  'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
-                  '_blank',
-                )
-              }
-            >
-              BUY HERE
-            </span>
+            You don't have sufficient amount of $PION. {/*<span*/}
+            {/*  className="underline cursor-pointer"*/}
+            {/*  onClick={() =>*/}
+            {/*    window.open(*/}
+            {/*      'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',*/}
+            {/*      '_blank',*/}
+            {/*    )*/}
+            {/*  }*/}
+            {/*>*/}
+            {/*  BUY HERE*/}
+            {/*</span>*/}
           </p>
         </FadeIn>
       ) : null}

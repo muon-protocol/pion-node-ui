@@ -61,6 +61,7 @@ export const steps: Step[] = [
     buttonLink:
       'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
     buttonLinkTarget: '_blank',
+    buttonDisabled: true,
   },
   {
     id: 2,
@@ -69,6 +70,7 @@ export const steps: Step[] = [
     buttonText: 'Create bonded PION',
     buttonLink: '/bonPION/create',
     buttonLinkTarget: '_self',
+    buttonDisabled: false,
   },
   {
     id: 3,
@@ -78,6 +80,7 @@ export const steps: Step[] = [
     buttonText: 'Setup Node',
     buttonLink: '/setup-node',
     buttonLinkTarget: '_self',
+    buttonDisabled: false,
   },
 ];
 
