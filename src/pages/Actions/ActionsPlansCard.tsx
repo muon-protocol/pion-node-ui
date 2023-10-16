@@ -57,7 +57,7 @@ export const ActionsPlansCard = ({
           <p
             onClick={() =>
               window.open(
-                'https://en.wikipedia.org/wiki/Power_of_attorney',
+                'https://docs.muon.net/muon-network/muon-nodes/pion-network/pion-poa-network',
                 '_blank',
               )
             }
