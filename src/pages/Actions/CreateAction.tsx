@@ -155,7 +155,15 @@ export const RenderCreateBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {chainId !== getCurrentChainId() ? (
+        {(ALICEBalance && createAmount.dsp > ALICEBalance.dsp) ||
+        (LPTokenBalance && createBoostAmount.dsp > LPTokenBalance.dsp) ? (
+          <button
+            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            disabled
+          >
+            Insufficient Funds
+          </button>
+        ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
             className="btn btn--white min-w-[360px] mx-auto !py-4"
