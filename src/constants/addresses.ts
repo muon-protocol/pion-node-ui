@@ -18,7 +18,7 @@ export const BONALICE_ADDRESS: AddressMap = {
 
 export const LP_TOKEN_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x13c42Aa47f15778155F5c48885bDdC3E1C72Acd7',
-  [SupportedChainId.MAINNET]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
+  [SupportedChainId.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
 };
 
 export const REWARD_ADDRESS: AddressMap = {

@@ -59,7 +59,7 @@ export const steps: Step[] = [
       'First you need to buy PION to create your bonPION NFT, minimum amount for starting is 1000 PION',
     buttonText: 'Buy PION',
     buttonLink:
-      'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+      'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
     buttonLinkTarget: '_blank',
   },
   {
