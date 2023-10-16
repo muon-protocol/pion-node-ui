@@ -84,7 +84,7 @@ const AmountInput = ({
               className="underline cursor-pointer"
               onClick={() =>
                 window.open(
-                  'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+                  'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
                   '_blank',
                 )
               }
