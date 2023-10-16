@@ -17,7 +17,7 @@ import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
-import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
+import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -51,7 +51,7 @@ export const RenderCreateBody = () => {
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const { boostCoefficient } = useBooster();
-  const { USDCPrice, ALICEPrice } = usePancakePair();
+  const { ALICEPrice } = useTokenPrice();
 
   const maxAmountToBoost = useMemo(() => {
     return ALICEPrice
@@ -114,7 +114,7 @@ export const RenderCreateBody = () => {
       </FadeIn>
 
       {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) &&
-        USDCPrice &&
+        ALICEPrice &&
         boostCoefficient && (
           <>
             <MoveUpIn
@@ -128,15 +128,10 @@ export const RenderCreateBody = () => {
                 <p className="font-light text-sm flex gap-1">
                   {createBoostAmount.dsp +
                     ' USDC -> ' +
-                    Math.round(
-                      (w3bNumberFromBigint(
-                        createBoostAmount.big *
-                          BigInt(Math.round(USDCPrice * 100)),
-                      ).dsp /
-                        100) *
-                        100,
-                    ) /
-                      100 +
+                    (
+                      createBoostAmount.dsp /
+                      (Math.round(ALICEPrice * 10000) / 10000)
+                    ).toFixed(2) +
                     ' PION '}
                   <p className="text-uptime font-bold">
                     x{boostCoefficient?.dsp}
@@ -145,13 +140,12 @@ export const RenderCreateBody = () => {
                 </p>
               </span>
               <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
-                {Math.round(
-                  (createBoostAmount.dsp *
-                    (Math.round(USDCPrice * 100) / 100) *
+                {(
+                  (createBoostAmount.dsp /
+                    (Math.round(ALICEPrice * 10000) / 10000)) *
                     boostCoefficient.dsp +
-                    createAmount.dsp) *
-                    100,
-                ) / 100}
+                  createAmount.dsp
+                ).toFixed(2) + ' PION'}
               </span>
             </MoveUpIn>
           </>

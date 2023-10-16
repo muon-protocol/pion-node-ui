@@ -15,8 +15,9 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 // import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
-import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
+// import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
+import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -79,7 +80,7 @@ export const RenderUpgradeBody = () => {
   }, [LPTokenAllowanceForBooster, upgradeBoostAmount]);
 
   const { boostCoefficient } = useBooster();
-  const { USDCPrice, ALICEPrice } = usePancakePair();
+  const { ALICEPrice } = useTokenPrice();
 
   const maxAmountToBoost = useMemo(() => {
     return ALICEPrice && boostableAmount
@@ -170,7 +171,7 @@ export const RenderUpgradeBody = () => {
           </span>
           {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) &&
             boostCoefficient &&
-            USDCPrice && (
+            ALICEPrice && (
               <>
                 <MoveUpIn
                   y={-10}
@@ -183,12 +184,10 @@ export const RenderUpgradeBody = () => {
                     <p className="font-light text-sm flex gap-1">
                       {upgradeBoostAmount.dsp +
                         ' USDC -> ' +
-                        Math.round(
-                          upgradeBoostAmount.dsp *
-                            (Math.round(USDCPrice * 100) / 100) *
-                            100,
-                        ) /
-                          100 +
+                        (
+                          upgradeBoostAmount.dsp /
+                          (Math.round(ALICEPrice * 10000) / 10000)
+                        ).toFixed(2) +
                         ' PION '}
                       <p className="text-uptime font-bold">
                         x{boostCoefficient?.dsp}
@@ -200,14 +199,13 @@ export const RenderUpgradeBody = () => {
                     </p>
                   </span>
                   <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
-                    {Math.round(
-                      (upgradeBoostAmount.dsp *
-                        (Math.round(USDCPrice * 100) / 100) *
+                    {(
+                      (upgradeBoostAmount.dsp /
+                        (Math.round(ALICEPrice * 10000) / 10000)) *
                         boostCoefficient.dsp +
-                        upgradeAmount.dsp +
-                        selectedUpgradeBonALICE.nodePower) *
-                        100,
-                    ) / 100}
+                      upgradeAmount.dsp +
+                      selectedUpgradeBonALICE.nodePower
+                    ).toFixed(2)}
                   </span>
                 </MoveUpIn>
               </>
