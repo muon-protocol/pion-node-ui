@@ -138,7 +138,10 @@ export default function Home() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
         <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
         <StakeMore></StakeMore>
-        <Withdraw needSubmitTier={needSubmitTier} address={address}></Withdraw>
+        <Withdraw
+          needSubmitTier={needSubmitTier && isVerify}
+          address={address}
+        ></Withdraw>
       </div>
       <LiveChatWidget
         license="15138837"
