@@ -117,7 +117,7 @@ const renderActionDescription = (action: ActionType) => {
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
             Create bonPION using PION tokens. You need bonPION to setup a node,
-            join Pion Network and earn reward. Don't miss the chance to boost
+            join PION Network and earn reward. Don't miss the chance to boost
             your NFT by 2x using USDC.
           </p>
         </FadeIn>
