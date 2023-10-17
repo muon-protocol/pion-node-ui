@@ -267,7 +267,7 @@ const ReviewDetail = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       setTimeout(() => {
-        window.open('/pion/dashboard/preparing', '_self');
+        window.open('/dashboard/preparing', '_self');
       }, 5000);
     }
   }, [stakerAddressInfo]);
@@ -284,7 +284,7 @@ const ReviewDetail = () => {
           redirect you to the dashboard in few seconds. If you don't want to
           wait, you can{' '}
           <span
-            onClick={() => window.open('/pion/dashboard', '_self')}
+            onClick={() => window.open('/dashboard', '_self')}
             className="underline cursor-pointer hover:font-medium"
           >
             click here

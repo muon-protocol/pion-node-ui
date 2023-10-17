@@ -161,7 +161,7 @@ const DesktopNavbar = () => {
                     <button className="btn btn--small">Setup Node</button>
                   </Link>
                 ) : (
-                  <div onClick={() => window.open('/pion/dashboard', '_self')}>
+                  <div onClick={() => window.open('/dashboard', '_self')}>
                     <button className="btn btn--small">Dashboard</button>
                   </div>
                 )}

@@ -21,7 +21,7 @@ const ActionsHeader = () => {
       {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
         <div
           className="ml-auto flex gap-1.5 items-center cursor-pointer"
-          onClick={() => window.open('/pion/dashboard', '_self')}
+          onClick={() => window.open('/dashboard', '_self')}
         >
           <img src="/assets/images/actions/back-icon.svg" alt="" />
           <p className="font-medium text-sm underline ">Back to Dashboard</p>

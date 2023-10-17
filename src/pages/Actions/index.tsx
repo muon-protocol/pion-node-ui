@@ -38,7 +38,7 @@ const Actions = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
-        window.open('/pion/dashboard', '_self');
+        window.open('/dashboard', '_self');
       } else if (
         muonNodeStakingUsers &&
         muonNodeStakingUsers[4] > BigInt(0) &&

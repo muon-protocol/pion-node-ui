@@ -80,7 +80,7 @@ const Home = () => {
             <p className="font-tomorrow text-2xl font-medium mb-6">
               {bonALICEs.length > 0 ? 'Manage bonPION' : 'Create bonPION'}
             </p>
-            <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
+            <span className="descriptions font-tomorrow mb-auto leading-[19px] flex flex-col gap-1">
               <p>
                 {bonALICEs.length > 0
                   ? 'You can add more $PION and USDC to increase your bonPION amount and node power'
@@ -145,7 +145,7 @@ const Home = () => {
             {nodeBonALICE.length > 0 ? (
               <div
                 className="btn !px-6 mx-auto font-tomorrow"
-                onClick={() => window.open('/pion/dashboard', '_self')}
+                onClick={() => window.open('/dashboard', '_self')}
               >
                 Go to Dashboard
               </div>

@@ -36,7 +36,7 @@ const ClaimPrize = () => {
 
   // useEffect(() => {
   // if (stakerAddressInfo?.active) {
-  //   window.open('/pion/dashboard', '_self');
+  //   window.open('/dashboard', '_self');
   // }
   // }, [stakerAddressInfo]);
 
