@@ -96,7 +96,7 @@ const DesktopNavbar = () => {
                 {/*            </div>*/}
                 {/*            <div className="dialog__top__right flex items-center">*/}
                 {/*              {bonALICEs.length > 0 ? (*/}
-                {/*                <Link to={'/bonPION/create'}>*/}
+                {/*                <Link to={'/pion/bonPION/create'}>*/}
                 {/*                  <button*/}
                 {/*                    onClick={() =>*/}
                 {/*                      setIsManageBonALICEDialogOpen(false)*/}
@@ -107,7 +107,7 @@ const DesktopNavbar = () => {
                 {/*                  </button>*/}
                 {/*                </Link>*/}
                 {/*              ) : (*/}
-                {/*                <Link to={'/bonPION/create'}>*/}
+                {/*                <Link to={'/pion/bonPION/create'}>*/}
                 {/*                  <button*/}
                 {/*                    onClick={() =>*/}
                 {/*                      setIsManageBonALICEDialogOpen(false)*/}
@@ -121,7 +121,7 @@ const DesktopNavbar = () => {
                 {/*            </div>*/}
                 {/*          </div>*/}
                 {/*          <div className="dialog--bottom">*/}
-                {/*            <Link to={'/claim'}>*/}
+                {/*            <Link to={'/pion/claim'}>*/}
                 {/*              <button*/}
                 {/*                onClick={() =>*/}
                 {/*                  setIsManageBonALICEDialogOpen(false)*/}
@@ -145,7 +145,7 @@ const DesktopNavbar = () => {
                 {!hasNodeBonALICE &&
                   !location.pathname.includes('/bonPION/') && (
                     <Link
-                      to={'/bonPION/create'}
+                      to={'/pion/bonPION/create'}
                       className="btn btn--small--with-icon relative"
                     >
                       <img
@@ -157,11 +157,11 @@ const DesktopNavbar = () => {
                     </Link>
                   )}
                 {!hasNodeBonALICE ? (
-                  <Link to="/setup-node">
+                  <Link to="/pion/setup-node">
                     <button className="btn btn--small">Setup Node</button>
                   </Link>
                 ) : (
-                  <div onClick={() => window.open('/dashboard', '_self')}>
+                  <div onClick={() => window.open('/pion/dashboard', '_self')}>
                     <button className="btn btn--small">Dashboard</button>
                   </div>
                 )}

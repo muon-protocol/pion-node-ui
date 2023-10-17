@@ -61,7 +61,7 @@ const ClaimCard = () => {
 
   // useEffect(() => {
   //   if (isSuccess || alreadyClaimedPrize) {
-  //     navigate('/setup-node');
+  //     navigate('/pion/setup-node');
   //     setAlreadyClaimedPrize(false);
   //   }
   // }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
@@ -148,7 +148,7 @@ const ClaimCard = () => {
             </button>
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
-              onClick={() => navigate('/setup-node')}
+              onClick={() => navigate('/pion/setup-node')}
               className="btn btn--white md:ml-auto max-md:!w-full !px-10"
               disabled
             >

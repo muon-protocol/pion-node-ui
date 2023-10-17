@@ -20,17 +20,17 @@ const Actions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/bonPION/create') {
+    if (location.pathname === '/pion/bonPION/create') {
       setSelectedAction(ActionType.CREATE);
-    } else if (location.pathname === '/bonPION/view') {
+    } else if (location.pathname === '/pion/bonPION/view') {
       setSelectedAction(ActionType.VIEW);
-    } else if (location.pathname === '/bonPION/increase') {
+    } else if (location.pathname === '/pion/bonPION/increase') {
       setSelectedAction(ActionType.UPGRADE);
-    } else if (location.pathname === '/bonPION/merge') {
+    } else if (location.pathname === '/pion/bonPION/merge') {
       setSelectedAction(ActionType.MERGE);
-    } else if (location.pathname === '/bonPION/split') {
+    } else if (location.pathname === '/pion/bonPION/split') {
       setSelectedAction(ActionType.SPLIT);
-    } else if (location.pathname === '/bonPION/transfer') {
+    } else if (location.pathname === '/pion/bonPION/transfer') {
       setSelectedAction(ActionType.TRANSFER);
     }
   }, [setSelectedAction, location.pathname]);
@@ -38,7 +38,7 @@ const Actions = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
-        window.open('/dashboard', '_self');
+        window.open('/pion/dashboard', '_self');
       } else if (
         muonNodeStakingUsers &&
         muonNodeStakingUsers[4] > BigInt(0) &&

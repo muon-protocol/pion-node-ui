@@ -267,7 +267,7 @@ const ReviewDetail = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       setTimeout(() => {
-        window.open('/dashboard/preparing', '_self');
+        window.open('/pion/dashboard/preparing', '_self');
       }, 5000);
     }
   }, [stakerAddressInfo]);
@@ -284,7 +284,7 @@ const ReviewDetail = () => {
           redirect you to the dashboard in few seconds. If you don't want to
           wait, you can{' '}
           <span
-            onClick={() => window.open('/dashboard', '_self')}
+            onClick={() => window.open('/pion/dashboard', '_self')}
             className="underline cursor-pointer hover:font-medium"
           >
             click here
@@ -317,7 +317,7 @@ const ReviewDetail = () => {
             {/*      className="hover:underline cursor-pointer text-primary"*/}
             {/*      onClick={() => {*/}
             {/*        setSelectedAction(sidebarItems[1].link);*/}
-            {/*        navigate('/create');*/}
+            {/*        navigate('/pion/create');*/}
             {/*      }}*/}
             {/*    >*/}
             {/*      upgrade*/}
@@ -327,7 +327,7 @@ const ReviewDetail = () => {
             {/*      className="hover:underline cursor-pointer text-primary"*/}
             {/*      onClick={() => {*/}
             {/*        setSelectedAction(sidebarItems[2].link);*/}
-            {/*        navigate('/create');*/}
+            {/*        navigate('/pion/create');*/}
             {/*      }}*/}
             {/*    >*/}
             {/*      merge*/}
@@ -355,7 +355,7 @@ const ReviewDetail = () => {
                   className="text-white text-xl underline cursor-pointer"
                   onClick={() =>
                     window.open(
-                      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-v2',
+                      'https://docs.muon.net/muon-network/muon-nodes/pion',
                       '_blank',
                     )
                   }
@@ -399,7 +399,7 @@ const EmptyBonALICECard = () => {
           </p>
           <button
             className="btn btn--white mx-auto"
-            onClick={() => navigate('/bonPION/create')}
+            onClick={() => navigate('/pion/bonPION/create')}
           >
             Create BonALICE
           </button>

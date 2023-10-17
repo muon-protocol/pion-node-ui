@@ -217,9 +217,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           const transaction = waitForTransaction({ hash });
 
           await toast.promise(transaction, {
-            loading: 'Upgrading Bonded ALICE with USDC...',
-            success: 'Upgraded!',
-            error: 'Failed to upgrade Bonded ALICE with USDC!',
+            loading: 'Boosting bonded PION with USDC...',
+            success: 'Boosted!',
+            error: 'Failed to boost bonded PION with USDC!',
           });
           setIsLockUSDCTransactionLoading(false);
         }

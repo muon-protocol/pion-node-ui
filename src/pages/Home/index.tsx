@@ -14,9 +14,7 @@ const Home = () => {
   const { bonALICEs } = useBonALICE();
 
   useEffect(() => {
-    // if (stakerAddressInfo?.active) {
-    //   window.open('/dashboard', '_self');
-    // }
+    navigate('/pion/get-started');
   }, [navigate, stakerAddressInfo]);
 
   const { ALICEBalance } = useALICE();
@@ -105,7 +103,7 @@ const Home = () => {
                 </div>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => window.open('/bonPION/increase', '_self')}
+                  onClick={() => window.open('/pion/bonPION/increase', '_self')}
                 >
                   Manage bonPION
                 </div>
@@ -115,7 +113,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => window.open('/bonPION/increase', '_self')}
+                  onClick={() => window.open('/pion/bonPION/increase', '_self')}
                 >
                   Manage bonPION
                 </div>
@@ -125,7 +123,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto"
-                  onClick={() => window.open('/bonPION/create', '_self')}
+                  onClick={() => window.open('/pion/bonPION/create', '_self')}
                 >
                   Create bonPION
                 </div>
@@ -151,14 +149,14 @@ const Home = () => {
             {nodeBonALICE.length > 0 ? (
               <div
                 className="btn !px-6 mx-auto font-tomorrow"
-                onClick={() => window.open('/dashboard', '_self')}
+                onClick={() => window.open('/pion/dashboard', '_self')}
               >
                 Go to Dashboard
               </div>
             ) : (
               <div
                 className="btn !px-6 mx-auto"
-                onClick={() => window.open('/setup-node', '_self')}
+                onClick={() => window.open('/pion/setup-node', '_self')}
               >
                 Setup Node
               </div>

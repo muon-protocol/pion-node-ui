@@ -23,10 +23,10 @@ export type Step = {
 };
 
 export enum ActionType {
-  VIEW = '/bonPION/view',
-  CREATE = '/bonPION/create',
-  UPGRADE = '/bonPION/increase',
-  MERGE = '/bonPION/merge',
+  VIEW = '/pion/bonPION/view',
+  CREATE = '/pion/bonPION/create',
+  UPGRADE = '/pion/bonPION/increase',
+  MERGE = '/pion/bonPION/merge',
   SPLIT = 'split',
   TRANSFER = 'transfer',
 }

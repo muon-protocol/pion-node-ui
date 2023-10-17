@@ -31,7 +31,7 @@ const InsufficientNFTAmoutModalBody = ({
           setSelectedAction(sidebarItems[1].link);
           createModal(false);
           claimModal(false);
-          navigate('/bonPION/create');
+          navigate('/pion/bonPION/create');
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >

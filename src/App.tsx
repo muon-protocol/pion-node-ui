@@ -50,31 +50,31 @@ function App() {
                                       <Routes>
                                         <Route path="/" element={<Home />} />
                                         <Route
-                                          path="/bonPION/view"
+                                          path="/pion/bonPION/view"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/create"
+                                          path="/pion/bonPION/create"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/increase"
+                                          path="/pion/bonPION/increase"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/merge"
+                                          path="/pion/bonPION/merge"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/split-"
+                                          path="/pion/bonPION/split-"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/bonPION/transfer-"
+                                          path="/pion/bonPION/transfer-"
                                           element={<Actions />}
                                         />
                                         <Route
-                                          path="/get-started"
+                                          path="/pion/get-started"
                                           element={<GetStarted />}
                                         />
                                         <Route
@@ -82,7 +82,7 @@ function App() {
                                           element={<ClaimPrize />}
                                         />
                                         <Route
-                                          path="/setup-node"
+                                          path="/pion/setup-node"
                                           element={<ReviewDetail />}
                                         />
                                       </Routes>

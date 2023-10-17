@@ -24,7 +24,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
           onClick={() => {
             createModal(false);
             claimModal(false);
-            navigate('/setup-node');
+            navigate('/pion/setup-node');
           }}
           className="btn btn--primary mb-2 mt-5 mx-auto"
         >
@@ -37,7 +37,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
             setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/bonPION/increase');
+            navigate('/pion/bonPION/increase');
           }}
           className="text-primary hover:underline cursor-pointer"
         >
