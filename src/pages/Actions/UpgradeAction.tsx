@@ -166,7 +166,7 @@ export const RenderUpgradeBody = () => {
       {selectedUpgradeBonALICE && (
         <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-            <p className="font-light">Your bonPION current amount:</p>
+            <p className="font-light">current bonPION amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
           {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) &&
