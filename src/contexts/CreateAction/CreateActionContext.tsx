@@ -75,7 +75,7 @@ const CreateActionContext = createContext<{
 
 const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const { ALICEBalance } = useALICE();
-  const { LPTokenBalance } = useLPToken();
+  const { LPTokenBalance, LPTokenDecimals } = useLPToken();
   const { ALICEAllowance } = useBonALICE();
   const { walletAddress } = useUserProfile();
 
@@ -97,7 +97,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const handleCreateBoostAmountChange = (amount: string) => {
-    setCreateBoostAmount(w3bNumberFromString(amount));
+    setCreateBoostAmount(w3bNumberFromString(amount, LPTokenDecimals));
   };
 
   const mintArgs = useMintArgs({

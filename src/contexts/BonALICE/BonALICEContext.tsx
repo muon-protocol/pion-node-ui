@@ -21,6 +21,7 @@ import { BonALICE, RawBonALICE } from '../../types';
 import useRefresh from '../Refresh/useRefresh.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
 import useAllowance from '../../hooks/useAllowance.ts';
+import useLPToken from '../LPToken/useLPToken.ts';
 
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
@@ -49,6 +50,7 @@ const BonALICEContext = createContext<{
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
   const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
+  const { LPTokenDecimals } = useLPToken();
 
   const { allowance: ALICEAllowance } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
@@ -56,7 +58,9 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { allowance: LPTokenAllowanceForBooster } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],
+    LPTokenDecimals,
   );
+
   const { allowance: ALICEAllowanceForBooster } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],

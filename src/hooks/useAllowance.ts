@@ -10,6 +10,7 @@ import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
 const useAllowance = (
   contractAddress: `0x${string}`,
   spenderAddress?: `0x${string}`,
+  decimals = 18,
 ) => {
   const [allowance, setAllowance] = useState<W3bNumber | null>(null);
   const { walletAddress } = useUserProfile();
@@ -30,9 +31,9 @@ const useAllowance = (
     if (isFetched && data !== undefined && data !== null) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      setAllowance(w3bNumberFromBigint(data));
+      setAllowance(w3bNumberFromBigint(data, decimals));
     }
-  }, [isFetched, data]);
+  }, [isFetched, data, decimals]);
 
   return { allowance };
 };

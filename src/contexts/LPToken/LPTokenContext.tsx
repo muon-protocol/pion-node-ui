@@ -6,16 +6,19 @@ import LP_TOKEN_ABI from '../../abis/LPToken.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
+import { useLpTokenDecimals } from '../../abis/types/generated.ts';
 // import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
 
 const LPTokenContext = createContext<{
   LPTokenBalanceIsFetched: boolean;
   LPTokenBalanceIsLoading: boolean;
   LPTokenBalance: W3bNumber | null;
+  LPTokenDecimals: number | undefined;
 }>({
   LPTokenBalanceIsFetched: false,
   LPTokenBalanceIsLoading: false,
   LPTokenBalance: null,
+  LPTokenDecimals: undefined,
 });
 
 const LPTokenProvider = ({ children }: { children: ReactNode }) => {
@@ -43,6 +46,15 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
   //   watch: true,
   // });
 
+  const { data: decimals } = useContractRead({
+    abi: LP_TOKEN_ABI,
+    address: LP_TOKEN_ADDRESS[getCurrentChainId()],
+    functionName: 'decimals',
+    args: undefined,
+    chainId: getCurrentChainId(),
+    watch: true,
+  });
+
   const {
     data: LPTokenBalanceData,
     isFetched: LPTokenBalanceIsFetched,
@@ -62,11 +74,9 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (LPTokenBalanceIsFetched && LPTokenBalanceData) {
-      setLPTokenBalance(
-        w3bNumberFromBigint(LPTokenBalanceData * BigInt(10 ** 12)),
-      );
+      setLPTokenBalance(w3bNumberFromBigint(LPTokenBalanceData, decimals));
     }
-  }, [LPTokenBalanceIsFetched, LPTokenBalanceData]);
+  }, [LPTokenBalanceIsFetched, LPTokenBalanceData, decimals]);
 
   return (
     <LPTokenContext.Provider
@@ -74,6 +84,7 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
         LPTokenBalanceIsFetched,
         LPTokenBalanceIsLoading,
         LPTokenBalance,
+        LPTokenDecimals: decimals,
       }}
     >
       {children}

@@ -98,7 +98,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { ALICEAllowance } = useBonALICE();
   const { ALICEBalance } = useALICE();
-  const { LPTokenBalance } = useLPToken();
+  const { LPTokenBalance, LPTokenDecimals } = useLPToken();
 
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
 
@@ -313,9 +313,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     });
   }, [approveLPToken, LPTokenBalance, upgradeBoostAmount]);
 
-  const handleUpgradeBoostAmountChange = useCallback((amount: string) => {
-    setUpgradeBoostAmount(w3bNumberFromString(amount));
-  }, []);
+  const handleUpgradeBoostAmountChange = useCallback(
+    (amount: string) => {
+      setUpgradeBoostAmount(w3bNumberFromString(amount, LPTokenDecimals));
+    },
+    [LPTokenDecimals],
+  );
 
   const handleUpgradeAmountChange = useCallback((amount: string) => {
     setUpgradeAmount(w3bNumberFromString(amount));
