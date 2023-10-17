@@ -60,7 +60,7 @@ export const getNodeInfoData = async (walletAddress) => {
     nodeInfoData.nodeIsActive = "Loading...";
     nodeInfoData.nodeInfo["isNew"] = res.node["isNew"];
     nodeInfoData.nodeInfo["active"] = res["node"]["active"];
-    const tests = res["node"]["tests"];
+    // const tests = res["node"]["tests"];
     nodeInfoData.nodeInfo["nodeAddress"] = res["node"]["nodeAddress"];
     nodeInfoData.nodeInfo["id"] = res["node"]["id"];
     nodeInfoData.nodeInfo["peerId"] = res["node"]["peerId"];
@@ -85,7 +85,7 @@ export const getNodeInfoData = async (walletAddress) => {
     } catch (error) {
       console.log(error);
     }
-    nodeInfoData.nodeInfo["nodeIP"] = res["node"]["ip"];
+    nodeInfoData.nodeInfo["nodeIP"] = "";
     nodeInfoData.nodeInfo["staked"] = web3.utils.fromWei(
       res["reward"]["balance"].toLocaleString("fullwide", {
         useGrouping: false,
@@ -97,9 +97,11 @@ export const getNodeInfoData = async (walletAddress) => {
     if (nodeInfoData.nodeInfo["active"]) {
       nodeInfoData.nodeIsActive = nodeInfoData.nodeInfo.isNew
         ? "Loading...(new node)"
-        : tests["networking"] && tests["peerInfo"] && tests["status"]
-        ? "Online"
-        : "Offline";
+        : // : tests["networking"] && tests["peerInfo"] && tests["status"]
+          // ? "Online"
+          // : "Offline";
+          "Online";
+
       nodeInfoData.nodeInfo["messages"] = res["messages"];
       nodeInfoData.nodeInfo["rewardPercent"] = res["reward"]["rewardPercent"];
       nodeInfoData.nodeInfo["history"] = res["history"].reverse();

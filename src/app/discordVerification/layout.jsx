@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
       <body className={roboto.className}>
         <script
           type="text/javascript"
-          src="/pion/dashboard../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
+          src="/dashboard../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"
         ></script>
         <Providers>
           <RainbowProvider>
@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
                   <div className="flex justify-between px-10 pt-4">
                     <div className="col-span-1">
                       <Image
-                        src="/pion/dashboard/Logo.svg"
+                        src="/dashboard/Logo.svg"
                         width="121"
                         height="32"
                       ></Image>
@@ -58,7 +58,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="w-full absolute bottom-0 h-14 flex justify-center py-3">
                   <Image
-                    src="/pion/dashboard/Footer.svg"
+                    src="/dashboard/Footer.svg"
                     width="172"
                     height="22"
                     className=""

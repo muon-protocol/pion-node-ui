@@ -43,14 +43,14 @@ export default function DiscordVerification() {
             <div className="mx-auto mt-14 relative w-full ">
               <Image
                 className=""
-                src={`/pion/dashboard/verification/Discord.svg`}
+                src={`/dashboard/verification/Discord.svg`}
                 width="90"
                 height="81"
               ></Image>
               {step === 1 && (
                 <Image
                   className={`absolute ${styles.discord}`}
-                  src={`/pion/dashboard/verification/Success.svg`}
+                  src={`/dashboard/verification/Success.svg`}
                   width="20"
                   height="50"
                 ></Image>
@@ -58,7 +58,7 @@ export default function DiscordVerification() {
               {step === 2 && (
                 <Image
                   className={`absolute ${styles.discord}`}
-                  src={`/pion/dashboard/verification/Rejected.svg`}
+                  src={`/dashboard/verification/Rejected.svg`}
                   width="20"
                   height="50"
                 ></Image>

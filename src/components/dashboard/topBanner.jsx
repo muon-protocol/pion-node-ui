@@ -49,7 +49,7 @@ export default function TopBanner({
         <div>
           {isVerify && !needSubmitTier ? (
             <Image
-              src="/pion/dashboard/dashboard/wallet-check.svg"
+              src="/dashboard/dashboard/wallet-check.svg"
               width="43"
               height="43"
             ></Image>
@@ -57,7 +57,7 @@ export default function TopBanner({
             <Image
               width="30"
               height="20"
-              src="/pion/dashboard/verification/warrning-icon.svg"
+              src="/dashboard/verification/warrning-icon.svg"
             ></Image>
           )}
         </div>

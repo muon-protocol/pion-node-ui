@@ -116,14 +116,14 @@ export default function Presale({ needSubmitTier }) {
       <div className="mx-auto mt-14 relative w-fit ">
         <Image
           className=""
-          src={`/pion/dashboard/verification/wallet.svg`}
+          src={`/dashboard/verification/wallet.svg`}
           width="90"
           height="81"
         ></Image>
         {step === 2 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/pion/dashboard/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="50"
           ></Image>
@@ -131,7 +131,7 @@ export default function Presale({ needSubmitTier }) {
         {step === 3 && (
           <Image
             className={`absolute ${styles.child_image}`}
-            src={`/pion/dashboard/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="50"
           ></Image>

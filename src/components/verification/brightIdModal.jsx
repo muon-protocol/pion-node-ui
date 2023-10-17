@@ -35,7 +35,7 @@ function Step1({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/pion/dashboard/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -52,7 +52,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/pion/dashboard/verification/googlePlay.svg"
+              src="/dashboard/verification/googlePlay.svg"
             />
           </a>
           <a
@@ -63,7 +63,7 @@ function Step1({ setBrightIdStep }) {
               width="162"
               height="48"
               alt="Get it on Google Play"
-              src="/pion/dashboard/verification/appStore.svg"
+              src="/dashboard/verification/appStore.svg"
             />
           </a>
         </div>
@@ -95,7 +95,7 @@ function Step2({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/pion/dashboard/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -190,7 +190,7 @@ function Step3({ setBrightIdStep }) {
         <Image
           width="100"
           height="100"
-          src="/pion/dashboard/verification/BrightId.svg"
+          src="/dashboard/verification/BrightId.svg"
           className="mx-auto"
         ></Image>
 
@@ -326,14 +326,14 @@ function Step5({ needSubmitTier }) {
         <div className="relative">
           <Image
             className=""
-            src={`/pion/dashboard/verification/BrightId.svg`}
+            src={`/dashboard/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/pion/dashboard/verification/Success.svg`}
+            src={`/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -341,7 +341,7 @@ function Step5({ needSubmitTier }) {
       </div>
       <p className="px-10 text-center mt-10">
         Congratulations! You&apos;ve passed the BrightID meet verification. You
-        now have the access to run Alice Starter node.
+        now have the access to run Pion Starter node.
       </p>
       {needSubmitTier && <SubmitTier></SubmitTier>}
       <button
@@ -365,14 +365,14 @@ function Step6() {
         <div className="relative">
           <Image
             className=""
-            src={`/pion/dashboard/verification/BrightId.svg`}
+            src={`/dashboard/verification/BrightId.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/pion/dashboard/verification/Rejected.svg`}
+            src={`/dashboard/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>

@@ -34,7 +34,7 @@ export function WarningBox({ children, className, dangerouslySetInnerHTML }) {
         <Image
           width="30"
           height="20"
-          src="/pion/dashboard/verification/warrning-icon.svg"
+          src="/dashboard/verification/warrning-icon.svg"
         ></Image>
       </div>
       <p
@@ -54,7 +54,7 @@ export function ErrorBox({ children }) {
         <Image
           width="20"
           height="20"
-          src="/pion/dashboard/verification/error.svg"
+          src="/dashboard/verification/error.svg"
         ></Image>
       </div>
       <p className="text-sm ml-3">{children}</p>

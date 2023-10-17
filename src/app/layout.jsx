@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
                   <div className="flex flex-wrap justify-between pl-10 md:px-10 pt-4">
                     <div className="col-span-1 mb-1">
                       <Image
-                        src="/pion/dashboard/Logo.svg"
+                        src="/dashboard/Logo.svg"
                         width="121"
                         height="32"
                       ></Image>
@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
                 </div>
                 <div className="w-full absolute bottom-0 h-14 flex justify-center py-3">
                   <Image
-                    src="/pion/dashboard/Footer.svg"
+                    src="/dashboard/Footer.svg"
                     width="172"
                     height="22"
                     className=""

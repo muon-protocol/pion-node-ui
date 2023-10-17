@@ -42,7 +42,7 @@ export function BackToVerificationBtn({ children, className }) {
         data-te-ripple-color="light"
       >
         <Image
-          src="/pion/dashboard/verification/back-icon.svg"
+          src="/dashboard/verification/back-icon.svg"
           width="24"
           height="24"
         ></Image>
@@ -96,7 +96,7 @@ export function BackToVerificationBtn({ children, className }) {
             <div className="relative px-4 pb-8 pt-4">
               <Image
                 className="mx-auto"
-                src="/pion/dashboard/verification/switchWallet.svg"
+                src="/dashboard/verification/switchWallet.svg"
                 width="106"
                 height="106"
               ></Image>
