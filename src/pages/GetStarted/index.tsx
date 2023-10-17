@@ -1,17 +1,17 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
-import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
-import { useEffect } from 'react';
+// import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+// import { useEffect } from 'react';
 
 const GetStarted = () => {
-  const { stakerAddressInfo } = useNodeBonALICE();
+  // const { stakerAddressInfo } = useNodeBonALICE();
 
-  useEffect(() => {
-    if (stakerAddressInfo?.active) {
-      window.open('/pion/dashboard', '_self');
-    }
-  }, [stakerAddressInfo]);
+  // useEffect(() => {
+  //   if (stakerAddressInfo?.active) {
+  //     window.open('/pion/dashboard', '_self');
+  //   }
+  // }, [stakerAddressInfo]);
 
   return (
     <div className="page__bg">
@@ -33,7 +33,7 @@ const GetStarted = () => {
             {/*  Joined the Deus Presale*/}
             {/*</span>*/}
             <span className="get-started__pioneer-option">
-              Operated an PION Node
+              Operated an ALICE Node
             </span>
           </span>
           <span className="get-started__actions">
@@ -62,7 +62,7 @@ const NewBonALICEAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/bonPION/create"
+      to="/pion/bonPION/create"
     >
       <motion.span whileHover="animate">
         <motion.img
@@ -77,7 +77,7 @@ const NewBonALICEAction = () => {
             src="/assets/images/get-started/new-bon-alice-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:font-light md:min-h-[4rem] flex items-center md:text-center mx-auto">
+          <div className="font-semibold md:text-2xl md:font-light md:min-h-[4rem] flex items-center md:text-center text-white mx-auto">
             Get Started with a New bonALICE
           </div>
         </div>
@@ -117,7 +117,7 @@ const MuanPioneerAction = () => {
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center mx-auto">
+          <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center text-white mx-auto">
             Claim Your Node-Drop
           </div>
         </div>
