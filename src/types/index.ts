@@ -39,6 +39,8 @@ export type SidebarItem = {
   hoverIcon: string;
   link: ActionType;
   disabled: boolean;
+  disabledMessage?: string;
+  disabledIcon?: string;
 };
 
 export type UserWallet = {
