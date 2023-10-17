@@ -13,7 +13,9 @@ export const ConnectWalletModal = ({
 
   return (
     <Modal
-      closeModalHandler={() => navigate(redirectRoute || '/')}
+      closeModalHandler={() =>
+        navigate(redirectRoute || '/pion/getting-started')
+      }
       isOpen={!walletAddress}
       size="sm"
     >

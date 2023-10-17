@@ -284,7 +284,7 @@ const ReviewDetail = () => {
           redirect you to the dashboard in few seconds. If you don't want to
           wait, you can{' '}
           <span
-            onClick={() => window.open('/dashboard', '_self')}
+            onClick={() => window.open('/dashboard/', '_self')}
             className="underline cursor-pointer hover:font-medium"
           >
             click here

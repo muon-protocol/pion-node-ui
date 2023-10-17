@@ -145,7 +145,7 @@ const Home = () => {
             {nodeBonALICE.length > 0 ? (
               <div
                 className="btn !px-6 mx-auto font-tomorrow"
-                onClick={() => window.open('/dashboard', '_self')}
+                onClick={() => window.open('/dashboard/', '_self')}
               >
                 Go to Dashboard
               </div>

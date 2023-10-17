@@ -49,6 +49,12 @@ function App() {
                                       <Navbar />
                                       <Routes>
                                         <Route
+                                          path="/"
+                                          element={
+                                            <Navigate to="/pion/getting-started" />
+                                          }
+                                        />
+                                        <Route
                                           path="/pion/getting-started"
                                           element={<Home />}
                                         />
@@ -88,12 +94,6 @@ function App() {
                                           path="/pion/setup-node"
                                           element={<ReviewDetail />}
                                         />
-                                        <Route
-                                          path="*"
-                                          element={
-                                            <Navigate to="/pion/getting-started" />
-                                          }
-                                        />{' '}
                                       </Routes>
                                       <Toaster position="bottom-right" />
                                       <Footer />

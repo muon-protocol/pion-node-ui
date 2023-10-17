@@ -36,7 +36,7 @@ const DesktopNavbar = () => {
     <FadeIn delay={0.3}>
       <div className="hidden md:flex absolute w-full navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
-          <Link to={'/'}>
+          <Link to={'/pion/getting-started'}>
             <img
               src="/assets/images/navbar/pion-logo.svg"
               alt={''}
@@ -46,7 +46,7 @@ const DesktopNavbar = () => {
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
-            location.pathname !== '/' &&
+            location.pathname !== '/pion/getting-started' &&
             location.pathname !== '/pion/claim' && (
               <>
                 {/*<button*/}
@@ -161,7 +161,7 @@ const DesktopNavbar = () => {
                     <button className="btn btn--small">Setup Node</button>
                   </Link>
                 ) : (
-                  <div onClick={() => window.open('/dashboard', '_self')}>
+                  <div onClick={() => window.open('/dashboard/', '_self')}>
                     <button className="btn btn--small">Dashboard</button>
                   </div>
                 )}
