@@ -112,7 +112,7 @@ const ReviewDetail = () => {
                 <span className="font-medium">
                   {nodeBonALICE.ALICELockAmount.dsp}
                 </span>{' '}
-                ALICE +{' '}
+                PION +{' '}
                 <span className="font-medium">
                   {nodeBonALICE.LPTokenLockAmount.dsp}
                 </span>{' '}
@@ -387,7 +387,7 @@ const EmptyBonALICECard = () => {
       {newNFTClaimedLoading ? (
         <>
           <p className="font-semibold text-xl text-center px-20">
-            Loading BonALICEs...
+            Loading bonPIONs...
           </p>
         </>
       ) : (
@@ -395,13 +395,13 @@ const EmptyBonALICECard = () => {
           <p className="font-semibold text-xl text-center px-20">
             {stakerAddressInfo?.active
               ? 'You have already added a node. Please go to your dashboard to check the details.'
-              : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
+              : 'You don’t have any bonPION in your wallet, please create one first or use another address'}
           </p>
           <button
             className="btn btn--white mx-auto"
             onClick={() => navigate('/pion/bonPION/create')}
           >
-            Create BonALICE
+            Create bonPION
           </button>
         </>
       )}
