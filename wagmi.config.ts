@@ -27,7 +27,7 @@ export default defineConfig({
       abi: BONALICE_ABI,
     },
     {
-      name: 'LPToken',
+      name: 'LpToken',
       abi: LP_TOKEN_ABI,
     },
     {

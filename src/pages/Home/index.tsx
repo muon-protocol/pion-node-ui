@@ -6,10 +6,12 @@ import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { StepCard } from './StepCard.tsx';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 const Home = () => {
   const navigate = useNavigate();
   const { stakerAddressInfo } = useNodeBonALICE();
+  const { bonALICEs } = useBonALICE();
 
   useEffect(() => {
     // if (stakerAddressInfo?.active) {
@@ -82,11 +84,11 @@ const Home = () => {
             animationDelay={0.2}
           >
             <p className="font-tomorrow text-2xl font-medium mb-6">
-              {nodeBonALICE.length > 0 ? 'Manage bonPION' : 'Create bonPION'}
+              {bonALICEs.length > 0 ? 'Manage bonPION' : 'Create bonPION'}
             </p>
             <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
               <p>
-                {nodeBonALICE.length > 0
+                {bonALICEs.length > 0
                   ? 'You can add more $PION and USDC to increase your bonPION amount and node power'
                   : 'Create bonPION using your $PION to be able to setup your node'}
               </p>
@@ -108,11 +110,21 @@ const Home = () => {
                   Manage bonPION
                 </div>
               </>
-            ) : (
+            ) : bonALICEs.length > 0 ? (
               <>
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto "
+                  onClick={() => window.open('/bonPION/increase', '_self')}
+                >
+                  Manage bonPION
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="mb-auto"></p>
+                <div
+                  className="btn !px-6 mx-auto"
                   onClick={() => window.open('/bonPION/create', '_self')}
                 >
                   Create bonPION

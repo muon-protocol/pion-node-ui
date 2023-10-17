@@ -14,8 +14,7 @@ export const useLPTokenAllowance = () => {
   const { data: allowanceForMuonNodeStaking } = useLpTokenAllowance({
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     args: [
-      walletAddress ||
-        '0x000000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000',
+      walletAddress || '0x000000000000000000000000000000000000000000000000000',
       MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     ],
     watch: true,
@@ -24,8 +23,7 @@ export const useLPTokenAllowance = () => {
   const { data: allowanceForBonALICE } = useLpTokenAllowance({
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     args: [
-      walletAddress ||
-        '0x00000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000',
+      walletAddress || '0x00000000000000000000000000000000000000000000000000',
       BONALICE_ADDRESS[getCurrentChainId()],
     ],
     watch: true,
