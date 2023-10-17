@@ -90,7 +90,7 @@ export default function Verification() {
   return (
     <div>
       <div className="flex flex-wrap">
-        <div className="mr-4 lg:max-w-[100%] xl:max-w-[65%]">
+        <div className="lg:mr-4 max-w-[100%]  2xl:max-w-[65%]">
           <TitleInfo></TitleInfo>
         </div>
         <div className=" grow md:mt-4">
