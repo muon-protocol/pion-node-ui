@@ -77,7 +77,7 @@ const ActionsSidebar = () => {
         disabledIcon: '/assets/images/actions/transfer-gray-icon.svg',
       },
     ],
-    [bonALICEs],
+    [bonALICEs, nodeBonALICE],
   );
 
   return (
