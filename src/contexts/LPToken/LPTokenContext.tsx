@@ -6,7 +6,7 @@ import { LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
-import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
+// import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
 // import { useLpTokenDecimals } from '../../abis/types/generated.ts';
 // import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
 
