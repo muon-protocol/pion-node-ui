@@ -21,8 +21,8 @@ export default function NewNode() {
       dispatch(fetchNodeInfo(address));
       if (selector.isNew) {
         setTryed(tryed + 1);
-      } else {
-        window.location.replace("/dashboard");
+      } else if (selector.isNew === false) {
+        window.location.replace("/dashboard/");
       }
     }, 15000);
   }, [tryed]);

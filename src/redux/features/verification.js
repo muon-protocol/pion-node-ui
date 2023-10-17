@@ -120,19 +120,20 @@ export const verification = createSlice({
       })
       .addCase(fetchVerification.rejected, (state, action) => {
         state.fetchStatus = "failed";
-      })
+      });
+    builder
       .addCase(fetchTierSig.pending, (state) => {
         state.fetchTierSigStatus = "loading";
       })
       .addCase(fetchTierSig.fulfilled, (state, action) => {
         state.fetchTierSigStatus = "succeeded";
-        if (action.payload.success) {
-          const data = action.payload.result;
+        if (action.payload.data.success) {
+          const data = action.payload.data.result;
           state.tier = data.tier;
           state.tierSig = data.signature;
         } else {
-          state.tierErrorMessage = action.payload.message;
-          if (action.payload.errorCode === 7) {
+          state.tierErrorMessage = action.payload.data.message;
+          if (action.payload.data.errorCode === 8) {
             state.isSetTier = true;
           }
         }

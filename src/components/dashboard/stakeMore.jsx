@@ -12,9 +12,6 @@ export default function StakeMore() {
     abi: json,
     functionName: "users",
     args: [address],
-    onSuccess(res) {
-      console.log(res);
-    },
   });
   const temp = Web3.utils.fromWei(String(data[0]), "ether");
   const balance = Number(temp).toFixed(2);
@@ -49,7 +46,7 @@ export default function StakeMore() {
       <div className="w-full flex justify-end">
         <LightBtn
           onClick={() => {
-            window.location.replace("/upgrade");
+            window.location.replace("/pion/bonPION/increase");
           }}
         >
           Boost

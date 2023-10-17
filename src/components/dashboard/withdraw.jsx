@@ -48,7 +48,6 @@ export default function Withdraw({ address, needSubmitTier }) {
     address: "0xd788C2276A6f75a8B9360E9695028329C925b0AB",
     abi: contractABI,
     functionName: "getReward",
-    chainId: 97,
     onError(error) {},
   });
   const { isSuccess: trSuccess, isLoading: trLoading } = useWaitForTransaction({

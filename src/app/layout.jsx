@@ -30,6 +30,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <title>PION Dashboard</title>
       </head>
       <body className={roboto.className}>
         <script

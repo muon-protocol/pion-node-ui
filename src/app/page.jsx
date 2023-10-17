@@ -98,7 +98,7 @@ export default function Home() {
       process.env.NODE_ENV === "production" &&
       process.env.NEXT_PUBLIC_REDIRECT_FOR_DISCONNECT_WALLET
     ) {
-      window.location.replace("/");
+      // window.location.replace("/");
     }
   }, [isDisconnected]);
   useEffect(() => {

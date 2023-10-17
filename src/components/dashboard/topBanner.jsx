@@ -25,7 +25,6 @@ export default function TopBanner({
     address: "0xF904Bf8eC671c548b6A8C69ABC27D65955E6472E",
     abi: contractABI,
     functionName: "setTier",
-    chainId: 97,
     onError(error) {
       console.log(error);
     },
@@ -119,7 +118,9 @@ export default function TopBanner({
           }
         }}
       >
-        {isVerify ? "Submit tier Update" : "Go to verification center"}
+        {needSubmitTier && isVerify
+          ? "Submit tier Update"
+          : "Go to verification center"}
       </LightBtn>
     </div>
   );
