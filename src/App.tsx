@@ -1,4 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 
 import ReviewDetail from './pages/ReviewDetail';
 import ClaimPrize from './pages/ClaimPrize';
@@ -48,7 +48,10 @@ function App() {
                                     <BrowserRouter>
                                       <Navbar />
                                       <Routes>
-                                        <Route path="/" element={<Home />} />
+                                        <Route
+                                          path="/pion/getting-started"
+                                          element={<Home />}
+                                        />
                                         <Route
                                           path="/pion/bonPION/view"
                                           element={<Actions />}
@@ -85,6 +88,12 @@ function App() {
                                           path="/pion/setup-node"
                                           element={<ReviewDetail />}
                                         />
+                                        <Route
+                                          path="*"
+                                          element={
+                                            <Navigate to="/pion/getting-started" />
+                                          }
+                                        />{' '}
                                       </Routes>
                                       <Toaster position="bottom-right" />
                                       <Footer />

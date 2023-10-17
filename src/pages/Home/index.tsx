@@ -1,21 +1,17 @@
 import { steps } from '../../data/constants';
 import { FadeIn } from '../../animations';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+// import { useNavigate } from 'react-router-dom';
+// import { useEffect } from 'react';
+// import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { StepCard } from './StepCard.tsx';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 const Home = () => {
-  const navigate = useNavigate();
-  const { stakerAddressInfo } = useNodeBonALICE();
+  // const navigate = useNavigate();
+  // const { stakerAddressInfo } = useNodeBonALICE();
   const { bonALICEs } = useBonALICE();
-
-  useEffect(() => {
-    navigate('/pion/get-started');
-  }, [navigate, stakerAddressInfo]);
 
   const { ALICEBalance } = useALICE();
   const { nodeBonALICE } = useMuonNodeStaking();
