@@ -18,8 +18,8 @@ export const BONALICE_ADDRESS: AddressMap = {
 
 export const LP_TOKEN_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0x13c42Aa47f15778155F5c48885bDdC3E1C72Acd7',
-  // [SupportedChainId.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-  [SupportedChainId.MAINNET]: '0xdac17f958d2ee523a2206206994597c13d831ec7',
+  [SupportedChainId.MAINNET]: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48', // USDC
+  // [SupportedChainId.MAINNET]: '0xdac17f958d2ee523a2206206994597c13d831ec7', // USDT
 };
 
 export const REWARD_ADDRESS: AddressMap = {
@@ -39,7 +39,7 @@ export const MUON_NODE_MANAGER_ADDRESS: AddressMap = {
 
 export const BOOSTER_ADDRESS: AddressMap = {
   [SupportedChainId.BSCTESTNET]: '0xF474C0B12BCf5323Ce032e12D93B57F177fE09BD',
-  [SupportedChainId.MAINNET]: '0x4BC5D819715e7242a6a58a4903bc5a83CF66f9D8',
+  [SupportedChainId.MAINNET]: '0xBF35B3748D96BA5BE15e6CEb66461cc0b7B08C7C',
 };
 
 export const PANCAKE_PAIR_ADDRESS: AddressMap = {

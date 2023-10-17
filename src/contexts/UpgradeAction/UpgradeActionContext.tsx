@@ -26,7 +26,7 @@ import {
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.ts';
-// import LP_TOKEN_ABI from '../../abis/LPToken.ts';
+import LP_TOKEN_ABI from '../../abis/LPToken.ts';
 import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.json';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
@@ -38,7 +38,7 @@ import BOOSTER_ABI from '../../abis/Booster.ts';
 import { getUserSignatureForBoostAPI } from '../../apis';
 import { waitForTransaction, writeContract } from '@wagmi/core';
 import toast from 'react-hot-toast';
-import { erc20ABI } from 'wagmi';
+// import { erc20ABI } from 'wagmi';
 
 const UpgradeActionContext = createContext<{
   isUpgradeModalOpen: boolean;
@@ -274,7 +274,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     isTransactionLoading: approveLPTokenIsTransactionLoading,
     isSuccess: approveLPTokenIsSuccess,
   } = useWagmiContractWrite({
-    abi: erc20ABI,
+    abi: LP_TOKEN_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'approve',
     args: approveLPTokenArgs,
