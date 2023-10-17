@@ -9,7 +9,7 @@ function WarningBox({ children, className, dangerouslySetInnerHTML }) {
   if (show) {
     return (
       <div
-        className={`${className} flex rounded-lg items-center bg-[#F7E2DB] px-4 py-2`}
+        className={`${className} flex rounded-lg items-center bg-cardBackground/50 px-4 py-2`}
       >
         <div className="min-w-[30px]">
           <Image

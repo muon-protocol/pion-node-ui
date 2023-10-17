@@ -36,8 +36,7 @@ function Step1({ setStep }) {
 
   const dispatch = useDispatch();
   const { data, isSuccess, signMessage } = useSignMessage({
-    message:
-      "Please sign this message to verify ownership of your Ethereum address to verify its uniqueness for Muon.",
+    message: process.env.NEXT_PUBLIC_SIGN_MESSAGE,
   });
 
   useEffect(() => {

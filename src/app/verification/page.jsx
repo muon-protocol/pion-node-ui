@@ -90,10 +90,10 @@ export default function Verification() {
   return (
     <div>
       <div className="flex flex-wrap">
-        <div className="mr-4 lg:max-w-[65%]">
+        <div className="mr-4 lg:max-w-[100%] xl:max-w-[65%]">
           <TitleInfo></TitleInfo>
         </div>
-        <div className="lg:ml-4 grow md:mt-4">
+        <div className=" grow md:mt-4">
           <PassVerification passed={selector}></PassVerification>
         </div>
       </div>

@@ -112,7 +112,7 @@ export default function Home() {
 
   useEffect(() => {
     if (selector.isNew) {
-      router.push("/dashboard/preparing");
+      window.location.replace("/dashboard/preparing");
     }
   }, [selector.isNew]);
 
@@ -139,7 +139,7 @@ export default function Home() {
         <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
         <StakeMore></StakeMore>
         <Withdraw
-          needSubmitTier={needSubmitTier && isVerify}
+          needSubmitTier={needSubmitTier || !isVerify}
           address={address}
         ></Withdraw>
       </div>
