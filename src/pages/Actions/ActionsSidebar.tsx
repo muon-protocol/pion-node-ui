@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from 'react';
 import { ActionType, SidebarItem } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const ActionsSidebar = () => {
   const { bonALICEs } = useBonALICE();
+  const { nodeBonALICE } = useMuonNodeStaking();
 
   const sidebarItems: SidebarItem[] = useMemo(
     () => [
@@ -37,7 +39,7 @@ const ActionsSidebar = () => {
         hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
         link: ActionType.UPGRADE,
         grayIcon: '/assets/images/actions/upgrade-gray-icon.svg',
-        disabled: bonALICEs.length === 0,
+        disabled: bonALICEs.length + nodeBonALICE.length === 0,
         disabledMessage: 'Create a bonPION first',
         disabledIcon: '/assets/images/actions/upgrade-disabled-icon.svg',
       },
@@ -48,7 +50,7 @@ const ActionsSidebar = () => {
         hoverIcon: '/assets/images/actions/merge-colored-icon.svg',
         link: ActionType.MERGE,
         grayIcon: '/assets/images/actions/merge-gray-icon.svg',
-        disabled: bonALICEs.length < 2,
+        disabled: bonALICEs.length + nodeBonALICE.length < 2,
         disabledMessage: 'You should have at least 2 BonPIONs',
         disabledIcon: '/assets/images/actions/merge-disabled-icon.svg',
       },
