@@ -18,32 +18,33 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         alt=""
       />
       <p className="text-center text-black">
-        Your bonPION has been {operation} successfully. now you can
-        <br />
+        Your bonPION has been {operation} successfully.
         <button
           onClick={() => {
             createModal(false);
             claimModal(false);
             navigate('/pion/setup-node');
           }}
-          className="btn btn--primary mb-2 mt-5 mx-auto"
+          className="btn btn--primary mt-5 mx-auto"
         >
           Setup Your Node
         </button>
-        or
         <br />
         <span
           onClick={() => {
             setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/pion/bonPION/increase');
+            window.open(
+              'https://docs.muon.net/muon-network/muon-nodes/pion/upgrading-bonpion-nfts',
+              '_blank',
+            );
           }}
           className="text-primary hover:underline cursor-pointer"
         >
           Increase
         </span>{' '}
-        your power to increase earnings from node operation.
+        your power to boost your rewards.
       </p>
     </div>
   );
