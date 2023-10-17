@@ -211,7 +211,7 @@ export default [
   {
     inputs: [
       {
-        internalType: 'contract IERC20',
+        internalType: 'contract IToken',
         name: '_usdc',
         type: 'address',
       },
@@ -287,7 +287,7 @@ export default [
   {
     inputs: [],
     name: 'usdcToken',
-    outputs: [{ internalType: 'contract IERC20', name: '', type: 'address' }],
+    outputs: [{ internalType: 'contract IToken', name: '', type: 'address' }],
     stateMutability: 'view',
     type: 'function',
   },
