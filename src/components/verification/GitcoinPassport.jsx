@@ -26,7 +26,7 @@ function Step1({ setGitCoinStep }) {
         <Image
           width="100"
           height="100"
-          src="/dashboard/verification/gitcoin.svg"
+          src="/pion/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 
@@ -126,7 +126,7 @@ function Step2({ setGitCoinStep }) {
         <Image
           width="100"
           height="100"
-          src="/dashboard/verification/gitcoin.svg"
+          src="/pion/dashboard/verification/gitcoin.svg"
           className="mx-auto"
         ></Image>
 
@@ -171,14 +171,14 @@ function Step3({ needSubmitTier }) {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/gitcoin.svg`}
+            src={`/pion/dashboard/verification/gitcoin.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_git_coin}`}
-            src={`/dashboard/verification/Success.svg`}
+            src={`/pion/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>

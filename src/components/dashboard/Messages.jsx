@@ -15,7 +15,7 @@ function WarningBox({ children, className, dangerouslySetInnerHTML }) {
           <Image
             width="30"
             height="20"
-            src="/dashboard/verification/warrning-icon.svg"
+            src="/pion/dashboard/verification/warrning-icon.svg"
           ></Image>
         </div>
         <p
@@ -33,7 +33,7 @@ function WarningBox({ children, className, dangerouslySetInnerHTML }) {
           <Image
             width="30"
             height="20"
-            src="/dashboard/dashboard/Close-button.svg"
+            src="/pion/dashboard/dashboard/Close-button.svg"
           ></Image>
         </button>
       </div>

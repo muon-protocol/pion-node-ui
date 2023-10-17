@@ -17,7 +17,7 @@ export default function CardInfo(props) {
           }}
         >
           <Image
-            src="/dashboard/dashboard/copy-icon.svg"
+            src="/pion/dashboard/dashboard/copy-icon.svg"
             width="24"
             height="24"
           ></Image>

@@ -23,14 +23,14 @@ function Step2({ needSubmitTier }) {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/Telegram.svg`}
+            src={`/pion/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Success.svg`}
+            src={`/pion/dashboard/verification/Success.svg`}
             width="20"
             height="20"
           ></Image>
@@ -63,14 +63,14 @@ function Step3() {
         <div className="relative">
           <Image
             className=""
-            src={`/dashboard/verification/Telegram.svg`}
+            src={`/pion/dashboard/verification/Telegram.svg`}
             width="90"
             height="81"
           ></Image>
 
           <Image
             className={`absolute ${Style.child_telegram}`}
-            src={`/dashboard/verification/Rejected.svg`}
+            src={`/pion/dashboard/verification/Rejected.svg`}
             width="20"
             height="20"
           ></Image>
@@ -189,7 +189,7 @@ export default function TelegramModal({ isActive, needSubmitTier }) {
                 <>
                   <div>
                     <Image
-                      src={`/dashboard/verification/Login.svg`}
+                      src={`/pion/dashboard/verification/Login.svg`}
                       width="90"
                       height="94"
                     ></Image>

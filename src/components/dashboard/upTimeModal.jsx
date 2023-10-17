@@ -51,7 +51,7 @@ export default function UpTimesModal() {
                 aria-label="Close"
               >
                 <Image
-                  src="/dashboard/dashboard/close-x.svg"
+                  src="/pion/dashboard/dashboard/close-x.svg"
                   width="20"
                   height="20"
                 ></Image>
