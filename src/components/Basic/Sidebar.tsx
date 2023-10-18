@@ -150,9 +150,9 @@ export const Sidebar = () => {
         {isSidebarOpen && (
           <div className="stats__right">
             <div className="stats__left flex flex-col gap-3">
-              <StatItem value="$1M" title="POL" />
-              <StatItem value="$15M" title="MCAP" />
-              <StatItem value="250K" title="Supply" />
+              <StatItem value={stats?.protocol_owned_liquidity} title="POL" />
+              <StatItem value={stats?.market_cap} title="MCAP" />
+              <StatItem value={stats?.pion_in_circulation} title="Supply" />
             </div>
           </div>
         )}
