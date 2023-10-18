@@ -38,8 +38,8 @@ const AmountInput = ({
                 balance && max
                   ? onValueChanged(
                       max.dsp < balance.dsp
-                        ? max.dsp.toString()
-                        : balance.dsp.toString(),
+                        ? max.dsp.toFixed(2)
+                        : balance.dsp.toFixed(2),
                     )
                   : null
               }
