@@ -113,6 +113,7 @@ export const Sidebar = () => {
           </p>
         </section>
       )}
+
       <img
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className={`absolute z-[1001] transition-all left-[110px] cursor-pointer -translate-x-1/2 top-7 ${
