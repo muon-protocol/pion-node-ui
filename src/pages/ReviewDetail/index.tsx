@@ -343,7 +343,7 @@ const ReviewDetail = () => {
         <FadeIn
           duration={0.1}
           delay={0.1}
-          className="content flex flex-col gap-8 justify-center items-center h-full"
+          className="content flex flex-col mb-8 justify-center items-center h-full"
         >
           <div className="review-details--top flex flex-col md:flex-row gap-9">
             <p className="text-lg text-center md:text-left md:text-[20px] font-light w-full">
@@ -416,6 +416,8 @@ const ReviewDetail = () => {
 
             {/*<NotificationCard  />*/}
           </div>
+        </FadeIn>
+        <FadeIn delay={0.2} duration={0.3} className="w-full">
           <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
             {reviewDetailCard()}
             {transferCard()}
