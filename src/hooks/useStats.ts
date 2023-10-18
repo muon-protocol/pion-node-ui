@@ -19,7 +19,6 @@ export const useStats = () => {
     const getStats = async () => {
       try {
         const response = await getStatsAPI();
-        console.log(response);
         setStats(response);
       } catch (e) {
         console.error(e);
