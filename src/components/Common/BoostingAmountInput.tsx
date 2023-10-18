@@ -62,7 +62,7 @@ const AmountInput = ({
               : `Enter amount ${max?.dsp ? '(max: ' + max.dsp + ')' : ''}`
           }
           type="number"
-          value={value.hStr}
+          value={disabled ? '' : value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
         <div
