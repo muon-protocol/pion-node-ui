@@ -1,5 +1,6 @@
 import { FadeIn } from '../../animations';
 import { W3bNumber } from '../../types/wagmi.ts';
+import { useEffect } from 'react';
 
 const AmountInput = ({
   balance,
@@ -20,6 +21,12 @@ const AmountInput = ({
   max: W3bNumber | undefined;
   disabled?: boolean;
 }) => {
+  useEffect(() => {
+    if (disabled) {
+      onValueChanged('');
+    }
+  }, [disabled, onValueChanged]);
+
   return (
     <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
       <div className="amount-input__top relative text-sm flex justify-between">
