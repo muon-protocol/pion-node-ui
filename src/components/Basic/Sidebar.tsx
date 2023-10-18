@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ActionType } from '../../types';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -60,7 +61,14 @@ export const Sidebar = () => {
         className="mb-[18px]"
         title="Create bonPION"
         isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/bonPION/create'}
+        isActive={[
+          ActionType.VIEW,
+          ActionType.CREATE,
+          ActionType.UPGRADE,
+          ActionType.MERGE,
+          ActionType.TRANSFER,
+          ActionType.SPLIT,
+        ].includes(location.pathname as ActionType)}
         onClick={() => navigate('/pion/bonPION/create')}
         icon="/assets/images/sidebar/step-2.svg"
       />
