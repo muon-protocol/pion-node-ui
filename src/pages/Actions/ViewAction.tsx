@@ -42,8 +42,7 @@ const RenderViewBody = () => {
             })
           : nodeBonALICE.length === 0 && (
               <p className="text-center py-56 px-3 mt-auto mb-auto text-white">
-                You have no bonPION NFTs to show. Please create Bonded PION NFT
-                first.
+                You have no bonPION NFTs to show.
               </p>
             )}
       </div>

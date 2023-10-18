@@ -39,7 +39,7 @@ export default {
         'card-hover': '#4D3E9E59',
         'modal-backdrop': '#00000066',
         'catskill-white': '#E9EFF666',
-        'input-bg': '#4b4b4b',
+        'input-bg': '#5D6168',
         'plan-1': '#F58E8E',
         'plan-2': '#F3C95D',
         'plan-3': '#918EF5',

@@ -180,7 +180,7 @@ export const RenderUpgradeBody = () => {
                   className="flex w-full justify-between items-center"
                 >
                   <span className="text-gray10">
-                    <p className="font-light">Your bonPION amount will be:</p>
+                    <p className="font-light">You get:</p>
                     <p className="font-light text-sm flex gap-1">
                       {upgradeBoostAmount.dsp +
                         ' USDC -> ' +

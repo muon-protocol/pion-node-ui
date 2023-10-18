@@ -48,7 +48,7 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg rounded-xl  h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg rounded-xl h-12 md:h-14">
         <input
           className="amount-input__input text-white flex-1 placeholder-white font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm"
           placeholder={`Enter amount ${

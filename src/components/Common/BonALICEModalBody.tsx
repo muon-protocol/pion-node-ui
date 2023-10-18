@@ -34,7 +34,7 @@ const BonALICEModalBody = ({
         })
       ) : (
         <p className="text-center py-24 px-3 text-white">
-          You have no bonPION NFTs to show. Please create Bonded PION NFT first.
+          You have no bonPION NFTs to show.
         </p>
       )}
     </div>

@@ -40,7 +40,7 @@ export const plans: Plan[] = [
   {
     id: 4,
     title: 'Proof of Authority (PoA)',
-    requiredNodePower: '+50K',
+    requiredNodePower: 'More than 50K',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
