@@ -27,6 +27,7 @@ import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
 import BuyPION from './pages/BuyPION';
+import { Sidebar } from './components/Basic/Sidebar.tsx';
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
                                   <ClaimPrizeProvider>
                                     <BrowserRouter>
                                       <Navbar />
+                                      <Sidebar />
                                       <Routes>
                                         <Route
                                           path="/"
