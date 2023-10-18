@@ -127,8 +127,8 @@ export const Sidebar = () => {
         className="mb-[18px]"
         title="Create bonPION"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/bonPION/create'}
+        onClick={() => navigate('/pion/bonPION/create')}
         icon="/assets/images/sidebar/step-2.svg"
       />
 
@@ -136,8 +136,8 @@ export const Sidebar = () => {
         className="mb-16"
         title="Finalize Setup"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/setup-node'}
+        onClick={() => navigate('/pion/setup-node')}
         icon="/assets/images/sidebar/step-3.svg"
       />
 
