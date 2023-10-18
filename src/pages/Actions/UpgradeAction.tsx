@@ -184,10 +184,10 @@ export const RenderUpgradeBody = () => {
                     <p className="font-light">You get:</p>
                     {upgradeBoostAmount.big > BigInt(0) ? (
                       <p className="font-light text-sm flex gap-1">
-                        {upgradeBoostAmount.dsp +
+                        {upgradeBoostAmount.hStr +
                           ' USDC -> ' +
                           (
-                            upgradeBoostAmount.dsp /
+                            Number(upgradeBoostAmount.hStr) /
                             (Math.round(ALICEPrice * 10000) / 10000)
                           ).toFixed(2) +
                           ' PION '}
@@ -195,7 +195,7 @@ export const RenderUpgradeBody = () => {
                           x{boostCoefficient?.dsp}
                         </p>
                         {' + ' +
-                          upgradeAmount.dsp +
+                          Number(upgradeAmount.hStr) +
                           ' PION + ' +
                           selectedUpgradeBonALICE.nodePower}
                       </p>
@@ -205,10 +205,10 @@ export const RenderUpgradeBody = () => {
                   </span>
                   <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
                     {(
-                      (upgradeBoostAmount.dsp /
+                      (Number(upgradeBoostAmount.hStr) /
                         (Math.round(ALICEPrice * 10000) / 10000)) *
                         boostCoefficient.dsp +
-                      upgradeAmount.dsp +
+                      Number(upgradeAmount.hStr) +
                       selectedUpgradeBonALICE.nodePower
                     ).toFixed(2)}
                   </span>
