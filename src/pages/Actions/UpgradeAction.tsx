@@ -167,7 +167,7 @@ export const RenderUpgradeBody = () => {
       {selectedUpgradeBonALICE && (
         <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-            <p className="font-light">current bonPION amount:</p>
+            <p className="font-light">Current bonPION amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
           {(upgradeAmount.dsp > 0 || upgradeBoostAmount.dsp > 0) &&
@@ -182,22 +182,26 @@ export const RenderUpgradeBody = () => {
                 >
                   <span className="text-gray10">
                     <p className="font-light">You get:</p>
-                    <p className="font-light text-sm flex gap-1">
-                      {upgradeBoostAmount.dsp +
-                        ' USDC -> ' +
-                        (
-                          upgradeBoostAmount.dsp /
-                          (Math.round(ALICEPrice * 10000) / 10000)
-                        ).toFixed(2) +
-                        ' PION '}
-                      <p className="text-uptime font-bold">
-                        x{boostCoefficient?.dsp}
+                    {upgradeBoostAmount.big > BigInt(0) ? (
+                      <p className="font-light text-sm flex gap-1">
+                        {upgradeBoostAmount.dsp +
+                          ' USDC -> ' +
+                          (
+                            upgradeBoostAmount.dsp /
+                            (Math.round(ALICEPrice * 10000) / 10000)
+                          ).toFixed(2) +
+                          ' PION '}
+                        <p className="text-uptime font-bold">
+                          x{boostCoefficient?.dsp}
+                        </p>
+                        {' + ' +
+                          upgradeAmount.dsp +
+                          ' PION + ' +
+                          selectedUpgradeBonALICE.nodePower}
                       </p>
-                      {' + ' +
-                        upgradeAmount.dsp +
-                        ' PION + ' +
-                        selectedUpgradeBonALICE.nodePower}
-                    </p>
+                    ) : (
+                      <p className="h-5"></p>
+                    )}
                   </span>
                   <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
                     {(

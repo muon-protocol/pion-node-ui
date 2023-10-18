@@ -51,7 +51,7 @@ const ActionsSidebar = () => {
         link: ActionType.MERGE,
         grayIcon: '/assets/images/actions/merge-gray-icon.svg',
         disabled: bonALICEs.length + nodeBonALICE.length < 2,
-        disabledMessage: 'You should have at least 2 BonPIONs',
+        disabledMessage: 'Requires at least 2 bonPIONs',
         disabledIcon: '/assets/images/actions/merge-disabled-icon.svg',
       },
       {
