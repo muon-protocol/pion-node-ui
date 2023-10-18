@@ -27,10 +27,7 @@ import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
 import BuyPION from './pages/BuyPION';
-<<<<<<< HEAD
 import { Sidebar } from './components/Basic/Sidebar.tsx';
-=======
->>>>>>> 8b8eaa3 (Buy PION Page Init)
 
 function App() {
   return (
