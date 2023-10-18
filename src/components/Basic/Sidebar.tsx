@@ -114,6 +114,32 @@ export const Sidebar = () => {
         </section>
       )}
 
+      <SidebarItem
+        className="mb-[18px]"
+        title="Buy PION"
+        isSidebarOpen={isSidebarOpen}
+        isActive={false}
+        onClick={() => {}}
+        icon="/assets/images/sidebar/step-1.svg"
+      />
+
+      <SidebarItem
+        className="mb-[18px]"
+        title="Create bonPION"
+        isSidebarOpen={isSidebarOpen}
+        isActive={false}
+        onClick={() => {}}
+        icon="/assets/images/sidebar/step-2.svg"
+      />
+
+      <SidebarItem
+        className="mb-[18px]"
+        title="Finalize Setup"
+        isSidebarOpen={isSidebarOpen}
+        isActive={false}
+        onClick={() => {}}
+        icon="/assets/images/sidebar/step-3.svg"
+      />
       <img
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className={`absolute z-[1001] transition-all left-[110px] cursor-pointer -translate-x-1/2 top-7 ${
