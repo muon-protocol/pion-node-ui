@@ -5,8 +5,6 @@ export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
-  if (location.pathname === '/pion/getting-started') return null;
-
   return (
     <div
       className={`sidebar flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all absolute left-0 top-0 h-full ${
@@ -36,8 +34,8 @@ export const Sidebar = () => {
         className="mb-[18px]"
         title="Get Started"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/getting-started'}
+        onClick={() => navigate('/pion/getting-started')}
         icon="/assets/images/sidebar/get-started.svg"
       />
 
