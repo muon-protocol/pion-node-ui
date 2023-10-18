@@ -349,7 +349,7 @@ const ReviewDetail = () => {
               <img src="/assets/images/review/guide-icon.svg" alt="" />
               <div>
                 <p className="text-white text-sm">
-                  Neet help setting up your node?
+                  Need help setting up your node?
                 </p>
                 <p
                   className="text-white text-xl underline cursor-pointer"
