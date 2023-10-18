@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   if (location.pathname === '/pion/getting-started') return null;
 
@@ -51,8 +53,8 @@ export const Sidebar = () => {
         className="mb-[18px]"
         title="Buy PION"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/buy-pion'}
+        onClick={() => navigate('/pion/buy-pion')}
         icon="/assets/images/sidebar/step-1.svg"
       />
 
@@ -60,8 +62,8 @@ export const Sidebar = () => {
         className="mb-[18px]"
         title="Create bonPION"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/bonPION/create'}
+        onClick={() => navigate('/pion/bonPION/create')}
         icon="/assets/images/sidebar/step-2.svg"
       />
 
@@ -69,8 +71,8 @@ export const Sidebar = () => {
         className="mb-16"
         title="Finalize Setup"
         isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
+        isActive={location.pathname === '/pion/setup-node'}
+        onClick={() => navigate('/pion/setup-node')}
         icon="/assets/images/sidebar/step-3.svg"
       />
 
@@ -149,7 +151,7 @@ const SidebarItem = ({
       <p
         className={`group-hover:text-primary-L1 text-white transition-all text-[14px] font-medium line-clamp-1 w-0 ${
           isSidebarOpen && '!w-[110px]'
-        } ${isActive && 'text-primary-L1'}`}
+        } ${isActive && '!text-primary-L1'}`}
       >
         {title}
       </p>
