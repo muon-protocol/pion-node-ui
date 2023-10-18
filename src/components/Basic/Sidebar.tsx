@@ -141,7 +141,7 @@ const SidebarItem = ({
 }) => {
   return (
     <div
-      className={`sidebar__logo flex transition-all cursor-pointer items-center group hover:text-primary-L1 gap-0 pl-1.5 mb-10 ${
+      className={`sidebar__logo relative flex transition-all cursor-pointer items-center group hover:text-primary-L1 gap-0 pl-1.5 mb-10 ${
         isSidebarOpen && '!pl-0 gap-4'
       } ${isActive && 'text-primary-L1'} ${className}`}
       onClick={onClick}
@@ -164,6 +164,16 @@ const SidebarItem = ({
       >
         {title}
       </p>
+
+      {!isSidebarOpen && (
+        <span className="absolute bg-light-text left-20 w-0 rounded transition-all group-hover:w-max group-hover:p-3">
+          <p
+            className={`text-black transition-all text-sm font-medium line-clamp-1 w-full`}
+          >
+            {title}
+          </p>
+        </span>
+      )}
     </div>
   );
 };
