@@ -5,7 +5,7 @@ const Home = () => {
     <div className="page__bg--buy-pion">
       <div className="page page--buy-pion page--centered flex flex-col md:px-10 gap-6">
         <FadeIn className="mr-auto" delay={0} duration={0.3}>
-          <p className="text-2xl font-medium">Buy $PION</p>
+          <p className="text-2xl font-medium font-tomorrow">Buy $PION</p>
         </FadeIn>
         <FadeIn className="mr-auto" delay={0.1} duration={0.3}>
           <p className="text-xl">[Where to buy explainer]</p>
