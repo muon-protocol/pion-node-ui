@@ -133,13 +133,41 @@ export const Sidebar = () => {
       />
 
       <SidebarItem
-        className="mb-[18px]"
+        className="mb-16"
         title="Finalize Setup"
         isSidebarOpen={isSidebarOpen}
         isActive={false}
         onClick={() => {}}
         icon="/assets/images/sidebar/step-3.svg"
       />
+
+      <section className="stats w-full flex gap-3 mb-8">
+        <div className="stats__left flex flex-col gap-3">
+          <StatItem value="25%" title="Nope APR" />
+          <StatItem value="1M" title="Staked" />
+          <StatItem value="$4M" title="TVL" />
+        </div>
+        {isSidebarOpen && (
+          <div className="stats__right">
+            <div className="stats__left flex flex-col gap-3">
+              <StatItem value="$1M" title="POL" />
+              <StatItem value="$15M" title="MCAP" />
+              <StatItem value="250K" title="Supply" />
+            </div>
+          </div>
+        )}
+      </section>
+
+      {isSidebarOpen && (
+        <section className="links flex flex-col gap-3 w-full items-center">
+          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all">
+            Muon Explorer
+          </p>
+          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all">
+            Build on Muon
+          </p>
+        </section>
+      )}
       <img
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className={`absolute z-[1001] transition-all left-[110px] cursor-pointer -translate-x-1/2 top-7 ${
