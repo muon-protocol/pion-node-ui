@@ -160,6 +160,7 @@ export const RenderUpgradeBody = () => {
           max={maxAmountToBoost}
           boostCoefficient={boostCoefficient}
           onValueChanged={handleUpgradeBoostAmountChange}
+          disabled={!maxAmountToBoost || maxAmountToBoost.big === BigInt(0)}
         />
       </FadeIn>
 

@@ -9,6 +9,7 @@ const AmountInput = ({
   withLink,
   boostCoefficient,
   max,
+  disabled,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
@@ -17,6 +18,7 @@ const AmountInput = ({
   withLink?: boolean;
   boostCoefficient?: W3bNumber;
   max: W3bNumber | undefined;
+  disabled?: boolean;
 }) => {
   return (
     <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
@@ -50,18 +52,31 @@ const AmountInput = ({
       </div>
       <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg rounded-xl h-12 md:h-14">
         <input
-          className="amount-input__input text-white flex-1 placeholder-white font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm"
-          placeholder={`Enter amount ${
-            max?.dsp ? '(max: ' + max.dsp + ')' : ''
+          disabled={disabled}
+          className={`amount-input__input text-white flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
+            disabled ? 'placeholder-gray' : 'placeholder-white'
           }`}
+          placeholder={
+            disabled
+              ? '-'
+              : `Enter amount ${max?.dsp ? '(max: ' + max.dsp + ')' : ''}`
+          }
           type="number"
           value={value.hStr}
           onChange={(e) => onValueChanged(e.target.value)}
         />
-        <div className="amount-input__token-name group text-gray10 font-semibold max-md:text-sm min-w-fit">
+        <div
+          className={`amount-input__token-name group font-semibold max-md:text-sm min-w-fit ${
+            disabled ? 'text-gray' : 'text-gray10'
+          }`}
+        >
           {rightText}
         </div>
-        <div className="bg-primary-dark px-4 h-full flex relative items-center rounded-r-xl gap-2 group">
+        <div
+          className={`bg-primary-dark px-4 h-full flex relative items-center rounded-r-xl gap-2 group ${
+            disabled ? 'bg-gray3' : ''
+          }`}
+        >
           <p className="text-xl font-bold text-white">
             {boostCoefficient?.dsp}x
           </p>

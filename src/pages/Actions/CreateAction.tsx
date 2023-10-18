@@ -110,6 +110,7 @@ export const RenderCreateBody = () => {
           boostCoefficient={boostCoefficient}
           max={maxAmountToBoost}
           onValueChanged={handleCreateBoostAmountChange}
+          disabled={!maxAmountToBoost || maxAmountToBoost.big === BigInt(0)}
         />
       </FadeIn>
 
