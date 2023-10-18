@@ -7,12 +7,27 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar z-[1000] bg-so-dark-gray w-[110px] transition-all absolute left-0 top-0 h-[100vh] ${
-        isSidebarOpen && '!w-[213px]'
+      className={`sidebar flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all absolute left-0 top-0 h-full ${
+        isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >
-      <div className="sidebar__logo">
-        <img src="/assets/images/logo.svg" alt="" />
+      <div
+        className={`sidebar__logo flex transition-all items-center gap-4 pl-[22px] ${
+          isSidebarOpen && '!pl-0'
+        }`}
+      >
+        <img
+          src="/assets/images/sidebar/logo.svg"
+          className="w-[26px] h-8"
+          alt=""
+        />
+        {isSidebarOpen && (
+          <img
+            src="/assets/images/sidebar/logo-typo.svg"
+            className="w-[px]"
+            alt=""
+          />
+        )}
       </div>
 
       <img

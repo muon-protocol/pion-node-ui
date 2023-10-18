@@ -36,13 +36,13 @@ const DesktopNavbar = () => {
     <FadeIn delay={0.3}>
       <div className="hidden md:flex absolute w-full navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
-          <Link to={'/pion/getting-started'}>
-            <img
-              src="/assets/images/navbar/pion-logo.svg?v=2"
-              alt={''}
-              className="w-auto h-9"
-            />
-          </Link>
+          {/*<Link to={'/pion/getting-started'}>*/}
+          {/*  <img*/}
+          {/*    src="/assets/images/navbar/pion-logo.svg"*/}
+          {/*    alt={''}*/}
+          {/*    className="w-auto h-9"*/}
+          {/*  />*/}
+          {/*</Link>*/}
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
