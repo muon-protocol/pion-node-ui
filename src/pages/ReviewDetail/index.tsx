@@ -320,6 +320,8 @@ const ReviewDetail = () => {
   return (
     <div className="page__bg">
       <div className="page page--review-details">
+        <p className="text-2xl font-medium mr-auto mb-6">Finalize Step</p>
+
         <Alert
           className="mb-8 w-full"
           type={'success'}
