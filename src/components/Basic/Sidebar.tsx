@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActionType } from '../../types';
+import { useStats } from '../../hooks/useStats.ts';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { stats } = useStats();
 
   return (
     <div
@@ -84,16 +87,16 @@ export const Sidebar = () => {
 
       <section className="stats w-full flex gap-3 mb-8">
         <div className="stats__left flex flex-col gap-3">
-          <StatItem value="25%" title="Nope APR" />
-          <StatItem value="1M" title="Staked" />
-          <StatItem value="$4M" title="TVL" />
+          <StatItem value={stats?.annual_percentage_yield} title="Nope APR" />
+          <StatItem value={stats?.pion_staked_in_staking} title="Staked" />
+          <StatItem value={stats?.total_value_locked} title="TVL" />
         </div>
         {isSidebarOpen && (
           <div className="stats__right">
             <div className="stats__left flex flex-col gap-3">
-              <StatItem value="$1M" title="POL" />
-              <StatItem value="$15M" title="MCAP" />
-              <StatItem value="250K" title="Supply" />
+              <StatItem value={stats?.protocol_owned_liquidity} title="POL" />
+              <StatItem value={stats?.market_cap} title="MCAP" />
+              <StatItem value={stats?.pion_in_circulation} title="Supply" />
             </div>
           </div>
         )}
@@ -165,11 +168,19 @@ const SidebarItem = ({
   );
 };
 
-const StatItem = ({ value, title }: { value: string; title: string }) => {
+const StatItem = ({
+  value,
+  title,
+}: {
+  value: string | undefined;
+  title: string;
+}) => {
   return (
     <div className="stat-item flex flex-col items-center justify-center gap-1">
       <span className="w-[76px] h-[60px] rounded-[10px] flex justify-center items-center bg-body-background">
-        <p className="stat-item__value font-bold text-[22px]">{value}</p>
+        <p className="stat-item__value font-bold text-[18px]">
+          {value ? value : '...'}
+        </p>
       </span>
       <p className="text-light-text text-sm">{title}</p>
     </div>

@@ -49,6 +49,13 @@ export async function getUserSignatureForBoostAPI(address: Address) {
   return response.data;
 }
 
+export async function getStatsAPI() {
+  const response = await axiosInstance.get(
+    'https://monitor-pion.muon.net/stats/data.json',
+  );
+  return response.data;
+}
+
 export async function getNodeStatusAPI(ip: string) {
   const response = await axiosInstance.get('/reward-server/status?ip=' + ip);
   return response.data;
