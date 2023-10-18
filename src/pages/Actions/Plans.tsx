@@ -1,14 +1,19 @@
 import { plans } from '../../data/constants.ts';
 import { ActionsPlansCard } from './ActionsPlansCard.tsx';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
-import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
+import {
+  w3bNumberFromBigint,
+  w3bNumberFromNumber,
+  w3bNumberFromString,
+} from '../../utils/web3.ts';
 import { ActionType } from '../../types';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useMemo } from 'react';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
-import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
+// import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
+import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 
 export const Plans = () => {
   const { valueOfBondedToken } = useMuonNodeStaking();
@@ -19,40 +24,37 @@ export const Plans = () => {
 
   const { createAmount, createBoostAmount } = useCreateAction();
   const { boostCoefficient } = useBooster();
-  const { USDCPrice } = usePancakePair();
+  const { ALICEPrice } = useTokenPrice();
 
   const createAmountInW3BNumber = useMemo(() => {
-    return USDCPrice && boostCoefficient
-      ? w3bNumberFromNumber(
-          Math.round(
-            (createBoostAmount.dsp *
-              (Math.round(USDCPrice * 100) / 100) *
+    return ALICEPrice && boostCoefficient
+      ? w3bNumberFromString(
+          (
+            (createBoostAmount.dsp / (Math.round(ALICEPrice * 10000) / 10000)) *
               boostCoefficient.dsp +
-              createAmount.dsp) *
-              100,
-          ) / 100,
+            createAmount.dsp
+          ).toFixed(2),
         )
       : w3bNumberFromNumber(0);
-  }, [USDCPrice, boostCoefficient, createAmount, createBoostAmount]);
+  }, [ALICEPrice, boostCoefficient, createAmount, createBoostAmount]);
 
   const { upgradeAmount, upgradeBoostAmount, selectedUpgradeBonALICE } =
     useUpgradeAction();
 
   const upgradeAmountInW3BNumber = useMemo(() => {
-    return USDCPrice && boostCoefficient && selectedUpgradeBonALICE
-      ? w3bNumberFromNumber(
-          Math.round(
-            (upgradeBoostAmount.dsp *
-              (Math.round(USDCPrice * 100) / 100) *
+    return ALICEPrice && boostCoefficient && selectedUpgradeBonALICE
+      ? w3bNumberFromString(
+          (
+            (upgradeBoostAmount.dsp /
+              (Math.round(ALICEPrice * 10000) / 10000)) *
               boostCoefficient.dsp +
-              upgradeAmount.dsp +
-              selectedUpgradeBonALICE.nodePower) *
-              100,
-          ) / 100,
+            upgradeAmount.dsp +
+            selectedUpgradeBonALICE.nodePower
+          ).toFixed(2),
         )
       : w3bNumberFromNumber(0);
   }, [
-    USDCPrice,
+    ALICEPrice,
     boostCoefficient,
     selectedUpgradeBonALICE,
     upgradeAmount.dsp,
@@ -77,6 +79,9 @@ export const Plans = () => {
 
   const isPlanActive = (minPower: number, maxPower: number) => {
     if (location.pathname === ActionType.CREATE) {
+      console.log('createAmountInW3BNumber.dsp', createAmountInW3BNumber.dsp);
+      console.log('minPower', minPower);
+      console.log('maxPower', maxPower);
       return (
         createAmountInW3BNumber.dsp >= minPower &&
         createAmountInW3BNumber.dsp < maxPower
@@ -115,7 +120,7 @@ export const Plans = () => {
   ]);
 
   return (
-    <div className="plans min-w-[470px] flex flex-col justify-between flex-grow">
+    <div className="plans min-w-[470px] flex flex-col justify-start gap-[18px] flex-grow">
       <ActionsPlansCard
         plan={plans[0]}
         className="w-full border-plan-1"

@@ -1,5 +1,5 @@
-import ActionsSidebar from './ActionsSidebar.tsx';
-import ActionsHeader from './ActionsHeader.tsx';
+// import ActionsSidebar from './ActionsSidebar.tsx';
+// import ActionsHeader from './ActionsHeader.tsx';
 import ActionsContent from './ActionsContent.tsx';
 import { FadeIn } from '../../animations';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
@@ -58,11 +58,10 @@ const Actions = () => {
 
   return (
     <div className="page__bg">
-      <div className="page page--centered">
+      <div className="page page--centered page--actions">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[1200px] gap-4 md:gap-5">
-          <ActionsHeader />
+        <FadeIn className="flex flex-col w-[1151px] gap-4 md:gap-5">
           <ActionsBody />
         </FadeIn>
       </div>
@@ -72,8 +71,7 @@ const Actions = () => {
 
 const ActionsBody = () => {
   return (
-    <div className="actions-body flex md:min-h-[552px] flex-col-reverse md:flex-row w-full gap-9">
-      <ActionsSidebar />
+    <div className="actions-body flex md:min-h-[607px] flex-col-reverse md:flex-row w-full gap-8">
       <ActionsContent />
       <Plans />
     </div>

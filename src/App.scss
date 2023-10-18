@@ -120,6 +120,10 @@ input[type=number] {
     @apply flex items-center justify-center;
   }
 
+  &--actions {
+    @apply md:max-w-[1151px];
+  }
+
   &--home {
     @apply md:max-w-[1161px];
   }

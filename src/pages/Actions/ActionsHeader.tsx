@@ -10,12 +10,12 @@ const ActionsHeader = () => {
   // const { muonNodeStakingUsers } = useMuonNodeStaking();
 
   return (
-    <div className="actions-header flex items-center w-[700px] gap-9">
-      <div className="w-[90px] flex items-center h-full">
+    <div className="actions-header flex items-center w-full gap-6">
+      <div className="w-[85px] flex items-center h-full">
         {renderActionImageAndName(selectedAction)}
       </div>
       <div className="w-full">
-        <p className="text-center md:text-left md:text-lg font-light text-white md:min-h-[112px] flex items-center">
+        <p className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] flex items-center">
           {renderActionDescription(selectedAction)}
         </p>
       </div>
@@ -35,11 +35,11 @@ const ActionsHeader = () => {
 
 const renderActionImageAndName = (action: ActionType) => {
   return (
-    <div className="w-[90px] flex flex-col justify-center items-center gap-2">
-      <div className="action-image relative min-h-[32px] md:min-h-[54px] flex justify-center w-full">
+    <div className="w-full flex flex-col justify-center items-center gap-1 -translate-y-3">
+      <div className="action-image relative min-h-[32px] md:min-h-[40px] flex justify-center w-full">
         {renderActionImage(action)}
       </div>
-      <div className="action-name text-primary-10-solid text-xl font-medium flex justify-center w-full text-center">
+      <div className="action-name text-primary-10-solid text-lg font-medium flex justify-center w-full text-center">
         {renderActionName(action)}
       </div>
     </div>
@@ -53,7 +53,7 @@ const renderActionImage = (action: ActionType) => {
         {action === ActionType.VIEW ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/view-icon.svg"
               alt="view"
             />
@@ -61,7 +61,7 @@ const renderActionImage = (action: ActionType) => {
         ) : action === ActionType.CREATE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/create-icon.svg"
               alt="create"
             />
@@ -69,7 +69,7 @@ const renderActionImage = (action: ActionType) => {
         ) : action === ActionType.UPGRADE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/upgrade-icon.svg"
               alt="upgrade"
             />
@@ -77,7 +77,7 @@ const renderActionImage = (action: ActionType) => {
         ) : action === ActionType.MERGE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/merge-icon.svg"
               alt="merge"
             />
@@ -85,7 +85,7 @@ const renderActionImage = (action: ActionType) => {
         ) : action === ActionType.SPLIT ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/split-icon.svg"
               alt="split"
             />
@@ -93,7 +93,7 @@ const renderActionImage = (action: ActionType) => {
         ) : action === ActionType.TRANSFER ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
-              className="w-8 h-8 md:w-[52px] md:h-[52px]"
+              className="w-8 h-8 md:w-10 md:h-10"
               src="/assets/images/actions/transfer-icon.svg"
               alt="transfer"
             />
