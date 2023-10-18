@@ -6,14 +6,13 @@ export function weiToEther(wei: string): string {
 }
 
 export function w3bNumberFromBigint(bigint: bigint, decimals = 18): W3bNumber {
-  // convert bigint with x decimals to a number with x decimals
   return {
     hStr: ethers.formatEther(bigint * BigInt(10 ** 18 / 10 ** decimals)),
-    dsp: parseFloat(
-      parseFloat(
-        ethers.formatEther(bigint * BigInt(10 ** 18 / 10 ** decimals)),
-      ).toFixed(2),
-    ),
+    dsp:
+      Math.floor(
+        Number(ethers.formatEther(bigint * BigInt(10 ** 18 / 10 ** decimals))) *
+          100,
+      ) / 100,
     big: bigint,
     bigStr: bigint.toString(),
   };

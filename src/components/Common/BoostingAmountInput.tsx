@@ -37,9 +37,9 @@ const AmountInput = ({
               onClick={() =>
                 balance && max
                   ? onValueChanged(
-                      max.big < balance.big
-                        ? max.dsp.toFixed(2)
-                        : balance.dsp.toFixed(2),
+                      max.dsp < balance.dsp
+                        ? max.dsp.toString()
+                        : balance.dsp.toString(),
                     )
                   : null
               }
