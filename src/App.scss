@@ -20,10 +20,10 @@
 }
 
 .actions-content {
-    background-image: url("../public/assets/images/actions/bg.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-image: url("../public/assets/images/actions/bg.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .review-detail {
@@ -39,6 +39,16 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+}
+
+.stat-item {
+  &__value {
+    background: linear-gradient(73.73deg, #5B4FEC -7.26%, #DFA891 100.28%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
   }
 }
 
