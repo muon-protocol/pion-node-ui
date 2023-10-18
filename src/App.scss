@@ -52,6 +52,10 @@
   }
 }
 
+.shop-card {
+
+}
+
 .styled-scroll {
   @apply pr-3 -mr-3;
 
@@ -128,6 +132,10 @@ input[type=number] {
 
   &--centered {
     @apply flex items-center justify-center;
+  }
+
+  &--buy-pion {
+    @apply md:max-w-[1139px];
   }
 
   &--actions {
