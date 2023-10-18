@@ -19,6 +19,7 @@ export const Sidebar = () => {
         className={`sidebar__logo flex transition-all items-center gap-4 pl-[22px] mb-10 ${
           isSidebarOpen && '!pl-0'
         }`}
+        onClick={() => navigate('/pion/getting-started')}
       >
         <img
           src="/assets/images/sidebar/logo.svg"
