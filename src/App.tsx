@@ -26,6 +26,7 @@ import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
+import BuyPION from './pages/BuyPION';
 
 function App() {
   return (
@@ -57,6 +58,10 @@ function App() {
                                         <Route
                                           path="/pion/getting-started"
                                           element={<Home />}
+                                        />
+                                        <Route
+                                          path="/pion/buy-pion"
+                                          element={<BuyPION />}
                                         />
                                         <Route
                                           path="/pion/bonPION/view"
