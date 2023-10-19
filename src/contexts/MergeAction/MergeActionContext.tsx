@@ -131,15 +131,15 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isInSelectedMergeBonALICEs(nodeBonALICE[0])
       ) {
         await mergeWithNodeNFT?.({
-          pending: 'Merging with Node BonALICE...',
+          pending: 'Merging with Node BonPION...',
           success: 'Merged!',
-          failed: 'Failed to Merge with Node BonALICE.',
+          failed: 'Failed to Merge with Node BonPION.',
         });
       } else {
         await merge?.({
-          pending: 'Merging Bonded ALICEs...',
+          pending: 'Merging Bonded PIONs...',
           success: 'Merged!',
-          failed: 'Failed to Merge Bonded ALICEs.',
+          failed: 'Failed to Merge Bonded PIONs.',
         });
       }
       setMergeModalSelectedBonALICEs([]);
