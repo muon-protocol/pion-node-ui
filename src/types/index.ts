@@ -6,6 +6,8 @@ export type Plan = {
   title: string;
   requiredNodePower: string;
   verificationMethods: string;
+  minNodePower: string | null;
+  maxNodePower: string;
   APR: string;
   profitability: string;
   backgroundColor: string;

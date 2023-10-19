@@ -31,9 +31,17 @@ export const ActionsPlansCard = ({
           <p className={`text-2xl font-semibold ${color}`}>{plan.title}</p>
           {active && <p className={color}>Your tier</p>}
         </div>
+
+        {plan.minNodePower && (
+          <div className="flex justify-between w-full items-center">
+            <p className="">Minimum Node Power</p>
+            <p className="font-semibold text-lg">{plan.minNodePower}</p>
+          </div>
+        )}
+
         <div className="flex justify-between w-full items-center">
-          <p className="">Required Node Power</p>
-          <p className="font-semibold text-lg">{plan.requiredNodePower} PION</p>
+          <p className="">Maximum Node Power</p>
+          <p className="font-semibold text-lg">{plan.maxNodePower}</p>
         </div>
 
         {active && activePower && (
@@ -42,18 +50,19 @@ export const ActionsPlansCard = ({
             <p className="font-semibold text-lg">{activePower} PION</p>
           </div>
         )}
-        {!POA && (
-          <div className="flex justify-between w-full items-center">
-            <p className="">Verification Required</p>
-            <p
-              className="underline cursor-pointer font-semibold text-lg"
-              onClick={() => window.open(plan.verificationLink, '_blank')}
-            >
-              {plan.verificationMethods}
-            </p>
-          </div>
-        )}
-        {POA && (
+        {!POA ? (
+          <p
+            onClick={() =>
+              window.open(
+                'https://docs.muon.net/muon-network/muon-nodes/pion-network/pion-poa-network',
+                '_blank',
+              )
+            }
+            className="text-white underline cursor-pointer font-bold"
+          >
+            Verify Tier {plan.id}
+          </p>
+        ) : (
           <p
             onClick={() =>
               window.open(
