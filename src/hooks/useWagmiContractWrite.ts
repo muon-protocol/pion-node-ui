@@ -43,7 +43,6 @@ const useWagmiContractWrite = ({
         setIsTransactionLoading(true);
         setTransactionHash(hash);
         const transaction = waitForTransaction({ hash: hash });
-
         await toast.promise(transaction, {
           loading: stateMessage.pending,
           success: stateMessage.success,
@@ -52,7 +51,7 @@ const useWagmiContractWrite = ({
         setIsTransactionLoading(false);
         setIsSuccess(true);
       } catch (error: any) {
-        console.log(error);
+        console.log('error', error);
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
         setIsFailed(true);

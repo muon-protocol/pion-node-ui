@@ -225,10 +225,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
             chainId: getCurrentChainId(),
           });
           setIsLockUSDCMetamaskLoading(false);
-          if (!hash) return;
+          if (!hash)
+            throw new Error(
+              'Failed to boost bonded PION with USDC! (No hash returned)',
+            );
           setIsLockUSDCTransactionLoading(true);
           const transaction = waitForTransaction({ hash });
-
           await toast.promise(transaction, {
             loading: 'Boosting bonded PION with USDC...',
             success: 'Boosted!',
