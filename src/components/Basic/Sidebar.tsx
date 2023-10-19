@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActionType } from '../../types';
 import { useStats } from '../../hooks/useStats.ts';
+import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,6 +16,9 @@ export const Sidebar = () => {
       setIsSidebarOpen(false);
     }
   }, [location.pathname]);
+
+  const { nodeBonALICE } = useMuonNodeStaking();
+  const { bonALICEs } = useBonALICE();
 
   return (
     <div
@@ -69,7 +74,11 @@ export const Sidebar = () => {
 
       <SidebarItem
         className="mb-[18px]"
-        title="Create bonPION"
+        title={
+          bonALICEs.length + nodeBonALICE.length > 0
+            ? 'Manage bonPION'
+            : 'Create bonPION'
+        }
         isSidebarOpen={isSidebarOpen}
         isActive={[
           ActionType.VIEW,
@@ -79,7 +88,13 @@ export const Sidebar = () => {
           ActionType.TRANSFER,
           ActionType.SPLIT,
         ].includes(location.pathname as ActionType)}
-        onClick={() => navigate('/pion/bonPION/create')}
+        onClick={() => {
+          if (bonALICEs.length + nodeBonALICE.length > 0) {
+            navigate('/pion/bonPION/increase');
+          } else {
+            navigate('/pion/bonPION/create');
+          }
+        }}
         icon="/assets/images/sidebar/step-2.svg"
       />
 
@@ -223,8 +238,8 @@ const SidebarItem = ({
       </div>
       <p
         className={`group-hover:text-primary-L1 text-white transition-all ease-in duration-[0.2s] text-[14px] font-medium line-clamp-1 w-0 ${
-          isSidebarOpen && '!w-[110px]'
-        } ${isActive && '!text-primary-L1'}`}
+          isSidebarOpen && '!w-[125px]'
+        } ${isActive && '!text-primary-L1 !font-bold'}`}
       >
         {title}
       </p>
@@ -232,7 +247,9 @@ const SidebarItem = ({
       {!isSidebarOpen && (
         <span className="absolute bg-light-text left-20 w-0 rounded transition-all ease-in duration-[0.2s] group-hover:w-max group-hover:p-3">
           <p
-            className={`text-black transition-all ease-out duration-2git 00 text-sm font-medium line-clamp-1 w-full`}
+            className={`text-black transition-all ease-out duration-300 text-sm font-medium line-clamp-1 w-full ${
+              isActive && 'text-primary !font-bold'
+            }`}
           >
             {title}
           </p>
