@@ -224,7 +224,7 @@ const SidebarItem = ({
       {!isSidebarOpen && (
         <span className="absolute bg-light-text left-20 w-0 rounded transition-all ease-out duration-500 group-hover:w-max group-hover:p-3">
           <p
-            className={`text-black transition-all ease-out duration-200 text-sm font-medium line-clamp-1 w-full`}
+            className={`text-black transition-all ease-out duration-2git 00 text-sm font-medium line-clamp-1 w-full`}
           >
             {title}
           </p>
