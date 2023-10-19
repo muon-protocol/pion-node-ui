@@ -35,7 +35,9 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 !w-full">Buy on UNISWAP</button>
+              <button className="btn !px-5 btn--white !w-full">
+                Buy on UNISWAP
+              </button>
             </div>
           </FadeIn>
 
@@ -63,7 +65,9 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 !w-full">Buy on UNISWAP</button>
+              <button className="btn !px-5 btn--white !w-full">
+                Buy on UNISWAP
+              </button>
             </div>
           </FadeIn>
 
@@ -87,7 +91,9 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 !w-full">Buy on MEXC</button>
+              <button className="btn !px-5 btn--white !w-full">
+                Buy on MEXC
+              </button>
             </div>
           </FadeIn>
         </div>

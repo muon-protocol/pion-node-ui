@@ -131,32 +131,21 @@ html {
   }
 
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1050px] md:pb-[148px] md:pt-[160px] mx-auto;
+  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1080px] md:pb-[148px] md:pt-[160px] mx-auto;
   min-height: calc(100vh);
 
   &--centered {
     //@apply flex items-center justify-center;
   }
 
-  &--buy-pion {
-    @apply md:max-w-[1050px];
-  }
-
-  &--actions {
-    @apply md:max-w-[1050px];
-  }
-
-  &--home {
-    @apply md:max-w-[1050px];
-  }
 
   &--get-started,
   &--claim-prize {
-    @apply flex flex-col items-center justify-center md:max-w-[1050px] mx-auto;
+    @apply flex flex-col items-center justify-center mx-auto;
   }
 
   &--review-details {
-    @apply flex flex-col md:max-w-[1050px];
+    @apply flex flex-col;
   }
 }
 

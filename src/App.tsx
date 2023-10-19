@@ -31,7 +31,7 @@ import { Sidebar } from './components/Basic/Sidebar.tsx';
 
 function App() {
   return (
-    <div className="app">
+    <div className="app relative">
       <Web3Provider>
         <ApolloProvider client={aliceClient}>
           <RefreshProvider>

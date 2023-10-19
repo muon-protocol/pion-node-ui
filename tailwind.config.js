@@ -14,7 +14,7 @@ export default {
         'primary-L1': '#918EF5',
         'primary-13': '#4D3E9E21',
         'primary-13-solid': '#E2E6FE',
-        'primary-L3': '#f1eeff',
+        'primary-L3': '#CDC9FD',
         'light-text': '#BCC8DE',
         gray10: '#E9EFF6',
         'body-background': '#252528',
