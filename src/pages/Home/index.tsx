@@ -7,6 +7,8 @@ import { StepCard } from './StepCard.tsx';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import { useRef, useState } from 'react';
+import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -15,6 +17,11 @@ const Home = () => {
 
   const { ALICEBalance } = useALICE();
   const { nodeBonALICE } = useMuonNodeStaking();
+
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => setIsBuyPIONDropdownOpen(false));
+
+  const [isBuyPIONDropdownOpen, setIsBuyPIONDropdownOpen] = useState(false);
 
   return (
     <div className="page__bg--home">
@@ -64,11 +71,48 @@ const Home = () => {
                 )}
               </div>
               <button
-                disabled
-                className="btn !px-6 mx-auto "
-                onClick={() => {}}
+                className="btn !px-6 mx-auto relative "
+                onClick={() => setIsBuyPIONDropdownOpen(!isBuyPIONDropdownOpen)}
               >
                 Buy $PION
+                {isBuyPIONDropdownOpen && (
+                  <FadeIn
+                    duration={0.1}
+                    delay={0.1}
+                    className="absolute bottom-0 translate-y-[110%] "
+                  >
+                    <div
+                      ref={ref}
+                      onClick={(e) => e.stopPropagation()}
+                      className="dialog py-4 px-7 bg-primary-very-dark rounded-lg flex flex-col gap-4"
+                    >
+                      <button
+                        onClick={() => {
+                          setIsBuyPIONDropdownOpen(false);
+                          window.open(
+                            'https://app.uniswap.org/#/swap?inputCurrency=0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
+                            '_blank',
+                          );
+                        }}
+                        className="btn btn--white btn--small min-w-[160px]"
+                      >
+                        Buy on UNISWAP
+                      </button>
+                      <button
+                        onClick={() => {
+                          setIsBuyPIONDropdownOpen(false);
+                          window.open(
+                            'https://www.mexc.com/exchange/PION_USDT?_from=market',
+                            '_blank',
+                          );
+                        }}
+                        className="btn btn--white btn--small min-w-[160px]"
+                      >
+                        Buy on MEXC
+                      </button>
+                    </div>
+                  </FadeIn>
+                )}
               </button>
             </>
           </StepCard>
