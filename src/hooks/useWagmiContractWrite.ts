@@ -52,6 +52,7 @@ const useWagmiContractWrite = ({
         setIsTransactionLoading(false);
         setIsSuccess(true);
       } catch (error: any) {
+        console.log(error);
         setIsMetamaskLoading(false);
         setIsTransactionLoading(false);
         setIsFailed(true);

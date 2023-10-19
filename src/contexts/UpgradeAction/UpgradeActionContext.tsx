@@ -177,21 +177,21 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       if (upgradeAmount.dsp > 0) {
         if (isNodeBonALICESelected) {
           await lockToBondedToken?.({
-            pending: 'Upgrading Bonded ALICE with ALICE...',
+            pending: 'Upgrading Bonded PION with PION...',
             success:
               upgradeBoostAmount.dsp > 0
                 ? 'Upgraded, wait for USDC upgrade...'
                 : 'Upgraded!',
-            failed: 'Failed to upgrade Bonded ALICE with ALICE!',
+            failed: 'Failed to upgrade Bonded PION with PION!',
           });
         } else {
           await lock?.({
-            pending: 'Upgrading Bonded ALICE with ALICE...',
+            pending: 'Upgrading Bonded PION with PION...',
             success:
               upgradeBoostAmount.dsp > 0
                 ? 'Upgraded, wait for USDC upgrade...'
                 : 'Upgraded!',
-            failed: 'Failed to upgrade Bonded ALICE with ALICE!',
+            failed: 'Failed to upgrade Bonded PION with PION!',
           });
         }
       }
