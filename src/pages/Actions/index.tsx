@@ -61,7 +61,7 @@ const Actions = () => {
       <div className="page page--centered page--actions">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[1151px] gap-4 md:gap-6">
+        <FadeIn className="flex flex-col w-full gap-4 md:gap-6">
           <p className="text-2xl font-medium font-tomorrow">
             Manage Bonded PION NFT
           </p>

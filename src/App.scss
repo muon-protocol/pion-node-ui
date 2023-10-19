@@ -52,19 +52,10 @@
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1793a3b (Buy PION Page)
 .shop-card {
 
 }
 
-<<<<<<< HEAD
-=======
->>>>>>> fa968e9 (Finish Sidebar)
-=======
->>>>>>> 1793a3b (Buy PION Page)
 .styled-scroll {
   @apply pr-3 -mr-3;
 
@@ -113,6 +104,10 @@ input[type=number] {
   @apply min-h-screen relative bg-body-background;
 }
 
+html {
+    @apply overflow-y-scroll no-scrollbar;
+}
+
 @media (max-width: 768px) {
   .page {
     min-height: calc(100vh) !important;
@@ -136,32 +131,32 @@ input[type=number] {
   }
 
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[124px] mx-auto;
+  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1050px] md:pb-[148px] md:pt-[160px] mx-auto;
   min-height: calc(100vh);
 
   &--centered {
-    @apply flex items-center justify-center;
+    //@apply flex items-center justify-center;
   }
 
   &--buy-pion {
-    @apply md:max-w-[1139px];
+    @apply md:max-w-[1050px];
   }
 
   &--actions {
-    @apply md:max-w-[1151px];
+    @apply md:max-w-[1050px];
   }
 
   &--home {
-    @apply md:max-w-[1161px];
+    @apply md:max-w-[1050px];
   }
 
   &--get-started,
   &--claim-prize {
-    @apply flex flex-col items-center justify-center md:max-w-[704px] mx-auto;
+    @apply flex flex-col items-center justify-center md:max-w-[1050px] mx-auto;
   }
 
   &--review-details {
-    @apply flex flex-col items-center justify-center md:max-w-[957px] md:px-2.5 mx-auto;
+    @apply flex flex-col md:max-w-[1050px];
   }
 }
 

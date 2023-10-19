@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <div className="page__bg--home">
-      <div className="page page--home page--centered flex flex-col md:px-10">
+      <div className="page page--home page--centered flex flex-col">
         <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
           <img
             src="/assets/images/navbar/pion-logo.svg"

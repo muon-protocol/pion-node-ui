@@ -52,7 +52,11 @@ const ReviewDetail = () => {
 
   const reviewDetailCard = () => {
     return (
-      <div className="review-detail__nft relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
+      <FadeIn
+        duration={0.3}
+        delay={0.3}
+        className="review-detail__nft relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col"
+      >
         <ConnectWalletModal redirectRoute="/get-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
           <div className="address-input__title text-light-text">
@@ -168,7 +172,7 @@ const ReviewDetail = () => {
           </span>
         </div>
         {bonALICEs.length === 0 && <EmptyBonALICECard />}
-      </div>
+      </FadeIn>
     );
   };
 
@@ -340,12 +344,12 @@ const ReviewDetail = () => {
           </span>
           .
         </Alert>
-        <FadeIn
-          duration={0.1}
-          delay={0.1}
-          className="content flex flex-col mb-8 justify-center items-center h-full"
-        >
-          <div className="review-details--top flex flex-col md:flex-row gap-9">
+        <div className="content flex mb-8 justify-center items-center gap-9 h-full">
+          <FadeIn
+            duration={0.3}
+            delay={0.1}
+            className="review-details--top flex flex-col md:flex-row"
+          >
             <p className="text-lg text-center md:text-left md:text-[20px] font-light w-full">
               Please review the bonPION details you're staking for node
               operation. When ready, fill out the requested information and
@@ -393,36 +397,37 @@ const ReviewDetail = () => {
             {/*    the uniqueness verification process in your dashboard*/}
             {/*  </Alert>*/}
             {/*)}*/}
-
-            <div className="bg-primary md:!w-[365px] md:!min-w-[365px] flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl">
-              <img src="/assets/images/review/guide-icon.svg" alt="" />
-              <div>
-                <p className="text-white text-sm">
-                  Need help setting up your node?
-                </p>
-                <p
-                  className="text-white text-xl underline cursor-pointer"
-                  onClick={() =>
-                    window.open(
-                      'https://docs.muon.net/muon-network/muon-nodes/pion',
-                      '_blank',
-                    )
-                  }
-                >
-                  See Our Setup Guide
-                </p>
-              </div>
+          </FadeIn>
+          <FadeIn
+            duration={0.3}
+            delay={0.2}
+            className="bg-primary md:!w-[365px] md:!min-w-[365px] flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
+          >
+            <img src="/assets/images/review/guide-icon.svg" alt="" />
+            <div>
+              <p className="text-white text-sm">
+                Need help setting up your node?
+              </p>
+              <p
+                className="text-white text-xl underline cursor-pointer"
+                onClick={() =>
+                  window.open(
+                    'https://docs.muon.net/muon-network/muon-nodes/pion',
+                    '_blank',
+                  )
+                }
+              >
+                See Our Setup Guide
+              </p>
             </div>
+          </FadeIn>
 
-            {/*<NotificationCard  />*/}
-          </div>
-        </FadeIn>
-        <FadeIn delay={0.2} duration={0.3} className="w-full">
-          <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
-            {reviewDetailCard()}
-            {transferCard()}
-          </div>
-        </FadeIn>
+          {/*<NotificationCard  />*/}
+        </div>
+        <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
+          {reviewDetailCard()}
+          {transferCard()}
+        </div>
       </div>
     </div>
   );
