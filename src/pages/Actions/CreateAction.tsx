@@ -126,19 +126,23 @@ export const RenderCreateBody = () => {
             >
               <span className="text-gray10">
                 <p className="font-light">New bonPION amount:</p>
-                <p className="font-light text-sm flex gap-1">
-                  {Number(createBoostAmount.hStr) +
-                    ' USDC -> ' +
-                    (
-                      Number(createBoostAmount.hStr) /
-                      (Math.round(ALICEPrice * 10000) / 10000)
-                    ).toFixed(2) +
-                    ' PION '}
-                  <p className="text-uptime font-bold">
-                    x{boostCoefficient?.dsp}
+                {createBoostAmount.big > BigInt(0) ? (
+                  <p className="font-light text-sm flex gap-1">
+                    {Number(createBoostAmount.hStr) +
+                      ' USDC -> ' +
+                      (
+                        Number(createBoostAmount.hStr) /
+                        (Math.round(ALICEPrice * 10000) / 10000)
+                      ).toFixed(2) +
+                      ' PION '}
+                    <p className="text-uptime font-bold">
+                      x{boostCoefficient?.dsp}
+                    </p>
+                    {' + ' + Number(createAmount.hStr) + ' PION'}
                   </p>
-                  {' + ' + Number(createAmount.hStr) + ' PION'}
-                </p>
+                ) : (
+                  <p className="h-5"></p>
+                )}
               </span>
               <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
                 {(
