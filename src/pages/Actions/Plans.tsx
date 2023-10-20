@@ -120,7 +120,7 @@ export const Plans = () => {
   ]);
 
   return (
-    <div className="plans min-w-[470px] flex flex-col justify-start gap-[18px] flex-grow">
+    <div className="plans w-full flex flex-col justify-start gap-[18px] flex-grow">
       <ActionsPlansCard
         plan={plans[0]}
         className="w-full border-plan-1"
