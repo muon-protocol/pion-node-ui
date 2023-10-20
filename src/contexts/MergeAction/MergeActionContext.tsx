@@ -32,6 +32,7 @@ const MergeActionContext = createContext<{
   isTransactionLoading: boolean;
   tokenApprovedContractAddress: string | undefined;
   handleApproveNFT: () => void;
+  setMergeModalSelectedBonALICEs: (bonALICEs: BonALICE[]) => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -44,6 +45,7 @@ const MergeActionContext = createContext<{
   isTransactionLoading: false,
   tokenApprovedContractAddress: undefined,
   handleApproveNFT: () => {},
+  setMergeModalSelectedBonALICEs: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -215,6 +217,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
           isApproveNFTTransactionLoading,
         tokenApprovedContractAddress,
         handleApproveNFT,
+        setMergeModalSelectedBonALICEs,
       }}
     >
       {children}
