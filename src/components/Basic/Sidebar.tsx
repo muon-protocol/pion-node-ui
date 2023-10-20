@@ -22,7 +22,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar  flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all ease-in duration-[0.2s]  left-0 top-0 h-full ${
+      className={`sidebar justify-between flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all ease-in duration-[0.2s]   ${
         isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >
@@ -45,150 +45,105 @@ export const Sidebar = () => {
           />
         )}
       </div>
+      <div className={'flex justify-between flex-col'}>
+        <div>
+          <SidebarItem
+            className="mb-4"
+            title="Get Started"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/pion/getting-started'}
+            onClick={() => navigate('/pion/getting-started')}
+            icon="/assets/images/sidebar/get-started.svg"
+          />
 
-      <SidebarItem
-        className="mb-[18px]"
-        title="Get Started"
-        isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/getting-started'}
-        onClick={() => navigate('/pion/getting-started')}
-        icon="/assets/images/sidebar/get-started.svg"
-      />
+          <p
+            className={`text-light-text text-sm pl-3.5 mb-4 transition-all ease-in duration-[0.2s] ${
+              isSidebarOpen && '!pl-0 !mb-3'
+            }`}
+          >
+            Steps:
+          </p>
 
-      <p
-        className={`text-light-text text-sm pl-3.5 mb-[18px] transition-all ease-in duration-[0.2s] ${
-          isSidebarOpen && '!pl-0 !mb-3'
-        }`}
-      >
-        Steps:
-      </p>
+          <SidebarItem
+            className="mb-4"
+            title="Buy PION"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/pion/buy-pion'}
+            onClick={() => navigate('/pion/buy-pion')}
+            icon="/assets/images/sidebar/step-1.svg"
+          />
 
-      <SidebarItem
-        className="mb-[18px]"
-        title="Buy PION"
-        isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/buy-pion'}
-        onClick={() => navigate('/pion/buy-pion')}
-        icon="/assets/images/sidebar/step-1.svg"
-      />
+          <SidebarItem
+            className="mb-[18px]"
+            title={
+              bonALICEs.length + nodeBonALICE.length > 0
+                ? 'Manage bonPION'
+                : 'Create bonPION'
+            }
+            isSidebarOpen={isSidebarOpen}
+            isActive={[
+              ActionType.VIEW,
+              ActionType.CREATE,
+              ActionType.UPGRADE,
+              ActionType.MERGE,
+              ActionType.TRANSFER,
+              ActionType.SPLIT,
+            ].includes(location.pathname as ActionType)}
+            onClick={() => {
+              if (bonALICEs.length + nodeBonALICE.length > 0) {
+                navigate('/pion/bonPION/increase');
+              } else {
+                navigate('/pion/bonPION/create');
+              }
+            }}
+            icon="/assets/images/sidebar/step-2.svg"
+          />
 
-      <SidebarItem
-        className="mb-[18px]"
-        title={
-          bonALICEs.length + nodeBonALICE.length > 0
-            ? 'Manage bonPION'
-            : 'Create bonPION'
-        }
-        isSidebarOpen={isSidebarOpen}
-        isActive={[
-          ActionType.VIEW,
-          ActionType.CREATE,
-          ActionType.UPGRADE,
-          ActionType.MERGE,
-          ActionType.TRANSFER,
-          ActionType.SPLIT,
-        ].includes(location.pathname as ActionType)}
-        onClick={() => {
-          if (bonALICEs.length + nodeBonALICE.length > 0) {
-            navigate('/pion/bonPION/increase');
-          } else {
-            navigate('/pion/bonPION/create');
-          }
-        }}
-        icon="/assets/images/sidebar/step-2.svg"
-      />
-
-      <SidebarItem
-        className="mb-16"
-        title="Finalize Setup"
-        isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/setup-node'}
-        onClick={() => navigate('/pion/setup-node')}
-        icon="/assets/images/sidebar/step-3.svg"
-      />
-
-      <section className="stats w-full flex gap-3 mb-8">
-        <div className="stats__left flex flex-col gap-3">
-          <StatItem value={stats?.annual_percentage_yield} title="Nope APR" />
-          <StatItem value={stats?.pion_staked_in_staking} title="Staked" />
-          <StatItem value={stats?.total_value_locked} title="TVL" />
+          <SidebarItem
+            className="mb-16"
+            title="Finalize Setup"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/pion/setup-node'}
+            onClick={() => navigate('/pion/setup-node')}
+            icon="/assets/images/sidebar/step-3.svg"
+          />
         </div>
-        {isSidebarOpen && (
-          <div className="stats__right">
+        <div>
+          <section className="stats w-full flex gap-3 mb-8">
             <div className="stats__left flex flex-col gap-3">
-              <StatItem value={stats?.protocol_owned_liquidity} title="POL" />
-              <StatItem value={stats?.market_cap} title="MCAP" />
-              <StatItem value={stats?.pion_in_circulation} title="Supply" />
+              <StatItem
+                value={stats?.annual_percentage_yield}
+                title="Nope APR"
+              />
+              <StatItem value={stats?.pion_staked_in_staking} title="Staked" />
+              <StatItem value={stats?.total_value_locked} title="TVL" />
             </div>
-          </div>
-        )}
-      </section>
+            {isSidebarOpen && (
+              <div className="stats__right">
+                <div className="stats__left flex flex-col gap-3">
+                  <StatItem
+                    value={stats?.protocol_owned_liquidity}
+                    title="POL"
+                  />
+                  <StatItem value={stats?.market_cap} title="MCAP" />
+                  <StatItem value={stats?.pion_in_circulation} title="Supply" />
+                </div>
+              </div>
+            )}
+          </section>
 
-      {isSidebarOpen && (
-        <section className="links flex flex-col gap-3 w-full items-center">
-          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.2s]">
-            Muon Explorer
-          </p>
-          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.2s]">
-            Build on Muon
-          </p>
-        </section>
-      )}
-
-      <SidebarItem
-        className="mb-[18px]"
-        title="Buy PION"
-        isSidebarOpen={isSidebarOpen}
-        isActive={false}
-        onClick={() => {}}
-        icon="/assets/images/sidebar/step-1.svg"
-      />
-
-      <SidebarItem
-        className="mb-[18px]"
-        title="Create bonPION"
-        isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/bonPION/create'}
-        onClick={() => navigate('/pion/bonPION/create')}
-        icon="/assets/images/sidebar/step-2.svg"
-      />
-
-      <SidebarItem
-        className="mb-16"
-        title="Finalize Setup"
-        isSidebarOpen={isSidebarOpen}
-        isActive={location.pathname === '/pion/setup-node'}
-        onClick={() => navigate('/pion/setup-node')}
-        icon="/assets/images/sidebar/step-3.svg"
-      />
-
-      <section className="stats w-full flex gap-3 mb-8">
-        <div className="stats__left flex flex-col gap-3">
-          <StatItem value="25%" title="Nope APR" />
-          <StatItem value="1M" title="Staked" />
-          <StatItem value="$4M" title="TVL" />
+          {isSidebarOpen && (
+            <section className="links flex flex-col gap-3 w-full items-center">
+              <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.2s]">
+                Muon Explorer
+              </p>
+              <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.2s]">
+                Build on Muon
+              </p>
+            </section>
+          )}
         </div>
-        {isSidebarOpen && (
-          <div className="stats__right">
-            <div className="stats__left flex flex-col gap-3">
-              <StatItem value={stats?.protocol_owned_liquidity} title="POL" />
-              <StatItem value={stats?.market_cap} title="MCAP" />
-              <StatItem value={stats?.pion_in_circulation} title="Supply" />
-            </div>
-          </div>
-        )}
-      </section>
-
-      {isSidebarOpen && (
-        <section className="links flex flex-col gap-3 w-full items-center">
-          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all">
-            Muon Explorer
-          </p>
-          <p className="cursor-pointer underline text-light-text font-medium hover:text-white transition-all">
-            Build on Muon
-          </p>
-        </section>
-      )}
+      </div>
       <img
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
         className={`absolute z-[1001] transition-all ease-in duration-[0.2s] left-[110px] cursor-pointer -translate-x-1/2 top-7 ${

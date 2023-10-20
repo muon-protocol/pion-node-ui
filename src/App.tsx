@@ -50,9 +50,11 @@ function App() {
                                     <BrowserRouter>
                                       <Navbar />
                                       <div className={'flex'}>
-                                      <Sidebar />
-                                        <div className={'w-full'}>
+                                      <Sidebar  />
+                                        <div className={'w-full page__bg--home flex justify-center'}>
+                                          <Footer />
                                       <Routes>
+
                                         <Route
                                           path="/"
                                           element={
@@ -107,7 +109,7 @@ function App() {
                                         </div>
                                       </div>
                                       <Toaster position="bottom-right" />
-                                      <Footer />
+                                      {/*<Footer />*/}
                                     </BrowserRouter>
                                   </ClaimPrizeProvider>
                                 </TransferActionProvider>
