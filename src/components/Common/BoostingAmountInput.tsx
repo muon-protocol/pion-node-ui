@@ -80,8 +80,8 @@ const AmountInput = ({
           {rightText}
         </div>
         <div
-          className={`bg-primary-dark px-4 h-full flex relative items-center rounded-r-xl gap-2 group ${
-            disabled ? 'bg-gray3' : ''
+          className={`px-4 h-full flex relative items-center rounded-r-xl gap-2 group ${
+            disabled ? 'bg-gray3' : 'bg-primary-dark'
           }`}
         >
           <p className="text-xl font-bold text-white">
