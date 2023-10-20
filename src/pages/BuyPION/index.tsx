@@ -35,7 +35,15 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 btn--white !w-full">
+              <button
+                className="btn !px-5 btn--white !w-full"
+                onClick={() =>
+                  window.open(
+                    'https://app.uniswap.org/#/swap?inputCurrency=0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
+                    '_blank',
+                  )
+                }
+              >
                 Buy on UNISWAP
               </button>
             </div>
@@ -65,7 +73,10 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 btn--white !w-full">
+              <button
+                className="btn !px-5 btn--white !w-full"
+                onClick={() => window.open('', '_blank')}
+              >
                 Buy on UNISWAP
               </button>
             </div>
@@ -91,7 +102,15 @@ const Home = () => {
                   </p>
                 </span>
               </span>
-              <button className="btn !px-5 btn--white !w-full">
+              <button
+                className="btn !px-5 btn--white !w-full"
+                onClick={() =>
+                  window.open(
+                    'https://www.mexc.com/exchange/PION_USDT?_from=market',
+                    '_blank',
+                  )
+                }
+              >
                 Buy on MEXC
               </button>
             </div>
