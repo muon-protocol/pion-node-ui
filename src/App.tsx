@@ -50,62 +50,60 @@ function App() {
                                     <BrowserRouter>
                                       <Navbar />
                                       <div className={'flex'}>
-                                      <Sidebar  />
-                                        <div className={'w-full page__bg--home flex justify-center'}>
-                                          <Footer />
-                                      <Routes>
-
-                                        <Route
-                                          path="/"
-                                          element={
-                                            <Navigate to="/pion/getting-started" />
-                                          }
-                                        />
-                                        <Route
-                                          path="/pion/getting-started"
-                                          element={<Home />}
-                                        />
-                                        <Route
-                                          path="/pion/buy-pion"
-                                          element={<BuyPION />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/view"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/create"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/increase"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/merge"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/split-"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/bonPION/transfer-"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/pion/get-started"
-                                          element={<GetStarted />}
-                                        />
-                                        <Route
-                                          path="/pion/claim"
-                                          element={<ClaimPrize />}
-                                        />
-                                        <Route
-                                          path="/pion/setup-node"
-                                          element={<ReviewDetail />}
-                                        />
-                                      </Routes>
+                                        <Sidebar />
+                                        <div className={'w-full'}>
+                                          <Routes>
+                                            <Route
+                                              path="/"
+                                              element={
+                                                <Navigate to="/pion/getting-started" />
+                                              }
+                                            />
+                                            <Route
+                                              path="/pion/getting-started"
+                                              element={<Home />}
+                                            />
+                                            <Route
+                                              path="/pion/buy-pion"
+                                              element={<BuyPION />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/view"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/create"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/increase"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/merge"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/split-"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/bonPION/transfer-"
+                                              element={<Actions />}
+                                            />
+                                            <Route
+                                              path="/pion/get-started"
+                                              element={<GetStarted />}
+                                            />
+                                            <Route
+                                              path="/pion/claim"
+                                              element={<ClaimPrize />}
+                                            />
+                                            <Route
+                                              path="/pion/setup-node"
+                                              element={<ReviewDetail />}
+                                            />
+                                          </Routes>
                                         </div>
                                       </div>
                                       <Toaster position="bottom-right" />

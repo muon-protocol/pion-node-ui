@@ -4,6 +4,7 @@ import { ActionType } from '../../types';
 import { useStats } from '../../hooks/useStats.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
+import { FadeIn } from '../../animations';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
