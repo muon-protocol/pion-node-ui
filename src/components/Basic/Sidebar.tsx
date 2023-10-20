@@ -22,7 +22,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all ease-in duration-[0.2s] absolute left-0 top-0 h-full ${
+      className={`sidebar  flex flex-col z-[1000] bg-so-dark-gray p-[18px] pt-6 w-[110px] transition-all ease-in duration-[0.2s]  left-0 top-0 h-full ${
         isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >

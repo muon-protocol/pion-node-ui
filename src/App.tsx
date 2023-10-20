@@ -49,7 +49,9 @@ function App() {
                                   <ClaimPrizeProvider>
                                     <BrowserRouter>
                                       <Navbar />
+                                      <div className={'flex'}>
                                       <Sidebar />
+                                        <div className={'w-full'}>
                                       <Routes>
                                         <Route
                                           path="/"
@@ -102,6 +104,8 @@ function App() {
                                           element={<ReviewDetail />}
                                         />
                                       </Routes>
+                                        </div>
+                                      </div>
                                       <Toaster position="bottom-right" />
                                       <Footer />
                                     </BrowserRouter>

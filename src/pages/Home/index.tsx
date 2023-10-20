@@ -24,7 +24,7 @@ const Home = () => {
   const [isBuyPIONDropdownOpen, setIsBuyPIONDropdownOpen] = useState(false);
 
   return (
-    <div className="page__bg--home">
+    <div className="page__bg--home w-full">
       <div className="page page--home page--centered flex flex-col">
         <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
           <img
