@@ -13,7 +13,7 @@ export const plans: Plan[] = [
     backgroundColor: '#F58E8E80',
     shadowColor: 'text-[#ed8080]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-1',
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ export const plans: Plan[] = [
     backgroundColor: '#F3C95D80',
     shadowColor: 'text-[#e6bf5a]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-2',
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ export const plans: Plan[] = [
     backgroundColor: '#918EF5',
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-3',
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ export const plans: Plan[] = [
     backgroundColor: '#918EF580',
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/pion-poa-network',
   },
 ];
 
