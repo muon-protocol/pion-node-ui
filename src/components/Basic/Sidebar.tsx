@@ -39,11 +39,7 @@ export const Sidebar = () => {
           alt=""
         />
         {isSidebarOpen && (
-          <img
-            src="/assets/images/sidebar/logo-typo.svg"
-            className="w-[px]"
-            alt=""
-          />
+          <img src="/assets/images/sidebar/logo-typo.svg" className="" alt="" />
         )}
       </div>
       <div className={'flex justify-between flex-col'}>
