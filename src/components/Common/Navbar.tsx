@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 // import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 // import useALICE from '../../contexts/ALICE/useALICE.ts';
@@ -6,7 +6,7 @@ import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 // import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import { useRef, useState } from 'react';
 // import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
-import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+// import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
 const Navbar = () => {
   return (
@@ -28,7 +28,7 @@ const DesktopNavbar = () => {
 
   // const ref = useRef(null);
 
-  const { hasNodeBonALICE } = useMuonNodeStaking();
+  // const { hasNodeBonALICE } = useMuonNodeStaking();
 
   // useOnClickOutside(ref, () => setIsManageBonALICEDialogOpen(false));
 
@@ -142,29 +142,29 @@ const DesktopNavbar = () => {
                 {/*    )}*/}
                 {/*  </button>*/}
                 {/*)}*/}
-                {!hasNodeBonALICE &&
-                  !location.pathname.includes('/bonPION/') && (
-                    <Link
-                      to={'/pion/bonPION/create'}
-                      className="btn btn--small--with-icon relative"
-                    >
-                      <img
-                        className="mr-2.5 w-6"
-                        src="/assets/images/pion-nft.png"
-                        alt=""
-                      />
-                      Manage bonPION
-                    </Link>
-                  )}
-                {!hasNodeBonALICE ? (
-                  <Link to="/pion/setup-node">
-                    <button className="btn btn--small">Setup Node</button>
-                  </Link>
-                ) : (
-                  <div onClick={() => window.open('/dashboard/', '_self')}>
-                    <button className="btn btn--small">Dashboard</button>
-                  </div>
-                )}
+                {/*{!hasNodeBonALICE &&*/}
+                {/*  !location.pathname.includes('/bonPION/') && (*/}
+                {/*    <Link*/}
+                {/*      to={'/pion/bonPION/create'}*/}
+                {/*      className="btn btn--small--with-icon relative"*/}
+                {/*    >*/}
+                {/*      <img*/}
+                {/*        className="mr-2.5 w-6"*/}
+                {/*        src="/assets/images/pion-nft.png"*/}
+                {/*        alt=""*/}
+                {/*      />*/}
+                {/*      Manage bonPION*/}
+                {/*    </Link>*/}
+                {/*  )}*/}
+                {/*{!hasNodeBonALICE ? (*/}
+                {/*  <Link to="/pion/setup-node">*/}
+                {/*    <button className="btn btn--small">Setup Node</button>*/}
+                {/*  </Link>*/}
+                {/*) : (*/}
+                {/*  <div onClick={() => window.open('/dashboard/', '_self')}>*/}
+                {/*    <button className="btn btn--small">Dashboard</button>*/}
+                {/*  </div>*/}
+                {/*)}*/}
               </>
             )}
 
