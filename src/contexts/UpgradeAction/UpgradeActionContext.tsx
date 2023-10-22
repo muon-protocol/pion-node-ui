@@ -212,8 +212,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
             ],
             chainId: getCurrentChainId(),
           });
-          setIsLockUSDCTransactionLoading(true);
           setIsLockUSDCMetamaskLoading(false);
+          if (!hash) return;
+          setIsLockUSDCTransactionLoading(true);
           const transaction = waitForTransaction({ hash });
 
           await toast.promise(transaction, {
@@ -263,29 +264,30 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [approveALICEIsSuccess]);
 
-  const approveLPTokenArgs = useApproveArgs({
-    spenderAddress: BOOSTER_ADDRESS[getCurrentChainId()],
-    approveAmount: upgradeBoostAmount,
-  });
+  // const approveLPTokenArgs = useApproveArgs({
+  //   spenderAddress: BOOSTER_ADDRESS[getCurrentChainId()],
+  //   approveAmount: upgradeBoostAmount,
+  // });
 
-  const {
-    callback: approveLPToken,
-    isMetamaskLoading: approveLPTokenIsMetamaskLoading,
-    isTransactionLoading: approveLPTokenIsTransactionLoading,
-    isSuccess: approveLPTokenIsSuccess,
-  } = useWagmiContractWrite({
-    abi: LP_TOKEN_ABI,
-    address: LP_TOKEN_ADDRESS[getCurrentChainId()],
-    functionName: 'approve',
-    args: approveLPTokenArgs,
-    chainId: getCurrentChainId(),
-  });
+  // const {
+  //   callback: approveLPToken,
+  //   isMetamaskLoading: approveLPTokenIsMetamaskLoading,
+  //   isTransactionLoading: approveLPTokenIsTransactionLoading,
+  //   isSuccess: approveLPTokenIsSuccess,
+  // } = useWagmiContractWrite({
+  //   abi: LP_TOKEN_ABI,
+  //   address: LP_TOKEN_ADDRESS[getCurrentChainId()],
+  //   functionName: 'approve',
+  //   args: approveLPTokenArgs,
+  //   chainId: getCurrentChainId(),
+  // });
 
-  useEffect(() => {
-    if (approveLPTokenIsSuccess) {
-      setIsAllowanceModalOpen(false);
-    }
-  }, [approveLPTokenIsSuccess]);
+  const [approveLPTokenIsMetamaskLoading, setApproveLPTokenIsMetamaskLoading] =
+    useState(false);
+  const [
+    approveLPTokenIsTransactionLoading,
+    setApproveLPTokenIsTransactionLoading,
+  ] = useState(false);
 
   const handleApproveALICEClicked = useCallback(async () => {
     if (!ALICEBalance || !upgradeAmount || upgradeAmount.big > ALICEBalance.big)
@@ -305,14 +307,42 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       upgradeBoostAmount.big > LPTokenBalance.big
     )
       return;
-    console.log('approveLPToken');
     openAllowanceModal();
-    await approveLPToken?.({
-      pending: 'Waiting for confirmation...',
-      success: 'Approved',
-      failed: 'Error',
-    });
-  }, [approveLPToken, LPTokenBalance, upgradeBoostAmount]);
+
+    try {
+      setApproveLPTokenIsMetamaskLoading(true);
+      const { hash } = await writeContract({
+        abi: LP_TOKEN_ABI,
+        address: LP_TOKEN_ADDRESS[getCurrentChainId()],
+        functionName: 'approve',
+        args: [BOOSTER_ADDRESS[getCurrentChainId()], upgradeBoostAmount.big],
+        chainId: getCurrentChainId(),
+      });
+      setApproveLPTokenIsMetamaskLoading(false);
+      if (!hash) return;
+
+      setApproveLPTokenIsTransactionLoading(true);
+      const transaction = waitForTransaction({ hash });
+
+      await toast.promise(transaction, {
+        loading: 'Approving...',
+        success: 'Approved',
+        error: 'Error',
+      });
+      setApproveLPTokenIsTransactionLoading(false);
+      setIsAllowanceModalOpen(false);
+    } catch (e) {
+      setApproveLPTokenIsTransactionLoading(false);
+      setApproveLPTokenIsMetamaskLoading(false);
+      console.log(e);
+    }
+
+    // await approveLPToken?.({
+    //   pending: 'Waiting for confirmation...',
+    //   success: 'Approved',
+    //   failed: 'Error',
+    // });
+  }, [LPTokenBalance, upgradeBoostAmount]);
 
   const handleUpgradeBoostAmountChange = useCallback(
     (amount: string) => {
