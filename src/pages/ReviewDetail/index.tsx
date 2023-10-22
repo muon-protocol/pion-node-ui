@@ -232,7 +232,7 @@ const ReviewDetail = () => {
               onChange={(e) => setPeerID(e.target.value)}
             />
           </div>
-          <span className="text-red-600 text-sm font-bold min-h-[20px]">
+          <span className="text-red-500 text-xs font-bold min-h-[20px]">
             {isPeerIDValid ? '' : 'Peer ID is invalid!'}
           </span>
         </span>
@@ -292,6 +292,7 @@ const ReviewDetail = () => {
             className="btn btn--white mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
             disabled={
+              !isNodeAddressValid ||
               !isPeerIDValid ||
               !nodeAddress ||
               !peerID ||
