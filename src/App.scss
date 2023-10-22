@@ -17,6 +17,29 @@
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @apply pr-0 mr-0;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    cursor: pointer;
+    border-radius: 100%;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 #5158F600;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ECEDFF;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ECEDFF;
+    cursor: pointer;
+  }
 }
 
 .actions-content {
