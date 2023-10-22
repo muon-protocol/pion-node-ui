@@ -165,6 +165,18 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     chainId: getCurrentChainId(),
   });
 
+  const {
+    callback: updateStaking,
+    isMetamaskLoading: updateStakingIsMetamaskLoading,
+    isTransactionLoading: updateStakingIsTransactionLoading,
+  } = useWagmiContractWrite({
+    abi: MUON_NODE_STAKING_ABI,
+    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    args: [],
+    functionName: 'updateStaking',
+    chainId: getCurrentChainId(),
+  });
+
   const [isLockUSDCMetamaskLoading, setIsLockUSDCMetamaskLoading] =
     useState(false);
   const [isLockUSDCTransactionLoading, setIsLockUSDCTransactionLoading] =
@@ -224,6 +236,16 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           });
           setIsLockUSDCTransactionLoading(false);
         }
+      }
+
+      if (isNodeBonALICESelected) {
+        toast('Updating your node ...');
+
+        await updateStaking?.({
+          pending: 'Wait for updating your node ...',
+          success: 'Updated!',
+          failed: 'Failed to update node!',
+        });
       }
 
       setUpgradeAmount(w3bNumberFromString(''));
@@ -443,11 +465,13 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         isMetamaskLoading:
           lockToBondedTokenIsMetamaskLoading ||
           isMetamaskLoading ||
-          isLockUSDCMetamaskLoading,
+          isLockUSDCMetamaskLoading ||
+          updateStakingIsMetamaskLoading,
         isTransactionLoading:
           lockToBondedTokenIsTransactionLoading ||
           isTransactionLoading ||
-          isLockUSDCTransactionLoading,
+          isLockUSDCTransactionLoading ||
+          updateStakingIsTransactionLoading,
         isAllowanceModalOpen,
         closeAllowanceModal,
         isApproveMetamaskLoading:
