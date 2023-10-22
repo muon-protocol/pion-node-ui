@@ -67,6 +67,26 @@ const useNodeBonALICE = () => {
     watch: true,
   });
 
+  useEffect(() => {
+    if (peerID.length === 0) {
+      setIsPeerIDValid(true);
+      return;
+    }
+
+    setIsPeerIDValid(true);
+    const validatePeerID = async () => {
+      createFromJSON({ id: peerID })
+        .then(() => {
+          setIsPeerIDValid(true);
+        })
+        .catch(() => {
+          setIsPeerIDValid(false);
+        });
+    };
+
+    validatePeerID();
+  }, [peerID]);
+
   const { data: stakerAddressInfo } = useMuonNodeManagerStakerAddressInfo({
     address: MUON_NODE_MANAGER_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,

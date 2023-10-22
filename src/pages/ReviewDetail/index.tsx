@@ -5,10 +5,10 @@ import { FadeIn } from '../../animations';
 // import AddressInput from '../../components/Common/AddressInput.tsx';
 import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
-// import { getCurrentChainId } from '../../constants/chains.ts';
-// import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-// import isZero from '../../utils/isZero.ts';
-// import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
+import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import isZero from '../../utils/isZero.ts';
+import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
 import Alert from '../../components/Common/Alert.tsx';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
@@ -30,14 +30,13 @@ const ReviewDetail = () => {
     setPeerID,
     nodeAddress,
     setNodeAddress,
-    // isMetamaskLoading,
-    // isTransactionLoading,
-    // isGettingNodeStatusLoading,
-    // isAddingNodeLoading,
-    // approvedBonALICEAddress,
-    // handleApproveClicked,
-    // isApproving,
-    // nodeBonALICEAddress,
+    isMetamaskLoading,
+    isTransactionLoading,
+    isAddingNodeLoading,
+    approvedBonALICEAddress,
+    handleApproveClicked,
+    isApproving,
+    nodeBonALICEAddress,
     stakerAddressInfo,
     nodeIP,
     setNodeIP,
@@ -46,7 +45,7 @@ const ReviewDetail = () => {
     invalidInfoError,
   } = useNodeBonALICE();
 
-  // const { chainId, handleSwitchNetwork } = useUserProfile();
+  const { chainId, handleSwitchNetwork } = useUserProfile();
 
   // const navigate = useNavigate();
   // const { setSelectedAction } = useActions();
@@ -233,7 +232,7 @@ const ReviewDetail = () => {
               onChange={(e) => setPeerID(e.target.value)}
             />
           </div>
-          <span className="text-red-500 text-xs font-bold min-h-[20px]">
+          <span className="text-red-600 text-sm font-bold min-h-[20px]">
             {isPeerIDValid ? '' : 'Peer ID is invalid!'}
           </span>
         </span>
@@ -250,62 +249,61 @@ const ReviewDetail = () => {
         >
           Add Node
         </button>
-        {/*{nodeBonALICEAddress ===*/}
-        {/*  MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&*/}
-        {/*stakerAddressInfo?.active ? (*/}
-        {/*  <button className="btn btn--white mt-auto mx-auto">Dashboard</button>*/}
-        {/*) : chainId !== getCurrentChainId() ? (*/}
-        {/*  <button*/}
-        {/*    onClick={() => handleSwitchNetwork(getCurrentChainId())}*/}
-        {/*    className="btn btn--white mt-auto mx-auto"*/}
-        {/*  >*/}
-        {/*    Switch Network*/}
-        {/*  </button>*/}
-        {/*) : !nodeBonALICE ? (*/}
-        {/*  <button className="btn btn--white mt-auto mx-auto" disabled>*/}
-        {/*    Select bonPION*/}
-        {/*  </button>*/}
-        {/*) : isMetamaskLoading || isTransactionLoading ? (*/}
-        {/*  <button className="btn btn--white mt-auto mx-auto" disabled>*/}
-        {/*    {isMetamaskLoading*/}
-        {/*      ? 'Waiting for Metamask...'*/}
-        {/*      : 'Waiting for Tx...'}*/}
-        {/*  </button>*/}
-        {/*) : nodeBonALICE.ALICELockAmount.dsp +*/}
-        {/*    nodeBonALICE.LPTokenLockAmount.dsp * 2 >=*/}
-        {/*    500 &&*/}
-        {/*  ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||*/}
-        {/*    approvedBonALICEAddress !==*/}
-        {/*      MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (*/}
-        {/*  <button*/}
-        {/*    onClick={() => handleApproveClicked()}*/}
-        {/*    className="btn btn--white mt-auto mx-auto"*/}
-        {/*    disabled={isApproving}*/}
-        {/*  >*/}
-        {/*    {isApproving ? 'Approving...' : 'Approve'}*/}
-        {/*  </button>*/}
-        {/*) : isAddingNodeLoading ? (*/}
-        {/*  <button className="btn btn--white mt-auto mx-auto" disabled>*/}
-        {/*    Adding Node...*/}
-        {/*  </button>*/}
-        {/*) : (*/}
-        {/*  <button*/}
-        {/*    className="btn btn--white mt-auto mx-auto"*/}
-        {/*    onClick={() => handleAddNodeClicked()}*/}
-        {/*    disabled={*/}
-        {/*      !isNodeAddressValid ||*/}
-        {/*      !isPeerIDValid ||*/}
-        {/*      !nodeAddress ||*/}
-        {/*      !peerID ||*/}
-        {/*      !nodeBonALICE ||*/}
-        {/*      nodeBonALICE.ALICELockAmount.dsp +*/}
-        {/*        nodeBonALICE.LPTokenLockAmount.dsp * 2 <*/}
-        {/*        500*/}
-        {/*    }*/}
-        {/*  >*/}
-        {/*    Add Node*/}
-        {/*  </button>*/}
-        {/*)}*/}
+        {nodeBonALICEAddress ===
+          MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
+        stakerAddressInfo?.active ? (
+          <button className="btn btn--white mt-auto mx-auto">Dashboard</button>
+        ) : chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn btn--white mt-auto mx-auto"
+          >
+            Switch Network
+          </button>
+        ) : !nodeBonALICE ? (
+          <button className="btn btn--white mt-auto mx-auto" disabled>
+            Select bonPION
+          </button>
+        ) : isMetamaskLoading || isTransactionLoading ? (
+          <button className="btn btn--white mt-auto mx-auto" disabled>
+            {isMetamaskLoading
+              ? 'Waiting for Metamask...'
+              : 'Waiting for Tx...'}
+          </button>
+        ) : nodeBonALICE.ALICELockAmount.dsp +
+            nodeBonALICE.LPTokenLockAmount.dsp * 2 >=
+            500 &&
+          ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
+            approvedBonALICEAddress !==
+              MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
+          <button
+            onClick={() => handleApproveClicked()}
+            className="btn btn--white mt-auto mx-auto"
+            disabled={isApproving}
+          >
+            {isApproving ? 'Approving...' : 'Approve'}
+          </button>
+        ) : isAddingNodeLoading ? (
+          <button className="btn btn--white mt-auto mx-auto" disabled>
+            Adding Node...
+          </button>
+        ) : (
+          <button
+            className="btn btn--white mt-auto mx-auto"
+            onClick={() => handleAddNodeClicked()}
+            disabled={
+              !isPeerIDValid ||
+              !nodeAddress ||
+              !peerID ||
+              !nodeBonALICE ||
+              nodeBonALICE.ALICELockAmount.dsp +
+                nodeBonALICE.LPTokenLockAmount.dsp * 2 <
+                500
+            }
+          >
+            Add Node
+          </button>
+        )}
       </FadeIn>
     );
   };
