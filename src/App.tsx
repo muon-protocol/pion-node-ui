@@ -107,7 +107,7 @@ function App() {
                                         </div>
                                       </div>
                                       <Toaster position="bottom-right" />
-                                      {/*<Footer />*/}
+                                      <Footer />
                                     </BrowserRouter>
                                   </ClaimPrizeProvider>
                                 </TransferActionProvider>
