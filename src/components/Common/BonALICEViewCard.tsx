@@ -58,9 +58,11 @@ const BonALICEViewCard: FC<{
             <p className="text-inherit text-[20px] -mb-[3px]">
               {bonALICE.nodePower}
             </p>
-            <p className="text-inherit font-bold">
-              (${(ALICEPrice * Number(bonALICE.nodePower)).toFixed(2)})
-            </p>
+            {ALICEPrice && (
+              <p className="text-inherit font-bold">
+                (${(ALICEPrice * Number(bonALICE.nodePower)).toFixed(2)})
+              </p>
+            )}
           </div>
         </span>
         <span className="text-sm flex gap-3 items-end">

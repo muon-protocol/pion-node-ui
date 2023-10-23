@@ -27,8 +27,7 @@ const UpgradeAmountCalculation = () => {
             <p className="font-light text-sm flex gap-1">
               {Number(upgradeAmount.hStr) +
                 ' PION + ' +
-                selectedUpgradeBonALICE.nodePower +
-                ' Power'}
+                selectedUpgradeBonALICE.nodePower}
             </p>
           ) : (
             <p className="h-5"></p>
