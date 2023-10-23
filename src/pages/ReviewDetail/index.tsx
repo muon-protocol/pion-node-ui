@@ -57,7 +57,7 @@ const ReviewDetail = () => {
         delay={0.3}
         className="review-detail__nft relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
       >
-        <ConnectWalletModal redirectRoute="/get-started" />
+        <ConnectWalletModal redirectRoute="/pion/getting-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
           <div className="address-input__title text-light-text">
             Select bonPION
