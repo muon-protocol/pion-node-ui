@@ -1,7 +1,7 @@
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useMemo } from 'react';
-import { FadeIn, MoveUpIn } from '../../animations';
+import { FadeIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
@@ -18,6 +18,7 @@ import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx
 import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
+import CreateAmountCalculation from './CreateAmountCalculation.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -114,47 +115,7 @@ export const RenderCreateBody = () => {
         />
       </FadeIn>
 
-      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) &&
-        ALICEPrice &&
-        boostCoefficient && (
-          <>
-            <MoveUpIn
-              y={-10}
-              duration={0.1}
-              delay={0.1}
-              className="flex w-full justify-between items-center"
-            >
-              <span className="text-gray10">
-                <p className="font-light">New bonPION amount:</p>
-                {createBoostAmount.big > BigInt(0) ? (
-                  <p className="font-light text-sm flex gap-1">
-                    {Number(createBoostAmount.hStr) +
-                      ' USDC -> ' +
-                      (
-                        Number(createBoostAmount.hStr) /
-                        (Math.round(ALICEPrice * 10000) / 10000)
-                      ).toFixed(2) +
-                      ' PION '}
-                    <p className="text-uptime font-bold">
-                      x{boostCoefficient?.dsp}
-                    </p>
-                    {' + ' + Number(createAmount.hStr) + ' PION'}
-                  </p>
-                ) : (
-                  <p className="h-5"></p>
-                )}
-              </span>
-              <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
-                {(
-                  (Number(createBoostAmount.hStr) /
-                    (Math.round(ALICEPrice * 10000) / 10000)) *
-                    boostCoefficient.dsp +
-                  Number(createAmount.hStr)
-                ).toFixed(2) + ' PION'}
-              </span>
-            </MoveUpIn>
-          </>
-        )}
+      <CreateAmountCalculation />
       <FadeIn
         duration={0.1}
         delay={0.1}
