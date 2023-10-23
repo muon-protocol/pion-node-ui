@@ -3,6 +3,8 @@ import { FadeIn } from '../../animations';
 // import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 // import useALICE from '../../contexts/ALICE/useALICE.ts';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
+import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
+import { useStats } from '../../hooks/useStats.ts';
 // import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import { useRef, useState } from 'react';
 // import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
@@ -182,10 +184,28 @@ const DesktopNavbar = () => {
           {/*    <strong className="text-white font-semibold">PION</strong>*/}
           {/*  </button>*/}
           {/*)}*/}
+          <PriceTVLButton />
           <ConnectWalletButton />
         </div>
       </div>
     </FadeIn>
+  );
+};
+
+const PriceTVLButton = () => {
+  const { ALICEPrice } = useTokenPrice();
+  const { stats } = useStats();
+  return (
+    <button className="btn btn--small !py-[5px] flex !cursor-default">
+      <img
+        src="/assets/images/navbar/pion-rounded-logo.svg"
+        alt=""
+        className="mr-2.5"
+      />
+      <p className="text-white text-sm font-medium">
+        ${ALICEPrice} (TVL: {stats?.total_value_locked || '...'})
+      </p>
+    </button>
   );
 };
 
