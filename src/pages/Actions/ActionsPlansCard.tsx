@@ -50,31 +50,14 @@ export const ActionsPlansCard = ({
             <p className="font-semibold text-lg">{activePower} PION</p>
           </div>
         )}
-        {!POA ? (
-          <p
-            onClick={() =>
-              window.open(
-                'https://docs.muon.net/muon-network/muon-nodes/pion-network/pion-poa-network',
-                '_blank',
-              )
-            }
-            className="text-white underline cursor-pointer font-bold"
-          >
-            Verify Tier {plan.id}
-          </p>
-        ) : (
-          <p
-            onClick={() =>
-              window.open(
-                'https://docs.muon.net/muon-network/muon-nodes/pion-network/pion-poa-network',
-                '_blank',
-              )
-            }
-            className="text-white underline cursor-pointer font-bold"
-          >
-            Learn more about PION's PoA Network.
-          </p>
-        )}
+        <p
+          onClick={() => window.open(plan.verificationLink, '_blank')}
+          className="text-white underline cursor-pointer font-bold"
+        >
+          {!POA
+            ? `Verify Tier ${plan.id}`
+            : `Learn more about PION's PoA Network.`}
+        </p>
       </div>
     </FadeIn>
   );
