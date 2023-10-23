@@ -21,13 +21,7 @@ const CreateAmountCalculation = () => {
       >
         <span className="text-gray10">
           <p className="font-light">New bonPION amount:</p>
-          {createBoostAmount.big > BigInt(0) ? (
-            <p className="font-light text-sm flex gap-1">
-              {Number(createAmount.hStr) + ' PION'}
-            </p>
-          ) : (
-            <p className="h-5"></p>
-          )}
+          <p className="h-5"></p>
         </span>
         <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
           {Number(createAmount.hStr).toFixed(2) + ' PION'}
