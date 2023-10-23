@@ -203,7 +203,8 @@ const PriceTVLButton = () => {
         className="mr-2.5"
       />
       <p className="text-white text-sm font-medium">
-        ${ALICEPrice} (TVL: {stats?.total_value_locked || '...'})
+        {ALICEPrice ? `$${ALICEPrice}` : ''} (TVL:{' '}
+        {stats?.total_value_locked || '...'})
       </p>
     </button>
   );

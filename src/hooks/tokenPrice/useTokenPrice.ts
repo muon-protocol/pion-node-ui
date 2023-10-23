@@ -7,7 +7,7 @@ export const useTokenPrice = () => {
   const { mediumRefresh } = useRefresh();
   const { walletAddress } = useUserProfile();
 
-  const [PIONPrice, setPIONPrice] = useState(0);
+  const [PIONPrice, setPIONPrice] = useState<null | number>(null);
 
   useEffect(() => {
     async function fetchTokenPrice() {
@@ -15,6 +15,8 @@ export const useTokenPrice = () => {
       const response = await getUserSignatureForBoostAPI(walletAddress);
       if (response.success) {
         setPIONPrice(Number(response.amount) / 10 ** 18);
+      } else {
+        setPIONPrice(null);
       }
     }
 
