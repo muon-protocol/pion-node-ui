@@ -26,8 +26,9 @@ const UpgradeAmountCalculation = () => {
           {upgradeAmount.big > BigInt(0) ? (
             <p className="font-light text-sm flex gap-1">
               {Number(upgradeAmount.hStr) +
-                ' PION + ' +
-                selectedUpgradeBonALICE.nodePower}
+                ' + ' +
+                selectedUpgradeBonALICE.nodePower +
+                ' PION'}
             </p>
           ) : (
             <p className="h-5"></p>
