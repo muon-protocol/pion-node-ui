@@ -38,7 +38,7 @@ const DesktopNavbar = () => {
         <div className="navbar__left">
           <Link to={'/pion/getting-started'}>
             <img
-              src="/assets/images/navbar/pion-logo.svg"
+              src="/assets/images/navbar/pion-logo.svg?v=2"
               alt={''}
               className="w-auto h-9"
             />
