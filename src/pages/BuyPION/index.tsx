@@ -74,10 +74,11 @@ const Home = () => {
                 </span>
               </span>
               <button
+                disabled
                 className="btn !px-5 btn--white !w-full"
                 onClick={() => window.open('', '_blank')}
               >
-                Buy on UNISWAP
+                Coming Soon
               </button>
             </div>
           </FadeIn>
