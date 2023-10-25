@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { BonALICE } from '../types';
 import { useAddNodeArgs, useApproveBonALICEArgs } from './useContractArgs.ts';
 import useWagmiContractWrite from './useWagmiContractWrite.ts';
@@ -22,9 +22,42 @@ const useNodeBonALICE = () => {
   const [isSelectNodeBonALICEModalOpen, setIsSelectNodeBonALICEModalOpen] =
     useState(false);
   useState(false);
+
+  const [nodeIP, setNodeIP] = useState<string>('');
+  const [invalidInfoError, setInvalidInfoError] = useState<string>('');
+
   const [peerID, setPeerID] = useState<string>('');
+  const [isPeerIDValid, setIsPeerIDValid] = useState<boolean>(true);
+
   const [nodeAddress, setNodeAddress] = useState<string>('');
   const { walletAddress } = useUserProfile();
+
+  const isNodeAddressValid = useMemo(() => {
+    if (nodeAddress.length === 0) return true;
+
+    const re = /^0x[a-fA-F0-9]{40}$/;
+    return re.test(nodeAddress);
+  }, [nodeAddress]);
+
+  useEffect(() => {
+    if (peerID.length === 0) {
+      setIsPeerIDValid(true);
+      return;
+    }
+
+    setIsPeerIDValid(true);
+    const validatePeerID = async () => {
+      createFromJSON({ id: peerID })
+        .then(() => {
+          setIsPeerIDValid(true);
+        })
+        .catch(() => {
+          setIsPeerIDValid(false);
+        });
+    };
+
+    validatePeerID();
+  }, [peerID]);
 
   const { data: nodeBonALICEAddress } = useBonAliceOwnerOf({
     address: BONALICE_ADDRESS[getCurrentChainId()],
@@ -61,18 +94,32 @@ const useNodeBonALICE = () => {
 
   const addNodeToNetwork = useCallback(async () => {
     setIsAddingNodeLoading(true);
+    setInvalidInfoError('');
     try {
-      await addNode?.({
-        pending: 'Waiting for Confirmation',
-        success: 'Node Added Successfully!',
-        failed: 'Error Adding Node!',
+      const response = await checkIPwithNodeSpecificationsAPI({
+        nodeIP: nodeIP,
+        peerID: peerID,
+        nodeAddress: nodeAddress,
       });
-      setIsAddingNodeLoading(false);
+      if (!response.success) {
+        setIsAddingNodeLoading(false);
+        setInvalidInfoError(response.message);
+        return;
+      }
+
+      if (response.success) {
+        await addNode?.({
+          pending: 'Waiting for Confirmation',
+          success: 'Node Added Successfully!',
+          failed: 'Error Adding Node!',
+        });
+        setIsAddingNodeLoading(false);
+      }
     } catch (e: any) {
       console.log(e);
       setIsAddingNodeLoading(false);
     }
-  }, [addNode]);
+  }, [addNode, nodeAddress, nodeIP, peerID]);
 
   useEffect(() => {
     setNodeBonALICE(null);
@@ -139,6 +186,11 @@ const useNodeBonALICE = () => {
     setNodeAddress,
     isAddingNodeLoading,
     setIsAddingNodeLoading,
+    nodeIP,
+    setNodeIP,
+    isNodeAddressValid,
+    isPeerIDValid,
+    invalidInfoError,
   };
 };
 

@@ -39,6 +39,11 @@ const ReviewDetail = () => {
     isApproving,
     nodeBonALICEAddress,
     stakerAddressInfo,
+    nodeIP,
+    setNodeIP,
+    isNodeAddressValid,
+    isPeerIDValid,
+    invalidInfoError,
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -170,8 +175,10 @@ const ReviewDetail = () => {
 
   const transferCard = () => {
     return (
-      <div
-        className={`review-detail__actions bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
+      <FadeIn
+        duration={0.3}
+        delay={0.4}
+        className={`review-detail__actions bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}
@@ -180,32 +187,63 @@ const ReviewDetail = () => {
         {/*  onValueChanged={(value) => setNodeIP(value)}*/}
         {/*  className="mb-9"*/}
         {/*/>*/}
-        <div className="address-input__top text-sm mb-2 flex justify-between">
+        <div className="address-input__top text-sm mb-1 flex justify-between">
+          <div className="address-input__title text-light-text">Node IP</div>
+        </div>
+        <span className="address-input__input-wrapper mb-6 flex flex-col">
+          <div className="items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Node IP'}
+              type="text"
+              value={nodeIP}
+              onChange={(e) => setNodeIP(e.target.value)}
+            />
+          </div>
+        </span>
+        <div className="address-input__top text-sm mb-1 flex justify-between">
           <div className="address-input__title text-light-text">
             Node Address
           </div>
         </div>
-        <div className="address-input__input-wrapper mb-4 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
-          <input
-            className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
-            placeholder={'Node Address'}
-            type="text"
-            value={nodeAddress}
-            onChange={(e) => setNodeAddress(e.target.value)}
-          />
-        </div>
-        <div className="address-input__top text-sm mb-2 flex justify-between">
+        <span className="address-input__input-wrapper mb-1 flex flex-col">
+          <div className="items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Node Address'}
+              type="text"
+              value={nodeAddress}
+              onChange={(e) => setNodeAddress(e.target.value)}
+            />
+          </div>
+          <span className="text-red-500 text-xs font-bold min-h-[20px]">
+            {isNodeAddressValid ? '' : 'Node Address is invalid!'}
+          </span>
+        </span>
+        <div className="address-input__top text-sm mb-1 flex justify-between">
           <div className="address-input__title text-light-text">Peer ID</div>
         </div>
-        <div className="address-input__input-wrapper mb-9 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
-          <input
-            className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
-            placeholder={'Peer ID'}
-            type="text"
-            value={peerID}
-            onChange={(e) => setPeerID(e.target.value)}
-          />
-        </div>
+        <span className="address-input__input-wrapper mb-4 flex flex-col">
+          <div className="items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-gray10 text-white font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Peer ID'}
+              type="text"
+              value={peerID}
+              onChange={(e) => setPeerID(e.target.value)}
+            />
+          </div>
+          <span className="text-red-500 text-xs font-bold min-h-[20px]">
+            {isPeerIDValid ? '' : 'Peer ID is invalid!'}
+          </span>
+        </span>
+        {invalidInfoError.length > 0 && (
+          <FadeIn duration={0.1} className="mx-auto mb-1">
+            <span className="text-red-500 text-sm font-bold">
+              {invalidInfoError}
+            </span>
+          </FadeIn>
+        )}
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
         stakerAddressInfo?.active ? (
@@ -249,6 +287,8 @@ const ReviewDetail = () => {
             className="btn btn--white mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
             disabled={
+              !isNodeAddressValid ||
+              !isPeerIDValid ||
               !nodeAddress ||
               !peerID ||
               !nodeBonALICE ||
@@ -260,7 +300,7 @@ const ReviewDetail = () => {
             Add Node
           </button>
         )}
-      </div>
+      </FadeIn>
     );
   };
 
