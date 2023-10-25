@@ -72,6 +72,7 @@ const Home = () => {
               </div>
               <button
                 className="btn !px-6 mx-auto relative "
+                disabled
                 onClick={() => setIsBuyPIONDropdownOpen(!isBuyPIONDropdownOpen)}
               >
                 Buy $PION
