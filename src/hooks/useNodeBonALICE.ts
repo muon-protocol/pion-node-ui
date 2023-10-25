@@ -16,6 +16,8 @@ import {
 } from '../abis/types/generated.ts';
 import BONALICE_ABI from '../abis/BonALICE';
 import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
+import { checkIPwithNodeSpecificationsAPI } from '../apis';
+import { createFromJSON } from '@libp2p/peer-id-factory';
 
 const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);

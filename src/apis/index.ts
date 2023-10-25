@@ -53,3 +53,23 @@ export async function getNodeStatusAPI(ip: string) {
   const response = await axiosInstance.get('/reward-server/status?ip=' + ip);
   return response.data;
 }
+
+export async function checkIPwithNodeSpecificationsAPI({
+  nodeIP,
+  peerID,
+  nodeAddress,
+}: {
+  nodeIP: string;
+  peerID: string;
+  nodeAddress: string;
+}) {
+  const response = await axiosInstance.post(
+    'https://monitor-pion.muon.net/validateNewNodeData',
+    {
+      ip: nodeIP,
+      peerID: peerID,
+      nodeAddress: nodeAddress,
+    },
+  );
+  return response.data;
+}

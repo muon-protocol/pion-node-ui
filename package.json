@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
+    "@libp2p/peer-id-factory": "^3.0.6",
     "@rainbow-me/rainbowkit": "^1.1.1",
     "@typechain/ethers-v5": "^11.0.0",
     "@types/react-router-dom": "^5.3.3",
