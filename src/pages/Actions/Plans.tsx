@@ -77,31 +77,31 @@ export const Plans = () => {
       : w3bNumberFromNumber(0);
   }, [selectedMergeBonALICEs]);
 
-  const isPlanActive = (minPower: number, maxPower: number) => {
-    if (location.pathname === ActionType.CREATE) {
-      console.log('createAmountInW3BNumber.dsp', createAmountInW3BNumber.dsp);
-      console.log('minPower', minPower);
-      console.log('maxPower', maxPower);
-      return (
-        createAmountInW3BNumber.dsp >= minPower &&
-        createAmountInW3BNumber.dsp < maxPower
-      );
-    } else if (location.pathname === ActionType.UPGRADE) {
-      return (
-        upgradeAmountInW3BNumber.dsp >= minPower &&
-        upgradeAmountInW3BNumber.dsp < maxPower
-      );
-    } else if (location.pathname === ActionType.MERGE) {
-      return (
-        mergeAmountInW3BNumber.dsp >= minPower &&
-        mergeAmountInW3BNumber.dsp < maxPower
-      );
-    }
-    return (
-      valueOfBondedTokenInW3BNumber.dsp >= minPower &&
-      valueOfBondedTokenInW3BNumber.dsp < maxPower
-    );
-  };
+  // const isPlanActive = (minPower: number, maxPower: number) => {
+  //   if (location.pathname === ActionType.CREATE) {
+  //     console.log('createAmountInW3BNumber.dsp', createAmountInW3BNumber.dsp);
+  //     console.log('minPower', minPower);
+  //     console.log('maxPower', maxPower);
+  //     return (
+  //       createAmountInW3BNumber.dsp >= minPower &&
+  //       createAmountInW3BNumber.dsp < maxPower
+  //     );
+  //   } else if (location.pathname === ActionType.UPGRADE) {
+  //     return (
+  //       upgradeAmountInW3BNumber.dsp >= minPower &&
+  //       upgradeAmountInW3BNumber.dsp < maxPower
+  //     );
+  //   } else if (location.pathname === ActionType.MERGE) {
+  //     return (
+  //       mergeAmountInW3BNumber.dsp >= minPower &&
+  //       mergeAmountInW3BNumber.dsp < maxPower
+  //     );
+  //   }
+  //   return (
+  //     valueOfBondedTokenInW3BNumber.dsp >= minPower &&
+  //     valueOfBondedTokenInW3BNumber.dsp < maxPower
+  //   );
+  // };
 
   const activePower = useMemo(() => {
     if (location.pathname === ActionType.CREATE) {
@@ -126,7 +126,8 @@ export const Plans = () => {
         className="w-full border-plan-1"
         animationDelay={0.1}
         animationDuration={0.3}
-        active={isPlanActive(500, 5000)}
+        // active={isPlanActive(500, 5000)}
+        active={false}
         activePower={activePower}
         color="text-plan-1"
       />
@@ -135,7 +136,8 @@ export const Plans = () => {
         className="w-full border-plan-2"
         animationDelay={0.2}
         animationDuration={0.3}
-        active={isPlanActive(5000, 25000)}
+        // active={isPlanActive(5000, 25000)}
+        active={false}
         activePower={activePower}
         color="text-plan-2"
       />
@@ -144,7 +146,8 @@ export const Plans = () => {
         className="w-full border-plan-4"
         animationDelay={0.3}
         animationDuration={0.3}
-        active={isPlanActive(25000, 50000)}
+        // active={isPlanActive(25000, 50000)}
+        active={false}
         activePower={activePower}
         color="text-plan-4"
       />
@@ -154,7 +157,8 @@ export const Plans = () => {
         className="w-full border-plan-3"
         animationDelay={0.4}
         animationDuration={0.3}
-        active={isPlanActive(50000, 100000000)}
+        // active={isPlanActive(50000, 100000000)}
+        active={false}
         activePower={activePower}
         color="text-plan-3"
       />

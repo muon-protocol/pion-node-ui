@@ -238,16 +238,16 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
           });
           setIsLockUSDCTransactionLoading(false);
         }
-      }
 
-      if (isNodeBonALICESelected) {
-        toast('Updating your node ...');
+        if (isNodeBonALICESelected) {
+          toast('Updating your node ...');
 
-        await updateStaking?.({
-          pending: 'Wait for updating your node ...',
-          success: 'Updated!',
-          failed: 'Failed to update node!',
-        });
+          await updateStaking?.({
+            pending: 'Wait for updating your node ...',
+            success: 'Updated!',
+            failed: 'Failed to update node!',
+          });
+        }
       }
 
       setUpgradeAmount(w3bNumberFromString(''));

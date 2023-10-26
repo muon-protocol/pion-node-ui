@@ -62,9 +62,22 @@ const Actions = () => {
         <ConnectWalletModal />
 
         <FadeIn className="flex flex-col w-full gap-4 md:gap-6">
-          <p className="text-2xl font-medium font-tomorrow">
-            Manage Bonded PION NFT
-          </p>
+          <span className="flex justify-between w-full items-end">
+            <p className="text-2xl font-medium font-tomorrow">
+              Manage Bonded PION NFT
+            </p>
+            {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
+              <div
+                className="ml-auto flex gap-1.5 items-center cursor-pointer"
+                onClick={() => window.open('/dashboard/', '_self')}
+              >
+                <img src="/assets/images/actions/back-icon.svg" alt="" />
+                <p className="font-medium text-sm underline ">
+                  Back to Dashboard
+                </p>
+              </div>
+            )}
+          </span>
           <ActionsBody />
         </FadeIn>
       </div>

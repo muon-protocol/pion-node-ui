@@ -20,10 +20,11 @@ export const Sidebar = () => {
 
   const { nodeBonALICE } = useMuonNodeStaking();
   const { bonALICEs } = useBonALICE();
+  const { muonNodeStakingUsers } = useMuonNodeStaking();
 
   return (
     <div
-      className={`sidebar z-[1000] bg-[#18171a] transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${
+      className={`sidebar max-md:hidden z-[1000] bg-[#18171a] transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${
         isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >
@@ -52,30 +53,46 @@ export const Sidebar = () => {
           )}
         </div>
 
-        <SidebarItem
-          className="mb-[18px]"
-          title="Get Started"
-          isSidebarOpen={isSidebarOpen}
-          isActive={location.pathname === '/pion/getting-started'}
-          onClick={() => navigate('/pion/getting-started')}
-          icon="/assets/images/sidebar/get-started.svg"
-        />
+        {!(muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)) && (
+          <SidebarItem
+            className="mb-[18px]"
+            title="Get Started"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/pion/getting-started'}
+            onClick={() => navigate('/pion/getting-started')}
+            icon="/assets/images/sidebar/get-started.svg"
+          />
+        )}
 
-        <p
-          className={`text-light-text text-sm pl-3.5 mb-[18px] transition-all ease-in duration-[0.2s] ${
-            isSidebarOpen && '!pl-0 !mb-3'
-          }`}
-        >
-          Steps:
-        </p>
-
+        {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) ? (
+          <SidebarItem
+            className="mb-[18px]"
+            title="Dashboard"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/dashboard/'}
+            onClick={() => window.open('/dashboard/', '_self')}
+            icon="/assets/images/sidebar/dashboard-icon.svg"
+          />
+        ) : (
+          <p
+            className={`text-light-text text-sm pl-3.5 mb-[18px] transition-all ease-in duration-[0.2s] ${
+              isSidebarOpen && '!pl-0 !mb-3'
+            }`}
+          >
+            Steps:
+          </p>
+        )}
         <SidebarItem
           className="mb-[18px]"
           title="Buy PION"
           isSidebarOpen={isSidebarOpen}
           isActive={location.pathname === '/pion/buy-pion'}
           onClick={() => navigate('/pion/buy-pion')}
-          icon="/assets/images/sidebar/step-1.svg"
+          icon={
+            muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
+              ? '/assets/images/navbar/pion-rounded-logo.svg'
+              : '/assets/images/sidebar/step-1.svg'
+          }
         />
 
         <SidebarItem
@@ -101,17 +118,22 @@ export const Sidebar = () => {
               navigate('/pion/bonPION/create');
             }
           }}
-          icon="/assets/images/sidebar/step-2.svg"
+          icon={
+            muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
+              ? '/assets/images/pion-nft-2.svg'
+              : '/assets/images/sidebar/step-2.svg'
+          }
         />
-
-        <SidebarItem
-          className="mb-10"
-          title="Finalize Setup"
-          isSidebarOpen={isSidebarOpen}
-          isActive={location.pathname === '/pion/setup-node'}
-          onClick={() => navigate('/pion/setup-node')}
-          icon="/assets/images/sidebar/step-3.svg"
-        />
+        {!(muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)) && (
+          <SidebarItem
+            className="mb-10"
+            title="Finalize Setup"
+            isSidebarOpen={isSidebarOpen}
+            isActive={location.pathname === '/pion/setup-node'}
+            onClick={() => navigate('/pion/setup-node')}
+            icon="/assets/images/sidebar/step-3.svg"
+          />
+        )}
 
         <section className="stats w-full flex gap-6 mb-7 mt-auto">
           <div className="stats__left flex flex-col gap-3">
