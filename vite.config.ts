@@ -6,6 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/reward-server': 'https://pion-test.muon.net/',
+      '/monitor': 'https://monitor-pion.muon.net/',
     },
   },
 });

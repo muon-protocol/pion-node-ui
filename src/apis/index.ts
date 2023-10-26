@@ -63,13 +63,10 @@ export async function checkIPwithNodeSpecificationsAPI({
   peerID: string;
   nodeAddress: string;
 }) {
-  const response = await axiosInstance.post(
-    'https://monitor-pion.muon.net/validateNewNodeData',
-    {
-      ip: nodeIP,
-      peerID: peerID,
-      nodeAddress: nodeAddress,
-    },
-  );
+  const response = await axiosInstance.post('/monitor/validateNewNodeData', {
+    ip: nodeIP,
+    peerId: peerID,
+    nodeAddress: nodeAddress,
+  });
   return response.data;
 }
