@@ -247,12 +247,6 @@ const ReviewDetail = () => {
             </span>
           </FadeIn>
         )}
-        <button
-          className="btn btn--white mt-auto mx-auto"
-          onClick={() => handleAddNodeClicked()}
-        >
-          Add Node
-        </button>
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
         stakerAddressInfo?.active ? (

@@ -130,22 +130,22 @@ export const Sidebar = () => {
           )}
         </section>
 
-        <section className="links flex flex-col gap-3 w-full items-center">
-          <p
-            className={`cursor-pointer text-center h-0 underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.1s] line-clamp-1 opacity-0 ${
-              isSidebarOpen && 'opacity-100 !h-5'
-            }`}
-          >
-            Muon Explorer
-          </p>
-          <p
-            className={`cursor-pointer text-center h-0 underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.1s] line-clamp-1 opacity-0 ${
-              isSidebarOpen && 'opacity-100 !h-5'
-            }`}
-          >
-            Build on Muon
-          </p>
-        </section>
+        {/*<section className="links flex flex-col gap-3 w-full items-center">*/}
+        {/*  <p*/}
+        {/*    className={`cursor-pointer text-center h-0 underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.1s] line-clamp-1 opacity-0 ${*/}
+        {/*      isSidebarOpen && 'opacity-100 !h-5'*/}
+        {/*    }`}*/}
+        {/*  >*/}
+        {/*    Muon Explorer*/}
+        {/*  </p>*/}
+        {/*  <p*/}
+        {/*    className={`cursor-pointer text-center h-0 underline text-light-text font-medium hover:text-white transition-all ease-in duration-[0.1s] line-clamp-1 opacity-0 ${*/}
+        {/*      isSidebarOpen && 'opacity-100 !h-5'*/}
+        {/*    }`}*/}
+        {/*  >*/}
+        {/*    Build on Muon*/}
+        {/*  </p>*/}
+        {/*</section>*/}
         <img
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className={`absolute z-[1001] transition-all ease-in duration-[0.2s] left-[110px] cursor-pointer -translate-x-1/2 top-7 ${

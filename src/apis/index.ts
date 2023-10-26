@@ -43,16 +43,12 @@ export async function getClaimSignatureAPI(
 }
 
 export async function getUserSignatureForBoostAPI(address: Address) {
-  const response = await axiosInstance.get(
-    'https://pion-price.muon.net/api/price/' + address,
-  );
+  const response = await axiosInstance.get('/api/price/' + address);
   return response.data;
 }
 
 export async function getStatsAPI() {
-  const response = await axiosInstance.get(
-    'https://monitor-pion.muon.net/stats/data.json',
-  );
+  const response = await axiosInstance.get('/stats/data.json');
   return response.data;
 }
 
