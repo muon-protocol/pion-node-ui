@@ -18,7 +18,7 @@ const ActionsContent = () => {
 
       <ActionsHeader />
 
-      <div className="actions-content w-full min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 py-10 rounded-2xl flex flex-col">
+      <div className="actions-content dark:bg-alice-body-background w-full min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 py-10 rounded-2xl flex flex-col">
         {selectedAction === ActionType.VIEW ? (
           <RenderViewBody />
         ) : selectedAction === ActionType.CREATE ? (

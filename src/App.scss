@@ -42,11 +42,13 @@
   }
 }
 
-.actions-content {
-  background-image: url("../public/assets/images/actions/bg.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+.pion {
+  & .actions-content {
+    background-image: url("../public/assets/images/actions/bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 .review-detail {
@@ -116,7 +118,7 @@ input::-webkit-inner-spin-button {
 }
 
 p {
-  @apply text-white;
+  @apply text-white dark:text-black;
 }
 
 input[type=number] {
@@ -128,7 +130,7 @@ input[type=number] {
 }
 
 html {
-    @apply overflow-y-scroll no-scrollbar;
+  @apply overflow-y-scroll no-scrollbar;
 }
 
 @media (max-width: 768px) {
@@ -137,22 +139,38 @@ html {
   }
 }
 
-.page {
-  &__bg {
-    //background-image: url('../public/assets/images/app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
-    background-image: url('../public/assets/images/app-background2.svg');
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    &--home {
+.pion {
+  & .page {
+    &__bg {
       background-image: url('../public/assets/images/app-background2.svg');
-      background-position: left top;
+      background-position: 0 0;
       background-repeat: no-repeat;
       background-size: cover;
+
+      &--home {
+        background-image: url('../public/assets/images/app-background2.svg');
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     }
   }
+}
 
+.dark {
+  & .page {
+    &__bg {
+      @apply bg-alice-body-background;
+      background-image: unset;
+
+      &--home {
+        background-image: unset;
+      }
+    }
+  }
+}
+
+.page {
   // Todo: Refactor this and use tailwind spacing classes
   @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1080px] md:pb-[148px] md:pt-[160px] mx-auto;
   min-height: calc(100vh);
@@ -194,7 +212,7 @@ html {
   }
 
   &--white {
-    @apply bg-primary-L3 text-primary hover:bg-white transition-all;
+    @apply bg-primary-L3 dark:bg-alice-primary-13 text-primary hover:bg-white transition-all;
   }
 
   &--large {
@@ -207,6 +225,7 @@ html {
 
   // color properties
   @apply bg-primary text-white w-fit;
+  @apply dark:bg-alice-primary dark:text-white;
 
   &--dark-primary {
     @apply bg-dark-soft-primary text-primary;

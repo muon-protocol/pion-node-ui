@@ -28,8 +28,17 @@ import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
 import BuyPION from './pages/BuyPION';
 import { Sidebar } from './components/Basic/Sidebar.tsx';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    if (import.meta.env.VITE_PROJECT_NAME === 'ALICE') {
+      document.getElementsByTagName('body')[0].className = 'dark alice';
+    } else {
+      document.getElementsByTagName('body')[0].className = 'pion';
+    }
+  }, []);
+
   return (
     <div className="app relative">
       <Web3Provider>

@@ -129,7 +129,7 @@ export const Plans = () => {
         // active={isPlanActive(500, 5000)}
         active={false}
         activePower={activePower}
-        color="text-plan-1"
+        color="!text-plan-1"
       />
       <ActionsPlansCard
         plan={plans[1]}
@@ -139,7 +139,7 @@ export const Plans = () => {
         // active={isPlanActive(5000, 25000)}
         active={false}
         activePower={activePower}
-        color="text-plan-2"
+        color="!text-plan-2"
       />
       <ActionsPlansCard
         plan={plans[2]}
@@ -149,7 +149,7 @@ export const Plans = () => {
         // active={isPlanActive(25000, 50000)}
         active={false}
         activePower={activePower}
-        color="text-plan-4"
+        color="!text-plan-4"
       />
       <ActionsPlansCard
         POA
@@ -160,7 +160,7 @@ export const Plans = () => {
         // active={isPlanActive(50000, 100000000)}
         active={false}
         activePower={activePower}
-        color="text-plan-3"
+        color="!text-plan-3"
       />
     </div>
   );

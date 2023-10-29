@@ -1,5 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 export default {
+  darkMode: 'class',
   content: ['./index.html', './src/**/*.{js,jsx,ts,tsx,css,scss}'],
   theme: {
     extend: {
@@ -58,6 +59,28 @@ export default {
         'alert-red-20': '#F5956944',
         'primary-dark-500': '#C2C1F4',
         'primary-dark-50': '#918EF580',
+        // ALICE Colors
+        'alice-primary': '#5158F6',
+        'alice-primary-13': '#5158F621',
+        'alice-primary-extra-light': '#EEEFFF',
+        'alice-secondary': '#F59569',
+        'alice-secondary-light': '#F6C7B4',
+        'alice-orange': '#F3A761',
+        'alice-pacific-blue': '#23B5D3',
+        'alice-body-background': '#F8FAFF',
+        'alice-card-background': '#FFFFFF',
+        'alice-xyz-75': '#E9EFF6BF',
+        'alice-gray': '#6F7787',
+      },
+      backgroundImage: {
+        'alice-primary-g':
+          'linear-gradient(135deg, #5158F6 0%, #822DF5 33.12%, #F3A761 100%)',
+        'alice-primary-g1':
+          'linear-gradient(230.96deg, rgba(81, 88, 246, 0.4) -1.58%, rgba(114, 81, 246, 0.16) 107.2%)',
+        'alice-primary-g2':
+          'linear-gradient(66.43deg, #5158F6 6.65%, rgba(114, 81, 246, 0.75) 93.48%)',
+        'alice-primary-g-light':
+          'linear-gradient(135deg, rgba(81, 88, 246, 0.2) 0%, rgba(130, 45, 245, 0.2) 33.12%, rgba(243, 167, 97, 0.2) 100%)',
       },
     },
   },

@@ -29,7 +29,7 @@ const AmountInput = ({
     <div className={`amount-input flex flex-col w-full gap-2 mb-2`}>
       <div className="amount-input__top relative text-sm flex justify-between">
         <span className="flex flex-col">
-          <p className="balance flex text-xyz-2">
+          <p className="balance flex text-xyz-2 dark:text-alice-gray">
             Balance:{' '}
             <span className="value ml-1 text-xyz-75">
               {balance ? balance.dsp : '...'}
@@ -73,7 +73,7 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-input-bg rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
         <input
           disabled={disabled}
           className={`amount-input__input text-white font-medium w-full h-full bg-transparent outline-none text-sm ${

@@ -62,9 +62,9 @@ export const ConnectWalletButton = ({
               return (
                 <button
                   onClick={openAccountModal}
-                  className={`btn btn--secondary !text-white ${
+                  className={`btn btn--dark-primary dark:btn--white !dark:text-primary ${
                     size === 'md' ? '' : 'btn--small'
-                  } btn--dark-primary`}
+                  }`}
                 >
                   {account.displayName} | {ALICEBalance?.dsp} PION
                 </button>
