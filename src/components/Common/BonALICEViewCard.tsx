@@ -43,7 +43,7 @@ const BonALICEViewCard: FC<{
         `}
       >
         <p className="text-inherit flex">
-          <img src="/assets/images/pion-nft.svg" className="mr-2" alt="" />{' '}
+          <img src="/assets/images/pion-nft-logo.svg" className="mr-2" alt="" />{' '}
           Bonded PION {bonALICE.isNodeBonALICE && '(Active Node)'}
         </p>
         <p className="text-inherit font-medium font-tomorrow flex gap-1">

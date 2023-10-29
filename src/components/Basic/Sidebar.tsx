@@ -90,7 +90,7 @@ export const Sidebar = () => {
           onClick={() => navigate('/pion/buy-pion')}
           icon={
             muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
-              ? '/assets/images/navbar/pion-rounded-logo.svg'
+              ? '/assets/images/navbar/pion-token-logo.svg'
               : '/assets/images/sidebar/step-1.svg'
           }
         />
@@ -120,7 +120,7 @@ export const Sidebar = () => {
           }}
           icon={
             muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
-              ? '/assets/images/pion-nft-2.svg'
+              ? '/assets/images/pion-nft-logo.svg'
               : '/assets/images/sidebar/step-2.svg'
           }
         />
