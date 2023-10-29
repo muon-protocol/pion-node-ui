@@ -198,7 +198,7 @@ const PriceTVLButton = () => {
   return (
     <button className="btn btn--small !py-[5px] flex !cursor-default">
       <img
-        src="/assets/images/navbar/pion-rounded-logo.svg"
+        src="/assets/images/navbar/pion-token-logo.svg"
         alt=""
         className="mr-2.5"
       />
