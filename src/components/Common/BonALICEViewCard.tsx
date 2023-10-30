@@ -26,7 +26,7 @@ const BonALICEViewCard: FC<{
   return (
     <div
       onClick={() => onClick && onClick()}
-      className={`new-bounded-ALICE-card rounded-2xl p-[18px] flex-1 bg-primary-card flex flex-col gap-6
+      className={`new-bounded-ALICE-card rounded-2xl p-[18px] flex-1 bg-primary-card dark:bg-alice-primary-13 flex flex-col gap-6
         ${className} ${
         !inverted
           ? selected
@@ -44,15 +44,11 @@ const BonALICEViewCard: FC<{
         `}
       >
         <p className="text-inherit flex">
-          <img
-            src="/assets/images/sidebar/pion-nft-logo.svg"
-            className="mr-2"
-            alt=""
-          />{' '}
+          <img src={strings.sidebar.nftLogoSrc} className="mr-2" alt="" />{' '}
           Bonded {strings.token} {bonALICE.isNodeBonALICE && '(Active Node)'}
         </p>
         <p className="text-inherit font-medium font-tomorrow flex gap-1">
-          <img src="/assets/images/hashtag.svg" alt="" />{' '}
+          <img src={strings.actions.hashtagSrc} alt="" />{' '}
           {bonALICE.tokenId.toString()}
         </p>
       </div>
@@ -79,7 +75,7 @@ const BonALICEViewCard: FC<{
             }}
           >
             <img
-              src="/assets/images/actions/upgrade-primary-icon.svg"
+              src={strings.actions.increase.primaryIcon}
               alt=""
               className="mr-2.5 h-5"
             />
@@ -94,7 +90,7 @@ const BonALICEViewCard: FC<{
               }}
             >
               <img
-                src="/assets/images/actions/merge-primary-icon.svg"
+                src={strings.actions.merge.primaryIcon}
                 alt=""
                 className="mr-2.5 h-5"
               />

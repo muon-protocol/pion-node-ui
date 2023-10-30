@@ -15,6 +15,7 @@ const strings = {
       tokenLogoSrc: '/assets/images/sidebar/pion-token-logo.svg',
     },
     actions: {
+      hashtagSrc: '/assets/images/hashtag.svg',
       view: {
         icon: '/assets/images/actions/view-icon.svg',
         hoverIcon: '/assets/images/actions/view-colored-icon.svg',
@@ -26,12 +27,14 @@ const strings = {
         grayIcon: '/assets/images/actions/create-gray-icon.svg',
       },
       increase: {
+        primaryIcon: '/assets/images/actions/upgrade-primary-icon.svg',
         icon: '/assets/images/actions/upgrade-icon.svg',
         hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
         grayIcon: '/assets/images/actions/upgrade-gray-icon.svg',
         disabledIcon: '/assets/images/actions/upgrade-disabled-icon.svg',
       },
       merge: {
+        primaryIcon: '/assets/images/actions/merge-primary-icon.svg',
         icon: '/assets/images/actions/merge-icon.svg',
         hoverIcon: '/assets/images/actions/merge-colored-icon.svg',
         grayIcon: '/assets/images/actions/merge-gray-icon.svg',
@@ -67,6 +70,7 @@ const strings = {
       tokenLogoSrc: '/assets/images/sidebar/alice-token-logo.svg',
     },
     actions: {
+      hashtagSrc: '/assets/images/alice-hashtag.svg',
       view: {
         icon: '/assets/images/actions/alice-view-icon.svg',
         hoverIcon: '/assets/images/actions/alice-view-colored-icon.svg',
@@ -78,12 +82,14 @@ const strings = {
         grayIcon: '/assets/images/actions/alice-create-gray-icon.svg',
       },
       increase: {
+        primaryIcon: '/assets/images/actions/alice-upgrade-primary-icon.svg',
         icon: '/assets/images/actions/alice-upgrade-icon.svg',
         hoverIcon: '/assets/images/actions/alice-upgrade-icon.svg',
         grayIcon: '/assets/images/actions/alice-upgrade-gray-icon.svg',
         disabledIcon: '/assets/images/actions/alice-upgrade-disabled-icon.svg',
       },
       merge: {
+        primaryIcon: '/assets/images/actions/alice-merge-primary-icon.svg',
         icon: '/assets/images/actions/alice-merge-icon.svg',
         hoverIcon: '/assets/images/actions/alice-merge-colored-icon.svg',
         grayIcon: '/assets/images/actions/alice-merge-gray-icon.svg',

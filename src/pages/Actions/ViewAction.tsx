@@ -3,13 +3,18 @@ import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaki
 import { BonALICE } from '../../types';
 import BonALICEViewCard from '../../components/Common/BonALICEViewCard.tsx';
 import strings from '../../constants/strings.ts';
+import { FadeIn } from '../../animations';
 
 const RenderViewBody = () => {
   const { bonALICEs } = useBonALICE();
   const { nodeBonALICE } = useMuonNodeStaking();
 
   return (
-    <div className="flex flex-col w-full overflow-y-auto styled-scroll !pr-0">
+    <FadeIn
+      delay={0.1}
+      duration={0.1}
+      className="flex flex-col w-full overflow-y-auto styled-scroll !pr-0"
+    >
       <div className="flex flex-col gap-3">
         {nodeBonALICE.length > 0 && (
           <BonALICEViewCard bonALICE={nodeBonALICE[0]} compact selected />
@@ -28,7 +33,7 @@ const RenderViewBody = () => {
               </p>
             )}
       </div>
-    </div>
+    </FadeIn>
   );
 };
 
