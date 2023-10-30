@@ -29,7 +29,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar max-md:hidden z-[1000] bg-[#18171a] dark:bg-alice-card-background transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${
+      className={`sidebar max-md:hidden z-[1000] bg-[#18171a] dark:bg-alice-primary-13 transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${
         isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >
@@ -170,7 +170,7 @@ export const Sidebar = () => {
           className={`absolute z-[1001] transition-all ease-in duration-[0.2s] left-[110px] cursor-pointer -translate-x-1/2 top-7 ${
             isSidebarOpen && 'rotate-180 left-[213px]'
           }`}
-          src="/assets/images/sidebar/arrow.svg"
+          src={strings.sidebar.arrowSrc}
           alt=""
         />
       </span>
@@ -197,13 +197,13 @@ const SidebarItem = ({
     <div
       className={`sidebar__logo relative flex transition-all ease-in duration-[0.2s] cursor-pointer items-center group hover:text-primary-L1 gap-0 pl-1.5 mb-10 ${
         isSidebarOpen && '!pl-0 gap-4'
-      } ${isActive && 'text-primary-L1'} ${className}`}
+      } ${isActive && 'text-primary-L1 dark:text-alice-primary'} ${className}`}
       onClick={onClick}
     >
       <div
-        className={`sidebar__item flex justify-center transition-all ease-in duration-[0.2s] items-center group-hover:bg-primary-L1 bg-so-dark-gray gap-3 rounded-lg w-[60px] h-[60px] ${
+        className={`sidebar__item flex justify-center transition-all ease-in duration-[0.2s] items-center group-hover:bg-primary-L1 dark:group-hover:bg-alice-primary-g2 bg-so-dark-gray gap-3 rounded-lg w-[60px] h-[60px] ${
           isSidebarOpen && '!w-[42px] !h-[42px]'
-        } ${isActive && '!bg-primary-L1'}`}
+        } ${isActive && '!bg-primary-L3 dark:bg-alice-primary-g2'}`}
       >
         <img
           src={icon}

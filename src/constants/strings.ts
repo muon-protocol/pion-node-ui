@@ -9,6 +9,7 @@ const strings = {
       tokenLogoSrc: '/assets/images/navbar/pion-token-logo.svg',
     },
     sidebar: {
+      arrowSrc: '/assets/images/sidebar/arrow.svg',
       logoSrc: '/assets/images/sidebar/logo.svg',
       logoTextSrc: '/assets/images/sidebar/logo-text.svg',
       nftLogoSrc: '/assets/images/sidebar/pion-nft-logo.svg',
@@ -64,6 +65,7 @@ const strings = {
       tokenLogoSrc: '/assets/images/navbar/alice-token-logo.svg',
     },
     sidebar: {
+      arrowSrc: '/assets/images/sidebar/alice-arrow.svg',
       logoSrc: '/assets/images/sidebar/alice-logo.svg',
       logoTextSrc: '/assets/images/sidebar/alice-logo-text.svg',
       nftLogoSrc: '/assets/images/sidebar/alice-nft-logo.svg',

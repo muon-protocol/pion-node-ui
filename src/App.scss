@@ -126,7 +126,7 @@ input[type=number] {
 }
 
 .app {
-  @apply min-h-screen relative bg-body-background;
+  @apply min-h-screen relative bg-body-background dark:bg-alice-body-background;
 }
 
 html {
