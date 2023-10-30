@@ -22,6 +22,10 @@ export const Sidebar = () => {
   const { bonALICEs } = useBonALICE();
   const { muonNodeStakingUsers } = useMuonNodeStaking();
 
+  if (location.pathname === '/pion/migration') {
+    return null;
+  }
+
   return (
     <div
       className={`sidebar max-md:hidden z-[1000] bg-[#18171a] dark:bg-alice-card-background transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${

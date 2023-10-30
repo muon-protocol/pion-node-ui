@@ -21,7 +21,7 @@ const Home = () => {
   const { nodeBonALICE } = useMuonNodeStaking();
 
   return (
-    <div className=" w-full page__bg">
+    <div className="w-full page__bg">
       <div className="page page--home page--centered flex flex-col">
         <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
           <img

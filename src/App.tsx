@@ -29,6 +29,7 @@ import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
 import BuyPION from './pages/BuyPION';
 import { Sidebar } from './components/Basic/Sidebar.tsx';
 import { useEffect } from 'react';
+import Migration from './pages/Migration';
 
 function App() {
   useEffect(() => {
@@ -111,6 +112,10 @@ function App() {
                                             <Route
                                               path="/pion/setup-node"
                                               element={<ReviewDetail />}
+                                            />
+                                            <Route
+                                              path="/pion/migration"
+                                              element={<Migration />}
                                             />
                                           </Routes>
                                         </div>
