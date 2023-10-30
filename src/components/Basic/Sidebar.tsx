@@ -44,17 +44,9 @@ export const Sidebar = () => {
           }`}
           onClick={() => navigate('/pion/getting-started')}
         >
-          <img
-            src="/assets/images/sidebar/logo.svg"
-            className="w-[26px] h-8"
-            alt=""
-          />
+          <img src={strings.sidebar.logoSrc} className="w-[26px] h-8" alt="" />
           {isSidebarOpen && (
-            <img
-              src="/assets/images/sidebar/logo-typo.svg"
-              className=""
-              alt=""
-            />
+            <img src={strings.sidebar.logoTextSrc} className="" alt="" />
           )}
         </div>
 
@@ -95,7 +87,7 @@ export const Sidebar = () => {
           onClick={() => navigate('/pion/buy-pion')}
           icon={
             muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
-              ? '/assets/images/navbar/pion-token-logo.svg'
+              ? strings.sidebar.tokenLogoSrc
               : '/assets/images/sidebar/step-1.svg'
           }
         />
@@ -125,7 +117,7 @@ export const Sidebar = () => {
           }}
           icon={
             muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
-              ? '/assets/images/pion-nft-logo.svg'
+              ? strings.sidebar.nftLogoSrc
               : '/assets/images/sidebar/step-2.svg'
           }
         />
@@ -215,7 +207,7 @@ const SidebarItem = ({
       >
         <img
           src={icon}
-          className={`transition-all ease-in duration-[0.2s] h-[28px] ${
+          className={`transition-all ease-in duration-[0.2s] h-[30px] ${
             isSidebarOpen && '!h-[24px]'
           }`}
           alt=""

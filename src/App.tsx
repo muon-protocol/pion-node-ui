@@ -40,6 +40,19 @@ function App() {
     }
   }, []);
 
+  useEffect(() => {
+    const link = document.querySelector("link[rel~='icon']");
+    const title = document.querySelector('title');
+    if (!link || !title) return;
+    if (import.meta.env.VITE_PROJECT_NAME === 'ALICE') {
+      link.setAttribute('href', '/alice-favicon.ico');
+      title.innerHTML = 'ALICE';
+    } else {
+      link.setAttribute('href', '/favicon.ico');
+      title.innerHTML = 'PION';
+    }
+  }, []);
+
   return (
     <div className="app relative">
       <Web3Provider>
