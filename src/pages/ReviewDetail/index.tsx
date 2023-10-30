@@ -56,11 +56,11 @@ const ReviewDetail = () => {
       <FadeIn
         duration={0.3}
         delay={0.3}
-        className="review-detail__nft relative bg-so-dark-gray p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
+        className="review-detail__nft relative bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
       >
         <ConnectWalletModal redirectRoute="/pion/getting-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-light-text">
+          <div className="address-input__title text-light-text dark:text-alice-gray">
             Select {strings.nft}
           </div>
         </div>
@@ -99,7 +99,7 @@ const ReviewDetail = () => {
           {/*  </button>*/}
           {/*</Link>*/}
         </div>
-        <div className="flex flex-col gap-3 max-md:text-sm mt-auto text-white">
+        <div className="flex flex-col gap-3 max-md:text-sm mt-auto text-white dark:text-black">
           <span className="flex w-full justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
@@ -182,7 +182,7 @@ const ReviewDetail = () => {
       <FadeIn
         duration={0.3}
         delay={0.4}
-        className={`review-detail__actions bg-so-dark-gray p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
+        className={`review-detail__actions bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}
@@ -192,12 +192,14 @@ const ReviewDetail = () => {
         {/*  className="mb-9"*/}
         {/*/>*/}
         <div className="address-input__top text-sm mb-1 flex justify-between">
-          <div className="address-input__title text-light-text">Node IP</div>
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Node IP
+          </div>
         </div>
         <span className="address-input__input-wrapper mb-6 flex flex-col">
-          <div className="items-center justify-between bg-input-bg rounded-xl pl-5 pr-4 h-14 mb-0.5">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
             <input
-              className="address-input__input placeholder-white text-white font-medium w-full h-full bg-transparent outline-none"
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
               placeholder={'Node IP'}
               type="text"
               value={nodeIP}
@@ -206,14 +208,14 @@ const ReviewDetail = () => {
           </div>
         </span>
         <div className="address-input__top text-sm mb-1 flex justify-between">
-          <div className="address-input__title text-light-text">
+          <div className="address-input__title text-light-text dark:text-alice-gray">
             Node Address
           </div>
         </div>
         <span className="address-input__input-wrapper mb-1 flex flex-col">
-          <div className="items-center justify-between bg-input-bg rounded-xl pl-5 pr-4 h-14 mb-0.5">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
             <input
-              className="address-input__input placeholder-white text-white font-medium w-full h-full bg-transparent outline-none"
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
               placeholder={'Node Address'}
               type="text"
               value={nodeAddress}
@@ -225,12 +227,14 @@ const ReviewDetail = () => {
           </span>
         </span>
         <div className="address-input__top text-sm mb-1 flex justify-between">
-          <div className="address-input__title text-light-text">Peer ID</div>
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Peer ID
+          </div>
         </div>
         <span className="address-input__input-wrapper mb-1 flex flex-col">
-          <div className="items-center justify-between bg-input-bg rounded-xl pl-5 pr-4 h-14 mb-0.5">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
             <input
-              className="address-input__input placeholder-white text-white font-medium w-full h-full bg-transparent outline-none"
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
               placeholder={'Peer ID'}
               type="text"
               value={peerID}
@@ -396,15 +400,15 @@ const ReviewDetail = () => {
           <FadeIn
             duration={0.3}
             delay={0.2}
-            className="bg-primary md:flex-1 flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
+            className="bg-primary dark:bg-alice-primary md:flex-1 flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
           >
             <img src="/assets/images/review/guide-icon.svg" alt="" />
             <div>
-              <p className="text-white text-sm">
+              <p className="text-white dark:text-white text-sm">
                 Need help setting up your node?
               </p>
               <p
-                className="text-white text-xl underline cursor-pointer"
+                className="text-white dark:text-white text-xl underline cursor-pointer"
                 onClick={() =>
                   window.open(
                     'https://docs.muon.net/muon-network/muon-nodes/pion',

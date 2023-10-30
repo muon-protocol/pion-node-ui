@@ -34,7 +34,7 @@ const SelectButtonWithModal = ({
         )}
         <div className="select-button-with-modal__button flex items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
           <span className="flex gap-1.5 md:gap-2.5 items-center">
-            <img className="w-7" src="/assets/images/pion-nft.png" alt="" />
+            <img className="w-7" src={strings.sidebar.nftLogoSrc} alt="" />
             {multiple ? (
               <>
                 {selectedItems.length > 0 ? (

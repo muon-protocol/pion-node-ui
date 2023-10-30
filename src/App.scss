@@ -49,17 +49,15 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-}
 
-.review-detail {
-  &__nft {
-    background-image: url("../public/assets/images/review/nft-bg.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  & .review-detail {
+    &__nft {
+      background-image: url("../public/assets/images/review/nft-bg.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
   }
-
-
 }
 
 .stat-item {
