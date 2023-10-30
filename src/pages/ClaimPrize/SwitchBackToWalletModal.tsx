@@ -1,5 +1,6 @@
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { formatWalletAddress } from '../../utils/web3.ts';
+import strings from '../../constants/strings.ts';
 
 const SwitchBackToWalletModal = () => {
   const { stakingAddress, stakingAddressFromPast } = useClaimPrize();
@@ -12,7 +13,7 @@ const SwitchBackToWalletModal = () => {
         alt=""
       />
       <p className="text-center text-black">
-        To claim your bonPION, please switch back to your Staking Address
+        To claim your {strings.nft}, please switch back to your Staking Address
         <br />
         <strong>
           {stakingAddressFromPast

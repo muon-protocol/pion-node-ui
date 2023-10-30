@@ -3,6 +3,7 @@ import useActions from '../../contexts/Actions/useActions.ts';
 import { sidebarItems } from '../../data/constants.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import strings from '../../constants/strings.ts';
 
 const ClaimedRewardModal = ({ operation }: { operation: string }) => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         alt=""
       />
       <p className="text-center text-black">
-        Your bonPION has been {operation} successfully.
+        Your {strings.nft} has been {operation} successfully.
         <button
           onClick={() => {
             createModal(false);

@@ -9,6 +9,7 @@ import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaki
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 import { useNavigate } from 'react-router-dom';
+import strings from '../../constants/strings.ts';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -40,13 +41,14 @@ const Home = () => {
             animationDelay={0.1}
           >
             <>
-              <p className="font-tomorrow text-2xl font-medium mb-6">
-                Buy $PION
+              <p className="font-tomorrow text-[22px] font-medium mb-6">
+                Buy ${strings.token}
               </p>
 
               <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">
                 <p>
-                  Buy $PION to create your bonPION and start earning rewards!
+                  Buy ${strings.token} to create your {strings.nft} and start
+                  earning rewards!
                 </p>
               </span>
               <div className="mb-5 mt-auto">
@@ -56,7 +58,7 @@ const Home = () => {
                     <strong className="text-primary-L3">
                       {ALICEBalance.dsp}
                     </strong>{' '}
-                    <span className="text-primary-L3">PION</span>
+                    <span className="text-primary-L3">{strings.token}</span>
                   </div>
                 )}
               </div>
@@ -64,7 +66,7 @@ const Home = () => {
                 className="btn !px-6 mx-auto relative"
                 onClick={() => navigate('/pion/buy-pion')}
               >
-                Buy $PION
+                Buy ${strings.token}
               </button>
             </>
           </StepCard>
@@ -73,21 +75,23 @@ const Home = () => {
             className="w-full md:w-1/3"
             animationDelay={0.2}
           >
-            <p className="font-tomorrow text-2xl font-medium mb-6">
-              {bonALICEs.length > 0 ? 'Manage bonPION' : 'Create bonPION'}
+            <p className="font-tomorrow text-[22px] font-medium mb-6">
+              {bonALICEs.length > 0
+                ? 'Manage ' + strings.nft
+                : 'Create ' + strings.nft}
             </p>
             <span className="descriptions font-tomorrow mb-auto leading-[19px] flex flex-col gap-1">
               <p>
                 {bonALICEs.length > 0
-                  ? 'You can add more $PION and USDC to increase your bonPION amount and node power'
-                  : 'Create bonPION using your $PION to be able to setup your node'}
+                  ? `You can add more $${strings.token} and USDC to increase your ${strings.nft} amount and node power`
+                  : `Create ${strings.nft} using your $${strings.token} to be able to setup your node`}
               </p>
             </span>
             {nodeBonALICE.length > 0 ? (
               <>
                 <div className="mb-5">
                   <p className="text-light-text">
-                    bonPION#{nodeBonALICE[0].tokenId.toString()} amount:{' '}
+                    {strings.nft}#{nodeBonALICE[0].tokenId.toString()} amount:{' '}
                     <strong className="text-primary-L3">
                       {nodeBonALICE[0].nodePower}
                     </strong>
@@ -97,7 +101,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto "
                   onClick={() => window.open('/pion/bonPION/increase', '_self')}
                 >
-                  Manage bonPION
+                  Manage {strings.nft}
                 </div>
               </>
             ) : bonALICEs.length > 0 ? (
@@ -107,7 +111,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto "
                   onClick={() => window.open('/pion/bonPION/increase', '_self')}
                 >
-                  Manage bonPION
+                  Manage {strings.nft}
                 </div>
               </>
             ) : (
@@ -117,7 +121,7 @@ const Home = () => {
                   className="btn !px-6 mx-auto"
                   onClick={() => window.open('/pion/bonPION/create', '_self')}
                 >
-                  Create bonPION
+                  Create {strings.nft}
                 </div>
               </>
             )}
@@ -127,7 +131,7 @@ const Home = () => {
             className="w-full md:w-1/3"
             animationDelay={0.3}
           >
-            <p className="font-tomorrow text-2xl font-medium mb-6">
+            <p className="font-tomorrow text-[22px] font-medium mb-6">
               {nodeBonALICE.length > 0 ? 'Manage Node' : 'Setup Node'}
             </p>
             <span className="descriptions font-tomorrow mb-7 leading-[19px] flex flex-col gap-1">

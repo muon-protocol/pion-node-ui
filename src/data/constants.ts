@@ -1,4 +1,5 @@
 import { ActionType, Plan, SidebarItem, Step, UserWallet } from '../types';
+import strings from '../constants/strings.ts';
 
 export const plans: Plan[] = [
   {
@@ -7,8 +8,8 @@ export const plans: Plan[] = [
     requiredNodePower: '500 - 5K',
     verificationMethods: 'Beginner Verification',
     APR: '10% - 15%',
-    minNodePower: '500 PION',
-    maxNodePower: '5K PION',
+    minNodePower: `500 ${strings.token}`,
+    maxNodePower: `5K ${strings.token}`,
     profitability: '200 - 250 days',
     backgroundColor: '#F58E8E80',
     shadowColor: 'text-[#ed8080]',
@@ -20,7 +21,7 @@ export const plans: Plan[] = [
     title: 'Tier 2',
     requiredNodePower: '5K - 25K',
     minNodePower: null,
-    maxNodePower: '25K PION',
+    maxNodePower: `25K ${strings.token}`,
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
     profitability: '100 - 180 days',
@@ -34,7 +35,7 @@ export const plans: Plan[] = [
     title: 'Tier 3',
     requiredNodePower: '25K - 50K',
     minNodePower: null,
-    maxNodePower: '50K PION',
+    maxNodePower: `50K ${strings.token}`,
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
@@ -62,10 +63,9 @@ export const plans: Plan[] = [
 export const steps: Step[] = [
   {
     id: 1,
-    title: 'Buy $PION',
-    description:
-      'First you need to buy PION to create your bonPION NFT, minimum amount for starting is 1000 PION',
-    buttonText: 'Buy PION',
+    title: `Buy $${strings.token}`,
+    description: `First you need to buy ${strings.token} to create your ${strings.nft} NFT, minimum amount for starting is 1000 ${strings.token}`,
+    buttonText: `Buy $${strings.token}`,
     buttonLink:
       'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
     buttonLinkTarget: '_blank',
@@ -74,8 +74,8 @@ export const steps: Step[] = [
   {
     id: 2,
     title: 'Create bonPION',
-    description: 'Lock your PION into bonPION and gain node power',
-    buttonText: 'Create bonded PION',
+    description: `Lock your ${strings.token} into ${strings.nft} and gain node power`,
+    buttonText: `Create bonded ${strings.token}`,
     buttonLink: '/bonPION/create',
     buttonLinkTarget: '_self',
     buttonDisabled: false,
@@ -83,8 +83,7 @@ export const steps: Step[] = [
   {
     id: 3,
     title: 'Setup Node',
-    description:
-      'When you have your bonPION ready, it’s time to setup your node and start earning',
+    description: `When you have your ${strings.nft} ready, it’s time to setup your node and start earning`,
     buttonText: 'Setup Node',
     buttonLink: '/setup-node',
     buttonLinkTarget: '_self',

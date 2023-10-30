@@ -1,5 +1,6 @@
 import { Plan } from '../../types';
 import { FadeIn } from '../../animations';
+import strings from '../../constants/strings.ts';
 
 export const ActionsPlansCard = ({
   plan,
@@ -46,8 +47,10 @@ export const ActionsPlansCard = ({
 
         {active && activePower && (
           <div className="flex justify-between w-full items-center">
-            <p className="">Your bonPION Node Power</p>
-            <p className="font-semibold text-lg">{activePower} PION</p>
+            <p className="">Your {strings.nft} Node Power</p>
+            <p className="font-semibold text-lg">
+              {activePower} {strings.token}
+            </p>
           </div>
         )}
         <p
@@ -56,7 +59,7 @@ export const ActionsPlansCard = ({
         >
           {!POA
             ? `Verify Tier ${plan.id}`
-            : `Learn more about PION's PoA Network.`}
+            : `Learn more about ${strings.token}'s PoA Network.`}
         </p>
       </div>
     </FadeIn>

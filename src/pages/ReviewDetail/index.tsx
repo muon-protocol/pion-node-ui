@@ -17,6 +17,7 @@ import { getTier } from '../../utils';
 import { useEffect } from 'react';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
+import strings from '../../constants/strings.ts';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -60,7 +61,7 @@ const ReviewDetail = () => {
         <ConnectWalletModal redirectRoute="/pion/getting-started" />
         <div className="address-input__top text-sm mb-2 flex justify-between">
           <div className="address-input__title text-light-text">
-            Select bonPION
+            Select {strings.nft}
           </div>
         </div>
         <div className="flex w-full gap-3 mb-7">
@@ -68,7 +69,7 @@ const ReviewDetail = () => {
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
             isModalOpen={isSelectNodeBonALICEModalOpen}
             closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
-            modalTitle="Select bonPION"
+            modalTitle={`Select ${strings.nft}`}
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
           >
@@ -105,7 +106,7 @@ const ReviewDetail = () => {
               {nodeBonALICE ? (
                 formatWalletAddress(nodeBonALICE?.account)
               ) : (
-                <span className="font-semibold">Select bonPION</span>
+                <span className="font-semibold">Select {strings.nft}</span>
               )}
             </span>
           </span>
@@ -120,7 +121,7 @@ const ReviewDetail = () => {
                 <span className="font-medium">
                   {nodeBonALICE.ALICELockAmount.dsp}
                 </span>{' '}
-                PION +{' '}
+                {strings.token} +{' '}
                 <span className="font-medium">
                   {nodeBonALICE.LPTokenLockAmount.dsp}
                 </span>{' '}
@@ -260,7 +261,7 @@ const ReviewDetail = () => {
           </button>
         ) : !nodeBonALICE ? (
           <button className="btn btn--white mt-auto mx-auto" disabled>
-            Select bonPION
+            Select {strings.nft}
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button className="btn btn--white mt-auto mx-auto" disabled>
@@ -345,7 +346,7 @@ const ReviewDetail = () => {
             className="review-details--top flex flex-col md:flex-row"
           >
             <p className="text-lg text-center md:text-left md:text-[20px] font-light md:w-[607px]">
-              Please review the bonPION details you're staking for node
+              Please review the {strings.nft} details you're staking for node
               operation. When ready, fill out the requested information and
               click ‘Add node’ to complete the setup.
             </p>
@@ -437,7 +438,7 @@ const EmptyBonALICECard = () => {
       {newNFTClaimedLoading ? (
         <>
           <p className="font-semibold text-xl text-center px-20">
-            Loading bonPIONs...
+            Loading {strings.nfts}...
           </p>
         </>
       ) : (
@@ -445,13 +446,13 @@ const EmptyBonALICECard = () => {
           <p className="font-semibold text-xl text-center px-20">
             {stakerAddressInfo?.active
               ? 'You have already added a node. Please go to your dashboard to check the details.'
-              : 'You don’t have any bonPION in your wallet, please create one first or use another address'}
+              : `You don’t have any ${strings.nft} in your wallet, please create one first or use another address`}
           </p>
           <button
             className="btn btn--white mx-auto"
             onClick={() => navigate('/pion/bonPION/create')}
           >
-            Create bonPION
+            Create {strings.nft}
           </button>
         </>
       )}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useActions from '../../contexts/Actions/useActions.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import strings from '../../constants/strings.ts';
 
 const InsufficientNFTAmoutModalBody = ({
   operation,
@@ -22,9 +23,10 @@ const InsufficientNFTAmoutModalBody = ({
         alt=""
       />
       <p className="text-center mb-8 text-black">
-        You've successfully {operation} your bonPION! Unfortunately your current
-        node power is insufficient to run a node. Please consider boosting your
-        bonPION to enable node setup.
+        You've successfully {operation} your {strings.nft}! Unfortunately your
+        current node power is insufficient to run a node. Please consider
+        boosting your
+        {strings.nft} to enable node setup.
       </p>
       <button
         onClick={() => {
@@ -35,7 +37,7 @@ const InsufficientNFTAmoutModalBody = ({
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >
-        increase Your bonPION
+        increase Your {strings.nft}
       </button>
     </div>
   );

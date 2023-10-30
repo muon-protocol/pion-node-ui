@@ -10,6 +10,7 @@ import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
+import strings from '../../constants/strings.ts';
 
 const RenderMergeBody = () => {
   const {
@@ -58,16 +59,16 @@ const RenderMergeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select two bonPIONs to merge"
+          title={`Select two ${strings.nfts} to merge`}
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select from Your bonPION Collection (' +
+              ? `Select from Your ${strings.nfts} Collection (` +
                 selectedMergeBonALICEs.length +
                 '/2)'
-              : 'No bonPIONs to Merge'
+              : `No ${strings.nfts} to Merge`
           }
           multiple
           selectedItems={selectedMergeBonALICEs}
@@ -94,7 +95,7 @@ const RenderMergeBody = () => {
           <MoveUpIn y={-10} duration={0.5} delay={0.3}>
             <FadeIn duration={0.2} delay={0.3}>
               <BonALICECard
-                title="New Bonded PION"
+                title={`New Bonded ${strings.token}`}
                 subTitle1="Node Power"
                 subValue1={
                   selectedMergeBonALICEs[0].nodePower +
@@ -145,7 +146,7 @@ const RenderMergeBody = () => {
             disabled={isMergeBonALICEsButtonDisabled}
             className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
-            Merge Bonded PIONs
+            Merge Bonded ${strings.tokens}
           </button>
         )}
       </FadeIn>

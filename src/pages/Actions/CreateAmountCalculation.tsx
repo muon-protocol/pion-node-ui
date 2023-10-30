@@ -2,6 +2,7 @@ import { MoveUpIn } from '../../animations';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
+import strings from '../../constants/strings.ts';
 
 const CreateAmountCalculation = () => {
   const { createAmount, createBoostAmount } = useCreateAction();
@@ -20,11 +21,11 @@ const CreateAmountCalculation = () => {
         className="flex w-full justify-between items-center"
       >
         <span className="text-gray10">
-          <p className="font-light">New bonPION amount:</p>
+          <p className="font-light">New {strings.nft} amount:</p>
           <p className="h-5"></p>
         </span>
         <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
-          {Number(createAmount.hStr).toFixed(2) + ' PION'}
+          {Number(createAmount.hStr).toFixed(2) + ' ' + strings.token}
         </span>
       </MoveUpIn>
     );
@@ -39,7 +40,7 @@ const CreateAmountCalculation = () => {
         className="flex w-full justify-between items-center"
       >
         <span className="text-gray10">
-          <p className="font-light">New bonPION amount:</p>
+          <p className="font-light">New {strings.nft} amount:</p>
           {createBoostAmount.big > BigInt(0) ? (
             <p className="font-light text-sm flex gap-1">
               {Number(createBoostAmount.hStr) +
@@ -48,9 +49,9 @@ const CreateAmountCalculation = () => {
                   Number(createBoostAmount.hStr) /
                   (Math.round(ALICEPrice * 10000) / 10000)
                 ).toFixed(2) +
-                ' PION '}
+                ` ${strings.token} `}
               <p className="text-uptime font-bold">x{boostCoefficient?.dsp}</p>
-              {' + ' + Number(createAmount.hStr) + ' PION'}
+              {' + ' + Number(createAmount.hStr) + ` ${strings.token}`}
             </p>
           ) : (
             <p className="h-5"></p>
@@ -62,7 +63,7 @@ const CreateAmountCalculation = () => {
               (Math.round(ALICEPrice * 10000) / 10000)) *
               boostCoefficient.dsp +
             Number(createAmount.hStr)
-          ).toFixed(2) + ' PION'}
+          ).toFixed(2) + ` ${strings.token}`}
         </span>
       </MoveUpIn>
     </>

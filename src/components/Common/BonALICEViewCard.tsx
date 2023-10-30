@@ -6,6 +6,7 @@ import { BonALICE } from '../../types';
 import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import strings from '../../constants/strings.ts';
 
 const BonALICEViewCard: FC<{
   bonALICE: BonALICE;
@@ -44,7 +45,7 @@ const BonALICEViewCard: FC<{
       >
         <p className="text-inherit flex">
           <img src="/assets/images/pion-nft-logo.svg" className="mr-2" alt="" />{' '}
-          Bonded PION {bonALICE.isNodeBonALICE && '(Active Node)'}
+          Bonded {strings.token} {bonALICE.isNodeBonALICE && '(Active Node)'}
         </p>
         <p className="text-inherit font-medium font-tomorrow flex gap-1">
           <img src="/assets/images/hashtag.svg" alt="" />{' '}

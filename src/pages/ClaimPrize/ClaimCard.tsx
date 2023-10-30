@@ -10,6 +10,7 @@ import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import { FadeIn } from '../../animations';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal.tsx';
+import strings from '../../constants/strings.ts';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -69,7 +70,9 @@ const ClaimCard = () => {
   return (
     <div className="w-full bg-primary-dark px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
       <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
-        <p className="mb-8 font-semibold text-[20px]">Your Bonded PION</p>
+        <p className="mb-8 font-semibold text-[20px]">
+          Your Bonded {strings.token}
+        </p>
         <span className="flex font-light mb-2">
           <p className="w-[143px] text-left">Staking address:</p>
           <p className="font-medium">
@@ -99,7 +102,7 @@ const ClaimCard = () => {
                 ? totalRewardFromPast.dsp
                 : totalRewards.dsp}
             </p>
-            PION
+            {strings.token}
           </div>
         </span>
         {/*<span className="flex font-light">*/}

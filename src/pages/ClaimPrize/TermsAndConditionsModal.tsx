@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { ClaimPrizeContext } from '../../contexts/ClaimPrize/ClaimPrizeContext.tsx';
+import strings from '../../constants/strings.ts';
 
 export const TermsAndConditionsModal = () => {
   const [termsAndConditionsChecked, setTermsAndConditionsChecked] =
@@ -48,7 +49,7 @@ export const TermsAndConditionsModal = () => {
             )
           }
         >
-          Terms of Acquisition of $PION tokens
+          Terms of Acquisition of ${strings.token} tokens
         </span>
         .
       </Checkbox>

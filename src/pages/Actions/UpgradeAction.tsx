@@ -19,6 +19,7 @@ import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import UpgradeAmountCalculation from './UpgradeAmountCalculation.tsx';
+import strings from '../../constants/strings.ts';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -122,14 +123,14 @@ export const RenderUpgradeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select bonPION"
+          title={`Select ${strings.nft}`}
           onClick={() => openUpgradeModal()}
           isModalOpen={isUpgradeModalOpen}
           closeModalHandler={() => closeUpgradeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select bonPION'
-              : 'No bonPIONs to Upgrade'
+              ? `Select ${strings.nft}`
+              : `No ${strings.nft} to Upgrade`
           }
           selectedItems={
             selectedUpgradeBonALICE ? [selectedUpgradeBonALICE] : []
@@ -146,7 +147,7 @@ export const RenderUpgradeBody = () => {
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
           withLink
-          rightText={'PION'}
+          rightText={strings.token}
           balance={ALICEBalance}
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
@@ -169,7 +170,7 @@ export const RenderUpgradeBody = () => {
       {selectedUpgradeBonALICE && (
         <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
-            <p className="font-light">Current bonPION amount:</p>
+            <p className="font-light">Current ${strings.nft} amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
           </span>
           <UpgradeAmountCalculation />
@@ -212,8 +213,8 @@ export const RenderUpgradeBody = () => {
           >
             Approve{' '}
             {ALICEBalance && upgradeAmount.big < ALICEBalance.big
-              ? upgradeAmount.hStr + ' PION'
-              : 'All PION'}
+              ? upgradeAmount.hStr + ` ${strings.nft}`
+              : `All ${strings.token}}`}
           </button>
         ) : showApproveLPToken ? (
           <button
@@ -232,7 +233,7 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn btn--white min-w-[360px] mx-auto !py-4"
           >
-            Increase Bonded PION
+            Increase Bonded {strings.token}
           </button>
         )}
       </FadeIn>
@@ -250,7 +251,7 @@ export const RenderUpgradeBody = () => {
           <p className="text-center text-black mb-6">
             You need to approve the{' '}
             {showApproveALICE
-              ? 'PION '
+              ? `${strings.token} `
               : showApproveLPToken
               ? 'USDC '
               : 'tokens '}
@@ -260,7 +261,7 @@ export const RenderUpgradeBody = () => {
               ? showApproveALICE
                 ? 'Muon node staking '
                 : 'Booster '
-              : 'Bonded PION '}
+              : `Bonded ${strings.token} `}
             Contract. Enter at least the amount you want to create and click
             Next then Approve button on metamask.
           </p>

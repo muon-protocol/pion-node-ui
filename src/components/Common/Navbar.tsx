@@ -38,13 +38,15 @@ const DesktopNavbar = () => {
     <FadeIn delay={0.3}>
       <div className="hidden md:flex absolute w-full navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
-          {/*<Link to={'/pion/getting-started'}>*/}
-          {/*  <img*/}
-          {/*    src="/assets/images/navbar/pion-logo.svg"*/}
-          {/*    alt={''}*/}
-          {/*    className="w-auto h-9"*/}
-          {/*  />*/}
-          {/*</Link>*/}
+          {location.pathname === '/pion/migration' && (
+            <div>
+              <img
+                src="/assets/images/navbar/pion-logo.svg"
+                alt={''}
+                className="w-auto h-9"
+              />
+            </div>
+          )}
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
@@ -202,7 +204,7 @@ const PriceTVLButton = () => {
         alt=""
         className="mr-2.5"
       />
-      <p className="text-white text-sm font-medium">
+      <p className="!text-white text-sm font-medium">
         {ALICEPrice ? `$${ALICEPrice}` : ''} (TVL:{' '}
         {stats?.total_value_locked || '...'})
       </p>

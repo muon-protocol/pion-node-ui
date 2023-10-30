@@ -11,6 +11,7 @@ import useActions from '../../contexts/Actions/useActions.ts';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import { useNavigate } from 'react-router-dom';
 import { ActionType } from '../../types';
+import strings from '../../constants/strings.ts';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
@@ -64,7 +65,7 @@ const Actions = () => {
         <FadeIn className="flex flex-col w-full gap-4 md:gap-6">
           <span className="flex justify-between w-full items-end">
             <p className="text-2xl font-medium font-tomorrow">
-              Manage Bonded PION NFT
+              Manage Bonded {strings.token} NFT
             </p>
             {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
               <div

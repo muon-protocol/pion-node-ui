@@ -3,6 +3,7 @@ import { FadeIn } from '../../animations';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { ethers } from 'ethers';
 import { useEffect } from 'react';
+import strings from '../../constants/strings.ts';
 
 const AmountInput = ({
   balance,
@@ -95,7 +96,7 @@ const AmountInput = ({
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 font-bold text-xs">
-            You don't have sufficient amount of $PION. {/*<span*/}
+            You don't have sufficient amount of ${strings.token}. {/*<span*/}
             {/*  className="underline cursor-pointer"*/}
             {/*  onClick={() =>*/}
             {/*    window.open(*/}

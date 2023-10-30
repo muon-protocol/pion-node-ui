@@ -19,6 +19,7 @@ import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import CreateAmountCalculation from './CreateAmountCalculation.tsx';
+import strings from '../../constants/strings.ts';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -94,7 +95,7 @@ export const RenderCreateBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          rightText={'PION'}
+          rightText={strings.token}
           balance={ALICEBalance}
           value={createAmount}
           withLink
@@ -155,8 +156,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' PION'
-              : 'All PION'}
+              ? createAmount.hStr + ' ' + strings.token
+              : 'All ' + strings.tokens}
           </button>
         ) : createBoostAmount.dsp === 0 &&
           ALICEAllowance &&
@@ -168,8 +169,8 @@ export const RenderCreateBody = () => {
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' PION'
-              : 'All PION'}
+              ? createAmount.hStr + ' ' + strings.token
+              : 'All ' + strings.token}
           </button>
         ) : LPTokenAllowanceForBooster &&
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
@@ -189,7 +190,7 @@ export const RenderCreateBody = () => {
             className="btn btn--white min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
-            Create Bonded PION
+            Create Bonded {strings.token}
           </button>
         )}
       </FadeIn>
@@ -223,11 +224,11 @@ export const RenderCreateBody = () => {
             {createBoostAmount.dsp > 0 &&
             ALICEAllowanceForBooster &&
             ALICEAllowanceForBooster.big < createAmount.big
-              ? 'PION '
+              ? strings.token + ' '
               : createBoostAmount.dsp === 0 &&
                 ALICEAllowance &&
                 ALICEAllowance.big < createAmount.big
-              ? 'PION '
+              ? strings.token + ' '
               : LPTokenAllowanceForBooster &&
                 LPTokenAllowanceForBooster.big < createBoostAmount.big
               ? 'USDC '
@@ -235,7 +236,7 @@ export const RenderCreateBody = () => {
             tokens in the{' '}
             {createBoostAmount && createBoostAmount.dsp > 0
               ? 'Booster contract'
-              : 'bonPION contract'}
+              : strings.nft + ' contract'}
             .
           </p>
           {ALICEAllowanceForBooster &&

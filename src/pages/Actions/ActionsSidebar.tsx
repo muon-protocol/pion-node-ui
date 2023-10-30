@@ -5,6 +5,7 @@ import { ActionType, SidebarItem } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import strings from '../../constants/strings.ts';
 
 const ActionsSidebar = () => {
   const { bonALICEs } = useBonALICE();
@@ -40,7 +41,7 @@ const ActionsSidebar = () => {
         link: ActionType.UPGRADE,
         grayIcon: '/assets/images/actions/upgrade-gray-icon.svg',
         disabled: bonALICEs.length + nodeBonALICE.length === 0,
-        disabledMessage: 'Create a bonPION first',
+        disabledMessage: `Create a ${strings.nft} first`,
         disabledIcon: '/assets/images/actions/upgrade-disabled-icon.svg',
       },
       {
@@ -51,7 +52,7 @@ const ActionsSidebar = () => {
         link: ActionType.MERGE,
         grayIcon: '/assets/images/actions/merge-gray-icon.svg',
         disabled: bonALICEs.length + nodeBonALICE.length < 2,
-        disabledMessage: 'Requires at least 2 bonPIONs',
+        disabledMessage: `Requires at least 2 ${strings.nfts}`,
         disabledIcon: '/assets/images/actions/merge-disabled-icon.svg',
       },
       {

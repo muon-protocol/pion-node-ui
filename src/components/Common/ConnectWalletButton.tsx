@@ -1,5 +1,6 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import useALICE from '../../contexts/ALICE/useALICE.ts';
+import strings from '../../constants/strings.ts';
 
 export const ConnectWalletButton = ({
   size,
@@ -62,11 +63,11 @@ export const ConnectWalletButton = ({
               return (
                 <button
                   onClick={openAccountModal}
-                  className={`btn btn--dark-primary dark:btn--white !dark:text-primary ${
+                  className={`btn btn--dark-primary !text-white dark:btn--white !dark:text-primary ${
                     size === 'md' ? '' : 'btn--small'
                   }`}
                 >
-                  {account.displayName} | {ALICEBalance?.dsp} PION
+                  {account.displayName} | {ALICEBalance?.dsp} {strings.token}
                 </button>
               );
             })()}

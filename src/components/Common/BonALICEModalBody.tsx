@@ -1,6 +1,7 @@
 import BonALICECard from './BonALICECard.tsx';
 import { BonALICE } from '../../types';
 import { getTier } from '../../utils';
+import strings from '../../constants/strings.ts';
 
 const BonALICEModalBody = ({
   bonALICEs,
@@ -20,7 +21,7 @@ const BonALICEModalBody = ({
               <BonALICECard
                 isNodeBonALICE={item.isNodeBonALICE}
                 className="cursor-pointer"
-                title={'bonPION #' + item.tokenId}
+                title={`${strings.nft} #` + item.tokenId}
                 subTitle1="Node Power"
                 subValue1={item.nodePower}
                 subTitle2="Tier"
@@ -34,7 +35,7 @@ const BonALICEModalBody = ({
         })
       ) : (
         <p className="text-center py-24 px-3 text-white">
-          You have no bonPION NFTs to show.
+          You have no {strings.nft} NFTs to show.
         </p>
       )}
     </div>

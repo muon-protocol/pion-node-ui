@@ -2,6 +2,7 @@ import useActions from '../../contexts/Actions/useActions.ts';
 import { ActionType } from '../../types';
 import { FadeIn, Scale } from '../../animations';
 import { AnimatePresence } from 'framer-motion';
+import strings from '../../constants/strings.ts';
 
 // import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 
@@ -101,42 +102,42 @@ const renderActionDescription = (action: ActionType) => {
     <>
       {action === ActionType.VIEW ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
-          <p>Here are all your bonPION NFTs.</p>
+          <p>Here are all your {strings.nft} NFTs.</p>
         </FadeIn>
       ) : action === ActionType.CREATE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Create bonPION using PION tokens. You need bonPION to setup a node,
-            join PION Network and earn reward. Don't miss the chance to boost
-            your NFT by 2x using USDC.
+            Create {strings.nft} using {strings.token} tokens. You need{' '}
+            {strings.nft} to setup a node, join {strings.token} Network and earn
+            reward. Don't miss the chance to boost your NFT by 2x using USDC.
           </p>
         </FadeIn>
       ) : action === ActionType.UPGRADE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Select your bonPION, then you can increase its power using PION
-            tokens and also you can boost it by 2x with USDC.
+            Select your {strings.nft}, then you can increase its power using{' '}
+            {strings.token} tokens and also you can boost it by 2x with USDC.
           </p>
         </FadeIn>
       ) : action === ActionType.MERGE ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            This page enables you to select some bonPION NFTs and merge them to
-            one NFT.
+            This page enables you to select some {strings.nft} NFTs and merge
+            them to one NFT.
           </p>
         </FadeIn>
       ) : action === ActionType.SPLIT ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Choose a bonALICE to split and adjust the slider to distribute the
-            power as desired.
+            Choose a {strings.nft} to split and adjust the slider to distribute
+            the power as desired.
           </p>
         </FadeIn>
       ) : action === ActionType.TRANSFER ? (
         <FadeIn key={action} duration={0.1} delay={0.1}>
           <p>
-            Choose a bonALICE from your collection, then enter the destination
-            address where you want to send it.
+            Choose a {strings.nft} from your collection, then enter the
+            destination address where you want to send it.
           </p>
         </FadeIn>
       ) : (

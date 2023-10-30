@@ -9,6 +9,7 @@ import Seekbar from '../../components/Common/Seekbar.tsx';
 // import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
+import strings from '../../constants/strings.ts';
 
 const RenderSplitBody = () => {
   const {
@@ -35,11 +36,11 @@ const RenderSplitBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select bonPION"
+          title={`Select ${strings.nft}`}
           onClick={() => openSplitModal()}
           isModalOpen={isSplitModalOpen}
           closeModalHandler={() => closeSplitModal()}
-          modalTitle="Select bonPION"
+          modalTitle={`Select ${strings.nft}`}
           selectedItems={selectedSplitBonALICE ? [selectedSplitBonALICE] : []}
           removeItem={() => {}}
         >
@@ -71,7 +72,7 @@ const RenderSplitBody = () => {
               />
               <div className="new-bounded-ALICEs flex flex-col md:flex-row gap-3 w-full select-none">
                 <BonALICECard
-                  title="New Bonded PION"
+                  title={`New Bonded ${strings.token}`}
                   subTitle1="Node Power"
                   subValue1={Math.round(
                     selectedSplitBonALICE.nodePower * (splitValue / 100),
@@ -85,7 +86,7 @@ const RenderSplitBody = () => {
                   selected
                 />
                 <BonALICECard
-                  title="New Bonded PION"
+                  title={`New Bonded ${strings.token}`}
                   subTitle1="Node Power"
                   subValue1={Math.round(
                     selectedSplitBonALICE.nodePower * (1 - splitValue / 100),

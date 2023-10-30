@@ -3,6 +3,7 @@ import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import { useState } from 'react';
 import { MoveUpIn } from '../../animations';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
+import strings from '../../constants/strings.ts';
 // import { formatWalletAddress, w3bNumberFromNumber } from '../../utils/web3.ts';
 
 export const PrizeCalculationDetailModal = () => {
@@ -74,7 +75,7 @@ export const PrizeCalculationDetailModal = () => {
       <div className="flex justify-between items-center pt-2 border-t border-dashed text-xl">
         <p className="text-primary-dark-500 font-semibold">Total</p>
         <p className="font-semibold text-primary-dark-500">
-          {w3bNumberFromNumber(rewards.total_reward).dsp} PION
+          {w3bNumberFromNumber(rewards.total_reward).dsp} {strings.token}
         </p>
       </div>
     </div>
@@ -168,7 +169,7 @@ const RewardSource = ({
           </span>
           <p className="font-semibold pr-0">
             {section.reward ? w3bNumberFromNumber(section.reward).dsp : '0'}{' '}
-            PION
+            {strings.token}
           </p>
         </div>
       ))}

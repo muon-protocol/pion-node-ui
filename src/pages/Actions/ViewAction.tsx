@@ -2,6 +2,7 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { BonALICE } from '../../types';
 import BonALICEViewCard from '../../components/Common/BonALICEViewCard.tsx';
+import strings from '../../constants/strings.ts';
 
 const RenderViewBody = () => {
   const { bonALICEs } = useBonALICE();
@@ -23,7 +24,7 @@ const RenderViewBody = () => {
             })
           : nodeBonALICE.length === 0 && (
               <p className="text-center py-56 px-3 mt-auto mb-auto text-white">
-                You have no bonPION NFTs to show.
+                You have no {strings.nft} NFTs to show.
               </p>
             )}
       </div>

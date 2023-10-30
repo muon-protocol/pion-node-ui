@@ -5,6 +5,7 @@ import { useStats } from '../../hooks/useStats.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { FadeIn } from '../../animations';
+import strings from '../../constants/strings.ts';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -88,7 +89,7 @@ export const Sidebar = () => {
         )}
         <SidebarItem
           className="mb-[18px]"
-          title="Buy PION"
+          title={`Buy ${strings.token}`}
           isSidebarOpen={isSidebarOpen}
           isActive={location.pathname === '/pion/buy-pion'}
           onClick={() => navigate('/pion/buy-pion')}
@@ -103,8 +104,8 @@ export const Sidebar = () => {
           className="mb-[18px]"
           title={
             bonALICEs.length + nodeBonALICE.length > 0
-              ? 'Manage bonPION'
-              : 'Create bonPION'
+              ? 'Manage ' + strings.nft
+              : 'Create ' + strings.nft
           }
           isSidebarOpen={isSidebarOpen}
           isActive={[

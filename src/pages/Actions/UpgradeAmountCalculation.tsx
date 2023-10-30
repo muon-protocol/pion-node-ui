@@ -2,6 +2,7 @@ import { MoveUpIn } from '../../animations';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
+import strings from '../../constants/strings.ts';
 
 const UpgradeAmountCalculation = () => {
   const { upgradeAmount, upgradeBoostAmount, selectedUpgradeBonALICE } =
@@ -28,7 +29,7 @@ const UpgradeAmountCalculation = () => {
               {Number(upgradeAmount.hStr) +
                 ' + ' +
                 selectedUpgradeBonALICE.nodePower +
-                ' PION'}
+                ` ${strings.token}`}
             </p>
           ) : (
             <p className="h-5"></p>
@@ -60,11 +61,11 @@ const UpgradeAmountCalculation = () => {
                 Number(upgradeBoostAmount.hStr) /
                 (Math.round(ALICEPrice * 10000) / 10000)
               ).toFixed(2) +
-              ' PION '}
+              ` ${strings.token} `}
             <p className="text-uptime font-bold">x{boostCoefficient?.dsp}</p>
             {' + ' +
               Number(upgradeAmount.hStr) +
-              ' PION + ' +
+              ` ${strings.token} + ` +
               selectedUpgradeBonALICE.nodePower}
           </p>
         ) : (

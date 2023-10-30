@@ -1,11 +1,14 @@
 import { FadeIn } from '../../animations';
+import strings from '../../constants/strings.ts';
 
 const Home = () => {
   return (
     <div className="page__bg">
       <div className="page page--buy-pion page--centered flex flex-col gap-6">
         <FadeIn className="mr-auto mb-8" delay={0} duration={0.3}>
-          <p className="text-2xl font-medium font-tomorrow">Buy $PION</p>
+          <p className="text-2xl font-medium font-tomorrow">
+            Buy ${strings.token}
+          </p>
         </FadeIn>
         <div className="steps flex w-full flex-col gap-12 md:gap-8 md:flex-row justify-between">
           <FadeIn className="w-1/3" delay={0.1} duration={0.3}>

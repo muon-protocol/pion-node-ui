@@ -12,6 +12,7 @@ import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import NewWalletModal from './NewWalletModal.tsx';
+import strings from '../../constants/strings.ts';
 
 const ClaimPrize = () => {
   const {
@@ -51,15 +52,15 @@ const ClaimPrize = () => {
               alt=""
               className="w-12 h-12"
             />
-            <p className="text-5xl font-bold">PION Node-Drop</p>
+            <p className="text-5xl font-bold">{strings.token} Node-Drop</p>
           </div>
           <p className="text-lg text-center md:text-left md:text-xl font-light mb-1.5">
             Alice node operators and Muon presale participants are eligible for
-            the PION Node-Drop. <br />
+            the {strings.token} Node-Drop. <br />
           </p>
           <p className="text-lg text-center md:text-left md:text-xl font-light mb-6">
             1. Connect your eligible addresses <br />
-            2. Claim your bonPION <br />
+            2. Claim your {strings.nft} <br />
             3. Wait for October 18th to run your node and start earning reward
           </p>
           <Alert
@@ -70,7 +71,7 @@ const ClaimPrize = () => {
             You have already claimed your reward under{' '}
             <p className="font-semibold inline">
               {' '}
-              bonPION #{userClaimedReward[1].toString()}
+              {strings.nft} #{userClaimedReward[1].toString()}
             </p>
             .
           </Alert>
@@ -110,8 +111,8 @@ const ClaimPrize = () => {
             <p className="font-semibold inline">
               ({formatWalletAddress(stakingAddressFromPast)})
             </p>{' '}
-            under bonPION #{userClaimedReward[1].toString()}. You can setup your
-            node using your bonPION on October 18th.
+            under {strings.nft} #{userClaimedReward[1].toString()}. You can
+            setup your node using your {strings.nft} on October 18th.
           </Alert>
           <Alert
             show={!!alreadyRegisteredWallet?.isAlreadyRegistered}
