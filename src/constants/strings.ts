@@ -4,6 +4,10 @@ const strings = {
     tokens: 'PIONs',
     nft: 'bonPION',
     nfts: 'bonPIONs',
+    navbar: {
+      logoSrc: '/assets/images/navbar/pion-logo.svg',
+      tokenLogoSrc: '/assets/images/navbar/pion-token-logo.svg',
+    },
     sidebar: {
       logoSrc: '/assets/images/sidebar/logo.svg',
       logoTextSrc: '/assets/images/sidebar/logo-text.svg',
@@ -16,6 +20,10 @@ const strings = {
     tokens: 'ALICEs',
     nft: 'bonALICE',
     nfts: 'bonALICEs',
+    navbar: {
+      logoSrc: '/assets/images/navbar/alice-logo.png',
+      tokenLogoSrc: '/assets/images/navbar/alice-token-logo.svg',
+    },
     sidebar: {
       logoSrc: '/assets/images/sidebar/alice-logo.svg',
       logoTextSrc: '/assets/images/sidebar/alice-logo-text.svg',

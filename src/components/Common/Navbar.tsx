@@ -5,6 +5,7 @@ import { FadeIn } from '../../animations';
 import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import { useStats } from '../../hooks/useStats.ts';
+import strings from '../../constants/strings.ts';
 // import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import { useRef, useState } from 'react';
 // import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
@@ -41,7 +42,7 @@ const DesktopNavbar = () => {
           {location.pathname === '/pion/migration' && (
             <div>
               <img
-                src="/assets/images/navbar/pion-logo.svg"
+                src={strings.navbar.logoSrc}
                 alt={''}
                 className="w-auto h-9"
               />
@@ -199,11 +200,7 @@ const PriceTVLButton = () => {
   const { stats } = useStats();
   return (
     <button className="btn btn--small !py-[5px] flex !cursor-default">
-      <img
-        src="/assets/images/navbar/pion-token-logo.svg"
-        alt=""
-        className="mr-2.5"
-      />
+      <img src={strings.navbar.tokenLogoSrc} alt="" className="mr-2.5" />
       <p className="!text-white text-sm font-medium">
         {ALICEPrice ? `$${ALICEPrice}` : ''} (TVL:{' '}
         {stats?.total_value_locked || '...'})
