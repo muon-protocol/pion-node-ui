@@ -202,6 +202,10 @@ html {
     @apply px-9 py-5 flex gap-4 text-2xl font-semibold;
   }
 
+  &--medium-with-icon {
+    @apply px-9 py-4 flex gap-4 text-[20px] font-semibold;
+  }
+
   &--small {
     @apply px-5 py-2 text-sm;
 

@@ -13,6 +13,7 @@ export default {
         primary: '#4D3E9E',
         secondary: '#48427D',
         'primary-L1': '#918EF5',
+        'primary-L1-50': '#918EF580',
         'primary-13': '#4D3E9E21',
         'primary-13-solid': '#E2E6FE',
         'primary-L3': '#CDC9FD',
