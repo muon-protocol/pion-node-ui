@@ -16,66 +16,66 @@ const ActionsSidebar = () => {
       {
         id: 0,
         title: 'View',
-        icon: '/assets/images/actions/view-icon.svg',
-        hoverIcon: '/assets/images/actions/view-colored-icon.svg',
+        icon: strings.actions.view.icon,
+        hoverIcon: strings.actions.view.hoverIcon,
         link: ActionType.VIEW,
-        grayIcon: '/assets/images/actions/view-gray-icon.svg',
+        grayIcon: strings.actions.view.grayIcon,
         disabled: false,
         disabledMessage: '',
       },
       {
         id: 1,
         title: 'Create',
-        icon: '/assets/images/actions/create-icon.svg',
-        hoverIcon: '/assets/images/actions/create-colored-icon.svg',
+        icon: strings.actions.create.icon,
+        hoverIcon: strings.actions.create.hoverIcon,
         link: ActionType.CREATE,
-        grayIcon: '/assets/images/actions/create-gray-icon.svg',
+        grayIcon: strings.actions.create.grayIcon,
         disabled: false,
         disabledMessage: '',
       },
       {
         id: 2,
         title: 'Increase',
-        icon: '/assets/images/actions/upgrade-icon.svg',
-        hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
+        icon: strings.actions.increase.icon,
+        hoverIcon: strings.actions.increase.hoverIcon,
         link: ActionType.UPGRADE,
-        grayIcon: '/assets/images/actions/upgrade-gray-icon.svg',
+        grayIcon: strings.actions.increase.grayIcon,
         disabled: bonALICEs.length + nodeBonALICE.length === 0,
         disabledMessage: `Create a ${strings.nft} first`,
-        disabledIcon: '/assets/images/actions/upgrade-disabled-icon.svg',
+        disabledIcon: strings.actions.increase.disabledIcon,
       },
       {
         id: 3,
         title: 'Merge',
-        icon: '/assets/images/actions/merge-icon.svg',
-        hoverIcon: '/assets/images/actions/merge-colored-icon.svg',
+        icon: strings.actions.merge.icon,
+        hoverIcon: strings.actions.merge.hoverIcon,
         link: ActionType.MERGE,
-        grayIcon: '/assets/images/actions/merge-gray-icon.svg',
+        grayIcon: strings.actions.merge.grayIcon,
         disabled: bonALICEs.length + nodeBonALICE.length < 2,
         disabledMessage: `Requires at least 2 ${strings.nfts}`,
-        disabledIcon: '/assets/images/actions/merge-disabled-icon.svg',
+        disabledIcon: strings.actions.merge.disabledIcon,
       },
       {
         id: 4,
         title: 'Split',
-        icon: '/assets/images/actions/split-icon.svg',
-        hoverIcon: '/assets/images/actions/split-colored-icon.svg',
+        icon: strings.actions.split.icon,
+        hoverIcon: strings.actions.split.hoverIcon,
         link: ActionType.SPLIT,
-        grayIcon: '/assets/images/actions/split-gray-icon.svg',
+        grayIcon: strings.actions.split.grayIcon,
         disabled: true,
         disabledMessage: 'Coming in 2024',
-        disabledIcon: '/assets/images/actions/split-gray-icon.svg',
+        disabledIcon: strings.actions.split.disabledIcon,
       },
       {
         id: 5,
         title: 'Transfer',
-        icon: '/assets/images/actions/transfer-icon.svg',
-        hoverIcon: '/assets/images/actions/transfer-colored-icon.svg',
+        icon: strings.actions.transfer.icon,
+        hoverIcon: strings.actions.transfer.hoverIcon,
         link: ActionType.TRANSFER,
-        grayIcon: '/assets/images/actions/transfer-gray-icon.svg',
+        grayIcon: strings.actions.transfer.grayIcon,
         disabled: true,
         disabledMessage: 'Coming in 2024',
-        disabledIcon: '/assets/images/actions/transfer-gray-icon.svg',
+        disabledIcon: strings.actions.transfer.disabledIcon,
       },
     ],
     [bonALICEs, nodeBonALICE],
@@ -144,8 +144,15 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       />
       <div
         className={`text-xs md:text-sm font-semibold transition-all text-gray3 
-          ${isHovered && !item.disabled && 'md:text-white'} 
-          ${selectedAction === item.link && 'md:text-white'}`}
+          ${
+            isHovered &&
+            !item.disabled &&
+            'md:text-white md:dark:text-alice-primary'
+          }
+          ${
+            selectedAction === item.link &&
+            'md:text-white md:dark:text-alice-primary'
+          }`}
       >
         {item.title}
       </div>
