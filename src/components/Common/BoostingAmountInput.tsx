@@ -60,7 +60,7 @@ const AmountInput = ({
       <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg dark:bg-alice-xyz-75 rounded-xl h-12 md:h-14">
         <input
           disabled={disabled}
-          className={`amount-input__input text-white flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
+          className={`amount-input__input text-white dark:text-black flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
             disabled ? 'placeholder-gray' : 'placeholder-white'
           }`}
           placeholder={
@@ -113,7 +113,7 @@ const AmountInput = ({
         </FadeIn>
       ) : withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
-          <p className="text-red-600 font-bold text-xs">
+          <p className="text-red-600 dark:text-red-600 font-bold text-xs">
             You don't have sufficient amount of USDC.
           </p>
         </FadeIn>

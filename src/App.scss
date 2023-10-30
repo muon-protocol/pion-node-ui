@@ -191,7 +191,7 @@ html {
   @apply px-16 py-3.5 font-medium text-center;
 
   &:disabled {
-    @apply bg-disabled text-gray cursor-not-allowed hover:bg-disabled;
+    @apply bg-disabled text-gray cursor-not-allowed hover:bg-disabled dark:bg-disabled dark:text-gray;
   }
 
   &--icon-btn {

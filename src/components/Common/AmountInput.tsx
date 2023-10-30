@@ -77,8 +77,10 @@ const AmountInput = ({
       <div className="amount-input__input-wrapper flex items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
         <input
           disabled={disabled}
-          className={`amount-input__input text-white font-medium w-full h-full bg-transparent outline-none text-sm ${
-            disabled ? 'placeholder-gray' : 'placeholder-white'
+          className={`amount-input__input text-white dark:text-black font-medium w-full h-full bg-transparent outline-none text-sm ${
+            disabled
+              ? 'placeholder-gray dark:placeholder-alice-gray'
+              : 'placeholder-white dark:placeholder-gray'
           }`}
           placeholder={disabled ? '-' : `Enter amount`}
           type="number"
@@ -95,7 +97,7 @@ const AmountInput = ({
       </div>
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
-          <p className="text-red-600 font-bold text-xs">
+          <p className="text-red-600 dark:text-red-600 font-bold text-xs">
             You don't have sufficient amount of ${strings.token}. {/*<span*/}
             {/*  className="underline cursor-pointer"*/}
             {/*  onClick={() =>*/}

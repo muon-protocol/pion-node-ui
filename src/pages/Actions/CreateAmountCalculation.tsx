@@ -24,7 +24,7 @@ const CreateAmountCalculation = () => {
           <p className="font-light">New {strings.nft} amount:</p>
           <p className="h-5"></p>
         </span>
-        <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
+        <span className="rounded-md bg-primary-dark dark:bg-alice-primary px-3 py-2.5 text-xl font-bold text-white">
           {Number(createAmount.hStr).toFixed(2) + ' ' + strings.token}
         </span>
       </MoveUpIn>
@@ -57,7 +57,7 @@ const CreateAmountCalculation = () => {
             <p className="h-5"></p>
           )}
         </span>
-        <span className="rounded-md bg-primary-dark px-3 py-2.5 text-xl font-bold text-white">
+        <span className="rounded-md bg-primary-dark dark:bg-alice-primary px-3 py-2.5 text-xl font-bold text-white">
           {(
             (Number(createBoostAmount.hStr) /
               (Math.round(ALICEPrice * 10000) / 10000)) *
