@@ -203,7 +203,7 @@ const SidebarItem = ({
       <div
         className={`sidebar__item flex justify-center transition-all ease-in duration-[0.2s] items-center group-hover:bg-primary-L1 dark:group-hover:bg-alice-primary-g2 bg-so-dark-gray gap-3 rounded-lg w-[60px] h-[60px] ${
           isSidebarOpen && '!w-[42px] !h-[42px]'
-        } ${isActive && '!bg-primary-L3 dark:bg-alice-primary-g2'}`}
+        } ${isActive && '!bg-primary-L1 dark:bg-alice-primary-g2'}`}
       >
         <img
           src={icon}
