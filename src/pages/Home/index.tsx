@@ -53,12 +53,14 @@ const Home = () => {
               </span>
               <div className="mb-5 mt-auto">
                 {ALICEBalance && (
-                  <div className="text-light-text">
+                  <div className="text-light-text dark:text-alice-primary">
                     Your Balance:{' '}
-                    <strong className="text-primary-L3">
+                    <strong className="text-primary-L3 dark:text-alice-primary">
                       {ALICEBalance.dsp}
                     </strong>{' '}
-                    <span className="text-primary-L3">{strings.token}</span>
+                    <span className="text-primary-L3 dark:text-alice-primary">
+                      {strings.token}
+                    </span>
                   </div>
                 )}
               </div>

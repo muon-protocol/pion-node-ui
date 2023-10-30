@@ -13,9 +13,12 @@ const Home = () => {
         <div className="steps flex w-full flex-col gap-12 md:gap-8 md:flex-row justify-between">
           <FadeIn className="w-1/3" delay={0.1} duration={0.3}>
             <div
-              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4`}
+              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4 dark:bg-alice-card-background`}
               style={{
-                backgroundImage: `url(/assets/images/buy-pion/background-1.svg)`,
+                backgroundImage:
+                  import.meta.env.VITE_PROJECT_NAME === 'PION'
+                    ? `url(/assets/images/buy-pion/background-1.svg)`
+                    : '',
               }}
             >
               <span className="flex flex-col gap-2 items-center justify-center">
@@ -52,9 +55,12 @@ const Home = () => {
 
           <FadeIn className="w-1/3" delay={0.2} duration={0.3}>
             <div
-              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4`}
+              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4 dark:bg-alice-card-background`}
               style={{
-                backgroundImage: `url(/assets/images/buy-pion/background-2.svg)`,
+                backgroundImage:
+                  import.meta.env.VITE_PROJECT_NAME === 'PION'
+                    ? `url(/assets/images/buy-pion/background-2.svg)`
+                    : '',
               }}
             >
               <span className="flex flex-col gap-2 items-center justify-center">
@@ -86,9 +92,12 @@ const Home = () => {
 
           <FadeIn className="w-1/3" delay={0.3} duration={0.3}>
             <div
-              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4`}
+              className={`shop-card flex flex-col items-center py-10 px-11 justify-between bg-cover bg-no-repeat bg-center rounded-3xl h-[270px] md:w-full gap-4 dark:bg-alice-card-background`}
               style={{
-                backgroundImage: `url(/assets/images/buy-pion/background-3.svg)`,
+                backgroundImage:
+                  import.meta.env.VITE_PROJECT_NAME === 'PION'
+                    ? `url(/assets/images/buy-pion/background-3.svg)`
+                    : '',
               }}
             >
               <span className="flex flex-col gap-2 items-center justify-center">

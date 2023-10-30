@@ -72,10 +72,6 @@
   }
 }
 
-.shop-card {
-
-}
-
 .styled-scroll {
   @apply pr-3 -mr-3;
 
@@ -101,9 +97,18 @@
   }
 }
 
-.with-stroke {
-  -webkit-text-stroke: 4px #5158F67F;
-  paint-order: stroke fill;
+.pion {
+  & .with-stroke {
+    -webkit-text-stroke: 4px #5158F67F;
+    paint-order: stroke fill;
+  }
+}
+
+.alice {
+  & .with-stroke {
+    -webkit-text-stroke: 4px #5158F67F;
+    paint-order: stroke fill;
+  }
 }
 
 input::-webkit-outer-spin-button,
