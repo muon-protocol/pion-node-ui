@@ -45,7 +45,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/view-icon.svg"
+              src={strings.actions.view.icon}
               alt="view"
             />
           </Scale>
@@ -53,7 +53,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/create-icon.svg"
+              src={strings.actions.create.icon}
               alt="create"
             />
           </Scale>
@@ -61,15 +61,15 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/upgrade-icon.svg"
-              alt="upgrade"
+              src={strings.actions.increase.icon}
+              alt="increase"
             />
           </Scale>
         ) : action === ActionType.MERGE ? (
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/merge-icon.svg"
+              src={strings.actions.merge.icon}
               alt="merge"
             />
           </Scale>
@@ -77,7 +77,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/split-icon.svg"
+              src={strings.actions.split.icon}
               alt="split"
             />
           </Scale>
@@ -85,7 +85,7 @@ const renderActionImage = (action: ActionType) => {
           <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
             <img
               className="w-8 h-8 md:w-10 md:h-10"
-              src="/assets/images/actions/transfer-icon.svg"
+              src={strings.actions.transfer.icon}
               alt="transfer"
             />
           </Scale>
