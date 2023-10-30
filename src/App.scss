@@ -155,11 +155,16 @@ html {
 .dark {
   & .page {
     &__bg {
-      @apply bg-alice-body-background;
-      background-image: unset;
+      background-image: url('../public/assets/images/alice-app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: cover;
 
       &--home {
-        background-image: unset;
+        background-image: url('../public/assets/images/alice-home-background.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
       }
     }
   }
