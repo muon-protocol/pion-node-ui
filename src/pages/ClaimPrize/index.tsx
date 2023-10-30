@@ -123,7 +123,7 @@ const ClaimPrize = () => {
             has been already registered with{' '}
             <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
           </Alert>
-          <div className="reward-wallets-section w-full bg-gray-bg-70 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+          <div className="reward-wallets-section w-full bg-gray-bg-70 dark:bg-alice-card-background p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
             {!stakingAddressFromPast && userClaimedReward[0] > BigInt(0) ? (
               <p className="text-2xl font-light text-center w-full my-auto">
                 No Eligible address detected
