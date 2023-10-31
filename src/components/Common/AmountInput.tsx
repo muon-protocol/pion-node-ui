@@ -4,6 +4,8 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { ethers } from 'ethers';
 import { useEffect } from 'react';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
+import { useNavigate } from 'react-router-dom';
 
 const AmountInput = ({
   balance,
@@ -20,6 +22,8 @@ const AmountInput = ({
   withLink?: boolean;
   disabled?: boolean;
 }) => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (disabled) {
       onValueChanged('');
@@ -98,17 +102,13 @@ const AmountInput = ({
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
           <p className="text-red-600 dark:text-red-600 font-bold text-xs">
-            You don't have sufficient amount of ${strings.token}. {/*<span*/}
-            {/*  className="underline cursor-pointer"*/}
-            {/*  onClick={() =>*/}
-            {/*    window.open(*/}
-            {/*      'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',*/}
-            {/*      '_blank',*/}
-            {/*    )*/}
-            {/*  }*/}
-            {/*>*/}
-            {/*  BUY HERE*/}
-            {/*</span>*/}
+            You don't have sufficient amount of ${strings.token}.{'  '}
+            <span
+              className="underline cursor-pointer"
+              onClick={() => navigate(routes.buyToken.path)}
+            >
+              Buy ${strings.token} here.
+            </span>
           </p>
         </FadeIn>
       ) : null}

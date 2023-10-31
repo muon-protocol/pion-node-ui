@@ -6,6 +6,7 @@ import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import { useStats } from '../../hooks/useStats.ts';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 // import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import { useRef, useState } from 'react';
 // import useOnClickOutside from '../../hooks/useOnClickOutside.ts';
@@ -39,7 +40,7 @@ const DesktopNavbar = () => {
     <FadeIn delay={0.3}>
       <div className="hidden md:flex absolute w-full navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
-          {location.pathname === '/pion/migration' && (
+          {location.pathname === routes.migration.path && (
             <div>
               <img
                 src={strings.navbar.logoSrc}
@@ -51,8 +52,8 @@ const DesktopNavbar = () => {
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
-            location.pathname !== '/pion/getting-started' &&
-            location.pathname !== '/pion/claim' && (
+            location.pathname !== routes.gettingStarted.path &&
+            location.pathname !== routes.claim.path && (
               <>
                 {/*<button*/}
                 {/*  className="btn btn--small"*/}

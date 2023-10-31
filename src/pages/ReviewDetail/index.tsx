@@ -18,6 +18,7 @@ import { useEffect } from 'react';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -454,7 +455,7 @@ const EmptyBonALICECard = () => {
           </p>
           <button
             className="btn btn--white mx-auto"
-            onClick={() => navigate('/pion/bonPION/create')}
+            onClick={() => navigate(routes.create.path)}
           >
             Create {strings.nft}
           </button>

@@ -97,7 +97,7 @@ const AmountInput = ({
             alt=""
             className="w-6 h-6"
           />
-          <div className="absolute top-0 -translate-y-[120%] -translate-x-1/2 flex left-1/2 flex-col items-center hidden mb-6 group-hover:flex">
+          <div className="absolute top-0 -translate-y-[105%] transition-all flex -translate-x-1/2 left-1/2 flex-col items-center opacity-0 mb-6 group-hover:opacity-100 group-hover:-translate-y-[115%]">
             <span className="relative z-10 px-3 py-2 w-40 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
               Use USDC to increase your power by {boostCoefficient?.dsp}x
             </span>

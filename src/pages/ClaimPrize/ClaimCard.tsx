@@ -11,6 +11,7 @@ import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import { FadeIn } from '../../animations';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal.tsx';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -151,7 +152,7 @@ const ClaimCard = () => {
             </button>
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
-              onClick={() => navigate('/pion/setup-node')}
+              onClick={() => navigate(routes.setupNode.path)}
               className="btn btn--white md:ml-auto max-md:!w-full !px-10"
               disabled
             >
