@@ -101,7 +101,7 @@ const Home = () => {
                 </div>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => window.open('/pion/bonPION/increase', '_self')}
+                  onClick={() => navigate('/pion/bonPION/increase')}
                 >
                   Manage {strings.nft}
                 </div>
@@ -111,7 +111,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => window.open('/pion/bonPION/increase', '_self')}
+                  onClick={() => navigate('/pion/bonPION/increase')}
                 >
                   Manage {strings.nft}
                 </div>
@@ -121,7 +121,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto"
-                  onClick={() => window.open('/pion/bonPION/create', '_self')}
+                  onClick={() => navigate('/pion/bonPION/create')}
                 >
                   Create {strings.nft}
                 </div>
@@ -154,7 +154,7 @@ const Home = () => {
             ) : (
               <div
                 className="btn !px-6 mx-auto"
-                onClick={() => window.open('/pion/setup-node', '_self')}
+                onClick={() => navigate('/pion/setup-node')}
               >
                 Setup Node
               </div>
