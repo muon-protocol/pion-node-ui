@@ -1,5 +1,6 @@
 const strings = {
   PION: {
+    projectName: 'pion',
     token: 'PION',
     tokens: 'PIONs',
     nft: 'bonPION',
@@ -56,6 +57,7 @@ const strings = {
     },
   },
   ALICE: {
+    projectName: 'alice',
     token: 'ALICE',
     tokens: 'ALICEs',
     nft: 'bonALICE',

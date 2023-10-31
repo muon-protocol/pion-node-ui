@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ActionType } from '../../types';
 import { useStats } from '../../hooks/useStats.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { FadeIn } from '../../animations';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 export const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -23,7 +23,7 @@ export const Sidebar = () => {
   const { bonALICEs } = useBonALICE();
   const { muonNodeStakingUsers } = useMuonNodeStaking();
 
-  if (location.pathname === '/pion/migration') {
+  if (location.pathname === routes.migration.path) {
     return null;
   }
 
@@ -42,7 +42,7 @@ export const Sidebar = () => {
           className={`sidebar__logo flex transition-all ease-in duration-[0.2s] items-center gap-4 pl-[22px] mb-10 ${
             isSidebarOpen && '!pl-0'
           }`}
-          onClick={() => navigate('/pion/getting-started')}
+          onClick={() => navigate(routes.gettingStarted.path)}
         >
           <img src={strings.sidebar.logoSrc} className="w-[26px] h-8" alt="" />
           {isSidebarOpen && (
@@ -55,8 +55,8 @@ export const Sidebar = () => {
             className="mb-[18px]"
             title="Get Started"
             isSidebarOpen={isSidebarOpen}
-            isActive={location.pathname === '/pion/getting-started'}
-            onClick={() => navigate('/pion/getting-started')}
+            isActive={location.pathname === routes.gettingStarted.path}
+            onClick={() => navigate(routes.gettingStarted.path)}
             icon="/assets/images/sidebar/get-started.svg"
           />
         )}
@@ -83,8 +83,8 @@ export const Sidebar = () => {
           className="mb-[18px]"
           title={`Buy ${strings.token}`}
           isSidebarOpen={isSidebarOpen}
-          isActive={location.pathname === '/pion/buy-pion'}
-          onClick={() => navigate('/pion/buy-pion')}
+          isActive={location.pathname === routes.buyToken.path}
+          onClick={() => navigate(routes.buyToken.path)}
           icon={
             muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0)
               ? strings.sidebar.tokenLogoSrc
@@ -101,18 +101,18 @@ export const Sidebar = () => {
           }
           isSidebarOpen={isSidebarOpen}
           isActive={[
-            ActionType.VIEW,
-            ActionType.CREATE,
-            ActionType.UPGRADE,
-            ActionType.MERGE,
-            ActionType.TRANSFER,
-            ActionType.SPLIT,
-          ].includes(location.pathname as ActionType)}
+            routes.view.path,
+            routes.create.path,
+            routes.increase.path,
+            routes.merge.path,
+            routes.split.path,
+            routes.transfer.path,
+          ].includes(location.pathname)}
           onClick={() => {
             if (bonALICEs.length + nodeBonALICE.length > 0) {
-              navigate('/pion/bonPION/increase');
+              navigate(routes.increase.path);
             } else {
-              navigate('/pion/bonPION/create');
+              navigate(routes.create.path);
             }
           }}
           icon={
@@ -126,8 +126,8 @@ export const Sidebar = () => {
             className="mb-10"
             title="Finalize Setup"
             isSidebarOpen={isSidebarOpen}
-            isActive={location.pathname === '/pion/setup-node'}
-            onClick={() => navigate('/pion/setup-node')}
+            isActive={location.pathname === routes.setupNode.path}
+            onClick={() => navigate(routes.setupNode.path)}
             icon="/assets/images/sidebar/step-3.svg"
           />
         )}

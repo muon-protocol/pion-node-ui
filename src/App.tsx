@@ -1,10 +1,10 @@
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import ReviewDetail from './pages/ReviewDetail';
-import ClaimPrize from './pages/ClaimPrize';
-import GetStarted from './pages/GetStarted';
-import Actions from './pages/Actions';
-import Home from './pages/Home';
+// import ReviewDetail from './pages/ReviewDetail';
+// import ClaimPrize from './pages/ClaimPrize';
+// import GetStarted from './pages/GetStarted';
+// import Actions from './pages/Actions';
+// import Home from './pages/Home';
 
 import Navbar from './components/Common/Navbar.tsx';
 
@@ -26,10 +26,11 @@ import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
-import BuyPION from './pages/BuyPION';
+// import BuyPION from './pages/BuyPION';
 import { Sidebar } from './components/Basic/Sidebar.tsx';
 import { useEffect } from 'react';
-import Migration from './pages/Migration';
+// import Migration from './pages/Migration';
+import routes, { RoutesInterface } from './routes';
 
 function App() {
   useEffect(() => {
@@ -76,60 +77,15 @@ function App() {
                                         <Sidebar />
                                         <div className={'w-full'}>
                                           <Routes>
-                                            <Route
-                                              path="/"
-                                              element={
-                                                <Navigate to="/pion/getting-started" />
-                                              }
-                                            />
-                                            <Route
-                                              path="/pion/getting-started"
-                                              element={<Home />}
-                                            />
-                                            <Route
-                                              path="/pion/buy-pion"
-                                              element={<BuyPION />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/view"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/create"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/increase"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/merge"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/split-"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/bonPION/transfer-"
-                                              element={<Actions />}
-                                            />
-                                            <Route
-                                              path="/pion/get-started"
-                                              element={<GetStarted />}
-                                            />
-                                            <Route
-                                              path="/pion/claim"
-                                              element={<ClaimPrize />}
-                                            />
-                                            <Route
-                                              path="/pion/setup-node"
-                                              element={<ReviewDetail />}
-                                            />
-                                            <Route
-                                              path="/pion/migration"
-                                              element={<Migration />}
-                                            />
+                                            {Object.keys(routes).map(
+                                              (key: keyof RoutesInterface) => (
+                                                <Route
+                                                  key={key}
+                                                  path={routes[key].path}
+                                                  element={routes[key].element}
+                                                />
+                                              ),
+                                            )}
                                           </Routes>
                                         </div>
                                       </div>
