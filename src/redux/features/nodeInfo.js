@@ -5,7 +5,7 @@ const initialState = {
   fetchStatus: "init",
   haveNode: false,
   nodeIsActive: "Loading...",
-  isNew: false,
+  isNew: "init",
   active: false,
   nodeAddress: "",
   id: "",
@@ -14,6 +14,9 @@ const initialState = {
   endTime: 0,
   nodeIP: "",
   staked: 0,
+  pionStaked: "init",
+  activePionStaked: "init",
+  tiersMaxStakeAmount: "init",
   onlinePercent: 0,
   messages: [],
   reward: 0,
@@ -34,6 +37,15 @@ export const node = createSlice({
   name: "node",
   initialState,
   reducers: {
+    setTiersMaxStakeAmount: (state, action) => {
+      state.tiersMaxStakeAmount = action.payload;
+    },
+    setActivePionStaked: (state, action) => {
+      state.activePionStaked = action.payload;
+    },
+    setPionStaked: (state, action) => {
+      state.pionStaked = action.payload;
+    },
     resetNodeInfo: (state) => {
       state.nodeInfo = initialState.nodeInfo;
     },
@@ -81,5 +93,12 @@ export const node = createSlice({
 });
 
 export const getNodeInfo = (state) => state.node.nodeInfo;
-export const { resetNodeInfo, setNodeInfo, setNodeActice } = node.actions;
+export const {
+  setTiersMaxStakeAmount,
+  setActivePionStaked,
+  setPionStaked,
+  resetNodeInfo,
+  setNodeInfo,
+  setNodeActice,
+} = node.actions;
 export default node.reducer;

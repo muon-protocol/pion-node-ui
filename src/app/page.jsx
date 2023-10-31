@@ -82,13 +82,17 @@ export default function Home() {
     verificationData.discordVerified ||
     verificationData.gitcoinPassportVerified ||
     verificationData.presaleVerified ||
-    verificationData.telegramVerified;
+    verificationData.telegramVerified ||
+    verificationData.privateSaleVerified;
 
   useEffect(() => {
-    if (verificationData.isSetTier) {
-      setNeedSubmitTier(false);
-    } else {
+    if (
+      verificationData.eligibleTier > verificationData.tier &&
+      selector.pionStaked > selector.tiersMaxStakeAmount
+    ) {
       setNeedSubmitTier(true);
+    } else {
+      setNeedSubmitTier(false);
     }
   }, [verificationData]);
 
@@ -105,13 +109,12 @@ export default function Home() {
     if (isConnected) {
       dispatch(fetchNodeInfo(address));
       dispatch(fetchVerification(address));
-      dispatch(fetchTierSig(address));
     }
   }, [address]);
   const router = useRouter();
 
   useEffect(() => {
-    if (selector.isNew) {
+    if (selector.isNew === true) {
       window.location.replace("/dashboard/preparing");
     }
   }, [selector.isNew]);
@@ -128,7 +131,6 @@ export default function Home() {
         privateSaleVerified={verificationData.privateSaleVerified}
         address={address}
       ></TopBanner>
-
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-8">
         {/* <CardInfo title="IP Address" data={selector.nodeIP}></CardInfo> */}
         <CardInfo title="Node ID" data={selector.id}></CardInfo>

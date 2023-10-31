@@ -2,13 +2,17 @@ import axios from "axios";
 
 const BASEURL =
   process.env.NODE_ENV !== "production"
-    ? process.env.NEXT_PUBLIC_PROXY_URL_DEV
+    ? process.env.NEXT_PUBLIC_APP_MUON_V1_URL_DEV
     : "";
 
-const fetchRewardData = async (staker, blockNumber) => {
+const fetchRewardData = async (stakerAddress, blockNumber) => {
   const response = await axios.get(
-    `${BASEURL}/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
+    `${BASEURL}/v1/?app=pion_tss_reward_oracle&method=reward&params[stakerAddress]=${stakerAddress}&params[blockNumber]=${blockNumber.toString()}`
   );
+  console.log(response);
+  // const response = await axios.get(
+  //   `${BASEURL}/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
+  // );
   if (!response.data.success) return false;
   else {
     const data = response.data;

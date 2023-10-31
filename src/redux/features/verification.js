@@ -13,12 +13,14 @@ const initialState = {
   presaleVerified: false,
   privateSaleVerified: false,
   telegramVerified: false,
+  temporary2ndTierVerified: false,
   brightidContexId: "",
   brightIdTryed: 0,
   errorMessage: "",
   interval: 0,
   fetchTierSigStatus: "init",
-  tier: 0,
+  tier: "init",
+  eligibleTier: "init",
   isSetTier: false,
   tierSig: "",
   tierErrorMessage: "",
@@ -55,6 +57,9 @@ export const verification = createSlice({
   name: "verification",
   initialState,
   reducers: {
+    setTier(state, action) {
+      state.tier = action.payload;
+    },
     setIsSetTier(state, action) {
       state.isSetTier = action.payload;
     },
@@ -107,15 +112,19 @@ export const verification = createSlice({
           // state.fetchStatus = "failed";
         } else {
           const verificationData = action.payload.result;
-          (state.brightidAuraVerified = verificationData.brightidAuraVerified),
-            (state.brightidMeetsVerified =
-              verificationData.brightidMeetsVerified),
-            (state.discordVerified = verificationData.discordVerified),
-            (state.gitcoinPassportVerified =
-              verificationData.gitcoinPassportVerified),
-            (state.presaleVerified = verificationData.presaleVerified),
-            (state.telegramVerified = verificationData.telegramVerified),
-            (state.privateSaleVerified = verificationData.privateSaleVerified);
+          state.brightidAuraVerified = verificationData.brightidAuraVerified;
+          state.brightidMeetsVerified = verificationData.brightidMeetsVerified;
+          state.discordVerified = verificationData.discordVerified;
+          state.gitcoinPassportVerified =
+            verificationData.gitcoinPassportVerified;
+          state.presaleVerified = verificationData.presaleVerified;
+          state.telegramVerified = verificationData.telegramVerified;
+          state.privateSaleVerified = verificationData.privateSaleVerified;
+          state.eligibleTier = verificationData.eligibleTier;
+          if (verificationData.temp2ndTierVerified) {
+            state.temporary2ndTierVerified =
+              verificationData.temp2ndTierVerified;
+          }
         }
       })
       .addCase(fetchVerification.rejected, (state, action) => {
@@ -144,6 +153,7 @@ export const verification = createSlice({
   },
 });
 export const {
+  setTier,
   setIsSetTier,
   setPresaleVerified,
   resetErrorMessage,

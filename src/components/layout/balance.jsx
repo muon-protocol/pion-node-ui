@@ -8,7 +8,7 @@ export default function Balance() {
   const [balance, setBalance] = useState(0);
   const { address, isDisconnected, status } = useAccount();
   useContractRead({
-    address: "0xF43CD517385237fe7A48927073151D12f4eADC53",
+    address: process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT,
     abi: aliceContract,
     functionName: "balanceOf",
     args: [address],
@@ -26,14 +26,14 @@ export default function Balance() {
   return (
     <div className="h-9 mb-1 bg-primaryMain flex items-center text-sm font-normal rounded-lg	px-5 mr-2">
       <Image
-        src="/dashboard/mini-logo.svg"
+        src="/dashboard/pion-logo.svg"
         width="21"
         height="5"
         className="mr-3"
       ></Image>
       <span className="mr-3">Balance:</span>
-      <b className="text-primary font-semibold mr-2">{balance}</b>
-      <b className="font-semibold">Pion</b>
+      <b className="text-white font-semibold mr-2">{balance}</b>
+      <b className="font-semibold">PION</b>
     </div>
   );
 }

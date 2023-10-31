@@ -22,29 +22,31 @@ export default function NewNode() {
       if (selector.isNew) {
         setTryed(tryed + 1);
       } else if (selector.isNew === false) {
-        window.location.replace("/dashboard/");
+        // window.location.replace("/dashboard/");
       }
     }, 15000);
   }, [tryed]);
 
   return (
-    <div className="w-full bg-white rounded-[18px] ">
-      <div className="w-[260px] mx-auto">
-        <Lottie width={50} height={50} animationData={done} />
-      </div>
-      <p className="text-xl mx-auto text-center">
-        Your node has been added to Pion network
-      </p>
-      <div className="flex mx-auto items-center justify-center">
-        <p className="text-myPrimary">Preparing your dashboard</p>
-        <div className="w-20">
-          <Lottie animationData={loading}></Lottie>
+    <div className="flex justify-center">
+      <div className="w-[480px] bg-[#3D3D3D] rounded-[18px] ">
+        <div className="w-[260px] mx-auto">
+          <Lottie width={50} height={50} animationData={done} />
         </div>
+        <p className="text-xl mx-auto text-center text-[#918EF5]">
+          Your node has been added to Pion network
+        </p>
+        <div className="flex mx-auto items-center justify-center">
+          <p className="text-myPrimary">Preparing your dashboard</p>
+          <div className="w-20">
+            <Lottie animationData={loading}></Lottie>
+          </div>
+        </div>
+        <LiveChatWidget
+          license="15138837"
+          visibility="minimized"
+        ></LiveChatWidget>
       </div>
-      <LiveChatWidget
-        license="15138837"
-        visibility="minimized"
-      ></LiveChatWidget>
     </div>
   );
 }

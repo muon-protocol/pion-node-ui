@@ -77,7 +77,8 @@ export default function UpTimesModal() {
                     Down times
                     <div className="flex rounded-[18px] ">
                       <span>
-                        {selector.downNodeTimes.length &&
+                        {selector.downNodeTimes &&
+                          selector.downNodeTimes.length &&
                           selector.downNodeTimes.length}{" "}
                         time(s)
                       </span>
@@ -108,9 +109,10 @@ export default function UpTimesModal() {
                   data-te-parent="#accordionExample"
                 >
                   <div className="text-black px-5 py-4 max-h-[300px] overflow-y-auto">
-                    {selector.downNodeTimes.map((downTime, i) => (
-                      <p key={i}>{downTime}</p>
-                    ))}
+                    {selector.downNodeTimes &&
+                      selector.downNodeTimes.map((downTime, i) => (
+                        <p key={i}>{downTime}</p>
+                      ))}
                   </div>
                 </div>
               </div>

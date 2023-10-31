@@ -5,9 +5,30 @@ import { LightBtn } from "@/app/page";
 import contractABI from "@/jsons/tierAbi.json";
 import { getTierSig } from "@/utils/requestVerifications";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setIsSetTier } from "@/redux/features/verification";
+
+function getFerificationNameFromTier(tier) {
+  let level = "";
+  switch (tier) {
+    case 1:
+      level = "1st";
+      break;
+    case 2:
+      level = "2nd";
+      break;
+    case 3:
+      level = "3rd";
+      break;
+    case 4:
+      level = "4th";
+
+    default:
+      break;
+  }
+  return `Verified for ${level} Tier`;
+}
 
 export default function TopBanner({
   isVerify,
@@ -17,6 +38,9 @@ export default function TopBanner({
 }) {
   const dispatch = useDispatch();
   const [serverRequestLoading, setServerRequestLoading] = useState(false);
+  const verificationData = useSelector(
+    (state) => state.rootReducer.verificationReducer
+  );
   const {
     data: contractData,
     write: writeSetTier,
@@ -35,6 +59,11 @@ export default function TopBanner({
   const { isSuccess: trSuccess, isLoading: trLoading } = useWaitForTransaction({
     hash: contractData?.hash,
   });
+  useEffect(() => {
+    if (trSuccess) {
+      location.reload();
+    }
+  }, [trSuccess]);
   const router = useRouter();
   return (
     <div
@@ -66,10 +95,8 @@ export default function TopBanner({
               Uniqueness Verification:
             </span>
             <h4 className="text-xl font-semibold text-primaryText ml-4">
-              {privateSaleVerified
-                ? "Verified for Master Node"
-                : isVerify
-                ? "Verified for Starter Node"
+              {isVerify
+                ? getFerificationNameFromTier(verificationData.eligibleTier)
                 : "Not Verified"}
             </h4>
           </div>
@@ -90,6 +117,7 @@ export default function TopBanner({
         </div>
       </div>
       <LightBtn
+        // disable={needSubmitTier && isVerify}
         loading={walletLoading || trLoading || serverRequestLoading}
         className="mt-5 lg:mt-0 min-w-[176px]"
         onClick={() => {
@@ -99,7 +127,6 @@ export default function TopBanner({
                 setServerRequestLoading(true);
                 if (response.data.success) {
                   const data = response.data.result;
-                  console.log(true);
                   writeSetTier({
                     args: [
                       data.stakerAddress,

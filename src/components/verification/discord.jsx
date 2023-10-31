@@ -43,7 +43,7 @@ export default function DiscordVerified({ signer, isActive }) {
     }
   }, [state]);
 
-  const URL = `https://discord.com/api/oauth2/authorize?client_id=1140034021099831326&redirect_uri=https%3A%2F%2Fpion-test.muon.net%2Fdashboard%2FdiscordVerification&response_type=code&scope=identify&state=${signer}`;
+  const URL = `https://discord.com/api/oauth2/authorize?client_id=1140034021099831326&redirect_uri=https%3A%2F%2Fapp.muon.net%2Fdashboard%2FdiscordVerification&response_type=code&scope=identify&state=${signer}`;
 
   return (
     <LightBtn

@@ -60,7 +60,7 @@ export const getNodeInfoData = async (walletAddress) => {
     nodeInfoData.nodeIsActive = "Loading...";
     nodeInfoData.nodeInfo["isNew"] = res.node["isNew"];
     nodeInfoData.nodeInfo["active"] = res["node"]["active"];
-    // const tests = res["node"]["tests"];
+    const tests = res["node"]["tests"];
     nodeInfoData.nodeInfo["nodeAddress"] = res["node"]["nodeAddress"];
     nodeInfoData.nodeInfo["id"] = res["node"]["id"];
     nodeInfoData.nodeInfo["peerId"] = res["node"]["peerId"];
@@ -68,7 +68,9 @@ export const getNodeInfoData = async (walletAddress) => {
       res["node"]["startTime"] * 1000
     ).format("dddd, MMMM Do YYYY, h:mm:ss a");
     if (res["node"]["endTime"]) {
-      nodeInfoData.nodeInfo["endTime"] = moment(res["node"]["endTime"] * 1000);
+      nodeInfoData.nodeInfo["endTime"] = moment(
+        res["node"]["endTime"] * 1000
+      ).format("dddd, MMMM Do YYYY, h:mm:ss a");
       nodeInfoData.nodeIsActive = "Exited";
     } else {
       nodeInfoData.nodeInfo["endTime"] = false;
@@ -97,10 +99,9 @@ export const getNodeInfoData = async (walletAddress) => {
     if (nodeInfoData.nodeInfo["active"]) {
       nodeInfoData.nodeIsActive = nodeInfoData.nodeInfo.isNew
         ? "Loading...(new node)"
-        : // : tests["networking"] && tests["peerInfo"] && tests["status"]
-          // ? "Online"
-          // : "Offline";
-          "Online";
+        : tests["networking"] && tests["peerInfo"] && tests["status"]
+        ? "Online"
+        : "Offline";
 
       nodeInfoData.nodeInfo["messages"] = res["messages"];
       nodeInfoData.nodeInfo["rewardPercent"] = res["reward"]["rewardPercent"];

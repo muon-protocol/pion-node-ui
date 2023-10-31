@@ -15,6 +15,7 @@ function Pass({ passed }) {
       brightidAuraVerified: "BrightID Aura Verification",
       gitcoinPassportVerified: "Gitcoin Verification",
       privateSaleVerified: "Private Sale Verification",
+      temporary2ndTierVerified: "Temporary 2nd Tier Verification",
     };
 
     return (
@@ -43,6 +44,7 @@ export default function PassVerification(props) {
     brightidMeetsVerified: selector.brightidMeetsVerified,
     gitcoinPassportVerified: selector.gitcoinPassportVerified,
     privateSaleVerified: selector.privateSaleVerified,
+    temporary2ndTierVerified: selector.temporary2ndTierVerified,
   };
   return (
     <div className="bg-cardBackground/50 w-full rounded-[10px] grid content-between py-4 px-8 h-full min-h-[148px]">

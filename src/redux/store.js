@@ -3,6 +3,7 @@ import nodeReducer from "./features/nodeInfo";
 import verificationReducer from "./features/verification";
 import generalReducer from "./features/general";
 import { combineReducers } from "redux";
+
 const rootReducer = combineReducers({
   nodeReducer,
   verificationReducer,

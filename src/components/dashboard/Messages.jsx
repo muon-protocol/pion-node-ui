@@ -60,13 +60,14 @@ export default function Messages() {
 
   return (
     <Parent>
-      {messages.map((message, index) => (
-        <WarningBox
-          key={index}
-          className={"my-2"}
-          dangerouslySetInnerHTML={message.message}
-        ></WarningBox>
-      ))}
+      {messages &&
+        messages.map((message, index) => (
+          <WarningBox
+            key={index}
+            className={"my-2"}
+            dangerouslySetInnerHTML={message.message}
+          ></WarningBox>
+        ))}
     </Parent>
   );
 }

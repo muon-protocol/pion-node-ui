@@ -45,7 +45,7 @@ export default function Withdraw({ address, needSubmitTier }) {
     write: writeGetReward,
     isLoading: walletLoading,
   } = useContractWrite({
-    address: "0xd788C2276A6f75a8B9360E9695028329C925b0AB",
+    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
     abi: contractABI,
     functionName: "getReward",
     onError(error) {},
@@ -91,7 +91,7 @@ export default function Withdraw({ address, needSubmitTier }) {
       {needSubmitTier && (
         <div className="absolute flex z-40 bg-gray/80 w-full h-full justify-center items-center px-4">
           <h4 className="text-xl text-center">
-            Complete <b>Uniqness Verification</b> to start earning
+            Complete <b>Uniqueness Verification</b> to start earning
           </h4>
         </div>
       )}
