@@ -1,9 +1,8 @@
-import { sidebarItems } from '../../data/constants.ts';
 import { useNavigate } from 'react-router-dom';
-import useActions from '../../contexts/Actions/useActions.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const InsufficientNFTAmoutModalBody = ({
   operation,
@@ -11,7 +10,6 @@ const InsufficientNFTAmoutModalBody = ({
   operation: string;
 }) => {
   const navigate = useNavigate();
-  const { setSelectedAction } = useActions();
   const { setIsInsufficientModalOpen: createModal } = useCreateAction();
   const { setIsInsufficientModalOpen: claimModal } = useClaimPrize();
 
@@ -25,15 +23,13 @@ const InsufficientNFTAmoutModalBody = ({
       <p className="text-center mb-8 text-black">
         You've successfully {operation} your {strings.nft}! Unfortunately your
         current node power is insufficient to run a node. Please consider
-        boosting your
-        {strings.nft} to enable node setup.
+        boosting your {strings.nft} to enable node setup.
       </p>
       <button
         onClick={() => {
-          setSelectedAction(sidebarItems[1].link);
           createModal(false);
           claimModal(false);
-          navigate('/pion/bonPION/create');
+          navigate(routes.create.path);
         }}
         className="btn btn--primary mx-auto !w-full !px-8"
       >

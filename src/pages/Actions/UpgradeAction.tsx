@@ -20,6 +20,7 @@ import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import UpgradeAmountCalculation from './UpgradeAmountCalculation.tsx';
 import strings from '../../constants/strings.ts';
+import UpgradeAllowanceModalBody from './UpgradeAllowanceModalBody.tsx';
 
 export const RenderUpgradeBody = () => {
   const {
@@ -36,9 +37,7 @@ export const RenderUpgradeBody = () => {
     handleUpgradeBonALICEClicked,
     isMetamaskLoading,
     isTransactionLoading,
-    isApproveMetamaskLoading,
     handleApproveLPTokenClicked,
-    isApproveTransactionLoading,
     handleApproveALICEClicked,
     isAllowanceModalOpen,
     closeAllowanceModal,
@@ -242,65 +241,7 @@ export const RenderUpgradeBody = () => {
         isOpen={isAllowanceModalOpen}
         closeModalHandler={closeAllowanceModal}
       >
-        <div className="flex flex-col justify-center items-center">
-          <img
-            className="w-[108px] mb-10"
-            src="/assets/images/claim/switch-wallet-modal-icon.svg"
-            alt=""
-          />
-          <p className="text-center text-black mb-6">
-            You need to approve the{' '}
-            {showApproveALICE
-              ? `${strings.token} `
-              : showApproveLPToken
-              ? 'USDC '
-              : 'tokens '}
-            to be spent by the{' '}
-            {nodeBonALICE.length > 0 &&
-            isSelectedUpgradeBonALICE(nodeBonALICE[0])
-              ? showApproveALICE
-                ? 'Muon node staking '
-                : 'Booster '
-              : `Bonded ${strings.token} `}
-            Contract. Enter at least the amount you want to create and click
-            Next then Approve button on metamask.
-          </p>
-          {(nodeBonALICE.length > 0 &&
-            isSelectedUpgradeBonALICE(nodeBonALICE[0]) &&
-            aliceAllowanceForMuon &&
-            aliceAllowanceForMuon.big < upgradeAmount.big) ||
-          (ALICEAllowance && ALICEAllowance?.big < upgradeAmount?.big) ? (
-            <button
-              className="btn btn--primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveALICEClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          ) : (
-            <button
-              className="btn btn--primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveLPTokenClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          )}
-        </div>
+        <UpgradeAllowanceModalBody />
       </Modal>
     </>
   );

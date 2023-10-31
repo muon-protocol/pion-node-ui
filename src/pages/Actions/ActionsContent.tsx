@@ -1,5 +1,3 @@
-import useActions from '../../contexts/Actions/useActions.ts';
-import { ActionType } from '../../types';
 import { RenderCreateBody } from './CreateAction.tsx';
 import { RenderUpgradeBody } from './UpgradeAction.tsx';
 import RenderMergeBody from './MergeAction.tsx';
@@ -8,10 +6,9 @@ import RenderTransferBody from './TransferAction.tsx';
 import RenderViewBody from './ViewAction.tsx';
 import ActionsHeader from './ActionsHeader.tsx';
 import ActionsSidebar from './ActionsSidebar.tsx';
+import routes from '../../routes';
 
 const ActionsContent = () => {
-  const { selectedAction } = useActions();
-
   return (
     <div className="flex flex-col gap-6 w-full min-w-[607px]">
       <ActionsSidebar />
@@ -19,17 +16,17 @@ const ActionsContent = () => {
       <ActionsHeader />
 
       <div className="actions-content dark:bg-alice-body-background w-full min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 py-10 rounded-2xl flex flex-col">
-        {selectedAction === ActionType.VIEW ? (
+        {location.pathname === routes.view.path ? (
           <RenderViewBody />
-        ) : selectedAction === ActionType.CREATE ? (
+        ) : location.pathname === routes.create.path ? (
           <RenderCreateBody />
-        ) : selectedAction === ActionType.UPGRADE ? (
+        ) : location.pathname === routes.increase.path ? (
           <RenderUpgradeBody />
-        ) : selectedAction === ActionType.MERGE ? (
+        ) : location.pathname === routes.merge.path ? (
           <RenderMergeBody />
-        ) : selectedAction === ActionType.SPLIT ? (
+        ) : location.pathname === routes.split.path ? (
           <RenderSplitBody />
-        ) : selectedAction === ActionType.TRANSFER ? (
+        ) : location.pathname === routes.transfer.path ? (
           <RenderTransferBody />
         ) : (
           <></>

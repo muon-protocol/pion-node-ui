@@ -1,5 +1,4 @@
 // import { sidebarItems } from '../../data/constants.ts';
-import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect, useMemo, useState } from 'react';
 import { SidebarItem } from '../../types';
 import { useNavigate } from 'react-router-dom';
@@ -92,7 +91,6 @@ const ActionsSidebar = () => {
 };
 
 const SidebarItem = ({ item }: { item: SidebarItem }) => {
-  const { selectedAction } = useActions();
   const [isHovered, setIsHovered] = useState(false);
   const navigate = useNavigate();
 
@@ -120,7 +118,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       onClick={() => !item.disabled && handleSidebarItemClick(item.link)}
     >
       {item.disabled && (
-        <div className="absolute top-0 -translate-y-[120%] flex flex-col items-center hidden mb-6 group-hover:flex">
+        <div className="absolute top-0 -translate-y-[115%] flex-col items-center flex transition-all opacity-0 mb-6 group-hover:opacity-100 group-hover:-translate-y-[125%]">
           <span className="relative z-10 p-2 w-32 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
             {item.disabledMessage}
           </span>
@@ -131,7 +129,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
         src={
           item.disabled
             ? item.disabledIcon
-            : (selectedAction === item.link || isHovered) && !item.disabled
+            : (location.pathname === item.link || isHovered) && !item.disabled
             ? item.icon
             : item.grayIcon
         }
@@ -146,7 +144,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
             'md:text-white md:dark:text-alice-primary'
           }
           ${
-            selectedAction === item.link &&
+            location.pathname === item.link &&
             'md:text-white md:dark:text-alice-primary'
           }`}
       >

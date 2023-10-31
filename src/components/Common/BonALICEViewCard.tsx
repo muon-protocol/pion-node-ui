@@ -7,6 +7,7 @@ import useMergeAction from '../../contexts/MergeAction/useMergeAction.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const BonALICEViewCard: FC<{
   bonALICE: BonALICE;
@@ -71,7 +72,7 @@ const BonALICEViewCard: FC<{
             className="btn btn--white !h-9 btn--small--with-icon"
             onClick={() => {
               setUpgradeModalSelectedBonALICE(bonALICE);
-              navigate('/pion/bonPION/increase');
+              navigate(routes.increase.path);
             }}
           >
             <img
@@ -86,7 +87,7 @@ const BonALICEViewCard: FC<{
               className="btn btn--white !h-9 btn--small--with-icon"
               onClick={() => {
                 setMergeModalSelectedBonALICEs([bonALICE]);
-                navigate('/pion/bonPION/merge');
+                navigate(routes.merge.path);
               }}
             >
               <img

@@ -11,7 +11,6 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Lottie from 'lottie-react';
-import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
@@ -20,6 +19,7 @@ import { useBooster } from '../../hooks/booster/useBooster.ts';
 import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import CreateAmountCalculation from './CreateAmountCalculation.tsx';
 import strings from '../../constants/strings.ts';
+import CreateAllowanceModalBody from './CreateAllowanceModalBody.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
@@ -43,8 +43,6 @@ export const RenderCreateBody = () => {
     closeAllowanceModal,
     isMetamaskLoading,
     isTransactionLoading,
-    isApproveMetamaskLoading,
-    isApproveTransactionLoading,
     isInsufficientModalOpen,
     setIsInsufficientModalOpen,
     isSufficientModalOpen,
@@ -117,6 +115,7 @@ export const RenderCreateBody = () => {
       </FadeIn>
 
       <CreateAmountCalculation />
+
       <FadeIn
         duration={0.1}
         delay={0.1}
@@ -213,65 +212,7 @@ export const RenderCreateBody = () => {
         isOpen={isAllowanceModalOpen}
         closeModalHandler={closeAllowanceModal}
       >
-        <div className="flex flex-col justify-center items-center">
-          <Lottie
-            animationData={waitingForApproveAnimation}
-            className={`w-60 h-auto`}
-          />
-          <p className="text-center text-black mb-6 font-medium">
-            Please approve by signing the message that appears in your wallet.
-            This allows the smart contract to securely lock your{' '}
-            {createBoostAmount.dsp > 0 &&
-            ALICEAllowanceForBooster &&
-            ALICEAllowanceForBooster.big < createAmount.big
-              ? strings.token + ' '
-              : createBoostAmount.dsp === 0 &&
-                ALICEAllowance &&
-                ALICEAllowance.big < createAmount.big
-              ? strings.token + ' '
-              : LPTokenAllowanceForBooster &&
-                LPTokenAllowanceForBooster.big < createBoostAmount.big
-              ? 'USDC '
-              : ''}
-            tokens in the{' '}
-            {createBoostAmount && createBoostAmount.dsp > 0
-              ? 'Booster contract'
-              : strings.nft + ' contract'}
-            .
-          </p>
-          {ALICEAllowanceForBooster &&
-          ALICEAllowanceForBooster?.big < createAmount?.big ? (
-            <button
-              className="btn btn--primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveALICEClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          ) : (
-            <button
-              className="btn btn--primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveLPTokenClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          )}
-        </div>
+        <CreateAllowanceModalBody />
       </Modal>
     </>
   );

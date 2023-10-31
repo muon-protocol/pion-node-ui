@@ -223,7 +223,7 @@ html {
   }
 
   &--white {
-    @apply bg-primary-L3 dark:bg-alice-primary-13 text-primary dark:text-primary hover:bg-white transition-all;
+    @apply bg-primary-L3 dark:bg-alice-primary-13 text-primary dark:text-primary hover:bg-white hover:dark:bg-white transition-all;
   }
 
   &--large {

@@ -1,13 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import useActions from '../../contexts/Actions/useActions.ts';
-import { sidebarItems } from '../../data/constants.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ClaimedRewardModal = ({ operation }: { operation: string }) => {
   const navigate = useNavigate();
-  const { setSelectedAction } = useActions();
   const { setIsSufficientModalOpen: createModal } = useCreateAction();
   const { setIsSufficientModalOpen: claimModal } = useClaimPrize();
 
@@ -24,7 +22,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
           onClick={() => {
             createModal(false);
             claimModal(false);
-            navigate('/pion/setup-node');
+            navigate(routes.setupNode.path);
           }}
           className="btn btn--primary mt-5 mx-auto"
         >
@@ -33,7 +31,6 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         <br />
         <span
           onClick={() => {
-            setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
             window.open(

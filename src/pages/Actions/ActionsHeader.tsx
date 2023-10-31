@@ -1,140 +1,162 @@
-import useActions from '../../contexts/Actions/useActions.ts';
-import { ActionType } from '../../types';
 import { FadeIn, Scale } from '../../animations';
 import { AnimatePresence } from 'framer-motion';
 import strings from '../../constants/strings.ts';
-
-// import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
+import routes from '../../routes';
 
 const ActionsHeader = () => {
-  const { selectedAction } = useActions();
-  // const { muonNodeStakingUsers } = useMuonNodeStaking();
-
   return (
     <div className="actions-header flex items-center w-full gap-6">
       <div className="w-[85px] flex items-center h-full">
-        {renderActionImageAndName(selectedAction)}
+        <ActionImageAndName />
       </div>
       <div className="w-full">
         <p className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] flex items-center">
-          {renderActionDescription(selectedAction)}
+          <ActionDescription />
         </p>
       </div>
     </div>
   );
 };
 
-const renderActionImageAndName = (action: ActionType) => {
+const ActionImageAndName = () => {
   return (
     <div className="w-full flex flex-col justify-center items-center gap-1 -translate-y-3">
       <div className="action-image relative min-h-[32px] md:min-h-[40px] flex justify-center w-full">
-        {renderActionImage(action)}
+        <ActionImage />
       </div>
       <div className="action-name text-primary-10-solid text-lg font-medium flex justify-center w-full text-center">
-        {renderActionName(action)}
+        <ActionName />
       </div>
     </div>
   );
 };
 
-const renderActionImage = (action: ActionType) => {
+const ActionImage = () => {
   return (
-    <>
-      <AnimatePresence>
-        {action === ActionType.VIEW ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.view.icon}
-              alt="view"
-            />
-          </Scale>
-        ) : action === ActionType.CREATE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.create.icon}
-              alt="create"
-            />
-          </Scale>
-        ) : action === ActionType.UPGRADE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.increase.icon}
-              alt="increase"
-            />
-          </Scale>
-        ) : action === ActionType.MERGE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.merge.icon}
-              alt="merge"
-            />
-          </Scale>
-        ) : action === ActionType.SPLIT ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.split.icon}
-              alt="split"
-            />
-          </Scale>
-        ) : action === ActionType.TRANSFER ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
-            <img
-              className="w-8 h-8 md:w-10 md:h-10"
-              src={strings.actions.transfer.icon}
-              alt="transfer"
-            />
-          </Scale>
-        ) : (
-          <></>
-        )}
-      </AnimatePresence>
-    </>
+    <AnimatePresence>
+      {location.pathname === routes.view.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.view.icon}
+            alt="view"
+          />
+        </Scale>
+      ) : location.pathname === routes.create.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.create.icon}
+            alt="create"
+          />
+        </Scale>
+      ) : location.pathname === routes.increase.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.increase.icon}
+            alt="increase"
+          />
+        </Scale>
+      ) : location.pathname === routes.merge.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.merge.icon}
+            alt="merge"
+          />
+        </Scale>
+      ) : location.pathname === routes.split.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.split.icon}
+            alt="split"
+          />
+        </Scale>
+      ) : location.pathname === routes.transfer.path ? (
+        <Scale
+          className="absolute"
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+        >
+          <img
+            className="w-8 h-8 md:w-10 md:h-10"
+            src={strings.actions.transfer.icon}
+            alt="transfer"
+          />
+        </Scale>
+      ) : (
+        <></>
+      )}
+    </AnimatePresence>
   );
 };
 
-const renderActionDescription = (action: ActionType) => {
+const ActionDescription = () => {
   return (
     <>
-      {action === ActionType.VIEW ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      {location.pathname === routes.view.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>Here are all your {strings.nft} NFTs.</p>
         </FadeIn>
-      ) : action === ActionType.CREATE ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      ) : location.pathname === routes.create.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>
             Create {strings.nft} using {strings.token} tokens. You need{' '}
             {strings.nft} to setup a node, join {strings.token} Network and earn
             reward. Don't miss the chance to boost your NFT by 2x using USDC.
           </p>
         </FadeIn>
-      ) : action === ActionType.UPGRADE ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      ) : location.pathname === routes.increase.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>
             Select your {strings.nft}, then you can increase its power using{' '}
             {strings.token} tokens and also you can boost it by 2x with USDC.
           </p>
         </FadeIn>
-      ) : action === ActionType.MERGE ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      ) : location.pathname === routes.merge.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>
             This page enables you to select some {strings.nft} NFTs and merge
             them to one NFT.
           </p>
         </FadeIn>
-      ) : action === ActionType.SPLIT ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      ) : location.pathname === routes.split.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>
             Choose a {strings.nft} to split and adjust the slider to distribute
             the power as desired.
           </p>
         </FadeIn>
-      ) : action === ActionType.TRANSFER ? (
-        <FadeIn key={action} duration={0.1} delay={0.1}>
+      ) : location.pathname === routes.transfer.path ? (
+        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
           <p>
             Choose a {strings.nft} from your collection, then enter the
             destination address where you want to send it.
@@ -147,32 +169,62 @@ const renderActionDescription = (action: ActionType) => {
   );
 };
 
-const renderActionName = (action: ActionType) => {
+const ActionName = () => {
   return (
     <>
       <AnimatePresence>
-        {action === ActionType.VIEW ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        {location.pathname === routes.view.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>View</p>
           </Scale>
-        ) : action === ActionType.CREATE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        ) : location.pathname === routes.create.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>Create</p>
           </Scale>
-        ) : action === ActionType.UPGRADE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        ) : location.pathname === routes.increase.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>Increase</p>
           </Scale>
-        ) : action === ActionType.MERGE ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        ) : location.pathname === routes.merge.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>Merge</p>
           </Scale>
-        ) : action === ActionType.SPLIT ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        ) : location.pathname === routes.split.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>Split</p>
           </Scale>
-        ) : action === ActionType.TRANSFER ? (
-          <Scale className="absolute" key={action} duration={0.1} delay={0.1}>
+        ) : location.pathname === routes.transfer.path ? (
+          <Scale
+            className="absolute"
+            key={location.pathname}
+            duration={0.1}
+            delay={0.1}
+          >
             <p>Transfer</p>
           </Scale>
         ) : (
