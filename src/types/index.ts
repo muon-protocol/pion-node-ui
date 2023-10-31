@@ -25,12 +25,12 @@ export type Step = {
 };
 
 export enum ActionType {
-  VIEW = '/pion/bonPION/view',
-  CREATE = '/pion/bonPION/create',
-  UPGRADE = '/pion/bonPION/increase',
-  MERGE = '/pion/bonPION/merge',
-  SPLIT = 'split',
-  TRANSFER = 'transfer',
+  VIEW = 'VIEW',
+  CREATE = 'CREATE',
+  UPGRADE = 'UPGRADE',
+  MERGE = 'MERGE',
+  SPLIT = 'SPLIT',
+  TRANSFER = 'TRANSFER',
 }
 
 export type SidebarItem = {
@@ -39,7 +39,7 @@ export type SidebarItem = {
   title: string;
   icon: string;
   hoverIcon: string;
-  link: ActionType;
+  link: string;
   disabled: boolean;
   disabledMessage?: string;
   disabledIcon?: string;

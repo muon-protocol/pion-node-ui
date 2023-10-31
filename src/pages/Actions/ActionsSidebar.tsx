@@ -1,11 +1,12 @@
 // import { sidebarItems } from '../../data/constants.ts';
 import useActions from '../../contexts/Actions/useActions.ts';
 import { useEffect, useMemo, useState } from 'react';
-import { ActionType, SidebarItem } from '../../types';
+import { SidebarItem } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ActionsSidebar = () => {
   const { bonALICEs } = useBonALICE();
@@ -18,7 +19,7 @@ const ActionsSidebar = () => {
         title: 'View',
         icon: strings.actions.view.icon,
         hoverIcon: strings.actions.view.hoverIcon,
-        link: ActionType.VIEW,
+        link: routes.view.path,
         grayIcon: strings.actions.view.grayIcon,
         disabled: false,
         disabledMessage: '',
@@ -28,7 +29,7 @@ const ActionsSidebar = () => {
         title: 'Create',
         icon: strings.actions.create.icon,
         hoverIcon: strings.actions.create.hoverIcon,
-        link: ActionType.CREATE,
+        link: routes.create.path,
         grayIcon: strings.actions.create.grayIcon,
         disabled: false,
         disabledMessage: '',
@@ -38,7 +39,7 @@ const ActionsSidebar = () => {
         title: 'Increase',
         icon: strings.actions.increase.icon,
         hoverIcon: strings.actions.increase.hoverIcon,
-        link: ActionType.UPGRADE,
+        link: routes.increase.path,
         grayIcon: strings.actions.increase.grayIcon,
         disabled: bonALICEs.length + nodeBonALICE.length === 0,
         disabledMessage: `Create a ${strings.nft} first`,
@@ -49,7 +50,7 @@ const ActionsSidebar = () => {
         title: 'Merge',
         icon: strings.actions.merge.icon,
         hoverIcon: strings.actions.merge.hoverIcon,
-        link: ActionType.MERGE,
+        link: routes.merge.path,
         grayIcon: strings.actions.merge.grayIcon,
         disabled: bonALICEs.length + nodeBonALICE.length < 2,
         disabledMessage: `Requires at least 2 ${strings.nfts}`,
@@ -60,7 +61,7 @@ const ActionsSidebar = () => {
         title: 'Split',
         icon: strings.actions.split.icon,
         hoverIcon: strings.actions.split.hoverIcon,
-        link: ActionType.SPLIT,
+        link: routes.split.path,
         grayIcon: strings.actions.split.grayIcon,
         disabled: true,
         disabledMessage: 'Coming in 2024',
@@ -71,7 +72,7 @@ const ActionsSidebar = () => {
         title: 'Transfer',
         icon: strings.actions.transfer.icon,
         hoverIcon: strings.actions.transfer.hoverIcon,
-        link: ActionType.TRANSFER,
+        link: routes.transfer.path,
         grayIcon: strings.actions.transfer.grayIcon,
         disabled: true,
         disabledMessage: 'Coming in 2024',
@@ -104,9 +105,9 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       ?.addEventListener('mouseleave', () => setIsHovered(false));
   }, [isHovered, item.id]);
 
-  const handleSidebarItemClick = (item: ActionType) => {
+  const handleSidebarItemClick = (item: string) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    navigate('/' + item);
+    navigate(item);
   };
 
   return (
@@ -116,12 +117,7 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
       }`}
       key={item.id}
       id={'sidebar-item-' + item.id}
-      onClick={() =>
-        !item.disabled &&
-        handleSidebarItemClick(
-          item.link.slice(1, item.link.length) as ActionType,
-        )
-      }
+      onClick={() => !item.disabled && handleSidebarItemClick(item.link)}
     >
       {item.disabled && (
         <div className="absolute top-0 -translate-y-[120%] flex flex-col items-center hidden mb-6 group-hover:flex">

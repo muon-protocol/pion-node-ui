@@ -12,6 +12,7 @@ import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import { useNavigate } from 'react-router-dom';
 import { ActionType } from '../../types';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
@@ -21,17 +22,17 @@ const Actions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/pion/bonPION/create') {
+    if (location.pathname === routes.create.path) {
       setSelectedAction(ActionType.CREATE);
-    } else if (location.pathname === '/pion/bonPION/view') {
+    } else if (location.pathname === routes.view.path) {
       setSelectedAction(ActionType.VIEW);
-    } else if (location.pathname === '/pion/bonPION/increase') {
+    } else if (location.pathname === routes.increase.path) {
       setSelectedAction(ActionType.UPGRADE);
-    } else if (location.pathname === '/pion/bonPION/merge') {
+    } else if (location.pathname === routes.merge.path) {
       setSelectedAction(ActionType.MERGE);
-    } else if (location.pathname === '/pion/bonPION/split') {
+    } else if (location.pathname === routes.split.path) {
       setSelectedAction(ActionType.SPLIT);
-    } else if (location.pathname === '/pion/bonPION/transfer') {
+    } else if (location.pathname === routes.transfer.path) {
       setSelectedAction(ActionType.TRANSFER);
     }
   }, [setSelectedAction, location.pathname]);

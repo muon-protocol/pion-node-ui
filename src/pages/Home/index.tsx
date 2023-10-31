@@ -10,6 +10,7 @@ import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 
 import { useNavigate } from 'react-router-dom';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const Home = () => {
   // const navigate = useNavigate();
@@ -66,7 +67,7 @@ const Home = () => {
               </div>
               <button
                 className="btn !px-6 mx-auto relative"
-                onClick={() => navigate('/pion/buy-pion')}
+                onClick={() => navigate(routes.buyToken.path)}
               >
                 Buy ${strings.token}
               </button>
@@ -101,7 +102,7 @@ const Home = () => {
                 </div>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => navigate('/pion/bonPION/increase')}
+                  onClick={() => navigate(routes.increase.path)}
                 >
                   Manage {strings.nft}
                 </div>
@@ -111,7 +112,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto "
-                  onClick={() => navigate('/pion/bonPION/increase')}
+                  onClick={() => navigate(routes.increase.path)}
                 >
                   Manage {strings.nft}
                 </div>
@@ -121,7 +122,7 @@ const Home = () => {
                 <p className="mb-auto"></p>
                 <div
                   className="btn !px-6 mx-auto"
-                  onClick={() => navigate('/pion/bonPION/create')}
+                  onClick={() => navigate(routes.create.path)}
                 >
                   Create {strings.nft}
                 </div>
@@ -154,7 +155,7 @@ const Home = () => {
             ) : (
               <div
                 className="btn !px-6 mx-auto"
-                onClick={() => navigate('/pion/setup-node')}
+                onClick={() => navigate(routes.setupNode.path)}
               >
                 Setup Node
               </div>
