@@ -49,7 +49,7 @@ export async function getUserSignatureForBoostAPI(address: Address) {
 
 export async function getStatsAPI() {
   const response = await axiosInstance.get(
-    'https://monitor-pion.muon.net/stats/data.json',
+    'https://app.muon.net//stats/data.json',
   );
   return response.data;
 }

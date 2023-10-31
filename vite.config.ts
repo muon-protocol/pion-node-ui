@@ -5,10 +5,10 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/reward-server': 'https://pion-test.muon.net/',
-      '/monitor/validateNewNodeData': 'https://monitor-pion.muon.net/',
-      '/api/price/': 'https://pion-test.muon.net/',
-      // '/stats/data.json': 'https://monitor-pion.muon.net/',
+      '/reward-server': 'https://app.muon.net/',
+      '/monitor/validateNewNodeData': 'https://app.muon.net/',
+      '/api/price/': 'https://app.muon.net/',
+      '/stats/data': 'https://app.muon.net/',
     },
   },
 });

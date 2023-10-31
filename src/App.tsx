@@ -1,11 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-// import ReviewDetail from './pages/ReviewDetail';
-// import ClaimPrize from './pages/ClaimPrize';
-// import GetStarted from './pages/GetStarted';
-// import Actions from './pages/Actions';
-// import Home from './pages/Home';
-
 import Navbar from './components/Common/Navbar.tsx';
 
 import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
@@ -26,10 +20,8 @@ import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
-// import BuyPION from './pages/BuyPION';
 import { Sidebar } from './components/Basic/Sidebar.tsx';
 import { useEffect } from 'react';
-// import Migration from './pages/Migration';
 import routes, { RoutesInterface } from './routes';
 
 function App() {

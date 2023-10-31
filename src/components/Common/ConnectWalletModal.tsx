@@ -2,6 +2,7 @@ import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import Modal from './Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import routes from '../../routes';
 
 export const ConnectWalletModal = ({
   redirectRoute,
@@ -14,7 +15,7 @@ export const ConnectWalletModal = ({
   return (
     <Modal
       closeModalHandler={() =>
-        navigate(redirectRoute || '/pion/getting-started')
+        navigate(redirectRoute || routes.gettingStarted.path)
       }
       isOpen={!walletAddress}
       size="sm"

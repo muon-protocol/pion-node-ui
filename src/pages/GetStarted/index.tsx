@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
 import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 // import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
 // import { useEffect } from 'react';
 
@@ -63,7 +64,7 @@ const NewBonALICEAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/pion/bonPION/create"
+      to={routes.create.path}
     >
       <motion.span whileHover="animate">
         <motion.img
@@ -103,7 +104,7 @@ const MuanPioneerAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/pion/claim"
+      to={routes.claim.path}
     >
       <motion.span whileHover="animate">
         <motion.img

@@ -30,6 +30,7 @@ import { useRawRewardsFromPast } from '../../hooks/useRawRewardsFromPast.ts';
 import useRawRewards from '../../hooks/useRawRewards.ts';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import useCreateAction from '../CreateAction/useCreateAction.ts';
+import routes from '../../routes';
 
 const ClaimPrizeContext = createContext<{
   isSwitchBackToWalletModalOpen: boolean;
@@ -396,7 +397,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   const checkConnectedWalletHasRewards = useCallback(
     (res: RawRewards) => {
-      if (location.pathname !== '/pion/claim') return;
+      if (location.pathname !== routes.claim.path) return;
       if (!walletAddress) return;
       if (
         !res.muon_presale.contributors.find(
