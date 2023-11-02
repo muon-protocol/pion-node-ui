@@ -1,4 +1,4 @@
-import { createContext, ReactNode } from 'react';
+import { createContext, ReactNode, useCallback } from 'react';
 import '@rainbow-me/rainbowkit/styles.css';
 
 import {
@@ -8,15 +8,34 @@ import {
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { bscTestnet, mainnet } from 'wagmi/chains';
-import { publicProvider } from 'wagmi/providers/public';
 import { getCurrentChainId } from '../../constants/chains.ts';
+import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 
 const Web3Context = createContext({});
 
 const Web3Provider = ({ children }: { children: ReactNode }) => {
+  const getRPCURL = useCallback((chainID: number) => {
+    switch (chainID) {
+      case 1:
+        return 'https://eth.llamarpc.com';
+      case 56:
+        return 'https://bsc-dataseed.binance.org/';
+      case 97:
+        return 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+      default:
+        return 'https://bsc-dataseed.binance.org/';
+    }
+  }, []);
+
   const { chains, publicClient } = configureChains(
     [getCurrentChainId() === 1 ? mainnet : bscTestnet],
-    [publicProvider()],
+    [
+      jsonRpcProvider({
+        rpc: (chain) => ({
+          http: getRPCURL(chain.id),
+        }),
+      }),
+    ],
   );
 
   const { connectors } = getDefaultWallets({
