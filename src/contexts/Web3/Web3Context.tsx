@@ -18,12 +18,10 @@ const Web3Provider = ({ children }: { children: ReactNode }) => {
     switch (chainID) {
       case 1:
         return 'https://ethereum.publicnode.com/';
-      case 56:
-        return 'https://bsc-dataseed.binance.org/';
       case 97:
-        return 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+        return 'wss://bsc-testnet.publicnode.com/';
       default:
-        return 'https://bsc-dataseed.binance.org/';
+        return 'https://ethereum.publicnode.com/';
     }
   }, []);
 
