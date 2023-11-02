@@ -50,7 +50,12 @@ const ClaimPrize = () => {
             <img
               src="/assets/images/claim/node-drop-icon.svg"
               alt=""
-              className="w-12 h-12"
+              className="w-12 h-12 dark:hidden"
+            />
+            <img
+              src="/assets/images/claim/node-drop-black-icon.svg"
+              alt=""
+              className="w-12 h-12 hidden dark:flex"
             />
             <p className="text-5xl font-bold">{strings.token} Node-Drop</p>
           </div>
@@ -123,7 +128,7 @@ const ClaimPrize = () => {
             has been already registered with{' '}
             <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
           </Alert>
-          <div className="reward-wallets-section w-full bg-gray-bg-70 dark:bg-alice-card-background p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+          <div className="reward-wallets-section w-full bg-gray-bg-70 dark:bg-alice-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
             {!stakingAddressFromPast && userClaimedReward[0] > BigInt(0) ? (
               <p className="text-2xl font-light text-center w-full my-auto">
                 No Eligible address detected

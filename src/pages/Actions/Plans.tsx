@@ -123,7 +123,7 @@ export const Plans = () => {
     <div className="plans w-full flex flex-col justify-start gap-[18px] flex-grow">
       <ActionsPlansCard
         plan={plans[0]}
-        className="w-full border-plan-1"
+        className="w-full dark:shadow-lg border-plan-1"
         animationDelay={0.1}
         animationDuration={0.3}
         // active={isPlanActive(500, 5000)}
@@ -133,7 +133,7 @@ export const Plans = () => {
       />
       <ActionsPlansCard
         plan={plans[1]}
-        className="w-full border-plan-2"
+        className="w-full dark:shadow-lg border-plan-2"
         animationDelay={0.2}
         animationDuration={0.3}
         // active={isPlanActive(5000, 25000)}
@@ -143,7 +143,7 @@ export const Plans = () => {
       />
       <ActionsPlansCard
         plan={plans[2]}
-        className="w-full border-plan-4"
+        className="w-full dark:shadow-lg border-plan-4"
         animationDelay={0.3}
         animationDuration={0.3}
         // active={isPlanActive(25000, 50000)}
@@ -154,7 +154,7 @@ export const Plans = () => {
       <ActionsPlansCard
         POA
         plan={plans[3]}
-        className="w-full border-plan-3"
+        className="w-full dark:shadow-lg border-plan-3"
         animationDelay={0.4}
         animationDuration={0.3}
         // active={isPlanActive(50000, 100000000)}

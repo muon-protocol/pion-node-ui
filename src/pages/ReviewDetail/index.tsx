@@ -57,7 +57,7 @@ const ReviewDetail = () => {
       <FadeIn
         duration={0.3}
         delay={0.3}
-        className="review-detail__nft relative bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
+        className="review-detail__nft relative dark:shadow-xl bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
       >
         <ConnectWalletModal redirectRoute={routes.gettingStarted.path} />
         <div className="address-input__top text-sm mb-2 flex justify-between">
@@ -183,7 +183,7 @@ const ReviewDetail = () => {
       <FadeIn
         duration={0.3}
         delay={0.4}
-        className={`review-detail__actions bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
+        className={`review-detail__actions bg-so-dark-gray dark:shadow-xl dark:bg-alice-card-background p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}

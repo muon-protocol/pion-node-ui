@@ -95,7 +95,7 @@ const Home = () => {
                 <div className="mb-5">
                   <p className="text-light-text">
                     {strings.nft}#{nodeBonALICE[0].tokenId.toString()} amount:{' '}
-                    <strong className="text-primary-L3">
+                    <strong className="text-primary-L3 dark:text-alice-primary">
                       {nodeBonALICE[0].nodePower}
                     </strong>
                   </p>

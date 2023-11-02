@@ -62,7 +62,7 @@
 
 .stat-item {
   &__value {
-    background: linear-gradient(73.73deg, #5B4FEC -7.26%, #DFA891 100.28%);
+    @apply bg-alice-primary-g;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

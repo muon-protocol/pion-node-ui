@@ -29,7 +29,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`sidebar max-md:hidden z-[1000] bg-[#18171a] dark:bg-alice-primary-13 transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] ${
+      className={`sidebar max-md:hidden z-[1000] bg-[#18171a] dark:bg-alice-primary-13 transition-all ease-in sticky duration-[0.2s] left-0 top-0 h-[100vh] dark:shadow-r-lg ${
         isSidebarOpen ? '!w-[213px]' : ''
       }`}
     >
@@ -39,7 +39,7 @@ export const Sidebar = () => {
         }`}
       >
         <div
-          className={`sidebar__logo flex transition-all ease-in duration-[0.2s] items-center gap-4 pl-[22px] mb-10 ${
+          className={`sidebar__logo flex transition-all ease-in duration-[0.2s] items-center gap-4 pl-[22px] mb-10 cursor-pointer ${
             isSidebarOpen && '!pl-0'
           }`}
           onClick={() => navigate(routes.gettingStarted.path)}
@@ -201,7 +201,7 @@ const SidebarItem = ({
       onClick={onClick}
     >
       <div
-        className={`sidebar__item flex justify-center transition-all ease-in duration-[0.2s] items-center group-hover:bg-primary-L1 dark:group-hover:bg-alice-primary-g2 bg-so-dark-gray gap-3 rounded-lg w-[60px] h-[60px] ${
+        className={`sidebar__item flex justify-center transition-all ease-in duration-[0.2s] items-center group-hover:bg-primary-L1 dark:group-hover:bg-alice-primary-g2 bg-so-dark-gray dark:bg-black gap-3 rounded-lg w-[60px] h-[60px] ${
           isSidebarOpen && '!w-[42px] !h-[42px]'
         } ${isActive && '!bg-primary-L1 dark:bg-alice-primary-g2'}`}
       >
@@ -245,7 +245,7 @@ const StatItem = ({
 }) => {
   return (
     <div className="stat-item flex flex-col items-center justify-center gap-1">
-      <span className="w-[76px] h-[60px] rounded-[10px] flex justify-center items-center bg-body-background">
+      <span className="w-[76px] h-[60px] rounded-[10px] flex justify-center items-center bg-body-background dark:bg-black">
         <p className="stat-item__value font-bold text-[18px]">
           {value ? value : '...'}
         </p>

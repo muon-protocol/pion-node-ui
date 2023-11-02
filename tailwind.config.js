@@ -75,6 +75,10 @@ export default {
         'alice-xyz-75': '#E9EFF6BF',
         'alice-gray': '#6F7787',
       },
+      boxShadow: {
+        'r-lg':
+          '0 -10px 15px -3px rgb(0 0 0 / 0.1), 0 -4px 6px -4px rgb(0 0 0 / 0.1);',
+      },
       backgroundImage: {
         'alice-primary-g':
           'linear-gradient(135deg, #5158F6 0%, #822DF5 33.12%, #F3A761 100%)',
