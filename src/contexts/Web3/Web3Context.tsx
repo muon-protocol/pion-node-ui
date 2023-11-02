@@ -17,7 +17,7 @@ const Web3Provider = ({ children }: { children: ReactNode }) => {
   const getRPCURL = useCallback((chainID: number) => {
     switch (chainID) {
       case 1:
-        return 'https://eth.llamarpc.com';
+        return 'https://ethereum.publicnode.com/';
       case 56:
         return 'https://bsc-dataseed.binance.org/';
       case 97:
