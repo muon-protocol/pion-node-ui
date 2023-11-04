@@ -101,7 +101,7 @@ const ReviewDetail = () => {
           {/*</Link>*/}
         </div>
         <div className="flex flex-col gap-3 max-md:text-sm mt-auto text-white dark:text-black">
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
               {nodeBonALICE ? (
@@ -111,7 +111,7 @@ const ReviewDetail = () => {
               )}
             </span>
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="flex gap-1 min-w-[170px]">Node Power: </span>
             {nodeBonALICE ? (
               <span>
@@ -132,13 +132,13 @@ const ReviewDetail = () => {
               <span className="font-semibold">-</span>
             )}
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Tier:</span>
             <span className="font-semibold ">
               {nodeBonALICE ? getTier(nodeBonALICE.nodePower) : '-'}
             </span>
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Verification Required:</span>
 
             {nodeBonALICE &&
@@ -324,7 +324,7 @@ const ReviewDetail = () => {
   return (
     <div className="page__bg">
       <div className="page page--review-details">
-        <FadeIn duration={0.3} className="mr-auto mb-6">
+        <FadeIn duration={0.3} className="mr-auto mb-11 md:mb-6">
           <p className="text-2xl font-medium font-tomorrow">Finalize Step</p>
         </FadeIn>
 
@@ -344,7 +344,7 @@ const ReviewDetail = () => {
           </span>
           .
         </Alert>
-        <div className="content flex mb-8 justify-center items-center gap-9 h-full">
+        <div className="content flex flex-col md:flex-row mb-8 justify-center items-center gap-9 h-full">
           <FadeIn
             duration={0.3}
             delay={0.1}
@@ -401,7 +401,7 @@ const ReviewDetail = () => {
           <FadeIn
             duration={0.3}
             delay={0.2}
-            className="bg-primary dark:bg-alice-primary md:flex-1 flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
+            className="bg-primary dark:bg-alice-primary md:flex-1 max-md:w-full flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
           >
             <img src="/assets/images/review/guide-icon.svg" alt="" />
             <div>
