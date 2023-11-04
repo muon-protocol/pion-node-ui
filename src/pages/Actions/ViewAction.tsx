@@ -15,7 +15,7 @@ const RenderViewBody = () => {
       duration={0.1}
       className="flex flex-col w-full overflow-y-auto styled-scroll !pr-0"
     >
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 max-h-[46vh]">
         {nodeBonALICE.length > 0 && (
           <BonALICEViewCard bonALICE={nodeBonALICE[0]} compact selected />
         )}

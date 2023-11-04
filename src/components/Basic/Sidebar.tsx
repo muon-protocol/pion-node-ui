@@ -215,7 +215,7 @@ const SidebarItem = ({
       </div>
       <p
         className={`group-hover:text-primary-L1 text-white transition-all ease-in duration-[0.2s] text-[14px] font-medium line-clamp-1 w-0 opacity-0 ${
-          isSidebarOpen && '!w-[125px] opacity-100'
+          isSidebarOpen && '!w-[130px] opacity-100'
         } ${isActive && '!text-primary-L1 !font-bold'}`}
       >
         {title}
