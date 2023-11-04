@@ -19,7 +19,7 @@ const Web3Provider = ({ children }: { children: ReactNode }) => {
       case 1:
         return 'https://ethereum.publicnode.com/';
       case 97:
-        return 'wss://bsc-testnet.publicnode.com/';
+        return 'https://bsc-testnet.publicnode.com/';
       default:
         return 'https://ethereum.publicnode.com/';
     }

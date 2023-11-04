@@ -5,6 +5,8 @@ const strings = {
     tokens: 'PIONs',
     nft: 'bonPION',
     nfts: 'bonPIONs',
+    projectSubgraphAddress:
+      'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft-mainnet',
     navbar: {
       logoSrc: '/assets/images/navbar/pion-logo.svg',
       tokenLogoSrc: '/assets/images/navbar/pion-token-logo.svg',
@@ -62,6 +64,8 @@ const strings = {
     tokens: 'ALICEs',
     nft: 'bonALICE',
     nfts: 'bonALICEs',
+    projectSubgraphAddress:
+      'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft',
     navbar: {
       logoSrc: '/assets/images/navbar/alice-logo.png',
       tokenLogoSrc: '/assets/images/navbar/alice-token-logo.svg',
