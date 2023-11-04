@@ -8,6 +8,8 @@ const strings = {
     projectSubgraphAddress:
       'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft-mainnet',
     navbar: {
+      hamburgerSrc: '/assets/images/navbar/pion-hamburger-icon.svg',
+      exitHamburgerSrc: '/assets/images/navbar/pion-exit-hamburger-icon.svg',
       logoSrc: '/assets/images/navbar/pion-logo.svg',
       tokenLogoSrc: '/assets/images/navbar/pion-token-logo.svg',
     },
@@ -67,6 +69,8 @@ const strings = {
     projectSubgraphAddress:
       'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft',
     navbar: {
+      hamburgerSrc: '/assets/images/navbar/alice-hamburger-icon.svg',
+      exitHamburgerSrc: '/assets/images/navbar/alice-exit-hamburger-icon.svg',
       logoSrc: '/assets/images/navbar/alice-logo.png',
       tokenLogoSrc: '/assets/images/navbar/alice-token-logo.svg',
     },

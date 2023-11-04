@@ -223,11 +223,13 @@ const MobileNavbar = () => {
   const { bonALICEs } = useBonALICE();
 
   useEffect(() => {
-    setIsMenuOpen(false);
+    setTimeout(() => {
+      setIsMenuOpen(false);
+    }, 300);
   }, [location.pathname]);
 
   return (
-    <div className="visible fixed w-[100vw] top-0 z-[1000] md:hidden h-14 bg-white flex items-center justify-end px-[5vw] shadow-md">
+    <div className="visible fixed w-[100vw] top-0 z-[1000] md:hidden h-[72px] bg-black dark:bg-white flex items-center justify-end px-[5vw] shadow-md">
       <section className="flex gap-4 mr-auto items-center">
         <img src={strings.sidebar.logoSrc} alt="" className="h-8" />
         <img src={strings.sidebar.logoTextSrc} alt="" className="h-8" />
@@ -237,7 +239,7 @@ const MobileNavbar = () => {
           <Scale duration={0.3} key={'1'} className="absolute right-[5vw]">
             <img
               onClick={() => setIsMenuOpen(false)}
-              src="/assets/images/modal/exit-dark-icon.svg"
+              src={strings.navbar.exitHamburgerSrc}
               className="h-8 w-auto"
               alt=""
             />
@@ -246,7 +248,7 @@ const MobileNavbar = () => {
           <Scale duration={0.3} key={'2'} className="absolute">
             <img
               onClick={() => setIsMenuOpen(true)}
-              src="/assets/images/navbar/hamburger-icon.png"
+              src={strings.navbar.hamburgerSrc}
               className="h-8 w-auto"
               alt=""
             />
@@ -254,7 +256,7 @@ const MobileNavbar = () => {
         )}
       </AnimatePresence>
       <div
-        className={`menu-body z-[1000] absolute top-14 h-[calc(100vh-14*4px)] flex flex-col justify-between backdrop-blur-md w-[100vw] transition-all bg-white bg-opacity-50 py-5 px-[5vw] ${
+        className={`menu-body z-[1000] absolute top-[72px] h-[calc(100vh-72px)] flex flex-col justify-between bg-black bg-opacity-40 backdrop-blur-2xl dark:backdrop-blur-md w-[100vw] transition-all dark:bg-white dark:bg-opacity-50 py-5 px-[5vw] ${
           isMenuOpen ? 'left-0' : 'left-[100vw]'
         }`}
       >
@@ -377,14 +379,14 @@ const MobileNavbarItem = ({
     >
       <div
         className={`flex items-center justify-center rounded-xl w-11 h-11 ${
-          isActive ? 'bg-alice-primary-g2' : 'bg-black1'
+          isActive ? 'bg-primary dark:bg-alice-primary-g2' : 'bg-black1'
         }`}
       >
         <img src={icon} className="max-w-[20px]" alt="" />
       </div>
       <p
         className={`text-white font-medium dark:text-black ${
-          isActive ? '!text-alice-primary font-semibold' : ''
+          isActive ? '!text-primary dark:!text-alice-primary font-semibold' : ''
         }`}
       >
         {title}
