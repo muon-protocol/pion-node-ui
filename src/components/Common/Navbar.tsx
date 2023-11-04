@@ -227,7 +227,7 @@ const MobileNavbar = () => {
   }, [location.pathname]);
 
   return (
-    <div className="visible fixed w-[100vw] top-0 z-[100] md:hidden h-14 bg-white flex items-center justify-end px-[5vw] shadow-md">
+    <div className="visible fixed w-[100vw] top-0 z-[1000] md:hidden h-14 bg-white flex items-center justify-end px-[5vw] shadow-md">
       <section className="flex gap-4 mr-auto items-center">
         <img src={strings.sidebar.logoSrc} alt="" className="h-8" />
         <img src={strings.sidebar.logoTextSrc} alt="" className="h-8" />
