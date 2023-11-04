@@ -8,7 +8,7 @@ import { useStats } from '../../hooks/useStats.ts';
 import strings from '../../constants/strings.ts';
 import routes from '../../routes';
 import { AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
 // import useBonALICE from '../../contexts/BonALICE/useBonALICE.ts';
@@ -221,6 +221,10 @@ const MobileNavbar = () => {
   const navigate = useNavigate();
   const { muonNodeStakingUsers } = useMuonNodeStaking();
   const { bonALICEs } = useBonALICE();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <div className="visible fixed w-[100vw] top-0 z-[100] md:hidden h-14 bg-white flex items-center justify-end px-[5vw] shadow-md">

@@ -14,7 +14,7 @@ const Home = () => {
           {import.meta.env.VITE_PROJECT_NAME === 'PION' ? (
             <>
               <FadeIn
-                className="w-1/3 dark:shadow-xl rounded-2xl"
+                className="w-1/3 max-md:w-full dark:shadow-xl rounded-2xl"
                 delay={0.1}
                 duration={0.3}
               >
@@ -60,7 +60,7 @@ const Home = () => {
               </FadeIn>
 
               <FadeIn
-                className="w-1/3 dark:shadow-xl rounded-2xl"
+                className="w-1/3 max-md:w-full dark:shadow-xl rounded-2xl"
                 delay={0.2}
                 duration={0.3}
               >
@@ -101,7 +101,7 @@ const Home = () => {
               </FadeIn>
 
               <FadeIn
-                className="w-1/3 dark:shadow-xl rounded-2xl"
+                className="w-1/3 max-md:w-full dark:shadow-xl rounded-2xl"
                 delay={0.3}
                 duration={0.3}
               >
@@ -144,7 +144,7 @@ const Home = () => {
             </>
           ) : (
             <FadeIn
-              className="w-1/3 dark:shadow-xl rounded-2xl"
+              className="w-1/3 max-md:w-full dark:shadow-xl rounded-2xl"
               delay={0.1}
               duration={0.3}
             >

@@ -28,7 +28,7 @@ const Home = () => {
         <FadeIn className="mr-auto mb-14" delay={0} duration={0.3}>
           <p className="text-2xl font-medium font-tomorrow">Getting Started</p>
         </FadeIn>
-        <div className="steps flex flex-col gap-12 md:gap-8 md:flex-row justify-between">
+        <div className="steps flex flex-col gap-16 md:gap-8 md:flex-row justify-between">
           <StepCard
             step={steps[0]}
             className="w-full md:w-1/3"
