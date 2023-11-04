@@ -10,6 +10,8 @@ const CreateAmountCalculation = () => {
   const { boostCoefficient } = useBooster();
 
   if (!createAmount.hStr && !createBoostAmount.hStr) return null;
+  if (createAmount.big === BigInt(0) && createBoostAmount.big === BigInt(0))
+    return null;
   if (!boostCoefficient) return null;
 
   if (!ALICEPrice) {

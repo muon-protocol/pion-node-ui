@@ -12,6 +12,8 @@ const UpgradeAmountCalculation = () => {
 
   if (!selectedUpgradeBonALICE) return null;
   if (!upgradeAmount.hStr && !upgradeBoostAmount.hStr) return null;
+  if (upgradeAmount.big === BigInt(0) && upgradeBoostAmount.big === BigInt(0))
+    return null;
   if (!boostCoefficient) return null;
 
   if (!ALICEPrice) {

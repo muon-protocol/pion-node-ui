@@ -98,6 +98,7 @@ export const RenderUpgradeBody = () => {
       !selectedUpgradeBonALICE ||
       !(upgradeAmount || upgradeBoostAmount) ||
       !(upgradeAmount.hStr || upgradeBoostAmount.hStr) ||
+      upgradeAmount.big + upgradeBoostAmount.big === BigInt(0) ||
       !ALICEBalance?.hStr ||
       upgradeAmount.big > ALICEBalance.big ||
       !LPTokenBalance ||
@@ -111,7 +112,7 @@ export const RenderUpgradeBody = () => {
     upgradeAmount,
     upgradeBoostAmount,
     ALICEBalance?.hStr,
-    ALICEBalance?.dsp,
+    ALICEBalance?.big,
     LPTokenBalance,
     ALICEPrice,
     boostableAmount,

@@ -42,7 +42,7 @@ const AmountInput = ({
           <div className="flex gap-1.5 max-md:items-end h-full">
             <button
               onClick={() =>
-                balance && max
+                balance && max && !disabled
                   ? onValueChanged(
                       max.dsp < balance.dsp
                         ? max.dsp.toFixed(2)
@@ -99,7 +99,7 @@ const AmountInput = ({
             alt=""
             className="w-6 h-6"
           />
-          <div className="absolute top-0 -translate-y-[105%] transition-all flex -translate-x-1/2 left-1/2 flex-col items-center opacity-0 mb-6 group-hover:opacity-100 group-hover:-translate-y-[115%]">
+          <div className="absolute top-0 -translate-y-[105%] transition-all group-hover:flex -translate-x-1/2 left-1/2 flex-col items-center opacity-0 hidden mb-6 group-hover:opacity-100 group-hover:-translate-y-[115%]">
             <span className="relative z-10 px-3 py-2 w-40 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
               Use USDC to increase your power by {boostCoefficient?.dsp}x
             </span>

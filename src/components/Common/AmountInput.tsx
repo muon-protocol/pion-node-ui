@@ -45,7 +45,9 @@ const AmountInput = ({
           <div className="flex gap-1.5 max-md:items-end h-full">
             <button
               onClick={() =>
-                balance ? onValueChanged((balance.dsp * 0.25).toString()) : null
+                balance && !disabled
+                  ? onValueChanged((balance.dsp * 0.25).toString())
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -53,7 +55,9 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                balance ? onValueChanged((balance.dsp * 0.5).toString()) : null
+                balance && !disabled
+                  ? onValueChanged((balance.dsp * 0.5).toString())
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -61,7 +65,9 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                balance ? onValueChanged((balance.dsp * 0.75).toString()) : null
+                balance && !disabled
+                  ? onValueChanged((balance.dsp * 0.75).toString())
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
@@ -69,7 +75,9 @@ const AmountInput = ({
             </button>
             <button
               onClick={() =>
-                balance ? onValueChanged(ethers.formatEther(balance.big)) : null
+                balance && !disabled
+                  ? onValueChanged(ethers.formatEther(balance.big))
+                  : null
               }
               className="btn btn--secondary-tag !font-normal"
             >
