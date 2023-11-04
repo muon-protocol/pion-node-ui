@@ -5,7 +5,7 @@ import routes from '../../routes';
 
 const ActionsHeader = () => {
   return (
-    <div className="actions-header flex items-center w-full gap-6">
+    <div className="actions-header flex flex-col md:flex items-center w-full gap-6">
       <div className="w-[85px] flex items-center h-full">
         <ActionImageAndName />
       </div>
@@ -123,41 +123,73 @@ const ActionDescription = () => {
   return (
     <>
       {location.pathname === routes.view.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>Here are all your {strings.nft} NFTs.</p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
+            Here are all your {strings.nft} NFTs.
+          </p>
         </FadeIn>
       ) : location.pathname === routes.create.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
             Create {strings.nft} using {strings.token} tokens. You need{' '}
             {strings.nft} to setup a node, join {strings.token} Network and earn
             reward. Don't miss the chance to boost your NFT by 2x using USDC.
           </p>
         </FadeIn>
       ) : location.pathname === routes.increase.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
             Select your {strings.nft}, then you can increase its power using{' '}
             {strings.token} tokens and also you can boost it by 2x with USDC.
           </p>
         </FadeIn>
       ) : location.pathname === routes.merge.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
             This page enables you to select some {strings.nft} NFTs and merge
             them to one NFT.
           </p>
         </FadeIn>
       ) : location.pathname === routes.split.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
             Choose a {strings.nft} to split and adjust the slider to distribute
             the power as desired.
           </p>
         </FadeIn>
       ) : location.pathname === routes.transfer.path ? (
-        <FadeIn key={location.pathname} duration={0.1} delay={0.1}>
-          <p>
+        <FadeIn
+          key={location.pathname}
+          duration={0.1}
+          delay={0.1}
+          className="w-full"
+        >
+          <p className="max-md:text-center max-md:w-full">
             Choose a {strings.nft} from your collection, then enter the
             destination address where you want to send it.
           </p>

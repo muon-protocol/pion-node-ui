@@ -65,12 +65,12 @@ const Actions = () => {
 
         <FadeIn className="flex flex-col w-full gap-4 md:gap-6">
           <span className="flex justify-between w-full items-end">
-            <p className="text-2xl font-medium font-tomorrow">
+            <p className="text-2xl font-medium font-tomorrow max-md:mb-11">
               Manage Bonded {strings.token} NFT
             </p>
             {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
               <div
-                className="ml-auto flex gap-1.5 items-center cursor-pointer"
+                className="ml-auto flex gap-1.5 items-center cursor-pointer max-md:hidden"
                 onClick={() => window.open('/dashboard/', '_self')}
               >
                 <img

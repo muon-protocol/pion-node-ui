@@ -10,12 +10,12 @@ import routes from '../../routes';
 
 const ActionsContent = () => {
   return (
-    <div className="flex flex-col gap-6 w-full min-w-[607px]">
+    <div className="flex flex-col gap-6 w-full max-md:min-w-[90vw] md:min-w-[607px]">
       <ActionsSidebar />
 
       <ActionsHeader />
 
-      <div className="actions-content dark:bg-alice-body-background dark:shadow-lg w-full min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 py-10 rounded-2xl flex flex-col">
+      <div className="actions-content dark:bg-alice-body-background dark:shadow-lg w-full px-4 py-4 max-md:min-w-[90vw] max-md:max-w-[90vw] md:min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 md:py-10 rounded-2xl flex flex-col">
         {location.pathname === routes.view.path ? (
           <RenderViewBody />
         ) : location.pathname === routes.create.path ? (
