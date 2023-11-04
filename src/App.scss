@@ -198,6 +198,13 @@ html {
   // size properties
   @apply px-16 py-3.5 font-medium text-center;
 
+  &--alice-primary {
+    color: white !important;
+    background-color: #5158F6 !important;
+    @apply cursor-pointer flex items-center justify-center dark:shadow-md hover:dark:shadow-lg dark:bg-alice-primary dark:transition-all;
+    @apply px-16 py-3.5 font-medium text-center;
+  }
+
   &:disabled {
     @apply bg-disabled dark:shadow-none hover:dark:shadow-none hover:dark:bg-disabled text-gray cursor-not-allowed hover:bg-disabled dark:bg-disabled dark:text-gray;
   }
@@ -224,6 +231,10 @@ html {
 
   &--white {
     @apply bg-primary-L3 dark:bg-alice-primary-13 text-primary dark:text-primary hover:bg-white hover:dark:bg-white transition-all;
+  }
+
+  &--action {
+    @apply bg-primary-L3 dark:bg-alice-primary text-primary dark:text-white hover:bg-white hover:dark:bg-alice-primary-g2 transition-all;
   }
 
   &--large {

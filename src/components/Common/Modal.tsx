@@ -33,7 +33,9 @@ const Modal: FC<{
               className={`modal-content ${
                 size === 'lg' ? 'max-w-[466px]' : 'max-w-[400px]'
               } w-[90%] px-4 md:px-8 pt-5 pb-4 md:pb-8 relative -z-10 ${
-                size === 'sm' ? 'bg-modal-small pb-0' : 'bg-gray-bg-70'
+                size === 'sm'
+                  ? 'bg-modal-small pb-0'
+                  : 'bg-gray-bg-70 dark:bg-alice-gray'
               } rounded-3xl`}
             >
               <div
@@ -42,7 +44,7 @@ const Modal: FC<{
               >
                 <div className="modal-header flex justify-between items-center mb-6">
                   <p
-                    className={`${
+                    className={`dark:text-white ${
                       size === 'lg'
                         ? 'text-lg font-bold'
                         : 'font-medium text-sm'
@@ -52,7 +54,17 @@ const Modal: FC<{
                   </p>
                   {closeable && (
                     <img
-                      className="cursor-pointer"
+                      className="cursor-pointer hidden dark:flex"
+                      onClick={closeModalHandler}
+                      src={'/assets/images/modal/exit-white-icon.svg'}
+                      width="14px"
+                      height="14px"
+                      alt={'x'}
+                    />
+                  )}
+                  {closeable && (
+                    <img
+                      className="cursor-pointer dark:hidden"
                       onClick={closeModalHandler}
                       src={
                         size === 'sm'

@@ -454,7 +454,7 @@ const EmptyBonALICECard = () => {
               : `You don’t have any ${strings.nft} in your wallet, please create one first or use another address`}
           </p>
           <button
-            className="btn btn--white mx-auto"
+            className="btn btn--action mx-auto"
             onClick={() => navigate(routes.create.path)}
           >
             Create {strings.nft}

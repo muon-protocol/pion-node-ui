@@ -109,18 +109,21 @@ const RenderSplitBody = () => {
         delay={0.1}
         className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
       >
-        <button disabled className="btn !w-full">
+        <button
+          disabled
+          className="btn btn--white dark:!bg-alice-primary dark:text-white !w-full"
+        >
           Currently Disabled
         </button>
         {/*{chainId !== getCurrentChainId() ? (*/}
         {/*  <button*/}
         {/*    onClick={() => handleSwitchNetwork(getCurrentChainId())}*/}
-        {/*    className="btn !w-full"*/}
+        {/*    className="btn btn--white dark:!bg-alice-primary dark:text-white !w-full"*/}
         {/*  >*/}
         {/*    Switch Network*/}
         {/*  </button>*/}
         {/*) : isMetamaskLoading || isTransactionLoading ? (*/}
-        {/*  <button className="btn !w-full" disabled>*/}
+        {/*  <button className="btn btn--white dark:!bg-alice-primary dark:text-white !w-full" disabled>*/}
         {/*    {isMetamaskLoading*/}
         {/*      ? 'Waiting for Metamask...'*/}
         {/*      : 'Waiting for Tx...'}*/}
@@ -131,7 +134,7 @@ const RenderSplitBody = () => {
         {/*      !isSplitBonALICEsButtonDisabled && handleSplit();*/}
         {/*    }}*/}
         {/*    disabled={isSplitBonALICEsButtonDisabled}*/}
-        {/*    className="btn !w-full"*/}
+        {/*    className="btn btn--white dark:!bg-alice-primary dark:text-white !w-full"*/}
         {/*  >*/}
         {/*    Split Bonded ALICE*/}
         {/*  </button>*/}

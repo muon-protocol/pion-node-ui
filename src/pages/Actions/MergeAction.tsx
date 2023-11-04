@@ -120,13 +120,13 @@ const RenderMergeBody = () => {
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             disabled
           >
             {isMetamaskLoading
@@ -135,7 +135,7 @@ const RenderMergeBody = () => {
           </button>
         ) : isApproveNFTActive ? (
           <button
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             onClick={() => handleApproveNFT()}
           >
             Approve NFT Token
@@ -144,7 +144,7 @@ const RenderMergeBody = () => {
           <button
             onClick={() => handleMerge()}
             disabled={isMergeBonALICEsButtonDisabled}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
           >
             Merge Bonded ${strings.tokens}
           </button>

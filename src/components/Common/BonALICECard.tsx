@@ -32,9 +32,9 @@ const BonALICECard: FC<{
         ${className} ${
         !inverted
           ? selected
-            ? 'bg-primary-dark text-gray10'
+            ? 'bg-primary-dark text-gray10 dark:bg-alice-primary-g1 dark:text-white'
             : onClick
-            ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500'
+            ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500 dark:hover:bg-alice-primary-g1'
             : 'bg-primary-10-solid text-black'
           : 'bg-so-dark-gray-2 text-white'
       }`}
@@ -45,18 +45,22 @@ const BonALICECard: FC<{
         } 
         `}
       >
-        <p className="text-inherit">{title}</p>
-        <p className="text-inherit text-xs pt-[3px] font-medium">
+        <p className="text-inherit dark:text-inherit">{title}</p>
+        <p className="text-inherit dark:text-inherit text-xs pt-[3px] font-medium">
           {isNodeBonALICE && '(Active Node)'}
         </p>
       </div>
       <span className="text-sm flex mb-0.5 md:mb-2 justify-between">
-        <p className="text-inherit font-light">{subTitle1}</p>
-        <p className="text-inherit font-medium">{subValue1}</p>
+        <p className="text-inherit dark:text-inherit font-light">{subTitle1}</p>
+        <p className="text-inherit dark:text-inherit font-medium">
+          {subValue1}
+        </p>
       </span>
       <span className="text-sm flex justify-between">
-        <p className="text-inherit font-light">{subTitle2}</p>
-        <p className="text-inherit font-medium">{subValue2}</p>
+        <p className="text-inherit dark:text-inherit font-light">{subTitle2}</p>
+        <p className="text-inherit dark:text-inherit font-medium">
+          {subValue2}
+        </p>
       </span>
     </div>
   );

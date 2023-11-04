@@ -92,13 +92,16 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
   const [isAllowanceModalOpen, setIsAllowanceModalOpen] = useState(false);
   const [newNFTClaimedLoading, setNewNFTClaimedLoading] = useState(false);
 
-  const handleCreateAmountChange = (amount: string) => {
+  const handleCreateAmountChange = useCallback((amount: string) => {
     setCreateAmount(w3bNumberFromString(amount));
-  };
+  }, []);
 
-  const handleCreateBoostAmountChange = (amount: string) => {
-    setCreateBoostAmount(w3bNumberFromString(amount, LPTokenDecimals));
-  };
+  const handleCreateBoostAmountChange = useCallback(
+    (amount: string) => {
+      setCreateBoostAmount(w3bNumberFromString(amount, LPTokenDecimals));
+    },
+    [LPTokenDecimals],
+  );
 
   const mintArgs = useMintArgs({
     walletAddress: walletAddress,

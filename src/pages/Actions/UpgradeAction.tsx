@@ -97,11 +97,11 @@ export const RenderUpgradeBody = () => {
     return (
       !selectedUpgradeBonALICE ||
       !(upgradeAmount || upgradeBoostAmount) ||
-      !(upgradeAmount.dsp || upgradeBoostAmount.dsp) ||
+      !(upgradeAmount.hStr || upgradeBoostAmount.hStr) ||
       !ALICEBalance?.hStr ||
-      upgradeAmount.dsp > ALICEBalance.dsp ||
+      upgradeAmount.big > ALICEBalance.big ||
       !LPTokenBalance ||
-      upgradeBoostAmount.dsp > LPTokenBalance.dsp ||
+      upgradeBoostAmount.big > LPTokenBalance.big ||
       (ALICEPrice !== undefined &&
         boostableAmount &&
         upgradeBoostAmount.big > maxAmountToBoost.big)
@@ -183,7 +183,7 @@ export const RenderUpgradeBody = () => {
         {(ALICEBalance && upgradeAmount.dsp > ALICEBalance.dsp) ||
         (LPTokenBalance && upgradeBoostAmount.dsp > LPTokenBalance.dsp) ? (
           <button
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             disabled
           >
             Insufficient Funds
@@ -191,13 +191,13 @@ export const RenderUpgradeBody = () => {
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
           <button
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             disabled
           >
             {isMetamaskLoading
@@ -207,18 +207,18 @@ export const RenderUpgradeBody = () => {
         ) : showApproveALICE ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
             {ALICEBalance && upgradeAmount.big < ALICEBalance.big
               ? upgradeAmount.hStr + ` ${strings.nft}`
-              : `All ${strings.token}}`}
+              : `All ${strings.token}`}
           </button>
         ) : showApproveLPToken ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
             disabled={isUpgradeBonALICEButtonDisabled}
           >
             Approve{' '}
@@ -230,7 +230,7 @@ export const RenderUpgradeBody = () => {
           <button
             onClick={() => handleUpgradeBonALICEClicked()}
             disabled={isUpgradeBonALICEButtonDisabled}
-            className="btn btn--white min-w-[360px] mx-auto !py-4"
+            className="btn btn--action min-w-[360px] mx-auto !py-4"
           >
             Increase Bonded {strings.token}
           </button>

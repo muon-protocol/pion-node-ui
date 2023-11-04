@@ -36,7 +36,7 @@ const AmountInput = ({
         <span className="flex flex-col">
           <p className="balance flex text-xyz-2 dark:text-alice-gray">
             Balance:{' '}
-            <span className="value ml-1 text-xyz-75">
+            <span className="value ml-1 text-xyz-75 dark:text-black dark:font-semibold">
               {balance ? balance.dsp : '...'}
             </span>
           </p>
@@ -93,7 +93,7 @@ const AmountInput = ({
         />
         <div
           className={`amount-input__token-name font-semibold max-md:text-sm min-w-fit ${
-            disabled ? 'text-gray' : 'text-gray10'
+            disabled ? 'text-gray' : 'text-gray10 dark:text-black1'
           }`}
         >
           {rightText}
