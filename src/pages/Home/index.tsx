@@ -25,13 +25,6 @@ const Home = () => {
   return (
     <div className="w-full page__bg">
       <div className="page page--home page--centered flex flex-col">
-        <div className="mobile-logo w-full flex justify-center mb-20 md:hidden">
-          <img
-            src="/assets/images/navbar/pion-logo.svg"
-            alt={''}
-            className="w-[150px] h-auto"
-          />
-        </div>
         <FadeIn className="mr-auto mb-14" delay={0} duration={0.3}>
           <p className="text-2xl font-medium font-tomorrow">Getting Started</p>
         </FadeIn>

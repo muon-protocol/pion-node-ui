@@ -223,10 +223,14 @@ const MobileNavbar = () => {
   const { bonALICEs } = useBonALICE();
 
   return (
-    <div className="visible fixed w-[100vw] top-0 z-[100] md:hidden h-14 bg-white flex items-center justify-end px-[5vw]">
+    <div className="visible fixed w-[100vw] top-0 z-[100] md:hidden h-14 bg-white flex items-center justify-end px-[5vw] shadow-md">
+      <section className="flex gap-4 mr-auto items-center">
+        <img src={strings.sidebar.logoSrc} alt="" className="h-8" />
+        <img src={strings.sidebar.logoTextSrc} alt="" className="h-8" />
+      </section>
       <AnimatePresence>
         {isMenuOpen ? (
-          <Scale duration={0.3} key={'1'} className="absolute">
+          <Scale duration={0.3} key={'1'} className="absolute right-[5vw]">
             <img
               onClick={() => setIsMenuOpen(false)}
               src="/assets/images/modal/exit-dark-icon.svg"
@@ -251,10 +255,6 @@ const MobileNavbar = () => {
         }`}
       >
         <section>
-          <span className="flex gap-3 mb-8 items-center">
-            <img src={strings.sidebar.logoSrc} alt="" className="h-9" />
-            <img src={strings.sidebar.logoTextSrc} alt="" className="h-9" />
-          </span>
           {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) ? (
             <>
               <MobileNavbarItem
