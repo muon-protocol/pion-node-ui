@@ -5,12 +5,12 @@ import routes from '../../routes';
 
 const ActionsHeader = () => {
   return (
-    <div className="actions-header flex flex-col md:flex items-center w-full gap-6">
+    <div className="actions-header flex flex-col md:flex-row items-center w-full gap-6">
       <div className="w-[85px] flex items-center h-full">
         <ActionImageAndName />
       </div>
       <div className="w-full">
-        <p className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] flex items-center">
+        <p className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] max-md:min-h-[96px] flex items-center">
           <ActionDescription />
         </p>
       </div>

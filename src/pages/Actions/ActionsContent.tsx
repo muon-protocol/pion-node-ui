@@ -15,7 +15,7 @@ const ActionsContent = () => {
 
       <ActionsHeader />
 
-      <div className="actions-content dark:bg-alice-body-background dark:shadow-lg w-full px-4 py-4 max-md:min-w-[90vw] max-md:max-w-[90vw] md:min-w-[607px] min-h-[528px] max-h-[624px] overflow-hidden md:px-11 md:py-10 rounded-2xl flex flex-col">
+      <div className="actions-content dark:bg-alice-body-background dark:shadow-lg w-full px-4 py-5 max-md:min-w-[90vw] max-md:max-w-[90vw] md:min-w-[607px] min-h-[464px] md:min-h-[528px] md:max-h-[624px] overflow-hidden md:px-11 md:py-10 rounded-2xl flex flex-col">
         {location.pathname === routes.view.path ? (
           <RenderViewBody />
         ) : location.pathname === routes.create.path ? (

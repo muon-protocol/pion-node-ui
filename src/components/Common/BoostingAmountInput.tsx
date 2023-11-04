@@ -28,7 +28,7 @@ const AmountInput = ({
   }, [disabled, onValueChanged]);
 
   return (
-    <div className={`amount-input flex flex-col w-full gap-2 mb-2 mt-1.5`}>
+    <div className={`amount-input flex flex-col gap-2 mb-2 mt-1.5`}>
       <div className="amount-input__top relative text-sm flex justify-between">
         <span className="flex flex-col">
           <p className="balance flex text-xyz-2 dark:text-alice-gray">
@@ -57,10 +57,10 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center gap-3 w-full bg-input-bg dark:bg-alice-xyz-75 rounded-xl h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center w-full gap-3 bg-input-bg dark:bg-alice-xyz-75 rounded-xl h-12 md:h-14">
         <input
           disabled={disabled}
-          className={`amount-input__input text-white dark:text-black flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
+          className={`amount-input__input text-white max-md:min-w-0 dark:text-black flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
             disabled
               ? 'placeholder-gray dark:placeholder-alice-gray'
               : 'placeholder-white dark:placeholder-gray'
@@ -82,7 +82,7 @@ const AmountInput = ({
           {rightText}
         </div>
         <div
-          className={`px-4 h-full flex relative items-center rounded-r-xl gap-2 group ${
+          className={`px-2 md:px-4 h-full flex relative items-center rounded-r-xl gap-1.5 md:gap-2 group ${
             disabled ? 'bg-gray3' : 'bg-primary-dark'
           }`}
         >
