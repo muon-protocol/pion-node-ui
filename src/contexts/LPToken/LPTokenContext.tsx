@@ -7,6 +7,7 @@ import LP_TOKEN_ABI from '../../abis/LPToken.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
+import { useLpTokenDecimals } from '../../abis/types/generated.ts';
 // import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
 // import { useLpTokenDecimals } from '../../abis/types/generated.ts';
 // import { useLpTokenBalanceOf } from '../../abis/types/generated.ts';
@@ -27,35 +28,18 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
   const [LPTokenBalance, setLPTokenBalance] = useState<W3bNumber | null>(null);
 
-  // const {
-  //   data: LPTokenBalanceData,
-  //   isFetched: LPTokenBalanceIsFetched,
-  //   isLoading: LPTokenBalanceIsLoading,
-  // } = useBalance({
-  //   address: walletAddress,
-  //   token: LP_TOKEN_ADDRESS[getCurrentChainId()],
-  //   chainId: getCurrentChainId(),
-  //   watch: true,
-  // });
-
-  // const { data } = useLpTokenBalanceOf({
-  //   args: [
-  //     walletAddress
-  //       ? walletAddress
-  //       : '0x0000000000000000000000000000000000000000',
-  //   ],
-  //   chainId: getCurrentChainId(),
-  //   watch: true,
-  // });
-
-  const { data: decimals } = useContractRead({
-    abi: LP_TOKEN_ABI,
+  const {
+    data: decimals,
+    isError,
+    error,
+    status,
+  } = useLpTokenDecimals({
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
-    functionName: 'decimals',
-    args: undefined,
-    chainId: getCurrentChainId(),
-    watch: true,
   });
+
+  useEffect(() => {
+    console.log('Error fetching LPToken decimals', isError, error, status);
+  }, [isError, error, status]);
 
   const {
     data: LPTokenBalanceData,

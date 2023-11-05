@@ -73,10 +73,6 @@ export default defineConfig(() => {
       out: 'src/abis/types/generated.ts',
       contracts: [
         {
-          name: 'erc20',
-          abi: erc20ABI,
-        },
-        {
           name: 'Alice',
           abi: ALICE_ABI,
         },

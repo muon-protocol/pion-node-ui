@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import {
   readContracts,
-  useBalance,
   useContractWrite,
   usePrepareContractWrite,
 } from 'wagmi';
@@ -14,7 +13,7 @@ import {
   LP_TOKEN_ADDRESS,
 } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import { BalanceData, W3bNumber } from '../../types/wagmi.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
 import { BonALICE, RawBonALICE } from '../../types';
@@ -25,10 +24,6 @@ import useLPToken from '../LPToken/useLPToken.ts';
 
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
-  balance: undefined | BalanceData;
-  isFetched: boolean;
-  isError: boolean;
-  isLoading: boolean;
   bonALICEs: BonALICE[];
   ALICEAllowance: W3bNumber | null;
   LPTokenAllowanceForBooster: W3bNumber | null;
@@ -36,10 +31,6 @@ const BonALICEContext = createContext<{
   fetchBonALICEIsLoading: boolean;
 }>({
   handleCreateBonALICEClicked: () => {},
-  balance: undefined,
-  isFetched: false,
-  isError: false,
-  isLoading: false,
   bonALICEs: [],
   ALICEAllowance: null,
   LPTokenAllowanceForBooster: null,
@@ -55,6 +46,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { allowance: ALICEAllowance } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
   );
+
   const { allowance: LPTokenAllowanceForBooster } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],
@@ -69,18 +61,6 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const [fetchBonALICEIsLoading, setFetchBonALICEIsLoading] = useState(false);
 
   const { fastRefresh } = useRefresh();
-
-  const {
-    data: balance,
-    isFetched,
-    isError,
-    isLoading,
-  } = useBalance({
-    address: walletAddress,
-    token: BONALICE_ADDRESS[getCurrentChainId()],
-    chainId: getCurrentChainId(),
-    watch: true,
-  });
 
   const { config } = usePrepareContractWrite({
     abi: BONALICE_ABI,
@@ -142,10 +122,6 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
       value={{
         bonALICEs,
         handleCreateBonALICEClicked,
-        balance,
-        isError,
-        isFetched,
-        isLoading,
         ALICEAllowance,
         LPTokenAllowanceForBooster,
         fetchBonALICEIsLoading,
