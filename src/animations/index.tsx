@@ -121,7 +121,6 @@ export const Scale: FC<{
   className?: string;
   delay?: number;
   duration?: number;
-  key: string;
 }> = ({ delay, duration, children, className }) => {
   const controls = useAnimation();
 
