@@ -4,8 +4,12 @@ import strings from '../../constants/strings.ts';
 
 export const ConnectWalletButton = ({
   size,
+  withIcon,
+  light,
 }: {
   size?: 'sm' | 'md' | 'lg';
+  withIcon?: boolean;
+  light?: boolean;
 }) => {
   const { ALICEBalance } = useALICE();
 
@@ -35,16 +39,33 @@ export const ConnectWalletButton = ({
           >
             {(() => {
               if (!connected) {
-                return (
-                  <button
-                    onClick={openConnectModal}
-                    className={`btn ${
-                      size === 'md' ? '' : 'btn--small'
-                    } btn--primary`}
-                  >
-                    Connect Wallet
-                  </button>
-                );
+                if (withIcon) {
+                  return (
+                    <button
+                      className={`btn btn--with-icon ${
+                        light ? 'btn--white' : 'btn--primary'
+                      } `}
+                      onClick={openConnectModal}
+                    >
+                      <img
+                        className="h-6 md:h-8 w-auto"
+                        src="/assets/images/migration/wallet-icon.svg"
+                        alt=""
+                      />
+                      <p className="text-inherit">Connect Wallet</p>
+                    </button>
+                  );
+                } else {
+                  return (
+                    <button
+                      onClick={openConnectModal}
+                      className={`
+                      }btn ${size === 'md' ? '' : 'btn--small'} btn--primary`}
+                    >
+                      Connect Wallet
+                    </button>
+                  );
+                }
               }
 
               if (chain.unsupported) {

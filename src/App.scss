@@ -214,11 +214,11 @@ html {
   }
 
   &--with-icon {
-    @apply px-9 py-5 flex gap-4 text-2xl font-semibold;
+    @apply px-7 py-4 text-xl md:px-9 md:py-5 flex gap-4 md:text-2xl font-semibold;
   }
 
   &--medium-with-icon {
-    @apply px-9 py-4 flex gap-4 text-[20px] font-semibold;
+    @apply px-7 py-4 text-lg md:px-9 md:py-4 flex gap-4 md:text-[20px] font-semibold;
   }
 
   &--small {

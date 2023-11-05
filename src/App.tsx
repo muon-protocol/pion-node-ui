@@ -47,7 +47,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app relative overflow-x-hidden max-md:pt-20">
+    <div className="app relative overflow-x-hidden max-md:pt-[calc(18*4px)]">
       <Web3Provider>
         <ApolloProvider client={aliceClient}>
           <RefreshProvider>
