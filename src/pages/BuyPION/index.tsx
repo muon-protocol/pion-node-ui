@@ -168,11 +168,15 @@ const Home = () => {
                       PancakeSwap
                     </p>
                   </span>
-                  <span className="flex gap-2">
+                  <span className="flex gap-2 items-center">
                     <p className="text-lg font-medium text-center text-light-text">
                       on
                     </p>
-                    <img src="/assets/images/buy-pion/arb.svg" alt="" />
+                    <img
+                      src="/assets/images/buy-pion/bnb.svg"
+                      className="w-6 h-6"
+                      alt=""
+                    />
                     <p className="text-lg font-bold text-white text-center">
                       BSC (testnet)
                     </p>
