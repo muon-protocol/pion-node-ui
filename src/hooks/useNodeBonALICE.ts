@@ -58,6 +58,7 @@ const useNodeBonALICE = () => {
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: nodeBonALICE ? [BigInt(nodeBonALICE.tokenId)] : undefined,
     watch: true,
+    enabled: !!nodeBonALICE,
   });
 
   const isNodeAddressValid = useMemo(() => {
@@ -91,6 +92,7 @@ const useNodeBonALICE = () => {
     address: MUON_NODE_MANAGER_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   const addNodeArgs = useAddNodeArgs({
@@ -157,6 +159,7 @@ const useNodeBonALICE = () => {
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: nodeBonALICE ? [nodeBonALICE.tokenId] : undefined,
     watch: true,
+    enabled: !!nodeBonALICE,
   });
 
   const approveBonALICEArgs = useApproveBonALICEArgs({

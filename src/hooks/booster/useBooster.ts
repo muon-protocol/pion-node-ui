@@ -11,11 +11,11 @@ export const useBooster = (tokenId?: bigint) => {
     address: BOOSTER_ADDRESS[getCurrentChainId()],
     args: tokenId ? [tokenId] : undefined,
     watch: true,
+    enabled: !!tokenId,
   });
 
   const { data: boostCoefficient } = useBoosterBoostValue({
     address: BOOSTER_ADDRESS[getCurrentChainId()],
-    watch: true,
   });
 
   return {

@@ -23,7 +23,12 @@ const RenderViewBody = () => {
           ? bonALICEs.map((item: BonALICE) => {
               return (
                 item.nodePower > 0 && (
-                  <BonALICEViewCard bonALICE={item} compact inverted />
+                  <BonALICEViewCard
+                    key={item.tokenId}
+                    bonALICE={item}
+                    compact
+                    inverted
+                  />
                 )
               );
             })

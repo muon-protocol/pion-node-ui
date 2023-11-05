@@ -10,9 +10,9 @@ const ActionsHeader = () => {
         <ActionImageAndName />
       </div>
       <div className="w-full">
-        <p className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] max-md:min-h-[96px] flex items-center">
+        <div className="text-center md:text-left md:text-lg font-light text-white md:leading-[23px] md:min-h-[70px] max-md:min-h-[96px] flex items-center">
           <ActionDescription />
-        </p>
+        </div>
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ const ActionImage = () => {
       {location.pathname === routes.view.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.view.path}
           duration={0.1}
           delay={0.1}
         >
@@ -50,7 +50,7 @@ const ActionImage = () => {
       ) : location.pathname === routes.create.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.create.path}
           duration={0.1}
           delay={0.1}
         >
@@ -63,7 +63,7 @@ const ActionImage = () => {
       ) : location.pathname === routes.increase.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.increase.path}
           duration={0.1}
           delay={0.1}
         >
@@ -76,7 +76,7 @@ const ActionImage = () => {
       ) : location.pathname === routes.merge.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.merge.path}
           duration={0.1}
           delay={0.1}
         >
@@ -89,7 +89,7 @@ const ActionImage = () => {
       ) : location.pathname === routes.split.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.split.path}
           duration={0.1}
           delay={0.1}
         >
@@ -102,7 +102,7 @@ const ActionImage = () => {
       ) : location.pathname === routes.transfer.path ? (
         <Scale
           className="absolute"
-          key={location.pathname}
+          key={routes.transfer.path}
           duration={0.1}
           delay={0.1}
         >

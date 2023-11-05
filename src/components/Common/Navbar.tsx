@@ -236,7 +236,7 @@ const MobileNavbar = () => {
       </section>
       <AnimatePresence>
         {isMenuOpen ? (
-          <Scale duration={0.3} key={'1'} className="absolute right-[5vw]">
+          <Scale duration={0.3} key={'2'} className="absolute right-[5vw]">
             <img
               onClick={() => setIsMenuOpen(false)}
               src={strings.navbar.exitHamburgerSrc}
@@ -245,7 +245,7 @@ const MobileNavbar = () => {
             />
           </Scale>
         ) : (
-          <Scale duration={0.3} key={'2'} className="absolute">
+          <Scale duration={0.3} key={'3'} className="absolute">
             <img
               onClick={() => setIsMenuOpen(true)}
               src={strings.navbar.hamburgerSrc}

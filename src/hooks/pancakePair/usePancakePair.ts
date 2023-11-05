@@ -7,7 +7,6 @@ import { w3bNumberFromBigint } from '../../utils/web3.ts';
 export const usePancakePair = () => {
   const { data: reservesData } = usePancakePairGetReserves({
     address: PANCAKE_PAIR_ADDRESS[getCurrentChainId()],
-    watch: true,
   });
 
   const ALICEPrice = useMemo(() => {

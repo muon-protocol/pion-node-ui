@@ -158,7 +158,7 @@ const RewardSource = ({
       {/*  })}*/}
       {/*</div>*/}
       {rewardSections.map((section) => (
-        <div className="flex justify-between items-center">
+        <div key={section.title} className="flex justify-between items-center">
           <span className="flex gap-1 items-center">
             {section.title}
             <img

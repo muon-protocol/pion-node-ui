@@ -39,7 +39,10 @@ const SelectButtonWithModal = ({
               <>
                 {selectedItems.length > 0 ? (
                   selectedItems.map((selectedItem) => (
-                    <span className="rounded-lg bg-algo px-2 text-black md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
+                    <span
+                      key={selectedItem.tokenId}
+                      className="rounded-lg bg-algo px-2 text-black md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between"
+                    >
                       <p className="text-xs md:text-sm text-black">
                         {`${strings.nft} #` + selectedItem.tokenId}
                       </p>

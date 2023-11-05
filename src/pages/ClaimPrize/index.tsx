@@ -160,6 +160,7 @@ const ClaimPrize = () => {
               >
                 {eligibleAddresses.map((wallet) => (
                   <VerifyWalletCard
+                    key={wallet.walletAddress}
                     wallet={wallet}
                     className="!min-w-[307px] scroll"
                   />

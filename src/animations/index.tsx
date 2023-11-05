@@ -121,19 +121,17 @@ export const Scale: FC<{
   className?: string;
   delay?: number;
   duration?: number;
-  key?: string;
-}> = ({ delay, duration, children, className, key = '1' }) => {
+  key: string;
+}> = ({ delay, duration, children, className }) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    if (key) {
-      controls.start({
-        opacity: 1,
-        scale: 1,
-        transition: { duration: duration || 0.3, delay: delay || 0 },
-      });
-    }
-  }, [controls, delay, duration, key]);
+    controls.start({
+      opacity: 1,
+      scale: 1,
+      transition: { duration: duration || 0.3, delay: delay || 0 },
+    });
+  }, [controls, delay, duration]);
 
   return (
     <motion.div

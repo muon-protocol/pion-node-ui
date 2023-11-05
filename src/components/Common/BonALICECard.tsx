@@ -32,9 +32,9 @@ const BonALICECard: FC<{
         ${className} ${
         !inverted
           ? selected
-            ? 'bg-primary-dark text-gray10 dark:bg-alice-primary-g1 dark:text-white'
+            ? 'bg-primary-dark text-gray10 dark:bg-alice-primary-g2 dark:text-white'
             : onClick
-            ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500 dark:hover:bg-alice-primary-g1'
+            ? 'bg-primary-10-solid text-black hover:bg-primary-dark-500 dark:hover:bg-alice-primary-g dark:hover:text-white'
             : 'bg-primary-10-solid text-black'
           : 'bg-so-dark-gray-2 text-white'
       }`}

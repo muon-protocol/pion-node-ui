@@ -139,9 +139,9 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { data: tokenApprovedContractAddress } = useBonAliceGetApproved({
     address: BONALICE_ADDRESS[getCurrentChainId()],
-    args: [selectedTokenId],
+    args: selectedTokenId ? [selectedTokenId] : undefined,
     watch: true,
-    enabled: !!selectedTokenId || !!walletAddress,
+    enabled: !!selectedTokenId,
   });
 
   const {
