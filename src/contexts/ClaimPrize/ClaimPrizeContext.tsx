@@ -21,7 +21,7 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
 import useSignMessage from '../../hooks/useSignMessage.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import REWARD_ABI from '../../abis/Reward.json';
+import REWARD_ABI from '../../abis/Reward';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';
@@ -140,6 +140,15 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   const [isInsufficientModalOpen, setIsInsufficientModalOpen] = useState(false);
   const [isSufficientModalOpen, setIsSufficientModalOpen] = useState(false);
 
+  const openSwitchBackToWalletModal = useCallback(
+    () => setIsSwitchBackToWalletModalOpen(true),
+    [],
+  );
+  const closeSwitchBackToWalletModal = useCallback(
+    () => setIsSwitchBackToWalletModalOpen(false),
+    [],
+  );
+
   const { userClaimedReward, valid } = useUserClaimedReward();
   const {
     stakingAddressFromPast,
@@ -197,11 +206,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess) {
-      // if (totalRewards.dsp < 500) {
-      //   setIsInsufficientModalOpen(true);
-      // } else {
-      // setIsSufficientModalOpen(true);
-      // }
       toast.success('Claimed successfully');
       if (!newNFTClaimedLoading) {
         setNewNFTClaimedLoading(true);
@@ -345,15 +349,15 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
     stakingAddress,
   ]);
 
-  const handleRemoveWallet = (walletAddress: string) => {
+  const handleRemoveWallet = useCallback((walletAddress: string) => {
     setWalletsWithSignature((wallets) =>
       wallets.filter((wallet) => wallet.walletAddress !== walletAddress),
     );
-  };
+  }, []);
 
   const [isMetamaskLoadingVerify, setIsMetamaskLoadingVerify] = useState(false);
 
-  const handleVerifyWallet = () => {
+  const handleVerifyWallet = useCallback(() => {
     setIsMetamaskLoadingVerify(true);
     signMessageMetamask()
       .then((signature) => {
@@ -371,12 +375,12 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setIsMetamaskLoadingVerify(false);
         console.log(error);
       });
-  };
+  }, [signMessageMetamask, walletAddress]);
 
   const [agreeWithTermsAndConditionsSig, setAgreeWithTermsAndConditionsSig] =
     useState<null | string>(null);
 
-  const handleApproveTermsAndConditions = () => {
+  const handleApproveTermsAndConditions = useCallback(() => {
     setIsMetamaskLoadingVerify(true);
     signTermsAndConditionsMessageMetamask()
       .then((signature) => {
@@ -389,7 +393,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         setIsMetamaskLoadingVerify(false);
         console.log(error);
       });
-  };
+  }, [signTermsAndConditionsMessageMetamask]);
 
   const [lastAlertedWallet, setLastAlertedWallet] = useState<
     `0x${string}` | null
@@ -451,7 +455,7 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
         }
       }
     },
-    [walletAddress],
+    [lastAlertedWallet, walletAddress],
   );
 
   useEffect(() => {
@@ -562,11 +566,6 @@ const ClaimPrizeProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setIsNewWalletModalOpen(false);
   }, [walletAddress]);
-
-  const openSwitchBackToWalletModal = () =>
-    setIsSwitchBackToWalletModalOpen(true);
-  const closeSwitchBackToWalletModal = () =>
-    setIsSwitchBackToWalletModalOpen(false);
 
   return (
     <ClaimPrizeContext.Provider

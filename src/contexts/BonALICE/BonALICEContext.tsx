@@ -5,7 +5,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
+import BONALICE_ABI from '../../abis/BonALICE';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -66,7 +66,9 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
-    args: [[], [], walletAddress],
+    args: walletAddress ? [[], [], walletAddress] : undefined,
+    chainId: getCurrentChainId(),
+    enabled: !!walletAddress,
   });
 
   const { write } = useContractWrite(config);
@@ -75,7 +77,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const { refetch: BonALICERefetch } = useQuery(USER_BON_ALICES, {
-    variables: { account: walletAddress },
+    variables: { account: walletAddress, skip: !walletAddress },
   });
 
   useEffect(() => {
@@ -94,6 +96,8 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
               LP_TOKEN_ADDRESS[getCurrentChainId()],
             ],
           ],
+          chainId: getCurrentChainId(),
+          enabled: !!walletAddress && !!bonALICE.tokenId,
         }));
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

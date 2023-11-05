@@ -10,7 +10,7 @@ import { BonALICE } from '../../types';
 import { useMergeArgs } from '../../hooks/useContractArgs.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
+import BONALICE_ABI from '../../abis/BonALICE';
 import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.ts';
 import {
   BONALICE_ADDRESS,
@@ -53,17 +53,48 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   const [mergeModalSelectedBonALICEs, setMergeModalSelectedBonALICEs] =
     useState<BonALICE[]>([]);
 
-  const handleMergeModalItemClicked = (bonALICE: BonALICE) => {
-    if (
-      mergeModalSelectedBonALICEs.find((b) => b.tokenId === bonALICE.tokenId)
-    ) {
-      removeMergeModalSelectedBonALICE(bonALICE);
-    } else {
-      if (mergeModalSelectedBonALICEs.length < 2) {
-        addMergeModalSelectedBonALICE(bonALICE);
+  const openMergeModal = useCallback(() => setIsMergeModalOpen(true), []);
+  const closeMergeModal = useCallback(() => setIsMergeModalOpen(false), []);
+
+  const removeMergeModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setMergeModalSelectedBonALICEs(
+        mergeModalSelectedBonALICEs.filter(
+          (b) => b.tokenId !== bonALICE.tokenId,
+        ),
+      );
+    },
+    [mergeModalSelectedBonALICEs],
+  );
+
+  const addMergeModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setMergeModalSelectedBonALICEs([
+        ...mergeModalSelectedBonALICEs,
+        bonALICE,
+      ]);
+    },
+    [mergeModalSelectedBonALICEs],
+  );
+
+  const handleMergeModalItemClicked = useCallback(
+    (bonALICE: BonALICE) => {
+      if (
+        mergeModalSelectedBonALICEs.find((b) => b.tokenId === bonALICE.tokenId)
+      ) {
+        removeMergeModalSelectedBonALICE(bonALICE);
+      } else {
+        if (mergeModalSelectedBonALICEs.length < 2) {
+          addMergeModalSelectedBonALICE(bonALICE);
+        }
       }
-    }
-  };
+    },
+    [
+      addMergeModalSelectedBonALICE,
+      mergeModalSelectedBonALICEs,
+      removeMergeModalSelectedBonALICE,
+    ],
+  );
 
   const mergeArgs = useMergeArgs({
     tokenId1: mergeModalSelectedBonALICEs[0]?.tokenId,
@@ -104,10 +135,13 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     return undefined;
   }, [mergeModalSelectedBonALICEs, nodeBonALICE, isInSelectedMergeBonALICEs]);
 
+  const { walletAddress } = useUserProfile();
+
   const { data: tokenApprovedContractAddress } = useBonAliceGetApproved({
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: [selectedTokenId],
     watch: true,
+    enabled: !!selectedTokenId || !!walletAddress,
   });
 
   const {
@@ -178,26 +212,11 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     if (mergeModalSelectedBonALICEs.length === 2) {
       closeMergeModal();
     }
-  }, [mergeModalSelectedBonALICEs]);
-
-  const addMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setMergeModalSelectedBonALICEs([...mergeModalSelectedBonALICEs, bonALICE]);
-  };
-
-  const removeMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setMergeModalSelectedBonALICEs(
-      mergeModalSelectedBonALICEs.filter((b) => b.tokenId !== bonALICE.tokenId),
-    );
-  };
-
-  const { walletAddress } = useUserProfile();
+  }, [closeMergeModal, mergeModalSelectedBonALICEs]);
 
   useEffect(() => {
     setMergeModalSelectedBonALICEs([]);
   }, [walletAddress]);
-
-  const openMergeModal = () => setIsMergeModalOpen(true);
-  const closeMergeModal = () => setIsMergeModalOpen(false);
 
   return (
     <MergeActionContext.Provider

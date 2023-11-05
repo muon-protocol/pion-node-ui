@@ -13,6 +13,7 @@ const useUserClaimedReward = () => {
   } = useRewardUsers({
     address: REWARD_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
+    enabled: !!walletAddress,
   });
 
   if (userClaimedReward === undefined || isFetching || isLoading) {

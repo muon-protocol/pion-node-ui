@@ -17,7 +17,7 @@ import {
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import ALICE_ABI from '../../abis/ALICE.json';
+import ALICE_ABI from '../../abis/ALICE';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import {
   useApproveArgs,
@@ -27,7 +27,7 @@ import {
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 import BONALICE_ABI from '../../abis/BonALICE.ts';
 import LP_TOKEN_ABI from '../../abis/LPToken.ts';
-import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.json';
+import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
@@ -97,6 +97,18 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     w3bNumberFromString(''),
   );
 
+  const openUpgradeModal = useCallback(() => setIsUpgradeModalOpen(true), []);
+  const closeUpgradeModal = useCallback(() => setIsUpgradeModalOpen(false), []);
+
+  const openAllowanceModal = useCallback(
+    () => setIsAllowanceModalOpen(true),
+    [],
+  );
+  const closeAllowanceModal = useCallback(
+    () => setIsAllowanceModalOpen(false),
+    [],
+  );
+
   const { ALICEAllowance } = useBonALICE();
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance, LPTokenDecimals } = useLPToken();
@@ -107,8 +119,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
     useALICEAllowance();
-  // const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
-  //   useLPTokenAllowance();
 
   const isSelectedUpgradeBonALICE = useCallback(
     (bonALICE: BonALICE) => {
@@ -160,7 +170,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     args: lockToBondedTokenArgs
       ? [lockToBondedTokenArgs[1], lockToBondedTokenArgs[2]]
-      : [],
+      : undefined,
     functionName: 'lockToBondedToken',
     chainId: getCurrentChainId(),
   });
@@ -322,7 +332,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       success: 'Approved',
       failed: 'Error',
     });
-  }, [approveALICE, ALICEBalance, upgradeAmount]);
+  }, [ALICEBalance, upgradeAmount, openAllowanceModal, approveALICE]);
 
   const handleApproveLPTokenClicked = useCallback(async () => {
     if (
@@ -360,13 +370,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       setApproveLPTokenIsMetamaskLoading(false);
       console.log(e);
     }
-
-    // await approveLPToken?.({
-    //   pending: 'Waiting for confirmation...',
-    //   success: 'Approved',
-    //   failed: 'Error',
-    // });
-  }, [LPTokenBalance, upgradeBoostAmount]);
+  }, [LPTokenBalance, openAllowanceModal, upgradeBoostAmount]);
 
   const handleUpgradeBoostAmountChange = useCallback(
     (amount: string) => {
@@ -384,7 +388,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       setUpgradeModalSelectedBonALICE(bonALICE);
       closeUpgradeModal();
     },
-    [],
+    [closeUpgradeModal],
   );
 
   const unselectUpgradeModalSelectedBonALICE = useCallback(() => {
@@ -443,12 +447,6 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
       setUpgradeModalSelectedBonALICE(nodeBonALICE[0]);
     }
   }, [walletAddress, hasNodeBonALICE, nodeBonALICE]);
-
-  const openUpgradeModal = () => setIsUpgradeModalOpen(true);
-  const closeUpgradeModal = () => setIsUpgradeModalOpen(false);
-
-  const openAllowanceModal = () => setIsAllowanceModalOpen(true);
-  const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
 
   return (
     <UpgradeActionContext.Provider

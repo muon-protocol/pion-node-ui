@@ -3,7 +3,7 @@ import { BonALICE } from '../types';
 import { useAddNodeArgs, useApproveBonALICEArgs } from './useContractArgs.ts';
 import useWagmiContractWrite from './useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
-import MuonNodeStakingABI from '../abis/MuonNodeStaking.json';
+import MuonNodeStakingABI from '../abis/MuonNodeStaking';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,

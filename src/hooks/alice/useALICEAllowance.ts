@@ -13,22 +13,20 @@ export const useALICEAllowance = () => {
 
   const { data: allowanceForMuonNodeStaking } = useAliceAllowance({
     address: ALICE_ADDRESS[getCurrentChainId()],
-    args: [
-      walletAddress ||
-        '0x000000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000',
-      MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-    ],
+    args: walletAddress
+      ? [walletAddress, MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]]
+      : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   const { data: allowanceForBonALICE } = useAliceAllowance({
     address: ALICE_ADDRESS[getCurrentChainId()],
-    args: [
-      walletAddress ||
-        '0x00000 000 000 000 000 000 000 000 000 000 000 000 000 000 000 000',
-      BONALICE_ADDRESS[getCurrentChainId()],
-    ],
+    args: walletAddress
+      ? [walletAddress, BONALICE_ADDRESS[getCurrentChainId()]]
+      : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   if (

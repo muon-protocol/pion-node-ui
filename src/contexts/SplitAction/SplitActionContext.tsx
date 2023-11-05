@@ -1,7 +1,12 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { BonALICE } from '../../types';
 // import { useSplitArgs } from '../../hooks/useContractArgs.ts';
-// import BONALICE_ABI from '../../abis/BonALICE.json';
 // import { getCurrentChainId } from '../../constants/chains.ts';
 // import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 // import { BONALICE_ADDRESS } from '../../constants/addresses.ts';
@@ -77,41 +82,54 @@ const SplitActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { walletAddress } = useUserProfile();
 
+  const openSplitModal = useCallback(() => setIsSplitModalOpen(true), []);
+  const closeSplitModal = useCallback(() => setIsSplitModalOpen(false), []);
+
   useEffect(() => {
     setSplitModalSelectedBonALICE(null);
     setSplitValue(50);
   }, [walletAddress]);
 
-  const handleSplitModalItemClicked = (bonALICE: BonALICE) => {
-    if (!splitModalSelectedBonALICE) {
-      changeSplitModalSelectedBonALICE(bonALICE);
-      return;
-    }
-    if (splitModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
-      unselectSplitModalSelectedBonALICE();
-    } else {
-      changeSplitModalSelectedBonALICE(bonALICE);
-    }
-  };
+  const changeSplitModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setSplitModalSelectedBonALICE(bonALICE);
+      closeSplitModal();
+    },
+    [closeSplitModal],
+  );
 
-  const changeSplitModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setSplitModalSelectedBonALICE(bonALICE);
-    closeSplitModal();
-  };
-
-  const unselectSplitModalSelectedBonALICE = () => {
+  const unselectSplitModalSelectedBonALICE = useCallback(() => {
     setSplitModalSelectedBonALICE(null);
-  };
+  }, []);
 
-  const isSelectedSplitBonALICE = (bonALICE: BonALICE) => {
-    return (
-      !!splitModalSelectedBonALICE &&
-      splitModalSelectedBonALICE.tokenId === bonALICE.tokenId
-    );
-  };
+  const handleSplitModalItemClicked = useCallback(
+    (bonALICE: BonALICE) => {
+      if (!splitModalSelectedBonALICE) {
+        changeSplitModalSelectedBonALICE(bonALICE);
+        return;
+      }
+      if (splitModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
+        unselectSplitModalSelectedBonALICE();
+      } else {
+        changeSplitModalSelectedBonALICE(bonALICE);
+      }
+    },
+    [
+      changeSplitModalSelectedBonALICE,
+      splitModalSelectedBonALICE,
+      unselectSplitModalSelectedBonALICE,
+    ],
+  );
 
-  const openSplitModal = () => setIsSplitModalOpen(true);
-  const closeSplitModal = () => setIsSplitModalOpen(false);
+  const isSelectedSplitBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      return (
+        !!splitModalSelectedBonALICE &&
+        splitModalSelectedBonALICE.tokenId === bonALICE.tokenId
+      );
+    },
+    [splitModalSelectedBonALICE],
+  );
 
   return (
     <SplitActionContext.Provider

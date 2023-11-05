@@ -124,6 +124,7 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
 
   const [isCreateAndBoostMetamaskLoading, setIsCreateAndBoostMetamaskLoading] =
     useState(false);
+
   const [
     isCreateAndBoostTransactionLoading,
     setIsCreateAndBoostTransactionLoading,
@@ -290,8 +291,14 @@ const CreateActionProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const openAllowanceModal = () => setIsAllowanceModalOpen(true);
-  const closeAllowanceModal = () => setIsAllowanceModalOpen(false);
+  const openAllowanceModal = useCallback(
+    () => setIsAllowanceModalOpen(true),
+    [],
+  );
+  const closeAllowanceModal = useCallback(
+    () => setIsAllowanceModalOpen(false),
+    [],
+  );
 
   return (
     <CreateActionContext.Provider

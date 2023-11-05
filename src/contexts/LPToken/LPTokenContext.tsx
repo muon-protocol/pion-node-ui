@@ -28,18 +28,9 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
   const [LPTokenBalance, setLPTokenBalance] = useState<W3bNumber | null>(null);
 
-  const {
-    data: decimals,
-    isError,
-    error,
-    status,
-  } = useLpTokenDecimals({
+  const { data: decimals } = useLpTokenDecimals({
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
   });
-
-  useEffect(() => {
-    console.log('Error fetching LPToken decimals', isError, error, status);
-  }, [isError, error, status]);
 
   const {
     data: LPTokenBalanceData,
@@ -49,13 +40,10 @@ const LPTokenProvider = ({ children }: { children: ReactNode }) => {
     abi: LP_TOKEN_ABI,
     address: LP_TOKEN_ADDRESS[getCurrentChainId()],
     functionName: 'balanceOf',
-    args: [
-      walletAddress
-        ? walletAddress
-        : '0x0000000000000000000000000000000000000000',
-    ],
+    args: walletAddress ? [walletAddress] : undefined,
     chainId: getCurrentChainId(),
     watch: true,
+    enabled: !!walletAddress,
   });
 
   useEffect(() => {

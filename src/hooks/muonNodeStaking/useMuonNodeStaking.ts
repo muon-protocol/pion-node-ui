@@ -21,24 +21,29 @@ export const useMuonNodeStaking = () => {
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   const { data: valueOfBondedToken } = useMuonNodeStakingValueOfBondedToken({
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     args: muonNodeStakingUsers ? [muonNodeStakingUsers[4]] : undefined,
     watch: true,
+    enabled: !!muonNodeStakingUsers,
   });
 
   const { data: nodeBonALICEPower } = useBonAliceGetLockedOf({
     address: BONALICE_ADDRESS[getCurrentChainId()],
-    args: [
-      muonNodeStakingUsers ? muonNodeStakingUsers[4] : BigInt(0),
-      [
-        ALICE_ADDRESS[getCurrentChainId()],
-        LP_TOKEN_ADDRESS[getCurrentChainId()],
-      ],
-    ],
+    args: muonNodeStakingUsers
+      ? [
+          muonNodeStakingUsers[4],
+          [
+            ALICE_ADDRESS[getCurrentChainId()],
+            LP_TOKEN_ADDRESS[getCurrentChainId()],
+          ],
+        ]
+      : undefined,
     watch: true,
+    enabled: !!muonNodeStakingUsers,
   });
 
   const nodeBonALICE = useMemo(() => {
