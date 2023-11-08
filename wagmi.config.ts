@@ -5,20 +5,22 @@ import PION_ABI from './src/abis/ALICE';
 import BONPION_ABI from './src/abis/BonALICE';
 import LP_TOKEN_ABI from './src/abis/LPToken';
 import REWARD_ABI from './src/abis/Reward';
-import MUON_NODE_STAKING from './src/abis/MuonNodeStaking';
-import MUON_NODE_MANAGER from './src/abis/MuonNodeManager';
-import BOOSTER from './src/abis/Booster';
-import PANCAKE_PAIR from './src/abis/PancakePair';
+import MUON_NODE_STAKING_ABI from './src/abis/MuonNodeStaking';
+import MUON_NODE_MANAGER_ABI from './src/abis/MuonNodeManager';
+import BOOSTER_ABI from './src/abis/Booster';
+import PANCAKE_PAIR_ABI from './src/abis/PancakePair';
 import { erc20ABI } from 'wagmi';
+import OLD_TOKEN_ABI from './src/abis/PION/OldToken';
 
 import ALICE_ABI from './src/abis/ALICE/ALICE';
 import BONALICE_ABI from './src/abis/ALICE/BonALICE';
 import ALICE_LP_TOKEN_ABI from './src/abis/ALICE/LPToken';
 import ALICE_REWARD_ABI from './src/abis/ALICE/Reward';
-import ALICE_MUON_NODE_STAKING from './src/abis/ALICE/MuonNodeStaking';
-import ALICE_MUON_NODE_MANAGER from './src/abis/ALICE/MuonNodeManager';
-import ALICE_BOOSTER from './src/abis/ALICE/Booster';
-import ALICE_PANCAKE_PAIR from './src/abis/ALICE/PancakePair';
+import ALICE_MUON_NODE_STAKING_ABI from './src/abis/ALICE/MuonNodeStaking';
+import ALICE_MUON_NODE_MANAGER_ABI from './src/abis/ALICE/MuonNodeManager';
+import ALICE_BOOSTER_ABI from './src/abis/ALICE/Booster';
+import ALICE_PANCAKE_PAIR_ABI from './src/abis/ALICE/PancakePair';
+import MIGRRATE_HELPER_ABI from './src/abis/PION/MigrationHelper';
 
 export default defineConfig(() => {
   const env = loadEnv({
@@ -51,19 +53,19 @@ export default defineConfig(() => {
         },
         {
           name: 'MuonNodeStaking',
-          abi: MUON_NODE_STAKING,
+          abi: MUON_NODE_STAKING_ABI,
         },
         {
           name: 'MuonNodeManager',
-          abi: MUON_NODE_MANAGER,
+          abi: MUON_NODE_MANAGER_ABI,
         },
         {
           name: 'Booster',
-          abi: BOOSTER,
+          abi: BOOSTER_ABI,
         },
         {
           name: 'PancakePair',
-          abi: PANCAKE_PAIR,
+          abi: PANCAKE_PAIR_ABI,
         },
       ],
       plugins: [react()],
@@ -72,6 +74,10 @@ export default defineConfig(() => {
     return {
       out: 'src/abis/types/generated.ts',
       contracts: [
+        {
+          name: 'OldToken',
+          abi: OLD_TOKEN_ABI,
+        },
         {
           name: 'Alice',
           abi: ALICE_ABI,
@@ -90,19 +96,23 @@ export default defineConfig(() => {
         },
         {
           name: 'MuonNodeStaking',
-          abi: ALICE_MUON_NODE_STAKING,
+          abi: ALICE_MUON_NODE_STAKING_ABI,
         },
         {
           name: 'MuonNodeManager',
-          abi: ALICE_MUON_NODE_MANAGER,
+          abi: ALICE_MUON_NODE_MANAGER_ABI,
         },
         {
           name: 'Booster',
-          abi: ALICE_BOOSTER,
+          abi: ALICE_BOOSTER_ABI,
         },
         {
           name: 'PancakePair',
-          abi: ALICE_PANCAKE_PAIR,
+          abi: ALICE_PANCAKE_PAIR_ABI,
+        },
+        {
+          name: 'MigrationHelper',
+          abi: MIGRRATE_HELPER_ABI,
         },
       ],
       plugins: [react()],
