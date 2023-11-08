@@ -23,7 +23,10 @@ export const Sidebar = () => {
   const { bonALICEs } = useBonALICE();
   const { muonNodeStakingUsers } = useMuonNodeStaking();
 
-  if (location.pathname === routes.migration.path) {
+  if (
+    location.pathname === routes.migration.path ||
+    location.pathname === routes.claim.path
+  ) {
     return null;
   }
 

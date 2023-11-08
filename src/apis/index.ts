@@ -75,3 +75,12 @@ export async function checkIPwithNodeSpecificationsAPI({
   });
   return response.data;
 }
+
+export async function getMigrationDataAPI({
+  walletAddress,
+}: {
+  walletAddress: string;
+}) {
+  const response = await axiosInstance.get('/migrate/' + walletAddress);
+  return response.data;
+}

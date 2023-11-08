@@ -9,6 +9,7 @@ export default defineConfig({
       '/monitor/validateNewNodeData': 'https://app.muon.net/',
       '/api/price/': 'https://app.muon.net/',
       '/stats/data': 'https://app.muon.net/',
+      '/migrate/': 'https://alice-test.muon.net/',
     },
   },
 });

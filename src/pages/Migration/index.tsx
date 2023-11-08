@@ -1,5 +1,6 @@
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { ConnectWalletButton } from '../../components/Common/ConnectWalletButton.tsx';
+import { useMigration } from '../../hooks/migration/useMigration.ts';
 
 const Migration = () => {
   return (
@@ -67,9 +68,12 @@ const ConnectWalletBody = () => {
 };
 
 const ClaimTokenBody = () => {
-  if (Math.random() > 0.5) {
+  const { amount } = useMigration();
+
+  if (amount && amount.big > BigInt(0)) {
     return <ClaimTokenWalletWithBalance />;
   }
+
   return <ClaimTokenWalletWithoutBalance />;
 };
 
@@ -100,7 +104,7 @@ const ClaimTokenWalletWithBalance = () => {
             src="/assets/images/migration/claim-icon.svg"
             alt=""
           />
-          <p className="text-inherit">Claim PION</p>
+          <p className="text-inherit">Approve old PION</p>
         </button>
       </div>
     </>
@@ -117,7 +121,9 @@ const ClaimTokenWalletWithoutBalance = () => {
       <div className="card bg-card-bg-v2 rounded-[18px] flex flex-col gap-6 justify-center items-center p-12 pb-8">
         <img src="/assets/images/migration/no-record-icon.svg" alt="" />
         <p className="text-gary4 text-lg font-medium max-md:text-center">
-          No record found, try another address
+          No record found, try another address <br />
+          You have 200 PION to claim but you do not have this amount of old PION
+          to burn.
         </p>
       </div>
     </>

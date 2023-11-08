@@ -67,6 +67,10 @@ export default defineConfig(() => {
           name: 'PancakePair',
           abi: PANCAKE_PAIR_ABI,
         },
+        {
+          name: 'MigrationHelper',
+          abi: MIGRRATE_HELPER_ABI,
+        },
       ],
       plugins: [react()],
     };
@@ -109,10 +113,6 @@ export default defineConfig(() => {
         {
           name: 'PancakePair',
           abi: ALICE_PANCAKE_PAIR_ABI,
-        },
-        {
-          name: 'MigrationHelper',
-          abi: MIGRRATE_HELPER_ABI,
         },
       ],
       plugins: [react()],
