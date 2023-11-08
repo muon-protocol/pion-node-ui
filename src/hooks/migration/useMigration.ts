@@ -9,7 +9,10 @@ import {
   OLD_TOKEN_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import { useOldTokenBalanceOf } from '../../abis/types/generated.ts';
+import {
+  useMigrationHelperClaimed,
+  useOldTokenBalanceOf,
+} from '../../abis/types/generated.ts';
 import useWagmiContractWrite from '../useWagmiContractWrite.ts';
 import OLD_TOKEN_ABI from '../../abis/PION/OldToken';
 import MIGRRATE_HELPER_ABI from '../../abis/PION/MigrationHelper';
@@ -107,6 +110,14 @@ export const useMigration = () => {
     }
   }, [claim]);
 
+  const { data: claimedAmount } = useMigrationHelperClaimed({
+    address: MIGRATION_HELPER[getCurrentChainId()],
+    args: walletAddress ? [walletAddress] : undefined,
+    chainId: getCurrentChainId(),
+    watch: true,
+    enabled: !!walletAddress,
+  });
+
   return {
     snapshotAmount,
     signature,
@@ -117,5 +128,11 @@ export const useMigration = () => {
         : null,
     approveBalanceToHelper,
     claimNewToken,
+    claimedAmount:
+      claimedAmount !== undefined ? w3bNumberFromBigint(claimedAmount) : null,
+    claimableAmount:
+      snapshotAmount && claimedAmount
+        ? w3bNumberFromBigint(snapshotAmount.big - claimedAmount)
+        : null,
   };
 };

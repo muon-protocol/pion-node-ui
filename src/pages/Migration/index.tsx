@@ -68,12 +68,15 @@ const ConnectWalletBody = () => {
 };
 
 const ClaimTokenBody = () => {
-  const { snapshotAmount } = useMigration();
+  const { snapshotAmount, claimableAmount } = useMigration();
 
   if (snapshotAmount && snapshotAmount.big > BigInt(0)) {
-    return <ClaimTokenWalletWithBalance />;
+    if (claimableAmount && claimableAmount.big > BigInt(0)) {
+      return <ClaimTokenWalletWithBalance />;
+    } else {
+      return <AlreadyClaimedAvailableAmount />;
+    }
   }
-
   return <ClaimTokenWalletWithoutBalance />;
 };
 
@@ -143,8 +146,29 @@ const ClaimTokenWalletWithoutBalance = () => {
       </p>
       <div className="card bg-card-bg-v2 rounded-[18px] flex flex-col gap-6 justify-center items-center p-12 pb-8">
         <img src="/assets/images/migration/no-record-icon.svg" alt="" />
-        <p className="text-gary4 text-lg font-medium max-md:text-center">
+        <p className="text-gary4 text-lg font-medium text-center">
           No record found, try another address <br />
+        </p>
+      </div>
+    </>
+  );
+};
+
+const AlreadyClaimedAvailableAmount = () => {
+  const { claimedAmount } = useMigration();
+
+  if (!claimedAmount) return null;
+
+  return (
+    <>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
+        [Explainer: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+        do eiusmod tempor incididunt ut labore et dolore magna ]
+      </p>
+      <div className="card bg-success-green-20 rounded-[18px] flex flex-col gap-6 justify-center items-center p-12 pb-12 md:min-w-[500px]">
+        {/*<img src="/assets/images/migration/no-record-icon.svg" alt="" />*/}
+        <p className="text-gary4 text-lg font-medium text-center">
+          You claimed {claimedAmount.dsp} PION tokens.
         </p>
       </div>
     </>
