@@ -68,9 +68,9 @@ const ConnectWalletBody = () => {
 };
 
 const ClaimTokenBody = () => {
-  const { amount } = useMigration();
+  const { snapshotAmount } = useMigration();
 
-  if (amount && amount.big > BigInt(0)) {
+  if (snapshotAmount && snapshotAmount.big > BigInt(0)) {
     return <ClaimTokenWalletWithBalance />;
   }
 
@@ -78,6 +78,16 @@ const ClaimTokenBody = () => {
 };
 
 const ClaimTokenWalletWithBalance = () => {
+  const {
+    oldTokenAllowance,
+    oldTokenBalance,
+    snapshotAmount,
+    approveBalanceToHelper,
+    claimNewToken,
+  } = useMigration();
+
+  if (!oldTokenAllowance || !oldTokenBalance || !snapshotAmount) return null;
+
   return (
     <>
       <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
@@ -86,26 +96,39 @@ const ClaimTokenWalletWithBalance = () => {
       </p>
       <div className="card bg-primary-L1-50 rounded-[18px] flex flex-col justify-between min-h-[290px] px-11 py-5 pr-6 md:pt-7 md:pl-14 md:pr-10 md:pb-8 w-full md:w-[517px]">
         <ul className="list-disc">
-          {Math.random() > 0.2 && (
+          {Math.random() > 0.0 && (
             <li className="text-white mb-3 text-lg font-medium">
               You had <strong>4000 PION</strong> tokens in your wallet at
               October 23rd, 2023 [Ethereum Mainnet Block #666].
             </li>
           )}
-          {Math.random() > 0.2 && (
+          {Math.random() > 0.0 && (
             <li className="text-white mb-10 text-lg font-medium">
               You had <strong>4000 PION</strong> tokens in MEXC exchange.
             </li>
           )}
         </ul>
-        <button className="btn btn--white btn--medium-with-icon mx-auto">
-          <img
-            className="h-6 w-6"
-            src="/assets/images/migration/claim-icon.svg"
-            alt=""
-          />
-          <p className="text-inherit">Approve old PION</p>
-        </button>
+        {oldTokenAllowance.big <
+        Math.min(Number(oldTokenBalance.big), Number(snapshotAmount.big)) ? (
+          <button
+            onClick={() => approveBalanceToHelper()}
+            className="btn btn--white btn--medium-with-icon mx-auto"
+          >
+            <p className="text-inherit">Approve old PION</p>
+          </button>
+        ) : (
+          <button
+            onClick={() => claimNewToken()}
+            className="btn btn--white btn--medium-with-icon mx-auto"
+          >
+            <img
+              className="h-6 w-6"
+              src="/assets/images/migration/claim-icon.svg"
+              alt=""
+            />
+            <p className="text-inherit">Claim PION</p>
+          </button>
+        )}
       </div>
     </>
   );
@@ -122,8 +145,6 @@ const ClaimTokenWalletWithoutBalance = () => {
         <img src="/assets/images/migration/no-record-icon.svg" alt="" />
         <p className="text-gary4 text-lg font-medium max-md:text-center">
           No record found, try another address <br />
-          You have 200 PION to claim but you do not have this amount of old PION
-          to burn.
         </p>
       </div>
     </>

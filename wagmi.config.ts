@@ -32,6 +32,10 @@ export default defineConfig(() => {
       out: 'src/abis/types/generated.ts',
       contracts: [
         {
+          name: 'OldToken',
+          abi: OLD_TOKEN_ABI,
+        },
+        {
           name: 'erc20',
           abi: erc20ABI,
         },
@@ -78,10 +82,6 @@ export default defineConfig(() => {
     return {
       out: 'src/abis/types/generated.ts',
       contracts: [
-        {
-          name: 'OldToken',
-          abi: OLD_TOKEN_ABI,
-        },
         {
           name: 'Alice',
           abi: ALICE_ABI,
