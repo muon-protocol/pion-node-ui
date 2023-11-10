@@ -1,6 +1,7 @@
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
 import { ConnectWalletButton } from '../../components/Common/ConnectWalletButton.tsx';
 import { useMigration } from '../../hooks/migration/useMigration.ts';
+import { getCurrentChainId } from '../../constants/chains.ts';
 
 const Migration = () => {
   return (
@@ -130,6 +131,8 @@ const ClaimTokenWalletWithBalance = () => {
     claimNewToken,
   } = useMigration();
 
+  const { chainId, handleSwitchNetwork } = useUserProfile();
+
   if (
     !oldTokenAllowance ||
     !oldTokenBalance ||
@@ -153,7 +156,14 @@ const ClaimTokenWalletWithBalance = () => {
           {/*  </li>*/}
           {/*)}*/}
         </ul>
-        {oldTokenAllowance.big < claimableAmount.big ? (
+        {chainId !== getCurrentChainId() ? (
+          <button
+            onClick={() => handleSwitchNetwork(getCurrentChainId())}
+            className="btn btn--white btn--medium-with-icon mx-auto"
+          >
+            Switch Network
+          </button>
+        ) : oldTokenAllowance.big < claimableAmount.big ? (
           <button
             onClick={() => approveBalanceToHelper()}
             className="btn btn--white btn--medium-with-icon mx-auto"
