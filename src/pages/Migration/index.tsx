@@ -6,7 +6,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 const Migration = () => {
   return (
     <div className="w-full page__bg">
-      <div className="page flex flex-col md:!pt-60 items-center gap-6">
+      <div className="page flex flex-col md:!pt-48 items-center gap-6">
         <Hero />
         <Title />
         <Body />
