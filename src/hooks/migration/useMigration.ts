@@ -1,5 +1,5 @@
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { getMigrationDataAPI } from '../../apis';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
@@ -58,18 +58,29 @@ export const useMigration = () => {
     18,
   );
 
+  const { data: claimedAmount } = useMigrationHelperClaimed({
+    address: MIGRATION_HELPER[getCurrentChainId()],
+    args: walletAddress ? [walletAddress] : undefined,
+    chainId: getCurrentChainId(),
+    watch: true,
+    enabled: !!walletAddress,
+  });
+
+  const claimableAmount = useMemo(() => {
+    if (snapshotAmount != null && claimedAmount != null) {
+      return w3bNumberFromBigint(snapshotAmount.big - claimedAmount);
+    }
+    return null;
+  }, [snapshotAmount, claimedAmount]);
+
   const { callback: approveOldToken } = useWagmiContractWrite({
     address: OLD_TOKEN_ADDRESS[getCurrentChainId()],
     abi: OLD_TOKEN_ABI,
     functionName: 'approve',
     chainId: getCurrentChainId(),
-    args:
-      snapshotAmount && oldTokenBalance
-        ? [
-            MIGRATION_HELPER[getCurrentChainId()],
-            Math.min(Number(snapshotAmount.big), Number(oldTokenBalance)),
-          ]
-        : undefined,
+    args: claimableAmount
+      ? [MIGRATION_HELPER[getCurrentChainId()], claimableAmount.big]
+      : undefined,
   });
 
   const approveBalanceToHelper = useCallback(async () => {
@@ -110,14 +121,6 @@ export const useMigration = () => {
     }
   }, [claim]);
 
-  const { data: claimedAmount } = useMigrationHelperClaimed({
-    address: MIGRATION_HELPER[getCurrentChainId()],
-    args: walletAddress ? [walletAddress] : undefined,
-    chainId: getCurrentChainId(),
-    watch: true,
-    enabled: !!walletAddress,
-  });
-
   return {
     snapshotAmount,
     signature,
@@ -130,9 +133,6 @@ export const useMigration = () => {
     claimNewToken,
     claimedAmount:
       claimedAmount !== undefined ? w3bNumberFromBigint(claimedAmount) : null,
-    claimableAmount:
-      snapshotAmount && claimedAmount
-        ? w3bNumberFromBigint(snapshotAmount.big - claimedAmount)
-        : null,
+    claimableAmount,
   };
 };

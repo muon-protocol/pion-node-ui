@@ -5,7 +5,7 @@ import { useMigration } from '../../hooks/migration/useMigration.ts';
 const Migration = () => {
   return (
     <div className="w-full page__bg">
-      <div className="page flex flex-col md:!pt-48 items-center gap-6">
+      <div className="page flex flex-col md:!pt-60 items-center gap-6">
         <Hero />
         <Title />
         <Body />
@@ -58,19 +58,22 @@ const Body = () => {
 const ConnectWalletBody = () => {
   return (
     <>
-      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
-        [Explainer: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-        do eiusmod tempor incididunt ut labore et dolore magna ]
-      </p>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
       <ConnectWalletButton size="md" withIcon light />
     </>
   );
 };
 
 const ClaimTokenBody = () => {
-  const { snapshotAmount, claimableAmount } = useMigration();
+  const { snapshotAmount, claimableAmount, oldTokenBalance } = useMigration();
+
+  if (!oldTokenBalance || !claimableAmount || !snapshotAmount)
+    return <LoadingCard />;
 
   if (snapshotAmount && snapshotAmount.big > BigInt(0)) {
+    if (oldTokenBalance && oldTokenBalance.big < claimableAmount.big) {
+      return <PleaseProvideMoreBalance />;
+    }
     if (claimableAmount && claimableAmount.big > BigInt(0)) {
       return <ClaimTokenWalletWithBalance />;
     } else {
@@ -80,39 +83,77 @@ const ClaimTokenBody = () => {
   return <ClaimTokenWalletWithoutBalance />;
 };
 
+const PleaseProvideMoreBalance = () => {
+  const { oldTokenBalance, snapshotAmount } = useMigration();
+  if (!oldTokenBalance || !snapshotAmount) return null;
+
+  return (
+    <>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
+      <div className="card bg-alert-red-20 rounded-[18px] flex flex-col text-center justify-between px-11 py-5 pr-6 w-full md:w-[517px]">
+        <p className="text-white mb-3 text-lg font-medium">
+          Currently, you have <strong>{oldTokenBalance.dsp} PION</strong> tokens
+          in your wallet.
+        </p>
+        <p className="text-white text-lg font-medium">
+          You need to have <strong>{snapshotAmount.dsp} PION</strong> tokens in
+          your wallet to claim PION tokens.
+        </p>
+      </div>
+    </>
+  );
+};
+
+const LoadingCard = () => {
+  return (
+    <>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
+      <div className="card bg-primary-L1-50 rounded-[18px] flex flex-col justify-center min-h-[290px] px-11 py-5 pr-6 md:pt-7 md:pl-14 md:pr-10 md:pb-8 w-full items-center md:w-[517px]">
+        <div
+          className="inline-block h-8 w-8 animate-spin rounded-full text-white border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          role="status"
+        >
+          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"></span>
+        </div>
+      </div>
+    </>
+  );
+};
+
 const ClaimTokenWalletWithBalance = () => {
   const {
     oldTokenAllowance,
     oldTokenBalance,
     snapshotAmount,
+    claimableAmount,
     approveBalanceToHelper,
     claimNewToken,
   } = useMigration();
 
-  if (!oldTokenAllowance || !oldTokenBalance || !snapshotAmount) return null;
+  if (
+    !oldTokenAllowance ||
+    !oldTokenBalance ||
+    !snapshotAmount ||
+    !claimableAmount
+  )
+    return null;
 
   return (
     <>
-      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
-        [Explainer: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-        do eiusmod tempor incididunt ut labore et dolore magna ]
-      </p>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
       <div className="card bg-primary-L1-50 rounded-[18px] flex flex-col justify-between min-h-[290px] px-11 py-5 pr-6 md:pt-7 md:pl-14 md:pr-10 md:pb-8 w-full md:w-[517px]">
         <ul className="list-disc">
-          {Math.random() > 0.0 && (
-            <li className="text-white mb-3 text-lg font-medium">
-              You had <strong>4000 PION</strong> tokens in your wallet at
-              October 23rd, 2023 [Ethereum Mainnet Block #666].
-            </li>
-          )}
-          {Math.random() > 0.0 && (
-            <li className="text-white mb-10 text-lg font-medium">
-              You had <strong>4000 PION</strong> tokens in MEXC exchange.
-            </li>
-          )}
+          <li className="text-white mb-3 text-lg font-medium">
+            You had <strong>{snapshotAmount.dsp} PION</strong> tokens in your
+            wallet at October 23rd, 2023 [Ethereum Mainnet Block #18426798].
+          </li>
+          {/*{Math.random() > 0.0 && (*/}
+          {/*  <li className="text-white mb-10 text-lg font-medium">*/}
+          {/*    You had <strong> PION</strong> tokens in MEXC exchange.*/}
+          {/*  </li>*/}
+          {/*)}*/}
         </ul>
-        {oldTokenAllowance.big <
-        Math.min(Number(oldTokenBalance.big), Number(snapshotAmount.big)) ? (
+        {oldTokenAllowance.big < claimableAmount.big ? (
           <button
             onClick={() => approveBalanceToHelper()}
             className="btn btn--white btn--medium-with-icon mx-auto"
@@ -140,10 +181,7 @@ const ClaimTokenWalletWithBalance = () => {
 const ClaimTokenWalletWithoutBalance = () => {
   return (
     <>
-      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
-        [Explainer: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-        do eiusmod tempor incididunt ut labore et dolore magna ]
-      </p>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
       <div className="card bg-card-bg-v2 rounded-[18px] flex flex-col gap-6 justify-center items-center p-12 pb-8">
         <img src="/assets/images/migration/no-record-icon.svg" alt="" />
         <p className="text-gary4 text-lg font-medium text-center">
@@ -161,10 +199,7 @@ const AlreadyClaimedAvailableAmount = () => {
 
   return (
     <>
-      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]">
-        [Explainer: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-        do eiusmod tempor incididunt ut labore et dolore magna ]
-      </p>
+      <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
       <div className="card bg-success-green-20 rounded-[18px] flex flex-col gap-6 justify-center items-center p-12 pb-12 md:min-w-[500px]">
         {/*<img src="/assets/images/migration/no-record-icon.svg" alt="" />*/}
         <p className="text-gary4 text-lg font-medium text-center">
