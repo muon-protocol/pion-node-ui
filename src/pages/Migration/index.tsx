@@ -129,6 +129,7 @@ const ClaimTokenWalletWithBalance = () => {
     claimableAmount,
     approveBalanceToHelper,
     claimNewToken,
+    snapshotMEXCAmount,
   } = useMigration();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -137,7 +138,8 @@ const ClaimTokenWalletWithBalance = () => {
     !oldTokenAllowance ||
     !oldTokenBalance ||
     !snapshotAmount ||
-    !claimableAmount
+    !claimableAmount ||
+    !snapshotMEXCAmount
   )
     return null;
 
@@ -147,14 +149,17 @@ const ClaimTokenWalletWithBalance = () => {
       <div className="card bg-primary-L1-50 rounded-[18px] flex flex-col justify-between min-h-[290px] px-11 py-5 pr-6 md:pt-7 md:pl-14 md:pr-10 md:pb-8 w-full md:w-[517px]">
         <ul className="list-disc">
           <li className="text-white mb-3 text-lg font-medium">
-            You had <strong>{snapshotAmount.dsp} PION</strong> tokens in your
-            wallet at October 23rd, 2023 [Ethereum Mainnet Block #18426798].
+            You had{' '}
+            <strong>{snapshotAmount.dsp - snapshotMEXCAmount.dsp} PION</strong>{' '}
+            tokens in your wallet at October 23rd, 2023 [Ethereum Mainnet Block
+            #18426798].
           </li>
-          {/*{Math.random() > 0.0 && (*/}
-          {/*  <li className="text-white mb-10 text-lg font-medium">*/}
-          {/*    You had <strong> PION</strong> tokens in MEXC exchange.*/}
-          {/*  </li>*/}
-          {/*)}*/}
+          {Math.random() > 0.0 && (
+            <li className="text-white mb-10 text-lg font-medium">
+              You had <strong>{snapshotMEXCAmount.dsp}</strong> tokens in MEXC
+              exchange.
+            </li>
+          )}
         </ul>
         {chainId !== getCurrentChainId() ? (
           <button

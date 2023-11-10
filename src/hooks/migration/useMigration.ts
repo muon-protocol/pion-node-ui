@@ -21,6 +21,8 @@ export const useMigration = () => {
   const { walletAddress } = useUserProfile();
 
   const [snapshotAmount, setSnapshotAmount] = useState<null | W3bNumber>(null);
+  const [snapshotMEXCAmount, setSnapshotMEXCAmount] =
+    useState<null | W3bNumber>(null);
   const [signature, setSignature] = useState<null | string>(null);
 
   const { data: oldTokenBalance } = useOldTokenBalanceOf({
@@ -38,6 +40,7 @@ export const useMigration = () => {
           const response = await getMigrationDataAPI({ walletAddress });
           if (response.success) {
             setSnapshotAmount(w3bNumberFromBigint(BigInt(response.amount)));
+            setSnapshotMEXCAmount(w3bNumberFromBigint(BigInt(response.mexc)));
             setSignature(response.signature);
           }
         } catch (error) {
@@ -123,6 +126,7 @@ export const useMigration = () => {
 
   return {
     snapshotAmount,
+    snapshotMEXCAmount,
     signature,
     oldTokenAllowance,
     oldTokenBalance:
