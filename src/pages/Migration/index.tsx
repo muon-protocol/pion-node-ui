@@ -93,12 +93,12 @@ const PleaseProvideMoreBalance = () => {
       <p className="text-center text-xl font-normal md:text-xl md:font-medium w-full md:max-w-[517px]"></p>
       <div className="card bg-alert-red-20 rounded-[18px] flex flex-col text-center justify-between px-11 py-5 pr-6 w-full md:w-[517px]">
         <p className="text-white mb-3 text-lg font-medium">
-          Currently, you have <strong>{oldTokenBalance.dsp} PION</strong> tokens
-          in your wallet.
+          Currently, you have <strong>{oldTokenBalance.dsp} old PION</strong>{' '}
+          tokens in your wallet.
         </p>
         <p className="text-white text-lg font-medium">
-          You need to have <strong>{snapshotAmount.dsp} PION</strong> tokens in
-          your wallet to claim PION tokens.
+          You need to have <strong>{snapshotAmount.dsp} old PION</strong> tokens
+          in your wallet to claim PION tokens.
         </p>
       </div>
     </>
