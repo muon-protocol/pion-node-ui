@@ -64,7 +64,7 @@ const UpgradeAllowanceModalBody = () => {
             ? 'Muon node staking '
             : 'Booster '
           : `Bonded ${strings.token} `}
-        Contract. Enter at least the amount you want to create and click Next
+        Contract. Enter at least the amount you want to boost and click Next
         then Approve button on metamask.
       </p>
       {(nodeBonALICE.length > 0 &&

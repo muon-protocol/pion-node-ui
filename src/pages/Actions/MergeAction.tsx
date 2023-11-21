@@ -146,7 +146,7 @@ const RenderMergeBody = () => {
             disabled={isMergeBonALICEsButtonDisabled}
             className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
           >
-            Merge Bonded ${strings.tokens}
+            Merge Bonded {strings.tokens}
           </button>
         )}
       </FadeIn>

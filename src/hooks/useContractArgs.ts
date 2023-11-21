@@ -19,7 +19,7 @@ export const useLockArgs = ({
       !tokenId ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
       return undefined;
@@ -46,7 +46,7 @@ export const useLockToBondedTokenArgs = ({
       !tokenId ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
       return undefined;
@@ -72,7 +72,7 @@ export const useLockUSDCArgs = ({
       !tokenId ||
       !LPTokenAmount ||
       !LPTokenAllowance ||
-      LPTokenAmount.dsp === 0 ||
+      LPTokenAmount.big === BigInt(0) ||
       LPTokenAmount.big > LPTokenAllowance.big
     )
       return undefined;
@@ -89,7 +89,7 @@ export const useApproveArgs = ({
   approveAmount: W3bNumber;
 }) => {
   return useMemo(() => {
-    if (!spenderAddress || !approveAmount || approveAmount.dsp === 0)
+    if (!spenderAddress || !approveAmount || approveAmount.big === BigInt(0))
       return undefined;
 
     return [spenderAddress, approveAmount.big];
@@ -113,7 +113,7 @@ export const useMintArgs = ({
       !walletAddress ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
       return undefined;
@@ -142,9 +142,9 @@ export const useCreateAndBoostArgs = ({
       !ALICEAllowance ||
       !LPTokenAmount ||
       !LPTokenAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp ||
-      LPTokenAmount.dsp === 0 ||
+      LPTokenAmount.big === BigInt(0) ||
       LPTokenAmount.dsp > LPTokenAllowance.dsp
     )
       return undefined;
@@ -161,7 +161,8 @@ export const useBoostArgs = ({
   boostAmount: W3bNumber;
 }) => {
   return useMemo(() => {
-    if (!tokenId || !boostAmount || boostAmount.dsp === 0) return undefined;
+    if (!tokenId || !boostAmount || boostAmount.big === BigInt(0))
+      return undefined;
 
     return [tokenId, boostAmount.big];
   }, [tokenId, boostAmount]);

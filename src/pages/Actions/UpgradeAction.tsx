@@ -154,7 +154,7 @@ export const RenderUpgradeBody = () => {
           disabled={!selectedUpgradeBonALICE}
         />
       </FadeIn>
-      <FadeIn className="mb-4" duration={0.1} delay={0.1}>
+      <FadeIn className="hidden" duration={0.1} delay={0.1}>
         <BoostingAmountInput
           withLink
           rightText={'USDC'}
@@ -168,7 +168,7 @@ export const RenderUpgradeBody = () => {
       </FadeIn>
 
       {selectedUpgradeBonALICE && (
-        <MoveUpIn y={-10} className="mb-6" duration={0.1} delay={0.3}>
+        <MoveUpIn y={-10} className="mb-6 mt-4" duration={0.1} delay={0.3}>
           <span className="flex justify-between max-md:text-sm text-gray10 mb-1 md:mb-2">
             <p className="font-light">Current ${strings.nft} amount:</p>
             <p className="font-medium">{selectedUpgradeBonALICE.nodePower}</p>
