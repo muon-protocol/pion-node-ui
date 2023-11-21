@@ -101,7 +101,7 @@ export const RenderCreateBody = () => {
         />
       </FadeIn>
 
-      <FadeIn className="mb-4" duration={0.1} delay={0.1}>
+      <FadeIn className="hidden" duration={0.1} delay={0.1}>
         <BoostingAmountInput
           withLink
           rightText={'USDC'}

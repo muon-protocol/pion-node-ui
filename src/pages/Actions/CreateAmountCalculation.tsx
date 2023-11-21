@@ -20,7 +20,7 @@ const CreateAmountCalculation = () => {
         y={-10}
         duration={0.1}
         delay={0.1}
-        className="flex w-full justify-between items-center"
+        className="flex mt-4 w-full justify-between items-center"
       >
         <span className="text-gray10">
           <p className="font-light">New {strings.nft} amount:</p>
