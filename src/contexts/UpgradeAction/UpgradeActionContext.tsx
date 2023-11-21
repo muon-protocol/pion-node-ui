@@ -17,7 +17,7 @@ import {
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import ALICE_ABI from '../../abis/ALICE';
+import ALICE_ABI from '../../abis/PION/Mainnet/Token.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import {
   useApproveArgs,
@@ -25,16 +25,16 @@ import {
   useLockToBondedTokenArgs,
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
-import BONALICE_ABI from '../../abis/BonALICE.ts';
-import LP_TOKEN_ABI from '../../abis/LPToken.ts';
-import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
+import LP_TOKEN_ABI from '../../abis/PION/Mainnet/LPToken.ts';
+import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 // import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import BOOSTER_ABI from '../../abis/Booster.ts';
+import BOOSTER_ABI from '../../abis/PION/Mainnet/Booster.ts';
 import { getUserSignatureForBoostAPI } from '../../apis';
 import { waitForTransaction, writeContract } from '@wagmi/core';
 import toast from 'react-hot-toast';

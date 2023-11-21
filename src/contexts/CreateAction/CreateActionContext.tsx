@@ -6,9 +6,9 @@ import {
   useState,
 } from 'react';
 import useALICE from '../ALICE/useALICE.ts';
-import BOOSTER_ABI from '../../abis/Booster.ts';
-import BONALICE_ABI from '../../abis/BonALICE.ts';
-import ALICE_ABI from '../../abis/ALICE.ts';
+import BOOSTER_ABI from '../../abis/PION/Mainnet/Booster.ts';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
+import ALICE_ABI from '../../abis/PION/Mainnet/Token.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,

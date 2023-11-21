@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { W3bNumber } from '../types/wagmi.ts';
 import { useContractRead } from 'wagmi';
-import ALICE_ABI from '../abis/ALICE';
+import ALICE_ABI from '../abis/PION/Mainnet/Token.ts';
 import { BONALICE_ADDRESS } from '../constants/addresses.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
 import { w3bNumberFromBigint } from '../utils/web3.ts';

@@ -14,8 +14,8 @@ import {
   useOldTokenBalanceOf,
 } from '../../abis/types/generated.ts';
 import useWagmiContractWrite from '../useWagmiContractWrite.ts';
-import OLD_TOKEN_ABI from '../../abis/PION/OldToken';
-import MIGRRATE_HELPER_ABI from '../../abis/PION/MigrationHelper';
+import OLD_TOKEN_ABI from '../../abis/PION/BSCTestnet/OldToken.ts';
+import MIGRRATE_HELPER_ABI from '../../abis/PION/BSCTestnet/MigrationHelper.ts';
 
 export const useMigration = () => {
   const { walletAddress } = useUserProfile();

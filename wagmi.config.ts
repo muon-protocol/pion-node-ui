@@ -1,118 +1,174 @@
 import { defineConfig, loadEnv } from '@wagmi/cli';
 import { react } from '@wagmi/cli/plugins';
 
-import PION_ABI from './src/abis/ALICE';
-import BONPION_ABI from './src/abis/BonALICE';
-import LP_TOKEN_ABI from './src/abis/LPToken';
-import REWARD_ABI from './src/abis/Reward';
-import MUON_NODE_STAKING_ABI from './src/abis/MuonNodeStaking';
-import MUON_NODE_MANAGER_ABI from './src/abis/MuonNodeManager';
-import BOOSTER_ABI from './src/abis/Booster';
-import PANCAKE_PAIR_ABI from './src/abis/PancakePair';
+// PION BSC Mainnet
+import PION_MAINNET_TOKEN_ABI from './src/abis/PION/Mainnet/Token';
+import PION_MAINNET_NFT_ABI from './src/abis/PION/Mainnet/NFT';
+import PION_MAINNET_LP_TOKEN_ABI from './src/abis/PION/Mainnet/LPToken';
+import PION_MAINNET_MUON_REWARD_MANAGER_ABI from './src/abis/PION/Mainnet/Reward';
+import PION_MAINNET_MUON_NODE_STAKING_ABI from './src/abis/PION/Mainnet/MuonNodeStaking';
+import PION_MAINNET_MUON_NODE_MANAGER_ABI from './src/abis/PION/Mainnet/MuonNodeManager';
+import PION_MAINNET_BOOSTER_ABI from './src/abis/PION/Mainnet/Booster';
+import PION_MAINNET_PANCAKE_PAIR_ABI from './src/abis/PION/Mainnet/PancakePair';
 import { erc20ABI } from 'wagmi';
-import OLD_TOKEN_ABI from './src/abis/PION/OldToken';
 
-import ALICE_ABI from './src/abis/ALICE/ALICE';
-import BONALICE_ABI from './src/abis/ALICE/BonALICE';
-import ALICE_LP_TOKEN_ABI from './src/abis/ALICE/LPToken';
-import ALICE_REWARD_ABI from './src/abis/ALICE/Reward';
-import ALICE_MUON_NODE_STAKING_ABI from './src/abis/ALICE/MuonNodeStaking';
-import ALICE_MUON_NODE_MANAGER_ABI from './src/abis/ALICE/MuonNodeManager';
-import ALICE_BOOSTER_ABI from './src/abis/ALICE/Booster';
-import ALICE_PANCAKE_PAIR_ABI from './src/abis/ALICE/PancakePair';
-import MIGRRATE_HELPER_ABI from './src/abis/PION/MigrationHelper';
+// ALICE BSC Testnet
+import ALICE_TESTNET_TOKEN_ABI from './src/abis/ALICE/BSCTestnet/ALICE';
+import ALICE_TESTNET_NFT_ABI from './src/abis/ALICE/BSCTestnet/BonALICE';
+import ALICE_TESTNET_LP_TOKEN_ABI from './src/abis/ALICE/BSCTestnet/LPToken';
+import ALICE_TESTNET_MUON_REWARD_MANAGER_ABI from './src/abis/ALICE/BSCTestnet/Reward';
+import ALICE_TESTNET_MUON_NODE_STAKING_ABI from './src/abis/ALICE/BSCTestnet/MuonNodeStaking';
+import ALICE_TESTNET_MUON_NODE_MANAGER_ABI from './src/abis/ALICE/BSCTestnet/MuonNodeManager';
+import ALICE_TESTNET_BOOSTER_ABI from './src/abis/ALICE/BSCTestnet/Booster';
+import ALICE_TESTNET_PANCAKE_PAIR_ABI from './src/abis/ALICE/BSCTestnet/PancakePair';
+
+// PION BSC Testnet
+import PION_TESTNET_TOKEN_ABI from './src/abis/PION/BSCTestnet/Token';
+import PION_TESTNET_NFT_ABI from './src/abis/PION/BSCTestnet/NFT';
+import PION_TESTNET_MUON_NODE_MANAGER_ABI from './src/abis/PION/BSCTestnet/MuonNodeManager';
+import PION_TESTNET_MUON_NODE_STAKING_ABI from './src/abis/PION/BSCTestnet/MuonNodeStaking';
+import PION_TESTNET_MUON_REWARD_MANAGER_ABI from './src/abis/PION/BSCTestnet/MuonRewardManager';
+import PION_TESTNET_OLD_TOKEN_ABI from './src/abis/PION/BSCTestnet/OldToken';
+import PION_TESTNET_MIGRRATE_HELPER_ABI from './src/abis/PION/BSCTestnet/MigrationHelper';
 
 export default defineConfig(() => {
   const env = loadEnv({
     mode: process.env.NODE_ENV,
     envDir: process.cwd(),
   });
+
   if (env.VITE_PROJECT_NAME === 'PION') {
-    return {
-      out: 'src/abis/types/generated.ts',
-      contracts: [
-        {
-          name: 'OldToken',
-          abi: OLD_TOKEN_ABI,
-        },
-        {
-          name: 'erc20',
-          abi: erc20ABI,
-        },
-        {
-          name: 'Alice',
-          abi: PION_ABI,
-        },
-        {
-          name: 'BonALICE',
-          abi: BONPION_ABI,
-        },
-        {
-          name: 'LpToken',
-          abi: LP_TOKEN_ABI,
-        },
-        {
-          name: 'Reward',
-          abi: REWARD_ABI,
-        },
-        {
-          name: 'MuonNodeStaking',
-          abi: MUON_NODE_STAKING_ABI,
-        },
-        {
-          name: 'MuonNodeManager',
-          abi: MUON_NODE_MANAGER_ABI,
-        },
-        {
-          name: 'Booster',
-          abi: BOOSTER_ABI,
-        },
-        {
-          name: 'PancakePair',
-          abi: PANCAKE_PAIR_ABI,
-        },
-        {
-          name: 'MigrationHelper',
-          abi: MIGRRATE_HELPER_ABI,
-        },
-      ],
-      plugins: [react()],
-    };
+    if (env.VITE_APP_CHAIN_ID === '1') {
+      return {
+        out: 'src/abis/types/generated.ts',
+        contracts: [
+          {
+            name: 'erc20',
+            abi: erc20ABI,
+          },
+          {
+            name: 'Alice',
+            abi: PION_MAINNET_TOKEN_ABI,
+          },
+          {
+            name: 'BonALICE',
+            abi: PION_MAINNET_NFT_ABI,
+          },
+          {
+            name: 'LpToken',
+            abi: PION_MAINNET_LP_TOKEN_ABI,
+          },
+          {
+            name: 'Reward',
+            abi: PION_MAINNET_MUON_REWARD_MANAGER_ABI,
+          },
+          {
+            name: 'MuonNodeStaking',
+            abi: PION_MAINNET_MUON_NODE_STAKING_ABI,
+          },
+          {
+            name: 'MuonNodeManager',
+            abi: PION_MAINNET_MUON_NODE_MANAGER_ABI,
+          },
+          {
+            name: 'Booster',
+            abi: PION_MAINNET_BOOSTER_ABI,
+          },
+          {
+            name: 'PancakePair',
+            abi: PION_MAINNET_PANCAKE_PAIR_ABI,
+          },
+        ],
+        plugins: [react()],
+      };
+    } else {
+      // env.VITE_APP_CHAIN_ID === '97'
+      return {
+        out: 'src/abis/types/generated.ts',
+        contracts: [
+          {
+            name: 'OldToken',
+            abi: PION_TESTNET_OLD_TOKEN_ABI,
+          },
+          {
+            name: 'erc20',
+            abi: erc20ABI,
+          },
+          {
+            name: 'Alice',
+            abi: PION_TESTNET_TOKEN_ABI,
+          },
+          {
+            name: 'BonALICE',
+            abi: PION_TESTNET_NFT_ABI,
+          },
+          {
+            name: 'LpToken',
+            abi: PION_MAINNET_LP_TOKEN_ABI,
+          },
+          {
+            name: 'Reward',
+            abi: PION_TESTNET_MUON_REWARD_MANAGER_ABI,
+          },
+          {
+            name: 'MuonNodeStaking',
+            abi: PION_TESTNET_MUON_NODE_STAKING_ABI,
+          },
+          {
+            name: 'MuonNodeManager',
+            abi: PION_TESTNET_MUON_NODE_MANAGER_ABI,
+          },
+          {
+            name: 'Booster',
+            abi: PION_MAINNET_BOOSTER_ABI,
+          },
+          {
+            name: 'PancakePair',
+            abi: PION_MAINNET_PANCAKE_PAIR_ABI,
+          },
+          {
+            name: 'MigrationHelper',
+            abi: PION_TESTNET_MIGRRATE_HELPER_ABI,
+          },
+        ],
+        plugins: [react()],
+      };
+    }
   } else {
     return {
       out: 'src/abis/types/generated.ts',
       contracts: [
         {
           name: 'Alice',
-          abi: ALICE_ABI,
+          abi: ALICE_TESTNET_TOKEN_ABI,
         },
         {
           name: 'BonALICE',
-          abi: BONALICE_ABI,
+          abi: ALICE_TESTNET_NFT_ABI,
         },
         {
           name: 'LpToken',
-          abi: ALICE_LP_TOKEN_ABI,
+          abi: ALICE_TESTNET_LP_TOKEN_ABI,
         },
         {
           name: 'Reward',
-          abi: ALICE_REWARD_ABI,
+          abi: ALICE_TESTNET_MUON_REWARD_MANAGER_ABI,
         },
         {
           name: 'MuonNodeStaking',
-          abi: ALICE_MUON_NODE_STAKING_ABI,
+          abi: ALICE_TESTNET_MUON_NODE_STAKING_ABI,
         },
         {
           name: 'MuonNodeManager',
-          abi: ALICE_MUON_NODE_MANAGER_ABI,
+          abi: ALICE_TESTNET_MUON_NODE_MANAGER_ABI,
         },
         {
           name: 'Booster',
-          abi: ALICE_BOOSTER_ABI,
+          abi: ALICE_TESTNET_BOOSTER_ABI,
         },
         {
           name: 'PancakePair',
-          abi: ALICE_PANCAKE_PAIR_ABI,
+          abi: ALICE_TESTNET_PANCAKE_PAIR_ABI,
         },
       ],
       plugins: [react()],

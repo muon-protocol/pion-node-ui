@@ -143,7 +143,7 @@ const ActionDescription = () => {
           <p className="max-md:text-center max-md:w-full">
             Create {strings.nft} using {strings.token} tokens. You need{' '}
             {strings.nft} to setup a node, join {strings.token} Network and earn
-            reward. Don't miss the chance to boost your NFT by 2x using USDC.
+            reward.
           </p>
         </FadeIn>
       ) : location.pathname === routes.increase.path ? (
@@ -155,7 +155,7 @@ const ActionDescription = () => {
         >
           <p className="max-md:text-center max-md:w-full">
             Select your {strings.nft}, then you can increase its power using{' '}
-            {strings.token} tokens and also you can boost it by 2x with USDC.
+            {strings.token} tokens.
           </p>
         </FadeIn>
       ) : location.pathname === routes.merge.path ? (

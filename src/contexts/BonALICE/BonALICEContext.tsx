@@ -5,7 +5,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,

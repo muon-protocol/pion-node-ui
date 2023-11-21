@@ -21,7 +21,7 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromNumber } from '../../utils/web3.ts';
 import useSignMessage from '../../hooks/useSignMessage.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
-import REWARD_ABI from '../../abis/Reward';
+import REWARD_ABI from '../../abis/PION/Mainnet/Reward.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import { REWARD_ADDRESS } from '../../constants/addresses.ts';
 import { useClaimRewardArgs } from '../../hooks/useContractArgs.ts';

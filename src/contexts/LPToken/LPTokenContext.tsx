@@ -3,7 +3,7 @@ import { useContractRead } from 'wagmi';
 // import {erc20ABI} from "wagmi";
 import { getCurrentChainId } from '../../constants/chains.ts';
 import { LP_TOKEN_ADDRESS } from '../../constants/addresses.ts';
-import LP_TOKEN_ABI from '../../abis/LPToken.ts';
+import LP_TOKEN_ABI from '../../abis/PION/Mainnet/LPToken.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
 import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';

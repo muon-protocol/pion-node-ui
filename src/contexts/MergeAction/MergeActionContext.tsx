@@ -10,8 +10,8 @@ import { BonALICE } from '../../types';
 import { useMergeArgs } from '../../hooks/useContractArgs.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE';
-import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.ts';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
+import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
