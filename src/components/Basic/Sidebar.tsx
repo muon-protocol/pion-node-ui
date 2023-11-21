@@ -248,7 +248,7 @@ const StatItem = ({
 }) => {
   return (
     <div className="stat-item flex flex-col items-center justify-center gap-1">
-      <span className="w-[76px] h-[60px] rounded-[10px] flex justify-center items-center bg-body-background dark:bg-black">
+      <span className="w-[76px] h-[60px] rounded-[10px] flex justify-center items-center bg-body-background dark:bg-alice-primary-g2">
         <p className="stat-item__value font-bold text-[18px]">
           {value ? value : '...'}
         </p>

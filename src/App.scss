@@ -60,13 +60,23 @@
   }
 }
 
-.stat-item {
-  &__value {
-    @apply bg-alice-primary-g;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+.pion {
+  & .stat-item {
+    &__value {
+      @apply bg-alice-primary-g;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+  }
+}
+
+.alice {
+  & .stat-item {
+    &__value {
+      @apply text-alice-body-background font-semibold;
+    }
   }
 }
 
