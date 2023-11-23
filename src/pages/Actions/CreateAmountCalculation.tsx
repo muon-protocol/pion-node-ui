@@ -21,7 +21,12 @@ const CreateAmountCalculation = () => {
     >
       <span className="text-gray10">
         <p className="font-light">New {strings.nft} amount:</p>
-        <p className="h-5"></p>
+        <p className="h-5 font-light text-sm flex gap-1">
+          {createAmount.hStr + ' ' + strings.token + ' '}
+          <p className="text-primary-L1 dark:text-alice-primary font-bold">
+            x {boostCoefficient?.dsp}
+          </p>
+        </p>
       </span>
       <span className="rounded-md bg-primary-dark dark:bg-alice-primary px-3 py-2.5 text-xl font-bold text-white">
         {(

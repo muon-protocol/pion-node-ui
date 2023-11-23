@@ -26,10 +26,17 @@ const UpgradeAmountCalculation = () => {
         <p className="font-light">You get:</p>
         {upgradeAmount.big > BigInt(0) ? (
           <p className="font-light text-sm flex gap-1">
-            {(Number(upgradeAmount.hStr) * boostCoefficient?.dsp).toFixed(2) +
-              ' + ' +
-              selectedUpgradeBonALICE.nodePower +
-              ` ${strings.token}`}
+            <p className="h-5 flex gap-1">
+              {upgradeAmount.hStr + ' ' + strings.token + ' '}
+              <p className="text-primary-L1 dark:text-alice-primary font-bold">
+                x {boostCoefficient?.dsp}
+              </p>
+              {' + ' + selectedUpgradeBonALICE.nodePower}
+            </p>
+            {/*{(Number(upgradeAmount.hStr) * boostCoefficient?.dsp).toFixed(2) +*/}
+            {/*  ' + ' +*/}
+            {/*  selectedUpgradeBonALICE.nodePower +*/}
+            {/*  ` ${strings.token}`}*/}
           </p>
         ) : (
           <p className="h-5"></p>
