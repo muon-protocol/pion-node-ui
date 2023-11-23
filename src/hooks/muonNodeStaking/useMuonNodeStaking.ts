@@ -1,7 +1,7 @@
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
-  LP_TOKEN_ADDRESS,
+  // LP_TOKEN_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -38,7 +38,7 @@ export const useMuonNodeStaking = () => {
           muonNodeStakingUsers[4],
           [
             ALICE_ADDRESS[getCurrentChainId()],
-            LP_TOKEN_ADDRESS[getCurrentChainId()],
+            // LP_TOKEN_ADDRESS[getCurrentChainId()],
           ],
         ]
       : undefined,
@@ -56,10 +56,10 @@ export const useMuonNodeStaking = () => {
         latestTimestamp: 0,
         tokenId: muonNodeStakingUsers ? muonNodeStakingUsers[4] : 0,
         ALICELockAmount: w3bNumberFromBigint(nodeBonALICEPower[0]),
-        LPTokenLockAmount: w3bNumberFromBigint(nodeBonALICEPower[1]),
+        LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
         nodePower:
-          w3bNumberFromBigint(nodeBonALICEPower[0]).dsp +
-          w3bNumberFromBigint(nodeBonALICEPower[1]).dsp * 2,
+          w3bNumberFromBigint(nodeBonALICEPower[0]).dsp * 2 +
+          w3bNumberFromBigint(BigInt(0)).dsp,
         isNodeBonALICE: true,
       },
     ];

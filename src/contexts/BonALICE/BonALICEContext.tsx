@@ -93,7 +93,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
             bonALICE.tokenId,
             [
               ALICE_ADDRESS[getCurrentChainId()],
-              LP_TOKEN_ADDRESS[getCurrentChainId()],
+              // LP_TOKEN_ADDRESS[getCurrentChainId()],
             ],
           ],
           chainId: getCurrentChainId(),
@@ -108,10 +108,10 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
             bonALICEs.push({
               ...rawBonALICEs[index],
               ALICELockAmount: w3bNumberFromBigint(lockedOf.result[0]),
-              LPTokenLockAmount: w3bNumberFromBigint(lockedOf.result[1]),
+              LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
               nodePower:
-                w3bNumberFromBigint(lockedOf.result[0]).dsp +
-                w3bNumberFromBigint(lockedOf.result[1]).dsp * 2,
+                w3bNumberFromBigint(lockedOf.result[0]).dsp * 2 +
+                w3bNumberFromBigint(BigInt(0)).dsp,
             });
           });
           setBonALICEs(bonALICEs);
