@@ -110,7 +110,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
               ALICELockAmount: w3bNumberFromBigint(lockedOf.result[0]),
               LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
               nodePower:
-                w3bNumberFromBigint(lockedOf.result[0]).dsp * 2 +
+                w3bNumberFromBigint(lockedOf.result[0]).dsp +
                 w3bNumberFromBigint(BigInt(0)).dsp,
             });
           });

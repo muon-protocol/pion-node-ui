@@ -58,7 +58,7 @@ export const useMuonNodeStaking = () => {
         ALICELockAmount: w3bNumberFromBigint(nodeBonALICEPower[0]),
         LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
         nodePower:
-          w3bNumberFromBigint(nodeBonALICEPower[0]).dsp * 2 +
+          w3bNumberFromBigint(nodeBonALICEPower[0]).dsp +
           w3bNumberFromBigint(BigInt(0)).dsp,
         isNodeBonALICE: true,
       },
