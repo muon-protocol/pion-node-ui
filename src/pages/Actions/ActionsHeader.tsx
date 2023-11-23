@@ -2,6 +2,7 @@ import { FadeIn, Scale } from '../../animations';
 import { AnimatePresence } from 'framer-motion';
 import strings from '../../constants/strings.ts';
 import routes from '../../routes';
+import { useBooster } from '../../hooks/booster/useBooster.ts';
 
 const ActionsHeader = () => {
   return (
@@ -120,6 +121,8 @@ const ActionImage = () => {
 };
 
 const ActionDescription = () => {
+  const { boostCoefficient } = useBooster();
+
   return (
     <>
       {location.pathname === routes.view.path ? (
@@ -154,8 +157,8 @@ const ActionDescription = () => {
           className="w-full"
         >
           <p className="max-md:text-center max-md:w-full">
-            Select your {strings.nft}, then you can boost its power using{' '}
-            {strings.token} tokens.
+            Select your {strings.nft} and boost its power using {strings.token}{' '}
+            token (current boosting rate: {boostCoefficient?.dsp}x)
           </p>
         </FadeIn>
       ) : location.pathname === routes.merge.path ? (
