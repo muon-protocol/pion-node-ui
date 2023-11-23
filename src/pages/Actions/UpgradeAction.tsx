@@ -44,11 +44,9 @@ export const RenderUpgradeBody = () => {
   } = useUpgradeAction();
 
   const { ALICEBalance } = useALICE();
-  const { bonALICEs, ALICEAllowance, LPTokenAllowanceForBooster } =
-    useBonALICE();
+  const { bonALICEs, LPTokenAllowanceForBooster } = useBonALICE();
 
-  const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
-    useALICEAllowance();
+  const { allowanceForBooster: aliceAllowanceForBooster } = useALICEAllowance();
   // const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
   //   useLPTokenAllowance();
 
@@ -60,19 +58,10 @@ export const RenderUpgradeBody = () => {
   const { nodeBonALICE } = useMuonNodeStaking();
 
   const showApproveALICE = useMemo(() => {
-    if (nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])) {
-      if (aliceAllowanceForMuon)
-        return aliceAllowanceForMuon.big < upgradeAmount.big;
-    } else {
-      if (ALICEAllowance) return ALICEAllowance.big < upgradeAmount.big;
-    }
-  }, [
-    nodeBonALICE,
-    isSelectedUpgradeBonALICE,
-    aliceAllowanceForMuon,
-    ALICEAllowance,
-    upgradeAmount,
-  ]);
+    if (!aliceAllowanceForBooster) return false;
+
+    return aliceAllowanceForBooster.big < upgradeAmount.big;
+  }, [aliceAllowanceForBooster, upgradeAmount]);
 
   const showApproveLPToken = useMemo(() => {
     if (LPTokenAllowanceForBooster)
@@ -96,28 +85,14 @@ export const RenderUpgradeBody = () => {
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
       !selectedUpgradeBonALICE ||
-      !(upgradeAmount || upgradeBoostAmount) ||
-      !(upgradeAmount.hStr || upgradeBoostAmount.hStr) ||
-      upgradeAmount.big + upgradeBoostAmount.big === BigInt(0) ||
-      !ALICEBalance?.hStr ||
-      upgradeAmount.big > ALICEBalance.big ||
-      !LPTokenBalance ||
-      upgradeBoostAmount.big > LPTokenBalance.big ||
-      (ALICEPrice !== undefined &&
-        boostableAmount &&
-        upgradeBoostAmount.big > maxAmountToBoost.big)
+      !upgradeAmount ||
+      !upgradeAmount.hStr ||
+      upgradeAmount.big === BigInt(0) ||
+      !ALICEBalance ||
+      !ALICEBalance.hStr ||
+      upgradeAmount.big > ALICEBalance.big
     );
-  }, [
-    selectedUpgradeBonALICE,
-    upgradeAmount,
-    upgradeBoostAmount,
-    ALICEBalance?.hStr,
-    ALICEBalance?.big,
-    LPTokenBalance,
-    ALICEPrice,
-    boostableAmount,
-    maxAmountToBoost.big,
-  ]);
+  }, [selectedUpgradeBonALICE, upgradeAmount, ALICEBalance]);
 
   return (
     <>

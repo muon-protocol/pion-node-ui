@@ -3,6 +3,7 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
+  BOOSTER_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
@@ -29,13 +30,24 @@ export const useALICEAllowance = () => {
     enabled: !!walletAddress,
   });
 
+  const { data: allowanceForBooster } = useAliceAllowance({
+    address: ALICE_ADDRESS[getCurrentChainId()],
+    args: walletAddress
+      ? [walletAddress, BOOSTER_ADDRESS[getCurrentChainId()]]
+      : undefined,
+    watch: true,
+    enabled: !!walletAddress,
+  });
+
   if (
     allowanceForMuonNodeStaking === undefined ||
-    allowanceForBonALICE === undefined
+    allowanceForBonALICE === undefined ||
+    allowanceForBooster === undefined
   ) {
     return {
       allowanceForMuonNodeStaking: null,
       allowanceForBonALICE: null,
+      allowanceForBooster: null,
     };
   }
 
@@ -44,5 +56,6 @@ export const useALICEAllowance = () => {
       allowanceForMuonNodeStaking,
     ),
     allowanceForBonALICE: w3bNumberFromBigint(allowanceForBonALICE),
+    allowanceForBooster: w3bNumberFromBigint(allowanceForBooster),
   };
 };

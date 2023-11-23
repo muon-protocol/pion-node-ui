@@ -3,7 +3,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
-  useMemo,
+  // useMemo,
   useState,
 } from 'react';
 import { BonALICE } from '../../types';
@@ -11,10 +11,10 @@ import { W3bNumber } from '../../types/wagmi.ts';
 import { w3bNumberFromString } from '../../utils/web3.ts';
 import {
   ALICE_ADDRESS,
-  BONALICE_ADDRESS,
+  // BONALICE_ADDRESS,
   BOOSTER_ADDRESS,
   LP_TOKEN_ADDRESS,
-  MUON_NODE_STAKING_ADDRESS,
+  // MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import ALICE_ABI from '../../abis/PION/Mainnet/Token.ts';
@@ -22,20 +22,20 @@ import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import {
   useApproveArgs,
   useLockArgs,
-  useLockToBondedTokenArgs,
+  // useLockToBondedTokenArgs,
 } from '../../hooks/useContractArgs.ts';
 import useBonALICE from '../BonALICE/useBonALICE.ts';
-import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
+// import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
 import LP_TOKEN_ABI from '../../abis/PION/Mainnet/LPToken.ts';
-import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
+// import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
-import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
+// import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 // import { useLPTokenAllowance } from '../../hooks/lpToken/useLPTokenAllowance.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import BOOSTER_ABI from '../../abis/PION/Mainnet/Booster.ts';
-import { getUserSignatureForBoostAPI } from '../../apis';
+import BOOSTER_ABI from '../../abis/PION/BSCTestnet/Booster.ts';
+// import { getUserSignatureForBoostAPI } from '../../apis';
 import { waitForTransaction, writeContract } from '@wagmi/core';
 import toast from 'react-hot-toast';
 // import { erc20ABI } from 'wagmi';
@@ -117,8 +117,8 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const { nodeBonALICE } = useMuonNodeStaking();
 
-  const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
-    useALICEAllowance();
+  // const { allowanceForMuonNodeStaking: aliceAllowanceForMuon } =
+  //   useALICEAllowance();
 
   const isSelectedUpgradeBonALICE = useCallback(
     (bonALICE: BonALICE) => {
@@ -129,19 +129,19 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     },
     [upgradeModalSelectedBonALICE],
   );
+  //
+  // const isNodeBonALICESelected = useMemo(() => {
+  //   if (nodeBonALICE.length > 0) {
+  //     return isSelectedUpgradeBonALICE(nodeBonALICE[0]);
+  //   }
+  //   return false;
+  // }, [nodeBonALICE, isSelectedUpgradeBonALICE]);
 
-  const isNodeBonALICESelected = useMemo(() => {
-    if (nodeBonALICE.length > 0) {
-      return isSelectedUpgradeBonALICE(nodeBonALICE[0]);
-    }
-    return false;
-  }, [nodeBonALICE, isSelectedUpgradeBonALICE]);
-
-  const lockToBondedTokenArgs = useLockToBondedTokenArgs({
-    tokenId: upgradeModalSelectedBonALICE?.tokenId,
-    ALICEAmount: upgradeAmount,
-    ALICEAllowance: aliceAllowanceForMuon,
-  });
+  // const lockToBondedTokenArgs = useLockToBondedTokenArgs({
+  //   tokenId: upgradeModalSelectedBonALICE?.tokenId,
+  //   ALICEAmount: upgradeAmount,
+  //   ALICEAllowance: aliceAllowanceForMuon,
+  // });
 
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
@@ -154,38 +154,38 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     isMetamaskLoading,
     isTransactionLoading,
   } = useWagmiContractWrite({
-    abi: BONALICE_ABI,
-    address: BONALICE_ADDRESS[getCurrentChainId()],
+    abi: BOOSTER_ABI,
+    address: BOOSTER_ADDRESS[getCurrentChainId()],
     args: lockArgs,
-    functionName: 'lock',
+    functionName: 'boost',
     chainId: getCurrentChainId(),
   });
 
-  const {
-    callback: lockToBondedToken,
-    isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
-    isTransactionLoading: lockToBondedTokenIsTransactionLoading,
-  } = useWagmiContractWrite({
-    abi: MUON_NODE_STAKING_ABI,
-    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-    args: lockToBondedTokenArgs
-      ? [lockToBondedTokenArgs[1], lockToBondedTokenArgs[2]]
-      : undefined,
-    functionName: 'lockToBondedToken',
-    chainId: getCurrentChainId(),
-  });
+  // const {
+  //   callback: lockToBondedToken,
+  //   isMetamaskLoading: lockToBondedTokenIsMetamaskLoading,
+  //   isTransactionLoading: lockToBondedTokenIsTransactionLoading,
+  // } = useWagmiContractWrite({
+  //   abi: MUON_NODE_STAKING_ABI,
+  //   address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+  //   args: lockToBondedTokenArgs
+  //     ? [lockToBondedTokenArgs[1], lockToBondedTokenArgs[2]]
+  //     : undefined,
+  //   functionName: 'lockToBondedToken',
+  //   chainId: getCurrentChainId(),
+  // });
 
-  const {
-    callback: updateStaking,
-    isMetamaskLoading: updateStakingIsMetamaskLoading,
-    isTransactionLoading: updateStakingIsTransactionLoading,
-  } = useWagmiContractWrite({
-    abi: MUON_NODE_STAKING_ABI,
-    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-    args: [],
-    functionName: 'updateStaking',
-    chainId: getCurrentChainId(),
-  });
+  // const {
+  //   callback: updateStaking,
+  //   isMetamaskLoading: updateStakingIsMetamaskLoading,
+  //   isTransactionLoading: updateStakingIsTransactionLoading,
+  // } = useWagmiContractWrite({
+  //   abi: MUON_NODE_STAKING_ABI,
+  //   address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+  //   args: [],
+  //   functionName: 'updateStaking',
+  //   chainId: getCurrentChainId(),
+  // });
 
   const [isLockUSDCMetamaskLoading, setIsLockUSDCMetamaskLoading] =
     useState(false);
@@ -194,71 +194,17 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
 
   const handleUpgradeBonALICEClicked = async () => {
     if (!walletAddress) return;
+    if (!(upgradeAmount.big > BigInt(0))) return;
 
     try {
-      if (upgradeAmount.dsp > 0) {
-        if (isNodeBonALICESelected) {
-          await lockToBondedToken?.({
-            pending: 'Upgrading Bonded PION with PION...',
-            success:
-              upgradeBoostAmount.dsp > 0
-                ? 'Upgraded, wait for USDC upgrade...'
-                : 'Upgraded!',
-            failed: 'Failed to upgrade Bonded PION with PION!',
-          });
-        } else {
-          await lock?.({
-            pending: 'Upgrading Bonded PION with PION...',
-            success:
-              upgradeBoostAmount.dsp > 0
-                ? 'Upgraded, wait for USDC upgrade...'
-                : 'Upgraded!',
-            failed: 'Failed to upgrade Bonded PION with PION!',
-          });
-        }
-      }
-      if (upgradeBoostAmount.dsp > 0) {
-        const response = await getUserSignatureForBoostAPI(walletAddress);
-        if (response.success) {
-          setIsLockUSDCMetamaskLoading(true);
-          const { hash } = await writeContract({
-            abi: BOOSTER_ABI,
-            address: BOOSTER_ADDRESS[getCurrentChainId()],
-            functionName: 'boost',
-            args: [
-              upgradeModalSelectedBonALICE?.tokenId,
-              upgradeBoostAmount.big,
-              response.amount,
-              response.timestamp,
-              response.signature,
-            ],
-            chainId: getCurrentChainId(),
-          });
-          setIsLockUSDCMetamaskLoading(false);
-          if (!hash)
-            throw new Error(
-              'Failed to boost bonded PION with USDC! (No hash returned)',
-            );
-          setIsLockUSDCTransactionLoading(true);
-          const transaction = waitForTransaction({ hash });
-          await toast.promise(transaction, {
-            loading: 'Boosting bonded PION with USDC...',
-            success: 'Boosted!',
-            error: 'Failed to boost bonded PION with USDC!',
-          });
-          setIsLockUSDCTransactionLoading(false);
-        }
-
-        if (isNodeBonALICESelected) {
-          toast('Updating your node ...');
-
-          await updateStaking?.({
-            pending: 'Wait for updating your node ...',
-            success: 'Updated!',
-            failed: 'Failed to update node!',
-          });
-        }
-      }
+      await lock?.({
+        pending: 'Upgrading Bonded PION with PION...',
+        success:
+          upgradeBoostAmount.dsp > 0
+            ? 'Upgraded, wait for USDC upgrade...'
+            : 'Upgraded!',
+        failed: 'Failed to upgrade Bonded PION with PION!',
+      });
 
       setUpgradeAmount(w3bNumberFromString(''));
       setUpgradeBoostAmount(w3bNumberFromString(''));
@@ -271,11 +217,87 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
+  // const handleUpgradeBonALICEClickedOldVersionWithUSDC = async () => {
+  //   if (!walletAddress) return;
+  //
+  //   try {
+  //     if (upgradeAmount.dsp > 0) {
+  //       if (isNodeBonALICESelected) {
+  //         await lockToBondedToken?.({
+  //           pending: 'Upgrading Bonded PION with PION...',
+  //           success:
+  //             upgradeBoostAmount.dsp > 0
+  //               ? 'Upgraded, wait for USDC upgrade...'
+  //               : 'Upgraded!',
+  //           failed: 'Failed to upgrade Bonded PION with PION!',
+  //         });
+  //       } else {
+  //         await lock?.({
+  //           pending: 'Upgrading Bonded PION with PION...',
+  //           success:
+  //             upgradeBoostAmount.dsp > 0
+  //               ? 'Upgraded, wait for USDC upgrade...'
+  //               : 'Upgraded!',
+  //           failed: 'Failed to upgrade Bonded PION with PION!',
+  //         });
+  //       }
+  //     }
+  //     if (upgradeBoostAmount.dsp > 0) {
+  //       const response = await getUserSignatureForBoostAPI(walletAddress);
+  //       if (response.success) {
+  //         setIsLockUSDCMetamaskLoading(true);
+  //         const { hash } = await writeContract({
+  //           abi: BOOSTER_ABI,
+  //           address: BOOSTER_ADDRESS[getCurrentChainId()],
+  //           functionName: 'boost',
+  //           args: [
+  //             upgradeModalSelectedBonALICE?.tokenId,
+  //             upgradeBoostAmount.big,
+  //             response.amount,
+  //             response.timestamp,
+  //             response.signature,
+  //           ],
+  //           chainId: getCurrentChainId(),
+  //         });
+  //         setIsLockUSDCMetamaskLoading(false);
+  //         if (!hash)
+  //           throw new Error(
+  //             'Failed to boost bonded PION with USDC! (No hash returned)',
+  //           );
+  //         setIsLockUSDCTransactionLoading(true);
+  //         const transaction = waitForTransaction({ hash });
+  //         await toast.promise(transaction, {
+  //           loading: 'Boosting bonded PION with USDC...',
+  //           success: 'Boosted!',
+  //           error: 'Failed to boost bonded PION with USDC!',
+  //         });
+  //         setIsLockUSDCTransactionLoading(false);
+  //       }
+  //
+  //       if (isNodeBonALICESelected) {
+  //         toast('Updating your node ...');
+  //
+  //         await updateStaking?.({
+  //           pending: 'Wait for updating your node ...',
+  //           success: 'Updated!',
+  //           failed: 'Failed to update node!',
+  //         });
+  //       }
+  //     }
+  //
+  //     setUpgradeAmount(w3bNumberFromString(''));
+  //     setUpgradeBoostAmount(w3bNumberFromString(''));
+  //     setUpgradeModalSelectedBonALICE(null);
+  //     setIsUpgradeModalOpen(false);
+  //   } catch (e) {
+  //     setIsLockUSDCTransactionLoading(false);
+  //     setIsLockUSDCMetamaskLoading(false);
+  //     console.log(e);
+  //   }
+  // };
+
   const approveALICEArgs = useApproveArgs({
-    spenderAddress:
-      nodeBonALICE.length > 0 && isSelectedUpgradeBonALICE(nodeBonALICE[0])
-        ? MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
-        : BONALICE_ADDRESS[getCurrentChainId()],
+    spenderAddress: BOOSTER_ADDRESS[getCurrentChainId()],
     approveAmount: upgradeAmount,
   });
 
@@ -462,16 +484,9 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeAmountChange,
         handleUpgradeBoostAmountChange,
         handleUpgradeBonALICEClicked,
-        isMetamaskLoading:
-          lockToBondedTokenIsMetamaskLoading ||
-          isMetamaskLoading ||
-          isLockUSDCMetamaskLoading ||
-          updateStakingIsMetamaskLoading,
+        isMetamaskLoading: isMetamaskLoading || isLockUSDCMetamaskLoading,
         isTransactionLoading:
-          lockToBondedTokenIsTransactionLoading ||
-          isTransactionLoading ||
-          isLockUSDCTransactionLoading ||
-          updateStakingIsTransactionLoading,
+          isTransactionLoading || isLockUSDCTransactionLoading,
         isAllowanceModalOpen,
         closeAllowanceModal,
         isApproveMetamaskLoading:

@@ -13,7 +13,6 @@ export const useLockArgs = ({
   ALICEAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
 }) => {
-  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
     if (
       !tokenId ||
@@ -24,12 +23,36 @@ export const useLockArgs = ({
     )
       return undefined;
 
-    const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
-    const amounts = [ALICEAmount.big];
-
-    return [tokenId, tokens, amounts];
+    return [tokenId, ALICEAmount.big];
   }, [tokenId, ALICEAmount, ALICEAllowance]);
 };
+
+// export const useLockArgs = ({
+//   tokenId,
+//   ALICEAmount,
+//   ALICEAllowance,
+// }: {
+//   tokenId: number | null;
+//   ALICEAmount: W3bNumber;
+//   ALICEAllowance: W3bNumber | null;
+// }) => {
+//   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+//   return useMemo(() => {
+//     if (
+//       !tokenId ||
+//       !ALICEAmount ||
+//       !ALICEAllowance ||
+//       ALICEAmount.big === BigInt(0) ||
+//       ALICEAmount.dsp > ALICEAllowance.dsp
+//     )
+//       return undefined;
+//
+//     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
+//     const amounts = [ALICEAmount.big];
+//
+//     return [tokenId, tokens, amounts];
+//   }, [tokenId, ALICEAmount, ALICEAllowance]);
+// };
 
 export const useLockToBondedTokenArgs = ({
   tokenId,
