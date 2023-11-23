@@ -25,7 +25,7 @@ export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
   const {
     ALICEAllowanceForBooster,
-    ALICEAllowance,
+    // ALICEAllowance,
     LPTokenAllowanceForBooster,
   } = useBonALICE();
   const { LPTokenBalance } = useLPToken();
@@ -159,8 +159,8 @@ export const RenderCreateBody = () => {
               : 'All ' + strings.tokens}
           </button>
         ) : createBoostAmount.dsp === 0 &&
-          ALICEAllowance &&
-          ALICEAllowance.big < createAmount.big ? (
+          ALICEAllowanceForBooster &&
+          ALICEAllowanceForBooster.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
             className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"

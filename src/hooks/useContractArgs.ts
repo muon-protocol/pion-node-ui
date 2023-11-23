@@ -100,14 +100,12 @@ export const useMintArgs = ({
   walletAddress,
   ALICEAmount,
   ALICEAllowance,
-  ALICEAddress,
 }: {
   walletAddress: `0x${string}` | null | undefined;
   ALICEAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  ALICEAddress: `0x${string}`;
 }) => {
-  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+  // args: [amounts (uint256[])]
   return useMemo(() => {
     if (
       !walletAddress ||
@@ -118,12 +116,38 @@ export const useMintArgs = ({
     )
       return undefined;
 
-    const tokens = [ALICEAddress];
-    const amounts = [ALICEAmount.big];
-
-    return [tokens, amounts, walletAddress];
-  }, [walletAddress, ALICEAmount, ALICEAllowance, ALICEAddress]);
+    return [ALICEAmount.big];
+  }, [walletAddress, ALICEAmount, ALICEAllowance]);
 };
+
+// export const useMintArgsOldVersionWithUSDC = ({
+//   walletAddress,
+//   ALICEAmount,
+//   ALICEAllowance,
+//   ALICEAddress,
+// }: {
+//   walletAddress: `0x${string}` | null | undefined;
+//   ALICEAmount: W3bNumber;
+//   ALICEAllowance: W3bNumber | null;
+//   ALICEAddress: `0x${string}`;
+// }) => {
+//   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+//   return useMemo(() => {
+//     if (
+//       !walletAddress ||
+//       !ALICEAmount ||
+//       !ALICEAllowance ||
+//       ALICEAmount.big === BigInt(0) ||
+//       ALICEAmount.dsp > ALICEAllowance.dsp
+//     )
+//       return undefined;
+//
+//     const tokens = [ALICEAddress];
+//     const amounts = [ALICEAmount.big];
+//
+//     return [tokens, amounts, walletAddress];
+//   }, [walletAddress, ALICEAmount, ALICEAllowance, ALICEAddress]);
+// };
 
 export const useCreateAndBoostArgs = ({
   ALICEAmount,
