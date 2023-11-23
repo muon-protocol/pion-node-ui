@@ -80,7 +80,7 @@ const BonALICEViewCard: FC<{
               alt=""
               className="mr-2.5 h-5"
             />
-            increase
+            boost
           </button>
           {bonALICEs.length + nodeBonALICE.length > 1 && (
             <button

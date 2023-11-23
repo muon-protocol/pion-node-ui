@@ -208,7 +208,7 @@ export const RenderUpgradeBody = () => {
             disabled={isUpgradeBonALICEButtonDisabled}
             className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
           >
-            Increase Bonded {strings.token}
+            Boost Bonded {strings.token}
           </button>
         )}
       </FadeIn>

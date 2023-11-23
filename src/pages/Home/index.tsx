@@ -79,7 +79,7 @@ const Home = () => {
             <span className="descriptions font-tomorrow mb-auto leading-[19px] flex flex-col gap-1">
               <p>
                 {bonALICEs.length > 0
-                  ? `You can add more $${strings.token} and USDC to increase your ${strings.nft} amount and node power`
+                  ? `You can add more $${strings.token} and USDC to boost your ${strings.nft} amount and node power`
                   : `Create ${strings.nft} using your $${strings.token} to be able to setup your node`}
               </p>
             </span>

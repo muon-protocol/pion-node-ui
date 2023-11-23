@@ -70,7 +70,7 @@ const ActionImage = () => {
           <img
             className="w-8 h-8 md:w-10 md:h-10"
             src={strings.actions.increase.icon}
-            alt="increase"
+            alt="boost"
           />
         </Scale>
       ) : location.pathname === routes.merge.path ? (
@@ -154,7 +154,7 @@ const ActionDescription = () => {
           className="w-full"
         >
           <p className="max-md:text-center max-md:w-full">
-            Select your {strings.nft}, then you can increase its power using{' '}
+            Select your {strings.nft}, then you can boost its power using{' '}
             {strings.token} tokens.
           </p>
         </FadeIn>
@@ -230,7 +230,7 @@ const ActionName = () => {
             duration={0.1}
             delay={0.1}
           >
-            <p>Increase</p>
+            <p>Boost</p>
           </Scale>
         ) : location.pathname === routes.merge.path ? (
           <Scale

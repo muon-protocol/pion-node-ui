@@ -40,7 +40,7 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
           }}
           className="text-primary hover:underline cursor-pointer"
         >
-          Increase
+          Boost
         </span>{' '}
         your power to boost your rewards.
       </p>

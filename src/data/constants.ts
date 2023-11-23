@@ -112,7 +112,7 @@ export const sidebarItems: SidebarItem[] = [
   },
   {
     id: 2,
-    title: 'Increase',
+    title: 'Boost',
     icon: '/assets/images/actions/upgrade-icon.svg',
     hoverIcon: '/assets/images/actions/upgrade-colored-icon.svg',
     link: ActionType.UPGRADE,

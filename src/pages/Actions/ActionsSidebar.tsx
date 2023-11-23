@@ -35,7 +35,7 @@ const ActionsSidebar = () => {
       },
       {
         id: 2,
-        title: 'Increase',
+        title: 'Boost',
         icon: strings.actions.increase.icon,
         hoverIcon: strings.actions.increase.hoverIcon,
         link: routes.increase.path,

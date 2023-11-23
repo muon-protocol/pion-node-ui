@@ -57,8 +57,8 @@ const routes: RoutesInterface = {
     element: <Actions />,
   },
   increase: {
-    path: `/${strings.projectName}/bon${strings.token}/increase`,
-    name: `Increase ${strings.token}`,
+    path: `/${strings.projectName}/bon${strings.token}/boost`,
+    name: `Boost ${strings.token}`,
     element: <Actions />,
   },
   merge: {
