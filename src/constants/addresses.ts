@@ -49,6 +49,7 @@ if (import.meta.env.VITE_PROJECT_NAME === 'PION') {
   };
 
   BOOSTER_ADDRESS = {
+    [SupportedChainId.BSCTESTNET]: '0xAC6dE9111ab469A226c3D608a1438d6CBe4Bdec9',
     [SupportedChainId.MAINNET]: '0xBF35B3748D96BA5BE15e6CEb66461cc0b7B08C7C',
   };
 
