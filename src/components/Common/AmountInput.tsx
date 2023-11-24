@@ -109,7 +109,7 @@ const AmountInput = ({
       </div>
       {withLink && balance && balance.big < value.big ? (
         <FadeIn duration={0.3}>
-          <p className="text-red-600 dark:text-red-600 font-bold text-xs">
+          <p className="text-red-400 dark:text-red-600 font-bold text-xs">
             You don't have sufficient amount of ${strings.token}.{'  '}
             <span
               className="underline cursor-pointer"

@@ -2,6 +2,7 @@ import Modal from './Modal.tsx';
 import { ReactNode } from 'react';
 import { BonALICE } from '../../types';
 import strings from '../../constants/strings.ts';
+import { FadeIn } from '../../animations';
 
 const SelectButtonWithModal = ({
   title = '',
@@ -13,6 +14,7 @@ const SelectButtonWithModal = ({
   onClick,
   selectedItems,
   removeItem,
+  errorMessage,
 }: {
   title?: string;
   multiple?: boolean;
@@ -23,6 +25,7 @@ const SelectButtonWithModal = ({
   onClick: () => void;
   selectedItems: BonALICE[];
   removeItem: (item: BonALICE) => void;
+  errorMessage?: string;
 }) => {
   return (
     <div className="select-button-with-modal mb-2 w-full">
@@ -87,6 +90,13 @@ const SelectButtonWithModal = ({
           />
         </div>
       </div>
+      {errorMessage && (
+        <FadeIn duration={0.3} className="mt-2">
+          <p className="text-red-400 dark:text-red-600 font-bold text-xs">
+            {errorMessage}
+          </p>
+        </FadeIn>
+      )}
 
       <Modal
         title={modalTitle}

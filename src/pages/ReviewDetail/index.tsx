@@ -73,6 +73,11 @@ const ReviewDetail = () => {
             modalTitle={`Select ${strings.nft}`}
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
+            errorMessage={
+              nodeBonALICE && nodeBonALICE?.nodePower < 500
+                ? `Select a ${strings.nft} with amount more than 500 to be able to add your node.`
+                : ''
+            }
           >
             <BonALICEModalBody
               bonALICEs={bonALICEs}
