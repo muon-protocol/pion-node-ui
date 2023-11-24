@@ -3,7 +3,7 @@ import { BonALICE } from '../types';
 import { useAddNodeArgs, useApproveBonALICEArgs } from './useContractArgs.ts';
 import useWagmiContractWrite from './useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
-import MuonNodeStakingABI from '../abis/PION/Mainnet/MuonNodeStaking.ts';
+import MuonNodeStakingABI from '../abis/PION/BSCTestnet/MuonNodeStaking.ts';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
@@ -14,7 +14,7 @@ import {
   useBonAliceOwnerOf,
   useMuonNodeManagerStakerAddressInfo,
 } from '../abis/types/generated.ts';
-import BONALICE_ABI from '../abis/PION/Mainnet/NFT.ts';
+import BONALICE_ABI from '../abis/PION/BSCTestnet/NFT.ts';
 import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
 import { checkIPwithNodeSpecificationsAPI } from '../apis';
 import { createFromJSON } from '@libp2p/peer-id-factory';
