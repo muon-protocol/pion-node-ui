@@ -146,7 +146,7 @@ const ActionDescription = () => {
           <p className="max-md:text-center max-md:w-full">
             Create {strings.nft} using {strings.token} tokens. You need{' '}
             {strings.nft} to setup a node, join {strings.token} Network and earn
-            reward.
+            reward.<br/><span className={'italic'}>(current boosting rate: <span className={'text-primary-L1 font-bold not-italic'}>{boostCoefficient?.dsp}x</span>)</span>
           </p>
         </FadeIn>
       ) : location.pathname === routes.increase.path ? (
@@ -158,7 +158,7 @@ const ActionDescription = () => {
         >
           <p className="max-md:text-center max-md:w-full">
             Select your {strings.nft} and boost its power using {strings.token}{' '}
-            token (current boosting rate: {boostCoefficient?.dsp}x)
+            token <span className={'italic'}>(current boosting rate: <span className={'text-primary-L1 font-bold not-italic'}>{boostCoefficient?.dsp}x</span>)</span>
           </p>
         </FadeIn>
       ) : location.pathname === routes.merge.path ? (

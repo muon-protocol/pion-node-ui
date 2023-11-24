@@ -110,13 +110,14 @@ const SidebarItem = ({ item }: { item: SidebarItem }) => {
 
   return (
     <div
-      className={`sidebar-item flex-1 relative flex flex-col gap-1.5 md:gap-2 items-center justify-center group ${
+      className={`sidebar-item relative flex-1 relative flex flex-col gap-1.5 md:gap-2 items-center justify-center group ${
         !item.disabled ? 'cursor-pointer' : 'cursor-default'
       }`}
       key={item.id}
       id={'sidebar-item-' + item.id}
       onClick={() => !item.disabled && handleSidebarItemClick(item.link)}
     >
+      {item.title == 'Create' && (<span className={'absolute text-white font-bold text-xs rounded-sm px-2 py-0.5 -top-7 bg-primary-L1'}>Boosted</span>)}
       {item.disabled && (
         <div className="absolute top-0 -translate-y-[115%] flex-col items-center flex transition-all opacity-0 mb-6 group-hover:opacity-100 group-hover:-translate-y-[125%]">
           <span className="relative z-10 p-2 w-32 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">
