@@ -33,10 +33,6 @@ const UpgradeAmountCalculation = () => {
               </p>
               {' + ' + selectedUpgradeBonALICE.nodePower}
             </p>
-            {/*{(Number(upgradeAmount.hStr) * boostCoefficient?.dsp).toFixed(2) +*/}
-            {/*  ' + ' +*/}
-            {/*  selectedUpgradeBonALICE.nodePower +*/}
-            {/*  ` ${strings.token}`}*/}
           </p>
         ) : (
           <p className="h-5"></p>

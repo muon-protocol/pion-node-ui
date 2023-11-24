@@ -109,7 +109,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     [],
   );
 
-  const { ALICEAllowance } = useBonALICE();
+  const { ALICEAllowanceForBooster } = useBonALICE();
   const { ALICEBalance } = useALICE();
   const { LPTokenBalance, LPTokenDecimals } = useLPToken();
 
@@ -146,7 +146,7 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   const lockArgs = useLockArgs({
     tokenId: upgradeModalSelectedBonALICE?.tokenId,
     ALICEAmount: upgradeAmount,
-    ALICEAllowance: ALICEAllowance,
+    ALICEAllowance: ALICEAllowanceForBooster,
   });
 
   const {
@@ -197,12 +197,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     if (!(upgradeAmount.big > BigInt(0))) return;
 
     try {
+      console.log('upgradeAmount', upgradeAmount);
+      console.log('lockArgs', lockArgs);
+      console.log('lock', lock);
       await lock?.({
         pending: 'Upgrading Bonded PION with PION...',
-        success:
-          upgradeBoostAmount.dsp > 0
-            ? 'Upgraded, wait for USDC upgrade...'
-            : 'Upgraded!',
+        success: 'Upgraded!',
         failed: 'Failed to upgrade Bonded PION with PION!',
       });
 
