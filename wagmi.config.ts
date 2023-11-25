@@ -31,6 +31,14 @@ import PION_TESTNET_MUON_REWARD_MANAGER_ABI from './src/abis/PION/BSCTestnet/Muo
 import PION_TESTNET_OLD_TOKEN_ABI from './src/abis/PION/BSCTestnet/OldToken';
 import PION_TESTNET_MIGRRATE_HELPER_ABI from './src/abis/PION/BSCTestnet/MigrationHelper';
 
+// PION BSC Mainnet
+import PION_BSCMAINNET_TOKEN_ABI from './src/abis/PION/BSCMainnet/Token';
+import PION_BSCMAINNET_NFT_ABI from './src/abis/PION/BSCMainnet/NFT';
+import PION_BSCMAINNET_MUON_NODE_MANAGER_ABI from './src/abis/PION/BSCMainnet/MuonNodeManager';
+import PION_BSCMAINNET_MUON_NODE_STAKING_ABI from './src/abis/PION/BSCMainnet/MuonNodeStaking';
+import PION_BSCMAINNET_MUON_REWARD_MANAGER_ABI from './src/abis/PION/BSCMainnet/MuonRewardManager';
+import PION_BSCMAINNET_BOOSTER_ABI from './src/abis/PION/BSCMainnet/Booster';
+
 export default defineConfig(() => {
   const env = loadEnv({
     mode: process.env.NODE_ENV,
@@ -77,6 +85,41 @@ export default defineConfig(() => {
           {
             name: 'PancakePair',
             abi: PION_MAINNET_PANCAKE_PAIR_ABI,
+          },
+        ],
+        plugins: [react()],
+      };
+    } else if (env.VITE_APP_CHAIN_ID === '56') {
+      return {
+        out: 'src/abis/types/generated.ts',
+        contracts: [
+          {
+            name: 'Alice',
+            abi: PION_BSCMAINNET_TOKEN_ABI,
+          },
+          {
+            name: 'BonALICE',
+            abi: PION_BSCMAINNET_NFT_ABI,
+          },
+          {
+            name: 'Reward',
+            abi: PION_BSCMAINNET_MUON_REWARD_MANAGER_ABI,
+          },
+          {
+            name: 'LpToken',
+            abi: PION_MAINNET_LP_TOKEN_ABI,
+          },
+          {
+            name: 'MuonNodeStaking',
+            abi: PION_BSCMAINNET_MUON_NODE_STAKING_ABI,
+          },
+          {
+            name: 'MuonNodeManager',
+            abi: PION_BSCMAINNET_MUON_NODE_MANAGER_ABI,
+          },
+          {
+            name: 'Booster',
+            abi: PION_BSCMAINNET_BOOSTER_ABI,
           },
         ],
         plugins: [react()],

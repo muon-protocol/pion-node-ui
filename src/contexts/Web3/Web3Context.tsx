@@ -7,7 +7,7 @@ import {
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { configureChains, createConfig, WagmiConfig } from 'wagmi';
-import { bscTestnet, mainnet } from 'wagmi/chains';
+import { bscTestnet, mainnet, bsc } from 'wagmi/chains';
 import { getCurrentChainId } from '../../constants/chains.ts';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 
@@ -20,13 +20,21 @@ const Web3Provider = ({ children }: { children: ReactNode }) => {
         return 'https://ethereum.publicnode.com/';
       case 97:
         return 'https://bsc-testnet.publicnode.com/';
+      case 56:
+        return 'https://bsc.publicnode.com/';
       default:
         return 'https://ethereum.publicnode.com/';
     }
   }, []);
 
   const { chains, publicClient } = configureChains(
-    [getCurrentChainId() === 1 ? mainnet : bscTestnet],
+    [
+      getCurrentChainId() === 1
+        ? mainnet
+        : getCurrentChainId() === 56
+        ? bsc
+        : bscTestnet,
+    ],
     [
       jsonRpcProvider({
         rpc: (chain) => ({

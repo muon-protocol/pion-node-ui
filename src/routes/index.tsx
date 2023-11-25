@@ -4,7 +4,7 @@ import BuyPION from '../pages/BuyPION';
 import Actions from '../pages/Actions';
 import ClaimPrize from '../pages/ClaimPrize';
 import ReviewDetail from '../pages/ReviewDetail';
-import Migration from '../pages/Migration';
+// import Migration from '../pages/Migration';
 import { Navigate } from 'react-router-dom';
 import { ReactNode } from 'react';
 
@@ -26,7 +26,7 @@ export interface RoutesInterface {
   transfer: RouteInterface;
   claim: RouteInterface;
   setupNode: RouteInterface;
-  migration: RouteInterface;
+  // migration: RouteInterface;
   [key: string]: RouteInterface;
 }
 
@@ -86,11 +86,11 @@ const routes: RoutesInterface = {
     name: `Setup Node`,
     element: <ReviewDetail />,
   },
-  migration: {
-    path: `/${strings.projectName}/migration`,
-    name: `Migration`,
-    element: <Migration />,
-  },
+  // migration: {
+  //   path: `/${strings.projectName}/migration`,
+  //   name: `Migration`,
+  //   element: <Migration />,
+  // },
 };
 
 export default routes;

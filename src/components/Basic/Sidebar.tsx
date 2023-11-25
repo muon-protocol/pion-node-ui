@@ -24,7 +24,7 @@ export const Sidebar = () => {
   const { muonNodeStakingUsers } = useMuonNodeStaking();
 
   if (
-    location.pathname === routes.migration.path ||
+    // location.pathname === routes.migration.path ||
     location.pathname === routes.claim.path
   ) {
     return null;

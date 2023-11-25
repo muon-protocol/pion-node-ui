@@ -33,7 +33,7 @@ const RenderViewBody = () => {
               );
             })
           : nodeBonALICE.length === 0 && (
-              <p className="text-center py-56 px-3 mt-auto mb-auto text-white">
+              <p className="text-center py-44 px-3 mt-auto mb-auto text-white">
                 You have no {strings.nft} NFTs to show.
               </p>
             )}

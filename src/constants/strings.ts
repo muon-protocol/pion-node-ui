@@ -6,7 +6,8 @@ const strings = {
     nft: 'bonPION',
     nfts: 'bonPIONs',
     projectSubgraphAddress:
-      'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft-mainnet',
+      'https://api.thegraph.com/subgraphs/name/rastegarishirazu/bondenpion-bnb',
+    // 'https://api.thegraph.com/subgraphs/name/rastegarishirazu/muon-nft-mainnet',
     projectTestnetSubgraphAddress:
       'https://api.thegraph.com/subgraphs/name/rastegarishirazu/bondedpion-chaple',
     footerLogoSrc: '/assets/images/footer/pion-muon-logo.svg',

@@ -44,15 +44,15 @@ const DesktopNavbar = () => {
     <FadeIn delay={0.3}>
       <div className="hidden md:flex absolute w-full navbar justify-between items-center py-9 pl-14 pr-12">
         <div className="navbar__left">
-          {location.pathname === routes.migration.path && (
-            <div>
-              <img
-                src={strings.navbar.logoSrc}
-                alt={''}
-                className="w-auto h-9"
-              />
-            </div>
-          )}
+          {/*{location.pathname === routes.migration.path && (*/}
+          {/*  <div>*/}
+          {/*    <img*/}
+          {/*      src={strings.navbar.logoSrc}*/}
+          {/*      alt={''}*/}
+          {/*      className="w-auto h-9"*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*)}*/}
         </div>
         <div className="navbar__right flex justify-end items-center gap-4">
           {location &&
