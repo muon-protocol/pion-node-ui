@@ -3,6 +3,7 @@ import {
   ReactNode,
   useCallback,
   useEffect,
+  useMemo,
   // useMemo,
   useState,
 } from 'react';
@@ -14,6 +15,7 @@ import {
   // BONALICE_ADDRESS,
   BOOSTER_ADDRESS,
   LP_TOKEN_ADDRESS,
+  MUON_NODE_STAKING_ADDRESS,
   // MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -27,7 +29,7 @@ import {
 import useBonALICE from '../BonALICE/useBonALICE.ts';
 // import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
 import LP_TOKEN_ABI from '../../abis/PION/Mainnet/LPToken.ts';
-// import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
+import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
 import useALICE from '../ALICE/useALICE.ts';
 import useLPToken from '../LPToken/useLPToken.ts';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
@@ -130,12 +132,12 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
     [upgradeModalSelectedBonALICE],
   );
   //
-  // const isNodeBonALICESelected = useMemo(() => {
-  //   if (nodeBonALICE.length > 0) {
-  //     return isSelectedUpgradeBonALICE(nodeBonALICE[0]);
-  //   }
-  //   return false;
-  // }, [nodeBonALICE, isSelectedUpgradeBonALICE]);
+  const isNodeBonALICESelected = useMemo(() => {
+    if (nodeBonALICE.length > 0) {
+      return isSelectedUpgradeBonALICE(nodeBonALICE[0]);
+    }
+    return false;
+  }, [nodeBonALICE, isSelectedUpgradeBonALICE]);
 
   // const lockToBondedTokenArgs = useLockToBondedTokenArgs({
   //   tokenId: upgradeModalSelectedBonALICE?.tokenId,
@@ -175,17 +177,17 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
   //   chainId: getCurrentChainId(),
   // });
 
-  // const {
-  //   callback: updateStaking,
-  //   isMetamaskLoading: updateStakingIsMetamaskLoading,
-  //   isTransactionLoading: updateStakingIsTransactionLoading,
-  // } = useWagmiContractWrite({
-  //   abi: MUON_NODE_STAKING_ABI,
-  //   address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
-  //   args: [],
-  //   functionName: 'updateStaking',
-  //   chainId: getCurrentChainId(),
-  // });
+  const {
+    callback: updateStaking,
+    isMetamaskLoading: updateStakingIsMetamaskLoading,
+    isTransactionLoading: updateStakingIsTransactionLoading,
+  } = useWagmiContractWrite({
+    abi: MUON_NODE_STAKING_ABI,
+    address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
+    args: [],
+    functionName: 'updateStaking',
+    chainId: getCurrentChainId(),
+  });
 
   const [isLockUSDCMetamaskLoading, setIsLockUSDCMetamaskLoading] =
     useState(false);
@@ -205,6 +207,16 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         success: 'Upgraded!',
         failed: 'Failed to upgrade Bonded PION with PION!',
       });
+
+      if (isNodeBonALICESelected) {
+        toast('Updating your node ...');
+
+        await updateStaking?.({
+          pending: 'Wait for updating your node ...',
+          success: 'Updated!',
+          failed: 'Failed to update node!',
+        });
+      }
 
       setUpgradeAmount(w3bNumberFromString(''));
       setUpgradeBoostAmount(w3bNumberFromString(''));
@@ -484,9 +496,14 @@ const UpgradeActionProvider = ({ children }: { children: ReactNode }) => {
         handleUpgradeAmountChange,
         handleUpgradeBoostAmountChange,
         handleUpgradeBonALICEClicked,
-        isMetamaskLoading: isMetamaskLoading || isLockUSDCMetamaskLoading,
+        isMetamaskLoading:
+          isMetamaskLoading ||
+          isLockUSDCMetamaskLoading ||
+          updateStakingIsMetamaskLoading,
         isTransactionLoading:
-          isTransactionLoading || isLockUSDCTransactionLoading,
+          isTransactionLoading ||
+          isLockUSDCTransactionLoading ||
+          updateStakingIsTransactionLoading,
         isAllowanceModalOpen,
         closeAllowanceModal,
         isApproveMetamaskLoading:
