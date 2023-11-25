@@ -98,6 +98,7 @@ export const RenderCreateBody = () => {
           value={createAmount}
           withLink
           onValueChanged={handleCreateAmountChange}
+          boostCoefficient={boostCoefficient}
         />
       </FadeIn>
 

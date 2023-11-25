@@ -14,6 +14,7 @@ const AmountInput = ({
   rightText,
   withLink,
   disabled,
+  boostCoefficient,
 }: {
   balance: W3bNumber | null;
   value: W3bNumber;
@@ -21,6 +22,7 @@ const AmountInput = ({
   rightText?: string;
   withLink?: boolean;
   disabled?: boolean;
+  boostCoefficient?: W3bNumber;
 }) => {
   const navigate = useNavigate();
 
@@ -86,10 +88,10 @@ const AmountInput = ({
           </div>
         </div>
       </div>
-      <div className="amount-input__input-wrapper flex items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-4 md:pl-5 pr-4 h-12 md:h-14">
+      <div className="amount-input__input-wrapper flex items-center w-full gap-3 bg-input-bg dark:bg-alice-xyz-75 rounded-xl h-12 md:h-14">
         <input
           disabled={disabled}
-          className={`amount-input__input text-white dark:text-black font-medium w-full h-full bg-transparent outline-none text-sm ${
+          className={`amount-input__input text-white max-md:min-w-0 dark:text-black flex-1 font-medium h-full pl-4 md:pl-5 bg-transparent outline-none text-sm ${
             disabled
               ? 'placeholder-gray dark:placeholder-alice-gray'
               : 'placeholder-white dark:placeholder-gray'
@@ -100,11 +102,36 @@ const AmountInput = ({
           onChange={(e) => onValueChanged(e.target.value)}
         />
         <div
-          className={`amount-input__token-name font-semibold max-md:text-sm min-w-fit ${
+          className={`amount-input__token-name group font-semibold max-md:text-sm min-w-fit ${
             disabled ? 'text-gray' : 'text-gray10 dark:text-black1'
           }`}
         >
           {rightText}
+        </div>
+        <div
+          className={`px-2 md:px-4 h-full flex relative items-center rounded-r-xl gap-1.5 md:gap-2 group ${
+            disabled ? 'bg-gray3' : 'bg-primary-dark'
+          }`}
+        >
+          <p className="text-xl font-bold text-white">
+            {boostCoefficient?.dsp}x
+          </p>
+          <p className="font-semibold text-sm mr-1 text-white leading-5">
+            Power
+            <br />
+            Boost
+          </p>
+          <img
+            src="/assets/images/boosting-icon.svg"
+            alt=""
+            className="w-6 h-6"
+          />
+          {/*<div className="absolute top-0 -translate-y-[105%] transition-all group-hover:flex -translate-x-1/2 left-1/2 flex-col items-center opacity-0 hidden mb-6 group-hover:opacity-100 group-hover:-translate-y-[115%]">*/}
+          {/*  <span className="relative z-10 px-3 py-2 w-40 text-center text-xs leading-none text-primary whitespace-no-wrap bg-white font-bold rounded shadow-lg">*/}
+          {/*    Use USDC to boost your power by {boostCoefficient?.dsp}x*/}
+          {/*  </span>*/}
+          {/*  <div className="w-3 h-3 -mt-2 rotate-45 bg-white"></div>*/}
+          {/*</div>*/}
         </div>
       </div>
       {withLink && balance && balance.big < value.big ? (

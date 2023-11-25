@@ -127,6 +127,7 @@ export const RenderUpgradeBody = () => {
           value={upgradeAmount}
           onValueChanged={handleUpgradeAmountChange}
           disabled={!selectedUpgradeBonALICE}
+          boostCoefficient={boostCoefficient}
         />
       </FadeIn>
       <FadeIn className="hidden" duration={0.1} delay={0.1}>
