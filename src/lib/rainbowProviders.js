@@ -25,6 +25,8 @@ const { chains, publicClient, webSocketPublicClient } = configureChains(
         switch (chain.id) {
           case 1:
             return { http: "https://ethereum.publicnode.com/" };
+          case 56:
+            return { http: "https://bsc.publicnode.com" };
           case 97:
             return { http: "https://bsc-testnet.publicnode.com" };
           default:
