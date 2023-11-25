@@ -16,8 +16,6 @@ import { useALICEAllowance } from '../../hooks/alice/useALICEAllowance.ts';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
 // import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
-import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
-import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
 import UpgradeAmountCalculation from './UpgradeAmountCalculation.tsx';
 import strings from '../../constants/strings.ts';
 import UpgradeAllowanceModalBody from './UpgradeAllowanceModalBody.tsx';
@@ -50,8 +48,6 @@ export const RenderUpgradeBody = () => {
   // const { allowanceForMuonNodeStaking: lpTokenAllowanceForMuon } =
   //   useLPTokenAllowance();
 
-  const { boostableAmount } = useBooster(selectedUpgradeBonALICE?.tokenId);
-
   const { LPTokenBalance } = useLPToken();
   const { chainId, handleSwitchNetwork } = useUserProfile();
 
@@ -70,17 +66,6 @@ export const RenderUpgradeBody = () => {
   }, [LPTokenAllowanceForBooster, upgradeBoostAmount]);
 
   const { boostCoefficient } = useBooster();
-  const { ALICEPrice } = useTokenPrice();
-
-  const maxAmountToBoost = useMemo(() => {
-    return ALICEPrice && boostableAmount
-      ? w3bNumberFromBigint(
-          ((boostableAmount.big + upgradeAmount.big) *
-            w3bNumberFromNumber(ALICEPrice).big) /
-            BigInt(10 ** 18),
-        )
-      : w3bNumberFromNumber(0);
-  }, [boostableAmount, upgradeAmount, ALICEPrice]);
 
   const isUpgradeBonALICEButtonDisabled = useMemo(() => {
     return (
@@ -136,10 +121,10 @@ export const RenderUpgradeBody = () => {
           rightText={'USDC'}
           balance={LPTokenBalance}
           value={upgradeBoostAmount}
-          max={maxAmountToBoost}
+          // max={maxAmountToBoost}
           boostCoefficient={boostCoefficient}
           onValueChanged={handleUpgradeBoostAmountChange}
-          disabled={!maxAmountToBoost || maxAmountToBoost.big === BigInt(0)}
+          // disabled={!maxAmountToBoost || maxAmountToBoost.big === BigInt(0)}
         />
       </FadeIn>
 

@@ -18,7 +18,7 @@ const AmountInput = ({
   rightText?: string;
   withLink?: boolean;
   boostCoefficient?: W3bNumber;
-  max: W3bNumber | undefined;
+  max?: W3bNumber | undefined;
   disabled?: boolean;
 }) => {
   useEffect(() => {
