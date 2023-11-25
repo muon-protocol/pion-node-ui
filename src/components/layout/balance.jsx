@@ -16,6 +16,9 @@ export default function Balance() {
       const balance = Web3.utils.fromWei(String(res), "ether");
       setBalance(Number(balance).toFixed(4));
     },
+    onError(error) {
+      console.log(error);
+    },
   });
 
   useEffect(() => {

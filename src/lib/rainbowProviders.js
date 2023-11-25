@@ -12,20 +12,34 @@ import {
   trustWallet,
   ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
-import { configureChains, createConfig, mainnet, WagmiConfig } from "wagmi";
-import { bscTestnet } from "wagmi/chains";
-import { publicProvider } from "wagmi/providers/public";
+import { configureChains, createConfig, WagmiConfig } from "wagmi";
+import { mainnet, bscTestnet } from "@wagmi/core/chains";
+
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet],
-  [publicProvider()]
+  [mainnet, bscTestnet],
+  [
+    jsonRpcProvider({
+      rpc: (chain) => {
+        switch (chain.id) {
+          case 1:
+            return { http: "https://ethereum.publicnode.com/" };
+          case 97:
+            return { http: "https://bsc-testnet.publicnode.com" };
+          default:
+            return { http: "https://ethereum.publicnode.com/" };
+        }
+      },
+    }),
+  ]
 );
 
 const projectId = process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID;
 
 const { wallets } = getDefaultWallets({
   appName: "RainbowKit demo",
-  projectId,
+  projectId: projectId,
   chains,
 });
 

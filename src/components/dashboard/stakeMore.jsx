@@ -29,6 +29,7 @@ export default function StakeMore() {
     functionName: "users",
     args: [address],
     onSuccess(res) {
+      console.log(res);
       let temp = Web3.utils.fromWei(String(res[0]), "ether");
       temp = Number(temp).toFixed(2);
       setNodePower(Number(temp));
@@ -133,7 +134,7 @@ export default function StakeMore() {
             if (needUpdateNodePower) {
               writeUpdateStaking();
             } else {
-              window.location.replace("/pion/bonPION/increase");
+              window.location.replace("/pion/bonPION/boost");
             }
           }}
         >
