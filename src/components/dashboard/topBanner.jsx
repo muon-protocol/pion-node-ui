@@ -46,7 +46,7 @@ export default function TopBanner({
     write: writeSetTier,
     isLoading: walletLoading,
   } = useContractWrite({
-    address: "0xF904Bf8eC671c548b6A8C69ABC27D65955E6472E",
+    address: process.env.NEXT_PUBLIC_TIER_SETTER_CONTRACT,
     abi: contractABI,
     functionName: "setTier",
     onError(error) {

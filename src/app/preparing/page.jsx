@@ -8,28 +8,48 @@ import { useAccount } from "wagmi";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LiveChatWidget } from "@livechat/widget-react";
+import { getNodeInfoData } from "@/utils/fetchNodeInfo";
 
 export default function NewNode() {
   const dispatch = useDispatch();
-  const { address } = useAccount();
+  const { address, isDisconnected } = useAccount();
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const router = useRouter();
 
   const [tryed, setTryed] = useState(0);
+  const [timeOut, setTimeOutState] = useState(0);
+  const [isNewNode, setIsNewNode] = useState(false);
   useEffect(() => {
     setTimeout(() => {
-      dispatch(fetchNodeInfo(address));
-      if (selector.isNew) {
-        setTryed(tryed + 1);
-      } else if (selector.isNew === false) {
-        // window.location.replace("/dashboard/");
-      }
-    }, 15000);
+      getNodeInfoData(address).then((res) => {
+        if (res.nodeInfo.isNew === false) {
+          window.location.replace("/dashboard/");
+        } else if (res.nodeInfo.isNew === true) {
+          setIsNewNode(true);
+          setTryed(tryed + 1);
+          if (tryed == 2) {
+            setTimeOutState(15000);
+          }
+        } else {
+          window.location.replace("/");
+        }
+      });
+    }, timeOut);
   }, [tryed]);
+
+  useEffect(() => {
+    if (isDisconnected) {
+      window.location.replace("/");
+    }
+  }, [isDisconnected]);
 
   return (
     <div className="flex justify-center">
-      <div className="w-[480px] bg-[#3D3D3D] rounded-[18px] ">
+      <div
+        className={`w-[480px] bg-[#3D3D3D] rounded-[18px] ${
+          !isNewNode && "hidden"
+        } `}
+      >
         <div className="w-[260px] mx-auto">
           <Lottie width={50} height={50} animationData={done} />
         </div>

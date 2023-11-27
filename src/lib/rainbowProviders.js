@@ -13,12 +13,12 @@ import {
   ledgerWallet,
 } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { mainnet, bscTestnet } from "@wagmi/core/chains";
+import { mainnet, bscTestnet, bsc } from "@wagmi/core/chains";
 
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [mainnet, bscTestnet],
+  [mainnet, bscTestnet, bsc],
   [
     jsonRpcProvider({
       rpc: (chain) => {

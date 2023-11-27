@@ -54,10 +54,9 @@ export default function Withdraw({ address, needSubmitTier }) {
     hash: contractData?.hash,
   });
 
-  const dispatch = useDispatch();
   useEffect(() => {
     if (trSuccess) {
-      dispatch(fetchNodeInfo(address));
+      location.reload();
     }
   }, [trSuccess]);
   return (
