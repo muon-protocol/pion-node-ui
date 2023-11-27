@@ -50,16 +50,15 @@ const Home = () => {
                     </span>
                   </span>
                   <button
-                    disabled
                     className="btn !px-5 btn--white !w-full"
                     onClick={() =>
                       window.open(
-                        'https://www.mexc.com/exchange/PION_USDT?_from=market',
+                        'https://thena.fi/swap?inputCurrency=BNB&outputCurrency=0xb8067235c9b71feec069af151fdf0975dfbdfba5',
                         '_blank',
                       )
                     }
                   >
-                    Coming Soon
+                    Buy on THENA
                   </button>
                 </div>
               </FadeIn>
