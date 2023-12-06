@@ -9,7 +9,6 @@ const fetchRewardData = async (stakerAddress, blockNumber) => {
   const response = await axios.get(
     `${BASEURL}/v1/?app=pion_tss_reward_oracle&method=reward&params[stakerAddress]=${stakerAddress}&params[blockNumber]=${blockNumber.toString()}`
   );
-  console.log(response);
   // const response = await axios.get(
   //   `${BASEURL}/poa/?app=tss_reward_oracle&method=reward&params[stakerAddress]=${staker}&params[blockNumber]=${blockNumber}`
   // );

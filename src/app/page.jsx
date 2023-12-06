@@ -72,6 +72,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const { address, isConnected, isDisconnected } = useAccount();
   const [needSubmitTier, setNeedSubmitTier] = useState(false);
+  const [needFillOutFrom, setNeedFillOutFrom] = useState(false);
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const verificationData = useSelector(
     (state) => state.rootReducer.verificationReducer
@@ -86,15 +87,34 @@ export default function Home() {
     verificationData.privateSaleVerified;
 
   useEffect(() => {
+    console.log(
+      `pionStaked: ${selector.pionStaked}, tiersMaxStakeAmount: ${selector.tiersMaxStakeAmount}`
+    );
     if (
       verificationData.eligibleTier > verificationData.tier &&
       selector.pionStaked > selector.tiersMaxStakeAmount
     ) {
       setNeedSubmitTier(true);
+      setNeedFillOutFrom(false);
     } else {
       setNeedSubmitTier(false);
+      if (
+        verificationData.eligibleTier == verificationData.tier &&
+        [1, 2].includes(verificationData.eligibleTier) &&
+        selector.pionStaked > selector.tiersMaxStakeAmount &&
+        selector.tiersMaxStakeAmount
+      ) {
+        setNeedFillOutFrom(true);
+      } else {
+        setNeedFillOutFrom(false);
+      }
     }
-  }, [verificationData]);
+  }, [
+    verificationData.eligibleTier,
+    verificationData.tier,
+    selector.pionStaked,
+    selector.tiersMaxStakeAmount,
+  ]);
 
   useEffect(() => {
     if (
@@ -124,11 +144,11 @@ export default function Home() {
   }
 
   return (
-    <div className={`${isDisconnected ? "opacity-50" : ""}`} aria-disabled>
+    <div className={`${isDisconnected ? "opacity-20" : ""}`} aria-disabled>
       <TopBanner
         needSubmitTier={needSubmitTier}
         isVerify={isVerify}
-        privateSaleVerified={verificationData.privateSaleVerified}
+        needFillOutFrom={needFillOutFrom}
         address={address}
       ></TopBanner>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4 mt-8">

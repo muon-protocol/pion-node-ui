@@ -83,7 +83,7 @@ const myCustomTheme = {
     connectButtonBackground: "#E3E5FE",
     connectButtonBackgroundError: "...",
     connectButtonInnerBackground: "...",
-    connectButtonText: "...",
+    connectButtonText: "white",
     connectButtonTextError: "...",
     connectionIndicator: "...",
     downloadBottomCardBackground: "...",

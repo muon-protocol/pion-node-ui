@@ -32,8 +32,9 @@ function getFerificationNameFromTier(tier) {
 
 export default function TopBanner({
   isVerify,
-  privateSaleVerified,
+
   needSubmitTier,
+  needFillOutFrom,
   address,
 }) {
   const dispatch = useDispatch();
@@ -121,7 +122,9 @@ export default function TopBanner({
         loading={walletLoading || trLoading || serverRequestLoading}
         className="mt-5 lg:mt-0 min-w-[176px]"
         onClick={() => {
-          if (needSubmitTier && isVerify) {
+          if (needFillOutFrom) {
+            window.open("https://form.typeform.com/to/DRyzP0zw");
+          } else if (needSubmitTier && isVerify) {
             getTierSig(address)
               .then((response) => {
                 setServerRequestLoading(true);
@@ -147,6 +150,8 @@ export default function TopBanner({
       >
         {needSubmitTier && isVerify
           ? "Submit tier Update"
+          : needFillOutFrom
+          ? "Fill out the form"
           : "Go to verification center"}
       </LightBtn>
     </div>

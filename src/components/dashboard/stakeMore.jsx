@@ -15,7 +15,7 @@ import {
 export default function StakeMore() {
   const dispatch = useDispatch();
   const [valueOfToken, setValueOfToken] = useState(0);
-  const [tier, setTier] = useState(0);
+  const [tier, setTier] = useState("init");
   const [tierMaxStakeAmount, setTierMaxStakeAmount] = useState(0);
   const [nodePower, setNodePower] = useState("init");
   const selector = useSelector(
@@ -29,7 +29,6 @@ export default function StakeMore() {
     functionName: "users",
     args: [address],
     onSuccess(res) {
-      console.log(res);
       let temp = Web3.utils.fromWei(String(res[0]), "ether");
       temp = Number(temp).toFixed(2);
       setNodePower(Number(temp));
@@ -49,18 +48,6 @@ export default function StakeMore() {
     },
   });
   useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
-    abi: json,
-    functionName: "tiersMaxStakeAmount",
-    args: [tier],
-    onSuccess(res) {
-      const toEther = Web3.utils.fromWei(String(res), "ether");
-      const tierMaxAamount = Number(toEther).toFixed(2);
-      setTierMaxStakeAmount(Number(tierMaxAamount));
-      dispatch(setTiersMaxStakeAmount(Number(tierMaxAamount)));
-    },
-  });
-  useContractRead({
     address: process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT,
     abi: nodeManagerAbi,
     functionName: "stakerAddressInfo",
@@ -68,6 +55,19 @@ export default function StakeMore() {
     onSuccess(res) {
       dispatch(setTierRedux(Number(res.tier)));
       setTier(Number(res.tier));
+    },
+  });
+  useContractRead({
+    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    abi: json,
+    functionName: "tiersMaxStakeAmount",
+    args: [tier],
+    enabled: tier != "init",
+    onSuccess(res) {
+      const toEther = Web3.utils.fromWei(String(res), "ether");
+      const tierMaxAamount = Number(toEther).toFixed(2);
+      setTierMaxStakeAmount(Number(tierMaxAamount));
+      dispatch(setTiersMaxStakeAmount(Number(tierMaxAamount)));
     },
   });
   const {

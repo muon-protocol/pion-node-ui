@@ -227,7 +227,6 @@ function Step3({ setBrightIdStep }) {
 
 function Step4({ setBrightIdStep }) {
   const dispatch = useDispatch();
-  dispatch(resetErrorMessage());
   const { address } = useAccount();
   const staker = address;
   const selector = useSelector(
@@ -356,6 +355,7 @@ function Step5({ needSubmitTier }) {
 }
 
 function Step6() {
+  ERRORCODE;
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
