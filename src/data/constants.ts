@@ -1,75 +1,106 @@
 import { ActionType, Plan, SidebarItem, Step, UserWallet } from '../types';
+import strings from '../constants/strings.ts';
 
 export const plans: Plan[] = [
   {
     id: 1,
     title: 'Tier 1',
-    requiredNodePower: '10,000',
+    requiredNodePower: '500 - 5K',
     verificationMethods: 'Beginner Verification',
     APR: '10% - 15%',
+    minNodePower: `500 ${strings.token}`,
+    maxNodePower: `5K ${strings.token}`,
     profitability: '200 - 250 days',
     backgroundColor: '#F58E8E80',
     shadowColor: 'text-[#ed8080]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-1',
   },
   {
     id: 2,
     title: 'Tier 2',
-    requiredNodePower: '50,000',
+    requiredNodePower: '5K - 25K',
+    minNodePower: null,
+    maxNodePower: `50K ${strings.token}`,
     verificationMethods: 'Aura Bronze',
     APR: '20% - 30%',
     profitability: '100 - 180 days',
     backgroundColor: '#F3C95D80',
     shadowColor: 'text-[#e6bf5a]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-2',
   },
   {
     id: 3,
     title: 'Tier 3',
-    requiredNodePower: '200,000',
+    requiredNodePower: '25K - 50K',
+    minNodePower: null,
+    maxNodePower: `250K ${strings.token}`,
+    verificationMethods: 'Aura Silver',
+    APR: '35% - 50%',
+    profitability: '50 - 80 days',
+    backgroundColor: '#918EF5',
+    shadowColor: 'text-[#8c8aed]',
+    verificationLink:
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/tier-3',
+  },
+  {
+    id: 4,
+    title: 'Proof of Authority (PoA)',
+    requiredNodePower: 'unlimited',
+    minNodePower: null,
+    maxNodePower: 'Unlimited',
     verificationMethods: 'Aura Silver',
     APR: '35% - 50%',
     profitability: '50 - 80 days',
     backgroundColor: '#918EF580',
     shadowColor: 'text-[#8c8aed]',
     verificationLink:
-      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-testnet/uniqueness-verification/',
+      'https://docs.muon.net/muon-network/muon-nodes/pion/uniqueness-verification/pion-poa-network',
   },
 ];
 
 export const steps: Step[] = [
   {
     id: 1,
-    title: 'Buy ALICE',
-    description:
-      'First you need to buy ALICE to create your bonALICE NFT, minimum amount for starting is 1000 ALICE',
-    buttonText: 'Buy ALICE',
+    title: `Buy $${strings.token}`,
+    description: `First you need to buy ${strings.token} to create your ${strings.nft} NFT, minimum amount for starting is 1000 ${strings.token}`,
+    buttonText: `Buy $${strings.token}`,
     buttonLink:
-      'https://pancakeswap.finance/swap?chain=bscTestnet&outputCurrency=0xF43CD517385237fe7A48927073151D12f4eADC53&inputCurrency=tBNB',
+      'https://app.uniswap.org/swap?theme=dark&exactField=input&exactAmount=10&inputCurrency=ETH&outputCurrency=0xf81df93ab37d5b1396139f294418b2741143b280',
     buttonLinkTarget: '_blank',
+    buttonDisabled: true,
   },
   {
     id: 2,
-    title: 'Create bonALICE',
-    description: 'Lock your ALICE into bonALICE and gain node power',
-    buttonText: 'Create bonded ALICE',
-    buttonLink: '/bonALICE/create',
+    title: 'Create bonPION',
+    description: `Lock your ${strings.token} into ${strings.nft} and gain node power`,
+    buttonText: `Create bonded ${strings.token}`,
+    buttonLink: '/bonPION/create',
     buttonLinkTarget: '_self',
+    buttonDisabled: false,
   },
   {
     id: 3,
     title: 'Setup Node',
-    description:
-      'When you have your bonALICE ready, it’s time to setup your node and start earning',
+    description: `When you have your ${strings.nft} ready, it’s time to setup your node and start earning`,
     buttonText: 'Setup Node',
     buttonLink: '/setup-node',
     buttonLinkTarget: '_self',
+    buttonDisabled: false,
   },
 ];
 
 export const sidebarItems: SidebarItem[] = [
+  {
+    id: 0,
+    title: 'View',
+    icon: '/assets/images/actions/view-icon.svg',
+    hoverIcon: '/assets/images/actions/view-colored-icon.svg',
+    link: ActionType.VIEW,
+    grayIcon: '/assets/images/actions/view-gray-icon.svg',
+    disabled: false,
+  },
   {
     id: 1,
     title: 'Create',
@@ -122,21 +153,21 @@ export const userWallets: UserWallet[] = [
     id: 1,
     title: 'Deus Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+600 ALICE',
+    balance: '+600 PION',
     verified: true,
   },
   {
     id: 2,
     title: 'Muon Presale',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+400 ALICE',
+    balance: '+400 PION',
     verified: false,
   },
   {
     id: 3,
-    title: 'Alice Operator',
+    title: 'PION Operator',
     address: '0x1234567890123456789012345678901234567890',
-    balance: '+200 ALICE',
+    balance: '+200 PION',
     verified: false,
   },
 ];

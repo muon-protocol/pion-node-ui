@@ -5,6 +5,7 @@ import { FadeIn } from '../../animations';
 import SelectButtonWithModal from '../../components/Common/SelectButtonWithModal.tsx';
 import AddressInput from '../../components/Common/AddressInput.tsx';
 import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
+import strings from '../../constants/strings.ts';
 
 const RenderTransferBody = () => {
   const {
@@ -28,11 +29,11 @@ const RenderTransferBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICE"
+          title={`Select ${strings.nft}`}
           onClick={() => openTransferModal()}
           isModalOpen={isTransferModalOpen}
           closeModalHandler={() => closeTransferModal()}
-          modalTitle="Select BonALICE"
+          modalTitle={`Select ${strings.nft}`}
           removeItem={() => {}}
           selectedItems={
             selectedTransferBonALICE ? [selectedTransferBonALICE] : []

@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { BonALICE } from '../types';
 import { useAddNodeArgs, useApproveBonALICEArgs } from './useContractArgs.ts';
 import useWagmiContractWrite from './useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../constants/chains.ts';
-import MuonNodeStakingABI from '../abis/MuonNodeStaking.json';
+import MuonNodeStakingABI from '../abis/PION/BSCTestnet/MuonNodeStaking.ts';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
@@ -14,28 +14,85 @@ import {
   useBonAliceOwnerOf,
   useMuonNodeManagerStakerAddressInfo,
 } from '../abis/types/generated.ts';
-import BONALICE_ABI from '../abis/BonALICE';
+import BONALICE_ABI from '../abis/PION/BSCTestnet/NFT.ts';
 import useUserProfile from '../contexts/UserProfile/useUserProfile.ts';
+import { checkIPwithNodeSpecificationsAPI } from '../apis';
+import { createFromJSON } from '@libp2p/peer-id-factory';
 
 const useNodeBonALICE = () => {
   const [nodeBonALICE, setNodeBonALICE] = useState<BonALICE | null>(null);
   const [isSelectNodeBonALICEModalOpen, setIsSelectNodeBonALICEModalOpen] =
     useState(false);
   useState(false);
+
+  const [nodeIP, setNodeIP] = useState<string>('');
+  const [invalidInfoError, setInvalidInfoError] = useState<string>('');
+
   const [peerID, setPeerID] = useState<string>('');
+  const [isPeerIDValid, setIsPeerIDValid] = useState<boolean>(true);
+
   const [nodeAddress, setNodeAddress] = useState<string>('');
   const { walletAddress } = useUserProfile();
+
+  useEffect(() => {
+    if (peerID.length === 0) {
+      setIsPeerIDValid(true);
+      return;
+    }
+
+    setIsPeerIDValid(true);
+    const validatePeerID = async () => {
+      createFromJSON({ id: peerID })
+        .then(() => {
+          setIsPeerIDValid(true);
+        })
+        .catch(() => {
+          setIsPeerIDValid(false);
+        });
+    };
+
+    validatePeerID();
+  }, [peerID]);
 
   const { data: nodeBonALICEAddress } = useBonAliceOwnerOf({
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: nodeBonALICE ? [BigInt(nodeBonALICE.tokenId)] : undefined,
     watch: true,
+    enabled: !!nodeBonALICE,
   });
+
+  const isNodeAddressValid = useMemo(() => {
+    if (nodeAddress.length === 0) return true;
+
+    const re = /^0x[a-fA-F0-9]{40}$/;
+    return re.test(nodeAddress);
+  }, [nodeAddress]);
+
+  useEffect(() => {
+    if (peerID.length === 0) {
+      setIsPeerIDValid(true);
+      return;
+    }
+
+    setIsPeerIDValid(true);
+    const validatePeerID = async () => {
+      createFromJSON({ id: peerID })
+        .then(() => {
+          setIsPeerIDValid(true);
+        })
+        .catch(() => {
+          setIsPeerIDValid(false);
+        });
+    };
+
+    validatePeerID();
+  }, [peerID]);
 
   const { data: stakerAddressInfo } = useMuonNodeManagerStakerAddressInfo({
     address: MUON_NODE_MANAGER_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   const addNodeArgs = useAddNodeArgs({
@@ -61,18 +118,32 @@ const useNodeBonALICE = () => {
 
   const addNodeToNetwork = useCallback(async () => {
     setIsAddingNodeLoading(true);
+    setInvalidInfoError('');
     try {
-      await addNode?.({
-        pending: 'Waiting for Confirmation',
-        success: 'Node Added Successfully!',
-        failed: 'Error Adding Node!',
+      const response = await checkIPwithNodeSpecificationsAPI({
+        nodeIP: nodeIP,
+        peerID: peerID,
+        nodeAddress: nodeAddress,
       });
-      setIsAddingNodeLoading(false);
+      if (!response.success) {
+        setIsAddingNodeLoading(false);
+        setInvalidInfoError(response.message);
+        return;
+      }
+
+      if (response.success) {
+        await addNode?.({
+          pending: 'Waiting for Confirmation',
+          success: 'Node Added Successfully!',
+          failed: 'Error Adding Node!',
+        });
+        setIsAddingNodeLoading(false);
+      }
     } catch (e: any) {
       console.log(e);
       setIsAddingNodeLoading(false);
     }
-  }, [addNode]);
+  }, [addNode, nodeAddress, nodeIP, peerID]);
 
   useEffect(() => {
     setNodeBonALICE(null);
@@ -88,6 +159,7 @@ const useNodeBonALICE = () => {
     address: BONALICE_ADDRESS[getCurrentChainId()],
     args: nodeBonALICE ? [nodeBonALICE.tokenId] : undefined,
     watch: true,
+    enabled: !!nodeBonALICE,
   });
 
   const approveBonALICEArgs = useApproveBonALICEArgs({
@@ -133,12 +205,17 @@ const useNodeBonALICE = () => {
     isApproving,
     nodeBonALICEAddress,
     stakerAddressInfo,
+    invalidInfoError,
+    nodeIP,
+    setNodeIP,
     peerID,
     setPeerID,
     nodeAddress,
     setNodeAddress,
     isAddingNodeLoading,
     setIsAddingNodeLoading,
+    isNodeAddressValid,
+    isPeerIDValid,
   };
 };
 

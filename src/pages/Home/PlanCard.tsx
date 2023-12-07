@@ -24,7 +24,7 @@ const PlanCard = ({
         <div className="plan-card__content mb-1 flex flex-col gap-6">
           <div className="plan-card__content__item flex flex-col z-10">
             <div className="plan-card__content__item__title">
-              Minimum required ALICE
+              Minimum required PION
             </div>
             <div className="plan-card__content__item__value">
               {plan.requiredNodePower}

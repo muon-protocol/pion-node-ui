@@ -1,7 +1,13 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { BonALICE } from '../../types';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import useTransfer from '../../hooks/useTransfer.ts';
+// import useTransfer from '../../hooks/useTransfer.ts';
 
 const TransferActionContext = createContext<{
   isTransferModalOpen: boolean;
@@ -12,7 +18,7 @@ const TransferActionContext = createContext<{
   selectedTransferBonALICE: BonALICE | null;
   handleTransferAddressChange: (address: string) => void;
   transferAddress: string;
-  transfer: () => void;
+  // transfer: () => void;
 }>({
   isTransferModalOpen: false,
   openTransferModal: () => {},
@@ -22,7 +28,7 @@ const TransferActionContext = createContext<{
   selectedTransferBonALICE: null,
   handleTransferAddressChange: () => {},
   transferAddress: '',
-  transfer: () => {},
+  // transfer: () => {},
 });
 
 const TransferActionProvider = ({ children }: { children: ReactNode }) => {
@@ -30,52 +36,68 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
   const [transferModalSelectedBonALICE, setTransferModalSelectedBonALICE] =
     useState<BonALICE | null>(null);
   const [transferAddress, setTransferAddress] = useState('');
-  const handleTransferAddressChange = (address: string) => {
+  const handleTransferAddressChange = useCallback((address: string) => {
     setTransferAddress(address);
-  };
+  }, []);
   const { walletAddress } = useUserProfile();
 
-  const { transfer } = useTransfer(
-    walletAddress,
-    transferAddress,
-    transferModalSelectedBonALICE?.tokenId,
+  const openTransferModal = useCallback(() => setIsTransferModalOpen(true), []);
+  const closeTransferModal = useCallback(
+    () => setIsTransferModalOpen(false),
+    [],
   );
 
-  const handleTransferModalItemClicked = (bonALICE: BonALICE) => {
-    if (!transferModalSelectedBonALICE) {
-      changeTransferModalSelectedBonALICE(bonALICE);
-      return;
-    }
-    if (transferModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
-      unselectTransferModalSelectedBonALICE();
-    } else {
-      changeTransferModalSelectedBonALICE(bonALICE);
-    }
-  };
+  // const { transfer } = useTransfer(
+  //   walletAddress,
+  //   transferAddress,
+  //   transferModalSelectedBonALICE?.tokenId,
+  // );
 
-  const changeTransferModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setTransferModalSelectedBonALICE(bonALICE);
-    closeTransferModal();
-  };
+  const changeTransferModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setTransferModalSelectedBonALICE(bonALICE);
+      closeTransferModal();
+    },
+    [closeTransferModal],
+  );
 
-  const unselectTransferModalSelectedBonALICE = () => {
+  const unselectTransferModalSelectedBonALICE = useCallback(() => {
     setTransferModalSelectedBonALICE(null);
-  };
+  }, []);
 
-  const isSelectedTransferBonALICE = (bonALICE: BonALICE) => {
-    return (
-      !!transferModalSelectedBonALICE &&
-      transferModalSelectedBonALICE.tokenId === bonALICE.tokenId
-    );
-  };
+  const handleTransferModalItemClicked = useCallback(
+    (bonALICE: BonALICE) => {
+      if (!transferModalSelectedBonALICE) {
+        changeTransferModalSelectedBonALICE(bonALICE);
+        return;
+      }
+      if (transferModalSelectedBonALICE.tokenId === bonALICE.tokenId) {
+        unselectTransferModalSelectedBonALICE();
+      } else {
+        changeTransferModalSelectedBonALICE(bonALICE);
+      }
+    },
+    [
+      changeTransferModalSelectedBonALICE,
+      transferModalSelectedBonALICE,
+      unselectTransferModalSelectedBonALICE,
+    ],
+  );
+
+  const isSelectedTransferBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      return (
+        !!transferModalSelectedBonALICE &&
+        transferModalSelectedBonALICE.tokenId === bonALICE.tokenId
+      );
+    },
+    [transferModalSelectedBonALICE],
+  );
 
   useEffect(() => {
     setTransferModalSelectedBonALICE(null);
     setTransferAddress('');
   }, [walletAddress]);
-
-  const openTransferModal = () => setIsTransferModalOpen(true);
-  const closeTransferModal = () => setIsTransferModalOpen(false);
 
   return (
     <TransferActionContext.Provider
@@ -88,7 +110,7 @@ const TransferActionProvider = ({ children }: { children: ReactNode }) => {
         closeTransferModal,
         isSelectedTransferBonALICE,
         handleTransferModalItemClicked,
-        transfer,
+        // transfer,
       }}
     >
       {children}

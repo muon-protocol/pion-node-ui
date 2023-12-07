@@ -2,6 +2,7 @@ import { ConnectWalletButton } from './ConnectWalletButton.tsx';
 import Modal from './Modal.tsx';
 import { useNavigate } from 'react-router-dom';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
+import routes from '../../routes';
 
 export const ConnectWalletModal = ({
   redirectRoute,
@@ -13,7 +14,9 @@ export const ConnectWalletModal = ({
 
   return (
     <Modal
-      closeModalHandler={() => navigate(redirectRoute || '/')}
+      closeModalHandler={() =>
+        navigate(redirectRoute || routes.gettingStarted.path)
+      }
       isOpen={!walletAddress}
       size="sm"
     >
@@ -23,7 +26,7 @@ export const ConnectWalletModal = ({
           src="/assets/images/modal/connect-wallet-modal-icon.svg"
           alt=""
         />
-        <p className="text-center mb-6">
+        <p className="text-center mb-6 text-black">
           please connect your wallet to continue.
         </p>
         <ConnectWalletButton size="md" />

@@ -29,6 +29,7 @@ const ALICEProvider = ({ children }: { children: ReactNode }) => {
     token: ALICE_ADDRESS[getCurrentChainId()],
     chainId: getCurrentChainId(),
     watch: true,
+    enabled: !!walletAddress,
   });
 
   useEffect(() => {

@@ -1,24 +1,26 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FadeIn } from '../../animations';
-import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
-import { useEffect } from 'react';
+import strings from '../../constants/strings.ts';
+import routes from '../../routes';
+// import useNodeBonALICE from '../../hooks/useNodeBonALICE.ts';
+// import { useEffect } from 'react';
 
 const GetStarted = () => {
-  const { stakerAddressInfo } = useNodeBonALICE();
+  // const { stakerAddressInfo } = useNodeBonALICE();
 
-  useEffect(() => {
-    if (stakerAddressInfo?.active) {
-      window.open('/dashboard', '_self');
-    }
-  }, [stakerAddressInfo]);
+  // useEffect(() => {
+  //   if (stakerAddressInfo?.active) {
+  //     window.open('/dashboard/', '_self');
+  //   }
+  // }, [stakerAddressInfo]);
 
   return (
     <div className="page__bg">
       <div className="page page--get-started">
         <FadeIn duration={0.3}>
           <p className="text-[19px] md:text-2xl font-light mb-6">
-            You can obtain bonALICE in two ways: either create a new one
+            You can obtain {strings.nft} in two ways: either create a new one
             independently or claim it as a reward if you're part of the MUON
             pioneers
           </p>
@@ -33,7 +35,7 @@ const GetStarted = () => {
             {/*  Joined the Deus Presale*/}
             {/*</span>*/}
             <span className="get-started__pioneer-option">
-              Operated an ALICE Node
+              Operated an {strings.token} Node
             </span>
           </span>
           <span className="get-started__actions">
@@ -62,7 +64,7 @@ const NewBonALICEAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/BonALICE/create"
+      to={routes.create.path}
     >
       <motion.span whileHover="animate">
         <motion.img
@@ -77,8 +79,8 @@ const NewBonALICEAction = () => {
             src="/assets/images/get-started/new-bon-alice-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:font-light md:min-h-[4rem] flex items-center md:text-center mx-auto">
-            Get Started with a New bonALICE
+          <div className="font-semibold md:text-2xl md:font-light md:min-h-[4rem] flex items-center md:text-center text-white mx-auto">
+            Get Started with a New {strings.nft}
           </div>
         </div>
       </motion.span>
@@ -102,7 +104,7 @@ const MuanPioneerAction = () => {
   return (
     <Link
       className="get-started__actions__action-container relative"
-      to="/claim"
+      to={routes.claim.path}
     >
       <motion.span whileHover="animate">
         <motion.img
@@ -117,7 +119,7 @@ const MuanPioneerAction = () => {
             src="/assets/images/get-started/muan-pioneer-icon.svg"
             alt=""
           />
-          <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center mx-auto">
+          <div className="font-semibold md:text-2xl md:min-h-[4rem] flex items-center md:font-light md:text-center text-white mx-auto">
             Claim Your Node-Drop
           </div>
         </div>

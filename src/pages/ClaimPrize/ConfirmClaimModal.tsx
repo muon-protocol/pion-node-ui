@@ -1,5 +1,6 @@
 import { formatWalletAddress } from '../../utils/web3.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import strings from '../../constants/strings.ts';
 
 const ConfirmClaimModal = () => {
   const { stakingAddress, handleConfirmClaimClicked } = useClaimPrize();
@@ -11,15 +12,14 @@ const ConfirmClaimModal = () => {
         src="/assets/images/claim/switch-wallet-modal-icon.svg"
         alt=""
       />
-      <p className="text-center mb-5">
-        Be aware that if you press confirm button, you will be only able to
-        claim your reward on the staking address{' '}
-        <strong>({formatWalletAddress(stakingAddress)})</strong>.
+      <p className="text-center mb-5 text-black">
+        Be aware that if you press the Confirm button, you will claim your
+        {strings.nft} on{' '}
+        <strong>({formatWalletAddress(stakingAddress)})</strong> and will NOT be
+        able to change it afterwards. You will have to run your node on this
+        address.
       </p>
-      <button
-        className="btn btn--secondary"
-        onClick={() => handleConfirmClaimClicked()}
-      >
+      <button className="btn" onClick={() => handleConfirmClaimClicked()}>
         Confirm
       </button>
     </div>

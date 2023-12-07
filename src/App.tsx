@@ -1,11 +1,5 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
-import ReviewDetail from './pages/ReviewDetail';
-import ClaimPrize from './pages/ClaimPrize';
-import GetStarted from './pages/GetStarted';
-import Actions from './pages/Actions';
-import Home from './pages/Home';
-
 import Navbar from './components/Common/Navbar.tsx';
 
 import { TransferActionProvider } from './contexts/TransferAction/TransferActionContext.tsx';
@@ -26,10 +20,34 @@ import { ApolloProvider } from '@apollo/client';
 import { aliceClient } from './apollo/client.ts';
 import { RefreshProvider } from './contexts/Refresh/RefreshContext.tsx';
 import { LPTokenProvider } from './contexts/LPToken/LPTokenContext.tsx';
+import { Sidebar } from './components/Basic/Sidebar.tsx';
+import { useEffect } from 'react';
+import routes, { RoutesInterface } from './routes';
 
 function App() {
+  useEffect(() => {
+    if (import.meta.env.VITE_PROJECT_NAME === 'ALICE') {
+      document.getElementsByTagName('body')[0].className = 'dark alice';
+    } else {
+      document.getElementsByTagName('body')[0].className = 'pion';
+    }
+  }, []);
+
+  useEffect(() => {
+    const link = document.querySelector("link[rel~='icon']");
+    const title = document.querySelector('title');
+    if (!link || !title) return;
+    if (import.meta.env.VITE_PROJECT_NAME === 'ALICE') {
+      link.setAttribute('href', '/alice-favicon.ico');
+      title.innerHTML = 'ALICE';
+    } else {
+      link.setAttribute('href', '/favicon.ico');
+      title.innerHTML = 'PION';
+    }
+  }, []);
+
   return (
-    <div className="app">
+    <div className="app relative overflow-x-hidden max-md:pt-[calc(18*4px)] no-scrollbar">
       <Web3Provider>
         <ApolloProvider client={aliceClient}>
           <RefreshProvider>
@@ -47,41 +65,22 @@ function App() {
                                   <ClaimPrizeProvider>
                                     <BrowserRouter>
                                       <Navbar />
-                                      <Routes>
-                                        <Route path="/" element={<Home />} />
-                                        <Route
-                                          path="/bonALICE/create"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/bonALICE/boost"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/bonALICE/merge"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/bonALICE/split-"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/bonALICE/transfer-"
-                                          element={<Actions />}
-                                        />
-                                        <Route
-                                          path="/get-started"
-                                          element={<GetStarted />}
-                                        />
-                                        <Route
-                                          path="/claim"
-                                          element={<ClaimPrize />}
-                                        />
-                                        <Route
-                                          path="/setup-node"
-                                          element={<ReviewDetail />}
-                                        />
-                                      </Routes>
+                                      <div className={'flex'}>
+                                        <Sidebar />
+                                        <div className={'w-full'}>
+                                          <Routes>
+                                            {Object.keys(routes).map(
+                                              (key: keyof RoutesInterface) => (
+                                                <Route
+                                                  key={key}
+                                                  path={routes[key].path}
+                                                  element={routes[key].element}
+                                                />
+                                              ),
+                                            )}
+                                          </Routes>
+                                        </div>
+                                      </div>
                                       <Toaster position="bottom-right" />
                                       <Footer />
                                     </BrowserRouter>

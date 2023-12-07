@@ -5,7 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/reward-server': 'http://103.75.196.96:80',
+      '/reward-server': 'https://app.muon.net/',
+      '/monitor/validateNewNodeData': 'https://app.muon.net/',
+      '/api/price/': 'https://app.muon.net/',
+      '/stats/data': 'https://app.muon.net/',
+      '/migrate/': 'https://alice-test.muon.net/',
     },
   },
 });

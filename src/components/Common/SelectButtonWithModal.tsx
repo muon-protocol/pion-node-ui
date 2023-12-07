@@ -1,6 +1,8 @@
 import Modal from './Modal.tsx';
 import { ReactNode } from 'react';
 import { BonALICE } from '../../types';
+import strings from '../../constants/strings.ts';
+import { FadeIn } from '../../animations';
 
 const SelectButtonWithModal = ({
   title = '',
@@ -12,6 +14,7 @@ const SelectButtonWithModal = ({
   onClick,
   selectedItems,
   removeItem,
+  errorMessage,
 }: {
   title?: string;
   multiple?: boolean;
@@ -22,29 +25,29 @@ const SelectButtonWithModal = ({
   onClick: () => void;
   selectedItems: BonALICE[];
   removeItem: (item: BonALICE) => void;
+  errorMessage?: string;
 }) => {
   return (
     <div className="select-button-with-modal mb-2 w-full">
       <div className="flex flex-col w-full gap-2" onClick={onClick}>
         {title && (
-          <div className="text-gray text-sm max-md:text-sm max-md:font-semibold">
+          <div className="text-sm max-md:text-sm max-md:font-semibold text-xyz-2 dark:text-alice-gray">
             {title}
           </div>
         )}
-        <div className="select-button-with-modal__button flex items-center justify-between bg-catskill-white rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
+        <div className="select-button-with-modal__button flex items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-3 md:pl-5 pr-4 h-12 md:h-14 cursor-pointer">
           <span className="flex gap-1.5 md:gap-2.5 items-center">
-            <img
-              className="w-5 h-5 md:w-[26px] md:h-[26px]"
-              src="/assets/images/alice-icon-colored.svg"
-              alt=""
-            />
+            <img className="w-7" src={strings.sidebar.nftLogoSrc} alt="" />
             {multiple ? (
               <>
                 {selectedItems.length > 0 ? (
                   selectedItems.map((selectedItem) => (
-                    <span className="rounded-lg bg-algo px-2 md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between">
-                      <p className="text-xs md:text-sm">
-                        {'BonALICE #' + selectedItem.tokenId}
+                    <span
+                      key={selectedItem.tokenId}
+                      className="rounded-lg bg-algo px-2 text-black md:px-3 py-2 flex gap-2 md:gap-3 items-center justify-between"
+                    >
+                      <p className="text-xs md:text-sm text-black">
+                        {`${strings.nft} #` + selectedItem.tokenId}
                       </p>
                       <img
                         onClick={(e) => {
@@ -58,17 +61,24 @@ const SelectButtonWithModal = ({
                     </span>
                   ))
                 ) : (
-                  <p className="text-gray font-medium max-md:text-sm">Select</p>
+                  <p className="text-white font-medium max-md:text-sm">
+                    Select
+                  </p>
                 )}
               </>
             ) : (
               <>
                 {selectedItems.length > 0 ? (
                   <p className="font-medium max-md:text-sm">
-                    {'BonALICE #' + selectedItems[0].tokenId}
+                    {`${strings.nft} #` +
+                      selectedItems[0].tokenId +
+                      ' | Amount: ' +
+                      selectedItems[0].nodePower}
                   </p>
                 ) : (
-                  <p className="text-gray font-medium max-md:text-sm">Select</p>
+                  <p className="text-white font-medium max-md:text-sm">
+                    Select
+                  </p>
                 )}
               </>
             )}
@@ -80,6 +90,13 @@ const SelectButtonWithModal = ({
           />
         </div>
       </div>
+      {errorMessage && (
+        <FadeIn duration={0.3} className="mt-2">
+          <p className="text-red-400 dark:text-red-600 font-bold text-xs">
+            {errorMessage}
+          </p>
+        </FadeIn>
+      )}
 
       <Modal
         title={modalTitle}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Address } from 'wagmi';
 
 const axiosInstance = axios.create();
 
@@ -41,7 +42,45 @@ export async function getClaimSignatureAPI(
   return response.data;
 }
 
+export async function getUserSignatureForBoostAPI(address: Address) {
+  const response = await axiosInstance.get('/api/price/' + address);
+  return response.data;
+}
+
+export async function getStatsAPI() {
+  const response = await axiosInstance.get(
+    'https://app.muon.net//stats/data.json',
+  );
+  return response.data;
+}
+
 export async function getNodeStatusAPI(ip: string) {
   const response = await axiosInstance.get('/reward-server/status?ip=' + ip);
+  return response.data;
+}
+
+export async function checkIPwithNodeSpecificationsAPI({
+  nodeIP,
+  peerID,
+  nodeAddress,
+}: {
+  nodeIP: string;
+  peerID: string;
+  nodeAddress: string;
+}) {
+  const response = await axiosInstance.post('/monitor/validateNewNodeData', {
+    ip: nodeIP,
+    peerId: peerID,
+    nodeAddress: nodeAddress,
+  });
+  return response.data;
+}
+
+export async function getMigrationDataAPI({
+  walletAddress,
+}: {
+  walletAddress: string;
+}) {
+  const response = await axiosInstance.get('/migrate/' + walletAddress);
   return response.data;
 }

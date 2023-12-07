@@ -16,6 +16,16 @@ export const useRewardWallets = (
             contributor.contributor === walletWithSignature.walletAddress &&
             contributor.reward > 0,
         ),
+        wasInDeusAllocation: rawRewards.deus_allocation.contributors.some(
+          (contributor) =>
+            contributor.contributor === walletWithSignature.walletAddress &&
+            contributor.reward > 0,
+        ),
+        wasMuonPrivateSale: rawRewards.muon_private_sale.contributors.some(
+          (contributor) =>
+            contributor.contributor === walletWithSignature.walletAddress &&
+            contributor.reward > 0,
+        ),
         wasInDeusPresale: rawRewards.deus_presale.contributors.some(
           (contributor) =>
             contributor.contributor === walletWithSignature.walletAddress &&

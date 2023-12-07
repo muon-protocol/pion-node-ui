@@ -6,6 +6,8 @@ export type Plan = {
   title: string;
   requiredNodePower: string;
   verificationMethods: string;
+  minNodePower: string | null;
+  maxNodePower: string;
   APR: string;
   profitability: string;
   backgroundColor: string;
@@ -19,14 +21,16 @@ export type Step = {
   buttonText: string;
   buttonLink: string;
   buttonLinkTarget: string;
+  buttonDisabled: boolean;
 };
 
 export enum ActionType {
-  CREATE = '/bonALICE/create',
-  UPGRADE = '/bonALICE/boost',
-  MERGE = '/bonALICE/merge',
-  SPLIT = 'split',
-  TRANSFER = 'transfer',
+  VIEW = 'VIEW',
+  CREATE = 'CREATE',
+  UPGRADE = 'UPGRADE',
+  MERGE = 'MERGE',
+  SPLIT = 'SPLIT',
+  TRANSFER = 'TRANSFER',
 }
 
 export type SidebarItem = {
@@ -35,8 +39,10 @@ export type SidebarItem = {
   title: string;
   icon: string;
   hoverIcon: string;
-  link: ActionType;
+  link: string;
   disabled: boolean;
+  disabledMessage?: string;
+  disabledIcon?: string;
 };
 
 export type UserWallet = {
@@ -53,10 +59,12 @@ export type RawRewards = {
   signature: string | null;
   claimer: `0x${string}` | null;
   alice_operator: RawRewardSection;
+  alice_operator_bounce: RawRewardSection;
+  deus_allocation: RawRewardSection;
   deus_presale: RawRewardSection;
   early_alice_operator: RawRewardSection;
   muon_presale: RawRewardSection;
-  alice_operator_bounce: RawRewardSection;
+  muon_private_sale: RawRewardSection;
   uniquenessVerified: boolean;
 };
 
@@ -76,6 +84,8 @@ export type RewardWallet = {
   signature: string | null;
   wasInMuonPresale: boolean;
   wasInDeusPresale: boolean;
+  wasInDeusAllocation: boolean;
+  wasMuonPrivateSale: boolean;
   wasAliceOperator: boolean;
   wasAliceOperatorEarly: boolean;
   wasAliceOperatorBounce: boolean;

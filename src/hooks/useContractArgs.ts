@@ -13,23 +13,46 @@ export const useLockArgs = ({
   ALICEAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
 }) => {
-  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
   return useMemo(() => {
     if (
       !tokenId ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
-      return null;
+      return undefined;
 
-    const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
-    const amounts = [ALICEAmount.big];
-
-    return [tokenId, tokens, amounts];
+    return [tokenId, ALICEAmount.big];
   }, [tokenId, ALICEAmount, ALICEAllowance]);
 };
+
+// export const useLockArgs = ({
+//   tokenId,
+//   ALICEAmount,
+//   ALICEAllowance,
+// }: {
+//   tokenId: number | null;
+//   ALICEAmount: W3bNumber;
+//   ALICEAllowance: W3bNumber | null;
+// }) => {
+//   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+//   return useMemo(() => {
+//     if (
+//       !tokenId ||
+//       !ALICEAmount ||
+//       !ALICEAllowance ||
+//       ALICEAmount.big === BigInt(0) ||
+//       ALICEAmount.dsp > ALICEAllowance.dsp
+//     )
+//       return undefined;
+//
+//     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
+//     const amounts = [ALICEAmount.big];
+//
+//     return [tokenId, tokens, amounts];
+//   }, [tokenId, ALICEAmount, ALICEAllowance]);
+// };
 
 export const useLockToBondedTokenArgs = ({
   tokenId,
@@ -46,10 +69,10 @@ export const useLockToBondedTokenArgs = ({
       !tokenId ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
-      return null;
+      return undefined;
 
     const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
     const amounts = [ALICEAmount.big];
@@ -72,10 +95,10 @@ export const useLockUSDCArgs = ({
       !tokenId ||
       !LPTokenAmount ||
       !LPTokenAllowance ||
-      LPTokenAmount.dsp === 0 ||
+      LPTokenAmount.big === BigInt(0) ||
       LPTokenAmount.big > LPTokenAllowance.big
     )
-      return null;
+      return undefined;
 
     return [tokenId, LPTokenAmount.big];
   }, [tokenId, LPTokenAmount, LPTokenAllowance]);
@@ -89,8 +112,9 @@ export const useApproveArgs = ({
   approveAmount: W3bNumber;
 }) => {
   return useMemo(() => {
-    if (!spenderAddress || !approveAmount || approveAmount.dsp === 0)
-      return null;
+    if (!spenderAddress || !approveAmount || approveAmount.big === BigInt(0))
+      return undefined;
+
     return [spenderAddress, approveAmount.big];
   }, [spenderAddress, approveAmount]);
 };
@@ -99,30 +123,54 @@ export const useMintArgs = ({
   walletAddress,
   ALICEAmount,
   ALICEAllowance,
-  ALICEAddress,
 }: {
   walletAddress: `0x${string}` | null | undefined;
   ALICEAmount: W3bNumber;
   ALICEAllowance: W3bNumber | null;
-  ALICEAddress: `0x${string}`;
 }) => {
-  // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+  // args: [amounts (uint256[])]
   return useMemo(() => {
     if (
       !walletAddress ||
       !ALICEAmount ||
       !ALICEAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp
     )
-      return null;
+      return undefined;
 
-    const tokens = [ALICEAddress];
-    const amounts = [ALICEAmount.big];
-
-    return [tokens, amounts, walletAddress];
-  }, [walletAddress, ALICEAmount, ALICEAllowance, ALICEAddress]);
+    return [ALICEAmount.big];
+  }, [walletAddress, ALICEAmount, ALICEAllowance]);
 };
+
+// export const useMintArgsOldVersionWithUSDC = ({
+//   walletAddress,
+//   ALICEAmount,
+//   ALICEAllowance,
+//   ALICEAddress,
+// }: {
+//   walletAddress: `0x${string}` | null | undefined;
+//   ALICEAmount: W3bNumber;
+//   ALICEAllowance: W3bNumber | null;
+//   ALICEAddress: `0x${string}`;
+// }) => {
+//   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
+//   return useMemo(() => {
+//     if (
+//       !walletAddress ||
+//       !ALICEAmount ||
+//       !ALICEAllowance ||
+//       ALICEAmount.big === BigInt(0) ||
+//       ALICEAmount.dsp > ALICEAllowance.dsp
+//     )
+//       return undefined;
+//
+//     const tokens = [ALICEAddress];
+//     const amounts = [ALICEAmount.big];
+//
+//     return [tokens, amounts, walletAddress];
+//   }, [walletAddress, ALICEAmount, ALICEAllowance, ALICEAddress]);
+// };
 
 export const useCreateAndBoostArgs = ({
   ALICEAmount,
@@ -141,12 +189,12 @@ export const useCreateAndBoostArgs = ({
       !ALICEAllowance ||
       !LPTokenAmount ||
       !LPTokenAllowance ||
-      ALICEAmount.dsp === 0 ||
+      ALICEAmount.big === BigInt(0) ||
       ALICEAmount.dsp > ALICEAllowance.dsp ||
-      LPTokenAmount.dsp === 0 ||
+      LPTokenAmount.big === BigInt(0) ||
       LPTokenAmount.dsp > LPTokenAllowance.dsp
     )
-      return null;
+      return undefined;
 
     return [ALICEAmount.big, LPTokenAmount.big];
   }, [ALICEAmount, ALICEAllowance, LPTokenAmount, LPTokenAllowance]);
@@ -160,7 +208,9 @@ export const useBoostArgs = ({
   boostAmount: W3bNumber;
 }) => {
   return useMemo(() => {
-    if (!tokenId || !boostAmount || boostAmount.dsp === 0) return null;
+    if (!tokenId || !boostAmount || boostAmount.big === BigInt(0))
+      return undefined;
+
     return [tokenId, boostAmount.big];
   }, [tokenId, boostAmount]);
 };
@@ -173,7 +223,8 @@ export const useMergeArgs = ({
   tokenId2: number | null;
 }) => {
   return useMemo(() => {
-    if (!tokenId1 || !tokenId2) return null;
+    if (!tokenId1 || !tokenId2) return undefined;
+
     return [tokenId1, tokenId2];
   }, [tokenId1, tokenId2]);
 };
@@ -189,8 +240,8 @@ export const useClaimRewardArgs = ({
   connectedWalletAddress: `0x${string}` | null | undefined;
   stakingAddress: `0x${string}` | null | undefined;
 }) => {
-  if (!rewardAmount || !signature) return null;
-  if (connectedWalletAddress !== stakingAddress) return null;
+  if (!rewardAmount || !signature) return undefined;
+  if (connectedWalletAddress !== stakingAddress) return undefined;
 
   return [rewardAmount.big, signature];
 };
@@ -202,7 +253,7 @@ export const useSplitArgs = ({
   bonALICE: BonALICE | null;
   percentage: number;
 }) => {
-  if (!bonALICE) return null;
+  if (!bonALICE) return undefined;
   // args: [tokenId (uint256), tokens (address[]), amounts (uint256[])]
 
   const tokens = [ALICE_ADDRESS[getCurrentChainId()]];
@@ -229,7 +280,8 @@ export const useAddNodeArgs = ({
   peerID: string;
   tokenId: number | null;
 }) => {
-  if (!nodeAddress || !peerID || !tokenId) return null;
+  if (!nodeAddress || !peerID || !tokenId) return undefined;
+
   return [nodeAddress, peerID, tokenId];
 };
 
@@ -240,6 +292,7 @@ export const useApproveBonALICEArgs = ({
   address: `0x${string}` | undefined;
   tokenId: number | null;
 }) => {
-  if (!address || !tokenId) return null;
+  if (!address || !tokenId) return undefined;
+
   return [address, tokenId];
 };

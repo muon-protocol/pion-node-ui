@@ -1,5 +1,5 @@
 import { Step } from '../../types';
-import { MoveUpIn } from '../../animations';
+import { FadeIn } from '../../animations';
 
 export const StepCard = ({
   step,
@@ -13,14 +13,17 @@ export const StepCard = ({
   children: React.ReactNode;
 }) => {
   return (
-    <MoveUpIn className={className + ' rounded-xl'} delay={animationDelay}>
-      <div className="step-card px-7 pt-5 pb-10 h-full min-h-[297px] max-w-[430px] flex flex-col relative bg-primary-13 rounded-xl bg-opacity-50 bg-black1 backdrop-blur-[12.5px]">
-        <div className="font-tomorrow absolute right-7 -top-10 text-8xl font-medium text-primary">
+    <FadeIn
+      className={className + ' rounded-3xl dark:shadow-xl'}
+      delay={animationDelay}
+    >
+      <div className="step-card px-7 pt-5 pb-10 h-full min-h-[297px] max-w-[430px] flex flex-col relative bg-black1 bg-opacity-50 rounded-2xl backdrop-blur-[12.5px] dark:bg-alice-card-background">
+        <p className="font-tomorrow absolute right-6 -top-10 text-8xl font-medium with-stroke dark:text-alice-primary-13">
           {step.id}
-        </div>
+        </p>
 
         {children}
       </div>
-    </MoveUpIn>
+    </FadeIn>
   );
 };

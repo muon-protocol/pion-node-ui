@@ -32,7 +32,31 @@ export const useRawRewardsFromPast = ({
         };
       },
     );
+    rawRewardsFromPast.deus_allocation.contributors.forEach((contributor) => {
+      if (
+        !wallets.some(
+          (wallet) => wallet.walletAddress === contributor.contributor,
+        )
+      ) {
+        wallets.push({
+          walletAddress: contributor.contributor,
+          signature: 'signature',
+        });
+      }
+    });
     rawRewardsFromPast.muon_presale.contributors.forEach((contributor) => {
+      if (
+        !wallets.some(
+          (wallet) => wallet.walletAddress === contributor.contributor,
+        )
+      ) {
+        wallets.push({
+          walletAddress: contributor.contributor,
+          signature: 'signature',
+        });
+      }
+    });
+    rawRewardsFromPast.muon_private_sale.contributors.forEach((contributor) => {
       if (
         !wallets.some(
           (wallet) => wallet.walletAddress === contributor.contributor,

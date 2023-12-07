@@ -1,6 +1,6 @@
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
 import useUserProfile from '../../contexts/UserProfile/useUserProfile.ts';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { formatWalletAddress } from '../../utils/web3.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -10,6 +10,8 @@ import ConfirmClaimModal from './ConfirmClaimModal.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import { FadeIn } from '../../animations';
 import { TermsAndConditionsModal } from './TermsAndConditionsModal.tsx';
+import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ClaimCard = () => {
   const { totalRewards, stakingAddress } = useClaimPrize();
@@ -17,9 +19,9 @@ const ClaimCard = () => {
     eligibleAddresses,
     isMetamaskLoading,
     isTransactionLoading,
-    isSuccess,
-    alreadyClaimedPrize,
-    setAlreadyClaimedPrize,
+    // isSuccess,
+    // alreadyClaimedPrize,
+    // setAlreadyClaimedPrize,
     stakingAddressFromPast,
     totalRewardFromPast,
     claimSignatureFromPast,
@@ -59,17 +61,19 @@ const ClaimCard = () => {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isSuccess || alreadyClaimedPrize) {
-      navigate('/setup-node');
-      setAlreadyClaimedPrize(false);
-    }
-  }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
+  // useEffect(() => {
+  //   if (isSuccess || alreadyClaimedPrize) {
+  //     navigate('/pion/setup-node');
+  //     setAlreadyClaimedPrize(false);
+  //   }
+  // }, [isSuccess, navigate, alreadyClaimedPrize, setAlreadyClaimedPrize]);
 
   return (
-    <div className="w-full bg-primary-13 px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
+    <div className="w-full bg-primary-dark dark:shadow-xl dark:bg-alice-card-background px-6 py-6 md:pl-11 md:pr-9 md:pb-7 md:pt-8 rounded-2xl flex flex-col md:flex-row text-white">
       <div className="claim-card__left flex-[4] mb-6 md:mb-0 max-md:text-sm">
-        <p className="mb-8 font-semibold text-[20px]">Your Bonded ALICE</p>
+        <p className="mb-8 font-semibold text-[20px]">
+          Your Bonded {strings.token}
+        </p>
         <span className="flex font-light mb-2">
           <p className="w-[143px] text-left">Staking address:</p>
           <p className="font-medium">
@@ -80,8 +84,8 @@ const ClaimCard = () => {
               : 'Connect eligible wallet'}
           </p>
         </span>
-        <span className="flex font-light mb-2">
-          <div className="flex gap-1 text-black w-[143px] text-left">
+        <span className="flex font-light mb-2 dark:text-black">
+          <div className="flex gap-1 w-[143px] text-left">
             {/*<p className="font-medium">*/}
             {/*  {stakingAddressFromPast*/}
             {/*    ? totalRewardFromPast.dsp*/}
@@ -93,17 +97,17 @@ const ClaimCard = () => {
             {/*  alt=""*/}
             {/*/>*/}
           </div>
-          <div className="flex text-black font-medium">
+          <div className="flex font-medium">
             <p className="mr-1">
               {stakingAddressFromPast
                 ? totalRewardFromPast.dsp
                 : totalRewards.dsp}
             </p>
-            ALICE
+            {strings.token}
           </div>
         </span>
         {/*<span className="flex font-light">*/}
-        {/*  <p className="w-[143px]">bonALICE Tier:</p>*/}
+        {/*  <p className="w-[143px]">bonPION Tier:</p>*/}
         {/*  <p className="flex text-black font-medium">*/}
         {/*    {stakingAddressFromPast || eligibleAddresses.length > 0*/}
         {/*      ? getTier(*/}
@@ -142,32 +146,36 @@ const ClaimCard = () => {
           {chainId !== getCurrentChainId() ? (
             <button
               onClick={() => handleSwitchNetwork(getCurrentChainId())}
-              className="btn md:ml-auto max-md:!w-full !px-6"
+              className="btn btn--white md:ml-auto max-md:!w-full !px-6"
             >
               Switch Network
             </button>
           ) : userClaimedReward[0] > BigInt(0) ? (
             <button
-              onClick={() => navigate('/setup-node')}
-              className="btn md:ml-auto max-md:!w-full !px-10"
+              onClick={() => navigate(routes.setupNode.path)}
+              className="btn btn--white md:ml-auto max-md:!w-full !px-10"
+              disabled
             >
-              Create Node
+              Claimed!
             </button>
           ) : isMetamaskLoading || isTransactionLoading ? (
-            <button className="btn md:ml-auto max-md:!w-full !px-6" disabled>
+            <button
+              className="btn btn--white md:ml-auto max-md:!w-full !px-6"
+              disabled
+            >
               {isMetamaskLoading ? 'Metamask...' : 'Transaction...'}
             </button>
           ) : claimSignatureFromPast ? (
             <button
               onClick={() => handleClaimRewardsFromPastClicked()}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn btn--white md:ml-auto max-md:!w-full"
             >
               Claim
             </button>
           ) : (
             <button
               onClick={() => handleClaimRewardsClicked()}
-              className="btn md:ml-auto max-md:!w-full"
+              className="btn btn--white md:ml-auto max-md:!w-full"
               disabled={isClaimButtonDisabled}
             >
               Claim
@@ -179,6 +187,7 @@ const ClaimCard = () => {
         size="lg"
         closeModalHandler={() => setIsPrizeCalculationDetailModalOpen(false)}
         isOpen={isPrizeCalculationDetailModalOpen}
+        title={'Node-Drop Calculation Details'}
       >
         <PrizeCalculationDetailModal />
       </Modal>

@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import useActions from '../../contexts/Actions/useActions.ts';
-import { sidebarItems } from '../../data/constants.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import useClaimPrize from '../../contexts/ClaimPrize/useActions.ts';
+import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ClaimedRewardModal = ({ operation }: { operation: string }) => {
   const navigate = useNavigate();
-  const { setSelectedAction } = useActions();
   const { setIsSufficientModalOpen: createModal } = useCreateAction();
   const { setIsSufficientModalOpen: claimModal } = useClaimPrize();
 
@@ -17,33 +16,33 @@ const ClaimedRewardModal = ({ operation }: { operation: string }) => {
         src="/assets/images/modal/successfully-claimed-icon.svg"
         alt=""
       />
-      <p className="text-center">
-        Your BonALICE has been {operation} successfully. now you can
-        <br />
+      <p className="text-center text-black">
+        Your {strings.nft} has been {operation} successfully.
         <button
           onClick={() => {
             createModal(false);
             claimModal(false);
-            navigate('/setup-node');
+            navigate(routes.setupNode.path);
           }}
-          className="btn btn--primary mb-2 mt-5 mx-auto"
+          className="btn btn--primary mt-5 mx-auto"
         >
           Setup Your Node
         </button>
-        or
         <br />
         <span
           onClick={() => {
-            setSelectedAction(sidebarItems[1].link);
             createModal(false);
             claimModal(false);
-            navigate('/bonALICE/boost');
+            window.open(
+              'https://docs.muon.net/muon-network/muon-nodes/pion/upgrading-bonpion-nfts',
+              '_blank',
+            );
           }}
           className="text-primary hover:underline cursor-pointer"
         >
           Boost
         </span>{' '}
-        your power to increase earnings from node operation.
+        your power to boost your rewards.
       </p>
     </div>
   );

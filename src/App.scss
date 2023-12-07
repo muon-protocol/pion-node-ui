@@ -17,10 +17,71 @@
 
   -ms-overflow-style: none;
   scrollbar-width: none;
+
+  @apply pr-0 mr-0;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    cursor: pointer;
+    border-radius: 100%;
+  }
+
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 #5158F600;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #ECEDFF;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #ECEDFF;
+    cursor: pointer;
+  }
+}
+
+.pion {
+  & .actions-content {
+    background-image: url("../public/assets/images/actions/bg.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  & .review-detail {
+    &__nft {
+      background-image: url("../public/assets/images/review/nft-bg.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  }
+}
+
+.pion {
+  & .stat-item {
+    &__value {
+      @apply bg-alice-primary-g;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+  }
+}
+
+.alice {
+  & .stat-item {
+    &__value {
+      @apply text-alice-body-background font-semibold;
+    }
+  }
 }
 
 .styled-scroll {
-  @apply pr-4 -mr-4;
+  @apply pr-3 -mr-3;
 
   &::-webkit-scrollbar {
     width: 3px;
@@ -34,13 +95,27 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #C2C1F4;
+    background: #ECEDFF;
     border-radius: 100px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #C2C1F4;
+    background: #ECEDFF;
     cursor: pointer;
+  }
+}
+
+.pion {
+  & .with-stroke {
+    -webkit-text-stroke: 4px #5158F67F;
+    paint-order: stroke fill;
+  }
+}
+
+.alice {
+  & .with-stroke {
+    -webkit-text-stroke: 4px #5158F67F;
+    paint-order: stroke fill;
   }
 }
 
@@ -51,7 +126,7 @@ input::-webkit-inner-spin-button {
 }
 
 p {
-  @apply text-black;
+  @apply text-white dark:text-black;
 }
 
 input[type=number] {
@@ -59,7 +134,11 @@ input[type=number] {
 }
 
 .app {
-  @apply min-h-screen relative;
+  @apply max-h-screen min-h-screen relative bg-body-background dark:bg-alice-body-background;
+}
+
+html {
+  @apply overflow-y-scroll no-scrollbar;
 }
 
 @media (max-width: 768px) {
@@ -68,62 +147,104 @@ input[type=number] {
   }
 }
 
-.page {
-  &__bg {
-    background-image: url('../public/assets/images/app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-    &--home {
-      background-image: url('../public/assets/images/home-background.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
-      background-position: top;
+.pion {
+  & .page {
+    &__bg {
+      background-image: url('../public/assets/images/app-background2.svg');
+      background-position: 0 0;
       background-repeat: no-repeat;
       background-size: cover;
+
+      &--home {
+        background-image: url('../public/assets/images/app-background2.svg');
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
     }
   }
+}
 
+.dark {
+  & .page {
+    &__bg {
+      background-image: url('../public/assets/images/alice-app-background2.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      background-size: cover;
+
+      &--home {
+        background-image: url('../public/assets/images/alice-home-background.svg'), linear-gradient(#F8FAFF 0%, #F8FAFF 100%);
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    }
+  }
+}
+
+.page {
   // Todo: Refactor this and use tailwind spacing classes
-  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1264px] md:pb-[148px] md:pt-[190px] mx-auto;
+  @apply max-w-[90vw] py-12 pb-24 md:px-4 md:max-w-[1080px] md:pb-[148px] md:pt-[160px] mx-auto;
   min-height: calc(100vh);
 
   &--centered {
-    @apply flex items-center justify-center;
+    //@apply flex items-center justify-center;
   }
 
-  &--home {
-    @apply md:max-w-[1161px];
-  }
 
   &--get-started,
   &--claim-prize {
-    @apply flex flex-col items-center justify-center md:max-w-[704px] mx-auto;
+    @apply flex flex-col items-center justify-center mx-auto;
   }
 
   &--review-details {
-    @apply flex flex-col items-center justify-center md:max-w-[957px] md:px-2.5 mx-auto;
+    @apply flex flex-col;
   }
 }
 
 .btn {
-  @apply cursor-pointer flex items-center justify-center;
+  @apply cursor-pointer flex items-center justify-center dark:shadow-md hover:dark:shadow-lg dark:transition-all;
   // size properties
   @apply px-16 py-3.5 font-medium text-center;
 
+  &--alice-primary {
+    color: white !important;
+    background-color: #5158F6 !important;
+    @apply cursor-pointer flex items-center justify-center dark:shadow-md hover:dark:shadow-lg dark:bg-alice-primary dark:transition-all;
+    @apply px-16 py-3.5 font-medium text-center;
+  }
+
   &:disabled {
-    @apply bg-disabled text-gray3 cursor-not-allowed;
+    @apply bg-disabled dark:shadow-none hover:dark:shadow-none hover:dark:bg-disabled text-gray cursor-not-allowed hover:bg-disabled dark:bg-disabled dark:text-gray;
   }
 
   &--icon-btn {
     @apply p-4;
   }
 
+  &--with-icon {
+    @apply px-7 py-4 text-xl md:px-9 md:py-5 flex gap-4 md:text-2xl font-semibold;
+  }
+
+  &--medium-with-icon {
+    @apply px-7 py-4 text-lg md:px-9 md:py-4 flex gap-4 md:text-[20px] font-semibold;
+  }
+
   &--small {
     @apply px-5 py-2 text-sm;
 
     &--with-icon {
-      @apply px-4 py-1.5 text-sm;
+      @apply px-4 py-[7px] text-sm;
     }
+  }
+
+  &--white {
+    @apply bg-primary-L3 dark:bg-alice-primary-13 text-primary dark:text-primary hover:bg-white hover:dark:bg-white transition-all;
+  }
+
+  &--action {
+    @apply bg-primary-L3 dark:bg-alice-primary text-primary dark:text-white hover:bg-white transition-all;
   }
 
   &--large {
@@ -136,17 +257,18 @@ input[type=number] {
 
   // color properties
   @apply bg-primary text-white w-fit;
+  @apply dark:bg-alice-primary dark:text-white;
 
   &--dark-primary {
     @apply bg-dark-soft-primary text-primary;
   }
 
   &--secondary {
-    @apply bg-primary-13 text-primary;
+    @apply bg-secondary text-white;
   }
 
   &--secondary-tag {
-    @apply bg-primary-10-solid text-primary;
+    @apply bg-tag-bg text-black;
   }
 
   // border properties

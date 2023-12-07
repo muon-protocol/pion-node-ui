@@ -51,7 +51,12 @@ export const VerifyWalletCard = ({
         />
         <RewardSection
           title="MUON Presale"
-          validSection={wallet.wasInMuonPresale || wallet.wasInDeusPresale}
+          validSection={
+            wallet.wasInMuonPresale ||
+            wallet.wasInDeusPresale ||
+            wallet.wasMuonPrivateSale ||
+            wallet.wasInDeusAllocation
+          }
         />
         {/*<RewardSection*/}
         {/*  title="Deus Presale"*/}
@@ -63,16 +68,16 @@ export const VerifyWalletCard = ({
           VERIFIED!
         </p>
       ) : walletAddress !== wallet.walletAddress ? (
-        <button className="btn btn--small ml-auto mt-auto" disabled>
+        <button className="btn btn--white btn--small ml-auto mt-auto" disabled>
           Switch Wallet
         </button>
       ) : isMetamaskLoadingVerify ? (
-        <button className="btn btn--small ml-auto mt-auto" disabled>
+        <button className="btn btn--white btn--small ml-auto mt-auto" disabled>
           Metamask...
         </button>
       ) : (
         <button
-          className="btn btn--small ml-auto mt-auto"
+          className="btn btn--white btn--small ml-auto mt-auto"
           onClick={() => handleVerifyWallet()}
         >
           Verify

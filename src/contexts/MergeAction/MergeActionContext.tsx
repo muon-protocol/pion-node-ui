@@ -10,8 +10,8 @@ import { BonALICE } from '../../types';
 import { useMergeArgs } from '../../hooks/useContractArgs.ts';
 import useWagmiContractWrite from '../../hooks/useWagmiContractWrite.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
-import MUON_NODE_STAKING_ABI from '../../abis/MuonNodeStaking.ts';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
+import MUON_NODE_STAKING_ABI from '../../abis/PION/Mainnet/MuonNodeStaking.ts';
 import {
   BONALICE_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
@@ -32,6 +32,7 @@ const MergeActionContext = createContext<{
   isTransactionLoading: boolean;
   tokenApprovedContractAddress: string | undefined;
   handleApproveNFT: () => void;
+  setMergeModalSelectedBonALICEs: (bonALICEs: BonALICE[]) => void;
 }>({
   isMergeModalOpen: false,
   openMergeModal: () => {},
@@ -44,6 +45,7 @@ const MergeActionContext = createContext<{
   isTransactionLoading: false,
   tokenApprovedContractAddress: undefined,
   handleApproveNFT: () => {},
+  setMergeModalSelectedBonALICEs: () => {},
 });
 
 const MergeActionProvider = ({ children }: { children: ReactNode }) => {
@@ -51,17 +53,48 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
   const [mergeModalSelectedBonALICEs, setMergeModalSelectedBonALICEs] =
     useState<BonALICE[]>([]);
 
-  const handleMergeModalItemClicked = (bonALICE: BonALICE) => {
-    if (
-      mergeModalSelectedBonALICEs.find((b) => b.tokenId === bonALICE.tokenId)
-    ) {
-      removeMergeModalSelectedBonALICE(bonALICE);
-    } else {
-      if (mergeModalSelectedBonALICEs.length < 2) {
-        addMergeModalSelectedBonALICE(bonALICE);
+  const openMergeModal = useCallback(() => setIsMergeModalOpen(true), []);
+  const closeMergeModal = useCallback(() => setIsMergeModalOpen(false), []);
+
+  const removeMergeModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setMergeModalSelectedBonALICEs(
+        mergeModalSelectedBonALICEs.filter(
+          (b) => b.tokenId !== bonALICE.tokenId,
+        ),
+      );
+    },
+    [mergeModalSelectedBonALICEs],
+  );
+
+  const addMergeModalSelectedBonALICE = useCallback(
+    (bonALICE: BonALICE) => {
+      setMergeModalSelectedBonALICEs([
+        ...mergeModalSelectedBonALICEs,
+        bonALICE,
+      ]);
+    },
+    [mergeModalSelectedBonALICEs],
+  );
+
+  const handleMergeModalItemClicked = useCallback(
+    (bonALICE: BonALICE) => {
+      if (
+        mergeModalSelectedBonALICEs.find((b) => b.tokenId === bonALICE.tokenId)
+      ) {
+        removeMergeModalSelectedBonALICE(bonALICE);
+      } else {
+        if (mergeModalSelectedBonALICEs.length < 2) {
+          addMergeModalSelectedBonALICE(bonALICE);
+        }
       }
-    }
-  };
+    },
+    [
+      addMergeModalSelectedBonALICE,
+      mergeModalSelectedBonALICEs,
+      removeMergeModalSelectedBonALICE,
+    ],
+  );
 
   const mergeArgs = useMergeArgs({
     tokenId1: mergeModalSelectedBonALICEs[0]?.tokenId,
@@ -102,10 +135,13 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     return undefined;
   }, [mergeModalSelectedBonALICEs, nodeBonALICE, isInSelectedMergeBonALICEs]);
 
+  const { walletAddress } = useUserProfile();
+
   const { data: tokenApprovedContractAddress } = useBonAliceGetApproved({
     address: BONALICE_ADDRESS[getCurrentChainId()],
-    args: [selectedTokenId],
+    args: selectedTokenId ? [selectedTokenId] : undefined,
     watch: true,
+    enabled: !!selectedTokenId,
   });
 
   const {
@@ -131,15 +167,15 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
         isInSelectedMergeBonALICEs(nodeBonALICE[0])
       ) {
         await mergeWithNodeNFT?.({
-          pending: 'Merging with Node BonALICE...',
+          pending: 'Merging with Node BonPION...',
           success: 'Merged!',
-          failed: 'Failed to Merge with Node BonALICE.',
+          failed: 'Failed to Merge with Node BonPION.',
         });
       } else {
         await merge?.({
-          pending: 'Merging Bonded ALICEs...',
+          pending: 'Merging Bonded PIONs...',
           success: 'Merged!',
-          failed: 'Failed to Merge Bonded ALICEs.',
+          failed: 'Failed to Merge Bonded PIONs.',
         });
       }
       setMergeModalSelectedBonALICEs([]);
@@ -176,26 +212,11 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
     if (mergeModalSelectedBonALICEs.length === 2) {
       closeMergeModal();
     }
-  }, [mergeModalSelectedBonALICEs]);
-
-  const addMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setMergeModalSelectedBonALICEs([...mergeModalSelectedBonALICEs, bonALICE]);
-  };
-
-  const removeMergeModalSelectedBonALICE = (bonALICE: BonALICE) => {
-    setMergeModalSelectedBonALICEs(
-      mergeModalSelectedBonALICEs.filter((b) => b.tokenId !== bonALICE.tokenId),
-    );
-  };
-
-  const { walletAddress } = useUserProfile();
+  }, [closeMergeModal, mergeModalSelectedBonALICEs]);
 
   useEffect(() => {
     setMergeModalSelectedBonALICEs([]);
   }, [walletAddress]);
-
-  const openMergeModal = () => setIsMergeModalOpen(true);
-  const closeMergeModal = () => setIsMergeModalOpen(false);
 
   return (
     <MergeActionContext.Provider
@@ -215,6 +236,7 @@ const MergeActionProvider = ({ children }: { children: ReactNode }) => {
           isApproveNFTTransactionLoading,
         tokenApprovedContractAddress,
         handleApproveNFT,
+        setMergeModalSelectedBonALICEs,
       }}
     >
       {children}

@@ -1,12 +1,11 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import {
   readContracts,
-  useBalance,
   useContractWrite,
   usePrepareContractWrite,
 } from 'wagmi';
 import { getCurrentChainId } from '../../constants/chains.ts';
-import BONALICE_ABI from '../../abis/BonALICE.json';
+import BONALICE_ABI from '../../abis/PION/Mainnet/NFT.ts';
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
@@ -14,20 +13,17 @@ import {
   LP_TOKEN_ADDRESS,
 } from '../../constants/addresses.ts';
 import useUserProfile from '../UserProfile/useUserProfile.ts';
-import { BalanceData, W3bNumber } from '../../types/wagmi.ts';
+import { W3bNumber } from '../../types/wagmi.ts';
 import { USER_BON_ALICES } from '../../apollo/queries';
 import { useQuery } from '@apollo/client';
 import { BonALICE, RawBonALICE } from '../../types';
 import useRefresh from '../Refresh/useRefresh.ts';
 import { w3bNumberFromBigint } from '../../utils/web3.ts';
 import useAllowance from '../../hooks/useAllowance.ts';
+import useLPToken from '../LPToken/useLPToken.ts';
 
 const BonALICEContext = createContext<{
   handleCreateBonALICEClicked: () => void;
-  balance: undefined | BalanceData;
-  isFetched: boolean;
-  isError: boolean;
-  isLoading: boolean;
   bonALICEs: BonALICE[];
   ALICEAllowance: W3bNumber | null;
   LPTokenAllowanceForBooster: W3bNumber | null;
@@ -35,10 +31,6 @@ const BonALICEContext = createContext<{
   fetchBonALICEIsLoading: boolean;
 }>({
   handleCreateBonALICEClicked: () => {},
-  balance: undefined,
-  isFetched: false,
-  isError: false,
-  isLoading: false,
   bonALICEs: [],
   ALICEAllowance: null,
   LPTokenAllowanceForBooster: null,
@@ -49,14 +41,18 @@ const BonALICEContext = createContext<{
 const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   const { walletAddress } = useUserProfile();
   const [bonALICEs, setBonALICEs] = useState<BonALICE[]>([]);
+  const { LPTokenDecimals } = useLPToken();
 
   const { allowance: ALICEAllowance } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
   );
+
   const { allowance: LPTokenAllowanceForBooster } = useAllowance(
     LP_TOKEN_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],
+    LPTokenDecimals,
   );
+
   const { allowance: ALICEAllowanceForBooster } = useAllowance(
     ALICE_ADDRESS[getCurrentChainId()],
     BOOSTER_ADDRESS[getCurrentChainId()],
@@ -66,23 +62,13 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
 
   const { fastRefresh } = useRefresh();
 
-  const {
-    data: balance,
-    isFetched,
-    isError,
-    isLoading,
-  } = useBalance({
-    address: walletAddress,
-    token: BONALICE_ADDRESS[getCurrentChainId()],
-    chainId: getCurrentChainId(),
-    watch: true,
-  });
-
   const { config } = usePrepareContractWrite({
     abi: BONALICE_ABI,
     address: BONALICE_ADDRESS[getCurrentChainId()],
     functionName: 'mintAndLock',
-    args: [[], [], walletAddress],
+    args: walletAddress ? [[], [], walletAddress] : undefined,
+    chainId: getCurrentChainId(),
+    enabled: !!walletAddress,
   });
 
   const { write } = useContractWrite(config);
@@ -91,7 +77,7 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const { refetch: BonALICERefetch } = useQuery(USER_BON_ALICES, {
-    variables: { account: walletAddress },
+    variables: { account: walletAddress, skip: !walletAddress },
   });
 
   useEffect(() => {
@@ -107,9 +93,11 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
             bonALICE.tokenId,
             [
               ALICE_ADDRESS[getCurrentChainId()],
-              LP_TOKEN_ADDRESS[getCurrentChainId()],
+              // LP_TOKEN_ADDRESS[getCurrentChainId()],
             ],
           ],
+          chainId: getCurrentChainId(),
+          enabled: !!walletAddress && !!bonALICE.tokenId,
         }));
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -120,10 +108,10 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
             bonALICEs.push({
               ...rawBonALICEs[index],
               ALICELockAmount: w3bNumberFromBigint(lockedOf.result[0]),
-              LPTokenLockAmount: w3bNumberFromBigint(lockedOf.result[1]),
+              LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
               nodePower:
                 w3bNumberFromBigint(lockedOf.result[0]).dsp +
-                w3bNumberFromBigint(lockedOf.result[1]).dsp * 2,
+                w3bNumberFromBigint(BigInt(0)).dsp,
             });
           });
           setBonALICEs(bonALICEs);
@@ -138,10 +126,6 @@ const BonALICEProvider = ({ children }: { children: ReactNode }) => {
       value={{
         bonALICEs,
         handleCreateBonALICEClicked,
-        balance,
-        isError,
-        isFetched,
-        isLoading,
         ALICEAllowance,
         LPTokenAllowanceForBooster,
         fetchBonALICEIsLoading,

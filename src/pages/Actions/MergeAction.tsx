@@ -10,6 +10,7 @@ import BonALICEModalBody from '../../components/Common/BonALICEModalBody.tsx';
 import { getTier } from '../../utils';
 import { useMuonNodeStaking } from '../../hooks/muonNodeStaking/useMuonNodeStaking.ts';
 import { MUON_NODE_STAKING_ADDRESS } from '../../constants/addresses.ts';
+import strings from '../../constants/strings.ts';
 
 const RenderMergeBody = () => {
   const {
@@ -37,8 +38,8 @@ const RenderMergeBody = () => {
 
   const isApproveNFTActive = useMemo(() => {
     if (selectedMergeBonALICEs.length !== 2) return false;
+    if (nodeBonALICE.length === 0) return false;
     if (isInSelectedMergeBonALICEs(nodeBonALICE[0])) {
-      console.log(tokenApprovedContractAddress);
       if (
         tokenApprovedContractAddress !==
         MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]
@@ -58,14 +59,16 @@ const RenderMergeBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1} className="mb-4">
         <SelectButtonWithModal
-          title="Select BonALICEs"
+          title={`Select two ${strings.nfts} to merge`}
           onClick={() => openMergeModal()}
           isModalOpen={isMergeModalOpen}
           closeModalHandler={() => closeMergeModal()}
           modalTitle={
             [...nodeBonALICE, ...bonALICEs].length > 0
-              ? 'Select BonALICEs to Merge'
-              : 'No BonALICEs to Merge'
+              ? `Select from Your ${strings.nfts} Collection (` +
+                selectedMergeBonALICEs.length +
+                '/2)'
+              : `No ${strings.nfts} to Merge`
           }
           multiple
           selectedItems={selectedMergeBonALICEs}
@@ -92,7 +95,7 @@ const RenderMergeBody = () => {
           <MoveUpIn y={-10} duration={0.5} delay={0.3}>
             <FadeIn duration={0.2} delay={0.3}>
               <BonALICECard
-                title="New Bonded ALICE"
+                title={`New Bonded ${strings.token}`}
                 subTitle1="Node Power"
                 subValue1={
                   selectedMergeBonALICEs[0].nodePower +
@@ -112,32 +115,38 @@ const RenderMergeBody = () => {
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
+        className="mt-auto max-md:w-[80vw] md:mx-auto !w-full"
       >
         {chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
+            disabled
+          >
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
         ) : isApproveNFTActive ? (
-          <button className="btn !w-full" onClick={() => handleApproveNFT()}>
+          <button
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
+            onClick={() => handleApproveNFT()}
+          >
             Approve NFT Token
           </button>
         ) : (
           <button
             onClick={() => handleMerge()}
             disabled={isMergeBonALICEsButtonDisabled}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
           >
-            Merge Bonded ALICEs
+            Merge Bonded {strings.tokens}
           </button>
         )}
       </FadeIn>

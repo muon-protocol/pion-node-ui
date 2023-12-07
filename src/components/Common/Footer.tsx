@@ -1,7 +1,9 @@
+import strings from '../../constants/strings.ts';
+
 export const Footer = () => {
   return (
-    <footer className="footer p-6 flex items-center justify-center absolute bottom-0 w-full">
-      <img src="/assets/images/footer/logo.svg" alt="" />
+    <footer className="footer p-6 flex items-center justify-center absolute -translate-y-full w-full">
+      <img src={strings.footerLogoSrc} alt="" />
     </footer>
   );
 };

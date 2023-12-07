@@ -17,6 +17,8 @@ import { getTier } from '../../utils';
 import { useEffect } from 'react';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
+import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const ReviewDetail = () => {
   const { bonALICEs } = useBonALICE();
@@ -32,13 +34,17 @@ const ReviewDetail = () => {
     setNodeAddress,
     isMetamaskLoading,
     isTransactionLoading,
-    // isGettingNodeStatusLoading,
     isAddingNodeLoading,
     approvedBonALICEAddress,
     handleApproveClicked,
     isApproving,
     nodeBonALICEAddress,
     stakerAddressInfo,
+    nodeIP,
+    setNodeIP,
+    isNodeAddressValid,
+    isPeerIDValid,
+    invalidInfoError,
   } = useNodeBonALICE();
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
@@ -48,19 +54,30 @@ const ReviewDetail = () => {
 
   const reviewDetailCard = () => {
     return (
-      <div className="relative bg-white p-4 md:px-10 md:py-9 rounded-2xl w-full overflow-hidden flex flex-col">
-        <ConnectWalletModal redirectRoute="/get-started" />
+      <FadeIn
+        duration={0.3}
+        delay={0.3}
+        className="review-detail__nft relative dark:shadow-xl bg-so-dark-gray dark:bg-alice-card-background p-4 md:px-10 md:py-9 rounded-2xl md:w-[607px] overflow-hidden flex flex-col"
+      >
+        <ConnectWalletModal redirectRoute={routes.gettingStarted.path} />
         <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Select BonALICE</div>
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Select {strings.nft}
+          </div>
         </div>
         <div className="flex w-full gap-3 mb-7">
           <SelectButtonWithModal
             onClick={() => setIsSelectNodeBonALICEModalOpen(true)}
             isModalOpen={isSelectNodeBonALICEModalOpen}
             closeModalHandler={() => setIsSelectNodeBonALICEModalOpen(false)}
-            modalTitle="Select BonALICE"
+            modalTitle={`Select ${strings.nft}`}
             removeItem={() => setNodeBonALICE(null)}
             selectedItems={nodeBonALICE ? [nodeBonALICE] : []}
+            errorMessage={
+              nodeBonALICE && nodeBonALICE?.nodePower < 500
+                ? `Select a ${strings.nft} with amount more than 500 to be able to add your node.`
+                : ''
+            }
           >
             <BonALICEModalBody
               bonALICEs={bonALICEs}
@@ -88,18 +105,18 @@ const ReviewDetail = () => {
           {/*  </button>*/}
           {/*</Link>*/}
         </div>
-        <div className="flex flex-col gap-3 max-md:text-sm mt-auto">
-          <span className="flex w-full justify-between leading-5 font-light">
+        <div className="flex flex-col gap-3 max-md:text-sm mt-auto text-white dark:text-black">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Staking Address:</span>
             <span className="font-semibold ">
               {nodeBonALICE ? (
                 formatWalletAddress(nodeBonALICE?.account)
               ) : (
-                <span className="font-semibold">Select BonALICE</span>
+                <span className="font-semibold">Select {strings.nft}</span>
               )}
             </span>
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="flex gap-1 min-w-[170px]">Node Power: </span>
             {nodeBonALICE ? (
               <span>
@@ -110,7 +127,7 @@ const ReviewDetail = () => {
                 <span className="font-medium">
                   {nodeBonALICE.ALICELockAmount.dsp}
                 </span>{' '}
-                ALICE +{' '}
+                {strings.token} +{' '}
                 <span className="font-medium">
                   {nodeBonALICE.LPTokenLockAmount.dsp}
                 </span>{' '}
@@ -120,19 +137,19 @@ const ReviewDetail = () => {
               <span className="font-semibold">-</span>
             )}
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Tier:</span>
             <span className="font-semibold ">
               {nodeBonALICE ? getTier(nodeBonALICE.nodePower) : '-'}
             </span>
           </span>
-          <span className="flex w-full justify-between leading-5 font-light">
+          <span className="flex w-full flex-col md:flex-row justify-between leading-5 font-light">
             <span className="min-w-[170px]">Verification Required:</span>
 
             {nodeBonALICE &&
             nodeBonALICE.ALICELockAmount.dsp +
               2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-              10000 ? (
+              500 ? (
               <span
                 className="font-semibold underline cursor-pointer"
                 onClick={() =>
@@ -144,7 +161,7 @@ const ReviewDetail = () => {
               >
                 {nodeBonALICE.ALICELockAmount.dsp +
                   2 * nodeBonALICE.LPTokenLockAmount.dsp >=
-                10000
+                500
                   ? 'Beginner Verification'
                   : nodeBonALICE.ALICELockAmount.dsp +
                       2 * nodeBonALICE.LPTokenLockAmount.dsp >=
@@ -162,14 +179,16 @@ const ReviewDetail = () => {
           </span>
         </div>
         {bonALICEs.length === 0 && <EmptyBonALICECard />}
-      </div>
+      </FadeIn>
     );
   };
 
   const transferCard = () => {
     return (
-      <div
-        className={`bg-white p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:!w-[365px] md:!min-w-[365px] max-md:text-sm`}
+      <FadeIn
+        duration={0.3}
+        delay={0.4}
+        className={`review-detail__actions bg-so-dark-gray dark:shadow-xl dark:bg-alice-card-background p-4 md:px-6 md:py-9 rounded-2xl flex flex-col md:flex-1 max-md:text-sm`}
       >
         {/*<AddressInput*/}
         {/*  title="Server IP"*/}
@@ -178,87 +197,124 @@ const ReviewDetail = () => {
         {/*  onValueChanged={(value) => setNodeIP(value)}*/}
         {/*  className="mb-9"*/}
         {/*/>*/}
-        <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Node Address</div>
+        <div className="address-input__top text-sm mb-1 flex justify-between">
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Node IP
+          </div>
         </div>
-        <div className="address-input__input-wrapper mb-4 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
-          <input
-            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
-            placeholder={'Node Address'}
-            type="text"
-            value={nodeAddress}
-            onChange={(e) => setNodeAddress(e.target.value)}
-          />
+        <span className="address-input__input-wrapper mb-6 flex flex-col">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Node IP'}
+              type="text"
+              value={nodeIP}
+              onChange={(e) => setNodeIP(e.target.value)}
+            />
+          </div>
+        </span>
+        <div className="address-input__top text-sm mb-1 flex justify-between">
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Node Address
+          </div>
         </div>
-        <div className="address-input__top text-sm mb-2 flex justify-between">
-          <div className="address-input__title text-gray">Peer ID</div>
+        <span className="address-input__input-wrapper mb-1 flex flex-col">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Node Address'}
+              type="text"
+              value={nodeAddress}
+              onChange={(e) => setNodeAddress(e.target.value)}
+            />
+          </div>
+          <span className="text-red-500 text-xs font-bold min-h-[20px]">
+            {isNodeAddressValid ? '' : 'Node Address is invalid!'}
+          </span>
+        </span>
+        <div className="address-input__top text-sm mb-1 flex justify-between">
+          <div className="address-input__title text-light-text dark:text-alice-gray">
+            Peer ID
+          </div>
         </div>
-        <div className="address-input__input-wrapper mb-9 flex items-center justify-between bg-catskill-white rounded-xl pl-5 pr-4 h-14">
-          <input
-            className="address-input__input placeholder-gray text-black font-medium w-full h-full bg-transparent outline-none"
-            placeholder={'Peer ID'}
-            type="text"
-            value={peerID}
-            onChange={(e) => setPeerID(e.target.value)}
-          />
-        </div>
+        <span className="address-input__input-wrapper mb-1 flex flex-col">
+          <div className="items-center justify-between bg-input-bg dark:bg-alice-xyz-75 rounded-xl pl-5 pr-4 h-14 mb-0.5">
+            <input
+              className="address-input__input placeholder-white dark:placeholder-gray text-white dark:text-black font-medium w-full h-full bg-transparent outline-none"
+              placeholder={'Peer ID'}
+              type="text"
+              value={peerID}
+              onChange={(e) => setPeerID(e.target.value)}
+            />
+          </div>
+          <span className="text-red-500 text-xs font-bold min-h-[20px]">
+            {isPeerIDValid ? '' : 'Peer ID is invalid!'}
+          </span>
+        </span>
+        {invalidInfoError.length > 0 && (
+          <FadeIn duration={0.1} className="mx-auto mb-1">
+            <span className="text-red-500 text-sm font-bold">
+              {invalidInfoError}
+            </span>
+          </FadeIn>
+        )}
         {nodeBonALICEAddress ===
           MUON_NODE_STAKING_ADDRESS[getCurrentChainId()] &&
         stakerAddressInfo?.active ? (
-          <button className="btn btn--secondary mt-auto mx-auto">
-            Dashboard
-          </button>
+          <button className="btn btn--white mt-auto mx-auto">Dashboard</button>
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
           >
             Switch Network
           </button>
         ) : !nodeBonALICE ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
-            Select BonALICE
+          <button className="btn btn--white mt-auto mx-auto" disabled>
+            Select {strings.nft}
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+          <button className="btn btn--white mt-auto mx-auto" disabled>
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
           </button>
         ) : nodeBonALICE.ALICELockAmount.dsp +
             nodeBonALICE.LPTokenLockAmount.dsp * 2 >=
-            10000 &&
+            500 &&
           ((approvedBonALICEAddress && isZero(approvedBonALICEAddress)) ||
             approvedBonALICEAddress !==
               MUON_NODE_STAKING_ADDRESS[getCurrentChainId()]) ? (
           <button
             onClick={() => handleApproveClicked()}
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
             disabled={isApproving}
           >
             {isApproving ? 'Approving...' : 'Approve'}
           </button>
         ) : isAddingNodeLoading ? (
-          <button className="btn btn--secondary mt-auto mx-auto" disabled>
+          <button className="btn btn--white mt-auto mx-auto" disabled>
             Adding Node...
           </button>
         ) : (
           <button
-            className="btn btn--secondary mt-auto mx-auto"
+            className="btn btn--white mt-auto mx-auto"
             onClick={() => handleAddNodeClicked()}
             disabled={
+              !isNodeAddressValid ||
+              !isPeerIDValid ||
               !nodeAddress ||
               !peerID ||
               !nodeBonALICE ||
               nodeBonALICE.ALICELockAmount.dsp +
                 nodeBonALICE.LPTokenLockAmount.dsp * 2 <
-                10000
+                500
             }
           >
             Add Node
           </button>
         )}
-      </div>
+      </FadeIn>
     );
   };
 
@@ -273,6 +329,10 @@ const ReviewDetail = () => {
   return (
     <div className="page__bg">
       <div className="page page--review-details">
+        <FadeIn duration={0.3} className="mr-auto mb-11 md:mb-6">
+          <p className="text-2xl font-medium font-tomorrow">Finalize Step</p>
+        </FadeIn>
+
         <Alert
           className="mb-8 w-full"
           type={'success'}
@@ -282,21 +342,21 @@ const ReviewDetail = () => {
           redirect you to the dashboard in few seconds. If you don't want to
           wait, you can{' '}
           <span
-            onClick={() => window.open('/dashboard', '_self')}
+            onClick={() => window.open('/dashboard/', '_self')}
             className="underline cursor-pointer hover:font-medium"
           >
             click here
           </span>
           .
         </Alert>
-        <FadeIn
-          duration={0.1}
-          delay={0.1}
-          className="content flex flex-col gap-8 justify-center items-center h-full"
-        >
-          <div className="review-details--top flex flex-col md:flex-row gap-9">
-            <p className="text-lg text-center md:text-left md:text-[20px] font-light w-full">
-              Please review the bonALICE details you're staking for node
+        <div className="content flex flex-col md:flex-row mb-8 justify-center items-center gap-9 h-full">
+          <FadeIn
+            duration={0.3}
+            delay={0.1}
+            className="review-details--top flex flex-col md:flex-row"
+          >
+            <p className="text-lg text-center md:text-left md:text-[20px] font-light md:w-[607px]">
+              Please review the {strings.nft} details you're staking for node
               operation. When ready, fill out the requested information and
               click ‘Add node’ to complete the setup.
             </p>
@@ -315,7 +375,7 @@ const ReviewDetail = () => {
             {/*      className="hover:underline cursor-pointer text-primary"*/}
             {/*      onClick={() => {*/}
             {/*        setSelectedAction(sidebarItems[1].link);*/}
-            {/*        navigate('/create');*/}
+            {/*        navigate('/pion/create');*/}
             {/*      }}*/}
             {/*    >*/}
             {/*      upgrade*/}
@@ -325,7 +385,7 @@ const ReviewDetail = () => {
             {/*      className="hover:underline cursor-pointer text-primary"*/}
             {/*      onClick={() => {*/}
             {/*        setSelectedAction(sidebarItems[2].link);*/}
-            {/*        navigate('/create');*/}
+            {/*        navigate('/pion/create');*/}
             {/*      }}*/}
             {/*    >*/}
             {/*      merge*/}
@@ -342,34 +402,37 @@ const ReviewDetail = () => {
             {/*    the uniqueness verification process in your dashboard*/}
             {/*  </Alert>*/}
             {/*)}*/}
-
-            <div className="bg-primary md:!w-[365px] md:!min-w-[365px] flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl">
-              <img src="/assets/images/review/guide-icon.svg" alt="" />
-              <div>
-                <p className="text-white text-sm">
-                  Neet help setting up your node?
-                </p>
-                <p
-                  className="text-white text-xl underline cursor-pointer"
-                  onClick={() =>
-                    window.open(
-                      'https://docs.muon.net/muon-network/muon-nodes/joining-alice-v2',
-                      '_blank',
-                    )
-                  }
-                >
-                  See Our Setup Guide
-                </p>
-              </div>
+          </FadeIn>
+          <FadeIn
+            duration={0.3}
+            delay={0.2}
+            className="bg-primary dark:bg-alice-primary md:flex-1 max-md:w-full flex pt-5 pb-6 pl-9 pr-9 items-center gap-3 rounded-xl"
+          >
+            <img src="/assets/images/review/guide-icon.svg" alt="" />
+            <div>
+              <p className="text-white dark:text-white text-sm">
+                Need help setting up your node?
+              </p>
+              <p
+                className="text-white dark:text-white text-xl underline cursor-pointer"
+                onClick={() =>
+                  window.open(
+                    'https://docs.muon.net/muon-network/muon-nodes/pion',
+                    '_blank',
+                  )
+                }
+              >
+                See Our Setup Guide
+              </p>
             </div>
+          </FadeIn>
 
-            {/*<NotificationCard  />*/}
-          </div>
-          <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
-            {reviewDetailCard()}
-            {transferCard()}
-          </div>
-        </FadeIn>
+          {/*<NotificationCard  />*/}
+        </div>
+        <div className="review-details--bottom flex flex-col md:flex-row gap-9 w-full">
+          {reviewDetailCard()}
+          {transferCard()}
+        </div>
       </div>
     </div>
   );
@@ -385,7 +448,7 @@ const EmptyBonALICECard = () => {
       {newNFTClaimedLoading ? (
         <>
           <p className="font-semibold text-xl text-center px-20">
-            Loading BonALICEs...
+            Loading {strings.nfts}...
           </p>
         </>
       ) : (
@@ -393,13 +456,13 @@ const EmptyBonALICECard = () => {
           <p className="font-semibold text-xl text-center px-20">
             {stakerAddressInfo?.active
               ? 'You have already added a node. Please go to your dashboard to check the details.'
-              : 'You don’t have any bonALICE in your wallet, please create one first or use another address'}
+              : `You don’t have any ${strings.nft} in your wallet, please create one first or use another address`}
           </p>
           <button
-            className="btn btn--primary mx-auto"
-            onClick={() => navigate('/create')}
+            className="btn btn--action mx-auto"
+            onClick={() => navigate(routes.create.path)}
           >
-            Create BonALICE
+            Create {strings.nft}
           </button>
         </>
       )}

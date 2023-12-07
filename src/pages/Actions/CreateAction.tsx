@@ -1,7 +1,7 @@
 import useALICE from '../../contexts/ALICE/useALICE.ts';
 import useCreateAction from '../../contexts/CreateAction/useCreateAction.ts';
 import { useMemo } from 'react';
-import { FadeIn, MoveUpIn } from '../../animations';
+import { FadeIn } from '../../animations';
 import AmountInput from '../../components/Common/AmountInput.tsx';
 import Modal from '../../components/Common/Modal.tsx';
 import useLPToken from '../../contexts/LPToken/useLPToken.ts';
@@ -11,19 +11,21 @@ import { getCurrentChainId } from '../../constants/chains.ts';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import Lottie from 'lottie-react';
-import waitingForApproveAnimation from '../../../public/assets/animations/waiting-for-approve.json';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
 import ClaimedRewardModal from '../ClaimPrize/ClaimedRewardModal.tsx';
 import BoostingAmountInput from '../../components/Common/BoostingAmountInput.tsx';
 import { w3bNumberFromBigint, w3bNumberFromNumber } from '../../utils/web3.ts';
 import { useBooster } from '../../hooks/booster/useBooster.ts';
-import { usePancakePair } from '../../hooks/pancakePair/usePancakePair.ts';
+import { useTokenPrice } from '../../hooks/tokenPrice/useTokenPrice.ts';
+import CreateAmountCalculation from './CreateAmountCalculation.tsx';
+import strings from '../../constants/strings.ts';
+import CreateAllowanceModalBody from './CreateAllowanceModalBody.tsx';
 
 export const RenderCreateBody = () => {
   const { ALICEBalance } = useALICE();
   const {
     ALICEAllowanceForBooster,
-    ALICEAllowance,
+    // ALICEAllowance,
     LPTokenAllowanceForBooster,
   } = useBonALICE();
   const { LPTokenBalance } = useLPToken();
@@ -41,8 +43,6 @@ export const RenderCreateBody = () => {
     closeAllowanceModal,
     isMetamaskLoading,
     isTransactionLoading,
-    isApproveMetamaskLoading,
-    isApproveTransactionLoading,
     isInsufficientModalOpen,
     setIsInsufficientModalOpen,
     isSufficientModalOpen,
@@ -51,7 +51,7 @@ export const RenderCreateBody = () => {
 
   const { chainId, handleSwitchNetwork } = useUserProfile();
   const { boostCoefficient } = useBooster();
-  const { USDCPrice, ALICEPrice } = usePancakePair();
+  const { ALICEPrice } = useTokenPrice();
 
   const maxAmountToBoost = useMemo(() => {
     return ALICEPrice
@@ -64,7 +64,7 @@ export const RenderCreateBody = () => {
 
   const isCreateBondedALICEButtonDisabled = useMemo(() => {
     return (
-      createAmount.dsp + 2 * createBoostAmount.dsp < 10000 ||
+      !(createAmount.hStr || createBoostAmount.hStr) ||
       !ALICEAllowanceForBooster ||
       (!LPTokenAllowanceForBooster && createBoostAmount.big > BigInt(0)) ||
       !(createAmount || createBoostAmount) ||
@@ -93,15 +93,16 @@ export const RenderCreateBody = () => {
     <>
       <FadeIn duration={0.1} delay={0.1}>
         <AmountInput
-          rightText={'ALICE'}
+          rightText={strings.token}
           balance={ALICEBalance}
           value={createAmount}
           withLink
           onValueChanged={handleCreateAmountChange}
+          boostCoefficient={boostCoefficient}
         />
       </FadeIn>
 
-      <FadeIn className="mb-4" duration={0.1} delay={0.1}>
+      <FadeIn className="hidden" duration={0.1} delay={0.1}>
         <BoostingAmountInput
           withLink
           rightText={'USDC'}
@@ -110,70 +111,37 @@ export const RenderCreateBody = () => {
           boostCoefficient={boostCoefficient}
           max={maxAmountToBoost}
           onValueChanged={handleCreateBoostAmountChange}
+          disabled={!maxAmountToBoost || maxAmountToBoost.big === BigInt(0)}
         />
       </FadeIn>
 
-      {(createAmount.dsp > 0 || createBoostAmount.dsp > 0) &&
-        USDCPrice &&
-        boostCoefficient && (
-          <>
-            <MoveUpIn
-              y={-10}
-              duration={0.1}
-              delay={0.1}
-              className="flex w-full justify-between items-center"
-            >
-              <span className="text-gray10">
-                <p className="font-light">Your new bonALICE amount:</p>
-                <p className="font-light text-sm flex gap-1">
-                  {createBoostAmount.dsp +
-                    ' USDC -> ' +
-                    Math.round(
-                      (w3bNumberFromBigint(
-                        createBoostAmount.big *
-                          BigInt(Math.round(USDCPrice * 100)),
-                      ).dsp /
-                        100) *
-                        100,
-                    ) /
-                      100 +
-                    ' ALICE '}
-                  <p className="text-primary font-bold">
-                    x{boostCoefficient?.dsp}
-                  </p>
-                  {' + ' + createAmount.dsp + ' ALICE'}
-                </p>
-              </span>
-              <span className="rounded-md bg-primary px-3 py-2.5 text-xl font-bold text-white">
-                {Math.round(
-                  (createBoostAmount.dsp *
-                    (Math.round(USDCPrice * 100) / 100) *
-                    boostCoefficient.dsp +
-                    createAmount.dsp) *
-                    100,
-                ) / 100}
-              </span>
-            </MoveUpIn>
-          </>
-        )}
+      <CreateAmountCalculation />
+
       <FadeIn
         duration={0.1}
         delay={0.1}
-        className="mt-auto max-md:mt-10 max-md:w-[80vw] md:mx-auto !w-full"
+        className="mt-auto max-md:w-[80vw] md:mx-auto !w-full"
       >
-        {createAmount.dsp < 10000 ? (
-          <button disabled className="btn !w-full" onClick={() => {}}>
-            insufficient ALICE amount (min: 10000)
+        {(ALICEBalance && createAmount.dsp > ALICEBalance.dsp) ||
+        (LPTokenBalance && createBoostAmount.dsp > LPTokenBalance.dsp) ? (
+          <button
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
+            disabled
+          >
+            Insufficient Funds
           </button>
         ) : chainId !== getCurrentChainId() ? (
           <button
             onClick={() => handleSwitchNetwork(getCurrentChainId())}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
           >
             Switch Network
           </button>
         ) : isMetamaskLoading || isTransactionLoading ? (
-          <button className="btn !w-full" disabled>
+          <button
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
+            disabled
+          >
             {isMetamaskLoading
               ? 'Waiting for Metamask...'
               : 'Waiting for Tx...'}
@@ -183,49 +151,46 @@ export const RenderCreateBody = () => {
           ALICEAllowanceForBooster.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEForBoosterClicked()}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' ALICEs'
-              : 'All ALICEs'}
+              ? createAmount.hStr + ' ' + strings.token
+              : 'All ' + strings.tokens}
           </button>
         ) : createBoostAmount.dsp === 0 &&
-          ALICEAllowance &&
-          ALICEAllowance.big < createAmount.big ? (
+          ALICEAllowanceForBooster &&
+          ALICEAllowanceForBooster.big < createAmount.big ? (
           <button
             onClick={() => handleApproveALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
             {ALICEBalance && createAmount.big < ALICEBalance.big
-              ? createAmount.hStr + ' ALICEs'
-              : 'All ALICEs'}
+              ? createAmount.hStr + ' ' + strings.token
+              : 'All ' + strings.token}
           </button>
         ) : LPTokenAllowanceForBooster &&
           LPTokenAllowanceForBooster.big < createBoostAmount.big ? (
           <button
             onClick={() => handleApproveLPTokenClicked()}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
             Approve{' '}
             {LPTokenBalance && createBoostAmount.big < LPTokenBalance.big
               ? createBoostAmount.hStr + ' USDC'
-              : 'All USDCs'}
+              : 'All USDC'}
           </button>
         ) : (
           <button
             onClick={() => handleCreateBonALICEClicked()}
-            className="btn !w-full"
+            className="btn btn--action min-w-full md:min-w-[360px] mx-auto !py-4"
             disabled={isCreateBondedALICEButtonDisabled}
           >
-            {createAmount.dsp + createBoostAmount.dsp > 0 &&
-            createAmount.dsp + createBoostAmount.dsp < 10000
-              ? 'At Least 10000 Power'
-              : 'Create Bonded ALICE'}
+            Create Bonded {strings.token}
           </button>
         )}
       </FadeIn>
@@ -248,65 +213,7 @@ export const RenderCreateBody = () => {
         isOpen={isAllowanceModalOpen}
         closeModalHandler={closeAllowanceModal}
       >
-        <div className="flex flex-col justify-center items-center">
-          <Lottie
-            animationData={waitingForApproveAnimation}
-            className={`w-60 h-auto`}
-          />
-          <p className="text-center mb-6 font-medium">
-            Please approve by signing the message that appears in your wallet.
-            This allows the smart contract to securely lock your{' '}
-            {createBoostAmount.dsp > 0 &&
-            ALICEAllowanceForBooster &&
-            ALICEAllowanceForBooster.big < createAmount.big
-              ? 'ALICE '
-              : createBoostAmount.dsp === 0 &&
-                ALICEAllowance &&
-                ALICEAllowance.big < createAmount.big
-              ? 'ALICE '
-              : LPTokenAllowanceForBooster &&
-                LPTokenAllowanceForBooster.big < createBoostAmount.big
-              ? 'USDC '
-              : ''}
-            tokens in the{' '}
-            {createBoostAmount && createBoostAmount.dsp > 0
-              ? 'Booster contract'
-              : 'BonALICE contract'}
-            .
-          </p>
-          {ALICEAllowanceForBooster &&
-          ALICEAllowanceForBooster?.big < createAmount?.big ? (
-            <button
-              className="btn btn--dark-primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveALICEClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          ) : (
-            <button
-              className="btn btn--dark-primary"
-              onClick={() =>
-                !isApproveMetamaskLoading &&
-                !isApproveTransactionLoading &&
-                handleApproveLPTokenClicked()
-              }
-            >
-              {isApproveMetamaskLoading
-                ? 'Waiting for Metamask...'
-                : isApproveTransactionLoading
-                ? 'Waiting for Tx...'
-                : 'Approve'}
-            </button>
-          )}
-        </div>
+        <CreateAllowanceModalBody />
       </Modal>
     </>
   );

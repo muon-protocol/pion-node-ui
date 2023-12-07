@@ -1,5 +1,5 @@
-import ActionsSidebar from './ActionsSidebar.tsx';
-import ActionsHeader from './ActionsHeader.tsx';
+// import ActionsSidebar from './ActionsSidebar.tsx';
+// import ActionsHeader from './ActionsHeader.tsx';
 import ActionsContent from './ActionsContent.tsx';
 import { FadeIn } from '../../animations';
 import { ConnectWalletModal } from '../../components/Common/ConnectWalletModal.tsx';
@@ -11,6 +11,8 @@ import useActions from '../../contexts/Actions/useActions.ts';
 import useUpgradeAction from '../../contexts/UpgradeAction/useUpgradeAction.ts';
 import { useNavigate } from 'react-router-dom';
 import { ActionType } from '../../types';
+import strings from '../../constants/strings.ts';
+import routes from '../../routes';
 
 const Actions = () => {
   const { stakerAddressInfo } = useNodeBonALICE();
@@ -20,15 +22,17 @@ const Actions = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/bonALICE/create') {
+    if (location.pathname === routes.create.path) {
       setSelectedAction(ActionType.CREATE);
-    } else if (location.pathname === '/bonALICE/boost') {
+    } else if (location.pathname === routes.view.path) {
+      setSelectedAction(ActionType.VIEW);
+    } else if (location.pathname === routes.increase.path) {
       setSelectedAction(ActionType.UPGRADE);
-    } else if (location.pathname === '/bonALICE/merge') {
+    } else if (location.pathname === routes.merge.path) {
       setSelectedAction(ActionType.MERGE);
-    } else if (location.pathname === '/bonALICE/split') {
+    } else if (location.pathname === routes.split.path) {
       setSelectedAction(ActionType.SPLIT);
-    } else if (location.pathname === '/bonALICE/transfer') {
+    } else if (location.pathname === routes.transfer.path) {
       setSelectedAction(ActionType.TRANSFER);
     }
   }, [setSelectedAction, location.pathname]);
@@ -36,7 +40,7 @@ const Actions = () => {
   useEffect(() => {
     if (stakerAddressInfo?.active) {
       if (muonNodeStakingUsers && muonNodeStakingUsers[4] === BigInt(0)) {
-        window.open('/dashboard', '_self');
+        window.open('/dashboard/', '_self');
       } else if (
         muonNodeStakingUsers &&
         muonNodeStakingUsers[4] > BigInt(0) &&
@@ -56,11 +60,35 @@ const Actions = () => {
 
   return (
     <div className="page__bg">
-      <div className="page page--centered">
+      <div className="page page--centered page--actions">
         <ConnectWalletModal />
 
-        <FadeIn className="flex flex-col w-[1200px] gap-4 md:gap-5">
-          <ActionsHeader />
+        <FadeIn className="flex flex-col w-full gap-4 md:gap-6">
+          <span className="flex justify-between w-full items-end">
+            <p className="text-2xl font-medium font-tomorrow max-md:mb-11">
+              Manage Bonded {strings.token} NFT
+            </p>
+            {muonNodeStakingUsers && muonNodeStakingUsers[4] !== BigInt(0) && (
+              <div
+                className="ml-auto flex gap-1.5 items-center cursor-pointer max-md:hidden"
+                onClick={() => window.open('/dashboard/', '_self')}
+              >
+                <img
+                  src="/assets/images/actions/back-icon.svg"
+                  className="hidden dark:flex"
+                  alt=""
+                />
+                <img
+                  src="/assets/images/actions/back-white-icon.svg"
+                  className="dark:hidden"
+                  alt=""
+                />
+                <p className="font-medium text-sm underline">
+                  Back to Dashboard
+                </p>
+              </div>
+            )}
+          </span>
           <ActionsBody />
         </FadeIn>
       </div>
@@ -70,8 +98,7 @@ const Actions = () => {
 
 const ActionsBody = () => {
   return (
-    <div className="actions-body flex md:min-h-[552px] flex-col-reverse md:flex-row w-full gap-9">
-      <ActionsSidebar />
+    <div className="actions-body flex md:min-h-[607px] flex-col-reverse md:flex-row w-full gap-8">
       <ActionsContent />
       <Plans />
     </div>

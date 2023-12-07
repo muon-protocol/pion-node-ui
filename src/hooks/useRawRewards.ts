@@ -20,6 +20,8 @@ const useRawRewards = ({
       (wallet) =>
         wallet.wasInMuonPresale ||
         wallet.wasInDeusPresale ||
+        wallet.wasInDeusAllocation ||
+        wallet.wasMuonPrivateSale ||
         wallet.wasAliceOperator ||
         wallet.wasAliceOperatorEarly ||
         wallet.wasAliceOperatorBounce,
@@ -30,7 +32,11 @@ const useRawRewards = ({
     rawRewards,
   });
 
-  return { totalRewards, eligibleAddresses, alreadyRegisteredWallet };
+  return {
+    totalRewards,
+    eligibleAddresses,
+    alreadyRegisteredWallet,
+  };
 };
 
 export default useRawRewards;

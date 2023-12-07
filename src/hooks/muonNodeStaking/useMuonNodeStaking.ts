@@ -1,7 +1,7 @@
 import {
   ALICE_ADDRESS,
   BONALICE_ADDRESS,
-  LP_TOKEN_ADDRESS,
+  // LP_TOKEN_ADDRESS,
   MUON_NODE_STAKING_ADDRESS,
 } from '../../constants/addresses.ts';
 import { getCurrentChainId } from '../../constants/chains.ts';
@@ -21,24 +21,29 @@ export const useMuonNodeStaking = () => {
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     args: walletAddress ? [walletAddress] : undefined,
     watch: true,
+    enabled: !!walletAddress,
   });
 
   const { data: valueOfBondedToken } = useMuonNodeStakingValueOfBondedToken({
     address: MUON_NODE_STAKING_ADDRESS[getCurrentChainId()],
     args: muonNodeStakingUsers ? [muonNodeStakingUsers[4]] : undefined,
     watch: true,
+    enabled: !!muonNodeStakingUsers,
   });
 
   const { data: nodeBonALICEPower } = useBonAliceGetLockedOf({
     address: BONALICE_ADDRESS[getCurrentChainId()],
-    args: [
-      muonNodeStakingUsers ? muonNodeStakingUsers[4] : BigInt(0),
-      [
-        ALICE_ADDRESS[getCurrentChainId()],
-        LP_TOKEN_ADDRESS[getCurrentChainId()],
-      ],
-    ],
+    args: muonNodeStakingUsers
+      ? [
+          muonNodeStakingUsers[4],
+          [
+            ALICE_ADDRESS[getCurrentChainId()],
+            // LP_TOKEN_ADDRESS[getCurrentChainId()],
+          ],
+        ]
+      : undefined,
     watch: true,
+    enabled: !!muonNodeStakingUsers,
   });
 
   const nodeBonALICE = useMemo(() => {
@@ -51,10 +56,10 @@ export const useMuonNodeStaking = () => {
         latestTimestamp: 0,
         tokenId: muonNodeStakingUsers ? muonNodeStakingUsers[4] : 0,
         ALICELockAmount: w3bNumberFromBigint(nodeBonALICEPower[0]),
-        LPTokenLockAmount: w3bNumberFromBigint(nodeBonALICEPower[1]),
+        LPTokenLockAmount: w3bNumberFromBigint(BigInt(0)),
         nodePower:
           w3bNumberFromBigint(nodeBonALICEPower[0]).dsp +
-          w3bNumberFromBigint(nodeBonALICEPower[1]).dsp * 2,
+          w3bNumberFromBigint(BigInt(0)).dsp,
         isNodeBonALICE: true,
       },
     ];

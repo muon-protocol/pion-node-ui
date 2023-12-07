@@ -4,11 +4,13 @@
 export enum SupportedChainId {
   BSCTESTNET = 97,
   BSCMAINNET = 56,
+  MAINNET = 1,
 }
 
 export const CHAIN_IDS_TO_NAMES = {
   [SupportedChainId.BSCMAINNET]: 'bscmainnet',
   [SupportedChainId.BSCTESTNET]: 'bsctestnet',
+  [SupportedChainId.MAINNET]: 'mainnet',
 };
 
 /**

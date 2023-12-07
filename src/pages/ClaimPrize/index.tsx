@@ -11,6 +11,8 @@ import ClaimCard from './ClaimCard.tsx';
 import useUserClaimedReward from '../../hooks/useUserClaimedReward.ts';
 import ClaimedRewardModal from './ClaimedRewardModal.tsx';
 import InsufficientNFTAmoutModalBody from '../../components/Common/InsufficientNFTAmoutModalBody.tsx';
+import NewWalletModal from './NewWalletModal.tsx';
+import strings from '../../constants/strings.ts';
 
 const ClaimPrize = () => {
   const {
@@ -26,6 +28,8 @@ const ClaimPrize = () => {
     setIsInsufficientModalOpen,
     setIsSufficientModalOpen,
     isSufficientModalOpen,
+    setIsNewWalletModalOpen,
+    isNewWalletModalOpen,
   } = useClaimPrize();
   const { walletAddress } = useUserProfile();
   const { userClaimedReward } = useUserClaimedReward();
@@ -33,7 +37,7 @@ const ClaimPrize = () => {
 
   // useEffect(() => {
   // if (stakerAddressInfo?.active) {
-  //   window.open('/dashboard', '_self');
+  //   window.open('/dashboard/', '_self');
   // }
   // }, [stakerAddressInfo]);
 
@@ -46,24 +50,33 @@ const ClaimPrize = () => {
             <img
               src="/assets/images/claim/node-drop-icon.svg"
               alt=""
-              className="w-12 h-12"
+              className="w-12 h-12 dark:hidden"
             />
-            <p className="text-5xl font-bold">ALICE Node-Drop</p>
+            <img
+              src="/assets/images/claim/node-drop-black-icon.svg"
+              alt=""
+              className="w-12 h-12 hidden dark:flex"
+            />
+            <p className="text-5xl font-bold">{strings.token} Node-Drop</p>
           </div>
+          <p className="text-lg text-center md:text-left md:text-xl font-light mb-1.5">
+            Alice node operators and Muon presale participants are eligible for
+            the {strings.token} Node-Drop. <br />
+          </p>
           <p className="text-lg text-center md:text-left md:text-xl font-light mb-6">
-            Go to your wallet and choose the address linked to your pioneer
-            activities. Repeat this step for each address associated with
-            pioneer activities.
+            1. Connect your eligible addresses <br />
+            2. Claim your {strings.nft} <br />
+            3. Wait for October 18th to run your node and start earning reward
           </p>
           <Alert
             className="mb-6"
             show={!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-            type="error"
+            type="success"
           >
             You have already claimed your reward under{' '}
             <p className="font-semibold inline">
               {' '}
-              BonALICE #{userClaimedReward[1].toString()}
+              {strings.nft} #{userClaimedReward[1].toString()}
             </p>
             .
           </Alert>
@@ -97,24 +110,25 @@ const ClaimPrize = () => {
           <Alert
             className="mb-6"
             show={!!stakingAddressFromPast && userClaimedReward[0] > BigInt(0)}
-            type="error"
+            type="success"
           >
             You have claimed the rewards for this address{' '}
             <p className="font-semibold inline">
               ({formatWalletAddress(stakingAddressFromPast)})
             </p>{' '}
-            with the following information. Click on the Create Node button to
-            create a node with this address.
+            under {strings.nft} #{userClaimedReward[1].toString()}. You can
+            setup your node using your {strings.nft} on October 18th.
           </Alert>
           <Alert
             show={!!alreadyRegisteredWallet?.isAlreadyRegistered}
             type="error"
+            className="mb-6"
           >
             <strong>{formatWalletAddress(walletAddress)} </strong>
             has been already registered with{' '}
             <strong>{alreadyRegisteredWallet?.registeredTo}</strong>.
           </Alert>
-          <div className="reward-wallets-section w-full bg-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
+          <div className="reward-wallets-section w-full bg-gray-bg-70 dark:bg-alice-primary-13 p-6 rounded-2xl flex gap-4 mb-6 min-h-[244px]">
             {!stakingAddressFromPast && userClaimedReward[0] > BigInt(0) ? (
               <p className="text-2xl font-light text-center w-full my-auto">
                 No Eligible address detected
@@ -146,10 +160,24 @@ const ClaimPrize = () => {
               >
                 {eligibleAddresses.map((wallet) => (
                   <VerifyWalletCard
+                    key={wallet.walletAddress}
                     wallet={wallet}
-                    className="!min-w-[304px] scroll"
+                    className="!min-w-[307px] scroll"
                   />
                 ))}
+                <div
+                  className="add-new-wallet-card border-2 rounded-xl border-titan-white min-w-[184px] flex flex-col items-center justify-center gap-6 h-full hover:bg-card-hover transition-all cursor-pointer"
+                  onClick={() => setIsNewWalletModalOpen(true)}
+                >
+                  <img
+                    src="/assets/images/claim/add-wallet-icon.svg"
+                    alt=""
+                    className="w-16 h-16"
+                  />
+                  <p className="font-medium text-white text-center">
+                    Add New Address
+                  </p>
+                </div>
               </span>
             ) : (
               <p className="text-2xl font-light text-center w-full my-auto">
@@ -181,6 +209,13 @@ const ClaimPrize = () => {
           closeModalHandler={() => setIsSufficientModalOpen(false)}
         >
           <ClaimedRewardModal operation="claimed" />
+        </Modal>
+        <Modal
+          size="sm"
+          isOpen={isNewWalletModalOpen}
+          closeModalHandler={() => setIsNewWalletModalOpen(false)}
+        >
+          <NewWalletModal />
         </Modal>
       </div>
     </div>
