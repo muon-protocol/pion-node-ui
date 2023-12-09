@@ -3,12 +3,14 @@ import aliceContract from "@/jsons/aliceContract.json";
 import Web3 from "web3";
 import { useEffect, useState } from "react";
 import { useAccount, useContractRead } from "wagmi";
+import { contracts } from "@/app/page";
 
 export default function Balance() {
   const [balance, setBalance] = useState(0);
   const { address, isDisconnected, status } = useAccount();
+  const contractsAddresses = contracts();
   useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT,
+    address: contractsAddresses.PION_TOKEN_CONTRACT,
     abi: aliceContract,
     functionName: "balanceOf",
     args: [address],

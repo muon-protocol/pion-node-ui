@@ -1,4 +1,4 @@
-import { LightBtn } from "@/app/page";
+import { LightBtn, contracts } from "@/app/page";
 import { useAccount, useContractRead, useContractWrite } from "wagmi";
 import json from "@/jsons/abi.json";
 import nodeManagerAbi from "@/jsons/nodeManagerAbi.json";
@@ -21,10 +21,10 @@ export default function StakeMore() {
   const selector = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
-
+  const contractsAddresses = contracts();
   const { address, isDisconnected, status } = useAccount();
   const { data } = useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    address: contractsAddresses.STAKING_CONTRACT,
     abi: json,
     functionName: "users",
     args: [address],
@@ -36,7 +36,7 @@ export default function StakeMore() {
     },
   });
   useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    address: contractsAddresses.STAKING_CONTRACT,
     abi: json,
     functionName: "valueOfBondedToken",
     args: [data && data[4]],
@@ -48,7 +48,7 @@ export default function StakeMore() {
     },
   });
   useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT,
+    address: contractsAddresses.NODE_MANAGER_CONTRACT,
     abi: nodeManagerAbi,
     functionName: "stakerAddressInfo",
     args: [address],
@@ -58,7 +58,7 @@ export default function StakeMore() {
     },
   });
   useContractRead({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    address: contractsAddresses.STAKING_CONTRACT,
     abi: json,
     functionName: "tiersMaxStakeAmount",
     args: [tier],
@@ -75,7 +75,7 @@ export default function StakeMore() {
     write: writeUpdateStaking,
     isLoading: walletLoading,
   } = useContractWrite({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    address: contractsAddresses.STAKING_CONTRACT,
     abi: json,
     functionName: "updateStaking",
   });

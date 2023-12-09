@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { LightBtn } from "@/app/page";
+import { LightBtn, contracts } from "@/app/page";
 import contractABI from "@/jsons/tierAbi.json";
 import { getTierSig } from "@/utils/requestVerifications";
 import { useContractWrite, useWaitForTransaction } from "wagmi";
@@ -42,12 +42,13 @@ export default function TopBanner({
   const verificationData = useSelector(
     (state) => state.rootReducer.verificationReducer
   );
+  const contractsAddresses = contracts();
   const {
     data: contractData,
     write: writeSetTier,
     isLoading: walletLoading,
   } = useContractWrite({
-    address: process.env.NEXT_PUBLIC_TIER_SETTER_CONTRACT,
+    address: contractsAddresses.TIER_SETTER_CONTRACT,
     abi: contractABI,
     functionName: "setTier",
     onError(error) {

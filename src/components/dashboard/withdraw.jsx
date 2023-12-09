@@ -1,11 +1,11 @@
 import fetchRewardData from "@/utils/fetchRewardData";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import contractABI from "@/jsons/abi.json";
 import { styled } from "styled-components";
 import { useBlockNumber, useContractWrite, useWaitForTransaction } from "wagmi";
 import { Loading } from "../layout/Loading";
 import { useEffect, useState } from "react";
-import { fetchNodeInfo } from "@/redux/features/nodeInfo";
+import { contracts } from "@/app/page";
 
 const Absolute = styled.div`
   position: absolute;
@@ -40,12 +40,13 @@ export default function Withdraw({ address, needSubmitTier }) {
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
   const { data: blockNumber } = useBlockNumber();
   const [state, setstate] = useState(false);
+  const contractAddresses = contracts();
   const {
     data: contractData,
     write: writeGetReward,
     isLoading: walletLoading,
   } = useContractWrite({
-    address: process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT,
+    address: contractAddresses.STAKING_CONTRACT,
     abi: contractABI,
     functionName: "getReward",
     onError(error) {},
