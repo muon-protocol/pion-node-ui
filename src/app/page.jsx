@@ -10,41 +10,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { useAccount, useNetwork } from "wagmi";
 import { fetchTierSig, fetchVerification } from "@/redux/features/verification";
 import { Loading } from "@/components/layout/Loading";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { LiveChatWidget } from "@livechat/widget-react";
 import Messages from "@/components/dashboard/Messages";
 
 export function contracts() {
-  const { chain } = useNetwork();
-  switch (chain.id) {
-    case 1:
-      return {
-        STAKING_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_MAINNET,
-        PION_TOKEN_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_MAINNET,
-        NODE_MANAGER_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_MAINNET,
-      };
-    case 56:
-      return {
-        STAKING_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_BNB,
-        PION_TOKEN_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_BNB,
-        NODE_MANAGER_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_BNB,
-        TIER_SETTER_CONTRACT: process.env.NEXT_PUBLIC_TIER_SETTER_CONTRACT_BNB,
-      };
-    case 97:
-      return {
-        STAKING_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_CHAPLE,
-        PION_TOKEN_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_CHAPLE,
-        NODE_MANAGER_CONTRACT:
-          process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_CHAPLE,
-      };
+  const { isConnected } = useAccount();
+  if (isConnected) {
+    const { chain } = useNetwork();
+    switch (chain.id) {
+      case 1:
+        return {
+          STAKING_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_MAINNET,
+          PION_TOKEN_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_MAINNET,
+          NODE_MANAGER_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_MAINNET,
+        };
+      case 56:
+        return {
+          STAKING_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_BNB,
+          PION_TOKEN_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_BNB,
+          NODE_MANAGER_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_BNB,
+          TIER_SETTER_CONTRACT:
+            process.env.NEXT_PUBLIC_TIER_SETTER_CONTRACT_BNB,
+        };
+      case 97:
+        return {
+          STAKING_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_CHAPLE,
+          PION_TOKEN_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_CHAPLE,
+          NODE_MANAGER_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_CHAPLE,
+        };
+    }
   }
 }
 
@@ -104,9 +108,16 @@ export function LightBtn({
 }
 
 export default function Home() {
-  contracts();
   const dispatch = useDispatch();
-  const { address, isConnected, isDisconnected } = useAccount();
+  const searchParams = useSearchParams();
+  const { address: walletAddress, isConnected, isDisconnected } = useAccount();
+  const stakerAddress = searchParams.get("staker");
+  console.log(stakerAddress);
+
+  const [address, setAddress] = useState(
+    searchParams.has("staker") ? stakerAddress : walletAddress
+  );
+
   const [needSubmitTier, setNeedSubmitTier] = useState(false);
   const [needFillOutFrom, setNeedFillOutFrom] = useState(false);
   const selector = useSelector((state) => state.rootReducer.nodeReducer);
@@ -136,7 +147,7 @@ export default function Home() {
       setNeedSubmitTier(false);
       if (
         verificationData.eligibleTier == verificationData.tier &&
-        [1, 2].includes(verificationData.eligibleTier) &&
+        [0, 1, 2].includes(verificationData.eligibleTier) &&
         selector.pionStaked > selector.tiersMaxStakeAmount &&
         selector.tiersMaxStakeAmount
       ) {
@@ -167,7 +178,6 @@ export default function Home() {
       dispatch(fetchVerification(address));
     }
   }, [address]);
-  const router = useRouter();
 
   useEffect(() => {
     if (selector.isNew === true) {

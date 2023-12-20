@@ -122,6 +122,7 @@ export default function TopBanner({
         // disable={needSubmitTier && isVerify}
         loading={walletLoading || trLoading || serverRequestLoading}
         className="mt-5 lg:mt-0 min-w-[176px]"
+        bgColor={needFillOutFrom && "bg-helperWarning"}
         onClick={() => {
           if (needFillOutFrom) {
             window.open("https://form.typeform.com/to/DRyzP0zw");
