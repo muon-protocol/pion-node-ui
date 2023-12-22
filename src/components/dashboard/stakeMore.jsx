@@ -12,7 +12,7 @@ import {
   setTiersMaxStakeAmount,
 } from "@/redux/features/nodeInfo";
 
-export default function StakeMore() {
+export default function StakeMore({ address }) {
   const dispatch = useDispatch();
   const [valueOfToken, setValueOfToken] = useState(0);
   const [tier, setTier] = useState("init");
@@ -22,7 +22,7 @@ export default function StakeMore() {
     (state) => state.rootReducer.verificationReducer
   );
   const contractsAddresses = contracts();
-  const { address, isDisconnected, status } = useAccount();
+  const { isDisconnected, status } = useAccount();
   const { data } = useContractRead({
     address: contractsAddresses.STAKING_CONTRACT,
     abi: json,

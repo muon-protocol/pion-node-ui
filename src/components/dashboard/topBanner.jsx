@@ -32,7 +32,6 @@ function getFerificationNameFromTier(tier) {
 
 export default function TopBanner({
   isVerify,
-
   needSubmitTier,
   needFillOutFrom,
   address,

@@ -48,6 +48,17 @@ export function contracts() {
           NODE_MANAGER_CONTRACT:
             process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_CHAPLE,
         };
+      default:
+        return {
+          STAKING_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_BNB,
+          PION_TOKEN_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_BNB,
+          NODE_MANAGER_CONTRACT:
+            process.env.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_BNB,
+          TIER_SETTER_CONTRACT:
+            process.env.NEXT_PUBLIC_TIER_SETTER_CONTRACT_BNB,
+        };
     }
   }
 }
@@ -131,7 +142,9 @@ export default function Home() {
     verificationData.gitcoinPassportVerified ||
     verificationData.presaleVerified ||
     verificationData.telegramVerified ||
-    verificationData.privateSaleVerified;
+    verificationData.privateSaleVerified ||
+    verificationData.pionMeetsVerified ||
+    verificationData.nodeDropVerified;
 
   useEffect(() => {
     console.log(
@@ -205,7 +218,7 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-8">
         <NodeUpTime onlinePercent={selector.onlinePercent}></NodeUpTime>
-        <StakeMore></StakeMore>
+        <StakeMore address={address}></StakeMore>
         <Withdraw
           needSubmitTier={needSubmitTier || !isVerify}
           address={address}

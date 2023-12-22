@@ -14,6 +14,8 @@ const initialState = {
   privateSaleVerified: false,
   telegramVerified: false,
   temporary2ndTierVerified: false,
+  pionMeetsVerified: false,
+  nodeDropVerified: false,
   brightidContexId: "",
   brightIdTryed: 0,
   errorMessage: "",
@@ -121,6 +123,8 @@ export const verification = createSlice({
           state.telegramVerified = verificationData.telegramVerified;
           state.privateSaleVerified = verificationData.privateSaleVerified;
           state.eligibleTier = verificationData.eligibleTier;
+          state.pionMeetsVerified = verificationData.pionMeetsVerified;
+          state.nodeDropVerified = verificationData.nodeDropVerified;
           if (verificationData.temp2ndTierVerified) {
             state.temporary2ndTierVerified =
               verificationData.temp2ndTierVerified;
