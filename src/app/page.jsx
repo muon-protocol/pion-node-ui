@@ -13,8 +13,16 @@ import { Loading } from "@/components/layout/Loading";
 import { useRouter, useSearchParams } from "next/navigation";
 import { LiveChatWidget } from "@livechat/widget-react";
 import Messages from "@/components/dashboard/Messages";
+import { mainnetContracts, bnbContracts } from "@/configs/contract";
 
 export function contracts() {
+  return {
+    STAKING_CONTRACT: bnbContracts.NEXT_PUBLIC_MUON_NODE_STAKING_CONTRACT_BNB,
+    PION_TOKEN_CONTRACT: bnbContracts.NEXT_PUBLIC_MUON_PION_TOKEN_CONTRACT_BNB,
+    NODE_MANAGER_CONTRACT:
+      bnbContracts.NEXT_PUBLIC_MUON_NODE_MANAGER_CONTRACT_BNB,
+    TIER_SETTER_CONTRACT: bnbContracts.NEXT_PUBLIC_TIER_SETTER_CONTRACT_BNB,
+  };
   const { isConnected } = useAccount();
   if (isConnected) {
     const { chain } = useNetwork();
