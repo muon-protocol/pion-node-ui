@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --color-primary: 81, 88, 246;
+  --color-primaryMain: 77, 62, 158;
+  --color-primaryText:255, 255, 255;
+  --color-cardBackground: 145, 142, 245;
+  --color-primaryL3: 205, 201, 253;
+  --color-secondary: 245, 149, 105;
+  --color-uptime: 183, 240, 60;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: 81, 88, 246, 1;
+    --color-secondary: 245, 149, 105;
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --color-primaryText:255, 255, 255;
+    --color-cardBackground: 145, 142, 245;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  background: #252528;
+  background-image: url("/dashboard/blur-background.svg");
+  background-size: cover;
+  font-family: 'Inter', sans-serif !important;
+  color: #FFFFFF;
+}
+.font-Montserrat{
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: rgb(var(--color-primary)) #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 13px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-primary));
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}
+
+
+code{
+  background-color: #6f7787 !important;
+    color: white !important;
+    padding: 0  5px !important;
+    border-radius: 5px;
+}
