@@ -1,4 +1,3 @@
-"use client";
 import "@/app/globals.css";
 import Image from "next/image";
 import StyledComponentsRegistry from "@/lib/registry";
@@ -9,9 +8,9 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { RainbowProvider } from "@/lib/rainbowProviders";
 
 import { Roboto } from "next/font/google";
-import Balance from "@/components/layout/balance";
-import { CustomConnectButton } from "@/components/layout/CustomConnectButton";
-import { useSelector } from "react-redux";
+// import Balance from "@/components/layout/balance";
+// import { CustomConnectButton } from "@/components/layout/CustomConnectButton";
+// import { useSelector } from "react-redux";
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -20,10 +19,10 @@ export const metadata = {
   description: "Pion Dashboard",
 };
 
-function Loading() {
-  const selector = useSelector((state) => state.rootReducer.generalReducer);
-  return;
-}
+// function Loading() {
+//   const selector = useSelector((state) => state.rootReducer.generalReducer);
+//   return;
+// }
 
 export default function RootLayout({ children }) {
   return (
