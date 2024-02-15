@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import aliceContract from "@/jsons/aliceContract.json";
 import Web3 from "web3";
