@@ -88,7 +88,7 @@ export default function Withdraw({ address, needSubmitTier }) {
           loading={walletLoading || state || trLoading}
         ></Btn>
       </div>
-      {needSubmitTier && (
+      {needSubmitTier && Number(selector.reward) === 0 && (
         <div className="absolute flex z-40 bg-gray/80 w-full h-full justify-center items-center px-4">
           <h4 className="text-xl text-center">
             Complete <b>Uniqueness Verification</b> to start earning
